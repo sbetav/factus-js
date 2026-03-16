@@ -1,0 +1,102 @@
+import type {
+  Municipality,
+  MunicipalityFilters,
+  Country,
+  CountryFilters,
+  Tribute,
+  TributeFilters,
+  MeasurementUnit,
+  MeasurementUnitFilters,
+  Acquirer,
+  AcquirerFilters,
+  ApiResponse,
+} from "@factus-js/types";
+import type { HttpClient } from "../http-client";
+
+export class ReferenceResource {
+  constructor(private readonly http: HttpClient) {}
+
+  // ---------------------------------------------------------------------------
+  // Municipalities
+  // ---------------------------------------------------------------------------
+
+  /**
+   * List all municipalities, optionally filtered by name.
+   * GET /v1/municipalities
+   */
+  listMunicipalities(
+    filters?: MunicipalityFilters & { page?: number; per_page?: number },
+  ): Promise<ApiResponse<Municipality[]>> {
+    return this.http.get(
+      "/v1/municipalities",
+      filters as Record<string, string | number | boolean | undefined>,
+    );
+  }
+
+  // ---------------------------------------------------------------------------
+  // Countries
+  // ---------------------------------------------------------------------------
+
+  /**
+   * List all countries, optionally filtered by name.
+   * GET /v1/countries
+   */
+  listCountries(
+    filters?: CountryFilters & { page?: number; per_page?: number },
+  ): Promise<ApiResponse<Country[]>> {
+    return this.http.get(
+      "/v1/countries",
+      filters as Record<string, string | number | boolean | undefined>,
+    );
+  }
+
+  // ---------------------------------------------------------------------------
+  // Tributes (taxes)
+  // ---------------------------------------------------------------------------
+
+  /**
+   * List all tribute (tax) codes, optionally filtered by name.
+   * GET /v1/tributes
+   */
+  listTributes(filters?: TributeFilters): Promise<ApiResponse<Tribute[]>> {
+    return this.http.get(
+      "/v1/tributes",
+      filters as Record<string, string | number | boolean | undefined>,
+    );
+  }
+
+  // ---------------------------------------------------------------------------
+  // Measurement Units
+  // ---------------------------------------------------------------------------
+
+  /**
+   * List all measurement units, optionally filtered by name.
+   * GET /v1/measurement-units
+   */
+  listMeasurementUnits(
+    filters?: MeasurementUnitFilters,
+  ): Promise<ApiResponse<MeasurementUnit[]>> {
+    return this.http.get(
+      "/v1/measurement-units",
+      filters as Record<string, string | number | boolean | undefined>,
+    );
+  }
+
+  // ---------------------------------------------------------------------------
+  // Acquirers (customers lookup)
+  // ---------------------------------------------------------------------------
+
+  /**
+   * Look up an acquirer (existing customer) by their identification.
+   * GET /v1/acquirers
+   */
+  getAcquirer(filters: AcquirerFilters): Promise<ApiResponse<Acquirer>> {
+    return this.http.get(
+      "/v1/acquirers",
+      filters as unknown as Record<
+        string,
+        string | number | boolean | undefined
+      >,
+    );
+  }
+}
