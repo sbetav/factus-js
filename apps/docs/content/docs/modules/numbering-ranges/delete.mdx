@@ -1,0 +1,29 @@
+---
+title: Eliminar rango
+description: Eliminar un rango de numeración por ID.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Firma
+
+```ts
+delete(id: number): Promise<DeleteNumberingRangeResponse>
+```
+
+## Endpoint Factus
+
+`DELETE /v1/numbering-ranges/{numbering_range_id}`
+
+Fuente oficial: [Eliminar rango](https://developers.factus.com.co/rangos-de-numeracion/eliminar-rango/index.html)
+
+<Callout type="warn">
+  Si el rango no se ha usado, se elimina permanentemente. Si ya se usó, queda
+  marcado como eliminado.
+</Callout>
+
+## Ejemplo
+
+```ts
+await factus.numberingRanges.delete(123);
+```

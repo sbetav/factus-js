@@ -5,7 +5,6 @@ import type {
   UpdateNumberingRangeCurrentInput,
   SoftwareNumberingRange,
   DeleteNumberingRangeResponse,
-  ToggleNumberingRangeStatusResponse,
   ApiResponse,
   PaginatedData,
 } from "@factus-js/types";
@@ -60,7 +59,7 @@ export class NumberingRangesModule {
    * Get the software numbering range registered with the DIAN.
    * GET /v1/numbering-ranges/dian
    */
-  getSoftwareRange(): Promise<ApiResponse<SoftwareNumberingRange>> {
+  getSoftwareRange(): Promise<ApiResponse<SoftwareNumberingRange[]>> {
     return this.http.get("/v1/numbering-ranges/dian");
   }
 
@@ -70,13 +69,5 @@ export class NumberingRangesModule {
    */
   delete(id: number): Promise<DeleteNumberingRangeResponse> {
     return this.http.delete(`/v1/numbering-ranges/${id}`);
-  }
-
-  /**
-   * Toggle the active/inactive status of a numbering range.
-   * PATCH /v1/numbering-ranges/{id}/toggle-status
-   */
-  toggleStatus(id: number): Promise<ToggleNumberingRangeStatusResponse> {
-    return this.http.patch(`/v1/numbering-ranges/${id}/toggle-status`);
   }
 }

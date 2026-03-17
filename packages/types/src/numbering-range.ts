@@ -55,10 +55,3 @@ export interface DeleteNumberingRangeResponse {
   status: string;
   message: string;
 }
-
-/** Response from PATCH /v1/numbering-ranges/{id}/toggle-status */
-export interface ToggleNumberingRangeStatusResponse {
-  status: string;
-  message: string;
-  data: NumberingRange;
-}

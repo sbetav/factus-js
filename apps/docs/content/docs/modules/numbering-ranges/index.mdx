@@ -1,0 +1,25 @@
+---
+title: Introducción
+description: Crear y gestionar rangos de numeración autorizados por la DIAN.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+Accede al modulo a traves de `factus.numberingRanges`.
+
+<Callout type="info">
+  Esta sección sigue los endpoints oficiales de Factus para rangos de
+  numeración. Referencia base:
+  [Introducción](https://developers.factus.com.co/rangos-de-numeracion/introduccion/index.html).
+</Callout>
+
+## Métodos disponibles
+
+| Método                     | Verbo + Ruta                              | Descripción                          |
+| -------------------------- | ----------------------------------------- | ------------------------------------ |
+| `list(filters?)`           | `GET /v1/numbering-ranges`                | Listar rangos con filtros opcionales |
+| `get(id)`                  | `GET /v1/numbering-ranges/{id}`           | Obtener un rango por ID              |
+| `create(input)`            | `POST /v1/numbering-ranges`               | Crear un nuevo rango                 |
+| `updateCurrent(id, input)` | `PATCH /v1/numbering-ranges/{id}/current` | Actualizar el consecutivo actual     |
+| `getSoftwareRange()`       | `GET /v1/numbering-ranges/dian`           | Obtener rangos asociados al software |
+| `delete(id)`               | `DELETE /v1/numbering-ranges/{id}`        | Eliminar un rango                    |

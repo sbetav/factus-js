@@ -1,0 +1,27 @@
+---
+title: Ver rango
+description: Obtener el detalle de un rango de numeración por ID.
+---
+
+## Firma
+
+```ts
+get(id: number): Promise<ApiResponse<NumberingRange>>
+```
+
+## Endpoint Factus
+
+`GET /v1/numbering-ranges/{numbering_range_id}`
+
+Fuente oficial: [Ver rango](https://developers.factus.com.co/rangos-de-numeracion/ver-rango/index.html)
+
+## Ejemplo
+
+```ts
+const response = await factus.numberingRanges.get(4);
+const rango = response.data;
+
+console.log(rango.prefix);
+console.log(rango.current);
+console.log(rango.document);
+```

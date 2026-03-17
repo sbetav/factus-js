@@ -1,0 +1,12 @@
+{
+  "title": "Rangos de numeración",
+  "pages": [
+    "index",
+    "list",
+    "create",
+    "get",
+    "delete",
+    "update-current",
+    "get-software-range"
+  ]
+}

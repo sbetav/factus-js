@@ -1,0 +1,31 @@
+---
+title: Crear rango
+description: Crear un nuevo rango de numeración.
+---
+
+## Firma
+
+```ts
+create(input: CreateNumberingRangeInput): Promise<ApiResponse<NumberingRange>>
+```
+
+## Endpoint Factus
+
+`POST /v1/numbering-ranges`
+
+Fuente oficial: [Crear rango](https://developers.factus.com.co/rangos-de-numeracion/crear-rango/index.html)
+
+## Ejemplo
+
+```ts
+import { NumberingRangeDocumentTypeCode } from "factus-js";
+
+const response = await factus.numberingRanges.create({
+  document: NumberingRangeDocumentTypeCode.SALES_INVOICE,
+  prefix: "FV",
+  current: 1,
+  resolution_number: "18764060780001",
+});
+
+console.log(response.data.id);
+```

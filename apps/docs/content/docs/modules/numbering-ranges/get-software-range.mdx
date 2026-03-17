@@ -1,0 +1,27 @@
+---
+title: Rangos asociados al software
+description: Obtener los rangos de numeración asociados al software DIAN.
+---
+
+## Firma
+
+```ts
+getSoftwareRange(): Promise<ApiResponse<SoftwareNumberingRange[]>>
+```
+
+## Endpoint Factus
+
+`GET /v1/numbering-ranges/dian`
+
+Fuente oficial: [Rangos asociados al software](https://developers.factus.com.co/rangos-de-numeracion/rangos-asociados-al-software/index.html)
+
+## Ejemplo
+
+```ts
+const response = await factus.numberingRanges.getSoftwareRange();
+const rangos = response.data;
+
+for (const rango of rangos) {
+  console.log(rango.prefix, rango.from, rango.to);
+}
+```

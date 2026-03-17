@@ -1,0 +1,37 @@
+---
+title: Obtener rangos
+description: Listar rangos de numeración con filtros y paginación.
+---
+
+## Firma
+
+```ts
+list(filters?: NumberingRangeFilters & { page?: number; per_page?: number }): Promise<ApiResponse<PaginatedData<NumberingRange>>>
+```
+
+## Endpoint Factus
+
+`GET /v1/numbering-ranges`
+
+Fuente oficial: [Obtener rangos de numeración](https://developers.factus.com.co/rangos-de-numeracion/obtener-rangos/index.html)
+
+## Filtros
+
+- `filter[id]`
+- `filter[document]`
+- `filter[resolution_number]`
+- `filter[technical_key]`
+- `filter[is_active]`
+
+## Ejemplo
+
+```ts
+const response = await factus.numberingRanges.list({
+  "filter[is_active]": "1",
+  page: 1,
+  per_page: 10,
+});
+
+const rangos = response.data.data;
+const paginacion = response.data.pagination;
+```
