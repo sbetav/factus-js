@@ -1,0 +1,29 @@
+---
+title: Eliminar nota de ajuste
+description: Eliminar una nota de ajuste no validada por reference_code.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Firma
+
+```ts
+delete(referenceCode: string): Promise<DeleteAdjustmentNoteResponse>
+```
+
+## Endpoint Factus
+
+`DELETE /v1/adjustment-notes/reference/{reference_code}`
+
+Fuente oficial: [Eliminar nota de ajuste](https://developers.factus.com.co/notas-ajuste-documentos-soporte/eliminar/index.html)
+
+<Callout type="warn">
+  Solo se pueden eliminar notas de ajuste que no hayan sido validadas por la
+  DIAN.
+</Callout>
+
+## Ejemplo
+
+```ts
+await factus.adjustmentNotes.delete("REF007");
+```

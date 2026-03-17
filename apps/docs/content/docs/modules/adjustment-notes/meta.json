@@ -1,0 +1,12 @@
+{
+  "title": "Notas de ajuste",
+  "pages": [
+    "index",
+    "create",
+    "get",
+    "list",
+    "download-pdf",
+    "download-xml",
+    "delete"
+  ]
+}

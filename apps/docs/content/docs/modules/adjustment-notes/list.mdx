@@ -1,0 +1,38 @@
+---
+title: Filtrar notas de ajuste
+description: Listar notas de ajuste con filtros y paginacion.
+---
+
+## Firma
+
+```ts
+list(filters?: AdjustmentNoteFilters & { page?: number; per_page?: number }): Promise<ApiResponse<PaginatedData<AdjustmentNote>>>
+```
+
+## Endpoint Factus
+
+`GET /v1/adjustment-notes`
+
+Fuente oficial: [Filtrar notas de ajuste](https://developers.factus.com.co/notas-ajuste-documentos-soporte/ver-y-filtrar/index.html)
+
+## Filtros
+
+- `filter[identification]`
+- `filter[names]`
+- `filter[number]`
+- `filter[prefix]`
+- `filter[reference_code]`
+- `filter[status]` (1 validado, 0 pendiente)
+
+## Ejemplo
+
+```ts
+const response = await factus.adjustmentNotes.list({
+  "filter[status]": "1",
+  page: 1,
+  per_page: 10,
+});
+
+const notas = response.data.data;
+const paginacion = response.data.pagination;
+```

@@ -1,0 +1,43 @@
+---
+title: Crear y validar
+description: Crear y validar una nota de ajuste a documento soporte.
+---
+
+## Firma
+
+```ts
+create(input: CreateAdjustmentNoteInput): Promise<ApiResponse<AdjustmentNote>>
+```
+
+## Endpoint Factus
+
+`POST /v1/adjustment-notes/validate`
+
+Fuente oficial: [Crear y validar](https://developers.factus.com.co/notas-ajuste-documentos-soporte/crear-validar/index.html)
+
+## Ejemplo
+
+```ts
+import { AdjustmentNoteReasonCode } from "factus-js";
+
+const response = await factus.adjustmentNotes.create({
+  numbering_range_id: 126,
+  reference_code: "NA-001",
+  support_document_id: 321,
+  correction_concept_code: AdjustmentNoteReasonCode.PRICE_ADJUSTMENT,
+  observation: "Correccion de precio en documento soporte",
+  items: [
+    {
+      code_reference: "SRV-001",
+      name: "Servicio ajustado",
+      quantity: 1,
+      discount_rate: 0,
+      price: 10000,
+      unit_measure_id: 70,
+      standard_code_id: 1,
+    },
+  ],
+});
+
+console.log(response.data.number);
+```

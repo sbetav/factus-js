@@ -38,46 +38,38 @@ export class AdjustmentNotesModule {
   }
 
   /**
-   * Get full detail of an adjustment note by its numeric ID.
-   * GET /v1/adjustment-notes/{id}
-   */
-  get(id: number): Promise<ApiResponse<ViewAdjustmentNoteData>> {
-    return this.http.get(`/v1/adjustment-notes/${id}`);
-  }
-
-  /**
    * Get full detail of an adjustment note by its document number.
-   * GET /v1/adjustment-notes/show/{number}
+   * GET /v1/adjustment-notes/{number}
    */
-  getByNumber(number: string): Promise<ApiResponse<ViewAdjustmentNoteData>> {
-    return this.http.get(`/v1/adjustment-notes/show/${number}`);
+  get(number: string): Promise<ApiResponse<ViewAdjustmentNoteData>> {
+    return this.http.get(`/v1/adjustment-notes/${number}`);
   }
 
   /**
    * Download the adjustment note XML as a base64-encoded string.
-   * GET /v1/adjustment-notes/download-xml/{id}
+   * GET /v1/adjustment-notes/download-xml/{number}
    */
   downloadXml(
-    id: number,
+    number: string,
   ): Promise<ApiResponse<DownloadAdjustmentNoteXmlResponse>> {
-    return this.http.get(`/v1/adjustment-notes/download-xml/${id}`);
+    return this.http.get(`/v1/adjustment-notes/download-xml/${number}`);
   }
 
   /**
    * Download the adjustment note PDF as a base64-encoded string.
-   * GET /v1/adjustment-notes/download-pdf/{id}
+   * GET /v1/adjustment-notes/download-pdf/{number}
    */
   downloadPdf(
-    id: number,
+    number: string,
   ): Promise<ApiResponse<DownloadAdjustmentNotePdfResponse>> {
-    return this.http.get(`/v1/adjustment-notes/download-pdf/${id}`);
+    return this.http.get(`/v1/adjustment-notes/download-pdf/${number}`);
   }
 
   /**
    * Delete (void) an adjustment note that has not yet been validated by the DIAN.
-   * DELETE /v1/adjustment-notes/{id}
+   * DELETE /v1/adjustment-notes/reference/{reference_code}
    */
-  delete(id: number): Promise<DeleteAdjustmentNoteResponse> {
-    return this.http.delete(`/v1/adjustment-notes/${id}`);
+  delete(referenceCode: string): Promise<DeleteAdjustmentNoteResponse> {
+    return this.http.delete(`/v1/adjustment-notes/reference/${referenceCode}`);
   }
 }

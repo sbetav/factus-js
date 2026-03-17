@@ -1,0 +1,26 @@
+---
+title: Introducción
+description: Crear, consultar y gestionar notas de ajuste para documentos soporte.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+Accede al modulo a traves de `factus.adjustmentNotes`.
+
+<Callout type="info">
+  Esta sección sigue los endpoints oficiales de Factus para notas de ajuste a
+  documentos soporte. Para contexto funcional y reglas generales, revisa:
+  [Introducción notas de
+  ajuste](https://developers.factus.com.co/notas-ajuste-documentos-soporte/indroduccion/index.html).
+</Callout>
+
+## Métodos disponibles
+
+| Método                  | Verbo + Ruta                                             | Descripción                                   |
+| ----------------------- | -------------------------------------------------------- | --------------------------------------------- |
+| `create(input)`         | `POST /v1/adjustment-notes/validate`                     | Crear y validar una nota de ajuste            |
+| `list(filters?)`        | `GET /v1/adjustment-notes`                               | Listar notas de ajuste con filtros opcionales |
+| `get(number)`           | `GET /v1/adjustment-notes/{number}`                      | Obtener detalle por número de documento       |
+| `downloadXml(number)`   | `GET /v1/adjustment-notes/download-xml/{number}`         | Descargar XML en base64                       |
+| `downloadPdf(number)`   | `GET /v1/adjustment-notes/download-pdf/{number}`         | Descargar PDF en base64                       |
+| `delete(referenceCode)` | `DELETE /v1/adjustment-notes/reference/{reference_code}` | Eliminar una nota de ajuste no validada       |

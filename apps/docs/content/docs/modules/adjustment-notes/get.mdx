@@ -1,0 +1,23 @@
+---
+title: Ver nota de ajuste
+description: Obtener detalle de una nota de ajuste por numero.
+---
+
+## Firma
+
+```ts
+get(number: string): Promise<ApiResponse<ViewAdjustmentNoteData>>
+```
+
+## Endpoint Factus
+
+`GET /v1/adjustment-notes/{number}`
+
+Fuente oficial: [Ver nota de ajuste](https://developers.factus.com.co/notas-ajuste-documentos-soporte/ver/index.html)
+
+## Ejemplo
+
+```ts
+const response = await factus.adjustmentNotes.get("NDA40");
+console.log(response.data.adjustment_note.total);
+```
