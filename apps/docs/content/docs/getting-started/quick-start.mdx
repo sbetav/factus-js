@@ -5,6 +5,7 @@ description: Configura FactusClient y realiza tu primera llamada a la API de Fac
 
 import { Steps, Step } from "fumadocs-ui/components/steps";
 import { Callout } from "fumadocs-ui/components/callout";
+import { Tabs, Tab } from "fumadocs-ui/components/tabs";
 
 # Inicio rápido
 
@@ -14,9 +15,41 @@ import { Callout } from "fumadocs-ui/components/callout";
 
 ## Instala los paquetes
 
+<Tabs items={['npm', 'yarn', 'pnpm', 'bun']}>
+
+<Tab value="npm">
+
 ```bash
 npm install @factus-js/client @factus-js/types @factus-js/constants
 ```
+
+</Tab>
+
+<Tab value="yarn">
+
+```bash
+yarn add @factus-js/client @factus-js/types @factus-js/constants
+```
+
+</Tab>
+
+<Tab value="pnpm">
+
+```bash
+pnpm add @factus-js/client @factus-js/types @factus-js/constants
+```
+
+</Tab>
+
+<Tab value="bun">
+
+```bash
+bun add @factus-js/client @factus-js/types @factus-js/constants
+```
+
+</Tab>
+
+</Tabs>
 
 </Step>
 
