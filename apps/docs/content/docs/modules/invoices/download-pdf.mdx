@@ -1,0 +1,23 @@
+---
+title: Descargar PDF
+description: Descargar PDF de una factura en base64 usando el numero del documento.
+---
+
+## Firma
+
+```ts
+downloadPdf(number: string): Promise<DownloadInvoicePdfResponse>
+```
+
+## Endpoint Factus
+
+`GET /v1/bills/download-pdf/{number}`
+
+Fuente oficial: [Descargar PDF](https://developers.factus.com.co/facturas/descargar-factura/index.html)
+
+## Ejemplo
+
+```ts
+const response = await factus.invoices.downloadPdf("SETP990000001");
+const pdfBuffer = Buffer.from(response.data.pdf_base_64_encoded, "base64");
+```

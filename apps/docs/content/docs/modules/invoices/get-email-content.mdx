@@ -1,0 +1,23 @@
+---
+title: Obtener contenido de correo
+description: Obtener asunto y adjunto (base64) para envío manual de correo.
+---
+
+## Firma
+
+```ts
+getEmailContent(number: string): Promise<GetInvoiceEmailContentResponse>
+```
+
+## Endpoint Factus
+
+`GET /v1/bills/{number}/email-content`
+
+Fuente oficial: [Obtener contenido de correo](https://developers.factus.com.co/facturas/obtener-contenido-de-correo/index.html)
+
+## Ejemplo
+
+```ts
+const response = await factus.invoices.getEmailContent("SETP990000001");
+console.log(response.data.subject);
+```

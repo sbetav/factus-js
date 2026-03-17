@@ -1,0 +1,28 @@
+---
+title: Eliminar factura no validada
+description: Eliminar una factura no validada por la DIAN usando reference_code.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Firma
+
+```ts
+delete(referenceCode: string): Promise<DeleteInvoiceResponse>
+```
+
+## Endpoint Factus
+
+`DELETE /v1/bills/destroy/reference/{reference_code}`
+
+Fuente oficial: [Eliminar factura no validada](https://developers.factus.com.co/facturas/eliminar/index.html)
+
+<Callout type="warn">
+  Solo se pueden eliminar facturas que no hayan sido validadas por la DIAN.
+</Callout>
+
+## Ejemplo
+
+```ts
+await factus.invoices.delete("ORD-2025-001");
+```

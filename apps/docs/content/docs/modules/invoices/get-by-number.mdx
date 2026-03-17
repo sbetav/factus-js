@@ -1,0 +1,23 @@
+---
+title: Ver factura
+description: Obtener el detalle completo de una factura por su número de documento.
+---
+
+## Firma
+
+```ts
+getByNumber(number: string): Promise<ViewInvoiceResponse>
+```
+
+## Endpoint Factus
+
+`GET /v1/bills/show/{number}`
+
+Fuente oficial: [Ver factura](https://developers.factus.com.co/facturas/ver/index.html)
+
+## Ejemplo
+
+```ts
+const response = await factus.invoices.getByNumber("SETP990000001");
+console.log(response.data.bill.total);
+```

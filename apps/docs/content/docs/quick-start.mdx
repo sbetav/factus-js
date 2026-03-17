@@ -167,8 +167,8 @@ const list = await factus.invoices.list({
 console.log(list.data.data); // InvoiceListItem[]
 console.log(list.data.pagination); // { total, per_page, current_page, ... }
 
-// Obtener una factura por ID
-const invoice = await factus.invoices.get(456);
+// Obtener una factura por numero de documento (canonico en Factus)
+const invoice = await factus.invoices.getByNumber("SETP990000001");
 console.log(invoice.data.bill.number);
 
 // Obtener por número de documento
@@ -190,13 +190,13 @@ const invoice2 = await factus.invoices.getByNumber("SETP990000001");
 
 ```ts
 // XML base64
-const xml = await factus.invoices.downloadXml(456);
+const xml = await factus.invoices.downloadXml("SETP990000001");
 const xmlContent = Buffer.from(xml.data.xml_base_64_encoded, "base64").toString(
   "utf-8",
 );
 
 // PDF base64
-const pdf = await factus.invoices.downloadPdf(456);
+const pdf = await factus.invoices.downloadPdf("SETP990000001");
 const pdfBuffer = Buffer.from(pdf.data.pdf_base_64_encoded, "base64");
 ```
 
@@ -206,7 +206,7 @@ const pdfBuffer = Buffer.from(pdf.data.pdf_base_64_encoded, "base64");
 import { FactusError } from "factus-js";
 
 try {
-  const invoice = await factus.invoices.get(99999);
+  const invoice = await factus.invoices.getByNumber("NO-EXISTE");
 } catch (error) {
   if (error instanceof FactusError) {
     console.error(error.statusCode); // 404

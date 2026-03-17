@@ -48,7 +48,7 @@ const factus = new FactusClient({
 });
 
 try {
-  const invoice = await factus.invoices.get(99999);
+  const invoice = await factus.invoices.getByNumber("NO-EXISTE");
 } catch (error) {
   if (error instanceof FactusError) {
     console.error("Error de la API:", error.message);

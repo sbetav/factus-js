@@ -1,0 +1,23 @@
+---
+title: Eventos de facturas
+description: Obtener la lista de eventos RADIAN registrados en una factura.
+---
+
+## Firma
+
+```ts
+getEvents(number: string): Promise<GetInvoiceEventsResponse>
+```
+
+## Endpoint Factus
+
+`GET /v1/bills/{number}/radian/events`
+
+Fuente oficial: [Eventos de facturas](https://developers.factus.com.co/facturas/eventos-de-facturas/index.html)
+
+## Ejemplo
+
+```ts
+const response = await factus.invoices.getEvents("SETP990000001");
+console.log(response.data);
+```

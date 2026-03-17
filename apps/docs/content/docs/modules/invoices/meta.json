@@ -1,0 +1,16 @@
+{
+  "title": "Facturas",
+  "pages": [
+    "index",
+    "create",
+    "get-by-number",
+    "list",
+    "download-pdf",
+    "download-xml",
+    "get-email-content",
+    "send-email",
+    "emit-radian-event",
+    "get-events",
+    "delete"
+  ]
+}

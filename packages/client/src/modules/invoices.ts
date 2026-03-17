@@ -14,6 +14,7 @@ import type {
   DownloadInvoicePdfResponse,
   GetInvoiceEmailContentResponse,
   ApiResponse,
+  EventCode,
 } from "@factus-js/types";
 import type { HttpClient } from "../http-client";
 
@@ -42,14 +43,6 @@ export class InvoicesModule {
   }
 
   /**
-   * Get full detail of a single invoice by its numeric ID.
-   * GET /v1/bills/{id}
-   */
-  get(id: number): Promise<ViewInvoiceResponse> {
-    return this.http.get(`/v1/bills/${id}`);
-  }
-
-  /**
    * Get full detail of a single invoice by its document number (e.g. "SETP990000001").
    * GET /v1/bills/show/{number}
    */
@@ -59,26 +52,26 @@ export class InvoicesModule {
 
   /**
    * Download the invoice XML as a base64-encoded string.
-   * GET /v1/bills/download-xml/{id}
+   * GET /v1/bills/download-xml/{number}
    */
-  downloadXml(id: number): Promise<DownloadInvoiceXmlResponse> {
-    return this.http.get(`/v1/bills/download-xml/${id}`);
+  downloadXml(number: string): Promise<DownloadInvoiceXmlResponse> {
+    return this.http.get(`/v1/bills/download-xml/${number}`);
   }
 
   /**
    * Download the invoice PDF as a base64-encoded string.
-   * GET /v1/bills/download-pdf/{id}
+   * GET /v1/bills/download-pdf/{number}
    */
-  downloadPdf(id: number): Promise<DownloadInvoicePdfResponse> {
-    return this.http.get(`/v1/bills/download-pdf/${id}`);
+  downloadPdf(number: string): Promise<DownloadInvoicePdfResponse> {
+    return this.http.get(`/v1/bills/download-pdf/${number}`);
   }
 
   /**
    * Get the email content (subject + attached document) for an invoice.
-   * GET /v1/bills/email-content/{id}
+   * GET /v1/bills/{number}/email-content
    */
-  getEmailContent(id: number): Promise<GetInvoiceEmailContentResponse> {
-    return this.http.get(`/v1/bills/email-content/${id}`);
+  getEmailContent(number: string): Promise<GetInvoiceEmailContentResponse> {
+    return this.http.get(`/v1/bills/${number}/email-content`);
   }
 
   /**
@@ -93,14 +86,18 @@ export class InvoicesModule {
   }
 
   /**
-   * Update the RADIAN responsible person data on an invoice.
-   * PUT /v1/bills/radian/{id}
+   * Emit a RADIAN event on an invoice by document number and event type.
+   * POST /v1/bills/radian/events/update/{number}/{event_type}
    */
-  updateRadianEvent(
-    id: number,
+  emitRadianEvent(
+    number: string,
+    eventType: EventCode,
     input: RadianEventUpdateInput,
   ): Promise<RadianEventUpdateResponse> {
-    return this.http.put(`/v1/bills/radian/${id}`, input);
+    return this.http.post(
+      `/v1/bills/radian/events/update/${number}/${eventType}`,
+      input,
+    );
   }
 
   /**

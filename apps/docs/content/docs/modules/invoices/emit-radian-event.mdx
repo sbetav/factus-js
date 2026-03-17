@@ -1,0 +1,54 @@
+---
+title: Aceptación Tacita
+description: Emitir eventos RADIAN para una factura por numero y tipo de evento.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Firma
+
+```ts
+emitRadianEvent(
+  number: string,
+  eventType: EventCode,
+  input: RadianEventUpdateInput,
+): Promise<RadianEventUpdateResponse>
+```
+
+## Endpoint Factus
+
+`POST /v1/bills/radian/events/update/{number}/{event_type}`
+
+Fuente oficial: [Aceptacion tacita](https://developers.factus.com.co/facturas/aceptacion-tacita/index.html)
+
+## Tipos de evento (`EventCode`)
+
+- `RECEIPT_ACKNOWLEDGEMENT` (`"030"`)
+- `INVOICE_CLAIM` (`"031"`)
+- `GOODS_OR_SERVICE_RECEIPT` (`"032"`)
+- `EXPRESS_ACCEPTANCE` (`"033"`)
+- `TACIT_ACCEPTANCE` (`"034"`)
+
+## Ejemplo
+
+```ts
+import { EventCode, IdentityDocumentTypeId } from "factus-js";
+
+await factus.invoices.emitRadianEvent(
+  "SETP990000001",
+  EventCode.TACIT_ACCEPTANCE,
+  {
+    identification_document_code: IdentityDocumentTypeId.CITIZENSHIP_ID,
+    identification: "12345678",
+    first_name: "Pepito",
+    last_name: "Perez",
+    job_title: "Compras",
+    organization_department: "Administracion",
+  },
+);
+```
+
+<Callout type="info">
+  Este metodo cubre el flujo documentado por Factus para emision de eventos
+  RADIAN (incluyendo aceptacion tacita, segun el `eventType`).
+</Callout>

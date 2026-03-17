@@ -1,0 +1,39 @@
+---
+title: Ver y filtrar facturas
+description: Listar facturas con filtros y paginación.
+---
+
+## Firma
+
+```ts
+list(filters?: InvoiceFilters & { page?: number; per_page?: number }): Promise<GetInvoicesResponse>
+```
+
+## Endpoint Factus
+
+`GET /v1/bills`
+
+Fuente oficial: [Ver y filtrar facturas](https://developers.factus.com.co/facturas/ver-y-filtrar/index.html)
+
+## Filtros
+
+- `filter[identification]`
+- `filter[names]`
+- `filter[number]`
+- `filter[prefix]`
+- `filter[reference_code]`
+- `filter[status]` (1 validada, 0 pendiente)
+
+## Ejemplo
+
+```ts
+const response = await factus.invoices.list({
+  "filter[status]": "1",
+  "filter[number]": "SETP99",
+  page: 1,
+  per_page: 15,
+});
+
+const facturas = response.data.data;
+const paginacion = response.data.pagination;
+```

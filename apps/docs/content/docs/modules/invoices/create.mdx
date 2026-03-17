@@ -1,0 +1,72 @@
+---
+title: Crear y validar factura
+description: Crear y validar una factura electronica de venta ante la DIAN.
+---
+
+## Firma
+
+```ts
+create(input: CreateInvoiceInput): Promise<ApiResponse<InvoiceListItem>>
+```
+
+## Endpoint Factus
+
+`POST /v1/bills/validate`
+
+Fuente oficial: [Factura avanzada](https://developers.factus.com.co/facturas/crear-y-validar-factura/factura-avanzada/index.html)
+
+## Ejemplo
+
+```ts
+import {
+  PaymentFormCode,
+  PaymentMethodCode,
+  IdentityDocumentTypeId,
+  CustomerTributeId,
+  OrganizationTypeId,
+  ProductStandardId,
+} from "factus-js";
+
+const response = await factus.invoices.create({
+  numbering_range_id: 123,
+  reference_code: "ORD-2025-001",
+  observation: "Observaciones de la factura",
+  payment_form: PaymentFormCode.CASH_PAYMENT,
+  payment_method_code: PaymentMethodCode.CASH,
+  payment_due_date: "2025-12-31",
+  billing_period: {
+    start_date: "2025-01-01",
+    end_date: "2025-01-31",
+  },
+  customer: {
+    identification: "900123456",
+    dv: "7",
+    company: "Empresa Cliente S.A.S.",
+    trade_name: "Empresa Cliente",
+    names: "Juan",
+    address: "Calle 123 # 45-67",
+    email: "cliente@empresa.com",
+    phone: "3001234567",
+    legal_organization_id: OrganizationTypeId.LEGAL_ENTITY,
+    tribute_id: CustomerTributeId.IVA,
+    identification_document_id: IdentityDocumentTypeId.NIT,
+    municipality_id: 149,
+  },
+  items: [
+    {
+      code_reference: "PROD-001",
+      name: "Producto ejemplo",
+      quantity: 2,
+      discount_rate: 5,
+      price: 50000,
+      tax_rate: "19.00",
+      unit_measure_id: 70,
+      standard_code_id: ProductStandardId.TAXPAYER_ADOPTION,
+      is_excluded: 0,
+      tribute_id: 1,
+    },
+  ],
+});
+
+console.log(response.data.number);
+```
