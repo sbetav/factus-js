@@ -83,13 +83,13 @@ export class BillsResource {
 
   /**
    * Send the invoice by email (max 2 per invoice per day).
-   * POST /v1/bills/send-email/{id}
+   * POST /v1/bills/send-email/{number}
    */
   sendEmail(
-    id: number,
+    number: string,
     input: SendBillEmailInput,
   ): Promise<SendBillEmailResponse> {
-    return this.http.post(`/v1/bills/send-email/${id}`, input);
+    return this.http.post(`/v1/bills/send-email/${number}`, input);
   }
 
   /**
@@ -104,18 +104,18 @@ export class BillsResource {
   }
 
   /**
-   * Get the list of RADIAN events recorded for an invoice.
-   * GET /v1/bills/events/{id}
+   * Get the list of RADIAN events recorded for an invoice by its document number.
+   * GET /v1/bills/{number}/radian/events
    */
-  getEvents(id: number): Promise<GetBillEventsResponse> {
-    return this.http.get(`/v1/bills/events/${id}`);
+  getEvents(number: string): Promise<GetBillEventsResponse> {
+    return this.http.get(`/v1/bills/${number}/radian/events`);
   }
 
   /**
    * Delete (void) an invoice that has not yet been validated by the DIAN.
-   * DELETE /v1/bills/{id}
+   * DELETE /v1/bills/destroy/reference/{reference_code}
    */
-  delete(id: number): Promise<DeleteBillResponse> {
-    return this.http.delete(`/v1/bills/${id}`);
+  delete(referenceCode: string): Promise<DeleteBillResponse> {
+    return this.http.delete(`/v1/bills/destroy/reference/${referenceCode}`);
   }
 }

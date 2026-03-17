@@ -47,21 +47,21 @@ export class NumberingRangesResource {
 
   /**
    * Update the current consecutive number of a numbering range.
-   * PATCH /v1/numbering-ranges/{id}
+   * PATCH /v1/numbering-ranges/{id}/current
    */
   updateCurrent(
     id: number,
     input: UpdateNumberingRangeCurrentInput,
   ): Promise<ApiResponse<NumberingRange>> {
-    return this.http.patch(`/v1/numbering-ranges/${id}`, input);
+    return this.http.patch(`/v1/numbering-ranges/${id}/current`, input);
   }
 
   /**
    * Get the software numbering range registered with the DIAN.
-   * GET /v1/numbering-ranges/software
+   * GET /v1/numbering-ranges/dian
    */
   getSoftwareRange(): Promise<ApiResponse<SoftwareNumberingRange>> {
-    return this.http.get("/v1/numbering-ranges/software");
+    return this.http.get("/v1/numbering-ranges/dian");
   }
 
   /**

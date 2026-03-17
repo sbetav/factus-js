@@ -1,12 +1,11 @@
 import type { IdentityDocumentTypeId } from "@factus-js/constants";
-import type { Department } from "./shared";
 
 export interface Municipality {
   id: number;
   code: string;
   name: string;
-  /** The department this municipality belongs to (returned as a full object by the API). */
-  department: Department;
+  /** The department name as returned by GET /v1/municipalities (plain string, e.g. "Amazonas"). */
+  department: string;
 }
 
 export interface MunicipalityFilters {

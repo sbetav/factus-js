@@ -56,11 +56,11 @@ export class ReferenceResource {
 
   /**
    * List all tribute (tax) codes, optionally filtered by name.
-   * GET /v1/tributes
+   * GET /v1/tributes/products
    */
   listTributes(filters?: TributeFilters): Promise<ApiResponse<Tribute[]>> {
     return this.http.get(
-      "/v1/tributes",
+      "/v1/tributes/products",
       filters as Record<string, string | number | boolean | undefined>,
     );
   }
@@ -88,11 +88,11 @@ export class ReferenceResource {
 
   /**
    * Look up an acquirer (existing customer) by their identification.
-   * GET /v1/acquirers
+   * GET /v1/dian/acquirer
    */
   getAcquirer(filters: AcquirerFilters): Promise<ApiResponse<Acquirer>> {
     return this.http.get(
-      "/v1/acquirers",
+      "/v1/dian/acquirer",
       filters as unknown as Record<
         string,
         string | number | boolean | undefined

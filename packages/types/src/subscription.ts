@@ -18,4 +18,8 @@ export interface CurrentSubscription {
   total_documents: number;
   documents_used: number;
   documents_remaining: number;
+  subscription_days_to_expires: number;
+  subscription_start_date: string;
+  subscription_expiration_date: string;
+  subscription_is_expired: boolean;
 }
