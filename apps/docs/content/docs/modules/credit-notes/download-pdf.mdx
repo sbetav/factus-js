@@ -1,0 +1,23 @@
+---
+title: Descargar PDF
+description: Descargar PDF de una nota crédito en base64 por numero.
+---
+
+## Firma
+
+```ts
+downloadPdf(number: string): Promise<DownloadCreditNotePdfResponse>
+```
+
+## Endpoint Factus
+
+`GET /v1/credit-notes/download-pdf/{number}`
+
+Fuente oficial: [Descargar PDF](https://developers.factus.com.co/notas-credito/descargar-pdf/index.html)
+
+## Ejemplo
+
+```ts
+const response = await factus.creditNotes.downloadPdf("NC72");
+const pdfBuffer = Buffer.from(response.data.pdf_base_64_encoded, "base64");
+```

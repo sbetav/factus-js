@@ -1,0 +1,25 @@
+---
+title: Descargar XML
+description: Descargar XML de una nota crédito en base64 por numero.
+---
+
+## Firma
+
+```ts
+downloadXml(number: string): Promise<DownloadCreditNoteXmlResponse>
+```
+
+## Endpoint Factus
+
+`GET /v1/credit-notes/download-xml/{number}`
+
+Fuente oficial: [Descargar XML](https://developers.factus.com.co/notas-credito/descargar-xml/index.html)
+
+## Ejemplo
+
+```ts
+const response = await factus.creditNotes.downloadXml("NC72");
+const xml = Buffer.from(response.data.xml_base_64_encoded, "base64").toString(
+  "utf-8",
+);
+```

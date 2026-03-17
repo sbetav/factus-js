@@ -41,61 +41,53 @@ export class CreditNotesModule {
   }
 
   /**
-   * Get full detail of a credit note by its numeric ID.
-   * GET /v1/credit-notes/{id}
-   */
-  get(id: number): Promise<ApiResponse<ViewCreditNoteData>> {
-    return this.http.get(`/v1/credit-notes/${id}`);
-  }
-
-  /**
    * Get full detail of a credit note by its document number.
-   * GET /v1/credit-notes/show/{number}
+   * GET /v1/credit-notes/{number}
    */
-  getByNumber(number: string): Promise<ApiResponse<ViewCreditNoteData>> {
-    return this.http.get(`/v1/credit-notes/show/${number}`);
+  get(number: string): Promise<ApiResponse<ViewCreditNoteData>> {
+    return this.http.get(`/v1/credit-notes/${number}`);
   }
 
   /**
    * Download the credit note XML as a base64-encoded string.
-   * GET /v1/credit-notes/download-xml/{id}
+   * GET /v1/credit-notes/download-xml/{number}
    */
-  downloadXml(id: number): Promise<DownloadCreditNoteXmlResponse> {
-    return this.http.get(`/v1/credit-notes/download-xml/${id}`);
+  downloadXml(number: string): Promise<DownloadCreditNoteXmlResponse> {
+    return this.http.get(`/v1/credit-notes/download-xml/${number}`);
   }
 
   /**
    * Download the credit note PDF as a base64-encoded string.
-   * GET /v1/credit-notes/download-pdf/{id}
+   * GET /v1/credit-notes/download-pdf/{number}
    */
-  downloadPdf(id: number): Promise<DownloadCreditNotePdfResponse> {
-    return this.http.get(`/v1/credit-notes/download-pdf/${id}`);
+  downloadPdf(number: string): Promise<DownloadCreditNotePdfResponse> {
+    return this.http.get(`/v1/credit-notes/download-pdf/${number}`);
   }
 
   /**
    * Get the email content for a credit note.
-   * GET /v1/credit-notes/email-content/{id}
+   * GET /v1/credit-notes/{number}/email-content
    */
-  getEmailContent(id: number): Promise<GetCreditNoteEmailContentResponse> {
-    return this.http.get(`/v1/credit-notes/email-content/${id}`);
+  getEmailContent(number: string): Promise<GetCreditNoteEmailContentResponse> {
+    return this.http.get(`/v1/credit-notes/${number}/email-content`);
   }
 
   /**
    * Send the credit note by email (max 2 per document per day).
-   * POST /v1/credit-notes/send-email/{id}
+   * POST /v1/credit-notes/send-email/{number}
    */
   sendEmail(
-    id: number,
+    number: string,
     input: SendCreditNoteEmailInput,
   ): Promise<SendCreditNoteEmailResponse> {
-    return this.http.post(`/v1/credit-notes/send-email/${id}`, input);
+    return this.http.post(`/v1/credit-notes/send-email/${number}`, input);
   }
 
   /**
    * Delete (void) a credit note that has not yet been validated by the DIAN.
-   * DELETE /v1/credit-notes/{id}
+   * DELETE /v1/credit-notes/reference/{reference_code}
    */
-  delete(id: number): Promise<DeleteCreditNoteResponse> {
-    return this.http.delete(`/v1/credit-notes/${id}`);
+  delete(referenceCode: string): Promise<DeleteCreditNoteResponse> {
+    return this.http.delete(`/v1/credit-notes/reference/${referenceCode}`);
   }
 }

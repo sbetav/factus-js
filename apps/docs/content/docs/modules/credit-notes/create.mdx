@@ -1,0 +1,59 @@
+---
+title: Crear y validar nota crédito
+description: Crear y validar una nota crédito electronica ante la DIAN.
+---
+
+## Firma
+
+```ts
+create(input: CreateCreditNoteInput): Promise<ApiResponse<CreditNoteListItem>>
+```
+
+## Endpoint Factus
+
+`POST /v1/credit-notes/validate`
+
+Fuente oficial: [Crear y validar nota crédito](https://developers.factus.com.co/notas-credito/crear-y-validar/index.html)
+
+## Ejemplo
+
+```ts
+import {
+  CreditNoteOperationTypeCode,
+  CreditNoteCorrectionCode,
+} from "factus-js";
+
+const response = await factus.creditNotes.create({
+  numbering_range_id: 124,
+  reference_code: "NC-001",
+  customization_id: CreditNoteOperationTypeCode.WITH_REFERENCE,
+  correction_concept_code: CreditNoteCorrectionCode.PRICE_ADJUSTMENT,
+  payment_method_code: "10",
+  bill_id: 456,
+  observation: "Ajuste de precio por error en factura original",
+  customer: {
+    identification: "900123456",
+    dv: "7",
+    company: "Empresa Cliente S.A.S.",
+    names: "Juan",
+    address: "Calle 123 # 45-67",
+    email: "cliente@empresa.com",
+  },
+  items: [
+    {
+      code_reference: "PROD-001",
+      name: "Producto ejemplo",
+      quantity: 1,
+      discount_rate: 0,
+      price: 10000,
+      tax_rate: "19.00",
+      unit_measure_id: 70,
+      standard_code_id: 1,
+      is_excluded: 0,
+      tribute_id: 1,
+    },
+  ],
+});
+
+console.log(response.data.number);
+```

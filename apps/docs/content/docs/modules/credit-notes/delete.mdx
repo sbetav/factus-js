@@ -1,0 +1,28 @@
+---
+title: Eliminar nota crédito
+description: Eliminar una nota crédito no validada usando reference_code.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Firma
+
+```ts
+delete(referenceCode: string): Promise<DeleteCreditNoteResponse>
+```
+
+## Endpoint Factus
+
+`DELETE /v1/credit-notes/reference/{reference_code}`
+
+Fuente oficial: [Eliminar nota crédito](https://developers.factus.com.co/notas-credito/eliminar/index.html)
+
+<Callout type="warn">
+  Solo se pueden eliminar notas crédito que no hayan sido validadas por la DIAN.
+</Callout>
+
+## Ejemplo
+
+```ts
+await factus.creditNotes.delete("REF005");
+```

@@ -1,0 +1,28 @@
+---
+title: Introducción
+description: Emitir, consultar y gestionar notas crédito electronicas.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+Accede al modulo a traves de `factus.creditNotes`.
+
+<Callout type="info">
+  Esta sección sigue los endpoints oficiales de Factus para notas crédito. Para
+  detalle completo de validaciones DIAN y reglas de negocio, revisa: [Crear y
+  validar nota
+  crédito](https://developers.factus.com.co/notas-credito/crear-y-validar/index.html).
+</Callout>
+
+## Métodos disponibles
+
+| Método                     | Verbo + Ruta                                         | Descripción                                 |
+| -------------------------- | ---------------------------------------------------- | ------------------------------------------- |
+| `create(input)`            | `POST /v1/credit-notes/validate`                     | Crear y validar una nueva nota crédito      |
+| `list(filters?)`           | `GET /v1/credit-notes`                               | Listar notas crédito con filtros opcionales |
+| `get(number)`              | `GET /v1/credit-notes/{number}`                      | Obtener detalle por número de documento     |
+| `downloadXml(number)`      | `GET /v1/credit-notes/download-xml/{number}`         | Descargar XML en base64                     |
+| `downloadPdf(number)`      | `GET /v1/credit-notes/download-pdf/{number}`         | Descargar PDF en base64                     |
+| `getEmailContent(number)`  | `GET /v1/credit-notes/{number}/email-content`        | Obtener asunto y adjunto para envío manual  |
+| `sendEmail(number, input)` | `POST /v1/credit-notes/send-email/{number}`          | Enviar la nota crédito por email            |
+| `delete(referenceCode)`    | `DELETE /v1/credit-notes/reference/{reference_code}` | Eliminar una nota crédito no validada       |

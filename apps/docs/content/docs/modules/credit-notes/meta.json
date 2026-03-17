@@ -1,0 +1,14 @@
+{
+  "title": "Notas crédito",
+  "pages": [
+    "index",
+    "create",
+    "get",
+    "list",
+    "download-pdf",
+    "download-xml",
+    "get-email-content",
+    "send-email",
+    "delete"
+  ]
+}

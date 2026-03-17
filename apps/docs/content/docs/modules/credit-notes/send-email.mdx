@@ -1,0 +1,24 @@
+---
+title: Enviar correo
+description: Enviar una nota crédito por correo usando el numero del documento.
+---
+
+## Firma
+
+```ts
+sendEmail(number: string, input: SendCreditNoteEmailInput): Promise<SendCreditNoteEmailResponse>
+```
+
+## Endpoint Factus
+
+`POST /v1/credit-notes/send-email/{number}`
+
+Fuente oficial: [Enviar correo](https://developers.factus.com.co/notas-credito/enviar-correo/index.html)
+
+## Ejemplo
+
+```ts
+await factus.creditNotes.sendEmail("NC72", {
+  email: "cliente@empresa.com",
+});
+```
