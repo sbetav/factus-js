@@ -1,0 +1,26 @@
+---
+title: Cargar factura
+description: Registrar una factura electronica recibida por track_id.
+---
+
+## Firma
+
+```ts
+upload(input: UploadReceptionBillInput): Promise<ApiResponse<UploadedReceptionBill>>
+```
+
+## Endpoint Factus
+
+`POST /v1/receptions/upload`
+
+Fuente oficial: [Cargar factura](https://developers.factus.com.co/recepcion-de-documentos/cargar-factura/index.html)
+
+## Ejemplo
+
+```ts
+const response = await factus.reception.upload({
+  track_id: "abc123def456...",
+});
+
+console.log(response.data.number);
+```

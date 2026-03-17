@@ -1,0 +1,56 @@
+---
+title: Emitir evento
+description: Emitir eventos RADIAN (030-034) para una factura recibida.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Firma
+
+```ts
+emitEvent(params: EmitEventParams, input: EmitEventInput): Promise<ApiResponse<ReceptionBillEvent[]>>
+```
+
+## Endpoint Factus
+
+`POST /v1/receptions/bills/{bill_id}/radian/events/{event_type}`
+
+Fuente oficial: [Emitir evento](https://developers.factus.com.co/recepcion-de-documentos/emitir-evento/index.html)
+
+## Ejemplo
+
+```ts
+import { EventCode, ClaimConceptCode } from "factus-js";
+
+await factus.reception.emitEvent(
+  {
+    bill_id: 987,
+    event_type: EventCode.RECEIPT_ACKNOWLEDGEMENT,
+  },
+  {
+    identification_document_code: 13,
+    identification: "12345678",
+    first_name: "Pepito",
+    last_name: "Perez",
+  },
+);
+
+await factus.reception.emitEvent(
+  {
+    bill_id: 987,
+    event_type: EventCode.INVOICE_CLAIM,
+  },
+  {
+    claim_concept_code: ClaimConceptCode.DOCUMENT_INCONSISTENCIES,
+    identification_document_code: 13,
+    identification: "12345678",
+    first_name: "Pepito",
+    last_name: "Perez",
+  },
+);
+```
+
+<Callout type="info">
+  Flujo usual: `030 -> 032 -> 033`. El evento `031` (reclamo) altera el flujo,
+  y `034` (aceptación tácita) se genera automáticamente según reglas DIAN.
+</Callout>

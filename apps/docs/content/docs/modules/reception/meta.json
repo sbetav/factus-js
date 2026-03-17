@@ -1,0 +1,9 @@
+{
+  "title": "Recepción RADIAN",
+  "pages": [
+    "index",
+    "upload",
+    "list",
+    "emit-event"
+  ]
+}

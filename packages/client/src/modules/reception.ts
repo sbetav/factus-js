@@ -28,14 +28,6 @@ export class ReceptionModule {
   }
 
   /**
-   * Get full detail of a received invoice by its numeric ID.
-   * GET /v1/receptions/bills/{id}
-   */
-  get(id: number): Promise<ApiResponse<UploadedReceptionBill>> {
-    return this.http.get(`/v1/receptions/bills/${id}`);
-  }
-
-  /**
    * Upload (register) a new received invoice via its DIAN track ID.
    * POST /v1/receptions/upload
    */
