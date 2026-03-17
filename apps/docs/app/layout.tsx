@@ -1,14 +1,24 @@
-import { RootProvider } from 'fumadocs-ui/provider/next';
-import './global.css';
-import { Inter } from 'next/font/google';
+import { RootProvider } from "fumadocs-ui/provider/next";
+import "./global.css";
+import { Geist, Geist_Mono } from "next/font/google";
 
-const inter = Inter({
-  subsets: ['latin'],
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist",
 });
 
-export default function Layout({ children }: LayoutProps<'/'>) {
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+});
+
+export default function Layout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={inter.className} suppressHydrationWarning>
+    <html
+      lang="es"
+      className={`${geist.variable} ${geistMono.variable} ${geist.className}`}
+      suppressHydrationWarning
+    >
       <body className="flex flex-col min-h-screen">
         <RootProvider>{children}</RootProvider>
       </body>
