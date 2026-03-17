@@ -17,9 +17,6 @@
     "modules/numbering-ranges",
     "modules/reception",
     "modules/subscription",
-    "modules/catalog",
-    "---Referencia---",
-    "constants",
-    "types"
+    "modules/catalog"
   ]
 }

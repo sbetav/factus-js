@@ -1,0 +1,32 @@
+---
+title: Tributos
+description: Listar tributos de productos disponibles en Factus.
+---
+
+## Firma
+
+```ts
+listTributes(filters?: TributeFilters): Promise<ApiResponse<Tribute[]>>
+```
+
+## Endpoint Factus
+
+`GET /v1/tributes/products`
+
+Fuente oficial: [Tributos de productos](https://developers.factus.com.co/tributos/tributos-de-productos/index.html)
+
+## Filtros
+
+- `name`
+
+## Ejemplo
+
+```ts
+const response = await factus.catalog.listTributes({
+  name: "IVA",
+});
+
+for (const tributo of response.data) {
+  console.log(tributo.id, tributo.code, tributo.name);
+}
+```

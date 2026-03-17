@@ -1,0 +1,12 @@
+{
+  "title": "Catálogo",
+  "pages": [
+    "index",
+    "adquirientes",
+    "tributos",
+    "unidades-de-medida",
+    "paises",
+    "municipios",
+    "tablas-de-referencia"
+  ]
+}

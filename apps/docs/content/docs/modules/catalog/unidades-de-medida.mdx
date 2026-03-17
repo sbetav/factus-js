@@ -1,0 +1,30 @@
+---
+title: Unidades de medida
+description: Listar unidades de medida DIAN.
+---
+
+## Firma
+
+```ts
+listMeasurementUnits(filters?: MeasurementUnitFilters): Promise<ApiResponse<MeasurementUnit[]>>
+```
+
+## Endpoint Factus
+
+`GET /v1/measurement-units`
+
+Fuente oficial: [Obtener unidades](https://developers.factus.com.co/unidades-de-medida/obtener-unidades/index.html)
+
+## Filtros
+
+- `name`
+
+## Ejemplo
+
+```ts
+const response = await factus.catalog.listMeasurementUnits({
+  name: "unidad",
+});
+
+console.log(response.data[0]);
+```

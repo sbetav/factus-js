@@ -1,0 +1,29 @@
+---
+title: Introducción
+description: Referencias maestras para adquirientes, tributos, unidades, países y municipios.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+Accede al modulo a traves de `factus.catalog`.
+
+<Callout type="info">
+  Esta sección consolida endpoints de consulta maestra y referencias usadas por
+  todos los documentos electrónicos.
+</Callout>
+
+## Métodos disponibles
+
+| Método                           | Verbo + Ruta                | Descripción                                                         |
+| -------------------------------- | --------------------------- | ------------------------------------------------------------------- |
+| `getAcquirer(filters)`           | `GET /v1/dian/acquirer`     | Obtener nombre/email del adquiriente por tipo y número de documento |
+| `listTributes(filters?)`         | `GET /v1/tributes/products` | Listar tributos de productos                                        |
+| `listMeasurementUnits(filters?)` | `GET /v1/measurement-units` | Listar unidades de medida                                           |
+| `listCountries(filters?)`        | `GET /v1/countries`         | Listar países                                                       |
+| `listMunicipalities(filters?)`   | `GET /v1/municipalities`    | Listar municipios                                                   |
+
+## Tablas de referencia
+
+Las tablas de referencia (tipos de documento, eventos, formas de pago, etc.) se
+exponen como constantes en `factus-js` (`@factus-js/constants`) y no requieren
+llamadas HTTP.
