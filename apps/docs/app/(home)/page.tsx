@@ -122,7 +122,7 @@ export default async function HomePage() {
   return (
     <main className="flex flex-col items-center w-full overflow-x-hidden">
       {/* ── HERO ──────────────────────────────────────────── */}
-      <section className="relative flex flex-col items-center px-6 pt-24 pb-32 text-center w-full max-w-5xl mx-auto">
+      <section className="relative flex flex-col items-center justify-center px-6  text-center w-full max-w-5xl mx-auto h-[calc(100dvh-57px)] pb-14">
         {/* Dot grid background — fades out radially */}
         <div
           aria-hidden
@@ -161,9 +161,9 @@ export default async function HomePage() {
             <Image
               src="/factus-js.webp"
               alt="factus-js"
-              width={92}
-              height={92}
-              className="relative object-contain"
+              width={90}
+              height={90}
+              className="relative object-contain size-18 xs:size-20 md:size-24"
               priority
               unoptimized
             />
@@ -181,7 +181,7 @@ export default async function HomePage() {
 
         {/* Headline */}
         <h1
-          className="animate-fade-up text-5xl font-bold tracking-tight text-fd-foreground sm:text-6xl"
+          className="animate-fade-up text-3xl font-bold xs:text-4xl tracking-tight text-fd-foreground sm:text-5xl"
           style={{ animationDelay: "160ms" }}
         >
           <span className="text-fd-primary">JavaScript</span> SDK para <br /> la
@@ -209,7 +209,7 @@ export default async function HomePage() {
 
         {/* Sub-headline */}
         <p
-          className="animate-fade-up mt-6 max-w-xl text-lg leading-relaxed text-fd-muted-foreground"
+          className="animate-fade-up mt-6 max-w-xl sm:text-lg leading-relaxed text-fd-muted-foreground"
           style={{ animationDelay: "240ms" }}
         >
           Emite facturas electrónicas, notas crédito, documentos soporte y más
@@ -271,7 +271,7 @@ export default async function HomePage() {
       {/* ── FEATURES ──────────────────────────────────────── */}
       <section className="w-full max-w-5xl px-6 py-20">
         <div className="mb-12 text-center">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-fd-primary">
+          <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-fd-primary">
             Características principales
           </p>
           <h2 className="text-2xl font-bold tracking-tight text-fd-foreground sm:text-3xl">
@@ -334,7 +334,7 @@ export default async function HomePage() {
         <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
           {/* Left: vertical timeline */}
           <div className="flex flex-col justify-center">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-fd-primary">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-fd-primary">
               Integración rápida
             </p>
             <h2 className="text-2xl font-bold tracking-tight text-fd-foreground sm:text-3xl text-pretty">

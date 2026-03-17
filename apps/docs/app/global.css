@@ -3,6 +3,8 @@
 @import "fumadocs-ui/css/preset.css";
 
 @theme {
+  --breakpoint-xs: 480px;
+
   /* Brand */
   --color-fd-primary: hsl(49 84% 51%);
   --color-fd-primary-foreground: hsl(0 0% 5%);
@@ -66,4 +68,10 @@
 
 .dark ::-webkit-scrollbar-thumb:hover {
   background: hsl(0 0% 55% / 0.55);
+}
+
+/* Prose links: underline matches foreground (override fumadocs primary) */
+.prose a:not([data-card]) {
+  -webkit-text-decoration-color: var(--color-fd-foreground);
+  text-decoration-color: var(--color-fd-foreground);
 }
