@@ -1,3 +1,12 @@
+import type {
+  ChargeDiscountCode,
+  CreditNoteCorrectionCode,
+  CustomerTributeId,
+  IdentityDocumentTypeId,
+  OrganizationTypeId,
+  PaymentMethodCode,
+  ProductStandardId,
+} from "@factus-js/constants";
 import type { Customer } from "./customer";
 import type { ApiResponse, PaginatedData } from "./common";
 import type {
@@ -23,17 +32,23 @@ import type {
 
 export interface CreateCreditNoteInput {
   numbering_range_id?: number;
-  correction_concept_code: number;
-  customization_id: number;
+  correction_concept_code: CreditNoteCorrectionCode;
+  /**
+   * Operation type code for the credit note.
+   * The Factus API accepts numeric values: 20 (with reference) or 22 (without reference).
+   * Note: CreditNoteOperationTypeCode constant values are strings ("20"/"22"); use the
+   * numeric literal here to match the actual API contract.
+   */
+  customization_id: 20 | 22;
   bill_id?: number;
   reference_code: string;
-  payment_method_code: string;
+  payment_method_code: PaymentMethodCode;
   send_email?: boolean;
   observation?: string;
   billing_period?: BillingPeriod;
   establishment?: EstablishmentInput;
   customer?: {
-    identification_document_id?: number;
+    identification_document_id?: IdentityDocumentTypeId;
     identification: string;
     dv?: number | string;
     company?: string;
@@ -42,8 +57,8 @@ export interface CreateCreditNoteInput {
     address?: string;
     email?: string;
     phone?: string;
-    legal_organization_id?: number | string;
-    tribute_id?: number | string;
+    legal_organization_id?: OrganizationTypeId;
+    tribute_id?: CustomerTributeId;
     municipality_id?: number | string;
   };
   items: Array<{
@@ -55,7 +70,7 @@ export interface CreateCreditNoteInput {
     price: number;
     tax_rate: string;
     unit_measure_id: number;
-    standard_code_id: number;
+    standard_code_id: ProductStandardId;
     is_excluded: number;
     tribute_id: number;
     withholding_taxes?: Array<{
@@ -65,7 +80,7 @@ export interface CreateCreditNoteInput {
     }>;
   }>;
   allowance_charges?: Array<{
-    concept_type: string;
+    concept_type: ChargeDiscountCode;
     is_surcharge: boolean;
     reason: string;
     base_amount: number;

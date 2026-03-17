@@ -1,3 +1,8 @@
+import type {
+  PaymentMethodCode,
+  ProductStandardId,
+  SupportDocumentIdentityTypeId,
+} from "@factus-js/constants";
 import type { ApiResponse, PaginatedData } from "./common";
 import type {
   CodeNameIdObject,
@@ -18,10 +23,10 @@ import type {
 export interface CreateSupportDocumentInput {
   reference_code: string;
   numbering_range_id?: number;
-  payment_method_code?: string;
+  payment_method_code?: PaymentMethodCode;
   observation?: string;
   provider: {
-    identification_document_id: number;
+    identification_document_id: SupportDocumentIdentityTypeId;
     identification: string;
     dv?: number;
     trade_name?: string;
@@ -40,7 +45,7 @@ export interface CreateSupportDocumentInput {
     discount_rate: number;
     price: number;
     unit_measure_id: number;
-    standard_code_id: number;
+    standard_code_id: ProductStandardId;
     withholding_taxes?: Array<{
       code: string;
       withholding_tax_rate: string | number;

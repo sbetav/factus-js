@@ -1,3 +1,8 @@
+import type {
+  AdjustmentNoteReasonCode,
+  PaymentMethodCode,
+  ProductStandardId,
+} from "@factus-js/constants";
 import type { ApiResponse, PaginatedData } from "./common";
 import type {
   CodeNameIdObject,
@@ -18,9 +23,9 @@ import type {
 export interface CreateAdjustmentNoteInput {
   reference_code: string;
   numbering_range_id?: number;
-  payment_method_code?: string;
+  payment_method_code?: PaymentMethodCode;
   support_document_id: number;
-  correction_concept_code: string;
+  correction_concept_code: AdjustmentNoteReasonCode;
   observation?: string;
   items: Array<{
     code_reference: string;
@@ -29,7 +34,7 @@ export interface CreateAdjustmentNoteInput {
     discount_rate: number;
     price: number;
     unit_measure_id: number;
-    standard_code_id: number;
+    standard_code_id: ProductStandardId;
     withholding_taxes?: Array<{
       code: string;
       withholding_tax_rate: string;

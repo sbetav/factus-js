@@ -1,3 +1,14 @@
+import type {
+  ChargeDiscountCode,
+  IdentityDocumentTypeId,
+  InvoiceDocumentType,
+  OperationTypeCode,
+  OrganizationTypeId,
+  CustomerTributeId,
+  PaymentFormCode,
+  PaymentMethodCode,
+  ProductStandardId,
+} from "@factus-js/constants";
 import type { Customer } from "./customer";
 import type { ApiResponse, PaginatedData } from "./common";
 import type {
@@ -29,13 +40,13 @@ export interface WithholdingTax {
 
 export interface CreateInvoiceInput {
   numbering_range_id?: number;
-  document?: string;
+  document?: InvoiceDocumentType;
   reference_code: string;
   observation?: string;
-  payment_form?: string;
+  payment_form?: PaymentFormCode;
   payment_due_date?: string;
-  payment_method_code?: string | number;
-  operation_type?: string;
+  payment_method_code?: PaymentMethodCode;
+  operation_type?: OperationTypeCode;
   order_reference?: {
     reference_code: string;
     issue_date?: string;
@@ -49,7 +60,7 @@ export interface CreateInvoiceInput {
   billing_period?: BillingPeriod;
   establishment?: EstablishmentInput;
   customer: {
-    identification_document_id: number | string;
+    identification_document_id: IdentityDocumentTypeId;
     identification: string;
     dv?: number | string;
     company?: string;
@@ -58,8 +69,8 @@ export interface CreateInvoiceInput {
     address?: string;
     email?: string;
     phone?: string;
-    legal_organization_id: number | string;
-    tribute_id: number | string;
+    legal_organization_id: OrganizationTypeId;
+    tribute_id: CustomerTributeId;
     municipality_id?: number | string;
   };
   items: Array<{
@@ -72,7 +83,7 @@ export interface CreateInvoiceInput {
     price: number;
     tax_rate: string;
     unit_measure_id: number;
-    standard_code_id: number;
+    standard_code_id: ProductStandardId;
     is_excluded: number;
     tribute_id: number;
     withholding_taxes?: Array<WithholdingTax>;
@@ -82,7 +93,7 @@ export interface CreateInvoiceInput {
     };
   }>;
   allowance_charges?: Array<{
-    concept_type: string;
+    concept_type: ChargeDiscountCode;
     is_surcharge: boolean;
     reason: string;
     base_amount: number | string;
@@ -237,7 +248,7 @@ export interface ViewInvoiceResponse {
 // ---------------------------------------------------------------------------
 
 export interface RadianEventUpdateInput {
-  identification_document_code: string | number;
+  identification_document_code: IdentityDocumentTypeId;
   identification: string;
   dv?: string;
   first_name: string;

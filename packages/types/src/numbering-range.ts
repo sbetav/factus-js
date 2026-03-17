@@ -2,7 +2,7 @@ import type { NumberingRangeDocumentTypeCode } from "@factus-js/constants";
 
 export interface NumberingRange {
   id: number;
-  document: string;
+  document: NumberingRangeDocumentTypeCode;
   /** The API is inconsistent: 'document_name' is missing in the list endpoint; 'document' carries the name there instead. */
   document_name?: string;
   prefix: string;
