@@ -63,11 +63,12 @@ import {
   PaymentMethodCode,
 } from "factus-js"; // o desde "@factus-js/constants"
 
-console.log(PaymentFormCode.CASH_PAYMENT); // "1"
+console.log(PaymentFormCode.CASH_PAYMENT.value); // "1"
+console.log(PaymentFormCode.CASH_PAYMENT.description); // "Pago de contado"
 ```
 
 <Callout type="info">
-  Cada constante funciona tanto como objeto de valores como como tipo TypeScript. Por ejemplo, `PaymentFormCode` puede usarse como tipo en tus propias funciones: `(code: PaymentFormCode) => void`.
+  Cada entrada de constante expone dos propiedades: `value` (el código DIAN) y `description` (la etiqueta legible por humanos). El tipo alias derivado (p. ej. `PaymentFormCode`) sigue resolviendo a la unión de literales válidos de `value`, por lo que puedes usarlo directamente como restricción de tipo en tus propias funciones: `(code: PaymentFormCode) => void`.
 </Callout>
 
 ---
@@ -185,15 +186,15 @@ console.log(PaymentFormCode.CASH_PAYMENT); // "1"
 
 Subconjunto de `IdentityDocumentTypeId` permitido en documentos soporte y notas de ajuste.
 
-| Constante                         | Valor |
-| --------------------------------- | ----- |
-| `FOREIGNER_CARD`                  | `4`   |
-| `FOREIGNER_ID`                    | `5`   |
-| `NIT`                             | `6`   |
-| `PASSPORT`                        | `7`   |
-| `FOREIGN_IDENTIFICATION_DOCUMENT` | `8`   |
-| `PEP`                             | `9`   |
-| `FOREIGN_NIT`                     | `10`  |
+| Constante                         | Valor | Descripción                            |
+| --------------------------------- | ----- | -------------------------------------- |
+| `FOREIGNER_CARD`                  | `4`   | Tarjeta de extranjería                 |
+| `FOREIGNER_ID`                    | `5`   | Cédula de extranjería                  |
+| `NIT`                             | `6`   | NIT                                    |
+| `PASSPORT`                        | `7`   | Pasaporte                              |
+| `FOREIGN_IDENTIFICATION_DOCUMENT` | `8`   | Documento de identificación extranjero |
+| `PEP`                             | `9`   | PEP                                    |
+| `FOREIGN_NIT`                     | `10`  | NIT otro país                          |
 
 ---
 
