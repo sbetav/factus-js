@@ -1,6 +1,6 @@
 ---
 title: Instalación
-description: Cómo instalar los paquetes de factus-js en tu proyecto.
+description: Cómo instalar factus-js en tu proyecto.
 ---
 
 import { Tabs, Tab } from "fumadocs-ui/components/tabs";
@@ -11,9 +11,64 @@ import { Callout } from "fumadocs-ui/components/callout";
 - **Node.js** 18 o superior (se requiere la API `fetch` nativa).
 - Una cuenta activa en [Factus](https://factus.com.co) con credenciales de API.
 
-## Instalar los paquetes
+## Instalar el paquete principal
 
-Instala el cliente principal y el paquete de tipos. El paquete de constantes es opcional pero recomendado para autocompletado de códigos DIAN.
+La forma recomendada es instalar `factus-js`, el paquete de entrada que reexporta todo — el cliente, los tipos y las constantes.
+
+<Tabs items={['npm', 'yarn', 'pnpm', 'bun']}>
+
+<Tab value="npm">
+
+```bash
+npm install factus-js
+```
+
+</Tab>
+
+<Tab value="yarn">
+
+```bash
+yarn add factus-js
+```
+
+</Tab>
+
+<Tab value="pnpm">
+
+```bash
+pnpm add factus-js
+```
+
+</Tab>
+
+<Tab value="bun">
+
+```bash
+bun add factus-js
+```
+
+</Tab>
+
+</Tabs>
+
+## Paquetes del monorepo
+
+| Paquete                | Descripción                                                                 |
+| ---------------------- | --------------------------------------------------------------------------- |
+| `factus-js`            | Punto de entrada principal — reexporta todo desde los paquetes internos     |
+| `@factus-js/client`    | Clase `FactusClient` con todos los recursos de la API                       |
+| `@factus-js/types`     | Interfaces TypeScript para entradas, salidas y respuestas                   |
+| `@factus-js/constants` | Objetos de constantes tipadas (códigos de documento, métodos de pago, etc.) |
+
+<Callout type="info">
+  `factus-js` reexporta todo desde `@factus-js/client`, `@factus-js/types` y
+  `@factus-js/constants`. No necesitas instalar los paquetes internos por
+  separado a menos que quieras dependencias granulares.
+</Callout>
+
+## Instalación avanzada (paquetes individuales)
+
+Si prefieres dependencias más granulares, puedes instalar los paquetes internos directamente:
 
 <Tabs items={['npm', 'yarn', 'pnpm', 'bun']}>
 
@@ -58,20 +113,6 @@ bun add @factus-js/constants
 </Tab>
 
 </Tabs>
-
-## Paquetes del monorepo
-
-| Paquete                | Descripción                                                                 |
-| ---------------------- | --------------------------------------------------------------------------- |
-| `@factus-js/client`    | Clase `FactusClient` con todos los recursos de la API                       |
-| `@factus-js/types`     | Interfaces TypeScript para entradas, salidas y respuestas                   |
-| `@factus-js/constants` | Objetos de constantes tipadas (códigos de documento, métodos de pago, etc.) |
-
-<Callout type="info">
-  `@factus-js/types` es una dependencia directa de `@factus-js/client`. Puedes
-  importar los tipos directamente desde `@factus-js/types` o utilizar los que
-  reexporta `@factus-js/client` según prefieras.
-</Callout>
 
 ## Variables de entorno
 

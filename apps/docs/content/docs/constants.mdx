@@ -10,6 +10,14 @@ El paquete `@factus-js/constants` expone objetos de constantes con tipado estric
 
 ## Instalación
 
+Si instalaste `factus-js`, las constantes ya están disponibles — no necesitas instalar nada más:
+
+```ts
+import { PaymentFormCode } from "factus-js";
+```
+
+Si usas los paquetes internos directamente, instala `@factus-js/constants` por separado:
+
 <Tabs items={['npm', 'yarn', 'pnpm', 'bun']}>
 
 <Tab value="npm">
@@ -53,7 +61,7 @@ import {
   InvoiceDocumentType,
   PaymentFormCode,
   PaymentMethodCode,
-} from "@factus-js/constants";
+} from "factus-js"; // o desde "@factus-js/constants"
 
 console.log(PaymentFormCode.CASH_PAYMENT); // "1"
 ```

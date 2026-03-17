@@ -1,0 +1,31 @@
+{
+  "name": "factus-js",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "TypeScript SDK for the Factus Colombian e-invoicing API",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@factus-js/client": "workspace:*",
+    "@factus-js/types": "workspace:*"
+  },
+  "devDependencies": {
+    "tsdown": "^0.21.3",
+    "typescript": "5.9.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

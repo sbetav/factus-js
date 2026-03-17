@@ -59,7 +59,7 @@ const steps = [
   { step: "03", label: "Instancia el cliente y empieza a operar" },
 ];
 
-const QUICKSTART_SNIPPET = `import { FactusClient } from "@factus-js/client";
+const QUICKSTART_SNIPPET = `import { FactusClient } from "factus-js";
 
 const factus = new FactusClient({
   clientId:     process.env.FACTUS_CLIENT_ID!,
@@ -70,14 +70,14 @@ const factus = new FactusClient({
 });
 
 // Crear una factura electrónica
-const response = await factus.bills.create({ ... });
+const response = await factus.invoices.create({ ... });
 console.log(response.data.number); // "SETP990000001"`;
 
 const pkgManagers = [
-  { id: "npm", cmd: "npm install @factus-js/client @factus-js/types" },
-  { id: "pnpm", cmd: "pnpm add @factus-js/client @factus-js/types" },
-  { id: "yarn", cmd: "yarn add @factus-js/client @factus-js/types" },
-  { id: "bun", cmd: "bun add @factus-js/client @factus-js/types" },
+  { id: "npm", cmd: "npm install factus-js" },
+  { id: "pnpm", cmd: "pnpm add factus-js" },
+  { id: "yarn", cmd: "yarn add factus-js" },
+  { id: "bun", cmd: "bun add factus-js" },
 ] as const;
 
 /* ─────────────────────────────────────────────────────────── */

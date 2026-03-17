@@ -18,7 +18,7 @@ import { Tabs, Tab } from "fumadocs-ui/components/tabs";
 <Tab value="npm">
 
 ```bash
-npm install @factus-js/client @factus-js/types @factus-js/constants
+npm install factus-js
 ```
 
 </Tab>
@@ -26,7 +26,7 @@ npm install @factus-js/client @factus-js/types @factus-js/constants
 <Tab value="yarn">
 
 ```bash
-yarn add @factus-js/client @factus-js/types @factus-js/constants
+yarn add factus-js
 ```
 
 </Tab>
@@ -34,7 +34,7 @@ yarn add @factus-js/client @factus-js/types @factus-js/constants
 <Tab value="pnpm">
 
 ```bash
-pnpm add @factus-js/client @factus-js/types @factus-js/constants
+pnpm add factus-js
 ```
 
 </Tab>
@@ -42,7 +42,7 @@ pnpm add @factus-js/client @factus-js/types @factus-js/constants
 <Tab value="bun">
 
 ```bash
-bun add @factus-js/client @factus-js/types @factus-js/constants
+bun add factus-js
 ```
 
 </Tab>
@@ -71,7 +71,7 @@ FACTUS_PASSWORD=tu-contraseña
 ## Inicializa el cliente
 
 ```ts
-import { FactusClient } from "@factus-js/client";
+import { FactusClient } from "factus-js";
 
 const factus = new FactusClient({
   clientId: process.env.FACTUS_CLIENT_ID!,
@@ -89,7 +89,7 @@ const factus = new FactusClient({
 ## Crea tu primera factura
 
 ```ts
-import { FactusClient } from "@factus-js/client";
+import { FactusClient } from "factus-js";
 import {
   InvoiceDocumentType,
   OperationTypeCode,
@@ -99,7 +99,7 @@ import {
   CustomerTributeId,
   OrganizationTypeId,
   ProductStandardId,
-} from "@factus-js/constants";
+} from "factus-js";
 
 const factus = new FactusClient({
   /* config */
@@ -203,7 +203,7 @@ const pdfBuffer = Buffer.from(pdf.data.pdf_base_64_encoded, "base64");
 ## Manejo de errores
 
 ```ts
-import { FactusError } from "@factus-js/client";
+import { FactusError } from "factus-js";
 
 try {
   const invoice = await factus.invoices.get(99999);

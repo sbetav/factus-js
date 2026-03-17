@@ -17,10 +17,11 @@ import { Callout } from "fumadocs-ui/components/callout";
 
 ## Paquetes
 
-El repositorio es un monorepo con tres paquetes publicados en npm:
+El repositorio es un monorepo con cuatro paquetes publicados en npm:
 
 | Paquete                | Descripción                                                                     |
 | ---------------------- | ------------------------------------------------------------------------------- |
+| `factus-js`            | Punto de entrada principal — reexporta todo desde los paquetes internos         |
 | `@factus-js/client`    | Cliente principal — `FactusClient` y todos los recursos                         |
 | `@factus-js/types`     | Interfaces TypeScript para todas las entidades y respuestas                     |
 | `@factus-js/constants` | Constantes con tipado — códigos DIAN, tipos de documento, métodos de pago, etc. |
@@ -78,7 +79,7 @@ El repositorio es un monorepo con tres paquetes publicados en npm:
 ## Inicio rápido
 
 ```ts
-import { FactusClient } from "@factus-js/client";
+import { FactusClient } from "factus-js";
 
 const factus = new FactusClient({
   clientId: process.env.FACTUS_CLIENT_ID!,
