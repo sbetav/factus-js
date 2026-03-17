@@ -1,0 +1,23 @@
+---
+title: Ver documento soporte
+description: Obtener detalle de un documento soporte por numero.
+---
+
+## Firma
+
+```ts
+get(number: string): Promise<ApiResponse<ViewSupportDocumentData>>
+```
+
+## Endpoint Factus
+
+`GET /v1/support-documents/show/{number}`
+
+Fuente oficial: [Ver documento soporte](https://developers.factus.com.co/documentos-soporte/ver/index.html)
+
+## Ejemplo
+
+```ts
+const response = await factus.supportDocuments.get("SEDS984000021");
+console.log(response.data.support_document.total);
+```

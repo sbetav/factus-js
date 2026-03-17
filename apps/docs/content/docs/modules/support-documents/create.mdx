@@ -1,0 +1,52 @@
+---
+title: Crear documento soporte
+description: Crear y validar un documento soporte electronico.
+---
+
+## Firma
+
+```ts
+create(input: CreateSupportDocumentInput): Promise<ApiResponse<SupportDocument>>
+```
+
+## Endpoint Factus
+
+`POST /v1/support-documents/validate`
+
+Fuente oficial: [Crear documento soporte](https://developers.factus.com.co/documentos-soporte/crear-validar/index.html)
+
+## Ejemplo
+
+```ts
+import { SupportDocumentIdentityTypeId } from "factus-js";
+
+const response = await factus.supportDocuments.create({
+  numbering_range_id: 125,
+  reference_code: "DS-001",
+  observation: "Compra a proveedor no obligado a facturar",
+  payment_method_code: "10",
+  provider: {
+    identification: "12345678",
+    names: "Pedro Proveedor",
+    address: "Carrera 10 # 20-30",
+    email: "proveedor@correo.com",
+    phone: "3109876543",
+    country_code: "CO",
+    identification_document_id: SupportDocumentIdentityTypeId.NIT,
+    municipality_id: 149,
+  },
+  items: [
+    {
+      code_reference: "SRV-001",
+      name: "Servicio prestado",
+      quantity: 1,
+      discount_rate: 0,
+      price: 200000,
+      unit_measure_id: 70,
+      standard_code_id: 1,
+    },
+  ],
+});
+
+console.log(response.data.number);
+```

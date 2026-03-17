@@ -1,0 +1,25 @@
+---
+title: Introducción
+description: Crear, consultar y gestionar documentos soporte para compras a no obligados a facturar.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+Accede al modulo a traves de `factus.supportDocuments`.
+
+<Callout type="info">
+  Esta sección sigue los endpoints oficiales de Factus para documentos soporte.
+  Para reglas DIAN y contexto funcional, revisa: [Introducción documentos
+  soporte](https://developers.factus.com.co/documentos-soporte/introduccion/index.html).
+</Callout>
+
+## Métodos disponibles
+
+| Método                  | Verbo + Ruta                                              | Descripción                                      |
+| ----------------------- | --------------------------------------------------------- | ------------------------------------------------ |
+| `create(input)`         | `POST /v1/support-documents/validate`                     | Crear y validar un nuevo documento soporte       |
+| `list(filters?)`        | `GET /v1/support-documents`                               | Listar documentos soporte con filtros opcionales |
+| `get(number)`           | `GET /v1/support-documents/show/{number}`                 | Obtener detalle por número de documento          |
+| `downloadXml(number)`   | `GET /v1/support-documents/download-xml/{number}`         | Descargar XML en base64                          |
+| `downloadPdf(number)`   | `GET /v1/support-documents/download-pdf/{number}`         | Descargar PDF en base64                          |
+| `delete(referenceCode)` | `DELETE /v1/support-documents/reference/{reference_code}` | Eliminar un documento soporte no validado        |

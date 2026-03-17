@@ -38,46 +38,38 @@ export class SupportDocumentsModule {
   }
 
   /**
-   * Get full detail of a support document by its numeric ID.
-   * GET /v1/support-documents/{id}
-   */
-  get(id: number): Promise<ApiResponse<ViewSupportDocumentData>> {
-    return this.http.get(`/v1/support-documents/${id}`);
-  }
-
-  /**
    * Get full detail of a support document by its document number.
    * GET /v1/support-documents/show/{number}
    */
-  getByNumber(number: string): Promise<ApiResponse<ViewSupportDocumentData>> {
+  get(number: string): Promise<ApiResponse<ViewSupportDocumentData>> {
     return this.http.get(`/v1/support-documents/show/${number}`);
   }
 
   /**
    * Download the support document XML as a base64-encoded string.
-   * GET /v1/support-documents/download-xml/{id}
+   * GET /v1/support-documents/download-xml/{number}
    */
   downloadXml(
-    id: number,
+    number: string,
   ): Promise<ApiResponse<DownloadSupportDocumentXmlResponse>> {
-    return this.http.get(`/v1/support-documents/download-xml/${id}`);
+    return this.http.get(`/v1/support-documents/download-xml/${number}`);
   }
 
   /**
    * Download the support document PDF as a base64-encoded string.
-   * GET /v1/support-documents/download-pdf/{id}
+   * GET /v1/support-documents/download-pdf/{number}
    */
   downloadPdf(
-    id: number,
+    number: string,
   ): Promise<ApiResponse<DownloadSupportDocumentPdfResponse>> {
-    return this.http.get(`/v1/support-documents/download-pdf/${id}`);
+    return this.http.get(`/v1/support-documents/download-pdf/${number}`);
   }
 
   /**
    * Delete (void) a support document that has not yet been validated by the DIAN.
-   * DELETE /v1/support-documents/{id}
+   * DELETE /v1/support-documents/reference/{reference_code}
    */
-  delete(id: number): Promise<DeleteSupportDocumentResponse> {
-    return this.http.delete(`/v1/support-documents/${id}`);
+  delete(referenceCode: string): Promise<DeleteSupportDocumentResponse> {
+    return this.http.delete(`/v1/support-documents/reference/${referenceCode}`);
   }
 }

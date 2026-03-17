@@ -1,0 +1,23 @@
+---
+title: Descargar PDF
+description: Descargar PDF de un documento soporte en base64 por numero.
+---
+
+## Firma
+
+```ts
+downloadPdf(number: string): Promise<ApiResponse<DownloadSupportDocumentPdfResponse>>
+```
+
+## Endpoint Factus
+
+`GET /v1/support-documents/download-pdf/{number}`
+
+Fuente oficial: [Descargar PDF](https://developers.factus.com.co/documentos-soporte/descargar-documento-soporte/index.html)
+
+## Ejemplo
+
+```ts
+const response = await factus.supportDocuments.downloadPdf("SEDS984000021");
+const pdfBuffer = Buffer.from(response.data.pdf_base_64_encoded, "base64");
+```
