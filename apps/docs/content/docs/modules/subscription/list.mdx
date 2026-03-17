@@ -1,0 +1,30 @@
+---
+title: Suscripciones
+description: Obtener todas las suscripciones activas de la cuenta.
+---
+
+## Firma
+
+```ts
+list(): Promise<ApiResponse<Subscription[]>>
+```
+
+## Endpoint Factus
+
+`GET /v1/subscriptions`
+
+Fuente oficial: [Suscripciones](https://developers.factus.com.co/suscripciones/suscripciones.html)
+
+## Ejemplo
+
+```ts
+const response = await factus.subscription.list();
+const suscripciones = response.data;
+
+for (const sub of suscripciones) {
+  console.log(sub.name);
+  console.log(sub.documents_quota);
+  console.log(sub.documents_consumed);
+  console.log(sub.documents_available);
+}
+```
