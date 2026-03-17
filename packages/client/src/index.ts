@@ -11,14 +11,14 @@ export { BASE_URLS } from "./http-client";
 export { FactusError } from "./error";
 
 // ---------------------------------------------------------------------------
-// Resource classes (for advanced use / dependency injection)
+// Module classes (for advanced use / dependency injection)
 // ---------------------------------------------------------------------------
-export { InvoicesResource } from "./modules/invoices";
-export { CreditNotesResource } from "./modules/credit-notes";
-export { SupportDocumentsResource } from "./modules/support-documents";
-export { AdjustmentNotesResource } from "./modules/adjustment-notes";
-export { ReceptionResource } from "./modules/reception";
-export { CompanyResource } from "./modules/company";
-export { NumberingRangesResource } from "./modules/numbering-ranges";
-export { SubscriptionResource } from "./modules/subscription";
-export { ReferenceResource } from "./modules/reference";
+export { InvoicesModule } from "./modules/invoices";
+export { CreditNotesModule } from "./modules/credit-notes";
+export { SupportDocumentsModule } from "./modules/support-documents";
+export { AdjustmentNotesModule } from "./modules/adjustment-notes";
+export { ReceptionModule } from "./modules/reception";
+export { CompanyModule } from "./modules/company";
+export { NumberingRangesModule } from "./modules/numbering-ranges";
+export { SubscriptionModule } from "./modules/subscription";
+export { CatalogModule } from "./modules/catalog";

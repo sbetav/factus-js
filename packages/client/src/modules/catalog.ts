@@ -13,7 +13,7 @@ import type {
 } from "@factus-js/types";
 import type { HttpClient } from "../http-client";
 
-export class ReferenceResource {
+export class CatalogModule {
   constructor(private readonly http: HttpClient) {}
 
   // ---------------------------------------------------------------------------

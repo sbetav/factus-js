@@ -17,8 +17,9 @@
     "modules/company",
     "modules/numbering-ranges",
     "modules/subscription",
-    "modules/reference",
+    "modules/catalog",
     "---Referencia---",
-    "constants"
+    "constants",
+    "types"
   ]
 }

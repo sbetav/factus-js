@@ -11,7 +11,7 @@ import type {
 } from "@factus-js/types";
 import type { HttpClient } from "../http-client";
 
-export class SupportDocumentsResource {
+export class SupportDocumentsModule {
   constructor(private readonly http: HttpClient) {}
 
   /**

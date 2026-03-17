@@ -1,9 +1,9 @@
 ---
-title: Referencia
+title: Catálogo
 description: Municipios, países, tributos, unidades de medida y búsqueda de adquirentes.
 ---
 
-Accede a través de `factus.reference`.
+Accede a través de `factus.catalog`.
 
 ## Métodos disponibles
 
@@ -27,10 +27,10 @@ listMunicipalities(filters?: MunicipalityFilters & { page?: number; per_page?: n
 
 ```ts
 // Todos los municipios
-const response = await factus.reference.listMunicipalities();
+const response = await factus.catalog.listMunicipalities();
 
 // Filtrar por nombre
-const bogota = await factus.reference.listMunicipalities({
+const bogota = await factus.catalog.listMunicipalities({
   name: "Bogotá",
 });
 
@@ -49,7 +49,7 @@ listCountries(filters?: CountryFilters & { page?: number; per_page?: number }): 
 ```
 
 ```ts
-const response = await factus.reference.listCountries();
+const response = await factus.catalog.listCountries();
 const colombia = response.data.find((c) => c.name === "Colombia");
 console.log(colombia?.id); // "CO"
 ```
@@ -65,7 +65,7 @@ listTributes(filters?: TributeFilters): Promise<ApiResponse<Tribute[]>>
 ```
 
 ```ts
-const response = await factus.reference.listTributes();
+const response = await factus.catalog.listTributes();
 for (const tributo of response.data) {
   console.log(tributo.id, tributo.code, tributo.name, tributo.description);
 }
@@ -82,7 +82,7 @@ listMeasurementUnits(filters?: MeasurementUnitFilters): Promise<ApiResponse<Meas
 ```
 
 ```ts
-const response = await factus.reference.listMeasurementUnits();
+const response = await factus.catalog.listMeasurementUnits();
 // Ejemplo: { id: 70, name: "Unidad (und)", code: "94" }
 ```
 
@@ -97,7 +97,7 @@ getAcquirer(filters: AcquirerFilters): Promise<ApiResponse<Acquirer>>
 ```
 
 ```ts
-const response = await factus.reference.getAcquirer({
+const response = await factus.catalog.getAcquirer({
   identification_number: "900123456",
   identification_document_id: 6, // NIT
 });

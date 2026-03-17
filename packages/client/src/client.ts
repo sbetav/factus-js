@@ -1,14 +1,14 @@
 import { HttpClient } from "./http-client";
 import type { FactusClientConfig } from "./http-client";
-import { InvoicesResource } from "./modules/invoices";
-import { CreditNotesResource } from "./modules/credit-notes";
-import { SupportDocumentsResource } from "./modules/support-documents";
-import { AdjustmentNotesResource } from "./modules/adjustment-notes";
-import { ReceptionResource } from "./modules/reception";
-import { CompanyResource } from "./modules/company";
-import { NumberingRangesResource } from "./modules/numbering-ranges";
-import { SubscriptionResource } from "./modules/subscription";
-import { ReferenceResource } from "./modules/reference";
+import { InvoicesModule } from "./modules/invoices";
+import { CreditNotesModule } from "./modules/credit-notes";
+import { SupportDocumentsModule } from "./modules/support-documents";
+import { AdjustmentNotesModule } from "./modules/adjustment-notes";
+import { ReceptionModule } from "./modules/reception";
+import { CompanyModule } from "./modules/company";
+import { NumberingRangesModule } from "./modules/numbering-ranges";
+import { SubscriptionModule } from "./modules/subscription";
+import { CatalogModule } from "./modules/catalog";
 
 /**
  * Main entry point for the Factus API SDK.
@@ -36,43 +36,43 @@ export class FactusClient {
   private readonly http: HttpClient;
 
   /** Electronic sales invoices. */
-  readonly invoices: InvoicesResource;
+  readonly invoices: InvoicesModule;
 
   /** Credit notes. */
-  readonly creditNotes: CreditNotesResource;
+  readonly creditNotes: CreditNotesModule;
 
   /** Support documents. */
-  readonly supportDocuments: SupportDocumentsResource;
+  readonly supportDocuments: SupportDocumentsModule;
 
   /** Adjustment notes for support documents. */
-  readonly adjustmentNotes: AdjustmentNotesResource;
+  readonly adjustmentNotes: AdjustmentNotesModule;
 
   /** Incoming / received invoices via RADIAN. */
-  readonly reception: ReceptionResource;
+  readonly reception: ReceptionModule;
 
   /** Company profile management. */
-  readonly company: CompanyResource;
+  readonly company: CompanyModule;
 
   /** Numbering ranges (prefixes). */
-  readonly numberingRanges: NumberingRangesResource;
+  readonly numberingRanges: NumberingRangesModule;
 
   /** Current subscription details. */
-  readonly subscription: SubscriptionResource;
+  readonly subscription: SubscriptionModule;
 
-  /** Reference data: municipalities, countries, tributes, measurement units, acquirers. */
-  readonly reference: ReferenceResource;
+  /** Catalog data: municipalities, countries, tributes, measurement units, acquirers. */
+  readonly catalog: CatalogModule;
 
   constructor(config: FactusClientConfig) {
     this.http = new HttpClient(config);
 
-    this.invoices = new InvoicesResource(this.http);
-    this.creditNotes = new CreditNotesResource(this.http);
-    this.supportDocuments = new SupportDocumentsResource(this.http);
-    this.adjustmentNotes = new AdjustmentNotesResource(this.http);
-    this.reception = new ReceptionResource(this.http);
-    this.company = new CompanyResource(this.http);
-    this.numberingRanges = new NumberingRangesResource(this.http);
-    this.subscription = new SubscriptionResource(this.http);
-    this.reference = new ReferenceResource(this.http);
+    this.invoices = new InvoicesModule(this.http);
+    this.creditNotes = new CreditNotesModule(this.http);
+    this.supportDocuments = new SupportDocumentsModule(this.http);
+    this.adjustmentNotes = new AdjustmentNotesModule(this.http);
+    this.reception = new ReceptionModule(this.http);
+    this.company = new CompanyModule(this.http);
+    this.numberingRanges = new NumberingRangesModule(this.http);
+    this.subscription = new SubscriptionModule(this.http);
+    this.catalog = new CatalogModule(this.http);
   }
 }
