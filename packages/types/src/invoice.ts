@@ -27,7 +27,7 @@ export interface WithholdingTax {
   withholding_tax_rate: number;
 }
 
-export interface CreateBillInput {
+export interface CreateInvoiceInput {
   numbering_range_id?: number;
   document?: string;
   reference_code: string;
@@ -94,7 +94,7 @@ export interface CreateBillInput {
 // List item type
 // ---------------------------------------------------------------------------
 
-export interface BillListItem {
+export interface InvoiceListItem {
   id: number;
   document: CodeNameObject;
   number: string;
@@ -118,8 +118,8 @@ export interface BillListItem {
   debit_notes: Array<{ id: number; number: string }>;
 }
 
-/** @deprecated Use BillListItem instead. */
-export interface Bill {
+/** @deprecated Use InvoiceListItem instead. */
+export interface Invoice {
   id: number;
   document: CodeNameObject;
   number: string;
@@ -134,7 +134,7 @@ export interface Bill {
 // Filters
 // ---------------------------------------------------------------------------
 
-export interface BillFilters {
+export interface InvoiceFilters {
   "filter[identification]"?: string;
   "filter[names]"?: string;
   "filter[number]"?: string;
@@ -147,7 +147,7 @@ export interface BillFilters {
 // View (detail) response
 // ---------------------------------------------------------------------------
 
-export interface BillItemResponse {
+export interface InvoiceItemResponse {
   scheme_id: string | null;
   note: string | null;
   code_reference: string;
@@ -166,14 +166,14 @@ export interface BillItemResponse {
   tribute: CodeNameIdObject;
   total: number;
   withholding_taxes: ItemWithholdingTax[];
-  /** The mandate field shape matches the mandate input on CreateBillInput items. */
+  /** The mandate field shape matches the mandate input on CreateInvoiceInput items. */
   mandate: {
     identification_document_id: number;
     identification: string;
   } | null;
 }
 
-export interface ViewBillData {
+export interface ViewInvoiceData {
   company: CompanyInfo;
   establishment: EstablishmentResponse;
   customer: Customer & {
@@ -219,17 +219,17 @@ export interface ViewBillData {
     issue_date: string;
     number: string;
   }>;
-  items: BillItemResponse[];
+  items: InvoiceItemResponse[];
   allowance_charges: AllowanceChargeResponse[];
   withholding_taxes: DocumentWithholdingTax[];
   credit_notes: Array<{ id: number; number: string }>;
   debit_notes: Array<{ id: number; number: string }>;
 }
 
-export interface ViewBillResponse {
+export interface ViewInvoiceResponse {
   status: string;
   message: string;
-  data: ViewBillData;
+  data: ViewInvoiceData;
 }
 
 // ---------------------------------------------------------------------------
@@ -251,7 +251,7 @@ export interface RadianEventUpdateResponse {
   message: string;
 }
 
-export interface BillEvent {
+export interface InvoiceEvent {
   number: string;
   cude: string;
   event_code: string;
@@ -260,33 +260,33 @@ export interface BillEvent {
   effective_time: string;
 }
 
-export interface GetBillEventsResponse {
+export interface GetInvoiceEventsResponse {
   status: string;
   message: string;
-  data: BillEvent[];
+  data: InvoiceEvent[];
 }
 
 // ---------------------------------------------------------------------------
 // Download / email / delete responses (re-exported aliases for convenience)
 // ---------------------------------------------------------------------------
 
-export interface SendBillEmailInput extends SendEmailInput {}
-export interface SendBillEmailResponse extends SendEmailResponse {}
-export interface DeleteBillResponse extends DeleteResponse {}
+export interface SendInvoiceEmailInput extends SendEmailInput {}
+export interface SendInvoiceEmailResponse extends SendEmailResponse {}
+export interface DeleteInvoiceResponse extends DeleteResponse {}
 
-export interface DownloadBillXmlResponse {
+export interface DownloadInvoiceXmlResponse {
   status: string;
   message: string;
   data: DownloadXmlData;
 }
 
-export interface DownloadBillPdfResponse {
+export interface DownloadInvoicePdfResponse {
   status: string;
   message: string;
   data: DownloadPdfData;
 }
 
-export interface GetBillEmailContentResponse {
+export interface GetInvoiceEmailContentResponse {
   status: string;
   message: string;
   data: {
@@ -299,6 +299,6 @@ export interface GetBillEmailContentResponse {
 // List response
 // ---------------------------------------------------------------------------
 
-export interface GetBillsResponse extends ApiResponse<
-  PaginatedData<BillListItem>
+export interface GetInvoicesResponse extends ApiResponse<
+  PaginatedData<InvoiceListItem>
 > {}

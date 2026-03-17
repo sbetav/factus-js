@@ -13,7 +13,7 @@ export { FactusError } from "./error";
 // ---------------------------------------------------------------------------
 // Resource classes (for advanced use / dependency injection)
 // ---------------------------------------------------------------------------
-export { BillsResource } from "./resources/bills";
+export { InvoicesResource } from "./resources/invoices";
 export { CreditNotesResource } from "./resources/credit-notes";
 export { SupportDocumentsResource } from "./resources/support-documents";
 export { AdjustmentNotesResource } from "./resources/adjustment-notes";

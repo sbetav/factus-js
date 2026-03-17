@@ -1,13 +1,13 @@
 ---
-title: Facturas (bills)
+title: Facturas (invoices)
 description: Crear, consultar, descargar y gestionar facturas electrónicas de venta.
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
 
-# Facturas (`bills`)
+# Facturas (`invoices`)
 
-El recurso `bills` gestiona las **facturas electrónicas de venta** validadas por la DIAN. Se accede a través de `factus.bills`.
+El recurso `invoices` gestiona las **facturas electrónicas de venta** validadas por la DIAN. Se accede a través de `factus.invoices`.
 
 ## Métodos disponibles
 
@@ -32,7 +32,7 @@ El recurso `bills` gestiona las **facturas electrónicas de venta** validadas po
 Crea y valida una nueva factura electrónica de venta ante la DIAN.
 
 ```ts
-create(input: CreateBillInput): Promise<ApiResponse<BillListItem>>
+create(input: CreateInvoiceInput): Promise<ApiResponse<InvoiceListItem>>
 ```
 
 ```ts
@@ -46,7 +46,7 @@ import {
   ProductStandardId,
 } from "@factus-js/constants";
 
-const response = await factus.bills.create({
+const response = await factus.invoices.create({
   numbering_range_id: 123,
   reference_code: "ORD-2025-001",
   observation: "Observaciones de la factura",
@@ -97,18 +97,18 @@ console.log(response.data.number); // "SETP990000001"
 Lista facturas con filtros opcionales y paginación.
 
 ```ts
-list(filters?: BillFilters & { page?: number; per_page?: number }): Promise<GetBillsResponse>
+list(filters?: InvoiceFilters & { page?: number; per_page?: number }): Promise<GetInvoicesResponse>
 ```
 
 ```ts
-const response = await factus.bills.list({
+const response = await factus.invoices.list({
   "filter[status]": "1", // 1=Procesado, 0=Pendiente
   "filter[number]": "SETP99", // filtro por número
   page: 1,
   per_page: 15,
 });
 
-const facturas = response.data.data; // BillListItem[]
+const facturas = response.data.data; // InvoiceListItem[]
 const paginacion = response.data.pagination; // { total, current_page, last_page, ... }
 ```
 
@@ -119,11 +119,11 @@ const paginacion = response.data.pagination; // { total, current_page, last_page
 Obtiene el detalle completo de una factura por su ID numérico interno.
 
 ```ts
-get(id: number): Promise<ViewBillResponse>
+get(id: number): Promise<ViewInvoiceResponse>
 ```
 
 ```ts
-const response = await factus.bills.get(456);
+const response = await factus.invoices.get(456);
 const factura = response.data.bill;
 console.log(factura.number, factura.status, factura.total);
 ```
@@ -135,11 +135,11 @@ console.log(factura.number, factura.status, factura.total);
 Obtiene el detalle completo de una factura por su número de documento (e.g. `"SETP990000001"`).
 
 ```ts
-getByNumber(number: string): Promise<ViewBillResponse>
+getByNumber(number: string): Promise<ViewInvoiceResponse>
 ```
 
 ```ts
-const response = await factus.bills.getByNumber("SETP990000001");
+const response = await factus.invoices.getByNumber("SETP990000001");
 ```
 
 ---
@@ -149,11 +149,11 @@ const response = await factus.bills.getByNumber("SETP990000001");
 Descarga el XML de la factura como string en base64.
 
 ```ts
-downloadXml(id: number): Promise<DownloadBillXmlResponse>
+downloadXml(id: number): Promise<DownloadInvoiceXmlResponse>
 ```
 
 ```ts
-const response = await factus.bills.downloadXml(456);
+const response = await factus.invoices.downloadXml(456);
 const xml = Buffer.from(response.data.xml_base_64_encoded, "base64").toString(
   "utf-8",
 );
@@ -166,11 +166,11 @@ const xml = Buffer.from(response.data.xml_base_64_encoded, "base64").toString(
 Descarga el PDF de la factura como string en base64.
 
 ```ts
-downloadPdf(id: number): Promise<DownloadBillPdfResponse>
+downloadPdf(id: number): Promise<DownloadInvoicePdfResponse>
 ```
 
 ```ts
-const response = await factus.bills.downloadPdf(456);
+const response = await factus.invoices.downloadPdf(456);
 const pdfBuffer = Buffer.from(response.data.pdf_base_64_encoded, "base64");
 ```
 
@@ -181,11 +181,11 @@ const pdfBuffer = Buffer.from(response.data.pdf_base_64_encoded, "base64");
 Obtiene el asunto y el documento adjunto preparados para enviar por email.
 
 ```ts
-getEmailContent(id: number): Promise<GetBillEmailContentResponse>
+getEmailContent(id: number): Promise<GetInvoiceEmailContentResponse>
 ```
 
 ```ts
-const response = await factus.bills.getEmailContent(456);
+const response = await factus.invoices.getEmailContent(456);
 console.log(response.data.subject);
 ```
 
@@ -196,11 +196,11 @@ console.log(response.data.subject);
 Envía la factura por email. Máximo 2 envíos por factura por día.
 
 ```ts
-sendEmail(number: string, input: SendBillEmailInput): Promise<SendBillEmailResponse>
+sendEmail(number: string, input: SendInvoiceEmailInput): Promise<SendInvoiceEmailResponse>
 ```
 
 ```ts
-const response = await factus.bills.sendEmail("SETP990000001", {
+const response = await factus.invoices.sendEmail("SETP990000001", {
   email: "cliente@empresa.com",
 });
 ```
@@ -216,7 +216,7 @@ updateRadianEvent(id: number, input: RadianEventUpdateInput): Promise<RadianEven
 ```
 
 ```ts
-await factus.bills.updateRadianEvent(456, {
+await factus.invoices.updateRadianEvent(456, {
   // campos del responsable RADIAN
 });
 ```
@@ -228,11 +228,11 @@ await factus.bills.updateRadianEvent(456, {
 Obtiene la lista de eventos RADIAN registrados en una factura.
 
 ```ts
-getEvents(number: string): Promise<GetBillEventsResponse>
+getEvents(number: string): Promise<GetInvoiceEventsResponse>
 ```
 
 ```ts
-const response = await factus.bills.getEvents("SETP990000001");
+const response = await factus.invoices.getEvents("SETP990000001");
 console.log(response.data); // eventos RADIAN
 ```
 
@@ -243,7 +243,7 @@ console.log(response.data); // eventos RADIAN
 Elimina (anula) una factura que **no ha sido aún validada** por la DIAN.
 
 ```ts
-delete(referenceCode: string): Promise<DeleteBillResponse>
+delete(referenceCode: string): Promise<DeleteInvoiceResponse>
 ```
 
 <Callout type="warn">
@@ -252,5 +252,5 @@ delete(referenceCode: string): Promise<DeleteBillResponse>
 </Callout>
 
 ```ts
-await factus.bills.delete("ORD-2025-001");
+await factus.invoices.delete("ORD-2025-001");
 ```

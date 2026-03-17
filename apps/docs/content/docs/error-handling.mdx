@@ -50,7 +50,7 @@ const factus = new FactusClient({
 });
 
 try {
-  const bill = await factus.bills.get(99999);
+  const invoice = await factus.invoices.get(99999);
 } catch (error) {
   if (error instanceof FactusError) {
     console.error("Error de la API:", error.message);
@@ -78,9 +78,9 @@ try {
 ## Manejo en producción
 
 ```ts
-async function crearFactura(input: CreateBillInput) {
+async function crearFactura(input: CreateInvoiceInput) {
   try {
-    const response = await factus.bills.create(input);
+    const response = await factus.invoices.create(input);
     return response.data;
   } catch (error) {
     if (error instanceof FactusError) {

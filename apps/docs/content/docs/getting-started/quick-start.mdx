@@ -74,7 +74,7 @@ const factus = new FactusClient({
   /* config */
 });
 
-const response = await factus.bills.create({
+const response = await factus.invoices.create({
   numbering_range_id: 123,
   reference_code: "ORD-001",
   observation: "Factura de prueba",
@@ -127,21 +127,21 @@ console.log(response.data.status); // "Procesado"
 
 ```ts
 // Listar facturas con filtros
-const list = await factus.bills.list({
+const list = await factus.invoices.list({
   "filter[status]": "1",
   page: 1,
   per_page: 10,
 });
 
-console.log(list.data.data); // BillListItem[]
+console.log(list.data.data); // InvoiceListItem[]
 console.log(list.data.pagination); // { total, per_page, current_page, ... }
 
 // Obtener una factura por ID
-const bill = await factus.bills.get(456);
-console.log(bill.data.bill.number);
+const invoice = await factus.invoices.get(456);
+console.log(invoice.data.bill.number);
 
 // Obtener por número de documento
-const bill2 = await factus.bills.getByNumber("SETP990000001");
+const invoice2 = await factus.invoices.getByNumber("SETP990000001");
 ```
 
 </Step>
@@ -159,13 +159,13 @@ const bill2 = await factus.bills.getByNumber("SETP990000001");
 
 ```ts
 // XML base64
-const xml = await factus.bills.downloadXml(456);
+const xml = await factus.invoices.downloadXml(456);
 const xmlContent = Buffer.from(xml.data.xml_base_64_encoded, "base64").toString(
   "utf-8",
 );
 
 // PDF base64
-const pdf = await factus.bills.downloadPdf(456);
+const pdf = await factus.invoices.downloadPdf(456);
 const pdfBuffer = Buffer.from(pdf.data.pdf_base_64_encoded, "base64");
 ```
 
@@ -175,7 +175,7 @@ const pdfBuffer = Buffer.from(pdf.data.pdf_base_64_encoded, "base64");
 import { FactusError } from "@factus-js/client";
 
 try {
-  const bill = await factus.bills.get(99999);
+  const invoice = await factus.invoices.get(99999);
 } catch (error) {
   if (error instanceof FactusError) {
     console.error(error.statusCode); // 404

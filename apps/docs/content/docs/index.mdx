@@ -30,7 +30,7 @@ El repositorio es un monorepo con tres paquetes publicados en npm:
 <Cards>
   <Card
     title="Facturas"
-    href="/docs/resources/bills"
+    href="/docs/resources/invoices"
     description="Crear, consultar, descargar y enviar facturas electrónicas de venta."
   />
   <Card
@@ -88,7 +88,7 @@ const factus = new FactusClient({
   environment: "sandbox",
 });
 
-const response = await factus.bills.create({
+const response = await factus.invoices.create({
   /* ... */
 });
 console.log(response.data.number); // "SETP990000001"

@@ -1,6 +1,6 @@
 import { HttpClient } from "./http-client";
 import type { FactusClientConfig } from "./http-client";
-import { BillsResource } from "./resources/bills";
+import { InvoicesResource } from "./resources/invoices";
 import { CreditNotesResource } from "./resources/credit-notes";
 import { SupportDocumentsResource } from "./resources/support-documents";
 import { AdjustmentNotesResource } from "./resources/adjustment-notes";
@@ -26,17 +26,17 @@ import { ReferenceResource } from "./resources/reference";
  * });
  *
  * // Create an invoice
- * const response = await factus.bills.create({ ... });
+ * const response = await factus.invoices.create({ ... });
  *
  * // List invoices
- * const list = await factus.bills.list({ "filter[status]": "1", page: 1 });
+ * const list = await factus.invoices.list({ "filter[status]": "1", page: 1 });
  * ```
  */
 export class FactusClient {
   private readonly http: HttpClient;
 
   /** Electronic sales invoices. */
-  readonly bills: BillsResource;
+  readonly invoices: InvoicesResource;
 
   /** Credit notes. */
   readonly creditNotes: CreditNotesResource;
@@ -65,7 +65,7 @@ export class FactusClient {
   constructor(config: FactusClientConfig) {
     this.http = new HttpClient(config);
 
-    this.bills = new BillsResource(this.http);
+    this.invoices = new InvoicesResource(this.http);
     this.creditNotes = new CreditNotesResource(this.http);
     this.supportDocuments = new SupportDocumentsResource(this.http);
     this.adjustmentNotes = new AdjustmentNotesResource(this.http);
