@@ -1,0 +1,25 @@
+---
+title: Introducción
+description: Consultar y actualizar el perfil de la empresa, y subir el logotipo.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+Accede al modulo a traves de `factus.company`.
+
+<Callout type="info">
+  Esta sección sigue los endpoints oficiales de Factus para empresa. Fuentes:
+  [Ver empresa](https://developers.factus.com.co/empresas/ver/index.html),
+  [Actualizar
+  empresa](https://developers.factus.com.co/empresas/actualizar/index.html),
+  [Actualizar
+  imagen](https://developers.factus.com.co/empresas/actualizar-imagen/index.html).
+</Callout>
+
+## Métodos disponibles
+
+| Método              | Verbo + Ruta            | Descripción                     |
+| ------------------- | ----------------------- | ------------------------------- |
+| `get()`             | `GET /v1/company`       | Obtener perfil de la empresa    |
+| `update(input)`     | `PUT /v1/company`       | Actualizar perfil de la empresa |
+| `uploadLogo(image)` | `POST /v1/company/logo` | Subir logotipo de la empresa    |

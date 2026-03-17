@@ -1,0 +1,38 @@
+---
+title: Actualizar empresa
+description: Actualizar los datos del perfil de la empresa.
+---
+
+## Firma
+
+```ts
+update(input: UpdateCompanyInput): Promise<ApiResponse<Company>>
+```
+
+## Endpoint Factus
+
+`PUT /v1/company`
+
+Fuente oficial: [Actualizar empresa](https://developers.factus.com.co/empresas/actualizar/index.html)
+
+## Ejemplo
+
+```ts
+const response = await factus.company.update({
+  legal_organization_code: "2",
+  company: null,
+  names: "Alan",
+  surnames: "Turing",
+  responsibilities: "5",
+  economic_activity: "6920",
+  email: "alan@empresa.com",
+  address: "calle 100 #50-80",
+  trade_name: null,
+  registration_code: null,
+  phone: "0987654321",
+  municipality_code: "68872",
+  tribute_code: "ZZ",
+});
+
+console.log(response.data.updated_at);
+```

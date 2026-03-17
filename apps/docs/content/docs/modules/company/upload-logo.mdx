@@ -1,0 +1,34 @@
+---
+title: Actualizar logo
+description: Subir o actualizar el logotipo de la empresa.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Firma
+
+```ts
+uploadLogo(image: File | Blob): Promise<ApiResponse<UploadCompanyLogoResponse>>
+```
+
+## Endpoint Factus
+
+`POST /v1/company/logo`
+
+Fuente oficial: [Actualizar logo de la empresa](https://developers.factus.com.co/empresas/actualizar-imagen/index.html)
+
+## Ejemplo
+
+```ts
+import { readFileSync } from "fs";
+
+const imageBuffer = readFileSync("./logo.png");
+const imageBlob = new Blob([imageBuffer], { type: "image/png" });
+
+const response = await factus.company.uploadLogo(imageBlob);
+console.log(response.data.url_log);
+```
+
+<Callout type="info">
+  La API retorna `url_log` (no `url_logo`) en este endpoint.
+</Callout>

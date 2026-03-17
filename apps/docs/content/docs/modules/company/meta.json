@@ -1,0 +1,4 @@
+{
+  "title": "Empresa",
+  "pages": ["index", "get", "update", "upload-logo"]
+}

@@ -74,4 +74,5 @@
 .prose a:not([data-card]) {
   -webkit-text-decoration-color: var(--color-fd-foreground);
   text-decoration-color: var(--color-fd-foreground);
+  text-decoration-thickness: 1px;
 }
