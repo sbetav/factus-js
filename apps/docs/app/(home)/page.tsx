@@ -271,13 +271,13 @@ export default async function HomePage() {
       {/* ── FEATURES ──────────────────────────────────────── */}
       <section className="w-full max-w-5xl px-6 py-20">
         <div className="mb-12 text-center">
-          <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-fd-primary">
+          <p className="mb-2 text-xs xs:text-sm font-semibold uppercase tracking-widest text-fd-primary">
             Características principales
           </p>
-          <h2 className="text-2xl font-bold tracking-tight text-fd-foreground sm:text-3xl">
+          <h2 className="text-xl xs:text-2xl font-bold tracking-tight text-pretty text-fd-foreground sm:text-3xl">
             Diseñado para la experiencia del desarrollador
           </h2>
-          <p className="mt-3 text-fd-muted-foreground">
+          <p className="mt-3 text-fd-muted-foreground text-sm xs:text-base">
             Un SDK que se quita del camino y te deja concentrarte en tu
             producto.
           </p>
@@ -334,13 +334,13 @@ export default async function HomePage() {
         <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
           {/* Left: vertical timeline */}
           <div className="flex flex-col justify-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-fd-primary">
+            <p className="mb-3 text-xs xs:text-sm font-semibold uppercase tracking-widest text-fd-primary">
               Integración rápida
             </p>
-            <h2 className="text-2xl font-bold tracking-tight text-fd-foreground sm:text-3xl text-pretty">
+            <h2 className="text-xl xs:text-2xl font-bold tracking-tight text-fd-foreground sm:text-3xl text-pretty">
               Emite tu primera factura en minutos
             </h2>
-            <p className="mt-4 leading-relaxed text-fd-muted-foreground">
+            <p className="mt-4 leading-relaxed text-fd-muted-foreground text-sm xs:text-base">
               Sin boilerplate, sin configuración compleja. Configura tus
               credenciales, instancia el cliente y empieza a operar.
             </p>
@@ -358,15 +358,15 @@ export default async function HomePage() {
                   key={s.step}
                   className={[
                     "relative flex items-start gap-4",
-                    i < steps.length - 1 ? "pb-8" : "",
+                    i < steps.length - 1 ? "xs:pb-8 pb-6" : "",
                   ].join(" ")}
                 >
                   {/* Step circle */}
-                  <div className="relative z-10 flex size-10 shrink-0 items-center justify-center rounded-full border-2 border-fd-primary/90 bg-fd-background font-mono text-xs font-bold text-fd-primary/90">
+                  <div className="relative z-10 flex size-8 xs:size-10 shrink-0 items-center justify-center rounded-full border-2 border-fd-primary/90 bg-fd-background font-mono text-xs font-bold text-fd-primary/90">
                     {s.step}
                   </div>
-                  <div className="pt-2.5">
-                    <span className="font-medium text-fd-foreground">
+                  <div className="xs:pt-2.5 pt-1">
+                    <span className="font-medium text-fd-foreground text-sm xs:text-base">
                       {s.label}
                     </span>
                   </div>
