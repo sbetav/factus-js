@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "target": "ESNext",
     "lib": [
       "dom",
@@ -20,11 +19,14 @@
     "jsx": "react-jsx",
     "incremental": true,
     "paths": {
+      "*": [
+        "./*"
+      ],
       "@/*": [
         "./*"
       ],
       "collections/*": [
-        ".source/*"
+        "./.source/*"
       ]
     },
     "plugins": [

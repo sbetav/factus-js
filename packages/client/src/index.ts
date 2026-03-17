@@ -13,12 +13,12 @@ export { FactusError } from "./error";
 // ---------------------------------------------------------------------------
 // Resource classes (for advanced use / dependency injection)
 // ---------------------------------------------------------------------------
-export { InvoicesResource } from "./resources/invoices";
-export { CreditNotesResource } from "./resources/credit-notes";
-export { SupportDocumentsResource } from "./resources/support-documents";
-export { AdjustmentNotesResource } from "./resources/adjustment-notes";
-export { ReceptionResource } from "./resources/reception";
-export { CompanyResource } from "./resources/company";
-export { NumberingRangesResource } from "./resources/numbering-ranges";
-export { SubscriptionResource } from "./resources/subscription";
-export { ReferenceResource } from "./resources/reference";
+export { InvoicesResource } from "./modules/invoices";
+export { CreditNotesResource } from "./modules/credit-notes";
+export { SupportDocumentsResource } from "./modules/support-documents";
+export { AdjustmentNotesResource } from "./modules/adjustment-notes";
+export { ReceptionResource } from "./modules/reception";
+export { CompanyResource } from "./modules/company";
+export { NumberingRangesResource } from "./modules/numbering-ranges";
+export { SubscriptionResource } from "./modules/subscription";
+export { ReferenceResource } from "./modules/reference";

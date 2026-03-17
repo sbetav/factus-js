@@ -1,13 +1,23 @@
 {
   "title": "factus-js",
   "pages": [
+    "---Inicio---",
     "index",
-    "---Guía---",
-    "getting-started",
+    "installation",
+    "---Guías---",
+    "quick-start",
     "authentication",
     "error-handling",
     "---Módulos---",
-    "resources",
+    "modules/invoices",
+    "modules/credit-notes",
+    "modules/support-documents",
+    "modules/adjustment-notes",
+    "modules/reception",
+    "modules/company",
+    "modules/numbering-ranges",
+    "modules/subscription",
+    "modules/reference",
     "---Referencia---",
     "constants"
   ]

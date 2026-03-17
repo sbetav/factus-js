@@ -1,14 +1,14 @@
 import { HttpClient } from "./http-client";
 import type { FactusClientConfig } from "./http-client";
-import { InvoicesResource } from "./resources/invoices";
-import { CreditNotesResource } from "./resources/credit-notes";
-import { SupportDocumentsResource } from "./resources/support-documents";
-import { AdjustmentNotesResource } from "./resources/adjustment-notes";
-import { ReceptionResource } from "./resources/reception";
-import { CompanyResource } from "./resources/company";
-import { NumberingRangesResource } from "./resources/numbering-ranges";
-import { SubscriptionResource } from "./resources/subscription";
-import { ReferenceResource } from "./resources/reference";
+import { InvoicesResource } from "./modules/invoices";
+import { CreditNotesResource } from "./modules/credit-notes";
+import { SupportDocumentsResource } from "./modules/support-documents";
+import { AdjustmentNotesResource } from "./modules/adjustment-notes";
+import { ReceptionResource } from "./modules/reception";
+import { CompanyResource } from "./modules/company";
+import { NumberingRangesResource } from "./modules/numbering-ranges";
+import { SubscriptionResource } from "./modules/subscription";
+import { ReferenceResource } from "./modules/reference";
 
 /**
  * Main entry point for the Factus API SDK.
