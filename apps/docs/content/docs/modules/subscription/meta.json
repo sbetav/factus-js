@@ -1,8 +1,4 @@
 {
   "title": "Suscripción",
-  "pages": [
-    "index",
-    "list",
-    "current"
-  ]
+  "pages": ["index", "list"]
 }

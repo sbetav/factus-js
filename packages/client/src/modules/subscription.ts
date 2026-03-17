@@ -1,8 +1,4 @@
-import type {
-  Subscription,
-  CurrentSubscription,
-  ApiResponse,
-} from "@factus-js/types";
+import type { Subscription, ApiResponse } from "@factus-js/types";
 import type { HttpClient } from "../http-client";
 
 export class SubscriptionModule {
@@ -14,15 +10,5 @@ export class SubscriptionModule {
    */
   list(): Promise<ApiResponse<Subscription[]>> {
     return this.http.get("/v1/subscriptions");
-  }
-
-  /**
-   * Get the legacy subscription summary (total, used, remaining documents).
-   * GET /v1/subscriptions/current
-   *
-   * @deprecated Use list() (GET /v1/subscriptions) instead for full subscription details.
-   */
-  getCurrent(): Promise<ApiResponse<CurrentSubscription>> {
-    return this.http.get("/v1/subscriptions/current");
   }
 }

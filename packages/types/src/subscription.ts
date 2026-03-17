@@ -12,14 +12,3 @@ export interface Subscription {
   is_active: boolean;
   has_unlimited_quota: boolean;
 }
-
-/** @deprecated Use GET /v1/subscriptions (returns Subscription[]) instead. Shape returned by the legacy GET /v1/subscriptions/current endpoint. */
-export interface CurrentSubscription {
-  total_documents: number;
-  documents_used: number;
-  documents_remaining: number;
-  subscription_days_to_expires: number;
-  subscription_start_date: string;
-  subscription_expiration_date: string;
-  subscription_is_expired: boolean;
-}
