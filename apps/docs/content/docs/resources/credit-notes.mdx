@@ -1,0 +1,209 @@
+---
+title: Notas crédito (credit-notes)
+description: Emitir, consultar y gestionar notas crédito electrónicas.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+# Notas crédito (`creditNotes`)
+
+El recurso `creditNotes` gestiona las **notas crédito electrónicas**. Se accede a través de `factus.creditNotes`.
+
+Una nota crédito puede emitirse con referencia a una factura existente (`WITH_REFERENCE`) o sin referencia (`WITHOUT_REFERENCE`).
+
+## Métodos disponibles
+
+| Método                 | Verbo + Ruta                              | Descripción                                 |
+| ---------------------- | ----------------------------------------- | ------------------------------------------- |
+| `create(input)`        | `POST /v1/credit-notes/validate`          | Crear y validar una nueva nota crédito      |
+| `list(filters?)`       | `GET /v1/credit-notes`                    | Listar notas crédito con filtros opcionales |
+| `get(id)`              | `GET /v1/credit-notes/{id}`               | Obtener detalle por ID numérico             |
+| `getByNumber(number)`  | `GET /v1/credit-notes/show/{number}`      | Obtener detalle por número de documento     |
+| `downloadXml(id)`      | `GET /v1/credit-notes/download-xml/{id}`  | Descargar XML en base64                     |
+| `downloadPdf(id)`      | `GET /v1/credit-notes/download-pdf/{id}`  | Descargar PDF en base64                     |
+| `getEmailContent(id)`  | `GET /v1/credit-notes/email-content/{id}` | Obtener asunto y adjunto del email          |
+| `sendEmail(id, input)` | `POST /v1/credit-notes/send-email/{id}`   | Enviar la nota crédito por email            |
+| `delete(id)`           | `DELETE /v1/credit-notes/{id}`            | Eliminar una nota crédito no validada       |
+
+---
+
+## `create(input)`
+
+Crea y valida una nueva nota crédito ante la DIAN.
+
+```ts
+create(input: CreateCreditNoteInput): Promise<ApiResponse<CreditNoteListItem>>
+```
+
+```ts
+import {
+  CreditNoteOperationTypeCode,
+  CreditNoteCorrectionCode,
+} from "@factus-js/constants";
+
+const response = await factus.creditNotes.create({
+  numbering_range_id: 124,
+  reference_code: "NC-001",
+  customization_id: CreditNoteOperationTypeCode.WITH_REFERENCE, // "20"
+  correction_concept_code: CreditNoteCorrectionCode.PRICE_ADJUSTMENT,
+  payment_method_code: "10",
+  bill_id: 456, // ID de la factura a la que hace referencia
+  observation: "Ajuste de precio por error en factura original",
+  customer: {
+    identification: "900123456",
+    dv: "7",
+    company: "Empresa Cliente S.A.S.",
+    trade_name: "Empresa Cliente",
+    names: "Juan",
+    address: "Calle 123 # 45-67",
+    email: "cliente@empresa.com",
+    phone: "3001234567",
+    legal_organization_id: 1,
+    tribute_id: 18,
+    identification_document_id: 6,
+    municipality_id: 149,
+  },
+  items: [
+    {
+      code_reference: "PROD-001",
+      name: "Producto ejemplo",
+      quantity: 1,
+      discount_rate: 0,
+      price: 10000,
+      tax_rate: "19.00",
+      unit_measure_id: 70,
+      standard_code_id: 1,
+      is_excluded: 0,
+      tribute_id: 1,
+    },
+  ],
+});
+
+console.log(response.data.number);
+```
+
+### Códigos de operación para `customization_id` (`CreditNoteOperationTypeCode`)
+
+| Constante           | Valor  | Descripción                                      |
+| ------------------- | ------ | ------------------------------------------------ |
+| `WITH_REFERENCE`    | `"20"` | Nota crédito referenciando una factura existente |
+| `WITHOUT_REFERENCE` | `"22"` | Nota crédito sin referencia a una factura        |
+
+### Códigos de corrección (`CreditNoteCorrectionCode`)
+
+| Constante                   | Valor | Descripción                              |
+| --------------------------- | ----- | ---------------------------------------- |
+| `PARTIAL_RETURN`            | `1`   | Devolución parcial de bienes o servicios |
+| `INVOICE_CANCELLATION`      | `2`   | Anulación de la factura                  |
+| `PARTIAL_OR_TOTAL_DISCOUNT` | `3`   | Descuento parcial o total                |
+| `PRICE_ADJUSTMENT`          | `4`   | Ajuste de precio                         |
+| `EARLY_PAYMENT_DISCOUNT`    | `5`   | Descuento por pago anticipado            |
+| `VOLUME_DISCOUNT`           | `6`   | Descuento por volumen                    |
+
+---
+
+## `list(filters?)`
+
+```ts
+list(filters?: CreditNoteFilters & { page?: number; per_page?: number }): Promise<GetCreditNotesResponse>
+```
+
+```ts
+const response = await factus.creditNotes.list({
+  page: 1,
+  per_page: 10,
+});
+
+const notas = response.data.data; // CreditNoteListItem[]
+const paginacion = response.data.pagination;
+```
+
+---
+
+## `get(id)`
+
+```ts
+get(id: number): Promise<ApiResponse<ViewCreditNoteData>>
+```
+
+```ts
+const response = await factus.creditNotes.get(789);
+```
+
+---
+
+## `getByNumber(number)`
+
+```ts
+getByNumber(number: string): Promise<ApiResponse<ViewCreditNoteData>>
+```
+
+```ts
+const response = await factus.creditNotes.getByNumber("NC-990000001");
+```
+
+---
+
+## `downloadXml(id)`
+
+```ts
+downloadXml(id: number): Promise<DownloadCreditNoteXmlResponse>
+```
+
+```ts
+const response = await factus.creditNotes.downloadXml(789);
+const xml = Buffer.from(response.data.xml_base_64_encoded, "base64").toString(
+  "utf-8",
+);
+```
+
+---
+
+## `downloadPdf(id)`
+
+```ts
+downloadPdf(id: number): Promise<DownloadCreditNotePdfResponse>
+```
+
+```ts
+const response = await factus.creditNotes.downloadPdf(789);
+const pdfBuffer = Buffer.from(response.data.pdf_base_64_encoded, "base64");
+```
+
+---
+
+## `getEmailContent(id)`
+
+```ts
+getEmailContent(id: number): Promise<GetCreditNoteEmailContentResponse>
+```
+
+---
+
+## `sendEmail(id, input)`
+
+```ts
+sendEmail(id: number, input: SendCreditNoteEmailInput): Promise<SendCreditNoteEmailResponse>
+```
+
+```ts
+await factus.creditNotes.sendEmail(789, {
+  email: "cliente@empresa.com",
+});
+```
+
+---
+
+## `delete(id)`
+
+<Callout type="warn">
+  Solo se pueden eliminar notas crédito que no hayan sido validadas por la DIAN.
+</Callout>
+
+```ts
+delete(id: number): Promise<DeleteCreditNoteResponse>
+```
+
+```ts
+await factus.creditNotes.delete(789);
+```

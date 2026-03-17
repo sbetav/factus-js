@@ -1,0 +1,158 @@
+---
+title: Rangos de numeración (numbering-ranges)
+description: Crear y gestionar rangos de numeración autorizados por la DIAN.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+# Rangos de numeración (`numberingRanges`)
+
+El recurso `numberingRanges` gestiona los **rangos de numeración** (prefijos) autorizados por la DIAN para tus documentos electrónicos. Se accede a través de `factus.numberingRanges`.
+
+## Métodos disponibles
+
+| Método                     | Verbo + Ruta                                    | Descripción                                      |
+| -------------------------- | ----------------------------------------------- | ------------------------------------------------ |
+| `list(filters?)`           | `GET /v1/numbering-ranges`                      | Listar rangos con filtros opcionales             |
+| `get(id)`                  | `GET /v1/numbering-ranges/{id}`                 | Obtener un rango por ID                          |
+| `create(input)`            | `POST /v1/numbering-ranges`                     | Crear un nuevo rango                             |
+| `updateCurrent(id, input)` | `PATCH /v1/numbering-ranges/{id}/current`       | Actualizar el consecutivo actual del rango       |
+| `getSoftwareRange()`       | `GET /v1/numbering-ranges/dian`                 | Obtener el rango de numeración del software DIAN |
+| `delete(id)`               | `DELETE /v1/numbering-ranges/{id}`              | Eliminar un rango                                |
+| `toggleStatus(id)`         | `PATCH /v1/numbering-ranges/{id}/toggle-status` | Activar/desactivar un rango                      |
+
+---
+
+## `list(filters?)`
+
+```ts
+list(filters?: NumberingRangeFilters & { page?: number; per_page?: number }): Promise<ApiResponse<PaginatedData<NumberingRange>>>
+```
+
+```ts
+const response = await factus.numberingRanges.list({
+  page: 1,
+  per_page: 10,
+});
+
+const rangos = response.data.data;
+const paginacion = response.data.pagination;
+```
+
+---
+
+## `get(id)`
+
+```ts
+get(id: number): Promise<ApiResponse<NumberingRange>>
+```
+
+```ts
+const response = await factus.numberingRanges.get(123);
+const rango = response.data;
+
+console.log(rango.prefix); // "SETP"
+console.log(rango.current); // consecutivo actual
+console.log(rango.document); // código de tipo de documento
+console.log(rango.document_name); // nombre del tipo de documento
+```
+
+---
+
+## `create(input)`
+
+Crea un nuevo rango de numeración.
+
+```ts
+create(input: CreateNumberingRangeInput): Promise<ApiResponse<NumberingRange>>
+```
+
+```ts
+import { NumberingRangeDocumentTypeCode } from "@factus-js/constants";
+
+const response = await factus.numberingRanges.create({
+  document: NumberingRangeDocumentTypeCode.SALES_INVOICE,
+  prefix: "FE",
+  current: 1,
+  resolution_number: "18764060780001",
+});
+
+console.log(response.data.id);
+```
+
+### Tipos de documento para rangos (`NumberingRangeDocumentTypeCode`)
+
+| Constante                          | Valor  | Descripción                         |
+| ---------------------------------- | ------ | ----------------------------------- |
+| `SALES_INVOICE`                    | `"21"` | Factura electrónica de venta        |
+| `CREDIT_NOTE`                      | `"22"` | Nota crédito                        |
+| `DEBIT_NOTE`                       | `"23"` | Nota débito                         |
+| `SUPPORT_DOCUMENT`                 | `"24"` | Documento soporte                   |
+| `SUPPORT_DOCUMENT_ADJUSTMENT_NOTE` | `"25"` | Nota de ajuste de documento soporte |
+| `PAYROLL`                          | `"26"` | Nómina electrónica                  |
+| `PAYROLL_ADJUSTMENT_NOTE`          | `"27"` | Nota de ajuste de nómina            |
+| `PAYROLL_DELETION_NOTE`            | `"28"` | Nota de eliminación de nómina       |
+| `PAPER_OR_STUB_INVOICE`            | `"30"` | Factura de papel o talonario        |
+
+---
+
+## `updateCurrent(id, input)`
+
+Actualiza el consecutivo actual de un rango de numeración.
+
+```ts
+updateCurrent(id: number, input: UpdateNumberingRangeCurrentInput): Promise<ApiResponse<NumberingRange>>
+```
+
+```ts
+const response = await factus.numberingRanges.updateCurrent(123, {
+  current: 500,
+});
+```
+
+---
+
+## `getSoftwareRange()`
+
+Obtiene el rango de numeración del software registrado ante la DIAN.
+
+```ts
+getSoftwareRange(): Promise<ApiResponse<SoftwareNumberingRange>>
+```
+
+```ts
+const response = await factus.numberingRanges.getSoftwareRange();
+console.log(response.data);
+```
+
+---
+
+## `delete(id)`
+
+<Callout type="warn">
+  Elimina permanentemente un rango de numeración. Esta acción no se puede
+  deshacer.
+</Callout>
+
+```ts
+delete(id: number): Promise<DeleteNumberingRangeResponse>
+```
+
+```ts
+await factus.numberingRanges.delete(123);
+```
+
+---
+
+## `toggleStatus(id)`
+
+Activa o desactiva un rango de numeración.
+
+```ts
+toggleStatus(id: number): Promise<ToggleNumberingRangeStatusResponse>
+```
+
+```ts
+const response = await factus.numberingRanges.toggleStatus(123);
+// el estado del rango cambia entre activo e inactivo
+```

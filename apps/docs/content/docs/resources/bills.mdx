@@ -1,0 +1,256 @@
+---
+title: Facturas (bills)
+description: Crear, consultar, descargar y gestionar facturas electrónicas de venta.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+# Facturas (`bills`)
+
+El recurso `bills` gestiona las **facturas electrónicas de venta** validadas por la DIAN. Se accede a través de `factus.bills`.
+
+## Métodos disponibles
+
+| Método                         | Verbo + Ruta                                          | Descripción                                  |
+| ------------------------------ | ----------------------------------------------------- | -------------------------------------------- |
+| `create(input)`                | `POST /v1/bills/validate`                             | Crear y validar una nueva factura            |
+| `list(filters?)`               | `GET /v1/bills`                                       | Listar facturas con filtros opcionales       |
+| `get(id)`                      | `GET /v1/bills/{id}`                                  | Obtener detalle por ID numérico              |
+| `getByNumber(number)`          | `GET /v1/bills/show/{number}`                         | Obtener detalle por número de documento      |
+| `downloadXml(id)`              | `GET /v1/bills/download-xml/{id}`                     | Descargar XML en base64                      |
+| `downloadPdf(id)`              | `GET /v1/bills/download-pdf/{id}`                     | Descargar PDF en base64                      |
+| `getEmailContent(id)`          | `GET /v1/bills/email-content/{id}`                    | Obtener asunto y adjunto del email           |
+| `sendEmail(number, input)`     | `POST /v1/bills/send-email/{number}`                  | Enviar la factura por email                  |
+| `updateRadianEvent(id, input)` | `PUT /v1/bills/radian/{id}`                           | Actualizar responsable RADIAN                |
+| `getEvents(number)`            | `GET /v1/bills/{number}/radian/events`                | Obtener eventos RADIAN de la factura         |
+| `delete(referenceCode)`        | `DELETE /v1/bills/destroy/reference/{reference_code}` | Eliminar una factura no validada por la DIAN |
+
+---
+
+## `create(input)`
+
+Crea y valida una nueva factura electrónica de venta ante la DIAN.
+
+```ts
+create(input: CreateBillInput): Promise<ApiResponse<BillListItem>>
+```
+
+```ts
+import { FactusClient } from "@factus-js/client";
+import {
+  PaymentFormCode,
+  PaymentMethodCode,
+  IdentityDocumentTypeId,
+  CustomerTributeId,
+  OrganizationTypeId,
+  ProductStandardId,
+} from "@factus-js/constants";
+
+const response = await factus.bills.create({
+  numbering_range_id: 123,
+  reference_code: "ORD-2025-001",
+  observation: "Observaciones de la factura",
+  payment_form: PaymentFormCode.CASH_PAYMENT,
+  payment_method_code: PaymentMethodCode.CASH,
+  payment_due_date: "2025-12-31",
+  billing_period: {
+    start_date: "2025-01-01",
+    end_date: "2025-01-31",
+  },
+  customer: {
+    identification: "900123456",
+    dv: "7",
+    company: "Empresa Cliente S.A.S.",
+    trade_name: "Empresa Cliente",
+    names: "Juan",
+    address: "Calle 123 # 45-67",
+    email: "cliente@empresa.com",
+    phone: "3001234567",
+    legal_organization_id: OrganizationTypeId.LEGAL_ENTITY,
+    tribute_id: CustomerTributeId.IVA,
+    identification_document_id: IdentityDocumentTypeId.NIT,
+    municipality_id: 149,
+  },
+  items: [
+    {
+      code_reference: "PROD-001",
+      name: "Producto ejemplo",
+      quantity: 2,
+      discount_rate: 5,
+      price: 50000,
+      tax_rate: "19.00",
+      unit_measure_id: 70,
+      standard_code_id: ProductStandardId.TAXPAYER_ADOPTION,
+      is_excluded: 0,
+      tribute_id: 1,
+    },
+  ],
+});
+
+console.log(response.data.number); // "SETP990000001"
+```
+
+---
+
+## `list(filters?)`
+
+Lista facturas con filtros opcionales y paginación.
+
+```ts
+list(filters?: BillFilters & { page?: number; per_page?: number }): Promise<GetBillsResponse>
+```
+
+```ts
+const response = await factus.bills.list({
+  "filter[status]": "1", // 1=Procesado, 0=Pendiente
+  "filter[number]": "SETP99", // filtro por número
+  page: 1,
+  per_page: 15,
+});
+
+const facturas = response.data.data; // BillListItem[]
+const paginacion = response.data.pagination; // { total, current_page, last_page, ... }
+```
+
+---
+
+## `get(id)`
+
+Obtiene el detalle completo de una factura por su ID numérico interno.
+
+```ts
+get(id: number): Promise<ViewBillResponse>
+```
+
+```ts
+const response = await factus.bills.get(456);
+const factura = response.data.bill;
+console.log(factura.number, factura.status, factura.total);
+```
+
+---
+
+## `getByNumber(number)`
+
+Obtiene el detalle completo de una factura por su número de documento (e.g. `"SETP990000001"`).
+
+```ts
+getByNumber(number: string): Promise<ViewBillResponse>
+```
+
+```ts
+const response = await factus.bills.getByNumber("SETP990000001");
+```
+
+---
+
+## `downloadXml(id)`
+
+Descarga el XML de la factura como string en base64.
+
+```ts
+downloadXml(id: number): Promise<DownloadBillXmlResponse>
+```
+
+```ts
+const response = await factus.bills.downloadXml(456);
+const xml = Buffer.from(response.data.xml_base_64_encoded, "base64").toString(
+  "utf-8",
+);
+```
+
+---
+
+## `downloadPdf(id)`
+
+Descarga el PDF de la factura como string en base64.
+
+```ts
+downloadPdf(id: number): Promise<DownloadBillPdfResponse>
+```
+
+```ts
+const response = await factus.bills.downloadPdf(456);
+const pdfBuffer = Buffer.from(response.data.pdf_base_64_encoded, "base64");
+```
+
+---
+
+## `getEmailContent(id)`
+
+Obtiene el asunto y el documento adjunto preparados para enviar por email.
+
+```ts
+getEmailContent(id: number): Promise<GetBillEmailContentResponse>
+```
+
+```ts
+const response = await factus.bills.getEmailContent(456);
+console.log(response.data.subject);
+```
+
+---
+
+## `sendEmail(number, input)`
+
+Envía la factura por email. Máximo 2 envíos por factura por día.
+
+```ts
+sendEmail(number: string, input: SendBillEmailInput): Promise<SendBillEmailResponse>
+```
+
+```ts
+const response = await factus.bills.sendEmail("SETP990000001", {
+  email: "cliente@empresa.com",
+});
+```
+
+---
+
+## `updateRadianEvent(id, input)`
+
+Actualiza los datos del responsable RADIAN en una factura.
+
+```ts
+updateRadianEvent(id: number, input: RadianEventUpdateInput): Promise<RadianEventUpdateResponse>
+```
+
+```ts
+await factus.bills.updateRadianEvent(456, {
+  // campos del responsable RADIAN
+});
+```
+
+---
+
+## `getEvents(number)`
+
+Obtiene la lista de eventos RADIAN registrados en una factura.
+
+```ts
+getEvents(number: string): Promise<GetBillEventsResponse>
+```
+
+```ts
+const response = await factus.bills.getEvents("SETP990000001");
+console.log(response.data); // eventos RADIAN
+```
+
+---
+
+## `delete(referenceCode)`
+
+Elimina (anula) una factura que **no ha sido aún validada** por la DIAN.
+
+```ts
+delete(referenceCode: string): Promise<DeleteBillResponse>
+```
+
+<Callout type="warn">
+  Solo se pueden eliminar facturas que no hayan sido validadas por la DIAN. Una
+  vez validada, la factura no puede eliminarse.
+</Callout>
+
+```ts
+await factus.bills.delete("ORD-2025-001");
+```

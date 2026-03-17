@@ -1,0 +1,97 @@
+---
+title: Introducción
+description: SDK de TypeScript para la API de facturación electrónica Factus (Colombia).
+---
+
+import { Cards, Card } from "fumadocs-ui/components/card";
+import { Callout } from "fumadocs-ui/components/callout";
+
+# factus-js
+
+**factus-js** es un SDK de TypeScript para la [API de Factus](https://factus.com.co), la plataforma colombiana de facturación electrónica homologada por la DIAN. El SDK proporciona una capa de abstracción completa sobre la API REST, con autenticación OAuth2 automática y tipado estricto en todos los métodos.
+
+<Callout type="info">
+  El SDK está en estado estable. Cubre la totalidad de los endpoints públicos de
+  la API de Factus v1.
+</Callout>
+
+## Paquetes
+
+El repositorio es un monorepo con tres paquetes publicados en npm:
+
+| Paquete                | Descripción                                                                     |
+| ---------------------- | ------------------------------------------------------------------------------- |
+| `@factus-js/client`    | Cliente principal — `FactusClient` y todos los recursos                         |
+| `@factus-js/types`     | Interfaces TypeScript para todas las entidades y respuestas                     |
+| `@factus-js/constants` | Constantes con tipado — códigos DIAN, tipos de documento, métodos de pago, etc. |
+
+## Recursos disponibles
+
+<Cards>
+  <Card
+    title="Facturas"
+    href="/docs/resources/bills"
+    description="Crear, consultar, descargar y enviar facturas electrónicas de venta."
+  />
+  <Card
+    title="Notas crédito"
+    href="/docs/resources/credit-notes"
+    description="Emitir notas crédito referenciadas o sin referencia a una factura."
+  />
+  <Card
+    title="Documentos soporte"
+    href="/docs/resources/support-documents"
+    description="Gestionar documentos soporte para compras a no obligados a facturar."
+  />
+  <Card
+    title="Notas de ajuste"
+    href="/docs/resources/adjustment-notes"
+    description="Notas de ajuste para corregir documentos soporte."
+  />
+  <Card
+    title="Recepción RADIAN"
+    href="/docs/resources/reception"
+    description="Facturas recibidas y eventos del ciclo de vida RADIAN."
+  />
+  <Card
+    title="Empresa"
+    href="/docs/resources/company"
+    description="Consultar y actualizar el perfil de la empresa."
+  />
+  <Card
+    title="Rangos de numeración"
+    href="/docs/resources/numbering-ranges"
+    description="Crear y gestionar rangos de numeración autorizados."
+  />
+  <Card
+    title="Suscripción"
+    href="/docs/resources/subscription"
+    description="Consultar el estado de la suscripción y los documentos disponibles."
+  />
+  <Card
+    title="Referencia"
+    href="/docs/resources/reference"
+    description="Municipios, países, tributos, unidades de medida y adquirentes."
+  />
+</Cards>
+
+## Inicio rápido
+
+```ts
+import { FactusClient } from "@factus-js/client";
+
+const factus = new FactusClient({
+  clientId: process.env.FACTUS_CLIENT_ID!,
+  clientSecret: process.env.FACTUS_CLIENT_SECRET!,
+  username: process.env.FACTUS_USERNAME!,
+  password: process.env.FACTUS_PASSWORD!,
+  environment: "sandbox",
+});
+
+const response = await factus.bills.create({
+  /* ... */
+});
+console.log(response.data.number); // "SETP990000001"
+```
+
+Consulta la [guía de instalación](/docs/getting-started/installation) y el [inicio rápido](/docs/getting-started/quick-start) para más detalles.

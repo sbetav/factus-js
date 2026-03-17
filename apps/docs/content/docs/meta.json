@@ -1,0 +1,14 @@
+{
+  "title": "factus-js",
+  "pages": [
+    "index",
+    "---Guía---",
+    "getting-started",
+    "authentication",
+    "error-handling",
+    "---Recursos---",
+    "resources",
+    "---Referencia---",
+    "constants"
+  ]
+}

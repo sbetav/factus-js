@@ -1,0 +1,90 @@
+---
+title: Instalación
+description: Cómo instalar los paquetes de factus-js en tu proyecto.
+---
+
+import { Tabs, Tab } from "fumadocs-ui/components/tabs";
+import { Callout } from "fumadocs-ui/components/callout";
+
+# Instalación
+
+## Requisitos
+
+- **Node.js** 18 o superior (se requiere la API `fetch` nativa).
+- Una cuenta activa en [Factus](https://factus.com.co) con credenciales de API.
+
+## Instalar los paquetes
+
+Instala el cliente principal y el paquete de tipos. El paquete de constantes es opcional pero recomendado para autocompletado de códigos DIAN.
+
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+
+<Tab value="npm">
+
+```bash
+npm install @factus-js/client @factus-js/types
+# opcional — constantes tipadas
+npm install @factus-js/constants
+```
+
+</Tab>
+
+<Tab value="pnpm">
+
+```bash
+pnpm add @factus-js/client @factus-js/types
+# opcional — constantes tipadas
+pnpm add @factus-js/constants
+```
+
+</Tab>
+
+<Tab value="yarn">
+
+```bash
+yarn add @factus-js/client @factus-js/types
+# opcional — constantes tipadas
+yarn add @factus-js/constants
+```
+
+</Tab>
+
+<Tab value="bun">
+
+```bash
+bun add @factus-js/client @factus-js/types
+# opcional — constantes tipadas
+bun add @factus-js/constants
+```
+
+</Tab>
+
+</Tabs>
+
+## Paquetes del monorepo
+
+| Paquete                | Descripción                                                                 |
+| ---------------------- | --------------------------------------------------------------------------- |
+| `@factus-js/client`    | Clase `FactusClient` con todos los recursos de la API                       |
+| `@factus-js/types`     | Interfaces TypeScript para entradas, salidas y respuestas                   |
+| `@factus-js/constants` | Objetos de constantes tipadas (códigos de documento, métodos de pago, etc.) |
+
+<Callout type="info">
+  `@factus-js/types` es una dependencia directa de `@factus-js/client`. Puedes
+  importar los tipos directamente desde `@factus-js/types` o utilizar los que
+  reexporta `@factus-js/client` según prefieras.
+</Callout>
+
+## Variables de entorno
+
+Guarda tus credenciales en variables de entorno. Nunca las escribas directamente en el código fuente.
+
+```bash
+# .env
+FACTUS_CLIENT_ID=tu-client-id
+FACTUS_CLIENT_SECRET=tu-client-secret
+FACTUS_USERNAME=tu@email.com
+FACTUS_PASSWORD=tu-contraseña
+```
+
+A continuación, consulta el [inicio rápido](/docs/getting-started/quick-start) para ver cómo inicializar el cliente y hacer tu primera llamada.

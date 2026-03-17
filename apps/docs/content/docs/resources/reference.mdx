@@ -1,0 +1,112 @@
+---
+title: Referencia (reference)
+description: Municipios, países, tributos, unidades de medida y búsqueda de adquirentes.
+---
+
+# Referencia (`reference`)
+
+El recurso `reference` proporciona acceso a las **tablas de referencia** de la API de Factus: municipios, países, tributos, unidades de medida y búsqueda de adquirentes (clientes existentes). Se accede a través de `factus.reference`.
+
+## Métodos disponibles
+
+| Método                           | Verbo + Ruta                | Descripción                             |
+| -------------------------------- | --------------------------- | --------------------------------------- |
+| `listMunicipalities(filters?)`   | `GET /v1/municipalities`    | Listar municipios de Colombia           |
+| `listCountries(filters?)`        | `GET /v1/countries`         | Listar países                           |
+| `listTributes(filters?)`         | `GET /v1/tributes/products` | Listar tributos (impuestos)             |
+| `listMeasurementUnits(filters?)` | `GET /v1/measurement-units` | Listar unidades de medida               |
+| `getAcquirer(filters)`           | `GET /v1/dian/acquirer`     | Buscar un adquirente por identificación |
+
+---
+
+## `listMunicipalities(filters?)`
+
+Lista los municipios de Colombia. Puedes filtrar por nombre.
+
+```ts
+listMunicipalities(filters?: MunicipalityFilters & { page?: number; per_page?: number }): Promise<ApiResponse<Municipality[]>>
+```
+
+```ts
+// Todos los municipios
+const response = await factus.reference.listMunicipalities();
+
+// Filtrar por nombre
+const bogota = await factus.reference.listMunicipalities({
+  name: "Bogotá",
+});
+
+console.log(bogota.data[0].id); // 149
+console.log(bogota.data[0].name); // "Bogotá D.C."
+```
+
+---
+
+## `listCountries(filters?)`
+
+Lista los países disponibles.
+
+```ts
+listCountries(filters?: CountryFilters & { page?: number; per_page?: number }): Promise<ApiResponse<Country[]>>
+```
+
+```ts
+const response = await factus.reference.listCountries();
+const colombia = response.data.find((c) => c.name === "Colombia");
+console.log(colombia?.id); // "CO"
+```
+
+---
+
+## `listTributes(filters?)`
+
+Lista los tributos (impuestos) disponibles en la API.
+
+```ts
+listTributes(filters?: TributeFilters): Promise<ApiResponse<Tribute[]>>
+```
+
+```ts
+const response = await factus.reference.listTributes();
+for (const tributo of response.data) {
+  console.log(tributo.id, tributo.code, tributo.name, tributo.description);
+}
+```
+
+---
+
+## `listMeasurementUnits(filters?)`
+
+Lista las unidades de medida aceptadas por la DIAN.
+
+```ts
+listMeasurementUnits(filters?: MeasurementUnitFilters): Promise<ApiResponse<MeasurementUnit[]>>
+```
+
+```ts
+const response = await factus.reference.listMeasurementUnits();
+// Ejemplo: { id: 70, name: "Unidad (und)", code: "94" }
+```
+
+---
+
+## `getAcquirer(filters)`
+
+Busca un adquirente (cliente ya registrado) por su número de identificación. Útil para autocompletar datos del cliente al crear una factura.
+
+```ts
+getAcquirer(filters: AcquirerFilters): Promise<ApiResponse<Acquirer>>
+```
+
+```ts
+const response = await factus.reference.getAcquirer({
+  identification_number: "900123456",
+  identification_document_id: 6, // NIT
+});
+
+const adquirente = response.data;
+console.log(adquirente.name);
+console.log(adquirente.email);
+```
+
+Con los datos del adquirente puedes rellenar directamente el campo `customer` en `factus.bills.create()`, `factus.creditNotes.create()`, etc.

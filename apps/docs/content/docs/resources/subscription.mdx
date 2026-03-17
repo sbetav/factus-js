@@ -1,0 +1,63 @@
+---
+title: Suscripción (subscription)
+description: Consultar el estado de la suscripción y los documentos disponibles.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+# Suscripción (`subscription`)
+
+El recurso `subscription` permite consultar el **estado de la suscripción** de la cuenta en Factus y el número de documentos disponibles. Se accede a través de `factus.subscription`.
+
+## Métodos disponibles
+
+| Método         | Verbo + Ruta                    | Descripción                                           |
+| -------------- | ------------------------------- | ----------------------------------------------------- |
+| `list()`       | `GET /v1/subscriptions`         | Listar todas las suscripciones activas de la cuenta   |
+| `getCurrent()` | `GET /v1/subscriptions/current` | Resumen legacy de documentos totales/usados/restantes |
+
+---
+
+## `list()`
+
+Lista todas las suscripciones activas asociadas a la cuenta. Este es el método recomendado.
+
+```ts
+list(): Promise<ApiResponse<Subscription[]>>
+```
+
+```ts
+const response = await factus.subscription.list();
+const suscripciones = response.data;
+
+for (const sub of suscripciones) {
+  console.log(sub.name); // nombre del plan
+  console.log(sub.documents_quota); // documentos totales
+  console.log(sub.documents_consumed); // documentos usados
+  console.log(sub.documents_available); // documentos disponibles
+}
+```
+
+---
+
+## `getCurrent()` (obsoleto)
+
+<Callout type="warn">
+  Este método está marcado como **obsoleto** (`@deprecated`). Usa `list()` en su
+  lugar para obtener información completa sobre las suscripciones.
+</Callout>
+
+Obtiene un resumen heredado con el total, usados y restantes de documentos de la suscripción actual.
+
+```ts
+/** @deprecated Use list() instead */
+getCurrent(): Promise<ApiResponse<CurrentSubscription>>
+```
+
+```ts
+// Uso desaconsejado — preferir list()
+const response = await factus.subscription.getCurrent();
+console.log(response.data.total_documents); // documentos totales
+console.log(response.data.documents_used); // documentos usados
+console.log(response.data.documents_remaining); // documentos restantes
+```

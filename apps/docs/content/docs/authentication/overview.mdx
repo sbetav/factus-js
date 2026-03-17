@@ -1,0 +1,94 @@
+---
+title: Autenticación
+description: Cómo funciona la autenticación OAuth2 automática en factus-js.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+# Autenticación
+
+La API de Factus utiliza el flujo **OAuth2 Resource Owner Password Credentials** (grant type `password`). El SDK gestiona todo el ciclo de vida del token de forma completamente automática: no necesitas llamar a ningún método de autenticación explícitamente.
+
+## Configuración
+
+Pasa las credenciales al constructor de `FactusClient`:
+
+```ts
+import { FactusClient } from "@factus-js/client";
+
+const factus = new FactusClient({
+  clientId: "tu-client-id",
+  clientSecret: "tu-client-secret",
+  username: "tu@email.com",
+  password: "tu-contraseña",
+  environment: "sandbox", // o "production"
+});
+```
+
+| Parámetro      | Tipo                        | Descripción                                                               |
+| -------------- | --------------------------- | ------------------------------------------------------------------------- |
+| `clientId`     | `string`                    | ID de cliente OAuth2 proporcionado por Factus                             |
+| `clientSecret` | `string`                    | Secreto de cliente OAuth2 proporcionado por Factus                        |
+| `username`     | `string`                    | Email de la cuenta Factus                                                 |
+| `password`     | `string`                    | Contraseña de la cuenta Factus                                            |
+| `environment`  | `"sandbox" \| "production"` | Entorno de la API. Por defecto: `"production"`                            |
+| `baseUrl`      | `string`                    | URL base personalizada (ignora `environment`). Útil para proxies o tests. |
+
+## URLs base
+
+| Entorno      | URL                                 |
+| ------------ | ----------------------------------- |
+| `sandbox`    | `https://api-sandbox.factus.com.co` |
+| `production` | `https://api.factus.com.co`         |
+
+## Ciclo de vida del token
+
+El SDK gestiona el token internamente mediante la clase `HttpClient`. El flujo es el siguiente:
+
+1. **Primera llamada**: antes de la primera petición HTTP, el SDK hace un `POST /oauth/token` con `grant_type=password` para obtener un access token y un refresh token.
+2. **Buffer de expiración**: el SDK considera el token expirado **60 segundos antes** de su expiración real, para evitar errores por latencia de red.
+3. **Renovación automática**: cuando el token está próximo a expirar, el SDK hace un `POST /oauth/token` con `grant_type=refresh_token` usando el refresh token almacenado.
+4. **Relogin como fallback**: si el refresh token falla por cualquier motivo, el SDK reinicia sesión automáticamente con las credenciales originales.
+
+<Callout type="info">
+  Todo este proceso es transparente. Puedes hacer llamadas a la API sin
+  preocuparte por los tokens: el SDK siempre tendrá un token válido cuando lo
+  necesite.
+</Callout>
+
+## Entorno sandbox
+
+Factus ofrece un entorno de pruebas (sandbox) completamente separado del entorno de producción. Usa `environment: "sandbox"` durante el desarrollo para no generar documentos fiscales reales.
+
+```ts
+// Desarrollo / pruebas
+const factus = new FactusClient({
+  // ... credenciales de sandbox
+  environment: "sandbox",
+});
+
+// Producción
+const factus = new FactusClient({
+  // ... credenciales de producción
+  environment: "production",
+});
+```
+
+<Callout type="warn">
+  Las credenciales de sandbox y producción son distintas. Asegúrate de usar las
+  correctas para cada entorno.
+</Callout>
+
+## Seguridad
+
+- Guarda siempre las credenciales en variables de entorno (`.env`), nunca directamente en el código fuente.
+- Nunca expongas `clientSecret` ni `password` en el lado del cliente (browser). El SDK está diseñado para ejecutarse en entornos de servidor (Node.js, Edge Runtime, etc.).
+- Usa `.gitignore` para excluir archivos `.env` del repositorio.
+
+```bash
+# .env — no committear
+FACTUS_CLIENT_ID=...
+FACTUS_CLIENT_SECRET=...
+FACTUS_USERNAME=...
+FACTUS_PASSWORD=...
+```

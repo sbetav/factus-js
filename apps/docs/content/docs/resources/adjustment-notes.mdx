@@ -1,0 +1,147 @@
+---
+title: Notas de ajuste (adjustment-notes)
+description: Crear, consultar y gestionar notas de ajuste para documentos soporte.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+# Notas de ajuste (`adjustmentNotes`)
+
+El recurso `adjustmentNotes` gestiona las **notas de ajuste** para documentos soporte electrónicos. Se accede a través de `factus.adjustmentNotes`.
+
+## Métodos disponibles
+
+| Método                | Verbo + Ruta                                 | Descripción                                   |
+| --------------------- | -------------------------------------------- | --------------------------------------------- |
+| `create(input)`       | `POST /v1/adjustment-notes/validate`         | Crear y validar una nueva nota de ajuste      |
+| `list(filters?)`      | `GET /v1/adjustment-notes`                   | Listar notas de ajuste con filtros opcionales |
+| `get(id)`             | `GET /v1/adjustment-notes/{id}`              | Obtener detalle por ID numérico               |
+| `getByNumber(number)` | `GET /v1/adjustment-notes/show/{number}`     | Obtener detalle por número de documento       |
+| `downloadXml(id)`     | `GET /v1/adjustment-notes/download-xml/{id}` | Descargar XML en base64                       |
+| `downloadPdf(id)`     | `GET /v1/adjustment-notes/download-pdf/{id}` | Descargar PDF en base64                       |
+| `delete(id)`          | `DELETE /v1/adjustment-notes/{id}`           | Eliminar una nota de ajuste no validada       |
+
+---
+
+## `create(input)`
+
+```ts
+create(input: CreateAdjustmentNoteInput): Promise<ApiResponse<AdjustmentNote>>
+```
+
+```ts
+import { AdjustmentNoteReasonCode } from "@factus-js/constants";
+
+const response = await factus.adjustmentNotes.create({
+  numbering_range_id: 126,
+  reference_code: "NA-001",
+  support_document_id: 321, // ID del documento soporte al que hace referencia
+  correction_concept_code: AdjustmentNoteReasonCode.PRICE_ADJUSTMENT,
+  observation: "Corrección de precio en documento soporte",
+  items: [
+    {
+      code_reference: "SRV-001",
+      name: "Servicio ajustado",
+      quantity: 1,
+      discount_rate: 0,
+      price: 10000,
+      unit_measure_id: 70,
+      standard_code_id: 1,
+    },
+  ],
+});
+
+console.log(response.data.number);
+```
+
+### Códigos de motivo (`AdjustmentNoteReasonCode`)
+
+| Constante                       | Valor | Descripción                     |
+| ------------------------------- | ----- | ------------------------------- |
+| `PARTIAL_RETURN`                | `1`   | Devolución parcial              |
+| `SUPPORT_DOCUMENT_CANCELLATION` | `2`   | Anulación del documento soporte |
+| `PARTIAL_OR_TOTAL_DISCOUNT`     | `3`   | Descuento parcial o total       |
+| `PRICE_ADJUSTMENT`              | `4`   | Ajuste de precio                |
+| `OTHER`                         | `5`   | Otro motivo                     |
+
+---
+
+## `list(filters?)`
+
+```ts
+list(filters?: AdjustmentNoteFilters & { page?: number; per_page?: number }): Promise<ApiResponse<PaginatedData<AdjustmentNote>>>
+```
+
+```ts
+const response = await factus.adjustmentNotes.list({ page: 1, per_page: 10 });
+const notas = response.data.data;
+const paginacion = response.data.pagination;
+```
+
+---
+
+## `get(id)`
+
+```ts
+get(id: number): Promise<ApiResponse<ViewAdjustmentNoteData>>
+```
+
+```ts
+const response = await factus.adjustmentNotes.get(654);
+```
+
+---
+
+## `getByNumber(number)`
+
+```ts
+getByNumber(number: string): Promise<ApiResponse<ViewAdjustmentNoteData>>
+```
+
+```ts
+const response = await factus.adjustmentNotes.getByNumber("NA-990000001");
+```
+
+---
+
+## `downloadXml(id)`
+
+```ts
+downloadXml(id: number): Promise<ApiResponse<DownloadAdjustmentNoteXmlResponse>>
+```
+
+```ts
+const response = await factus.adjustmentNotes.downloadXml(654);
+const xml = Buffer.from(response.data.xml_base_64_encoded, "base64").toString(
+  "utf-8",
+);
+```
+
+---
+
+## `downloadPdf(id)`
+
+```ts
+downloadPdf(id: number): Promise<ApiResponse<DownloadAdjustmentNotePdfResponse>>
+```
+
+```ts
+const response = await factus.adjustmentNotes.downloadPdf(654);
+```
+
+---
+
+## `delete(id)`
+
+<Callout type="warn">
+  Solo se pueden eliminar notas de ajuste que no hayan sido validadas por la
+  DIAN.
+</Callout>
+
+```ts
+delete(id: number): Promise<DeleteAdjustmentNoteResponse>
+```
+
+```ts
+await factus.adjustmentNotes.delete(654);
+```

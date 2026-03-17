@@ -1,0 +1,246 @@
+---
+title: Constantes
+description: Referencia completa de todas las constantes tipadas del paquete @factus-js/constants.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+# Constantes (`@factus-js/constants`)
+
+El paquete `@factus-js/constants` expone objetos de constantes con tipado estricto para todos los códigos DIAN y valores enumerados utilizados en la API de Factus. Usar estas constantes en lugar de valores literales mejora la legibilidad del código y evita errores tipográficos.
+
+## Instalación
+
+```bash
+npm install @factus-js/constants
+```
+
+## Uso
+
+```ts
+import {
+  InvoiceDocumentType,
+  PaymentFormCode,
+  PaymentMethodCode,
+} from "@factus-js/constants";
+
+console.log(PaymentFormCode.CASH_PAYMENT); // "1"
+```
+
+<Callout type="info">
+  Cada constante funciona tanto como objeto de valores como como tipo TypeScript. Por ejemplo, `PaymentFormCode` puede usarse como tipo en tus propias funciones: `(code: PaymentFormCode) => void`.
+</Callout>
+
+---
+
+## Tipo de documento de factura
+
+### `InvoiceDocumentType`
+
+| Constante                         | Valor  | Descripción                  |
+| --------------------------------- | ------ | ---------------------------- |
+| `ELECTRONIC_SALES_INVOICE`        | `"01"` | Factura electrónica de venta |
+| `ELECTRONIC_TRANSMISSION_TYPE_03` | `"03"` | Tipo de transmisión 03       |
+
+---
+
+## Tipo de operación
+
+### `OperationTypeCode`
+
+| Constante   | Valor  | Descripción |
+| ----------- | ------ | ----------- |
+| `STANDARD`  | `"10"` | Estándar    |
+| `MANDATES`  | `"11"` | Mandatos    |
+| `TRANSPORT` | `"12"` | Transporte  |
+
+### `CreditNoteOperationTypeCode`
+
+| Constante           | Valor  | Descripción              |
+| ------------------- | ------ | ------------------------ |
+| `WITH_REFERENCE`    | `"20"` | Con referencia a factura |
+| `WITHOUT_REFERENCE` | `"22"` | Sin referencia           |
+
+---
+
+## Correcciones y motivos
+
+### `CreditNoteCorrectionCode`
+
+| Constante                   | Valor | Descripción                   |
+| --------------------------- | ----- | ----------------------------- |
+| `PARTIAL_RETURN`            | `1`   | Devolución parcial            |
+| `INVOICE_CANCELLATION`      | `2`   | Anulación de la factura       |
+| `PARTIAL_OR_TOTAL_DISCOUNT` | `3`   | Descuento parcial o total     |
+| `PRICE_ADJUSTMENT`          | `4`   | Ajuste de precio              |
+| `EARLY_PAYMENT_DISCOUNT`    | `5`   | Descuento por pago anticipado |
+| `VOLUME_DISCOUNT`           | `6`   | Descuento por volumen         |
+
+### `AdjustmentNoteReasonCode`
+
+| Constante                       | Valor | Descripción                     |
+| ------------------------------- | ----- | ------------------------------- |
+| `PARTIAL_RETURN`                | `1`   | Devolución parcial              |
+| `SUPPORT_DOCUMENT_CANCELLATION` | `2`   | Anulación del documento soporte |
+| `PARTIAL_OR_TOTAL_DISCOUNT`     | `3`   | Descuento parcial o total       |
+| `PRICE_ADJUSTMENT`              | `4`   | Ajuste de precio                |
+| `OTHER`                         | `5`   | Otro                            |
+
+---
+
+## Productos y estándares
+
+### `ProductStandardId`
+
+| Constante           | Valor | Descripción                       |
+| ------------------- | ----- | --------------------------------- |
+| `TAXPAYER_ADOPTION` | `1`   | Estándar propio del contribuyente |
+| `UNSPSC`            | `2`   | Clasificación UNSPSC              |
+| `TARIFF_HEADING`    | `3`   | Partida arancelaria               |
+| `GTIN`              | `4`   | Código GTIN                       |
+
+---
+
+## Eventos RADIAN
+
+### `EventCode`
+
+| Constante                  | Valor   | Descripción                |
+| -------------------------- | ------- | -------------------------- |
+| `RECEIPT_ACKNOWLEDGEMENT`  | `"030"` | Acuse de recibo            |
+| `INVOICE_CLAIM`            | `"031"` | Reclamo                    |
+| `GOODS_OR_SERVICE_RECEIPT` | `"032"` | Recibo de bienes/servicios |
+| `EXPRESS_ACCEPTANCE`       | `"033"` | Aceptación expresa         |
+| `TACIT_ACCEPTANCE`         | `"034"` | Aceptación tácita          |
+
+### `ClaimConceptCode`
+
+| Constante                     | Valor  | Descripción                     |
+| ----------------------------- | ------ | ------------------------------- |
+| `DOCUMENT_INCONSISTENCIES`    | `"01"` | Inconsistencias en el documento |
+| `GOODS_NOT_DELIVERED_TOTAL`   | `"02"` | Bienes no entregados (total)    |
+| `GOODS_NOT_DELIVERED_PARTIAL` | `"03"` | Bienes no entregados (parcial)  |
+| `SERVICE_NOT_PROVIDED`        | `"04"` | Servicio no prestado            |
+
+---
+
+## Identificación
+
+### `IdentityDocumentTypeId`
+
+| Constante                         | Valor | Descripción                            |
+| --------------------------------- | ----- | -------------------------------------- |
+| `CIVIL_REGISTRATION`              | `1`   | Registro civil                         |
+| `IDENTITY_CARD`                   | `2`   | Tarjeta de identidad                   |
+| `CITIZENSHIP_ID`                  | `3`   | Cédula de ciudadanía                   |
+| `FOREIGNER_CARD`                  | `4`   | Tarjeta de extranjería                 |
+| `FOREIGNER_ID`                    | `5`   | Cédula de extranjería                  |
+| `NIT`                             | `6`   | NIT                                    |
+| `PASSPORT`                        | `7`   | Pasaporte                              |
+| `FOREIGN_IDENTIFICATION_DOCUMENT` | `8`   | Documento de identificación extranjero |
+| `PEP`                             | `9`   | Permiso especial de permanencia        |
+| `FOREIGN_NIT`                     | `10`  | NIT de otro país                       |
+| `NUIP`                            | `11`  | NUIP                                   |
+
+### `SupportDocumentIdentityTypeId`
+
+Subconjunto de `IdentityDocumentTypeId` permitido en documentos soporte y notas de ajuste.
+
+| Constante                         | Valor |
+| --------------------------------- | ----- |
+| `FOREIGNER_CARD`                  | `4`   |
+| `FOREIGNER_ID`                    | `5`   |
+| `NIT`                             | `6`   |
+| `PASSPORT`                        | `7`   |
+| `FOREIGN_IDENTIFICATION_DOCUMENT` | `8`   |
+| `PEP`                             | `9`   |
+| `FOREIGN_NIT`                     | `10`  |
+
+---
+
+## Adquirentes y organización
+
+### `CustomerTributeId`
+
+| Constante        | Valor | Descripción                |
+| ---------------- | ----- | -------------------------- |
+| `IVA`            | `18`  | Responsable de IVA         |
+| `NOT_APPLICABLE` | `21`  | No aplica (no responsable) |
+
+### `OrganizationTypeId`
+
+| Constante        | Valor | Descripción      |
+| ---------------- | ----- | ---------------- |
+| `LEGAL_ENTITY`   | `1`   | Persona jurídica |
+| `NATURAL_PERSON` | `2`   | Persona natural  |
+
+---
+
+## Formas y métodos de pago
+
+### `PaymentFormCode`
+
+| Constante        | Valor | Descripción |
+| ---------------- | ----- | ----------- |
+| `CASH_PAYMENT`   | `"1"` | Contado     |
+| `CREDIT_PAYMENT` | `"2"` | Crédito     |
+
+### `PaymentMethodCode`
+
+| Constante      | Valor   | Descripción            |
+| -------------- | ------- | ---------------------- |
+| `CASH`         | `"10"`  | Efectivo               |
+| `BANK_DEPOSIT` | `"42"`  | Depósito bancario      |
+| `CHECK`        | `"20"`  | Cheque                 |
+| `TRANSFER`     | `"47"`  | Transferencia bancaria |
+| `BONDS`        | `"71"`  | Bonos                  |
+| `VOUCHERS`     | `"72"`  | Vales                  |
+| `UNDEFINED`    | `"1"`   | Sin definir            |
+| `DEBIT_CARD`   | `"49"`  | Tarjeta débito         |
+| `CREDIT_CARD`  | `"48"`  | Tarjeta crédito        |
+| `OTHER`        | `"ZZZ"` | Otro                   |
+
+---
+
+## Rangos de numeración
+
+### `NumberingRangeDocumentTypeCode`
+
+| Constante                          | Valor  | Descripción                   |
+| ---------------------------------- | ------ | ----------------------------- |
+| `SALES_INVOICE`                    | `"21"` | Factura de venta              |
+| `CREDIT_NOTE`                      | `"22"` | Nota crédito                  |
+| `DEBIT_NOTE`                       | `"23"` | Nota débito                   |
+| `SUPPORT_DOCUMENT`                 | `"24"` | Documento soporte             |
+| `SUPPORT_DOCUMENT_ADJUSTMENT_NOTE` | `"25"` | Nota de ajuste de soporte     |
+| `PAYROLL`                          | `"26"` | Nómina electrónica            |
+| `PAYROLL_ADJUSTMENT_NOTE`          | `"27"` | Nota de ajuste de nómina      |
+| `PAYROLL_DELETION_NOTE`            | `"28"` | Nota de eliminación de nómina |
+| `PAPER_OR_STUB_INVOICE`            | `"30"` | Factura de papel/talonario    |
+
+---
+
+## Cargos y descuentos
+
+### `ChargeDiscountCode`
+
+| Constante                 | Valor  | Descripción             |
+| ------------------------- | ------ | ----------------------- |
+| `UNCONDITIONAL_DISCOUNT`  | `"00"` | Descuento incondicional |
+| `CONDITIONAL_DISCOUNT`    | `"01"` | Descuento condicional   |
+| `UNCONDITIONAL_SURCHARGE` | `"02"` | Recargo incondicional   |
+| `CONDITIONAL_SURCHARGE`   | `"03"` | Recargo condicional     |
+
+---
+
+## Responsabilidad fiscal
+
+### `FiscalResponsibilityCode`
+
+| Constante                | Valor       | Descripción                         |
+| ------------------------ | ----------- | ----------------------------------- |
+| `LARGE_TAXPAYER`         | `"O-13"`    | Gran contribuyente                  |
+| `SELF_WITHHOLDING_AGENT` | `"0-15"`    | Autorretenedor                      |
+| `VAT_WITHHOLDING_AGENT`  | `"0-23"`    | Agente de retención IVA             |
+| `SIMPLE_TAX_REGIME`      | `"0-47"`    | Régimen simple de tributación       |
+| `NOT_RESPONSIBLE`        | `"R-99-PN"` | No responsable (personas naturales) |

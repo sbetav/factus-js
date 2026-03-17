@@ -1,0 +1,116 @@
+---
+title: Manejo de errores
+description: Cómo capturar y gestionar errores de la API con FactusError.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+# Manejo de errores
+
+Cuando una llamada a la API falla (respuesta HTTP 4xx o 5xx), el SDK lanza una instancia de `FactusError`. Esta clase extiende `Error` nativo de JavaScript y añade información estructurada del error devuelto por la API.
+
+## La clase `FactusError`
+
+```ts
+class FactusError extends Error {
+  name: "FactusError";
+  statusCode: number;
+  errors: Array<{
+    code: number;
+    message: string;
+    detail: string;
+    api_version: string;
+  }>;
+}
+```
+
+| Propiedad              | Tipo         | Descripción                                           |
+| ---------------------- | ------------ | ----------------------------------------------------- |
+| `message`              | `string`     | Mensaje del primer error, o el statusText HTTP        |
+| `statusCode`           | `number`     | Código de estado HTTP (400, 401, 404, 422, 500, etc.) |
+| `errors`               | `Array<...>` | Lista completa de errores devuelta por la API         |
+| `errors[].code`        | `number`     | Código interno de error de la API                     |
+| `errors[].message`     | `string`     | Mensaje de error legible                              |
+| `errors[].detail`      | `string`     | Detalle técnico del error                             |
+| `errors[].api_version` | `string`     | Versión de la API que generó el error                 |
+
+## Importar `FactusError`
+
+```ts
+import { FactusError } from "@factus-js/client";
+```
+
+## Ejemplo básico
+
+```ts
+import { FactusClient, FactusError } from "@factus-js/client";
+
+const factus = new FactusClient({
+  /* config */
+});
+
+try {
+  const bill = await factus.bills.get(99999);
+} catch (error) {
+  if (error instanceof FactusError) {
+    console.error("Error de la API:", error.message);
+    console.error("Código HTTP:", error.statusCode);
+    console.error("Errores detallados:", error.errors);
+  } else {
+    // Error de red u otro error inesperado
+    throw error;
+  }
+}
+```
+
+## Errores comunes
+
+| Código HTTP | Situación típica                                      |
+| ----------- | ----------------------------------------------------- |
+| `400`       | Datos de entrada inválidos o campo requerido faltante |
+| `401`       | Credenciales inválidas o token expirado               |
+| `403`       | Sin permisos para realizar la operación               |
+| `404`       | Recurso no encontrado (ID incorrecto)                 |
+| `422`       | Error de validación de la DIAN (campos del documento) |
+| `429`       | Límite de solicitudes superado                        |
+| `500`       | Error interno del servidor de Factus                  |
+
+## Manejo en producción
+
+```ts
+async function crearFactura(input: CreateBillInput) {
+  try {
+    const response = await factus.bills.create(input);
+    return response.data;
+  } catch (error) {
+    if (error instanceof FactusError) {
+      // Errores de validación (422) — múltiples errores posibles
+      if (error.statusCode === 422) {
+        const mensajes = error.errors.map((e) => e.message).join(", ");
+        throw new Error(`Error de validación: ${mensajes}`);
+      }
+
+      // Error de autenticación
+      if (error.statusCode === 401) {
+        throw new Error("Credenciales inválidas o sesión expirada");
+      }
+
+      // Cualquier otro error de la API
+      throw new Error(`Error ${error.statusCode}: ${error.message}`);
+    }
+
+    // Error de red (sin conexión, timeout, etc.)
+    throw error;
+  }
+}
+```
+
+<Callout type="info">
+  Los errores de autenticación (401) debidos a token expirado son manejados
+  automáticamente por el SDK mediante el refresco del token. Solo recibirás un
+  `FactusError` con `statusCode: 401` si las credenciales en sí son inválidas.
+</Callout>
+
+## Errores de red
+
+Las llamadas de red que fallen antes de llegar al servidor (sin conexión, DNS, timeout) lanzarán el error nativo del `fetch` API, no un `FactusError`. Comprueba siempre `instanceof FactusError` antes de acceder a las propiedades adicionales.
