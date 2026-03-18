@@ -162,7 +162,7 @@ export default async function HomePage() {
               alt="factus-js"
               width={90}
               height={90}
-              className="relative object-contain size-18 xs:size-20 md:size-24"
+              className="relative object-contain size-18 xs:size-20 md:size-22"
               priority
               unoptimized
             />
