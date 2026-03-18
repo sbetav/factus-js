@@ -110,7 +110,7 @@ import {
 
 const createInvoice = async () => {
   try {
-    const response = await factus.invoices.create({
+    const response = await factus.bills.create({
       numbering_range_id: 123,
       reference_code: "ORD-001",
       observation: "Factura de prueba",

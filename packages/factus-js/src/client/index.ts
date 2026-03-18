@@ -13,7 +13,7 @@ export { FactusError } from "./error";
 // ---------------------------------------------------------------------------
 // Module classes (for advanced use / dependency injection)
 // ---------------------------------------------------------------------------
-export { InvoicesModule } from "./modules/invoices";
+export { BillsModule } from "./modules/bills";
 export { CreditNotesModule } from "./modules/credit-notes";
 export { SupportDocumentsModule } from "./modules/support-documents";
 export { AdjustmentNotesModule } from "./modules/adjustment-notes";

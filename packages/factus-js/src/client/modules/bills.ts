@@ -18,7 +18,7 @@ import type {
 } from "../../types";
 import type { HttpClient } from "../http-client";
 
-export class InvoicesModule {
+export class BillsModule {
   constructor(private readonly http: HttpClient) {}
 
   /**

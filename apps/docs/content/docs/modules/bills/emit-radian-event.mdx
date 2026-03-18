@@ -34,18 +34,14 @@ Fuente oficial: [Aceptación tacita](https://developers.factus.com.co/facturas/a
 ```ts
 import { EventCode, IdentityDocumentTypeId } from "factus-js";
 
-await factus.invoices.emitRadianEvent(
-  "SETP990000001",
-  EventCode.TacitAcceptance,
-  {
-    identification_document_code: IdentityDocumentTypeId.CitizenshipId,
-    identification: "12345678",
-    first_name: "Pepito",
-    last_name: "Perez",
-    job_title: "Compras",
-    organization_department: "Administracion",
-  },
-);
+await factus.bills.emitRadianEvent("SETP990000001", EventCode.TacitAcceptance, {
+  identification_document_code: IdentityDocumentTypeId.CitizenshipId,
+  identification: "12345678",
+  first_name: "Pepito",
+  last_name: "Perez",
+  job_title: "Compras",
+  organization_department: "Administracion",
+});
 ```
 
 <Callout type="info">

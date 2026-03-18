@@ -90,7 +90,7 @@ const factus = new FactusClient({
 });
 
 // Crear una factura electrónica
-const response = await factus.invoices.create({ ... });
+const response = await factus.bills.create({ ... });
 console.log(response.data.number); // "SETP990000001"`;
 
 const pkgManagers = [

@@ -9,7 +9,7 @@
     "authentication",
     "error-handling",
     "---Módulos---",
-    "modules/invoices",
+    "modules/bills",
     "modules/credit-notes",
     "modules/support-documents",
     "modules/adjustment-notes",

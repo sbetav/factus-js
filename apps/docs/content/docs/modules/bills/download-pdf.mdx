@@ -18,6 +18,6 @@ Fuente oficial: [Descargar PDF](https://developers.factus.com.co/facturas/descar
 ## Ejemplo
 
 ```ts
-const response = await factus.invoices.downloadPdf("SETP990000001");
+const response = await factus.bills.downloadPdf("SETP990000001");
 const pdfBuffer = Buffer.from(response.data.pdf_base_64_encoded, "base64");
 ```

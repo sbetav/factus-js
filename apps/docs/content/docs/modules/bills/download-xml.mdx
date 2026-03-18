@@ -18,7 +18,7 @@ Fuente oficial: [Descargar XML](https://developers.factus.com.co/facturas/descar
 ## Ejemplo
 
 ```ts
-const response = await factus.invoices.downloadXml("SETP990000001");
+const response = await factus.bills.downloadXml("SETP990000001");
 const xml = Buffer.from(response.data.xml_base_64_encoded, "base64").toString(
   "utf-8",
 );
