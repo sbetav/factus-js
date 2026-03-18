@@ -3,6 +3,8 @@ title: Cargar factura
 description: Registrar una factura electronica recibida por track_id.
 ---
 
+import { Callout } from "fumadocs-ui/components/callout";
+
 ## Firma del método
 
 ```ts
@@ -19,8 +21,14 @@ Fuente oficial: [Cargar factura](https://developers.factus.com.co/recepcion-de-d
 
 ```ts
 const response = await factus.reception.upload({
-  track_id: "abc123def456...",
+  track_id:
+    "79760c1d956a143a1076c9d06808b0916f90eb3eec5d34697fd875a2f4be1c3c18ae583d902671161d443c5dfbd48a4d",
 });
 
 console.log(response.data.number);
 ```
+
+<Callout type="info">
+  Este endpoint no tiene permisos en entorno sandbox. Úsalo en producción o con
+  credenciales autorizadas.
+</Callout>

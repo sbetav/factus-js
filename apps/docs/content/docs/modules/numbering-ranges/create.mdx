@@ -3,6 +3,8 @@ title: Crear rango
 description: Crear un nuevo rango de numeración.
 ---
 
+import { Callout } from "fumadocs-ui/components/callout";
+
 ## Firma del método
 
 ```ts
@@ -22,10 +24,15 @@ import { NumberingRangeDocumentTypeCode } from "factus-js";
 
 const response = await factus.numberingRanges.create({
   document: NumberingRangeDocumentTypeCode.SalesInvoice,
-  prefix: "FV",
-  current: 1,
-  resolution_number: "18764060780001",
+  prefix: "SETP",
+  current: 984000000,
+  resolution_number: "18760000009",
 });
 
 console.log(response.data.id);
 ```
+
+<Callout type="info">
+  Este endpoint no tiene permisos en entorno sandbox. Úsalo en producción o con
+  credenciales autorizadas.
+</Callout>

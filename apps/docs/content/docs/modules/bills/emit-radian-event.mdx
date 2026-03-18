@@ -34,17 +34,21 @@ Fuente oficial: [Aceptación tacita](https://developers.factus.com.co/facturas/a
 ```ts
 import { EventCode, IdentityDocumentTypeId } from "factus-js";
 
-await factus.bills.emitRadianEvent("SETP990000001", EventCode.TacitAcceptance, {
+await factus.bills.emitRadianEvent("SETP990000049", EventCode.TacitAcceptance, {
   identification_document_code: IdentityDocumentTypeId.CitizenshipId,
-  identification: "12345678",
+  identification: "12345667",
   first_name: "Pepito",
   last_name: "Perez",
-  job_title: "Compras",
-  organization_department: "Administracion",
+  job_title: "Desarrollador de software",
+  organization_department: "Sistemas",
 });
 ```
 
 <Callout type="info">
   Este método cubre el flujo documentado por Factus para emisión de eventos
   RADIAN (incluyendo aceptación tacita, según el `eventType`).
+</Callout>
+
+<Callout type="warn">
+  Es probable que este método no funcione en entorno sandbox.
 </Callout>

@@ -21,19 +21,19 @@ Fuente oficial: [Crear documento soporte](https://developers.factus.com.co/docum
 import { SupportDocumentIdentityTypeId } from "factus-js";
 
 const response = await factus.supportDocuments.create({
-  numbering_range_id: 125,
-  reference_code: "DS-001",
+  numbering_range_id: 148,
+  reference_code: "REF0017",
   observation: "Compra a proveedor no obligado a facturar",
   payment_method_code: "10",
   provider: {
-    identification: "12345678",
-    names: "Pedro Proveedor",
-    address: "Carrera 10 # 20-30",
-    email: "proveedor@correo.com",
-    phone: "3109876543",
+    identification: "123456789",
+    names: "Alan Turing",
+    address: "calle 1 # 2-68",
+    email: "alanturing@enigmasas.com",
+    phone: "1234567890",
     country_code: "CO",
     identification_document_id: SupportDocumentIdentityTypeId.NIT,
-    municipality_id: 149,
+    municipality_id: 980,
   },
   items: [
     {

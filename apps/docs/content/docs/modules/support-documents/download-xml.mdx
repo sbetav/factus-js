@@ -18,7 +18,7 @@ Fuente oficial: [Descargar XML](https://developers.factus.com.co/documentos-sopo
 ## Ejemplo
 
 ```ts
-const response = await factus.supportDocuments.downloadXml("SEDS984000021");
+const response = await factus.supportDocuments.downloadXml("SEDS984000085");
 const xml = Buffer.from(response.data.xml_base_64_encoded, "base64").toString(
   "utf-8",
 );

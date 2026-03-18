@@ -18,7 +18,7 @@ Fuente oficial: [Descargar XML](https://developers.factus.com.co/notas-credito/d
 ## Ejemplo
 
 ```ts
-const response = await factus.creditNotes.downloadXml("NC72");
+const response = await factus.creditNotes.downloadXml("NC856");
 const xml = Buffer.from(response.data.xml_base_64_encoded, "base64").toString(
   "utf-8",
 );

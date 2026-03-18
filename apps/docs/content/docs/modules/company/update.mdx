@@ -3,6 +3,8 @@ title: Actualizar empresa
 description: Actualizar los datos del perfil de la empresa.
 ---
 
+import { Callout } from "fumadocs-ui/components/callout";
+
 ## Firma del método
 
 ```ts
@@ -25,7 +27,7 @@ const response = await factus.company.update({
   surnames: "Turing",
   responsibilities: "5",
   economic_activity: "6920",
-  email: "alan@empresa.com",
+  email: "alanturing@enigmasas.com",
   address: "calle 100 #50-80",
   trade_name: null,
   registration_code: null,
@@ -36,3 +38,8 @@ const response = await factus.company.update({
 
 console.log(response.data.updated_at);
 ```
+
+<Callout type="info">
+  Este endpoint no tiene permisos en entorno sandbox. Úsalo en producción o con
+  credenciales autorizadas.
+</Callout>

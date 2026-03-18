@@ -3,6 +3,8 @@ title: Ver rango
 description: Obtener el detalle de un rango de numeración por ID.
 ---
 
+import { Callout } from "fumadocs-ui/components/callout";
+
 ## Firma del método
 
 ```ts
@@ -25,3 +27,8 @@ console.log(numberingRange.prefix);
 console.log(numberingRange.current);
 console.log(numberingRange.document);
 ```
+
+<Callout type="info">
+  Este endpoint no tiene permisos en entorno sandbox. Úsalo en producción o con
+  credenciales autorizadas.
+</Callout>

@@ -50,7 +50,7 @@ export interface EmitEventInput {
 }
 
 export interface EmitEventParams {
-  bill_id: number;
+  bill_id: string | number;
   event_type: EventCode;
 }
 

@@ -60,7 +60,7 @@ Crea un archivo `.env.local` en la raíz de tu proyecto:
 ```bash title=".env.local"
 FACTUS_CLIENT_ID=tu-client-id
 FACTUS_CLIENT_SECRET=tu-client-secret
-FACTUS_USERNAME=tu@email.com
+FACTUS_USERNAME=alanturing@enigmasas.com
 FACTUS_PASSWORD=tu-contraseña
 ```
 
@@ -97,8 +97,6 @@ export const factus = new FactusClient({
 ```ts
 import factus from "./factus";
 import {
-  InvoiceDocumentType,
-  OperationTypeCode,
   PaymentFormCode,
   PaymentMethodCode,
   IdentityDocumentTypeId,
@@ -111,10 +109,10 @@ import {
 const createInvoice = async () => {
   try {
     const response = await factus.bills.create({
-      numbering_range_id: 123,
-      reference_code: "ORD-001",
+      numbering_range_id: 8,
+      reference_code: "I3",
       observation: "Factura de prueba",
-      payment_form: PaymentFormCode.CashPayment,
+      payment_form: PaymentFormCode.CreditPayment,
       payment_method_code: PaymentMethodCode.Cash,
       payment_due_date: "2025-12-31",
       billing_period: {
@@ -122,26 +120,26 @@ const createInvoice = async () => {
         end_date: "2025-01-31",
       },
       customer: {
-        identification: "900123456",
-        dv: "7",
-        company: "Empresa de Prueba S.A.S.",
-        trade_name: "Empresa Prueba",
-        names: "Juan",
-        address: "Calle 123 # 45-67",
-        email: "cliente@empresa.com",
-        phone: "3001234567",
-        legal_organization_id: OrganizationTypeId.LegalEntity,
+        identification: "123456789",
+        dv: "3",
+        company: "",
+        trade_name: "",
+        names: "Alan Turing",
+        address: "calle 1 # 2-68",
+        email: "alanturing@enigmasas.com",
+        phone: "1234567890",
+        legal_organization_id: OrganizationTypeId.NaturalPerson,
         tribute_id: CustomerTributeId.IVA,
         identification_document_id: IdentityDocumentTypeId.NIT,
-        municipality_id: 149, // Bogotá D.C.
+        municipality_id: 980, // San Gil
       },
       items: [
         {
-          code_reference: "PROD-001",
+          code_reference: "12345",
           name: "Producto de ejemplo",
           quantity: 1,
-          discount_rate: 0,
-          price: 100000,
+          discount_rate: 20,
+          price: 50000,
           tax_rate: "19.00",
           unit_measure_id: 70, // unidad
           standard_code_id: ProductStandardId.TaxpayerAdoption,

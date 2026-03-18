@@ -39,13 +39,13 @@ export class ReceptionModule {
 
   /**
    * Emit a RADIAN lifecycle event (030–034) on a received invoice.
-   * POST /v1/receptions/bills/{bill_id}/radian/events/{event_type}
+   * PATCH /v1/receptions/bills/{bill_id}/radian/events/{event_type}
    */
   emitEvent(
     params: EmitEventParams,
     input: EmitEventInput,
   ): Promise<ApiResponse<ReceptionBillEvent[]>> {
-    return this.http.post(
+    return this.http.patch(
       `/v1/receptions/bills/${params.bill_id}/radian/events/${params.event_type}`,
       input,
     );

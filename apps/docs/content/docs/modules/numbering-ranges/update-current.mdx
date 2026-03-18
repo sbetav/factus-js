@@ -3,6 +3,8 @@ title: Actualizar consecutivo
 description: Actualizar el consecutivo actual de un rango de numeración.
 ---
 
+import { Callout } from "fumadocs-ui/components/callout";
+
 ## Firma del método
 
 ```ts
@@ -18,9 +20,14 @@ Fuente oficial: [Actualizar consecutivo](https://developers.factus.com.co/rangos
 ## Ejemplo
 
 ```ts
-const response = await factus.numberingRanges.updateCurrent(59, {
-  current: 500,
+const response = await factus.numberingRanges.updateCurrent(10, {
+  current: 985000001,
 });
 
 console.log(response.data.current);
 ```
+
+<Callout type="info">
+  Este endpoint no tiene permisos en entorno sandbox. Úsalo en producción o con
+  credenciales autorizadas.
+</Callout>

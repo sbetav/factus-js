@@ -21,18 +21,18 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/notas-ajuste-
 import { AdjustmentNoteReasonCode } from "factus-js";
 
 const response = await factus.adjustmentNotes.create({
-  numbering_range_id: 126,
-  reference_code: "NA-001",
-  support_document_id: 321,
+  numbering_range_id: 149,
+  reference_code: "REF007",
+  support_document_id: 224,
   correction_concept_code: AdjustmentNoteReasonCode.PriceAdjustment,
   observation: "Corrección de precio en documento soporte",
   items: [
     {
-      code_reference: "SRV-001",
-      name: "Servicio ajustado",
+      code_reference: "12345",
+      name: "producto de prueba",
       quantity: 1,
-      discount_rate: 0,
-      price: 10000,
+      discount_rate: 20,
+      price: 50000,
       unit_measure_id: 70,
       standard_code_id: 1,
     },

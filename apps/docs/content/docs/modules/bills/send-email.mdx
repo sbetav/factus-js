@@ -3,6 +3,8 @@ title: Enviar correo
 description: Enviar por correo electrónico una factura usando su numero.
 ---
 
+import { Callout } from "fumadocs-ui/components/callout";
+
 ## Firma del método
 
 ```ts
@@ -18,7 +20,12 @@ Fuente oficial: [Enviar correo](https://developers.factus.com.co/facturas/enviar
 ## Ejemplo
 
 ```ts
-await factus.bills.sendEmail("SETP990000001", {
-  email: "cliente@empresa.com",
+await factus.bills.sendEmail("SETP990000203", {
+  email: "alanturing@enigmasas.com",
 });
 ```
+
+<Callout type="info">
+  Este método no tiene permisos en entorno sandbox. Úsalo en producción o con
+  credenciales autorizadas.
+</Callout>

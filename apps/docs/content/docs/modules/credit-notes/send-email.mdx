@@ -3,6 +3,8 @@ title: Enviar correo
 description: Enviar una nota crédito por correo usando el numero del documento.
 ---
 
+import { Callout } from "fumadocs-ui/components/callout";
+
 ## Firma del método
 
 ```ts
@@ -18,7 +20,12 @@ Fuente oficial: [Enviar correo](https://developers.factus.com.co/notas-credito/e
 ## Ejemplo
 
 ```ts
-await factus.creditNotes.sendEmail("NC72", {
-  email: "cliente@empresa.com",
+await factus.creditNotes.sendEmail("NC856", {
+  email: "alanturing@enigmasas.com",
 });
 ```
+
+<Callout type="info">
+  Este endpoint no tiene permisos en entorno sandbox. Úsalo en producción o con
+  credenciales autorizadas.
+</Callout>

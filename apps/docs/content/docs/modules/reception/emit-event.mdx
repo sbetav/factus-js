@@ -13,7 +13,7 @@ emitEvent(params: EmitEventParams, input: EmitEventInput): Promise<ApiResponse<R
 
 ## Endpoint Factus
 
-`POST /v1/receptions/bills/{bill_id}/radian/events/{event_type}`
+`PATCH /v1/receptions/bills/{bill_id}/radian/events/{event_type}`
 
 Fuente oficial: [Emitir evento](https://developers.factus.com.co/recepcion-de-documentos/emitir-evento/index.html)
 
@@ -24,28 +24,32 @@ import { EventCode, ClaimConceptCode } from "factus-js";
 
 await factus.reception.emitEvent(
   {
-    bill_id: 987,
+    bill_id: "SETP990000203",
     event_type: EventCode.ReceiptAcknowledgement,
   },
   {
     identification_document_code: 13,
-    identification: "12345678",
+    identification: "12345667",
     first_name: "Pepito",
     last_name: "Perez",
+    job_title: "Desarrollador de software",
+    organization_department: "Sistemas",
   },
 );
 
 await factus.reception.emitEvent(
   {
-    bill_id: 987,
+    bill_id: "SETP990000203",
     event_type: EventCode.InvoiceClaim,
   },
   {
     claim_concept_code: ClaimConceptCode.DocumentInconsistencies,
     identification_document_code: 13,
-    identification: "12345678",
+    identification: "12345667",
     first_name: "Pepito",
     last_name: "Perez",
+    job_title: "Desarrollador de software",
+    organization_department: "Sistemas",
   },
 );
 ```
@@ -53,4 +57,8 @@ await factus.reception.emitEvent(
 <Callout type="info">
   Flujo usual: `030 -> 032 -> 033`. El evento `031` (reclamo) altera el flujo,
   y `034` (aceptación tácita) se genera automáticamente según reglas DIAN.
+</Callout>
+
+<Callout type="warn">
+  Es probable que este método no funcione en entorno sandbox.
 </Callout>
