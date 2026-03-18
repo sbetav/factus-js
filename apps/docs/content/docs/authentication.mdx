@@ -5,12 +5,11 @@ description: Cómo funciona la autenticación OAuth2 automática en factus-js.
 
 import { Callout } from "fumadocs-ui/components/callout";
 
-La API de Factus utiliza el flujo **OAuth2 Resource Owner Password Credentials** (grant type `password`). El SDK gestiona todo el ciclo de vida del token de forma completamente automática: no necesitas llamar a ningún método de autenticación explícitamente.
+La API de Factus utiliza **OAuth2** para autenticar a los clientes. **factus-js** gestiona todo el ciclo de vida del token de forma completamente automática por lo que no necesitas llamar ningún método de autenticación manualmente.
 
 <Callout type="info">
-  Para referencia completa y autorizada sobre autenticación y credenciales,
-  consulta la [documentación oficial de
-  Factus](https://developers.factus.com.co/).
+  Para más información revisa la documentación original: [Introducción a la
+  autenticación](https://developers.factus.com.co/autenticacion/introduccion/).
 </Callout>
 
 ## Configuración
@@ -56,8 +55,7 @@ El SDK gestiona el token internamente mediante la clase `HttpClient`. El flujo e
 
 <Callout type="info">
   Todo este proceso es transparente. Puedes hacer llamadas a la API sin
-  preocuparte por los tokens: el SDK siempre tendrá un token válido cuando lo
-  necesite.
+  preocuparte por los tokens.
 </Callout>
 
 ## Entorno sandbox
@@ -85,14 +83,5 @@ const factus = new FactusClient({
 
 ## Seguridad
 
-- Guarda siempre las credenciales en variables de entorno (`.env`), nunca directamente en el código fuente.
-- Nunca expongas `clientSecret` ni `password` en el lado del cliente (browser). El SDK está diseñado para ejecutarse en entornos de servidor (Node.js, Edge Runtime, etc.).
-- Usa `.gitignore` para excluir archivos `.env` del repositorio.
-
-```bash
-# .env — no committear
-FACTUS_CLIENT_ID=...
-FACTUS_CLIENT_SECRET=...
-FACTUS_USERNAME=...
-FACTUS_PASSWORD=...
-```
+- Guarda siempre las credenciales en variables de entorno (`.env.local`), nunca directamente en el código fuente.
+- Nunca expongas credenciales en el lado del cliente. **factus-js** está diseñado para ejecutarse en entornos de servidor (Node.js, Edge Runtime, etc.).

@@ -3,7 +3,7 @@ title: Filtrar documentos soporte
 description: Listar documentos soporte con filtros y paginación.
 ---
 
-## Firma
+## Firma del método
 
 ```ts
 list(filters?: SupportDocumentFilters & { page?: number; per_page?: number }): Promise<ApiResponse<PaginatedData<SupportDocument>>>
@@ -33,6 +33,6 @@ const response = await factus.supportDocuments.list({
   per_page: 10,
 });
 
-const documentos = response.data.data;
-const paginacion = response.data.pagination;
+const supportDocuments = response.data.data;
+const pagination = response.data.pagination;
 ```

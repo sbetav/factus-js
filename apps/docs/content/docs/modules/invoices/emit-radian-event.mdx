@@ -5,7 +5,7 @@ description: Emitir eventos RADIAN para una factura por numero y tipo de evento.
 
 import { Callout } from "fumadocs-ui/components/callout";
 
-## Firma
+## Firma del método
 
 ```ts
 emitRadianEvent(
@@ -19,7 +19,7 @@ emitRadianEvent(
 
 `POST /v1/bills/radian/events/update/{number}/{event_type}`
 
-Fuente oficial: [Aceptacion tacita](https://developers.factus.com.co/facturas/aceptacion-tacita/index.html)
+Fuente oficial: [Aceptación tacita](https://developers.factus.com.co/facturas/aceptacion-tacita/index.html)
 
 ## Tipos de evento (`EventCode`)
 
@@ -49,6 +49,6 @@ await factus.invoices.emitRadianEvent(
 ```
 
 <Callout type="info">
-  Este metodo cubre el flujo documentado por Factus para emision de eventos
-  RADIAN (incluyendo aceptacion tacita, segun el `eventType`).
+  Este método cubre el flujo documentado por Factus para emisión de eventos
+  RADIAN (incluyendo aceptación tacita, según el `eventType`).
 </Callout>

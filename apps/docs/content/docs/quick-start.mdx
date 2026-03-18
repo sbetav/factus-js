@@ -55,9 +55,9 @@ bun add factus-js
 
 ## Configura las credenciales
 
-Crea un archivo `.env` en la raíz de tu proyecto:
+Crea un archivo `.env.local` en la raíz de tu proyecto:
 
-```bash
+```bash title=".env.local"
 FACTUS_CLIENT_ID=tu-client-id
 FACTUS_CLIENT_SECRET=tu-client-secret
 FACTUS_USERNAME=tu@email.com
@@ -70,10 +70,10 @@ FACTUS_PASSWORD=tu-contraseña
 
 ## Inicializa el cliente
 
-```ts
+```ts title="factus.ts"
 import { FactusClient } from "factus-js";
 
-const factus = new FactusClient({
+export const factus = new FactusClient({
   clientId: process.env.FACTUS_CLIENT_ID!,
   clientSecret: process.env.FACTUS_CLIENT_SECRET!,
   username: process.env.FACTUS_USERNAME!,
@@ -82,6 +82,12 @@ const factus = new FactusClient({
 });
 ```
 
+<Callout type="info">
+  El SDK obtiene y renueva el token de acceso de forma automática por lo que no
+  necesitas llamar a ningún método de inicio de sesión manualmente. Consulta la
+  [documentación de autenticación](/docs/authentication) para más detalles.
+</Callout>
+
 </Step>
 
 <Step>
@@ -89,7 +95,7 @@ const factus = new FactusClient({
 ## Crea tu primera factura
 
 ```ts
-import { FactusClient } from "factus-js";
+import factus from "./factus";
 import {
   InvoiceDocumentType,
   OperationTypeCode,
@@ -99,121 +105,61 @@ import {
   CustomerTributeId,
   OrganizationTypeId,
   ProductStandardId,
+  FactusError,
 } from "factus-js";
 
-const factus = new FactusClient({
-  /* config */
-});
+const createInvoice = async () => {
+  try {
+    const response = await factus.invoices.create({
+      numbering_range_id: 123,
+      reference_code: "ORD-001",
+      observation: "Factura de prueba",
+      payment_form: PaymentFormCode.CASH_PAYMENT,
+      payment_method_code: PaymentMethodCode.CASH,
+      payment_due_date: "2025-12-31",
+      billing_period: {
+        start_date: "2025-01-01",
+        end_date: "2025-01-31",
+      },
+      customer: {
+        identification: "900123456",
+        dv: "7",
+        company: "Empresa de Prueba S.A.S.",
+        trade_name: "Empresa Prueba",
+        names: "Juan",
+        address: "Calle 123 # 45-67",
+        email: "cliente@empresa.com",
+        phone: "3001234567",
+        legal_organization_id: OrganizationTypeId.LEGAL_ENTITY,
+        tribute_id: CustomerTributeId.IVA,
+        identification_document_id: IdentityDocumentTypeId.NIT,
+        municipality_id: 149, // Bogotá D.C.
+      },
+      items: [
+        {
+          code_reference: "PROD-001",
+          name: "Producto de ejemplo",
+          quantity: 1,
+          discount_rate: 0,
+          price: 100000,
+          tax_rate: "19.00",
+          unit_measure_id: 70, // unidad
+          standard_code_id: ProductStandardId.TAXPAYER_ADOPTION,
+          is_excluded: 0,
+          tribute_id: 1,
+        },
+      ],
+    });
 
-const response = await factus.invoices.create({
-  numbering_range_id: 123,
-  reference_code: "ORD-001",
-  observation: "Factura de prueba",
-  payment_form: PaymentFormCode.CASH_PAYMENT,
-  payment_method_code: PaymentMethodCode.CASH,
-  payment_due_date: "2025-12-31",
-  billing_period: {
-    start_date: "2025-01-01",
-    end_date: "2025-01-31",
-  },
-  customer: {
-    identification: "900123456",
-    dv: "7",
-    company: "Empresa de Prueba S.A.S.",
-    trade_name: "Empresa Prueba",
-    names: "Juan",
-    address: "Calle 123 # 45-67",
-    email: "cliente@empresa.com",
-    phone: "3001234567",
-    legal_organization_id: OrganizationTypeId.LEGAL_ENTITY,
-    tribute_id: CustomerTributeId.IVA,
-    identification_document_id: IdentityDocumentTypeId.NIT,
-    municipality_id: 149, // Bogotá D.C.
-  },
-  items: [
-    {
-      code_reference: "PROD-001",
-      name: "Producto de ejemplo",
-      quantity: 1,
-      discount_rate: 0,
-      price: 100000,
-      tax_rate: "19.00",
-      unit_measure_id: 70, // unidad
-      standard_code_id: ProductStandardId.TAXPAYER_ADOPTION,
-      is_excluded: 0,
-      tribute_id: 1,
-    },
-  ],
-});
-
-console.log(response.data.number); // "SETP990000001"
-console.log(response.data.status); // "Procesado"
-```
-
-</Step>
-
-<Step>
-
-## Consulta facturas existentes
-
-```ts
-// Listar facturas con filtros
-const list = await factus.invoices.list({
-  "filter[status]": "1",
-  page: 1,
-  per_page: 10,
-});
-
-console.log(list.data.data); // InvoiceListItem[]
-console.log(list.data.pagination); // { total, per_page, current_page, ... }
-
-// Obtener una factura por numero de documento (canonico en Factus)
-const invoice = await factus.invoices.getByNumber("SETP990000001");
-console.log(invoice.data.bill.number);
-
-// Obtener por número de documento
-const invoice2 = await factus.invoices.getByNumber("SETP990000001");
+    return response.data;
+  } catch (error) {
+    if (error instanceof FactusError) {
+      console.error(error);
+    }
+  }
+};
 ```
 
 </Step>
 
 </Steps>
-
-<Callout type="info">
-  La autenticación OAuth2 es completamente automática. El SDK obtiene y renueva
-  el token de acceso de forma transparente. No necesitas llamar a ningún método
-  de inicio de sesión manualmente. Consulta la [documentación de
-  autenticación](/docs/authentication) para más detalles.
-</Callout>
-
-## Descargar documentos
-
-```ts
-// XML base64
-const xml = await factus.invoices.downloadXml("SETP990000001");
-const xmlContent = Buffer.from(xml.data.xml_base_64_encoded, "base64").toString(
-  "utf-8",
-);
-
-// PDF base64
-const pdf = await factus.invoices.downloadPdf("SETP990000001");
-const pdfBuffer = Buffer.from(pdf.data.pdf_base_64_encoded, "base64");
-```
-
-## Manejo de errores
-
-```ts
-import { FactusError } from "factus-js";
-
-try {
-  const invoice = await factus.invoices.getByNumber("NO-EXISTE");
-} catch (error) {
-  if (error instanceof FactusError) {
-    console.error(error.statusCode); // 404
-    console.error(error.message); // "Not found"
-    console.error(error.errors); // [{ code, message, detail, api_version }]
-  }
-}
-```
-
-Consulta la [guía de manejo de errores](/docs/error-handling) para más detalles.

@@ -3,7 +3,7 @@ title: Rangos asociados al software
 description: Obtener los rangos de numeración asociados al software DIAN.
 ---
 
-## Firma
+## Firma del método
 
 ```ts
 getSoftwareRange(): Promise<ApiResponse<SoftwareNumberingRange[]>>
@@ -19,9 +19,9 @@ Fuente oficial: [Rangos asociados al software](https://developers.factus.com.co/
 
 ```ts
 const response = await factus.numberingRanges.getSoftwareRange();
-const rangos = response.data;
+const numberingRanges = response.data;
 
-for (const rango of rangos) {
-  console.log(rango.prefix, rango.from, rango.to);
+for (const numberingRange of numberingRanges) {
+  console.log(numberingRange.prefix, numberingRange.from, numberingRange.to);
 }
 ```

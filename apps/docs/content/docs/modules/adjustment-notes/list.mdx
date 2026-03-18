@@ -1,9 +1,9 @@
 ---
 title: Filtrar notas de ajuste
-description: Listar notas de ajuste con filtros y paginacion.
+description: Listar notas de ajuste con filtros y paginación.
 ---
 
-## Firma
+## Firma del método
 
 ```ts
 list(filters?: AdjustmentNoteFilters & { page?: number; per_page?: number }): Promise<ApiResponse<PaginatedData<AdjustmentNote>>>
@@ -33,6 +33,6 @@ const response = await factus.adjustmentNotes.list({
   per_page: 10,
 });
 
-const notas = response.data.data;
-const paginacion = response.data.pagination;
+const adjustmentNotes = response.data.data;
+const pagination = response.data.pagination;
 ```

@@ -3,7 +3,7 @@ title: Ver nota de ajuste
 description: Obtener detalle de una nota de ajuste por numero.
 ---
 
-## Firma
+## Firma del método
 
 ```ts
 get(number: string): Promise<ApiResponse<ViewAdjustmentNoteData>>
@@ -19,5 +19,5 @@ Fuente oficial: [Ver nota de ajuste](https://developers.factus.com.co/notas-ajus
 
 ```ts
 const response = await factus.adjustmentNotes.get("NDA40");
-console.log(response.data.adjustment_note.total);
+console.log(response.data);
 ```

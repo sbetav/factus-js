@@ -3,7 +3,7 @@ title: Ver y filtrar notas crédito
 description: Listar notas crédito con filtros y paginación.
 ---
 
-## Firma
+## Firma del método
 
 ```ts
 list(filters?: CreditNoteFilters & { page?: number; per_page?: number }): Promise<GetCreditNotesResponse>
@@ -33,6 +33,6 @@ const response = await factus.creditNotes.list({
   per_page: 10,
 });
 
-const notas = response.data.data;
-const paginacion = response.data.pagination;
+const creditNotes = response.data.data;
+const pagination = response.data.pagination;
 ```

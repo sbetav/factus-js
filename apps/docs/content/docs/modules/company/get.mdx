@@ -3,7 +3,7 @@ title: Ver empresa
 description: Obtener los datos del perfil de la empresa autenticada.
 ---
 
-## Firma
+## Firma del método
 
 ```ts
 get(): Promise<ApiResponse<Company>>
@@ -19,9 +19,9 @@ Fuente oficial: [Ver empresa](https://developers.factus.com.co/empresas/ver/inde
 
 ```ts
 const response = await factus.company.get();
-const empresa = response.data;
+const company = response.data;
 
-console.log(empresa.graphic_representation_name);
-console.log(empresa.nit);
-console.log(empresa.email);
+console.log(company.graphic_representation_name);
+console.log(company.nit);
+console.log(company.email);
 ```

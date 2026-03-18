@@ -3,7 +3,7 @@ title: Ver rango
 description: Obtener el detalle de un rango de numeración por ID.
 ---
 
-## Firma
+## Firma del método
 
 ```ts
 get(id: number): Promise<ApiResponse<NumberingRange>>
@@ -19,9 +19,9 @@ Fuente oficial: [Ver rango](https://developers.factus.com.co/rangos-de-numeracio
 
 ```ts
 const response = await factus.numberingRanges.get(4);
-const rango = response.data;
+const numberingRange = response.data;
 
-console.log(rango.prefix);
-console.log(rango.current);
-console.log(rango.document);
+console.log(numberingRange.prefix);
+console.log(numberingRange.current);
+console.log(numberingRange.document);
 ```

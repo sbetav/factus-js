@@ -3,7 +3,7 @@ title: Suscripciones
 description: Obtener todas las suscripciones activas de la cuenta.
 ---
 
-## Firma
+## Firma del método
 
 ```ts
 list(): Promise<ApiResponse<Subscription[]>>
@@ -19,12 +19,12 @@ Fuente oficial: [Suscripciones](https://developers.factus.com.co/suscripciones/s
 
 ```ts
 const response = await factus.subscription.list();
-const suscripciones = response.data;
+const subscriptions = response.data;
 
-for (const sub of suscripciones) {
-  console.log(sub.name);
-  console.log(sub.documents_quota);
-  console.log(sub.documents_consumed);
-  console.log(sub.documents_available);
+for (const subscription of subscriptions) {
+  console.log(subscription.name);
+  console.log(subscription.documents_quota);
+  console.log(subscription.documents_consumed);
+  console.log(subscription.documents_available);
 }
 ```

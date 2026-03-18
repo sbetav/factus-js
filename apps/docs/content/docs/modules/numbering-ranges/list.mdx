@@ -3,7 +3,7 @@ title: Obtener rangos
 description: Listar rangos de numeración con filtros y paginación.
 ---
 
-## Firma
+## Firma del método
 
 ```ts
 list(filters?: NumberingRangeFilters & { page?: number; per_page?: number }): Promise<ApiResponse<PaginatedData<NumberingRange>>>
@@ -32,6 +32,6 @@ const response = await factus.numberingRanges.list({
   per_page: 10,
 });
 
-const rangos = response.data.data;
-const paginacion = response.data.pagination;
+const numberingRanges = response.data.data;
+const pagination = response.data.pagination;
 ```

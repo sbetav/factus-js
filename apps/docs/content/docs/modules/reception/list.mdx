@@ -1,9 +1,9 @@
 ---
 title: Ver facturas
-description: Listar y filtrar facturas electronicas recibidas.
+description: Listar y filtrar facturas electrónicas recibidas.
 ---
 
-## Firma
+## Firma del método
 
 ```ts
 list(filters?: ReceptionBillFilters & { page?: number; per_page?: number }): Promise<ApiResponse<PaginatedData<ReceptionBill>>>
@@ -34,6 +34,6 @@ const response = await factus.reception.list({
   per_page: 10,
 });
 
-const facturas = response.data.data;
-const paginacion = response.data.pagination;
+const receptionBills = response.data.data;
+const pagination = response.data.pagination;
 ```

@@ -3,7 +3,7 @@ title: Crear y validar
 description: Crear y validar una nota de ajuste a documento soporte.
 ---
 
-## Firma
+## Firma del método
 
 ```ts
 create(input: CreateAdjustmentNoteInput): Promise<ApiResponse<AdjustmentNote>>
@@ -25,7 +25,7 @@ const response = await factus.adjustmentNotes.create({
   reference_code: "NA-001",
   support_document_id: 321,
   correction_concept_code: AdjustmentNoteReasonCode.PRICE_ADJUSTMENT,
-  observation: "Correccion de precio en documento soporte",
+  observation: "Corrección de precio en documento soporte",
   items: [
     {
       code_reference: "SRV-001",

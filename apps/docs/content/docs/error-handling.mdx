@@ -5,7 +5,7 @@ description: Cómo capturar y gestionar errores de la API con FactusError.
 
 import { Callout } from "fumadocs-ui/components/callout";
 
-Cuando una llamada a la API falla (respuesta HTTP 4xx o 5xx), el SDK lanza una instancia de `FactusError`. Esta clase extiende `Error` nativo de JavaScript y añade información estructurada del error devuelto por la API.
+Cuando una llamada a la API falla (respuesta HTTP 4xx o 5xx), el SDK lanza una instancia de tipo `FactusError`. Esta clase extiende `Error` nativo de JavaScript y añade información estructurada del error devuelto por la API.
 
 ## La clase `FactusError`
 
@@ -72,42 +72,6 @@ try {
 | `422`       | Error de validación de la DIAN (campos del documento) |
 | `429`       | Límite de solicitudes superado                        |
 | `500`       | Error interno del servidor de Factus                  |
-
-## Manejo en producción
-
-```ts
-async function crearFactura(input: CreateInvoiceInput) {
-  try {
-    const response = await factus.invoices.create(input);
-    return response.data;
-  } catch (error) {
-    if (error instanceof FactusError) {
-      // Errores de validación (422) — múltiples errores posibles
-      if (error.statusCode === 422) {
-        const mensajes = error.errors.map((e) => e.message).join(", ");
-        throw new Error(`Error de validación: ${mensajes}`);
-      }
-
-      // Error de autenticación
-      if (error.statusCode === 401) {
-        throw new Error("Credenciales inválidas o sesión expirada");
-      }
-
-      // Cualquier otro error de la API
-      throw new Error(`Error ${error.statusCode}: ${error.message}`);
-    }
-
-    // Error de red (sin conexión, timeout, etc.)
-    throw error;
-  }
-}
-```
-
-<Callout type="info">
-  Los errores de autenticación (401) debidos a token expirado son manejados
-  automáticamente por el SDK mediante el refresco del token. Solo recibirás un
-  `FactusError` con `statusCode: 401` si las credenciales en sí son inválidas.
-</Callout>
 
 ## Errores de red
 

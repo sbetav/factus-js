@@ -1,6 +1,6 @@
 ---
 title: Introducción
-description: SDK de TypeScript para la API de facturación electrónica Factus (Colombia).
+description: Javascript SDK para la API de facturación electrónica Factus (Colombia).
 ---
 
 import { Cards, Card } from "fumadocs-ui/components/card";
@@ -8,11 +8,11 @@ import { Callout } from "fumadocs-ui/components/callout";
 
 # factus-js
 
-**factus-js** es un SDK de TypeScript para la [API de Factus](https://factus.com.co), la plataforma colombiana de facturación electrónica homologada por la DIAN. El SDK proporciona una capa de abstracción completa sobre la API REST, con autenticación OAuth2 automática y tipado estricto en todos los métodos.
+**factus-js** es un SDK de Javascript para la [API de Factus](https://factus.com.co), una plataforma colombiana de facturación electrónica homologada por la DIAN. El SDK proporciona una capa de abstracción completa sobre la API REST, con autenticación OAuth2 automática y tipado estricto en todos los métodos.
 
 <Callout type="info">
-  Para la documentación oficial y completa de la API de Factus, visita la
-  [documentación oficial de Factus](https://developers.factus.com.co/).
+  Para más información sobre la API y sus endpoints visita la [documentación
+  oficial de Factus](https://developers.factus.com.co/).
 </Callout>
 
 ## Paquete
@@ -47,11 +47,6 @@ El SDK se distribuye como un único paquete en npm:
     description="Notas de ajuste para corregir documentos soporte."
   />
   <Card
-    title="Recepción RADIAN"
-    href="/docs/modules/reception"
-    description="Facturas recibidas y eventos del ciclo de vida RADIAN."
-  />
-  <Card
     title="Empresa"
     href="/docs/modules/company"
     description="Consultar y actualizar el perfil de la empresa."
@@ -60,6 +55,11 @@ El SDK se distribuye como un único paquete en npm:
     title="Rangos de numeración"
     href="/docs/modules/numbering-ranges"
     description="Crear y gestionar rangos de numeración autorizados."
+  />
+  <Card
+    title="Recepción de documentos"
+    href="/docs/modules/reception"
+    description="Facturas recibidas y eventos del ciclo de vida RADIAN."
   />
   <Card
     title="Suscripción"
@@ -72,24 +72,3 @@ El SDK se distribuye como un único paquete en npm:
     description="Municipios, países, tributos, unidades de medida y adquirentes."
   />
 </Cards>
-
-## Inicio rápido
-
-```ts
-import { FactusClient } from "factus-js";
-
-const factus = new FactusClient({
-  clientId: process.env.FACTUS_CLIENT_ID!,
-  clientSecret: process.env.FACTUS_CLIENT_SECRET!,
-  username: process.env.FACTUS_USERNAME!,
-  password: process.env.FACTUS_PASSWORD!,
-  environment: "sandbox",
-});
-
-const response = await factus.invoices.create({
-  /* ... */
-});
-console.log(response.data.number); // "SETP990000001"
-```
-
-Consulta la [guía de instalación](/docs/installation) y el [inicio rápido](/docs/quick-start) para más detalles.
