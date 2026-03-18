@@ -5,11 +5,4 @@ export default defineConfig({
   format: ["esm", "cjs"],
   dts: true,
   clean: true,
-  deps: {
-    neverBundle: [
-      "@factus-js/client",
-      "@factus-js/types",
-      "@factus-js/constants",
-    ],
-  },
 });

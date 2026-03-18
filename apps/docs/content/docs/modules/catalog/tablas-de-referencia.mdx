@@ -4,7 +4,6 @@ description: Códigos DIAN y tablas de negocio expuestos como constantes tipadas
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
-import { Tabs, Tab } from "fumadocs-ui/components/tabs";
 
 Esta página consolida las tablas oficiales de Factus y su equivalente en
 constantes de `factus-js`.
@@ -19,39 +18,6 @@ Si instalaste `factus-js`, las constantes ya están disponibles.
 ```ts
 import { PaymentFormCode, EventCode } from "factus-js";
 ```
-
-Si usas paquetes internos:
-
-<Tabs items={['npm', 'yarn', 'pnpm', 'bun']}>
-  <Tab value="npm">
-
-```bash
-npm install @factus-js/constants
-```
-
-  </Tab>
-  <Tab value="yarn">
-
-```bash
-yarn add @factus-js/constants
-```
-
-  </Tab>
-  <Tab value="pnpm">
-
-```bash
-pnpm add @factus-js/constants
-```
-
-  </Tab>
-  <Tab value="bun">
-
-```bash
-bun add @factus-js/constants
-```
-
-  </Tab>
-</Tabs>
 
 <Callout type="info">
   Estas tablas no se consultan por HTTP: se exponen como constantes tipadas.

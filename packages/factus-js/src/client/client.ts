@@ -15,7 +15,7 @@ import { CatalogModule } from "./modules/catalog";
  *
  * @example
  * ```ts
- * import { FactusClient } from "@factus-js/client";
+ * import { FactusClient } from "factus-js";
  *
  * const factus = new FactusClient({
  *   clientId: "your-client-id",

@@ -11,7 +11,7 @@ import type {
   DownloadCreditNotePdfResponse,
   GetCreditNoteEmailContentResponse,
   ApiResponse,
-} from "@factus-js/types";
+} from "../../types";
 import type { HttpClient } from "../http-client";
 
 export class CreditNotesModule {

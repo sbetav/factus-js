@@ -1,4 +1,4 @@
-import type { NumberingRangeDocumentTypeCode } from "@factus-js/constants";
+import type { NumberingRangeDocumentTypeCode } from "../constants";
 
 export interface NumberingRange {
   id: number;

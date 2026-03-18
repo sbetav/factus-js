@@ -17,10 +17,6 @@
     "dev": "tsdown --watch",
     "typecheck": "tsc --noEmit"
   },
-  "dependencies": {
-    "@factus-js/client": "workspace:*",
-    "@factus-js/types": "workspace:*"
-  },
   "devDependencies": {
     "tsdown": "^0.21.3",
     "typescript": "5.9.2"

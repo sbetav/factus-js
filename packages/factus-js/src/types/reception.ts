@@ -1,4 +1,4 @@
-import type { ClaimConceptCode, EventCode } from "@factus-js/constants";
+import type { ClaimConceptCode, EventCode } from "../constants";
 import type { CodeNameObject } from "./shared";
 
 export interface ReceptionBill {

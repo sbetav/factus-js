@@ -12,10 +12,8 @@
     "format": "biome format --write"
   },
   "dependencies": {
-    "@factus-js/client": "workspace:^",
-    "@factus-js/constants": "workspace:^",
-    "@factus-js/types": "workspace:^",
     "@takumi-rs/image-response": "^0.72.0",
+    "factus-js": "workspace:^",
     "fumadocs-core": "16.6.17",
     "fumadocs-mdx": "14.2.10",
     "fumadocs-ui": "16.6.17",

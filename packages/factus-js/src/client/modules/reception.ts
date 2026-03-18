@@ -8,7 +8,7 @@ import type {
   ReceptionBillEvent,
   ApiResponse,
   PaginatedData,
-} from "@factus-js/types";
+} from "../../types";
 import type { HttpClient } from "../http-client";
 
 export class ReceptionModule {

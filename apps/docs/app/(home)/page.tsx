@@ -10,7 +10,7 @@ import {
   Pre,
 } from "fumadocs-ui/components/codeblock";
 import { Braces, Zap, RefreshCw, GitBranch, ArrowRight } from "lucide-react";
-import clientPkg from "../../../../packages/client/package.json";
+import sdkPkg from "../../../../packages/factus-js/package.json";
 import { GitHubIcon } from "@/components/icons/github-icon";
 import { TypeScriptIcon } from "@/components/icons/typescript-icon";
 import type { Metadata } from "next";
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 /*  Data                                                       */
 /* ─────────────────────────────────────────────────────────── */
 
-const VERSION = clientPkg.version;
+const VERSION = sdkPkg.version;
 
 const features: Array<{
   icon: typeof Braces;

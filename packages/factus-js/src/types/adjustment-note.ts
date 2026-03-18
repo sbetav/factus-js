@@ -1,8 +1,8 @@
 import type {
+  AdjustmentNoteReasonCode,
   PaymentMethodCode,
   ProductStandardId,
-  SupportDocumentIdentityTypeId,
-} from "@factus-js/constants";
+} from "../constants";
 import type { ApiResponse, PaginatedData } from "./common";
 import type {
   CodeNameIdObject,
@@ -12,7 +12,7 @@ import type {
   DocumentWithholdingTax,
   DownloadPdfData,
   DownloadXmlData,
-  NumberingRangeInfo,
+  EstablishmentResponse,
   ItemWithholdingTax,
 } from "./shared";
 
@@ -20,24 +20,13 @@ import type {
 // Input types
 // ---------------------------------------------------------------------------
 
-export interface CreateSupportDocumentInput {
+export interface CreateAdjustmentNoteInput {
   reference_code: string;
   numbering_range_id?: number;
   payment_method_code?: PaymentMethodCode;
+  support_document_id: number;
+  correction_concept_code: AdjustmentNoteReasonCode;
   observation?: string;
-  provider: {
-    identification_document_id: SupportDocumentIdentityTypeId;
-    identification: string;
-    dv?: number;
-    trade_name?: string;
-    names: string;
-    address: string;
-    email: string;
-    phone?: string;
-    is_resident?: number;
-    country_code: string;
-    municipality_id?: number;
-  };
   items: Array<{
     code_reference: string;
     name: string;
@@ -48,51 +37,16 @@ export interface CreateSupportDocumentInput {
     standard_code_id: ProductStandardId;
     withholding_taxes?: Array<{
       code: string;
-      withholding_tax_rate: string | number;
+      withholding_tax_rate: string;
     }>;
   }>;
-}
-
-// ---------------------------------------------------------------------------
-// List item type
-// ---------------------------------------------------------------------------
-
-export interface SupportDocument {
-  id: number;
-  number: string;
-  api_client_name: string;
-  /** Can be null when no reference code is set. */
-  reference_code: string | null;
-  identification: string;
-  graphic_representation_name: string;
-  trade_name: string | null;
-  names: string;
-  email: string;
-  total: string;
-  status: number | string;
-  errors: string[];
-  created_at: string;
-  adjustment_notes?: any[];
-}
-
-// ---------------------------------------------------------------------------
-// Filters
-// ---------------------------------------------------------------------------
-
-export interface SupportDocumentFilters {
-  "filter[identification]"?: string;
-  "filter[names]"?: string;
-  "filter[number]"?: string;
-  "filter[prefix]"?: string;
-  "filter[reference_code]"?: string;
-  "filter[status]"?: string | number;
 }
 
 // ---------------------------------------------------------------------------
 // View (detail) response
 // ---------------------------------------------------------------------------
 
-export interface SupportDocumentItemResponse {
+export interface AdjustmentNoteItemResponse {
   code_reference: string;
   name: string;
   quantity: number;
@@ -103,15 +57,16 @@ export interface SupportDocumentItemResponse {
   taxable_amount: string;
   tax_amount: string;
   price: string;
-  is_excluded: number;
   unit_measure: CodeNameIdObject;
   standard_code: CodeNameIdObject;
   total: number;
   withholding_taxes: ItemWithholdingTax[];
 }
 
-export interface ViewSupportDocumentData {
+export interface ViewAdjustmentNoteData {
   company: CompanyInfo;
+  /** Present in the detail response per the Postman collection. */
+  establishment: EstablishmentResponse;
   provider: {
     identification: string;
     dv: string;
@@ -121,13 +76,11 @@ export interface ViewSupportDocumentData {
     address: string;
     email: string;
     phone: string;
-    identification_document: CodeNameIdObject;
     legal_organization: CodeNameIdObject;
     tribute: CodeNameIdObject;
-    country: CodeNameIdObject;
     municipality: CodeNameIdObject;
   };
-  support_document: {
+  adjustment_note: {
     id: number;
     number: string;
     reference_code: string;
@@ -147,24 +100,56 @@ export interface ViewSupportDocumentData {
     qr_image: string;
     payment_method: CodeNameObject;
   };
-  items: SupportDocumentItemResponse[];
+  items: AdjustmentNoteItemResponse[];
   withholding_taxes: DocumentWithholdingTax[];
-  adjustment_notes: any[];
-  numbering_range: NumberingRangeInfo;
 }
 
 // ---------------------------------------------------------------------------
-// Download / delete responses
+// List item type
+// Note: updated_at is NOT present in the Postman list response.
 // ---------------------------------------------------------------------------
 
-export interface DeleteSupportDocumentResponse extends DeleteResponse {}
-export interface DownloadSupportDocumentXmlResponse extends DownloadXmlData {}
-export interface DownloadSupportDocumentPdfResponse extends DownloadPdfData {}
+export interface AdjustmentNote {
+  id: number;
+  number: string;
+  api_client_name: string;
+  reference_code: string;
+  identification: string;
+  graphic_representation_name: string;
+  trade_name: string | null;
+  names: string;
+  email: string;
+  total: string;
+  status: number | string;
+  errors: string[];
+  created_at: string;
+}
+
+// ---------------------------------------------------------------------------
+// Filters
+// ---------------------------------------------------------------------------
+
+export interface AdjustmentNoteFilters {
+  "filter[identification]"?: string;
+  "filter[names]"?: string;
+  "filter[number]"?: string;
+  "filter[prefix]"?: string;
+  "filter[reference_code]"?: string;
+  "filter[status]"?: string | number;
+}
+
+// ---------------------------------------------------------------------------
+// Download responses
+// ---------------------------------------------------------------------------
+
+export interface DownloadAdjustmentNoteXmlResponse extends DownloadXmlData {}
+export interface DownloadAdjustmentNotePdfResponse extends DownloadPdfData {}
+export interface DeleteAdjustmentNoteResponse extends DeleteResponse {}
 
 // ---------------------------------------------------------------------------
 // List response
 // ---------------------------------------------------------------------------
 
-export interface GetSupportDocumentsResponse extends ApiResponse<
-  PaginatedData<SupportDocument>
+export interface GetAdjustmentNotesResponse extends ApiResponse<
+  PaginatedData<AdjustmentNote>
 > {}

@@ -20,18 +20,12 @@ importers:
 
   apps/docs:
     dependencies:
-      '@factus-js/client':
-        specifier: workspace:^
-        version: link:../../packages/client
-      '@factus-js/constants':
-        specifier: workspace:^
-        version: link:../../packages/constants
-      '@factus-js/types':
-        specifier: workspace:^
-        version: link:../../packages/types
       '@takumi-rs/image-response':
         specifier: ^0.72.0
         version: 0.72.0
+      factus-js:
+        specifier: workspace:^
+        version: link:../../packages/factus-js
       fumadocs-core:
         specifier: 16.6.17
         version: 16.6.17(@mdx-js/mdx@3.1.1)(@types/estree-jsx@1.0.5)(@types/hast@3.0.4)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@0.577.0(react@19.2.4))(next@16.1.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(zod@4.3.6)
@@ -85,49 +79,7 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
-  packages/client:
-    dependencies:
-      '@factus-js/types':
-        specifier: workspace:*
-        version: link:../types
-    devDependencies:
-      tsdown:
-        specifier: ^0.21.3
-        version: 0.21.3(typescript@5.9.2)
-      typescript:
-        specifier: 5.9.2
-        version: 5.9.2
-
-  packages/constants:
-    devDependencies:
-      tsdown:
-        specifier: ^0.21.3
-        version: 0.21.3(typescript@5.9.2)
-      typescript:
-        specifier: 5.9.2
-        version: 5.9.2
-
   packages/factus-js:
-    dependencies:
-      '@factus-js/client':
-        specifier: workspace:*
-        version: link:../client
-      '@factus-js/types':
-        specifier: workspace:*
-        version: link:../types
-    devDependencies:
-      tsdown:
-        specifier: ^0.21.3
-        version: 0.21.3(typescript@5.9.2)
-      typescript:
-        specifier: 5.9.2
-        version: 5.9.2
-
-  packages/types:
-    dependencies:
-      '@factus-js/constants':
-        specifier: workspace:*
-        version: link:../constants
     devDependencies:
       tsdown:
         specifier: ^0.21.3

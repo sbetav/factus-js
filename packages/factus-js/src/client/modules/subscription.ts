@@ -1,4 +1,4 @@
-import type { Subscription, ApiResponse } from "@factus-js/types";
+import type { Subscription, ApiResponse } from "../../types";
 import type { HttpClient } from "../http-client";
 
 export class SubscriptionModule {

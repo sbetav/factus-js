@@ -6,7 +6,7 @@ import type {
   OrganizationTypeId,
   PaymentMethodCode,
   ProductStandardId,
-} from "@factus-js/constants";
+} from "../constants";
 import type { Customer } from "./customer";
 import type { ApiResponse, PaginatedData } from "./common";
 import type {

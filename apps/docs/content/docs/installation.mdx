@@ -4,16 +4,15 @@ description: Cómo instalar factus-js en tu proyecto.
 ---
 
 import { Tabs, Tab } from "fumadocs-ui/components/tabs";
-import { Callout } from "fumadocs-ui/components/callout";
 
 ## Requisitos
 
 - **Node.js** 18 o superior (se requiere la API `fetch` nativa).
 - Una cuenta activa en [Factus](https://factus.com.co) con credenciales de API.
 
-## Instalar el paquete principal
+## Instalar el paquete
 
-La forma recomendada es instalar `factus-js`, el paquete de entrada que reexporta todo — el cliente, los tipos y las constantes.
+Instala `factus-js`, que incluye cliente, tipos y constantes tipadas.
 
 <Tabs items={['npm', 'yarn', 'pnpm', 'bun']}>
 
@@ -51,68 +50,11 @@ bun add factus-js
 
 </Tabs>
 
-## Paquetes del monorepo
+## Paquete del SDK
 
-| Paquete                | Descripción                                                                 |
-| ---------------------- | --------------------------------------------------------------------------- |
-| `factus-js`            | Punto de entrada principal — reexporta todo desde los paquetes internos     |
-| `@factus-js/client`    | Clase `FactusClient` con todos los recursos de la API                       |
-| `@factus-js/types`     | Interfaces TypeScript para entradas, salidas y respuestas                   |
-| `@factus-js/constants` | Objetos de constantes tipadas (códigos de documento, métodos de pago, etc.) |
-
-<Callout type="info">
-  `factus-js` reexporta todo desde `@factus-js/client`, `@factus-js/types` y
-  `@factus-js/constants`. No necesitas instalar los paquetes internos por
-  separado a menos que quieras dependencias granulares.
-</Callout>
-
-## Instalación avanzada (paquetes individuales)
-
-Si prefieres dependencias más granulares, puedes instalar los paquetes internos directamente:
-
-<Tabs items={['npm', 'yarn', 'pnpm', 'bun']}>
-
-<Tab value="npm">
-
-```bash
-npm install @factus-js/client @factus-js/types
-# opcional — constantes tipadas
-npm install @factus-js/constants
-```
-
-</Tab>
-
-<Tab value="yarn">
-
-```bash
-yarn add @factus-js/client @factus-js/types
-# opcional — constantes tipadas
-yarn add @factus-js/constants
-```
-
-</Tab>
-
-<Tab value="pnpm">
-
-```bash
-pnpm add @factus-js/client @factus-js/types
-# opcional — constantes tipadas
-pnpm add @factus-js/constants
-```
-
-</Tab>
-
-<Tab value="bun">
-
-```bash
-bun add @factus-js/client @factus-js/types
-# opcional — constantes tipadas
-bun add @factus-js/constants
-```
-
-</Tab>
-
-</Tabs>
+| Paquete     | Descripción                                                      |
+| ----------- | ---------------------------------------------------------------- |
+| `factus-js` | SDK principal con `FactusClient`, tipos TypeScript y constantes. |
 
 ## Variables de entorno
 

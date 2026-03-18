@@ -1,8 +1,4 @@
-import type {
-  TokenResponse,
-  LoginInput,
-  RefreshTokenInput,
-} from "@factus-js/types";
+import type { TokenResponse, LoginInput, RefreshTokenInput } from "../types";
 import { FactusError } from "./error";
 
 export interface FactusClientConfig {

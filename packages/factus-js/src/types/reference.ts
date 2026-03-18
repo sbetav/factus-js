@@ -1,4 +1,4 @@
-import type { IdentityDocumentTypeId } from "@factus-js/constants";
+import type { IdentityDocumentTypeId } from "../constants";
 
 export interface Municipality {
   id: number;
