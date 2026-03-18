@@ -23,11 +23,11 @@ Fuente oficial: [Aceptación tacita](https://developers.factus.com.co/facturas/a
 
 ## Tipos de evento (`EventCode`)
 
-- `RECEIPT_ACKNOWLEDGEMENT` (`"030"`)
-- `INVOICE_CLAIM` (`"031"`)
-- `GOODS_OR_SERVICE_RECEIPT` (`"032"`)
-- `EXPRESS_ACCEPTANCE` (`"033"`)
-- `TACIT_ACCEPTANCE` (`"034"`)
+- `ReceiptAcknowledgement` (`"030"`)
+- `InvoiceClaim` (`"031"`)
+- `GoodsOrServiceReceipt` (`"032"`)
+- `ExpressAcceptance` (`"033"`)
+- `TacitAcceptance` (`"034"`)
 
 ## Ejemplo
 
@@ -36,9 +36,9 @@ import { EventCode, IdentityDocumentTypeId } from "factus-js";
 
 await factus.invoices.emitRadianEvent(
   "SETP990000001",
-  EventCode.TACIT_ACCEPTANCE,
+  EventCode.TacitAcceptance,
   {
-    identification_document_code: IdentityDocumentTypeId.CITIZENSHIP_ID,
+    identification_document_code: IdentityDocumentTypeId.CitizenshipId,
     identification: "12345678",
     first_name: "Pepito",
     last_name: "Perez",

@@ -26,8 +26,8 @@ import {
 const response = await factus.creditNotes.create({
   numbering_range_id: 124,
   reference_code: "NC-001",
-  customization_id: CreditNoteOperationTypeCode.WITH_REFERENCE,
-  correction_concept_code: CreditNoteCorrectionCode.PRICE_ADJUSTMENT,
+  customization_id: CreditNoteOperationTypeCode.WithReference,
+  correction_concept_code: CreditNoteCorrectionCode.PriceAdjustment,
   payment_method_code: "10",
   bill_id: 456,
   observation: "Ajuste de precio por error en factura original",

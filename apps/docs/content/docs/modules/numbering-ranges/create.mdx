@@ -21,7 +21,7 @@ Fuente oficial: [Crear rango](https://developers.factus.com.co/rangos-de-numerac
 import { NumberingRangeDocumentTypeCode } from "factus-js";
 
 const response = await factus.numberingRanges.create({
-  document: NumberingRangeDocumentTypeCode.SALES_INVOICE,
+  document: NumberingRangeDocumentTypeCode.SalesInvoice,
   prefix: "FV",
   current: 1,
   resolution_number: "18764060780001",

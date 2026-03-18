@@ -11,12 +11,15 @@ constantes de `factus-js`.
 Fuente oficial:
 [Tablas de referencia](https://developers.factus.com.co/tablas-de-referencia/tablas/index.html)
 
-## Uso
+## Modo de uso
 
 Si instalaste `factus-js`, las constantes ya están disponibles.
 
 ```ts
 import { PaymentFormCode, EventCode } from "factus-js";
+
+const paymentForm = PaymentFormCode.CashPayment;
+const event = EventCode.ExpressAcceptance;
 ```
 
 <Callout type="info">
@@ -25,38 +28,238 @@ import { PaymentFormCode, EventCode } from "factus-js";
   demás métodos de `factus.catalog`.
 </Callout>
 
-## Constantes disponibles
-
-- `InvoiceDocumentType`
-- `OperationTypeCode`
-- `CreditNoteOperationTypeCode`
-- `CreditNoteCorrectionCode`
-- `ProductStandardId`
-- `ClaimConceptCode`
-- `EventCode`
-- `IdentityDocumentTypeId`
-- `SupportDocumentIdentityTypeId`
-- `CustomerTributeId`
-- `OrganizationTypeId`
-- `PaymentMethodCode`
-- `PaymentFormCode`
-- `NumberingRangeDocumentTypeCode`
-- `AdjustmentNoteReasonCode`
-- `ChargeDiscountCode`
-- `FiscalResponsibilityCode`
-
-## Ejemplo
+## Tipo de documento de factura (`InvoiceDocumentType`)
 
 ```ts
-import {
-  EventCode,
-  IdentityDocumentTypeId,
-  NumberingRangeDocumentTypeCode,
-  PaymentMethodCode,
-} from "factus-js";
-
-const eventType = EventCode.EXPRESS_ACCEPTANCE;
-const idType = IdentityDocumentTypeId.NIT;
-const documentType = NumberingRangeDocumentTypeCode.SALES_INVOICE;
-const paymentMethod = PaymentMethodCode.TRANSFER;
+import { InvoiceDocumentType } from "factus-js";
 ```
+
+| Clave                          | Valor  | Descripción                                       |
+| ------------------------------ | ------ | ------------------------------------------------- |
+| `ElectronicSalesInvoice`       | `"01"` | Factura electrónica de venta.                     |
+| `ElectronicTransmissionType03` | `"03"` | Instrumento electrónico de transmisión - tipo 03. |
+
+## Tipo de operación (`OperationTypeCode`)
+
+```ts
+import { OperationTypeCode } from "factus-js";
+```
+
+| Clave       | Valor  | Descripción |
+| ----------- | ------ | ----------- |
+| `Standard`  | `"10"` | Estándar.   |
+| `Mandates`  | `"11"` | Mandatos.   |
+| `Transport` | `"12"` | Transporte. |
+
+## Tipo de operación en nota crédito (`CreditNoteOperationTypeCode`)
+
+```ts
+import { CreditNoteOperationTypeCode } from "factus-js";
+```
+
+| Clave              | Valor  | Descripción                                            |
+| ------------------ | ------ | ------------------------------------------------------ |
+| `WithReference`    | `"20"` | Nota Crédito que referencia una factura electrónica.   |
+| `WithoutReference` | `"22"` | Nota Crédito sin referencia a una factura electrónica. |
+
+## Concepto de corrección de nota crédito (`CreditNoteCorrectionCode`)
+
+```ts
+import { CreditNoteCorrectionCode } from "factus-js";
+```
+
+| Clave                    | Valor | Descripción                                                              |
+| ------------------------ | ----- | ------------------------------------------------------------------------ |
+| `PartialReturn`          | `1`   | Devolución parcial de los bienes y/o no aceptación parcial del servicio. |
+| `InvoiceCancellation`    | `2`   | Anulación de factura electrónica.                                        |
+| `PartialOrTotalDiscount` | `3`   | Rebaja o descuento parcial o total.                                      |
+| `PriceAdjustment`        | `4`   | Ajuste de precio.                                                        |
+| `EarlyPaymentDiscount`   | `5`   | Descuento comercial por pronto pago.                                     |
+| `VolumeDiscount`         | `6`   | Descuento comercial por volumen de ventas.                               |
+
+## Estándar de producto (`ProductStandardId`)
+
+```ts
+import { ProductStandardId } from "factus-js";
+```
+
+| Clave              | Valor | Descripción                            |
+| ------------------ | ----- | -------------------------------------- |
+| `TaxpayerAdoption` | `1`   | Estándar de adopción del contribuyente |
+| `UNSPSC`           | `2`   | UNSPSC                                 |
+| `TariffHeading`    | `3`   | Partida Arancelaria                    |
+| `GTIN`             | `4`   | GTIN                                   |
+
+## Concepto de reclamo (`ClaimConceptCode`)
+
+```ts
+import { ClaimConceptCode } from "factus-js";
+```
+
+| Clave                      | Valor  | Descripción                         |
+| -------------------------- | ------ | ----------------------------------- |
+| `DocumentInconsistencies`  | `"01"` | Documento con inconsistencias       |
+| `GoodsNotDeliveredTotal`   | `"02"` | Mercancía no entregada totalmente   |
+| `GoodsNotDeliveredPartial` | `"03"` | Mercancía no entregada parcialmente |
+| `ServiceNotProvided`       | `"04"` | Servicio no prestado                |
+
+## Código de evento (`EventCode`)
+
+```ts
+import { EventCode } from "factus-js";
+```
+
+| Clave                    | Valor   | Descripción                                     |
+| ------------------------ | ------- | ----------------------------------------------- |
+| `ReceiptAcknowledgement` | `"030"` | Acuse de recibo de Factura Electronica de Venta |
+| `InvoiceClaim`           | `"031"` | Reclamo de la Factura Electronica de Venta      |
+| `GoodsOrServiceReceipt`  | `"032"` | Recibo del bien y/o prestación del servicio     |
+| `ExpressAcceptance`      | `"033"` | Aceptación expresa                              |
+| `TacitAcceptance`        | `"034"` | Aceptación tacita                               |
+
+## Tipo de documento de identificación (`IdentityDocumentTypeId`)
+
+```ts
+import { IdentityDocumentTypeId } from "factus-js";
+```
+
+| Clave                           | Valor | Descripción                            |
+| ------------------------------- | ----- | -------------------------------------- |
+| `CivilRegistration`             | `1`   | Registro civil                         |
+| `IdentityCard`                  | `2`   | Tarjeta de identidad                   |
+| `CitizenshipId`                 | `3`   | Cédula de ciudadanía                   |
+| `ForeignerCard`                 | `4`   | Tarjeta de extranjería                 |
+| `ForeignerId`                   | `5`   | Cédula de extranjería                  |
+| `NIT`                           | `6`   | NIT                                    |
+| `Passport`                      | `7`   | Pasaporte                              |
+| `ForeignIdentificationDocument` | `8`   | Documento de identificación extranjero |
+| `PEP`                           | `9`   | PEP                                    |
+| `ForeignNIT`                    | `10`  | NIT otro país                          |
+| `NUIP`                          | `11`  | NUIP                                   |
+
+## Tipo de identificación para documento soporte (`SupportDocumentIdentityTypeId`)
+
+```ts
+import { SupportDocumentIdentityTypeId } from "factus-js";
+```
+
+| Clave                           | Valor | Descripción                            |
+| ------------------------------- | ----- | -------------------------------------- |
+| `ForeignerCard`                 | `4`   | Tarjeta de extranjería                 |
+| `ForeignerId`                   | `5`   | Cédula de extranjería                  |
+| `NIT`                           | `6`   | NIT                                    |
+| `Passport`                      | `7`   | Pasaporte                              |
+| `ForeignIdentificationDocument` | `8`   | Documento de identificación extranjero |
+| `PEP`                           | `9`   | PEP                                    |
+| `ForeignNIT`                    | `10`  | NIT otro país                          |
+
+## Tributo del cliente (`CustomerTributeId`)
+
+```ts
+import { CustomerTributeId } from "factus-js";
+```
+
+| Clave           | Valor | Descripción |
+| --------------- | ----- | ----------- |
+| `IVA`           | `18`  | IVA         |
+| `NotApplicable` | `21`  | No aplica   |
+
+## Tipo de organización (`OrganizationTypeId`)
+
+```ts
+import { OrganizationTypeId } from "factus-js";
+```
+
+| Clave           | Valor | Descripción      |
+| --------------- | ----- | ---------------- |
+| `LegalEntity`   | `1`   | Persona Jurídica |
+| `NaturalPerson` | `2`   | Persona Natural  |
+
+## Método de pago (`PaymentMethodCode`)
+
+```ts
+import { PaymentMethodCode } from "factus-js";
+```
+
+| Clave         | Valor   | Descripción               |
+| ------------- | ------- | ------------------------- |
+| `Cash`        | `"10"`  | Efectivo                  |
+| `BankDeposit` | `"42"`  | Consignación              |
+| `Check`       | `"20"`  | Cheque                    |
+| `Transfer`    | `"47"`  | Transferencia             |
+| `Bonds`       | `"71"`  | Bonos                     |
+| `Vouchers`    | `"72"`  | Vales                     |
+| `Undefined`   | `"1"`   | Medio de pago no definido |
+| `DebitCard`   | `"49"`  | Tarjeta Débito            |
+| `CreditCard`  | `"48"`  | Tarjeta Crédito           |
+| `Other`       | `"ZZZ"` | Otro                      |
+
+## Forma de pago (`PaymentFormCode`)
+
+```ts
+import { PaymentFormCode } from "factus-js";
+```
+
+| Clave           | Valor | Descripción     |
+| --------------- | ----- | --------------- |
+| `CashPayment`   | `"1"` | Pago de contado |
+| `CreditPayment` | `"2"` | Pago a crédito  |
+
+## Tipo de documento en rangos de numeración (`NumberingRangeDocumentTypeCode`)
+
+```ts
+import { NumberingRangeDocumentTypeCode } from "factus-js";
+```
+
+| Clave                           | Valor  | Descripción                      |
+| ------------------------------- | ------ | -------------------------------- |
+| `SalesInvoice`                  | `"21"` | Factura de Venta                 |
+| `CreditNote`                    | `"22"` | Nota Crédito                     |
+| `DebitNote`                     | `"23"` | Nota Débito                      |
+| `SupportDocument`               | `"24"` | Documento Soporte                |
+| `SupportDocumentAdjustmentNote` | `"25"` | Nota de Ajuste Documento Soporte |
+| `Payroll`                       | `"26"` | Nomina                           |
+| `PayrollAdjustmentNote`         | `"27"` | Nota de Ajuste Nomina            |
+| `PayrollDeletionNote`           | `"28"` | Nota de eliminación de nomina    |
+| `PaperOrStubInvoice`            | `"30"` | Factura de talonario y de papel  |
+
+## Concepto de corrección de nota de ajuste (`AdjustmentNoteReasonCode`)
+
+```ts
+import { AdjustmentNoteReasonCode } from "factus-js";
+```
+
+| Clave                         | Valor | Descripción                                                                                                                           |
+| ----------------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `PartialReturn`               | `1`   | Devolución parcial de los bienes y/o no aceptación parcial del servicio                                                               |
+| `SupportDocumentCancellation` | `2`   | Anulación del documento soporte en adquisiciones efectuadas a sujetos no obligados a expedir factura de venta o documento equivalente |
+| `PartialOrTotalDiscount`      | `3`   | Rebaja o descuento parcial o total                                                                                                    |
+| `PriceAdjustment`             | `4`   | Ajuste de precio                                                                                                                      |
+| `Other`                       | `5`   | Otros                                                                                                                                 |
+
+## Tipo de cargo o descuento (`ChargeDiscountCode`)
+
+```ts
+import { ChargeDiscountCode } from "factus-js";
+```
+
+| Clave                    | Valor  | Descripción                                         |
+| ------------------------ | ------ | --------------------------------------------------- |
+| `UnconditionalDiscount`  | `"00"` | Descuento no condicionado (disponible próximamente) |
+| `ConditionalDiscount`    | `"01"` | Descuento condicionado (disponible próximamente)    |
+| `UnconditionalSurcharge` | `"02"` | Recargo no condicionado (disponible próximamente)   |
+| `ConditionalSurcharge`   | `"03"` | Recargo condicionado                                |
+
+## Responsabilidad fiscal (`FiscalResponsibilityCode`)
+
+```ts
+import { FiscalResponsibilityCode } from "factus-js";
+```
+
+| Clave                  | Valor       | Descripción                   |
+| ---------------------- | ----------- | ----------------------------- |
+| `LargeTaxpayer`        | `"O-13"`    | Gran contribuyente            |
+| `SelfWithholdingAgent` | `"0-15"`    | Autorretenedor                |
+| `VATWithholdingAgent`  | `"0-23"`    | Agente de retención de IVA    |
+| `SimpleTaxRegime`      | `"0-47"`    | Regimen simple de tributación |
+| `NotResponsible`       | `"R-99-PN"` | No responsable                |
