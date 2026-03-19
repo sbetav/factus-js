@@ -7,19 +7,26 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.js"
     }
   },
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run src/__tests__",
+    "test:unit": "vitest run src/__tests__/unit",
+    "test:watch": "vitest src/__tests__/unit",
+    "test:sandbox": "vitest run src/__tests__/sandbox",
+    "test:all": "vitest run src/__tests__"
   },
   "devDependencies": {
+    "@types/node": "^24.5.2",
     "tsdown": "^0.21.3",
-    "typescript": "5.9.2"
+    "typescript": "5.9.2",
+    "vitest": "^3.2.4"
   },
   "publishConfig": {
     "access": "public"
