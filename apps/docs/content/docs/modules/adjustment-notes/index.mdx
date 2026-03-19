@@ -19,7 +19,7 @@ Accede al modulo a traves de `factus.adjustmentNotes`.
 | Método                  | Método HTTP + Endpoint                                   | Descripción                                   |
 | ----------------------- | -------------------------------------------------------- | --------------------------------------------- |
 | `create(input)`         | `POST /v1/adjustment-notes/validate`                     | Crear y validar una nota de ajuste            |
-| `list(filters?)`        | `GET /v1/adjustment-notes`                               | Listar notas de ajuste con filtros opcionales |
+| `list(params?)`         | `GET /v1/adjustment-notes`                               | Listar notas de ajuste con filtros opcionales |
 | `get(number)`           | `GET /v1/adjustment-notes/{number}`                      | Obtener detalle por número de documento       |
 | `downloadXml(number)`   | `GET /v1/adjustment-notes/download-xml/{number}`         | Descargar XML en base64                       |
 | `downloadPdf(number)`   | `GET /v1/adjustment-notes/download-pdf/{number}`         | Descargar PDF en base64                       |

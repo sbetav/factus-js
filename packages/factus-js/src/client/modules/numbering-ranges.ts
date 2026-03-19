@@ -1,6 +1,7 @@
 import type {
   NumberingRange,
   NumberingRangeFilters,
+  ListParams,
   CreateNumberingRangeInput,
   UpdateNumberingRangeCurrentInput,
   SoftwareNumberingRange,
@@ -9,6 +10,7 @@ import type {
   PaginatedData,
 } from "../../types";
 import type { HttpClient } from "../http-client";
+import { buildListQueryParams } from "../list-params";
 
 export class NumberingRangesModule {
   constructor(private readonly http: HttpClient) {}
@@ -18,12 +20,9 @@ export class NumberingRangesModule {
    * GET /v1/numbering-ranges
    */
   list(
-    filters?: NumberingRangeFilters & { page?: number; per_page?: number },
+    params?: ListParams<NumberingRangeFilters>,
   ): Promise<ApiResponse<PaginatedData<NumberingRange>>> {
-    return this.http.get(
-      "/v1/numbering-ranges",
-      filters as Record<string, string | number | boolean | undefined>,
-    );
+    return this.http.get("/v1/numbering-ranges", buildListQueryParams(params));
   }
 
   /**

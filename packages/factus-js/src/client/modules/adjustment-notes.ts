@@ -2,6 +2,7 @@ import type {
   CreateAdjustmentNoteInput,
   AdjustmentNote,
   AdjustmentNoteFilters,
+  ListParams,
   ViewAdjustmentNoteData,
   DownloadAdjustmentNoteXmlResponse,
   DownloadAdjustmentNotePdfResponse,
@@ -10,6 +11,7 @@ import type {
   PaginatedData,
 } from "../../types";
 import type { HttpClient } from "../http-client";
+import { buildListQueryParams } from "../list-params";
 
 export class AdjustmentNotesModule {
   constructor(private readonly http: HttpClient) {}
@@ -29,12 +31,9 @@ export class AdjustmentNotesModule {
    * GET /v1/adjustment-notes
    */
   list(
-    filters?: AdjustmentNoteFilters & { page?: number; per_page?: number },
+    params?: ListParams<AdjustmentNoteFilters>,
   ): Promise<ApiResponse<PaginatedData<AdjustmentNote>>> {
-    return this.http.get(
-      "/v1/adjustment-notes",
-      filters as Record<string, string | number | boolean | undefined>,
-    );
+    return this.http.get("/v1/adjustment-notes", buildListQueryParams(params));
   }
 
   /**

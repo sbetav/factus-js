@@ -33,11 +33,11 @@ export interface CreateNumberingRangeInput {
 }
 
 export interface NumberingRangeFilters {
-  "filter[id]"?: string;
-  "filter[document]"?: string;
-  "filter[resolution_number]"?: string;
-  "filter[technical_key]"?: string;
-  "filter[is_active]"?: string;
+  id?: string;
+  document?: string;
+  resolution_number?: string;
+  technical_key?: string;
+  is_active?: string;
 }
 
 export interface SoftwareNumberingRange {

@@ -3,6 +3,7 @@ import type {
   MunicipalityFilters,
   Country,
   CountryFilters,
+  ListParams,
   Tribute,
   TributeFilters,
   MeasurementUnit,
@@ -12,6 +13,7 @@ import type {
   ApiResponse,
 } from "../../types";
 import type { HttpClient } from "../http-client";
+import { buildListQueryParams } from "../list-params";
 
 export class CatalogModule {
   constructor(private readonly http: HttpClient) {}
@@ -25,12 +27,9 @@ export class CatalogModule {
    * GET /v1/municipalities
    */
   listMunicipalities(
-    filters?: MunicipalityFilters & { page?: number; per_page?: number },
+    params?: ListParams<MunicipalityFilters>,
   ): Promise<ApiResponse<Municipality[]>> {
-    return this.http.get(
-      "/v1/municipalities",
-      filters as Record<string, string | number | boolean | undefined>,
-    );
+    return this.http.get("/v1/municipalities", buildListQueryParams(params));
   }
 
   // ---------------------------------------------------------------------------
@@ -42,12 +41,9 @@ export class CatalogModule {
    * GET /v1/countries
    */
   listCountries(
-    filters?: CountryFilters & { page?: number; per_page?: number },
+    params?: ListParams<CountryFilters>,
   ): Promise<ApiResponse<Country[]>> {
-    return this.http.get(
-      "/v1/countries",
-      filters as Record<string, string | number | boolean | undefined>,
-    );
+    return this.http.get("/v1/countries", buildListQueryParams(params));
   }
 
   // ---------------------------------------------------------------------------

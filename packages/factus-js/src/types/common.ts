@@ -35,3 +35,9 @@ export interface PaginatedData<T> {
     links: PaginationLink[];
   };
 }
+
+export interface ListParams<TFilter> {
+  filter?: TFilter;
+  page?: number;
+  per_page?: number;
+}

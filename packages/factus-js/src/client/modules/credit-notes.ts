@@ -2,6 +2,7 @@ import type {
   CreateCreditNoteInput,
   CreditNoteListItem,
   CreditNoteFilters,
+  ListParams,
   ViewCreditNoteData,
   GetCreditNotesResponse,
   SendCreditNoteEmailInput,
@@ -13,6 +14,7 @@ import type {
   ApiResponse,
 } from "../../types";
 import type { HttpClient } from "../http-client";
+import { buildListQueryParams } from "../list-params";
 
 export class CreditNotesModule {
   constructor(private readonly http: HttpClient) {}
@@ -32,12 +34,9 @@ export class CreditNotesModule {
    * GET /v1/credit-notes
    */
   list(
-    filters?: CreditNoteFilters & { page?: number; per_page?: number },
+    params?: ListParams<CreditNoteFilters>,
   ): Promise<GetCreditNotesResponse> {
-    return this.http.get(
-      "/v1/credit-notes",
-      filters as Record<string, string | number | boolean | undefined>,
-    );
+    return this.http.get("/v1/credit-notes", buildListQueryParams(params));
   }
 
   /**

@@ -1,6 +1,7 @@
 import type {
   ReceptionBill,
   ReceptionBillFilters,
+  ListParams,
   EmitEventInput,
   EmitEventParams,
   UploadReceptionBillInput,
@@ -10,6 +11,7 @@ import type {
   PaginatedData,
 } from "../../types";
 import type { HttpClient } from "../http-client";
+import { buildListQueryParams } from "../list-params";
 
 export class ReceptionModule {
   constructor(private readonly http: HttpClient) {}
@@ -19,12 +21,9 @@ export class ReceptionModule {
    * GET /v1/receptions/bills
    */
   list(
-    filters?: ReceptionBillFilters & { page?: number; per_page?: number },
+    params?: ListParams<ReceptionBillFilters>,
   ): Promise<ApiResponse<PaginatedData<ReceptionBill>>> {
-    return this.http.get(
-      "/v1/receptions/bills",
-      filters as Record<string, string | number | boolean | undefined>,
-    );
+    return this.http.get("/v1/receptions/bills", buildListQueryParams(params));
   }
 
   /**

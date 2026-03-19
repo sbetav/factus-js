@@ -37,7 +37,7 @@ describe("HttpClient", () => {
 
     const response = await http.get<{ data: Array<{ number: string }> }>(
       "/v1/bills",
-      { "filter[number]": "SETP99", page: 1 },
+      { "filter[number]": "SETP99", page: 1, per_page: 15 },
     );
 
     expect(response.data[0].number).toBe("SETP990000203");
@@ -56,7 +56,7 @@ describe("HttpClient", () => {
     });
 
     expect(mock.calls[1].url).toBe(
-      "https://api-sandbox.factus.com.co/v1/bills?filter%5Bnumber%5D=SETP99&page=1",
+      "https://api-sandbox.factus.com.co/v1/bills?filter%5Bnumber%5D=SETP99&page=1&per_page=15",
     );
     expect(mock.calls[1].init?.method).toBe("GET");
     expect(mock.calls[1].init?.headers).toMatchObject({

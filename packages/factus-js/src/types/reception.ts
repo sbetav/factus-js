@@ -27,13 +27,13 @@ export interface ReceptionBill {
 }
 
 export interface ReceptionBillFilters {
-  "filter[id]"?: string;
-  "filter[number]"?: string;
-  "filter[issue_date]"?: string;
-  "filter[cufe]"?: string;
-  "filter[company_nit]"?: string;
-  "filter[company_name]"?: string;
-  "filter[completed_events]"?: string;
+  id?: string;
+  number?: string;
+  issue_date?: string;
+  cufe?: string;
+  company_nit?: string;
+  company_name?: string;
+  completed_events?: string;
 }
 
 export interface EmitEventInput {

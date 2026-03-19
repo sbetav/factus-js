@@ -6,7 +6,7 @@ description: Listar y filtrar facturas electrónicas recibidas.
 ## Firma del método
 
 ```ts
-list(filters?: ReceptionBillFilters & { page?: number; per_page?: number }): Promise<ApiResponse<PaginatedData<ReceptionBill>>>
+list(params?: ListParams<ReceptionBillFilters>): Promise<ApiResponse<PaginatedData<ReceptionBill>>>
 ```
 
 ## Endpoint Factus
@@ -19,49 +19,62 @@ Fuente oficial: [Ver facturas](https://developers.factus.com.co/recepcion-de-doc
 
 <TypeTable
   type={{
-    filters: {
-      type: "ReceptionBillFilters & { page?: number; per_page?: number }",
+    params: {
+      type: "ListParams<ReceptionBillFilters>",
       required: false,
       description: (
         <div>
           Filtros y paginación para la consulta.
           <TypeTable
             type={{
-              "filter[id]": {
-                type: "string",
+              filter: {
+                type: "ReceptionBillFilters",
                 required: false,
-                description: "Filtra por ID interno del documento recibido.",
-              },
-              "filter[number]": {
-                type: "string",
-                required: false,
-                description: "Filtra por número del documento.",
-              },
-              "filter[issue_date]": {
-                type: "string",
-                required: false,
-                description: "Filtra por fecha de emisión del documento.",
-              },
-              "filter[cufe]": {
-                type: "string",
-                required: false,
-                description: "Filtra por CUFE.",
-              },
-              "filter[company_nit]": {
-                type: "string",
-                required: false,
-                description: "Filtra por NIT del emisor.",
-              },
-              "filter[company_name]": {
-                type: "string",
-                required: false,
-                description: "Filtra por nombre o razón social del emisor.",
-              },
-              "filter[completed_events]": {
-                type: "string",
-                required: false,
-                description:
-                  "Filtra por estado de eventos emitidos (`1` completos, `0` pendientes).",
+                description: (
+                  <TypeTable
+                    type={{
+                      id: {
+                        type: "string",
+                        required: false,
+                        description:
+                          "Filtra por ID interno del documento recibido.",
+                      },
+                      number: {
+                        type: "string",
+                        required: false,
+                        description: "Filtra por número del documento.",
+                      },
+                      issue_date: {
+                        type: "string",
+                        required: false,
+                        description:
+                          "Filtra por fecha de emisión del documento.",
+                      },
+                      cufe: {
+                        type: "string",
+                        required: false,
+                        description: "Filtra por CUFE.",
+                      },
+                      company_nit: {
+                        type: "string",
+                        required: false,
+                        description: "Filtra por NIT del emisor.",
+                      },
+                      company_name: {
+                        type: "string",
+                        required: false,
+                        description:
+                          "Filtra por nombre o razón social del emisor.",
+                      },
+                      completed_events: {
+                        type: "string",
+                        required: false,
+                        description:
+                          "Filtra por estado de eventos emitidos (`1` completos, `0` pendientes).",
+                      },
+                    }}
+                  />
+                ),
               },
               page: {
                 type: "number",
@@ -85,7 +98,7 @@ Fuente oficial: [Ver facturas](https://developers.factus.com.co/recepcion-de-doc
 
 ```ts
 const response = await factus.reception.list({
-  "filter[completed_events]": "0",
+  filter: { completed_events: "0" },
   page: 1,
   per_page: 10,
 });

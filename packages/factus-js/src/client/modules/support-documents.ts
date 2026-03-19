@@ -2,6 +2,7 @@ import type {
   CreateSupportDocumentInput,
   SupportDocument,
   SupportDocumentFilters,
+  ListParams,
   ViewSupportDocumentData,
   DeleteSupportDocumentResponse,
   DownloadSupportDocumentXmlResponse,
@@ -10,6 +11,7 @@ import type {
   PaginatedData,
 } from "../../types";
 import type { HttpClient } from "../http-client";
+import { buildListQueryParams } from "../list-params";
 
 export class SupportDocumentsModule {
   constructor(private readonly http: HttpClient) {}
@@ -29,12 +31,9 @@ export class SupportDocumentsModule {
    * GET /v1/support-documents
    */
   list(
-    filters?: SupportDocumentFilters & { page?: number; per_page?: number },
+    params?: ListParams<SupportDocumentFilters>,
   ): Promise<ApiResponse<PaginatedData<SupportDocument>>> {
-    return this.http.get(
-      "/v1/support-documents",
-      filters as Record<string, string | number | boolean | undefined>,
-    );
+    return this.http.get("/v1/support-documents", buildListQueryParams(params));
   }
 
   /**

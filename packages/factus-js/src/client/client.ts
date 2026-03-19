@@ -29,7 +29,11 @@ import { CatalogModule } from "./modules/catalog";
  * const response = await factus.bills.create({ ... });
  *
  * // List bills
- * const list = await factus.bills.list({ "filter[status]": "1", page: 1 });
+ * const list = await factus.bills.list({
+ *   filter: { status: 1, reference_code: "INV-123" },
+ *   page: 1,
+ *   per_page: 15,
+ * });
  * ```
  */
 export class FactusClient {

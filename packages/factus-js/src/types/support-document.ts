@@ -80,12 +80,12 @@ export interface SupportDocument {
 // ---------------------------------------------------------------------------
 
 export interface SupportDocumentFilters {
-  "filter[identification]"?: string;
-  "filter[names]"?: string;
-  "filter[number]"?: string;
-  "filter[prefix]"?: string;
-  "filter[reference_code]"?: string;
-  "filter[status]"?: string | number;
+  identification?: string;
+  names?: string;
+  number?: string;
+  prefix?: string;
+  reference_code?: string;
+  status?: string | number;
 }
 
 // ---------------------------------------------------------------------------

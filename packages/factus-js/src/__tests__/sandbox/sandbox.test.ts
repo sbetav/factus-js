@@ -293,7 +293,7 @@ describe("sandbox integration", () => {
       }),
     ).resolves.not.toBeUndefined();
     await expect(
-      factus.catalog.listMunicipalities({ name: "San Gil" }),
+      factus.catalog.listMunicipalities({ filter: { name: "San Gil" } }),
     ).resolves.not.toBeUndefined();
     await expect(
       factus.catalog.listTributes({ name: "IVA" }),
@@ -302,7 +302,7 @@ describe("sandbox integration", () => {
       factus.catalog.listMeasurementUnits({ name: "Unidad" }),
     ).resolves.not.toBeUndefined();
     await expect(
-      factus.catalog.listCountries({ name: "Colombia" }),
+      factus.catalog.listCountries({ filter: { name: "Colombia" } }),
     ).resolves.not.toBeUndefined();
 
     await expect(

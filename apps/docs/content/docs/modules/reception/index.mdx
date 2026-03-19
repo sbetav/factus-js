@@ -21,6 +21,6 @@ Accede al modulo a traves de `factus.reception`.
 
 | Método                     | Método HTTP + Endpoint                                            | Descripción                                         |
 | -------------------------- | ----------------------------------------------------------------- | --------------------------------------------------- |
-| `list(filters?)`           | `GET /v1/receptions/bills`                                        | Listar facturas recibidas                           |
+| `list(params?)`            | `GET /v1/receptions/bills`                                        | Listar facturas recibidas                           |
 | `upload(input)`            | `POST /v1/receptions/upload`                                      | Registrar factura recibida por track_id (CUFE/CUDE) |
 | `emitEvent(params, input)` | `PATCH /v1/receptions/bills/{bill_id}/radian/events/{event_type}` | Emitir evento RADIAN                                |

@@ -17,7 +17,8 @@ describe("module routing contract", () => {
     const bills = new BillsModule(spy.client as never);
 
     const createInput = { reference_code: "X" } as never;
-    const listFilters = { "filter[number]": "SETP", page: 1 };
+    const listFilters = { filter: { number: "SETP" }, page: 1, per_page: 10 };
+    const listQuery = { "filter[number]": "SETP", page: 1, per_page: 10 };
     const sendInput = { email: "x@y.com" } as never;
     const eventInput = { identification: "123" } as never;
 
@@ -34,7 +35,7 @@ describe("module routing contract", () => {
 
     expect(spy.calls).toEqual([
       { method: "post", path: "/v1/bills/validate", payload: createInput },
-      { method: "get", path: "/v1/bills", payload: listFilters },
+      { method: "get", path: "/v1/bills", payload: listQuery },
       {
         method: "get",
         path: "/v1/bills/show/SETP990000203",
@@ -82,7 +83,8 @@ describe("module routing contract", () => {
     const creditNotes = new CreditNotesModule(spy.client as never);
 
     const createInput = { reference_code: "X" } as never;
-    const listFilters = { "filter[status]": "1", page: 1 };
+    const listFilters = { filter: { status: "1" }, page: 1, per_page: 10 };
+    const listQuery = { "filter[status]": "1", page: 1, per_page: 10 };
     const sendInput = { email: "x@y.com" } as never;
 
     await creditNotes.create(createInput);
@@ -100,7 +102,7 @@ describe("module routing contract", () => {
         path: "/v1/credit-notes/validate",
         payload: createInput,
       },
-      { method: "get", path: "/v1/credit-notes", payload: listFilters },
+      { method: "get", path: "/v1/credit-notes", payload: listQuery },
       { method: "get", path: "/v1/credit-notes/NC856", payload: undefined },
       {
         method: "get",
@@ -131,7 +133,8 @@ describe("module routing contract", () => {
     const supportDocuments = new SupportDocumentsModule(spy.client as never);
 
     const createInput = { reference_code: "REF" } as never;
-    const listFilters = { "filter[status]": "1", page: 1 };
+    const listFilters = { filter: { status: "1" }, page: 1, per_page: 10 };
+    const listQuery = { "filter[status]": "1", page: 1, per_page: 10 };
 
     await supportDocuments.create(createInput);
     await supportDocuments.list(listFilters);
@@ -146,7 +149,7 @@ describe("module routing contract", () => {
         path: "/v1/support-documents/validate",
         payload: createInput,
       },
-      { method: "get", path: "/v1/support-documents", payload: listFilters },
+      { method: "get", path: "/v1/support-documents", payload: listQuery },
       {
         method: "get",
         path: "/v1/support-documents/show/SEDS984000021",
@@ -174,7 +177,8 @@ describe("module routing contract", () => {
     const adjustmentNotes = new AdjustmentNotesModule(spy.client as never);
 
     const createInput = { reference_code: "REF" } as never;
-    const listFilters = { "filter[status]": "1", page: 1 };
+    const listFilters = { filter: { status: "1" }, page: 1, per_page: 10 };
+    const listQuery = { "filter[status]": "1", page: 1, per_page: 10 };
 
     await adjustmentNotes.create(createInput);
     await adjustmentNotes.list(listFilters);
@@ -189,7 +193,7 @@ describe("module routing contract", () => {
         path: "/v1/adjustment-notes/validate",
         payload: createInput,
       },
-      { method: "get", path: "/v1/adjustment-notes", payload: listFilters },
+      { method: "get", path: "/v1/adjustment-notes", payload: listQuery },
       { method: "get", path: "/v1/adjustment-notes/NDS3", payload: undefined },
       {
         method: "get",
@@ -209,7 +213,16 @@ describe("module routing contract", () => {
     const spy = createHttpSpy();
     const reception = new ReceptionModule(spy.client as never);
 
-    const listFilters = { "filter[completed_events]": "0", page: 1 };
+    const listFilters = {
+      filter: { completed_events: "0" },
+      page: 1,
+      per_page: 10,
+    };
+    const listQuery = {
+      "filter[completed_events]": "0",
+      page: 1,
+      per_page: 10,
+    };
     const uploadInput = { track_id: "x" } as never;
     const eventInput = { identification: "12345667" } as never;
 
@@ -221,7 +234,7 @@ describe("module routing contract", () => {
     );
 
     expect(spy.calls).toEqual([
-      { method: "get", path: "/v1/receptions/bills", payload: listFilters },
+      { method: "get", path: "/v1/receptions/bills", payload: listQuery },
       { method: "post", path: "/v1/receptions/upload", payload: uploadInput },
       {
         method: "patch",
@@ -235,7 +248,8 @@ describe("module routing contract", () => {
     const spy = createHttpSpy();
     const numberingRanges = new NumberingRangesModule(spy.client as never);
 
-    const listFilters = { "filter[is_active]": "1", page: 1 };
+    const listFilters = { filter: { is_active: "1" }, page: 1, per_page: 10 };
+    const listQuery = { "filter[is_active]": "1", page: 1, per_page: 10 };
     const createInput = { prefix: "SETP" } as never;
     const updateInput = { current: 985000001 } as never;
 
@@ -247,7 +261,7 @@ describe("module routing contract", () => {
     await numberingRanges.delete(8);
 
     expect(spy.calls).toEqual([
-      { method: "get", path: "/v1/numbering-ranges", payload: listFilters },
+      { method: "get", path: "/v1/numbering-ranges", payload: listQuery },
       { method: "get", path: "/v1/numbering-ranges/8", payload: undefined },
       { method: "post", path: "/v1/numbering-ranges", payload: createInput },
       {
@@ -290,8 +304,10 @@ describe("module routing contract", () => {
     const catalog = new CatalogModule(spy.client as never);
     const subscription = new SubscriptionModule(spy.client as never);
 
-    const municipalityFilters = { name: "San Gil" };
-    const countryFilters = { name: "Colombia" };
+    const municipalityFilters = { filter: { name: "San Gil" } };
+    const municipalityQuery = { "filter[name]": "San Gil" };
+    const countryFilters = { filter: { name: "Colombia" } };
+    const countryQuery = { "filter[name]": "Colombia" };
     const tributeFilters = { name: "IVA" };
     const unitFilters = { name: "Unidad" };
     const acquirerFilters = {
@@ -310,9 +326,9 @@ describe("module routing contract", () => {
       {
         method: "get",
         path: "/v1/municipalities",
-        payload: municipalityFilters,
+        payload: municipalityQuery,
       },
-      { method: "get", path: "/v1/countries", payload: countryFilters },
+      { method: "get", path: "/v1/countries", payload: countryQuery },
       { method: "get", path: "/v1/tributes/products", payload: tributeFilters },
       { method: "get", path: "/v1/measurement-units", payload: unitFilters },
       { method: "get", path: "/v1/dian/acquirer", payload: acquirerFilters },

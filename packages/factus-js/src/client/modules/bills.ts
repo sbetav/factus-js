@@ -2,6 +2,7 @@ import type {
   CreateInvoiceInput,
   InvoiceListItem,
   InvoiceFilters,
+  ListParams,
   GetInvoicesResponse,
   ViewInvoiceResponse,
   SendInvoiceEmailInput,
@@ -17,6 +18,7 @@ import type {
   EventCode,
 } from "../../types";
 import type { HttpClient } from "../http-client";
+import { buildListQueryParams } from "../list-params";
 
 export class BillsModule {
   constructor(private readonly http: HttpClient) {}
@@ -33,13 +35,8 @@ export class BillsModule {
    * List invoices with optional filters and pagination.
    * GET /v1/bills
    */
-  list(
-    filters?: InvoiceFilters & { page?: number; per_page?: number },
-  ): Promise<GetInvoicesResponse> {
-    return this.http.get(
-      "/v1/bills",
-      filters as Record<string, string | number | boolean | undefined>,
-    );
+  list(params?: ListParams<InvoiceFilters>): Promise<GetInvoicesResponse> {
+    return this.http.get("/v1/bills", buildListQueryParams(params));
   }
 
   /**

@@ -6,7 +6,7 @@ description: Listar rangos de numeración con filtros y paginación.
 ## Firma del método
 
 ```ts
-list(filters?: NumberingRangeFilters & { page?: number; per_page?: number }): Promise<ApiResponse<PaginatedData<NumberingRange>>>
+list(params?: ListParams<NumberingRangeFilters>): Promise<ApiResponse<PaginatedData<NumberingRange>>>
 ```
 
 ## Endpoint Factus
@@ -19,39 +19,51 @@ Fuente oficial: [Obtener rangos de numeración](https://developers.factus.com.co
 
 <TypeTable
   type={{
-    filters: {
-      type: "NumberingRangeFilters & { page?: number; per_page?: number } (object)",
+    params: {
+      type: "ListParams<NumberingRangeFilters> (object)",
       required: false,
       description: (
         <div>
           Filtros y paginación para la consulta.
           <TypeTable
             type={{
-              "filter[id]": {
-                type: "string",
+              filter: {
+                type: "NumberingRangeFilters",
                 required: false,
-                description: "Filtra por ID interno del rango de numeración.",
-              },
-              "filter[document]": {
-                type: "string",
-                required: false,
-                description: "Filtra por tipo de documento asociado al rango.",
-              },
-              "filter[resolution_number]": {
-                type: "string",
-                required: false,
-                description: "Filtra por número de resolución.",
-              },
-              "filter[technical_key]": {
-                type: "string",
-                required: false,
-                description: "Filtra por clave técnica.",
-              },
-              "filter[is_active]": {
-                type: "string",
-                required: false,
-                description:
-                  "Filtra por estado activo del rango (`1` activo, `0` inactivo).",
+                description: (
+                  <TypeTable
+                    type={{
+                      id: {
+                        type: "string",
+                        required: false,
+                        description:
+                          "Filtra por ID interno del rango de numeración.",
+                      },
+                      document: {
+                        type: "string",
+                        required: false,
+                        description:
+                          "Filtra por tipo de documento asociado al rango.",
+                      },
+                      resolution_number: {
+                        type: "string",
+                        required: false,
+                        description: "Filtra por número de resolución.",
+                      },
+                      technical_key: {
+                        type: "string",
+                        required: false,
+                        description: "Filtra por clave técnica.",
+                      },
+                      is_active: {
+                        type: "string",
+                        required: false,
+                        description:
+                          "Filtra por estado activo del rango (`1` activo, `0` inactivo).",
+                      },
+                    }}
+                  />
+                ),
               },
               page: {
                 type: "number",
@@ -75,7 +87,7 @@ Fuente oficial: [Obtener rangos de numeración](https://developers.factus.com.co
 
 ```ts
 const response = await factus.numberingRanges.list({
-  "filter[is_active]": "1",
+  filter: { is_active: "1" },
   page: 1,
   per_page: 10,
 });

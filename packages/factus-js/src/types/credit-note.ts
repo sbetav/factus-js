@@ -138,12 +138,12 @@ export interface CreditNote extends CreditNoteListItem {
 // ---------------------------------------------------------------------------
 
 export interface CreditNoteFilters {
-  "filter[identification]"?: string;
-  "filter[names]"?: string;
-  "filter[number]"?: string;
-  "filter[prefix]"?: string;
-  "filter[reference_code]"?: string;
-  "filter[status]"?: string;
+  identification?: string;
+  names?: string;
+  number?: string;
+  prefix?: string;
+  reference_code?: string;
+  status?: string;
 }
 
 // ---------------------------------------------------------------------------

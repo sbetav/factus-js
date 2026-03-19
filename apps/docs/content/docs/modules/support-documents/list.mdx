@@ -6,7 +6,7 @@ description: Listar documentos soporte con filtros y paginación.
 ## Firma del método
 
 ```ts
-list(filters?: SupportDocumentFilters & { page?: number; per_page?: number }): Promise<ApiResponse<PaginatedData<SupportDocument>>>
+list(params?: ListParams<SupportDocumentFilters>): Promise<ApiResponse<PaginatedData<SupportDocument>>>
 ```
 
 ## Endpoint Factus
@@ -19,45 +19,56 @@ Fuente oficial: [Filtrar documentos soporte](https://developers.factus.com.co/do
 
 <TypeTable
   type={{
-    filters: {
-      type: "SupportDocumentFilters & { page?: number; per_page?: number } (object)",
+    params: {
+      type: "ListParams<SupportDocumentFilters> (object)",
       required: false,
       description: (
         <div>
           Filtros y paginación para la consulta.
           <TypeTable
             type={{
-              "filter[identification]": {
-                type: "string",
+              filter: {
+                type: "SupportDocumentFilters",
                 required: false,
-                description: "Filtra por identificación del proveedor.",
-              },
-              "filter[names]": {
-                type: "string",
-                required: false,
-                description: "Filtra por nombres o razón social del proveedor.",
-              },
-              "filter[number]": {
-                type: "string",
-                required: false,
-                description:
-                  "Filtra por número del documento (admite coincidencias parciales).",
-              },
-              "filter[prefix]": {
-                type: "string",
-                required: false,
-                description: "Filtra por prefijo del documento.",
-              },
-              "filter[reference_code]": {
-                type: "string",
-                required: false,
-                description: "Filtra por código de referencia interno.",
-              },
-              "filter[status]": {
-                type: "string | number",
-                required: false,
-                description:
-                  "Estado de validación (`1` validado, `0` pendiente).",
+                description: (
+                  <TypeTable
+                    type={{
+                      identification: {
+                        type: "string",
+                        required: false,
+                        description: "Filtra por identificación del proveedor.",
+                      },
+                      names: {
+                        type: "string",
+                        required: false,
+                        description:
+                          "Filtra por nombres o razón social del proveedor.",
+                      },
+                      number: {
+                        type: "string",
+                        required: false,
+                        description:
+                          "Filtra por número del documento (admite coincidencias parciales).",
+                      },
+                      prefix: {
+                        type: "string",
+                        required: false,
+                        description: "Filtra por prefijo del documento.",
+                      },
+                      reference_code: {
+                        type: "string",
+                        required: false,
+                        description: "Filtra por código de referencia interno.",
+                      },
+                      status: {
+                        type: "string | number",
+                        required: false,
+                        description:
+                          "Estado de validación (`1` validado, `0` pendiente).",
+                      },
+                    }}
+                  />
+                ),
               },
               page: {
                 type: "number",
@@ -81,7 +92,7 @@ Fuente oficial: [Filtrar documentos soporte](https://developers.factus.com.co/do
 
 ```ts
 const response = await factus.supportDocuments.list({
-  "filter[status]": "1",
+  filter: { status: "1" },
   page: 1,
   per_page: 10,
 });
