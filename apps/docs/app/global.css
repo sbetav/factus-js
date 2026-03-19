@@ -76,3 +76,44 @@
   text-decoration-color: var(--color-fd-foreground);
   text-decoration-thickness: 1px;
 }
+
+/* TypeTable: let the first column (Prop name) wrap instead of forcing nowrap */
+.bg-fd-card code[class~="w-1/4"] {
+  min-width: 0 !important; /* overrides TypeTable's min-w-fit */
+  width: 33.3333% !important; /* slightly wider than TypeTable's default w-1/4 */
+  flex: 0 0 33.3333% !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* TypeTable header ("Prop") matches the first-column width */
+.bg-fd-card p[class~="w-1/4"] {
+  min-width: 0 !important;
+  width: 33.3333% !important;
+  flex: 0 0 33.3333% !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* TypeTable header/body ("Type") flexes to remaining space */
+.bg-fd-card [class*="max-xl:hidden"] {
+  min-width: 0 !important;
+  flex: 1 1 auto !important;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Below ~sm (40rem / ~640px), make the Prop column full width */
+@media not (min-width: 40rem) {
+  .bg-fd-card code[class~="w-1/4"] {
+    width: 100% !important;
+    flex: 1 1 auto !important;
+  }
+
+  .bg-fd-card p[class~="w-1/4"] {
+    width: 100% !important;
+    flex: 1 1 auto !important;
+  }
+}

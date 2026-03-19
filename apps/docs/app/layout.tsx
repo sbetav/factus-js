@@ -39,7 +39,28 @@ export default function Layout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <body className="flex flex-col min-h-screen">
-        <RootProvider>{children}</RootProvider>
+        <RootProvider
+          i18n={{
+            // Keep the locale name aligned with the current search index language
+            // (your `/api/search` handler is configured for `english`).
+            locale: "english",
+            locales: [{ name: "Español", locale: "english" }],
+            translations: {
+              search: "Buscar",
+              searchNoResult: "No se encontraron resultados",
+              toc: "En esta página",
+              tocNoHeadings: "Sin encabezados",
+              lastUpdate: "Última actualización",
+              chooseLanguage: "Elegir un idioma",
+              nextPage: "Página siguiente",
+              previousPage: "Página anterior",
+              chooseTheme: "Tema",
+              editOnGithub: "Editar en GitHub",
+            },
+          }}
+        >
+          {children}
+        </RootProvider>
       </body>
     </html>
   );
