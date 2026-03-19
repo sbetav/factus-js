@@ -1,5 +1,5 @@
 ---
-title: Eventos de facturas
+title: Obtener eventos RADIAN
 description: Obtener la lista de eventos RADIAN registrados en una factura.
 ---
 
@@ -15,6 +15,18 @@ getEvents(number: string): Promise<GetInvoiceEventsResponse>
 
 Fuente oficial: [Eventos de facturas](https://developers.factus.com.co/facturas/eventos-de-facturas/index.html)
 
+## Parámetros
+
+<TypeTable
+  type={{
+    number: {
+      type: "string",
+      required: true,
+      description:
+        "Número del documento de la factura para consultar sus eventos RADIAN.",
+    },
+  }}
+/>
 ## Ejemplo
 
 ```ts

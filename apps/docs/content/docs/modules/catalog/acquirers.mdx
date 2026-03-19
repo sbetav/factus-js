@@ -1,0 +1,69 @@
+---
+title: Obtener adquiriente
+description: Consultar nombre y correo del adquiriente por tipo y numero de documento.
+---
+
+## Firma del método
+
+```ts
+getAcquirer(filters: AcquirerFilters): Promise<ApiResponse<Acquirer>>
+```
+
+## Endpoint Factus
+
+`GET /v1/dian/acquirer`
+
+Fuente oficial: [Obtener datos de adquiriente](https://developers.factus.com.co/informacion-adquirientes/obtener-datos-adquiriente/index.html)
+
+## Parámetros
+
+<TypeTable
+  type={{
+    filters: {
+      type: "AcquirerFilters (object)",
+      required: true,
+      description: (
+        <div>
+          Datos de identificación para buscar el adquiriente.
+          <TypeTable
+            type={{
+              identification_document_id: {
+                type: "IdentityDocumentTypeId",
+                required: true,
+                description: (
+                  <>
+                    {
+                      "Tipo de documento de identificación del adquiriente — Ver "
+                    }
+                    <a href="/docs/modules/catalog/reference-tables#tipo-de-documento-de-identificación-identitydocumenttypeid">
+                      {"IdentityDocumentTypeId"}
+                    </a>
+                    {"."}
+                  </>
+                ),
+              },
+              identification_number: {
+                type: "string",
+                required: true,
+                description: "Número de identificación del adquiriente.",
+              },
+            }}
+          />
+        </div>
+      ),
+    },
+  }}
+/>
+## Ejemplo
+
+```ts
+import { IdentityDocumentTypeId } from "factus-js";
+
+const response = await factus.catalog.getAcquirer({
+  identification_document_id: IdentityDocumentTypeId.NIT,
+  identification_number: "1399991",
+});
+
+console.log(response.data.name);
+console.log(response.data.email);
+```

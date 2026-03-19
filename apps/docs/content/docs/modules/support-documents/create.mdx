@@ -15,6 +15,246 @@ create(input: CreateSupportDocumentInput): Promise<ApiResponse<SupportDocument>>
 
 Fuente oficial: [Crear documento soporte](https://developers.factus.com.co/documentos-soporte/crear-validar/index.html)
 
+## Parámetros
+
+<TypeTable
+  type={{
+    
+    reference_code: {
+      type: "string",
+      required: true,
+      description: "Código único interno de referencia.",
+    },
+    numbering_range_id: {
+      type: "number",
+      required: false,
+      description:
+        "ID del rango de numeración del documento soporte.",
+    },
+    payment_method_code: {
+      type: "PaymentMethodCode",
+      required: false,
+      description: (
+        <>
+          {"Método de pago DIAN — Ver "}
+          <a href="/docs/modules/catalog/reference-tables#método-de-pago-paymentmethodcode">
+            {"PaymentMethodCode"}
+          </a>
+          {"."}
+        </>
+      ),
+    },
+    observation: {
+      type: "string",
+      required: false,
+      description: "Observaciones del documento.",
+    },
+    provider: {
+      type: "object",
+      required: true,
+      description: (
+        <div>
+          Datos del proveedor no obligado a facturar.
+            <TypeTable
+              type={{
+                identification_document_id: {
+                  type: "SupportDocumentIdentityTypeId",
+                  required: true,
+                  description: (
+                    <>
+                      {"Tipo de documento del proveedor — Ver "}
+                      <a href="/docs/modules/catalog/reference-tables#tipo-de-identificación-para-documento-soporte-supportdocumentidentitytypeid">
+                        {"SupportDocumentIdentityTypeId"}
+                      </a>
+                      {"."}
+                    </>
+                  ),
+                },
+                identification: {
+                  type: "string",
+                  required: true,
+                  description:
+                    "Número de identificación del proveedor.",
+                },
+                dv: {
+                  type: "number",
+                  required: false,
+                  description:
+                    "Dígito de verificación del proveedor cuando aplica.",
+                },
+                trade_name: {
+                  type: "string",
+                  required: false,
+                  description: "Nombre comercial del proveedor.",
+                },
+                names: {
+                  type: "string",
+                  required: true,
+                  description:
+                    "Nombres o razón social del proveedor.",
+                },
+                address: {
+                  type: "string",
+                  required: true,
+                  description: "Dirección del proveedor.",
+                },
+                email: {
+                  type: "string",
+                  required: true,
+                  description: "Correo del proveedor.",
+                },
+                phone: {
+                  type: "string",
+                  required: false,
+                  description: "Teléfono del proveedor.",
+                },
+                is_resident: {
+                  type: "number",
+                  required: false,
+                  description: (
+                    <>
+                      {"Indicador de residencia ("}
+                      <code>{"0"}</code>
+                      {"/"}
+                      <code>{"1"}</code>
+                      {") según reglas DIAN."}
+                    </>
+                  ),
+                },
+                country_code: {
+                  type: "string",
+                  required: true,
+                  description: (
+                    <>
+                      {"Código de país del proveedor — Consulta "}
+                      <a href="/docs/modules/catalog/countries">
+                        {"países"}
+                      </a>
+                      {"."}
+                    </>
+                  ),
+                },
+                municipality_id: {
+                  type: "number",
+                  required: false,
+                  description: (
+                    <>
+                      {
+                        "ID de municipio del proveedor cuando aplica — Consulta "
+                      }
+                      <a href="/docs/modules/catalog/municipalities">
+                        {"municipios"}
+                      </a>
+                      {"."}
+                    </>
+                  ),
+                },
+              }}
+            />
+        </div>
+      ),
+    },
+    items: {
+      type: "Array<object>",
+      required: true,
+      description: (
+        <div>
+          Ítems del documento soporte.
+            <TypeTable
+              type={{
+                code_reference: {
+                  type: "string",
+                  required: true,
+                  description:
+                    "Código interno del producto o servicio.",
+                },
+                name: {
+                  type: "string",
+                  required: true,
+                  description: "Nombre del producto o servicio.",
+                },
+                quantity: {
+                  type: "number",
+                  required: true,
+                  description: "Cantidad.",
+                },
+                discount_rate: {
+                  type: "number",
+                  required: true,
+                  description: "Porcentaje de descuento del ítem.",
+                },
+                price: {
+                  type: "number",
+                  required: true,
+                  description: "Precio unitario.",
+                },
+                unit_measure_id: {
+                  type: "number",
+                  required: true,
+                  description: (
+                    <>
+                      {"ID de unidad de medida — Consulta "}
+                      <a href="/docs/modules/catalog/measurement-units">
+                        {"unidades de medida"}
+                      </a>
+                      {"."}
+                    </>
+                  ),
+                },
+                standard_code_id: {
+                  type: "ProductStandardId",
+                  required: true,
+                  description: (
+                    <>
+                      {"Estándar del producto/servicio — Ver "}
+                      <a href="/docs/modules/catalog/reference-tables#estándar-de-producto-productstandardid">
+                        {"ProductStandardId"}
+                      </a>
+                      {"."}
+                    </>
+                  ),
+                },
+                withholding_taxes: {
+                  type: "Array<object>",
+                  required: false,
+                  description: (
+                    <div>
+                      Autorretenciones del ítem.
+                        <TypeTable
+                          type={{
+                            code: {
+                              type: "string",
+                              required: true,
+                              description:
+                                <>
+                                  {"Código de retención aplicada — Consulta "}
+                                  <a href="/docs/modules/catalog/tributes">
+                                    tributos
+                                  </a>
+                                  {"."}
+                                </>
+                            },
+                            withholding_tax_rate:
+                              {
+                                type: "string | number",
+                                required: true,
+                                description:
+                                  "Tasa de retención aplicada.",
+                              },
+                          }}
+                        />
+                    </div>
+                  ),
+                },
+              }}
+            />
+          </div>
+      ),
+    },
+
+}}
+/>
+
 ## Ejemplo
 
 ```ts

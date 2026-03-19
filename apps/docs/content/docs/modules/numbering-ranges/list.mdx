@@ -15,13 +15,61 @@ list(filters?: NumberingRangeFilters & { page?: number; per_page?: number }): Pr
 
 Fuente oficial: [Obtener rangos de numeración](https://developers.factus.com.co/rangos-de-numeracion/obtener-rangos/index.html)
 
-## Filtros
+## Parámetros
 
-- `filter[id]`
-- `filter[document]`
-- `filter[resolution_number]`
-- `filter[technical_key]`
-- `filter[is_active]`
+<TypeTable
+  type={{
+    filters: {
+      type: "NumberingRangeFilters & { page?: number; per_page?: number } (object)",
+      required: false,
+      description: (
+        <div>
+          Filtros y paginación para la consulta.
+          <TypeTable
+            type={{
+              "filter[id]": {
+                type: "string",
+                required: false,
+                description: "Filtra por ID interno del rango de numeración.",
+              },
+              "filter[document]": {
+                type: "string",
+                required: false,
+                description: "Filtra por tipo de documento asociado al rango.",
+              },
+              "filter[resolution_number]": {
+                type: "string",
+                required: false,
+                description: "Filtra por número de resolución.",
+              },
+              "filter[technical_key]": {
+                type: "string",
+                required: false,
+                description: "Filtra por clave técnica.",
+              },
+              "filter[is_active]": {
+                type: "string",
+                required: false,
+                description:
+                  "Filtra por estado activo del rango (`1` activo, `0` inactivo).",
+              },
+              page: {
+                type: "number",
+                required: false,
+                description: "Número de página (base 1).",
+              },
+              per_page: {
+                type: "number",
+                required: false,
+                description: "Cantidad de resultados por página.",
+              },
+            }}
+          />
+        </div>
+      ),
+    },
+  }}
+/>
 
 ## Ejemplo
 

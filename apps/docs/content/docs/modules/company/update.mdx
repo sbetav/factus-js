@@ -17,6 +17,102 @@ update(input: UpdateCompanyInput): Promise<ApiResponse<Company>>
 
 Fuente oficial: [Actualizar empresa](https://developers.factus.com.co/empresas/actualizar/index.html)
 
+## Parámetros
+
+<TypeTable
+  type={{
+    
+    legal_organization_code: {
+      type: "string",
+      required: true,
+      description: (
+        <>
+          {"Código del tipo de organización ("}
+          <code>{"1"}</code>
+          {", "}
+          <code>{"2"}</code>
+          {", etc.)."}
+        </>
+      ),
+    },
+    company: {
+      type: "string | null",
+      required: false,
+      description: (
+        <>
+          {"Razón social; para persona natural suele enviarse "}
+          <code>{"null"}</code>
+          {"."}
+        </>
+      ),
+    },
+    trade_name: {
+      type: "string | null",
+      required: false,
+      description: "Nombre comercial de la empresa.",
+    },
+    names: {
+      type: "string | null",
+      required: false,
+      description: "Nombres (aplica para persona natural).",
+    },
+    surnames: {
+      type: "string | null",
+      required: false,
+      description: "Apellidos (aplica para persona natural).",
+    },
+    registration_code: {
+      type: "string | null",
+      required: false,
+      description:
+        "Código de registro mercantil/cámara de comercio.",
+    },
+    economic_activity: {
+      type: "string",
+      required: true,
+      description: "Código CIIU de actividad económica principal.",
+    },
+    phone: {
+      type: "string",
+      required: true,
+      description: "Teléfono de contacto.",
+    },
+    email: {
+      type: "string",
+      required: true,
+      description: "Correo electrónico de contacto.",
+    },
+    address: {
+      type: "string",
+      required: true,
+      description: "Dirección principal.",
+    },
+    tribute_code: {
+      type: "string",
+      required: true,
+      description: (
+        <>
+          {"Código del tributo (por ejemplo "}
+          <code>{"ZZ"}</code>
+          {")."}
+        </>
+      ),
+    },
+    municipality_code: {
+      type: "string",
+      required: true,
+      description: "Código DANE del municipio.",
+    },
+    responsibilities: {
+      type: "string",
+      required: true,
+      description:
+        "Código(s) de responsabilidad fiscal, en el formato esperado por Factus.",
+    },
+
+}}
+/>
+
 ## Ejemplo
 
 ```ts
@@ -40,6 +136,6 @@ console.log(response.data.updated_at);
 ```
 
 <Callout type="info">
-  Este endpoint no tiene permisos en entorno sandbox. Úsalo en producción o con
+  Este metodo no se puedde usar en entorno sandbox. Úsalo en producción o con
   credenciales autorizadas.
 </Callout>

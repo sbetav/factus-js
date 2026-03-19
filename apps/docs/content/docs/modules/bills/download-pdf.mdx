@@ -15,6 +15,17 @@ downloadPdf(number: string): Promise<DownloadInvoicePdfResponse>
 
 Fuente oficial: [Descargar PDF](https://developers.factus.com.co/facturas/descargar-factura/index.html)
 
+## Parámetros
+
+<TypeTable
+  type={{
+    "number": {
+      type: "string",
+      required: true,
+      description: "Número del documento de la factura cuyo PDF se descargará.",
+    },
+  }}
+/>
 ## Ejemplo
 
 ```ts

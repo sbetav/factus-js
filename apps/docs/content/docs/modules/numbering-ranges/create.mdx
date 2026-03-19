@@ -17,6 +17,44 @@ create(input: CreateNumberingRangeInput): Promise<ApiResponse<NumberingRange>>
 
 Fuente oficial: [Crear rango](https://developers.factus.com.co/rangos-de-numeracion/crear-rango/index.html)
 
+## Parámetros
+
+<TypeTable
+  type={{
+    
+    document: {
+      type: "NumberingRangeDocumentTypeCode",
+      required: true,
+      description: (
+        <>
+        {"Código del tipo de documento para el rango — Ver "}
+        <a href="/docs/modules/catalog/reference-tables#tipo-de-documento-en-rangos-de-numeración-numberingrangedocumenttypecode">
+          {"tipo de documento en rangos de numeración"}
+        </a>
+        {"."}
+        </>
+      ),
+    },
+    prefix: {
+      type: "string",
+      required: true,
+      description: "Prefijo del rango (ej. SETP).",
+    },
+    current: {
+      type: "number",
+      required: true,
+      description: "Consecutivo inicial/actual del rango.",
+    },
+    resolution_number: {
+      type: "string",
+      required: false,
+      description:
+        "Número de resolución; requerido para documentos 21, 24 o 30.",
+    },
+
+}}
+/>
+
 ## Ejemplo
 
 ```ts
@@ -33,6 +71,6 @@ console.log(response.data.id);
 ```
 
 <Callout type="info">
-  Este endpoint no tiene permisos en entorno sandbox. Úsalo en producción o con
+  Este metodo no se puedde usar en entorno sandbox. Úsalo en producción o con
   credenciales autorizadas.
 </Callout>

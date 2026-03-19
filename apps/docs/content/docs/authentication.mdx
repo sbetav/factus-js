@@ -28,14 +28,41 @@ const factus = new FactusClient({
 });
 ```
 
-| Parámetro      | Tipo                        | Descripción                                                               |
-| -------------- | --------------------------- | ------------------------------------------------------------------------- |
-| `clientId`     | `string`                    | ID de cliente OAuth2 proporcionado por Factus                             |
-| `clientSecret` | `string`                    | Secreto de cliente OAuth2 proporcionado por Factus                        |
-| `username`     | `string`                    | Email de la cuenta Factus                                                 |
-| `password`     | `string`                    | Contraseña de la cuenta Factus                                            |
-| `environment`  | `"sandbox" \| "production"` | Entorno de la API. Por defecto: `"production"`                            |
-| `baseUrl`      | `string`                    | URL base personalizada (ignora `environment`). Útil para proxies o tests. |
+<TypeTable
+  type={{
+    clientId: {
+      type: "string",
+      required: true,
+      description: "ID de cliente OAuth2 proporcionado por Factus.",
+    },
+    clientSecret: {
+      type: "string",
+      required: true,
+      description: "Secreto de cliente OAuth2 proporcionado por Factus.",
+    },
+    username: {
+      type: "string",
+      required: true,
+      description: "Email de la cuenta Factus.",
+    },
+    password: {
+      type: "string",
+      required: true,
+      description: "Contraseña de la cuenta Factus.",
+    },
+    environment: {
+      type: '"sandbox" | "production"',
+      required: false,
+      description: 'Entorno de la API. Por defecto: "production".',
+    },
+    baseUrl: {
+      type: "string",
+      required: false,
+      description:
+        "URL base personalizada (ignora environment). Útil para proxies o tests.",
+    },
+  }}
+/>
 
 ## URLs base
 

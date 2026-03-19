@@ -15,6 +15,17 @@ downloadXml(number: string): Promise<DownloadInvoiceXmlResponse>
 
 Fuente oficial: [Descargar XML](https://developers.factus.com.co/facturas/descargar-xml/index.html)
 
+## Parámetros
+
+<TypeTable
+  type={{
+    "number": {
+      type: "string",
+      required: true,
+      description: "Número del documento de la factura cuyo XML se descargará.",
+    },
+  }}
+/>
 ## Ejemplo
 
 ```ts

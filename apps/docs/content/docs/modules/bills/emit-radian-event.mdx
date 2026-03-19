@@ -1,6 +1,6 @@
 ---
-title: Aceptación Tacita
-description: Emitir eventos RADIAN para una factura por numero y tipo de evento.
+title: Emitir eventos RADIAN
+description: Emitir eventos RADIAN para una factura por número y tipo de evento.
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
@@ -21,13 +21,90 @@ emitRadianEvent(
 
 Fuente oficial: [Aceptación tacita](https://developers.factus.com.co/facturas/aceptacion-tacita/index.html)
 
-## Tipos de evento (`EventCode`)
+## Parámetros
 
-- `ReceiptAcknowledgement` (`"030"`)
-- `InvoiceClaim` (`"031"`)
-- `GoodsOrServiceReceipt` (`"032"`)
-- `ExpressAcceptance` (`"033"`)
-- `TacitAcceptance` (`"034"`)
+<TypeTable
+  type={{
+    number: {
+      type: "string",
+      required: true,
+      description:
+        "Número del documento de la factura sobre la que se emitirá el evento.",
+    },
+    eventType: {
+      type: "EventCode",
+      required: true,
+      description: (
+        <>
+          {"Código del evento RADIAN — Ver "}
+          <a href="/docs/modules/catalog/reference-tables#código-de-evento-eventcode">
+            {"EventCode"}
+          </a>
+          {"."}
+        </>
+      ),
+    },
+    input: {
+      type: "RadianEventUpdateInput (object)",
+      required: true,
+      description: (
+        <div>
+          Datos para actualizar el evento RADIAN.
+          <TypeTable
+            type={{
+            identification_document_code: {
+              type: "IdentityDocumentTypeId",
+              required: true,
+              description: (
+                <>
+                  {"Tipo de documento de identificación de quien reporta el evento — Ver "}
+                  <a href="/docs/modules/catalog/reference-tables#tipo-de-documento-de-identificaci%C3%B3n-identitydocumenttypeid">
+                    {"IdentityDocumentTypeId"}
+                  </a>
+                  {"."}
+                </>
+              ),
+            },
+          identification: {
+            type: "string",
+            required: true,
+            description:
+              "Número de identificación de quien reporta el evento.",
+          },
+          dv: {
+            type: "string",
+            required: false,
+            description:
+              "Dígito de verificación (requerido si el tipo de documento es NIT).",
+          },
+          first_name: {
+            type: "string",
+            required: true,
+            description: "Nombres de quien reporta el evento.",
+          },
+          last_name: {
+            type: "string",
+            required: true,
+            description: "Apellidos de quien reporta el evento.",
+          },
+          job_title: {
+            type: "string",
+            required: false,
+              description: "Cargo de quien reporta el evento.",
+            },
+            organization_department: {
+              type: "string",
+              required: false,
+              description: "Área/departamento de quien reporta el evento.",
+            },
+            }}
+          />
+        </div>
+      ),
+    },
+
+}}
+/>
 
 ## Ejemplo
 

@@ -15,6 +15,17 @@ downloadPdf(number: string): Promise<ApiResponse<DownloadAdjustmentNotePdfRespon
 
 Fuente oficial: [Descargar PDF](https://developers.factus.com.co/notas-ajuste-documentos-soporte/descargar-nota-ajuste-soporte-pdf/index.html)
 
+## Parámetros
+
+<TypeTable
+  type={{
+    "number": {
+      type: "string",
+      required: true,
+      description: "Número del documento de la nota de ajuste cuyo PDF se descargará.",
+    },
+  }}
+/>
 ## Ejemplo
 
 ```ts

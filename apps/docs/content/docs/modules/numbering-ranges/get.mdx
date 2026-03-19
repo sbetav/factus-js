@@ -17,6 +17,17 @@ get(id: number): Promise<ApiResponse<NumberingRange>>
 
 Fuente oficial: [Ver rango](https://developers.factus.com.co/rangos-de-numeracion/ver-rango/index.html)
 
+## Parámetros
+
+<TypeTable
+  type={{
+    id: {
+      type: "number",
+      required: true,
+      description: "ID numérico del rango de numeración a consultar.",
+    },
+  }}
+/>
 ## Ejemplo
 
 ```ts
@@ -29,6 +40,6 @@ console.log(numberingRange.document);
 ```
 
 <Callout type="info">
-  Este endpoint no tiene permisos en entorno sandbox. Úsalo en producción o con
+  Este metodo no se puedde usar en entorno sandbox. Úsalo en producción o con
   credenciales autorizadas.
 </Callout>

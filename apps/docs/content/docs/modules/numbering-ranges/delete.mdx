@@ -22,6 +22,17 @@ Fuente oficial: [Eliminar rango](https://developers.factus.com.co/rangos-de-nume
   marcado como eliminado.
 </Callout>
 
+## Parámetros
+
+<TypeTable
+  type={{
+    id: {
+      type: "number",
+      required: true,
+      description: "ID numérico del rango de numeración a eliminar.",
+    },
+  }}
+/>
 ## Ejemplo
 
 ```ts
@@ -29,6 +40,6 @@ await factus.numberingRanges.delete(8);
 ```
 
 <Callout type="info">
-  Este endpoint no tiene permisos en entorno sandbox. Úsalo en producción o con
+  Este metodo no se puedde usar en entorno sandbox. Úsalo en producción o con
   credenciales autorizadas.
 </Callout>

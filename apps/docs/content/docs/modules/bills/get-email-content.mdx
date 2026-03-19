@@ -15,6 +15,17 @@ getEmailContent(number: string): Promise<GetInvoiceEmailContentResponse>
 
 Fuente oficial: [Obtener contenido de correo](https://developers.factus.com.co/facturas/obtener-contenido-de-correo/index.html)
 
+## Parámetros
+
+<TypeTable
+  type={{
+    "number": {
+      type: "string",
+      required: true,
+      description: "Número del documento de la factura para construir el contenido de correo.",
+    },
+  }}
+/>
 ## Ejemplo
 
 ```ts

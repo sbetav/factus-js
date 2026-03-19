@@ -17,6 +17,36 @@ sendEmail(number: string, input: SendInvoiceEmailInput): Promise<SendInvoiceEmai
 
 Fuente oficial: [Enviar correo](https://developers.factus.com.co/facturas/enviar-correo/index.html)
 
+## Parámetros
+
+<TypeTable
+  type={{
+    number: {
+      type: "string",
+      required: true,
+      description: "Número del documento de la factura a enviar.",
+    },
+    input: {
+      type: "SendInvoiceEmailInput (object)",
+      required: true,
+      description: (
+        <div>
+          Datos para enviar el correo electrónico.
+          <TypeTable
+            type={{
+              email: {
+                type: "string",
+                required: true,
+                description: "Correo destinatario.",
+              },
+            }}
+          />
+        </div>
+      ),
+    },
+  }}
+/>
+
 ## Ejemplo
 
 ```ts

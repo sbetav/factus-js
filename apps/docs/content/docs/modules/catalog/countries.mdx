@@ -1,0 +1,60 @@
+---
+title: Países
+description: Listar países disponibles para datos de terceros y empresa.
+---
+
+## Firma del método
+
+```ts
+listCountries(filters?: CountryFilters & { page?: number; per_page?: number }): Promise<ApiResponse<Country[]>>
+```
+
+## Endpoint Factus
+
+`GET /v1/countries`
+
+Fuente oficial: [Obtener países](https://developers.factus.com.co/paises/obtener-paises/index.html)
+
+## Parámetros
+
+<TypeTable
+  type={{
+    filters: {
+      type: "CountryFilters & { page?: number; per_page?: number } (object)",
+      required: false,
+      description: (
+        <div>
+          Filtros y paginación opcional para la consulta.
+          <TypeTable
+            type={{
+              name: {
+                type: "string",
+                required: false,
+                description: "Filtra países por nombre (coincidencia parcial).",
+              },
+              page: {
+                type: "number",
+                required: false,
+                description: "Número de página (base 1).",
+              },
+              per_page: {
+                type: "number",
+                required: false,
+                description: "Cantidad de resultados por página.",
+              },
+            }}
+          />
+        </div>
+      ),
+    },
+  }}
+/>
+## Ejemplo
+
+```ts
+const response = await factus.catalog.listCountries({
+  name: "Colombia",
+});
+
+console.log(response.data[0]);
+```

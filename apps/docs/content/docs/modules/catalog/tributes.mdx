@@ -15,10 +15,31 @@ listTributes(filters?: TributeFilters): Promise<ApiResponse<Tribute[]>>
 
 Fuente oficial: [Tributos de productos](https://developers.factus.com.co/tributos/tributos-de-productos/index.html)
 
-## Filtros
+## Parámetros
 
-- `name`
-
+<TypeTable
+  type={{
+    filters: {
+      type: "TributeFilters (object)",
+      required: false,
+      description: (
+        <div>
+          Filtros opcionales para la consulta.
+          <TypeTable
+            type={{
+              name: {
+                type: "string",
+                required: false,
+                description:
+                  "Filtra tributos por nombre (coincidencia parcial).",
+              },
+            }}
+          />
+        </div>
+      ),
+    },
+  }}
+/>
 ## Ejemplo
 
 ```ts

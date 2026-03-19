@@ -15,6 +15,17 @@ downloadPdf(number: string): Promise<ApiResponse<DownloadSupportDocumentPdfRespo
 
 Fuente oficial: [Descargar PDF](https://developers.factus.com.co/documentos-soporte/descargar-documento-soporte/index.html)
 
+## Parámetros
+
+<TypeTable
+  type={{
+    "number": {
+      type: "string",
+      required: true,
+      description: "Número del documento soporte cuyo PDF se descargará.",
+    },
+  }}
+/>
 ## Ejemplo
 
 ```ts

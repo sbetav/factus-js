@@ -17,6 +17,36 @@ updateCurrent(id: number, input: UpdateNumberingRangeCurrentInput): Promise<ApiR
 
 Fuente oficial: [Actualizar consecutivo](https://developers.factus.com.co/rangos-de-numeracion/actualizar-consecutivo/index.html)
 
+## Parámetros
+
+<TypeTable
+  type={{
+    id: {
+      type: "number",
+      required: true,
+      description: "ID numérico del rango de numeración a actualizar.",
+    },
+    input: {
+      type: "UpdateNumberingRangeCurrentInput (object)",
+      required: true,
+      description: (
+        <div>
+          Datos para actualizar el consecutivo actual.
+          <TypeTable
+            type={{
+              current: {
+                type: "number",
+                required: true,
+                description: "Valor del consecutivo actual.",
+              },
+            }}
+          />
+        </div>
+      ),
+    },
+  }}
+/>
+
 ## Ejemplo
 
 ```ts
@@ -28,6 +58,6 @@ console.log(response.data.current);
 ```
 
 <Callout type="info">
-  Este endpoint no tiene permisos en entorno sandbox. Úsalo en producción o con
+  Este metodo no se puedde usar en entorno sandbox. Úsalo en producción o con
   credenciales autorizadas.
 </Callout>

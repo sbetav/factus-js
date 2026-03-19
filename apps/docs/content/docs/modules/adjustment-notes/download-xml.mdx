@@ -15,6 +15,17 @@ downloadXml(number: string): Promise<ApiResponse<DownloadAdjustmentNoteXmlRespon
 
 Fuente oficial: [Descargar XML](https://developers.factus.com.co/notas-ajuste-documentos-soporte/descargar-xml/index.html)
 
+## Parámetros
+
+<TypeTable
+  type={{
+    "number": {
+      type: "string",
+      required: true,
+      description: "Número del documento de la nota de ajuste cuyo XML se descargará.",
+    },
+  }}
+/>
 ## Ejemplo
 
 ```ts

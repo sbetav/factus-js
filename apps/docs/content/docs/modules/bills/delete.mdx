@@ -21,6 +21,17 @@ Fuente oficial: [Eliminar factura no validada](https://developers.factus.com.co/
   Solo se pueden eliminar facturas que no hayan sido validadas por la DIAN.
 </Callout>
 
+## Parámetros
+
+<TypeTable
+  type={{
+    "referenceCode": {
+      type: "string",
+      required: true,
+      description: <>{"Código de referencia ("}<code>{"reference_code"}</code>{") de la factura no validada a eliminar."}</>,
+    },
+  }}
+/>
 ## Ejemplo
 
 ```ts

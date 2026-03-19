@@ -15,6 +15,17 @@ getByNumber(number: string): Promise<ViewInvoiceResponse>
 
 Fuente oficial: [Ver factura](https://developers.factus.com.co/facturas/ver/index.html)
 
+## Parámetros
+
+<TypeTable
+  type={{
+    "number": {
+      type: "string",
+      required: true,
+      description: <>{"Número del documento de la factura (por ejemplo "}<code>{"SETP990000203"}</code>{")."}</>,
+    },
+  }}
+/>
 ## Ejemplo
 
 ```ts

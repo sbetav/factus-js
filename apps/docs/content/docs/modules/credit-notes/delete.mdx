@@ -21,6 +21,17 @@ Fuente oficial: [Eliminar nota crédito](https://developers.factus.com.co/notas-
   Solo se pueden eliminar notas crédito que no hayan sido validadas por la DIAN.
 </Callout>
 
+## Parámetros
+
+<TypeTable
+  type={{
+    "referenceCode": {
+      type: "string",
+      required: true,
+      description: <>{"Código de referencia ("}<code>{"reference_code"}</code>{") de la nota crédito no validada a eliminar."}</>,
+    },
+  }}
+/>
 ## Ejemplo
 
 ```ts

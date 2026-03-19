@@ -17,6 +17,17 @@ uploadLogo(image: File | Blob): Promise<ApiResponse<UploadCompanyLogoResponse>>
 
 Fuente oficial: [Actualizar logo de la empresa](https://developers.factus.com.co/empresas/actualizar-imagen/index.html)
 
+## Parámetros
+
+<TypeTable
+  type={{
+    image: {
+      type: "File | Blob",
+      required: true,
+      description: "Archivo de imagen del logo en formato PNG, JPG o JPEG.",
+    },
+  }}
+/>
 ## Ejemplo
 
 ```ts
@@ -34,6 +45,6 @@ console.log(response.data.url_log);
 </Callout>
 
 <Callout type="info">
-  Este endpoint no tiene permisos en entorno sandbox. Úsalo en producción o con
+  Este metodo no se puedde usar en entorno sandbox. Úsalo en producción o con
   credenciales autorizadas.
 </Callout>

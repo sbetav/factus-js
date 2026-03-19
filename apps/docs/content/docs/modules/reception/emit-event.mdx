@@ -17,6 +17,123 @@ emitEvent(params: EmitEventParams, input: EmitEventInput): Promise<ApiResponse<R
 
 Fuente oficial: [Emitir evento](https://developers.factus.com.co/recepcion-de-documentos/emitir-evento/index.html)
 
+## Parámetros
+
+<TypeTable
+  type={{
+    params: {
+      type: "EmitEventParams",
+      required: true,
+      description: (
+        <div>
+          Identificación del documento y tipo de evento a emitir.
+            <TypeTable
+              type={{
+                bill_id: {
+                  type: "string | number",
+                  required: true,
+                  description:
+                    "ID o número del documento recibido sobre el cual se emitirá el evento.",
+                },
+                event_type: {
+                  type: "EventCode",
+                  required: true,
+                  description: (
+                    <>
+                      {"Código del evento RADIAN — Ver "}
+                      <a href="/docs/modules/catalog/reference-tables#código-de-evento-eventcode">
+                        {"EventCode"}
+                      </a>
+                      {"."}
+                    </>
+                  ),
+                },
+              }}
+            />
+        </div>
+      ),
+    },
+
+    input: {
+      type: "EmitEventInput (object)",
+      required: true,
+      description: (
+        <div>
+          Datos del evento a emitir.
+          <TypeTable
+            type={{
+              claim_concept_code: {
+      type: "ClaimConceptCode",
+      required: false,
+      description: (
+        <>
+          {"Concepto de reclamo; requerido cuando "}
+          <code>{"event_type"}</code>
+          {" es "}
+          <code>{"031"}</code>
+          {". — Ver "}
+          <a href="/docs/modules/catalog/reference-tables#concepto-de-reclamo-claimconceptcode">
+            {"ClaimConceptCode"}
+          </a>
+          {"."}
+        </>
+      ),
+    },
+    identification_document_code: {
+      type: "number",
+      required: true,
+      description:
+        "Tipo de documento de identificación de la persona que emite el evento.",
+    },
+    identification: {
+      type: "string",
+      required: true,
+      description:
+        "Número de identificación de la persona que emite el evento.",
+    },
+    dv: {
+      type: "string",
+      required: false,
+      description: (
+        <>
+          {"Dígito de verificación; requerido cuando "}
+          <code>{"identification_document_code"}</code>
+          {" es NIT ("}
+          <code>{"6"}</code>
+          {")."}
+        </>
+      ),
+    },
+    first_name: {
+      type: "string",
+      required: true,
+      description: "Nombres de la persona que emite el evento.",
+    },
+    last_name: {
+      type: "string",
+      required: true,
+      description: "Apellidos de la persona que emite el evento.",
+    },
+    job_title: {
+      type: "string",
+      required: false,
+      description: "Cargo de la persona que emite el evento.",
+    },
+    organization_department: {
+      type: "string",
+      required: false,
+      description:
+        "Área/departamento de la persona que emite el evento.",
+    },
+            }}
+          />
+        </div>
+      ),
+    },
+
+}}
+/>
+
 ## Ejemplo
 
 ```ts

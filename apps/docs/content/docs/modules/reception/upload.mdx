@@ -17,6 +17,21 @@ upload(input: UploadReceptionBillInput): Promise<ApiResponse<UploadedReceptionBi
 
 Fuente oficial: [Cargar factura](https://developers.factus.com.co/recepcion-de-documentos/cargar-factura/index.html)
 
+## Parámetros
+
+<TypeTable
+  type={{
+    
+    track_id: {
+      type: "string",
+      required: true,
+      description:
+        "Track ID/CUFE de la factura emitida por el proveedor.",
+    },
+
+}}
+/>
+
 ## Ejemplo
 
 ```ts
@@ -29,6 +44,6 @@ console.log(response.data.number);
 ```
 
 <Callout type="info">
-  Este endpoint no tiene permisos en entorno sandbox. Úsalo en producción o con
+  Este metodo no se puedde usar en entorno sandbox. Úsalo en producción o con
   credenciales autorizadas.
 </Callout>

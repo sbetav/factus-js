@@ -15,15 +15,71 @@ list(filters?: ReceptionBillFilters & { page?: number; per_page?: number }): Pro
 
 Fuente oficial: [Ver facturas](https://developers.factus.com.co/recepcion-de-documentos/ver-facturas/index.html)
 
-## Filtros
+## Parámetros
 
-- `filter[id]`
-- `filter[number]`
-- `filter[issue_date]`
-- `filter[cufe]`
-- `filter[company_nit]`
-- `filter[company_name]`
-- `filter[completed_events]`
+<TypeTable
+  type={{
+    filters: {
+      type: "ReceptionBillFilters & { page?: number; per_page?: number }",
+      required: false,
+      description: (
+        <div>
+          Filtros y paginación para la consulta.
+          <TypeTable
+            type={{
+              "filter[id]": {
+                type: "string",
+                required: false,
+                description: "Filtra por ID interno del documento recibido.",
+              },
+              "filter[number]": {
+                type: "string",
+                required: false,
+                description: "Filtra por número del documento.",
+              },
+              "filter[issue_date]": {
+                type: "string",
+                required: false,
+                description: "Filtra por fecha de emisión del documento.",
+              },
+              "filter[cufe]": {
+                type: "string",
+                required: false,
+                description: "Filtra por CUFE.",
+              },
+              "filter[company_nit]": {
+                type: "string",
+                required: false,
+                description: "Filtra por NIT del emisor.",
+              },
+              "filter[company_name]": {
+                type: "string",
+                required: false,
+                description: "Filtra por nombre o razón social del emisor.",
+              },
+              "filter[completed_events]": {
+                type: "string",
+                required: false,
+                description:
+                  "Filtra por estado de eventos emitidos (`1` completos, `0` pendientes).",
+              },
+              page: {
+                type: "number",
+                required: false,
+                description: "Número de página (base 1).",
+              },
+              per_page: {
+                type: "number",
+                required: false,
+                description: "Cantidad de resultados por página.",
+              },
+            }}
+          />
+        </div>
+      ),
+    },
+  }}
+/>
 
 ## Ejemplo
 

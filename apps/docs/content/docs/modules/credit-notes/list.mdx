@@ -15,14 +15,67 @@ list(filters?: CreditNoteFilters & { page?: number; per_page?: number }): Promis
 
 Fuente oficial: [Ver y filtrar notas crédito](https://developers.factus.com.co/notas-credito/ver-filtrar/index.html)
 
-## Filtros
+## Parámetros
 
-- `filter[identification]`
-- `filter[names]`
-- `filter[number]`
-- `filter[prefix]`
-- `filter[reference_code]`
-- `filter[status]` (1 validada, 0 pendiente)
+<TypeTable
+  type={{
+    filters: {
+      type: "CreditNoteFilters & { page?: number; per_page?: number } (object)",
+      required: false,
+      description: (
+        <div>
+          Filtros y paginación para la consulta.
+          <TypeTable
+            type={{
+              "filter[identification]": {
+                type: "string",
+                required: false,
+                description: "Filtra por identificación del cliente.",
+              },
+              "filter[names]": {
+                type: "string",
+                required: false,
+                description: "Filtra por nombres o razón social del cliente.",
+              },
+              "filter[number]": {
+                type: "string",
+                required: false,
+                description:
+                  "Filtra por número del documento (admite coincidencias parciales).",
+              },
+              "filter[prefix]": {
+                type: "string",
+                required: false,
+                description: "Filtra por prefijo del documento.",
+              },
+              "filter[reference_code]": {
+                type: "string",
+                required: false,
+                description: "Filtra por código de referencia interno.",
+              },
+              "filter[status]": {
+                type: "string",
+                required: false,
+                description:
+                  "Estado de validación (`1` validada, `0` pendiente).",
+              },
+              page: {
+                type: "number",
+                required: false,
+                description: "Número de página (base 1).",
+              },
+              per_page: {
+                type: "number",
+                required: false,
+                description: "Cantidad de resultados por página.",
+              },
+            }}
+          />
+        </div>
+      ),
+    },
+  }}
+/>
 
 ## Ejemplo
 

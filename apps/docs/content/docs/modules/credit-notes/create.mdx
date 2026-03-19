@@ -15,6 +15,457 @@ create(input: CreateCreditNoteInput): Promise<ApiResponse<CreditNoteListItem>>
 
 Fuente oficial: [Crear y validar nota crédito](https://developers.factus.com.co/notas-credito/crear-y-validar/index.html)
 
+## Parámetros
+
+<TypeTable
+  type={{
+    
+    numbering_range_id: {
+      type: "number",
+      required: false,
+      description: "ID del rango de numeración.",
+    },
+    correction_concept_code: {
+      type: "CreditNoteCorrectionCode",
+      required: true,
+      description: (
+        <>
+          {"Concepto de corrección — Ver "}
+          <a href="/docs/modules/catalog/reference-tables#concepto-de-corrección-de-nota-crédito-creditnotecorrectioncode">
+            {"CreditNoteCorrectionCode"}
+          </a>
+          {"."}
+        </>
+      ),
+    },
+    customization_id: {
+      type: "20 | 22",
+      required: true,
+      description: (
+        <>
+          {"Tipo de operación — Ver "}
+          <a href="/docs/modules/catalog/reference-tables#tipo-de-operación-en-nota-crédito-creditnoteoperationtypecode">
+            {"CreditNoteOperationTypeCode"}
+          </a>
+          {"."}
+        </>
+      ),
+    },
+    bill_id: {
+      type: "number",
+      required: false,
+      description: (
+        <>
+          {
+            "ID interno de la factura referenciada; usualmente requerido cuando "
+          }
+          <code>{"customization_id"}</code>
+          {" es "}
+          <code>{"20"}</code>
+          {"."}
+        </>
+      ),
+    },
+    reference_code: {
+      type: "string",
+      required: true,
+      description:
+        "Código único interno de referencia de la nota crédito.",
+    },
+    payment_method_code: {
+      type: "PaymentMethodCode",
+      required: true,
+      description: (
+        <>
+          {"Método de pago DIAN — Ver "}
+          <a href="/docs/modules/catalog/reference-tables#m%C3%A9todo-de-pago-paymentmethodcode">
+            {"PaymentMethodCode"}
+          </a>
+          {"."}
+        </>
+      ),
+    },
+    send_email: {
+      type: "boolean",
+      required: false,
+      description: (
+        <>
+          {"Si "}
+          <code>{"true"}</code>
+          {", Factus envía el correo automáticamente."}
+        </>
+      ),
+    },
+    observation: {
+      type: "string",
+      required: false,
+      description: "Observaciones del documento.",
+    },
+    billing_period: {
+      type: "BillingPeriod",
+      required: false,
+      description: (
+        <div>
+          Período de facturación asociado.
+            <TypeTable
+              type={{
+                start_date: {
+                  type: "string",
+                  required: true,
+                  description: "Fecha inicial (YYYY-MM-DD).",
+                },
+                start_time: {
+                  type: "string",
+                  required: false,
+                  description: "Hora inicial (HH:mm:ss).",
+                },
+                end_date: {
+                  type: "string",
+                  required: true,
+                  description: "Fecha final (YYYY-MM-DD).",
+                },
+                end_time: {
+                  type: "string",
+                  required: false,
+                  description: "Hora final (HH:mm:ss).",
+                },
+              }}
+            />
+        </div>
+      ),
+    },
+    establishment: {
+      type: "EstablishmentInput",
+      required: false,
+      description: (
+        <div>
+          Datos del establecimiento emisor.
+            <TypeTable
+              type={{
+                name: {
+                  type: "string",
+                  required: true,
+                  description: "Nombre del establecimiento.",
+                },
+                address: {
+                  type: "string",
+                  required: true,
+                  description: "Dirección del establecimiento.",
+                },
+                phone_number: {
+                  type: "string",
+                  required: true,
+                  description: "Teléfono del establecimiento.",
+                },
+                email: {
+                  type: "string",
+                  required: true,
+                  description: "Correo del establecimiento.",
+                },
+                municipality_id: {
+                  type: "string",
+                  required: true,
+                  description: (
+                    <>
+                      {"ID del municipio. Consulta "}
+                      <a href="/docs/modules/catalog/municipalities">
+                        {"municipios"}
+                      </a>
+                      {"."}
+                    </>
+                  ),
+                },
+              }}
+            />
+        </div>
+      ),
+    },
+    customer: {
+      type: "object",
+      required: false,
+      description: (
+        <div>
+          Datos del cliente receptor (según escenario puede ser
+          obligatorio por reglas DIAN).
+            <TypeTable
+              type={{
+                identification_document_id: {
+                  type: "IdentityDocumentTypeId",
+                  required: false,
+                  description: (
+                    <>
+                      {"Tipo de documento — Ver "}
+                      <a href="/docs/modules/catalog/reference-tables#tipo-de-documento-de-identificación-identitydocumenttypeid">
+                        {"IdentityDocumentTypeId"}
+                      </a>
+                      {"."}
+                    </>
+                  ),
+                },
+                identification: {
+                  type: "string",
+                  required: true,
+                  description:
+                    "Número de identificación del cliente.",
+                },
+                dv: {
+                  type: "number | string",
+                  required: false,
+                  description:
+                    "Dígito de verificación del cliente (NIT).",
+                },
+                company: {
+                  type: "string",
+                  required: false,
+                  description: "Razón social del cliente.",
+                },
+                trade_name: {
+                  type: "string",
+                  required: false,
+                  description: "Nombre comercial del cliente.",
+                },
+                names: {
+                  type: "string",
+                  required: false,
+                  description: "Nombres del cliente.",
+                },
+                address: {
+                  type: "string",
+                  required: false,
+                  description: "Dirección del cliente.",
+                },
+                email: {
+                  type: "string",
+                  required: false,
+                  description: "Correo del cliente.",
+                },
+                phone: {
+                  type: "string",
+                  required: false,
+                  description: "Teléfono del cliente.",
+                },
+                legal_organization_id: {
+                  type: "OrganizationTypeId",
+                  required: false,
+                  description: (
+                    <>
+                      {"Tipo de organización — Ver "}
+                      <a href="/docs/modules/catalog/reference-tables#tipo-de-organización-organizationtypeid">
+                        {"OrganizationTypeId"}
+                      </a>
+                      {"."}
+                    </>
+                  ),
+                },
+                tribute_id: {
+                  type: "CustomerTributeId",
+                  required: false,
+                  description: (
+                    <>
+                      {"Tributo del cliente — Ver "}
+                      <a href="/docs/modules/catalog/reference-tables#tributo-del-cliente-customertributeid">
+                        {"CustomerTributeId"}
+                      </a>
+                      {"."}
+                    </>
+                  ),
+                },
+                municipality_id: {
+                  type: "number | string",
+                  required: false,
+                  description: (
+                    <>
+                      {"ID del municipio del cliente — Consulta "}
+                      <a href="/docs/modules/catalog/municipalities">
+                        {"municipios"}
+                      </a>
+                      {"."}
+                    </>
+                  ),
+                },
+              }}
+            />
+        </div>
+      ),
+    },
+    items: {
+      type: "Array<object>",
+      required: true,
+      description: (
+        <div>
+          Ítems incluidos en la nota crédito.
+            <TypeTable
+              type={{
+                note: {
+                  type: "string",
+                  required: false,
+                  description: "Nota adicional del ítem.",
+                },
+                code_reference: {
+                  type: "string",
+                  required: true,
+                  description:
+                    "Código interno del producto o servicio.",
+                },
+                name: {
+                  type: "string",
+                  required: true,
+                  description: "Nombre del producto o servicio.",
+                },
+                quantity: {
+                  type: "number",
+                  required: true,
+                  description: "Cantidad.",
+                },
+                discount_rate: {
+                  type: "number",
+                  required: true,
+                  description: "Porcentaje de descuento.",
+                },
+                price: {
+                  type: "number",
+                  required: true,
+                  description:
+                    "Precio unitario con impuestos incluidos.",
+                },
+                tax_rate: {
+                  type: "string",
+                  required: true,
+                  description: "Tasa de impuesto del ítem.",
+                },
+                unit_measure_id: {
+                  type: "number",
+                  required: true,
+                  description: (
+                    <>
+                      {"ID de unidad de medida — Consulta "}
+                      <a href="/docs/modules/catalog/measurement-units">
+                        {"unidades de medida"}
+                      </a>
+                      {"."}
+                    </>
+                  ),
+                },
+                standard_code_id: {
+                  type: "ProductStandardId",
+                  required: true,
+                  description: (
+                    <>
+                      {"Estándar del producto/servicio — Ver "}
+                      <a href="/docs/modules/catalog/reference-tables#estándar-de-producto-productstandardid">
+                        {"ProductStandardId"}
+                      </a>
+                      {"."}
+                    </>
+                  ),
+                },
+                is_excluded: {
+                  type: "number",
+                  required: true,
+                  description:
+                    "Indica exclusión de IVA (0 no, 1 sí).",
+                },
+                tribute_id: {
+                  type: "number",
+                  required: true,
+                  description: (
+                    <>
+                      {"ID del tributo aplicado al ítem — Consulta "}
+                      <a href="/docs/modules/catalog/tributes">
+                        {"tributos"}
+                      </a>
+                      {"."}
+                    </>
+                  ),
+                },
+                withholding_taxes: {
+                  type: "Array<object>",
+                  required: false,
+                  description: (
+                    <div>
+                      Retenciones del ítem.
+                        <TypeTable
+                          type={{
+                            code: {
+                              type: "string",
+                              required: true,
+                              description: (
+                                <>
+                                  {"Código de retención — Consulta "}
+                                  <a href="/docs/modules/catalog/tributes">
+                                    tributos
+                                  </a>
+                                  {"."}
+                                </>
+                              ),
+                            },
+                            withholding_tax_rate:
+                              {
+                                type: "number",
+                                required: true,
+                                description: "Tasa de retención.",
+                              },
+                          }}
+                        />
+                    </div>
+                  ),
+                },
+              }}
+            />
+        </div>
+      ),
+    },
+    allowance_charges: {
+      type: "Array<object>",
+      required: false,
+      description: (
+        <div>
+          Descuentos o recargos globales del documento.
+            <TypeTable
+              type={{
+                concept_type: {
+                  type: "ChargeDiscountCode",
+                  required: true,
+                  description: (
+                    <>
+                      {"Código de concepto. Ver "}
+                      <a href="/docs/modules/catalog/reference-tables#tipo-de-cargo-o-descuento-chargediscountcode">
+                        {"ChargeDiscountCode"}
+                      </a>
+                      {"."}
+                    </>
+                  ),
+                },
+                is_surcharge: {
+                  type: "boolean",
+                  required: true,
+                  description:
+                    "true para recargo, false para descuento.",
+                },
+                reason: {
+                  type: "string",
+                  required: true,
+                  description: "Motivo del descuento/recargo.",
+                },
+                base_amount: {
+                  type: "number",
+                  required: true,
+                  description: "Base sobre la cual se calcula.",
+                },
+                amount: {
+                  type: "number",
+                  required: true,
+                  description: "Valor total del descuento/recargo.",
+                },
+              }}
+            />
+        </div>
+      ),
+    },
+
+}}
+/>
+
 ## Ejemplo
 
 ```ts

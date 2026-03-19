@@ -22,15 +22,53 @@ class FactusError extends Error {
 }
 ```
 
-| Propiedad              | Tipo         | Descripción                                           |
-| ---------------------- | ------------ | ----------------------------------------------------- |
-| `message`              | `string`     | Mensaje del primer error, o el statusText HTTP        |
-| `statusCode`           | `number`     | Código de estado HTTP (400, 401, 404, 422, 500, etc.) |
-| `errors`               | `Array<...>` | Lista completa de errores devuelta por la API         |
-| `errors[].code`        | `number`     | Código interno de error de la API                     |
-| `errors[].message`     | `string`     | Mensaje de error legible                              |
-| `errors[].detail`      | `string`     | Detalle técnico del error                             |
-| `errors[].api_version` | `string`     | Versión de la API que generó el error                 |
+<TypeTable
+  type={{
+    message: {
+      type: "string",
+      required: true,
+      description: "Mensaje del primer error, o el statusText HTTP.",
+    },
+    statusCode: {
+      type: "number",
+      required: true,
+      description: "Código de estado HTTP (400, 401, 404, 422, 500, etc.).",
+    },
+    errors: {
+      type: "Array<object>",
+      required: true,
+      description: (
+        <div>
+          Lista completa de errores devuelta por la API.
+          <TypeTable
+            type={{
+              code: {
+                type: "number",
+                required: true,
+                description: "Código interno de error de la API.",
+              },
+              message: {
+                type: "string",
+                required: true,
+                description: "Mensaje de error legible.",
+              },
+              detail: {
+                type: "string",
+                required: true,
+                description: "Detalle técnico del error.",
+              },
+              api_version: {
+                type: "string",
+                required: true,
+                description: "Versión de la API que generó el error.",
+              },
+            }}
+          />
+        </div>
+      ),
+    },
+  }}
+/>
 
 ## Importar `FactusError`
 

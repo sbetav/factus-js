@@ -1,0 +1,61 @@
+---
+title: Municipios
+description: Listar municipios disponibles para direcciones y ubicaciones.
+---
+
+## Firma del método
+
+```ts
+listMunicipalities(filters?: MunicipalityFilters & { page?: number; per_page?: number }): Promise<ApiResponse<Municipality[]>>
+```
+
+## Endpoint Factus
+
+`GET /v1/municipalities`
+
+Fuente oficial: [Obtener municipios](https://developers.factus.com.co/municipios/obtener-municipios/index.html)
+
+## Parámetros
+
+<TypeTable
+  type={{
+    filters: {
+      type: "MunicipalityFilters & { page?: number; per_page?: number } (object)",
+      required: false,
+      description: (
+        <div>
+          Filtros y paginación opcional para la consulta.
+          <TypeTable
+            type={{
+              name: {
+                type: "string",
+                required: false,
+                description:
+                  "Filtra municipios por nombre (coincidencia parcial).",
+              },
+              page: {
+                type: "number",
+                required: false,
+                description: "Número de página (base 1).",
+              },
+              per_page: {
+                type: "number",
+                required: false,
+                description: "Cantidad de resultados por página.",
+              },
+            }}
+          />
+        </div>
+      ),
+    },
+  }}
+/>
+## Ejemplo
+
+```ts
+const response = await factus.catalog.listMunicipalities({
+  name: "San Gil",
+});
+
+console.log(response.data[0]);
+```
