@@ -41,6 +41,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     images: [ogImageUrl],
   },
+  verification: {
+    google: "VtR1sa2X3WgAFpn6RPNd3xhrtzS0ba7cxAqITuskuOY",
+  },
 };
 
 export default function Layout({ children }: LayoutProps<"/">) {
