@@ -135,7 +135,7 @@ export default async function HomePage() {
   return (
     <main className="flex flex-col items-center w-full overflow-x-hidden">
       {/* ── HERO ──────────────────────────────────────────── */}
-      <section className="relative flex flex-col items-center py-16 justify-center px-6  text-center w-full max-w-5xl mx-auto h-[calc(100dvh-57px)] pb-14">
+      <section className="relative flex flex-col items-center py-14 justify-center px-6 text-center w-full max-w-5xl mx-auto min-h-[calc(100dvh-57px)] pb-14">
         {/* Dot grid background — fades out radially */}
         <div
           aria-hidden
@@ -188,7 +188,7 @@ export default async function HomePage() {
           className="animate-fade-up mb-5 sm:mb-8 inline-flex items-center gap-2 rounded-full border border-fd-border bg-fd-card px-3.5 py-1.5 text-xs font-medium text-fd-muted-foreground"
           style={{ animationDelay: "80ms" }}
         >
-          <span className="size-1.5 rounded-full bg-fd-primary" aria-hidden />v
+          <span className="size-1.5 rounded-full bg-emerald-500" aria-hidden />v
           {VERSION} · factus-js
         </span>
 
@@ -231,12 +231,12 @@ export default async function HomePage() {
 
         {/* CTAs */}
         <div
-          className="animate-fade-up mt-10 flex flex-wrap items-center justify-center gap-3"
+          className="animate-fade-up mt-10 flex w-full flex-col xs:flex-row items-center justify-center gap-3"
           style={{ animationDelay: "320ms" }}
         >
           <Link
             href="/docs"
-            className="inline-flex items-center gap-2 rounded-lg bg-fd-primary px-6 py-3 text-sm font-semibold text-fd-primary-foreground shadow-sm transition-all duration-150 hover:opacity-90 active:scale-[0.98]"
+            className="inline-flex items-center gap-2 rounded-lg bg-fd-primary px-6 py-2 xs:py-3 text-sm font-semibold text-fd-primary-foreground shadow-sm transition-all duration-150 hover:opacity-90 active:scale-[0.98] w-full xs:w-auto justify-center"
           >
             Comenzar ahora
             <ArrowRight className="size-4" />
@@ -245,7 +245,7 @@ export default async function HomePage() {
             href="https://github.com/sbetav/factus-js"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-lg border border-fd-border bg-fd-card px-6 py-3 text-sm font-semibold text-fd-foreground transition-all duration-150 hover:bg-fd-accent active:scale-[0.98]"
+            className="inline-flex items-center gap-2 rounded-lg border border-fd-border bg-fd-card px-6 py-2 xs:py-3 text-sm font-semibold text-fd-foreground transition-all duration-150 hover:bg-fd-accent active:scale-[0.98] w-full xs:w-auto justify-center"
           >
             <GitHubIcon className="size-4" />
             GitHub
