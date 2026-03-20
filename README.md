@@ -133,15 +133,15 @@ try {
 - `subscription`
 - `catalog`
 
-## Documentacion
+## Documentación
 
-- Guia completa: `https://developers.factus.com.co/`
+- Guía completa: `https://developers.factus.com.co/`
 - Docs del SDK (este repositorio): `apps/docs`
 - README del paquete: `packages/factus-js/README.md`
 
 ## Monorepo
 
-Este repositorio tambien contiene el sitio de documentacion y tooling de desarrollo.
+Este repositorio también contiene el sitio de documentación y tooling de desarrollo.
 Si vas a contribuir:
 
 ```bash

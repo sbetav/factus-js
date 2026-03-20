@@ -3,16 +3,49 @@
   "type": "module",
   "version": "0.1.0",
   "description": "TypeScript SDK for the Factus Colombian e-invoicing API",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "author": "sbetav",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sbetav/factus-js.git",
+    "directory": "packages/factus-js"
+  },
+  "bugs": {
+    "url": "https://github.com/sbetav/factus-js/issues"
+  },
+  "homepage": "https://github.com/sbetav/factus-js#readme",
+  "keywords": [
+    "factus",
+    "colombia",
+    "electronic-invoicing",
+    "dian",
+    "api",
+    "sdk",
+    "typescript"
+  ],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
   "scripts": {
+    "prepublishOnly": "pnpm run build",
     "build": "tsdown",
     "dev": "tsdown --watch",
     "typecheck": "tsc --noEmit",
