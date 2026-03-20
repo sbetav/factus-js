@@ -1,11 +1,8 @@
 import Image from "next/image";
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
+import { gitConfig } from "@/lib/site";
 
-export const gitConfig = {
-  user: "sbetav",
-  repo: "factus-js",
-  branch: "main",
-};
+export { gitConfig };
 
 function NavLogo() {
   return (

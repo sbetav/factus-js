@@ -13,23 +13,29 @@ import { Braces, Zap, RefreshCw, GitBranch, ArrowRight } from "lucide-react";
 import sdkPkg from "../../../../packages/factus-js/package.json";
 import { GitHubIcon } from "@/components/icons/github-icon";
 import type { Metadata } from "next";
+import { getSiteUrl } from "@/lib/site";
+
+const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
   title: "factus-js — SDK de JavaScript para la API de Factus",
   description:
     "Emite facturas electrónicas, notas crédito y documentos soporte directamente desde Node.js. SDK totalmente tipado con TypeScript.",
+  alternates: {
+    canonical: new URL("/", siteUrl).href,
+  },
   openGraph: {
     title: "factus-js — SDK de JavaScript para la API de Factus",
     description:
       "Emite facturas electrónicas, notas crédito y documentos soporte directamente desde Node.js. SDK totalmente tipado con TypeScript.",
-    images: [{ url: "/og/home/image.webp", width: 1200, height: 630 }],
+    images: [{ url: "/og/home", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "factus-js — SDK de JavaScript para la API de Factus",
     description:
       "Emite facturas electrónicas, notas crédito y documentos soporte directamente desde Node.js. SDK totalmente tipado con TypeScript.",
-    images: ["/og/home/image.webp"],
+    images: ["/og/home"],
   },
 };
 

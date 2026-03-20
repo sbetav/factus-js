@@ -2,6 +2,7 @@ import { RootProvider } from "fumadocs-ui/provider/next";
 import "./global.css";
 import { Geist, Geist_Mono } from "next/font/google";
 import type { Metadata } from "next";
+import { getSiteUrl } from "@/lib/site";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -14,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://factus-js.vercel.app"),
+  metadataBase: new URL(getSiteUrl()),
   title: {
     template: "%s | factus-js",
     default: "factus-js — SDK de JavaScript para la API de Factus",

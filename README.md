@@ -136,7 +136,7 @@ try {
 ## Documentación
 
 - Guía completa: `https://developers.factus.com.co/`
-- Docs del SDK (este repositorio): `apps/docs`
+- Docs del SDK (este repositorio): `https://factusjs.vercel.app/`
 - README del paquete: `packages/factus-js/README.md`
 
 ## Monorepo

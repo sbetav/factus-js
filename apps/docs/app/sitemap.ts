@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import { source } from "@/lib/source";
+import { getSiteUrl } from "@/lib/site";
 
-const BASE = "https://factus-js.vercel.app";
+const BASE = getSiteUrl();
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = source.getPages().map((page) => ({

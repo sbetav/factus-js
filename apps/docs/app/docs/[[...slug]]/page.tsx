@@ -10,7 +10,7 @@ import { notFound } from "next/navigation";
 import { getMDXComponents } from "@/components/mdx";
 import type { Metadata } from "next";
 import { createRelativeLink } from "fumadocs-ui/mdx";
-import { gitConfig } from "@/lib/layout.shared";
+import { getGithubDocsBlobUrl, getSiteUrl } from "@/lib/site";
 import { ViewOptionsPopover } from "@/components/view-options-popover";
 
 export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
@@ -32,7 +32,7 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
         </MarkdownCopyButton>
         <ViewOptionsPopover
           markdownUrl={`${page.url}.mdx`}
-          githubUrl={`https://github.com/${gitConfig.user}/${gitConfig.repo}/blob/${gitConfig.branch}/content/docs/${page.path}`}
+          githubUrl={getGithubDocsBlobUrl(page.path)}
         >
           Abrir
         </ViewOptionsPopover>
@@ -61,14 +61,18 @@ export async function generateMetadata(
   if (!page) notFound();
 
   const ogImage = getPageImage(page).url;
+  const siteUrl = getSiteUrl();
 
   return {
     title: page.data.title,
     description: page.data.description,
+    alternates: {
+      canonical: new URL(page.url, `${siteUrl}/`).href,
+    },
     openGraph: {
       title: page.data.title,
       description: page.data.description,
-      images: ogImage,
+      images: [ogImage],
       url: page.url,
     },
     twitter: {

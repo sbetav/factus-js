@@ -1,8 +1,9 @@
 import type { MetadataRoute } from "next";
+import { getSiteUrl } from "@/lib/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: { userAgent: "*", allow: "/", disallow: ["/og/"] },
-    sitemap: "https://factus-js.vercel.app/sitemap.xml",
+    rules: { userAgent: "*", allow: "/" },
+    sitemap: `${getSiteUrl()}/sitemap.xml`,
   };
 }
