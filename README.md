@@ -4,7 +4,7 @@
 
 # factus-js
 
-SDK de JavaScript/TypeScript para la API de Factus.
+JavaScript/TypeScript SDK para la API de Factus.
 
 ## Instalación
 

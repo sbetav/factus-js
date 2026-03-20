@@ -18,20 +18,20 @@ import { getSiteUrl } from "@/lib/site";
 const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
-  title: "factus-js — SDK de JavaScript para la API de Factus",
+  title: "factus-js — JavaScript SDK para la API de Factus",
   description:
     "Emite facturas electrónicas, notas crédito y documentos soporte directamente desde Node.js. SDK totalmente tipado con TypeScript.",
   alternates: {
     canonical: new URL("/", siteUrl).href,
   },
   openGraph: {
-    title: "factus-js — SDK de JavaScript para la API de Factus",
+    title: "factus-js — JavaScript SDK para la API de Factus",
     description:
       "Emite facturas electrónicas, notas crédito y documentos soporte directamente desde Node.js. SDK totalmente tipado con TypeScript.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "factus-js — SDK de JavaScript para la API de Factus",
+    title: "factus-js — JavaScript SDK para la API de Factus",
     description:
       "Emite facturas electrónicas, notas crédito y documentos soporte directamente desde Node.js. SDK totalmente tipado con TypeScript.",
   },

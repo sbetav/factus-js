@@ -18,10 +18,10 @@ export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: {
     template: "%s | factus-js",
-    default: "factus-js — SDK de JavaScript para la API de Factus",
+    default: "factus-js — JavaScript SDK para la API de Factus",
   },
   description:
-    "SDK de JavaScript/TypeScript para emitir facturas electrónicas, notas crédito y documentos soporte a través de la API de Factus desde Node.js.",
+    "JavaScript/TypeScript SDK para emitir facturas electrónicas, notas crédito y documentos soporte a través de la API de Factus.",
   openGraph: {
     siteName: "factus-js",
     locale: "es_CO",
