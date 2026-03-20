@@ -2,7 +2,7 @@ import { RootProvider } from "fumadocs-ui/provider/next";
 import "./global.css";
 import { Geist, Geist_Mono } from "next/font/google";
 import type { Metadata } from "next";
-import { getSiteUrl, openGraphImagePath } from "@/lib/site";
+import { getOgImageAbsoluteUrl, getSiteUrl } from "@/lib/site";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -13,6 +13,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-geist-mono",
 });
+
+const ogImageUrl = getOgImageAbsoluteUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
@@ -28,7 +30,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: openGraphImagePath,
+        url: ogImageUrl,
         width: 1200,
         height: 630,
         alt: "factus-js",
@@ -37,7 +39,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    images: [openGraphImagePath],
+    images: [ogImageUrl],
   },
 };
 

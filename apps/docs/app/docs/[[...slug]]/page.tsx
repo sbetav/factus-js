@@ -12,8 +12,8 @@ import type { Metadata } from "next";
 import { createRelativeLink } from "fumadocs-ui/mdx";
 import {
   getGithubDocsBlobUrl,
+  getOgImageAbsoluteUrl,
   getSiteUrl,
-  openGraphImagePath,
 } from "@/lib/site";
 import { ViewOptionsPopover } from "@/components/view-options-popover";
 
@@ -65,6 +65,7 @@ export async function generateMetadata(
   if (!page) notFound();
 
   const siteUrl = getSiteUrl();
+  const ogImageUrl = getOgImageAbsoluteUrl();
 
   return {
     title: page.data.title,
@@ -77,7 +78,7 @@ export async function generateMetadata(
       description: page.data.description,
       images: [
         {
-          url: openGraphImagePath,
+          url: ogImageUrl,
           width: 1200,
           height: 630,
           alt: "factus-js",
@@ -89,7 +90,7 @@ export async function generateMetadata(
       card: "summary_large_image",
       title: page.data.title,
       description: page.data.description,
-      images: [openGraphImagePath],
+      images: [ogImageUrl],
     },
   };
 }

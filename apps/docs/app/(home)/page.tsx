@@ -13,9 +13,10 @@ import { Braces, Zap, RefreshCw, GitBranch, ArrowRight } from "lucide-react";
 import sdkPkg from "../../../../packages/factus-js/package.json";
 import { GitHubIcon } from "@/components/icons/github-icon";
 import type { Metadata } from "next";
-import { getSiteUrl } from "@/lib/site";
+import { getOgImageAbsoluteUrl, getSiteUrl } from "@/lib/site";
 
 const siteUrl = getSiteUrl();
+const ogImageUrl = getOgImageAbsoluteUrl();
 
 export const metadata: Metadata = {
   title: "factus-js — JavaScript SDK para la API de Factus",
@@ -28,12 +29,21 @@ export const metadata: Metadata = {
     title: "factus-js — JavaScript SDK para la API de Factus",
     description:
       "Emite facturas electrónicas, notas crédito y documentos soporte directamente desde Node.js. SDK totalmente tipado con TypeScript.",
+    images: [
+      {
+        url: ogImageUrl,
+        width: 1200,
+        height: 630,
+        alt: "factus-js",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "factus-js — JavaScript SDK para la API de Factus",
     description:
       "Emite facturas electrónicas, notas crédito y documentos soporte directamente desde Node.js. SDK totalmente tipado con TypeScript.",
+    images: [ogImageUrl],
   },
 };
 
@@ -125,7 +135,7 @@ export default async function HomePage() {
   return (
     <main className="flex flex-col items-center w-full overflow-x-hidden">
       {/* ── HERO ──────────────────────────────────────────── */}
-      <section className="relative flex flex-col items-center justify-center px-6  text-center w-full max-w-5xl mx-auto h-[calc(100dvh-57px)] pb-14">
+      <section className="relative flex flex-col items-center py-16 justify-center px-6  text-center w-full max-w-5xl mx-auto h-[calc(100dvh-57px)] pb-14">
         {/* Dot grid background — fades out radially */}
         <div
           aria-hidden
@@ -175,7 +185,7 @@ export default async function HomePage() {
 
         {/* Version badge */}
         <span
-          className="animate-fade-up mb-8 inline-flex items-center gap-2 rounded-full border border-fd-border bg-fd-card px-3.5 py-1.5 text-xs font-medium text-fd-muted-foreground"
+          className="animate-fade-up mb-5 sm:mb-8 inline-flex items-center gap-2 rounded-full border border-fd-border bg-fd-card px-3.5 py-1.5 text-xs font-medium text-fd-muted-foreground"
           style={{ animationDelay: "80ms" }}
         >
           <span className="size-1.5 rounded-full bg-fd-primary" aria-hidden />v
