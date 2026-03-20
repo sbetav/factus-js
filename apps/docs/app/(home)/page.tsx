@@ -113,6 +113,10 @@ const pkgManagers = [
   { id: "bun", cmd: "bun add factus-js" },
 ] as const;
 
+/** Official Factus product + HTTP API reference (this site documents the JS SDK). */
+const FACTUS_WEB = "https://www.factus.com.co/";
+const FACTUS_API_DOCS = "https://developers.factus.com.co/";
+
 /* ─────────────────────────────────────────────────────────── */
 /*  Page (async Server Component for syntax highlighting)      */
 /* ─────────────────────────────────────────────────────────── */
@@ -418,19 +422,119 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── FOOTER ────────────────────────────────────────── */}
-      <footer className="w-full border-t border-fd-border pt-5 pb-6">
-        <p className="text-center text-sm text-fd-muted-foreground">
-          Made with ❤️ by{" "}
-          <a
-            href="https://github.com/sbetav"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-medium text-fd-foreground underline-offset-4 hover:underline"
-          >
-            sbetav
-          </a>
-        </p>
+      <footer className="w-full border-t border-fd-border">
+        <div className="grid mx-auto max-w-5xl gap-8 sm:grid-cols-2 md:grid-cols-3 py-9 px-6">
+          {/* Brand */}
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center gap-2.5">
+              <Image
+                src="/factus-js.webp"
+                alt="factus-js logo"
+                width={24}
+                height={24}
+                className="size-6 object-contain"
+                unoptimized
+              />
+              <span className="text-sm font-semibold tracking-tight text-fd-foreground">
+                factus-js
+              </span>
+            </div>
+            <p className="text-xs text-fd-muted-foreground">
+              JavaScript SDK para la API de Factus.
+            </p>
+          </div>
+
+          {/* Docs */}
+          <nav aria-labelledby="footer-docs">
+            <h3
+              id="footer-docs"
+              className="text-xs font-semibold uppercase tracking-wide text-fd-muted-foreground"
+            >
+              Documentación
+            </h3>
+            <ul className="mt-3 space-y-2 text-sm">
+              <li>
+                <Link href="/docs" className="hover:text-fd-foreground">
+                  Guía SDK
+                </Link>
+              </li>
+              <li>
+                <a
+                  href={FACTUS_API_DOCS}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-fd-foreground"
+                >
+                  API oficial de Factus
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          {/* Community / Links */}
+          <nav aria-labelledby="footer-links">
+            <h3
+              id="footer-links"
+              className="text-xs font-semibold uppercase tracking-wide text-fd-muted-foreground"
+            >
+              Enlaces
+            </h3>
+            <ul className="mt-3 space-y-2 text-sm">
+              <li>
+                <a
+                  href={FACTUS_WEB}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-fd-foreground"
+                >
+                  Sitio oficial de Factus
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/sbetav/factus-js"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-fd-foreground"
+                >
+                  Repositorio en GitHub
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <div className="h-px w-full bg-fd-border" />
+
+        <div className="px-6 mx-auto max-w-5xl">
+          <div className="flex flex-col gap-2 py-4.5 text-xs text-fd-muted-foreground sm:flex-row sm:justify-between">
+            <p>© {new Date().getFullYear()} factus-js. Licencia MIT.</p>
+
+            <p>
+              Hecho con <span className="text-[11px]">❤️</span> por{" "}
+              <a
+                href="https://github.com/sbetav"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline text-fd-foreground"
+              >
+                sbetav
+              </a>
+            </p>
+
+            <p>
+              No es un producto oficial de{" "}
+              <a
+                href={FACTUS_WEB}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline"
+              >
+                Factus
+              </a>
+            </p>
+          </div>
+        </div>
       </footer>
     </main>
   );
