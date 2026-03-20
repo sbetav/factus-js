@@ -1,159 +1,153 @@
-# Turborepo starter
+<p align="center">
+  <img src="./assets/banner.png" alt="JavaScript SDK para la API de Factus" />
+</p>
 
-This Turborepo starter is maintained by the Turborepo core team.
+# factus-js
 
-## Using this example
+SDK de JavaScript/TypeScript para la API de Factus.
 
-Run the following command:
+## Instalación
 
-```sh
-npx create-turbo@latest
+```bash
+npm install factus-js
 ```
 
-## What's inside?
+## Requisitos
 
-This Turborepo includes the following packages/apps:
+- Node.js 18+ (usa `fetch` nativo).
+- Credenciales de API de Factus.
 
-### Apps and Packages
+## Quickstart
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+### 1) Configura variables de entorno
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo build
+```env
+FACTUS_CLIENT_ID=tu-client-id
+FACTUS_CLIENT_SECRET=tu-client-secret
+FACTUS_USERNAME=tu-usuario
+FACTUS_PASSWORD=tu-password
 ```
 
-Without global `turbo`, use your package manager:
+### 2) Inicializa el cliente
 
-```sh
-cd my-turborepo
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+```ts
+import { FactusClient } from "factus-js";
+
+const factus = new FactusClient({
+  clientId: process.env.FACTUS_CLIENT_ID!,
+  clientSecret: process.env.FACTUS_CLIENT_SECRET!,
+  username: process.env.FACTUS_USERNAME!,
+  password: process.env.FACTUS_PASSWORD!,
+  environment: "sandbox", // usa "production" para ambiente real
+});
 ```
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+### 3) Haz tu primera llamada
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo build --filter=docs
+```ts
+const bills = await factus.bills.list({ page: 1, per_page: 10 });
+console.log(bills.data.data);
 ```
 
-Without global `turbo`:
+## Ejemplos de uso
 
-```sh
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
+### Crear factura electronica
+
+```ts
+import {
+  PaymentFormCode,
+  PaymentMethodCode,
+  IdentityDocumentTypeId,
+  CustomerTributeId,
+  OrganizationTypeId,
+  ProductStandardId,
+} from "factus-js";
+
+const response = await factus.bills.create({
+  numbering_range_id: 8,
+  reference_code: "I3",
+  observation: "Factura de prueba",
+  payment_form: PaymentFormCode.CreditPayment,
+  payment_method_code: PaymentMethodCode.Cash,
+  payment_due_date: "2025-12-31",
+  billing_period: {
+    start_date: "2025-01-01",
+    end_date: "2025-01-31",
+  },
+  customer: {
+    identification: "123456789",
+    dv: "3",
+    company: "",
+    trade_name: "",
+    names: "Alan Turing",
+    address: "calle 1 # 2-68",
+    email: "alanturing@enigmasas.com",
+    phone: "1234567890",
+    legal_organization_id: OrganizationTypeId.NaturalPerson,
+    tribute_id: CustomerTributeId.IVA,
+    identification_document_id: IdentityDocumentTypeId.NIT,
+    municipality_id: 980,
+  },
+  items: [
+    {
+      code_reference: "12345",
+      name: "Producto de ejemplo",
+      quantity: 1,
+      discount_rate: 20,
+      price: 50000,
+      tax_rate: "19.00",
+      unit_measure_id: 70,
+      standard_code_id: ProductStandardId.TaxpayerAdoption,
+      is_excluded: 0,
+      tribute_id: 1,
+    },
+  ],
+});
+
+console.log(response.data);
 ```
 
-### Develop
+### Manejo de errores
 
-To develop all apps and packages, run the following command:
+```ts
+import { FactusError } from "factus-js";
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo dev
+try {
+  await factus.bills.getByNumber("SETP990000001");
+} catch (error) {
+  if (error instanceof FactusError) {
+    console.error(error.status, error.message, error.details);
+  }
+}
 ```
 
-Without global `turbo`, use your package manager:
+## Módulos disponibles
 
-```sh
-cd my-turborepo
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
+- `bills`
+- `creditNotes`
+- `supportDocuments`
+- `adjustmentNotes`
+- `reception`
+- `company`
+- `numberingRanges`
+- `subscription`
+- `catalog`
+
+## Documentacion
+
+- Guia completa: `https://developers.factus.com.co/`
+- Docs del SDK (este repositorio): `apps/docs`
+- README del paquete: `packages/factus-js/README.md`
+
+## Monorepo
+
+Este repositorio tambien contiene el sitio de documentacion y tooling de desarrollo.
+Si vas a contribuir:
+
+```bash
+pnpm install
+pnpm dev
+pnpm build
+pnpm lint
+pnpm check-types
 ```
-
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo dev --filter=web
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
-
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo login
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo link
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)

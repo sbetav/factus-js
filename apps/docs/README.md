@@ -1,45 +1,53 @@
-# docs
+# @factus-js/docs
 
-This is a Next.js application generated with
-[Create Fumadocs](https://github.com/fuma-nama/fumadocs).
+Aplicación de documentación de `factus-js`, construida con Next.js y Fumadocs.
 
-Run development server:
+## Ejecutar localmente
+
+Desde la raíz del monorepo:
 
 ```bash
-npm run dev
-# or
-pnpm dev
-# or
-yarn dev
+pnpm install
+pnpm --filter @factus-js/docs dev
 ```
 
-Open http://localhost:3000 with your browser to see the result.
+Abre `http://localhost:3000`.
 
-## Explore
+## Scripts
 
-In the project, you can see:
+```bash
+pnpm --filter @factus-js/docs dev
+pnpm --filter @factus-js/docs build
+pnpm --filter @factus-js/docs start
+pnpm --filter @factus-js/docs lint
+pnpm --filter @factus-js/docs format
+pnpm --filter @factus-js/docs types:check
+```
 
-- `lib/source.ts`: Code for content source adapter, [`loader()`](https://fumadocs.dev/docs/headless/source-api) provides the interface to access your content.
-- `lib/layout.shared.tsx`: Shared options for layouts, optional but preferred to keep.
+## Estructura principal
 
-| Route                     | Description                                            |
-| ------------------------- | ------------------------------------------------------ |
-| `app/(home)`              | The route group for your landing page and other pages. |
-| `app/docs`                | The documentation layout and pages.                    |
-| `app/api/search/route.ts` | The Route Handler for search.                          |
+| Ruta                      | Descripción                                |
+| ------------------------- | ------------------------------------------ |
+| `content/docs`            | Contenido MDX de la documentación del SDK. |
+| `app/docs`                | Rutas y layout de la sección de docs.      |
+| `app/(home)`              | Landing y paginas publicas.                |
+| `app/api/search/route.ts` | Endpoint de búsqueda.                      |
+| `lib/source.ts`           | Adaptador de contenido (`loader()`).       |
+| `source.config.ts`        | Configuración de Fumadocs MDX.             |
 
-### Fumadocs MDX
+## Flujo de contribución recomendado
 
-A `source.config.ts` config file has been included, you can customise different options like frontmatter schema.
+1. Crea o edita archivos en `content/docs`.
+2. Verifica en local con `pnpm --filter @factus-js/docs dev`.
+3. Corre los checks antes de abrir PR:
 
-Read the [Introduction](https://fumadocs.dev/docs/mdx) for further details.
+```bash
+pnpm --filter @factus-js/docs lint
+pnpm --filter @factus-js/docs types:check
+pnpm --filter @factus-js/docs build
+```
 
-## Learn More
+## Referencias
 
-To learn more about Next.js and Fumadocs, take a look at the following
-resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
-  features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [Fumadocs](https://fumadocs.dev) - learn about Fumadocs
+- [Fumadocs](https://fumadocs.dev)
+- [Next.js](https://nextjs.org/docs)

@@ -4,6 +4,7 @@
 
 @theme {
   --breakpoint-xs: 480px;
+  --font-mono: var(--font-geist-mono);
 
   /* Brand */
   --color-fd-primary: hsl(49 84% 51%);
