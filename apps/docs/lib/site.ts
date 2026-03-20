@@ -32,3 +32,5 @@ export function getGithubDocsBlobUrl(pagePath: string): string {
   const rel = pagePath.replace(/^\//, "");
   return `${base}/${dir}/${rel}`;
 }
+
+export const openGraphImagePath = "/og.png";

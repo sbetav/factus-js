@@ -1,4 +1,4 @@
-import { getPageImage, source } from "@/lib/source";
+import { source } from "@/lib/source";
 import {
   DocsBody,
   DocsDescription,
@@ -10,7 +10,11 @@ import { notFound } from "next/navigation";
 import { getMDXComponents } from "@/components/mdx";
 import type { Metadata } from "next";
 import { createRelativeLink } from "fumadocs-ui/mdx";
-import { getGithubDocsBlobUrl, getSiteUrl } from "@/lib/site";
+import {
+  getGithubDocsBlobUrl,
+  getSiteUrl,
+  openGraphImagePath,
+} from "@/lib/site";
 import { ViewOptionsPopover } from "@/components/view-options-popover";
 
 export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
@@ -60,7 +64,6 @@ export async function generateMetadata(
   const page = source.getPage(params.slug);
   if (!page) notFound();
 
-  const ogImage = getPageImage(page).url;
   const siteUrl = getSiteUrl();
 
   return {
@@ -72,14 +75,21 @@ export async function generateMetadata(
     openGraph: {
       title: page.data.title,
       description: page.data.description,
-      images: [ogImage],
+      images: [
+        {
+          url: openGraphImagePath,
+          width: 1200,
+          height: 630,
+          alt: "factus-js",
+        },
+      ],
       url: page.url,
     },
     twitter: {
       card: "summary_large_image",
       title: page.data.title,
       description: page.data.description,
-      images: [ogImage],
+      images: [openGraphImagePath],
     },
   };
 }

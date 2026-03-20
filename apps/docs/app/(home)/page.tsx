@@ -28,14 +28,12 @@ export const metadata: Metadata = {
     title: "factus-js — SDK de JavaScript para la API de Factus",
     description:
       "Emite facturas electrónicas, notas crédito y documentos soporte directamente desde Node.js. SDK totalmente tipado con TypeScript.",
-    images: [{ url: "/og/home", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "factus-js — SDK de JavaScript para la API de Factus",
     description:
       "Emite facturas electrónicas, notas crédito y documentos soporte directamente desde Node.js. SDK totalmente tipado con TypeScript.",
-    images: ["/og/home"],
   },
 };
 

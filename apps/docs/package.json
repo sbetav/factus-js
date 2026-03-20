@@ -12,7 +12,6 @@
     "format": "biome format --write"
   },
   "dependencies": {
-    "@takumi-rs/image-response": "^0.72.0",
     "factus-js": "workspace:^",
     "fumadocs-core": "16.6.17",
     "fumadocs-mdx": "14.2.10",

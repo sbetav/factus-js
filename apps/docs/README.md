@@ -45,6 +45,7 @@ pnpm --filter @factus-js/docs types:check
 | `app/(home)`              | Landing y paginas publicas.                |
 | `app/api/search/route.ts` | Endpoint de búsqueda.                      |
 | `lib/source.ts`           | Adaptador de contenido (`loader()`).       |
+| `public/og.png`           | Imagen OG compartida (1200×630).           |
 | `source.config.ts`        | Configuración de Fumadocs MDX.             |
 
 ## Flujo de contribución recomendado

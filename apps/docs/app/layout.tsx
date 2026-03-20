@@ -2,7 +2,7 @@ import { RootProvider } from "fumadocs-ui/provider/next";
 import "./global.css";
 import { Geist, Geist_Mono } from "next/font/google";
 import type { Metadata } from "next";
-import { getSiteUrl } from "@/lib/site";
+import { getSiteUrl, openGraphImagePath } from "@/lib/site";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -26,9 +26,18 @@ export const metadata: Metadata = {
     siteName: "factus-js",
     locale: "es_CO",
     type: "website",
+    images: [
+      {
+        url: openGraphImagePath,
+        width: 1200,
+        height: 630,
+        alt: "factus-js",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
+    images: [openGraphImagePath],
   },
 };
 
