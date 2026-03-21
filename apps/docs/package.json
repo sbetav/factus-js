@@ -12,6 +12,7 @@
     "format": "biome format --write"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "factus-js": "workspace:^",
     "fumadocs-core": "16.6.17",
     "fumadocs-mdx": "14.2.10",
