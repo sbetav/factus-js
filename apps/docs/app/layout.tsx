@@ -59,9 +59,9 @@ export default function Layout({ children }: LayoutProps<"/">) {
         <RootProvider
           i18n={{
             // Keep the locale name aligned with the current search index language
-            // (your `/api/search` handler is configured for `english`).
-            locale: "english",
-            locales: [{ name: "Español", locale: "english" }],
+            // (your `/api/search` handler is configured for `spanish`).
+            locale: "spanish",
+            locales: [{ name: "Español", locale: "spanish" }],
             translations: {
               search: "Buscar",
               searchNoResult: "No se encontraron resultados",
