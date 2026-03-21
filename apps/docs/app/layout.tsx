@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import type { Metadata } from "next";
 import { getOgImageAbsoluteUrl, getSiteUrl } from "@/lib/site";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -79,6 +80,7 @@ export default function Layout({ children }: LayoutProps<"/">) {
         </RootProvider>
       </body>
       <Analytics />
+      <SpeedInsights />
     </html>
   );
 }

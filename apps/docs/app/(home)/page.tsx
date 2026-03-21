@@ -507,7 +507,7 @@ export default async function HomePage() {
         <div className="h-px w-full bg-fd-border" />
 
         <div className="px-6 mx-auto max-w-5xl">
-          <div className="flex flex-col gap-2 py-4.5 text-xs text-fd-muted-foreground sm:flex-row sm:justify-between">
+          <div className="flex flex-col gap-2 py-4.5 text-xs items-center sm:items-start text-fd-muted-foreground sm:flex-row sm:justify-between">
             <p>© {new Date().getFullYear()} factus-js. Licencia MIT.</p>
 
             <p>
