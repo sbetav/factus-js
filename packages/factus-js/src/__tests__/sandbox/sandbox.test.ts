@@ -1,71 +1,111 @@
 import { FactusClient } from "../../index";
-import { expectFactusError } from "../helpers/assert-factus-error";
+import { FactusError } from "../../client/error";
 import {
   readSandboxEnv,
   shouldRunSandboxTests,
   uniqueRef,
 } from "../helpers/sandbox-env";
 
-const EXPECTED_PERMISSION_ERRORS = [
-  "bills.sendEmail",
-  "creditNotes.sendEmail",
-  "numberingRanges.get",
-  "numberingRanges.create",
-  "numberingRanges.updateCurrent",
-  "numberingRanges.delete",
-  "reception.upload",
-  "company.update",
-  "company.uploadLogo",
-];
+// ---------------------------------------------------------------------------
+// Result collector — accumulates per-method outcomes and prints a summary
+// ---------------------------------------------------------------------------
 
-const EXPECTED_UNABLE_TO_TEST = [
-  "bills.delete",
-  "bills.emitRadianEvent",
-  "creditNotes.delete",
-  "supportDocuments.delete",
-  "adjustmentNotes.delete",
-  "reception.emitEvent",
-];
+type MethodResult =
+  | { status: "ok" }
+  | { status: "expected-error"; error: FactusError }
+  | { status: "unexpected-error"; error: unknown };
 
-function printSandboxExpectations(): void {
-  console.error(
-    "⚠️ The following methods are expected to fail during tests in sandbox environment:",
-  );
-  console.error("");
-  console.error("No permissions:");
-  for (const method of EXPECTED_PERMISSION_ERRORS) {
-    console.error(`- ${method}`);
+const results = new Map<string, MethodResult>();
+
+function formatError(error: unknown): string {
+  if (error instanceof FactusError) {
+    if (error.errors.length > 0) {
+      return `${error.statusCode} — ${JSON.stringify(error.errors, null, 2)}`;
+    }
+    return `${error.statusCode} — ${error.message}`;
   }
-  console.error("");
-  console.error("Unable to test:");
-  for (const method of EXPECTED_UNABLE_TO_TEST) {
-    console.error(`- ${method}`);
-  }
-  console.error("");
+  return String(error);
 }
 
-async function expectResolvesOrConflict(
-  methodName: string,
+function printResults(): void {
+  const maxName = Math.max(...[...results.keys()].map((k) => k.length));
+
+  for (const [name, result] of results) {
+    const padded = name.padEnd(maxName);
+    switch (result.status) {
+      case "ok":
+        console.log(`  OK    ${padded}`);
+        break;
+      case "expected-error":
+        console.log(`  WARN  ${padded}  ${formatError(result.error)}`);
+        break;
+      case "unexpected-error":
+        console.log(`  FAIL  ${padded}  ${formatError(result.error)}`);
+        break;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Test helpers
+// ---------------------------------------------------------------------------
+
+async function run(name: string, call: Promise<unknown>): Promise<void> {
+  try {
+    const result = await call;
+    expect(result).not.toBeUndefined();
+    results.set(name, { status: "ok" });
+  } catch (error) {
+    results.set(name, { status: "unexpected-error", error });
+    throw error;
+  }
+}
+
+async function runAllowConflict(
+  name: string,
   call: Promise<unknown>,
   allowedStatusCodes: number[] = [409],
 ): Promise<void> {
   try {
     const result = await call;
     expect(result).not.toBeUndefined();
+    results.set(name, { status: "ok" });
   } catch (error) {
-    const maybeFactus = error as { statusCode?: number; message?: string };
     if (
-      maybeFactus?.statusCode &&
-      allowedStatusCodes.includes(maybeFactus.statusCode)
+      error instanceof FactusError &&
+      allowedStatusCodes.includes(error.statusCode)
     ) {
-      console.log(
-        `[sandbox] ${methodName} returned ${maybeFactus.statusCode} (${maybeFactus.message ?? "error"}); continuing because this is acceptable for sandbox variability.`,
-      );
+      results.set(name, { status: "expected-error", error });
+      return;
+    }
+    results.set(name, { status: "unexpected-error", error });
+    throw error;
+  }
+}
+
+async function runExpectError(
+  name: string,
+  call: Promise<unknown>,
+  allowedStatusCodes: number[] = [400, 401, 403, 404, 405, 409, 422, 429, 500],
+): Promise<void> {
+  try {
+    await call;
+    const error = new Error("Expected FactusError but promise resolved");
+    results.set(name, { status: "unexpected-error", error });
+    throw error;
+  } catch (error) {
+    if (error instanceof FactusError) {
+      expect(allowedStatusCodes).toContain(error.statusCode);
+      results.set(name, { status: "expected-error", error });
       return;
     }
     throw error;
   }
 }
+
+// ---------------------------------------------------------------------------
+// Tests
+// ---------------------------------------------------------------------------
 
 describe("sandbox integration", () => {
   if (!shouldRunSandboxTests()) {
@@ -74,8 +114,6 @@ describe("sandbox integration", () => {
       console.log(
         "To enable, set RUN_SANDBOX_TESTS=true in packages/factus-js/.env.local",
       );
-      console.log("");
-      printSandboxExpectations();
       expect(true).toBe(true);
     });
     return;
@@ -94,12 +132,14 @@ describe("sandbox integration", () => {
   const supportReference = uniqueRef("REF0017");
   const adjustmentReference = uniqueRef("REF007");
 
-  beforeAll(() => {
-    printSandboxExpectations();
+  afterAll(() => {
+    console.log("\n--- Sandbox Results ---\n");
+    printResults();
+    console.log("");
   });
 
   test("verified endpoints should resolve", async () => {
-    await expectResolvesOrConflict(
+    await runAllowConflict(
       "bills.create",
       factus.bills.create({
         numbering_range_id: 8,
@@ -137,26 +177,17 @@ describe("sandbox integration", () => {
       [409, 422],
     );
 
-    await expect(
-      factus.bills.list({ page: 1, per_page: 5 }),
-    ).resolves.not.toBeUndefined();
-    await expect(
-      factus.bills.getByNumber("SETP990000203"),
-    ).resolves.not.toBeUndefined();
-    await expect(
+    await run("bills.list", factus.bills.list({ page: 1, per_page: 5 }));
+    await run("bills.getByNumber", factus.bills.getByNumber("SETP990000203"));
+    await run(
+      "bills.getEmailContent",
       factus.bills.getEmailContent("SETP990000203"),
-    ).resolves.not.toBeUndefined();
-    await expect(
-      factus.bills.downloadPdf("SETP990000203"),
-    ).resolves.not.toBeUndefined();
-    await expect(
-      factus.bills.downloadXml("SETP990000203"),
-    ).resolves.not.toBeUndefined();
-    await expect(
-      factus.bills.getEvents("SETP990000203"),
-    ).resolves.not.toBeUndefined();
+    );
+    await run("bills.downloadPdf", factus.bills.downloadPdf("SETP990000203"));
+    await run("bills.downloadXml", factus.bills.downloadXml("SETP990000203"));
+    await run("bills.getEvents", factus.bills.getEvents("SETP990000203"));
 
-    await expectResolvesOrConflict(
+    await runAllowConflict(
       "creditNotes.create",
       factus.creditNotes.create({
         numbering_range_id: 9,
@@ -190,21 +221,25 @@ describe("sandbox integration", () => {
       [409, 422],
     );
 
-    await expect(
+    await run(
+      "creditNotes.list",
       factus.creditNotes.list({ page: 1, per_page: 5 }),
-    ).resolves.not.toBeUndefined();
-    await expect(factus.creditNotes.get("NC856")).resolves.not.toBeUndefined();
-    await expect(
+    );
+    await run("creditNotes.get", factus.creditNotes.get("NC856"));
+    await run(
+      "creditNotes.getEmailContent",
       factus.creditNotes.getEmailContent("NC856"),
-    ).resolves.not.toBeUndefined();
-    await expect(
+    );
+    await run(
+      "creditNotes.downloadPdf",
       factus.creditNotes.downloadPdf("NC856"),
-    ).resolves.not.toBeUndefined();
-    await expect(
+    );
+    await run(
+      "creditNotes.downloadXml",
       factus.creditNotes.downloadXml("NC856"),
-    ).resolves.not.toBeUndefined();
+    );
 
-    await expectResolvesOrConflict(
+    await runAllowConflict(
       "supportDocuments.create",
       factus.supportDocuments.create({
         reference_code: supportReference,
@@ -237,20 +272,24 @@ describe("sandbox integration", () => {
       [409, 422],
     );
 
-    await expect(
+    await run(
+      "supportDocuments.list",
       factus.supportDocuments.list({ page: 1, per_page: 5 }),
-    ).resolves.not.toBeUndefined();
-    await expect(
+    );
+    await run(
+      "supportDocuments.get",
       factus.supportDocuments.get("SEDS984000021"),
-    ).resolves.not.toBeUndefined();
-    await expect(
+    );
+    await run(
+      "supportDocuments.downloadPdf",
       factus.supportDocuments.downloadPdf("SEDS984000021"),
-    ).resolves.not.toBeUndefined();
-    await expect(
+    );
+    await run(
+      "supportDocuments.downloadXml",
       factus.supportDocuments.downloadXml("SEDS984000021"),
-    ).resolves.not.toBeUndefined();
+    );
 
-    await expectResolvesOrConflict(
+    await runAllowConflict(
       "adjustmentNotes.create",
       factus.adjustmentNotes.create({
         reference_code: adjustmentReference,
@@ -273,64 +312,76 @@ describe("sandbox integration", () => {
       [409, 422],
     );
 
-    await expect(
+    await run(
+      "adjustmentNotes.list",
       factus.adjustmentNotes.list({ page: 1, per_page: 5 }),
-    ).resolves.not.toBeUndefined();
-    await expect(
-      factus.adjustmentNotes.get("NDS3"),
-    ).resolves.not.toBeUndefined();
-    await expect(
+    );
+    await run("adjustmentNotes.get", factus.adjustmentNotes.get("NDS3"));
+    await run(
+      "adjustmentNotes.downloadPdf",
       factus.adjustmentNotes.downloadPdf("NDS3"),
-    ).resolves.not.toBeUndefined();
-    await expect(
+    );
+    await run(
+      "adjustmentNotes.downloadXml",
       factus.adjustmentNotes.downloadXml("NDS3"),
-    ).resolves.not.toBeUndefined();
+    );
 
-    await expect(
+    await run(
+      "catalog.getAcquirer",
       factus.catalog.getAcquirer({
         identification_document_id: 3,
         identification_number: "1399991",
       }),
-    ).resolves.not.toBeUndefined();
-    await expect(
+    );
+    await run(
+      "catalog.listMunicipalities",
       factus.catalog.listMunicipalities({ filter: { name: "San Gil" } }),
-    ).resolves.not.toBeUndefined();
-    await expect(
+    );
+    await run(
+      "catalog.listTributes",
       factus.catalog.listTributes({ name: "IVA" }),
-    ).resolves.not.toBeUndefined();
-    await expect(
+    );
+    await run(
+      "catalog.listMeasurementUnits",
       factus.catalog.listMeasurementUnits({ name: "Unidad" }),
-    ).resolves.not.toBeUndefined();
-    await expect(
+    );
+    await run(
+      "catalog.listCountries",
       factus.catalog.listCountries({ filter: { name: "Colombia" } }),
-    ).resolves.not.toBeUndefined();
+    );
 
-    await expect(
+    await run(
+      "numberingRanges.list",
       factus.numberingRanges.list({ page: 1, per_page: 5 }),
-    ).resolves.not.toBeUndefined();
-    await expect(
+    );
+    await run(
+      "numberingRanges.getSoftwareRange",
       factus.numberingRanges.getSoftwareRange(),
-    ).resolves.not.toBeUndefined();
-    await expect(
+    );
+    await run(
+      "reception.list",
       factus.reception.list({ page: 1, per_page: 5 }),
-    ).resolves.not.toBeUndefined();
-    await expect(factus.subscription.list()).resolves.not.toBeUndefined();
-    await expect(factus.company.get()).resolves.not.toBeUndefined();
+    );
+    await run("subscription.list", factus.subscription.list());
+    await run("company.get", factus.company.get());
   });
 
   test("permission-limited endpoints should throw FactusError", async () => {
-    await expectFactusError(
+    await runExpectError(
+      "bills.sendEmail",
       factus.bills.sendEmail("SETP990000203", {
         email: "alanturing@enigmasas.com",
       }),
     );
-    await expectFactusError(
+    await runExpectError(
+      "creditNotes.sendEmail",
       factus.creditNotes.sendEmail("NC856", {
         email: "alanturing@enigmasas.com",
       }),
     );
-    await expectFactusError(factus.numberingRanges.get(8));
-    await expectFactusError(
+    await runExpectError("numberingRanges.get", factus.numberingRanges.get(8));
+    await runExpectError(
+      "numberingRanges.create",
       factus.numberingRanges.create({
         document: "21",
         prefix: "SETP",
@@ -338,17 +389,23 @@ describe("sandbox integration", () => {
         current: 984000000,
       }),
     );
-    await expectFactusError(
+    await runExpectError(
+      "numberingRanges.updateCurrent",
       factus.numberingRanges.updateCurrent(10, { current: 985000001 }),
     );
-    await expectFactusError(factus.numberingRanges.delete(8));
-    await expectFactusError(
+    await runExpectError(
+      "numberingRanges.delete",
+      factus.numberingRanges.delete(8),
+    );
+    await runExpectError(
+      "reception.upload",
       factus.reception.upload({
         track_id:
           "79760c1d956a143a1076c9d06808b0916f90eb3eec5d34697fd875a2f4be1c3c18ae583d902671161d443c5dfbd48a4d",
       }),
     );
-    await expectFactusError(
+    await runExpectError(
+      "company.update",
       factus.company.update({
         legal_organization_code: "2",
         company: null,
@@ -365,7 +422,8 @@ describe("sandbox integration", () => {
         tribute_code: "ZZ",
       }),
     );
-    await expectFactusError(
+    await runExpectError(
+      "company.uploadLogo",
       factus.company.uploadLogo(
         new Blob(["fake image"], { type: "image/png" }),
       ),
@@ -373,8 +431,9 @@ describe("sandbox integration", () => {
   });
 
   test("unable-to-test endpoints should throw FactusError in sandbox", async () => {
-    await expectFactusError(factus.bills.delete("SETP990000049"));
-    await expectFactusError(
+    await runExpectError("bills.delete", factus.bills.delete("SETP990000049"));
+    await runExpectError(
+      "bills.emitRadianEvent",
       factus.bills.emitRadianEvent("SETP990000049", "030", {
         identification_document_code: 13,
         identification: "12345667",
@@ -384,10 +443,20 @@ describe("sandbox integration", () => {
         organization_department: "Sistemas",
       }),
     );
-    await expectFactusError(factus.creditNotes.delete("NC856"));
-    await expectFactusError(factus.supportDocuments.delete("SEDS984000021"));
-    await expectFactusError(factus.adjustmentNotes.delete("NDS3"));
-    await expectFactusError(
+    await runExpectError(
+      "creditNotes.delete",
+      factus.creditNotes.delete("NC856"),
+    );
+    await runExpectError(
+      "supportDocuments.delete",
+      factus.supportDocuments.delete("SEDS984000021"),
+    );
+    await runExpectError(
+      "adjustmentNotes.delete",
+      factus.adjustmentNotes.delete("NDS3"),
+    );
+    await runExpectError(
+      "reception.emitEvent",
       factus.reception.emitEvent(
         {
           bill_id: "SETP990000203",

@@ -179,8 +179,9 @@ export class HttpClient {
 
     if (!response.ok) {
       let errorPayload: {
-        status: string;
-        errors: Array<{
+        status?: string;
+        message?: string;
+        errors?: Array<{
           code: number;
           message: string;
           detail: string;
@@ -192,12 +193,10 @@ export class HttpClient {
       } catch {
         // ignore JSON parse errors
       }
-      const message = errorPayload?.errors?.[0]?.message ?? response.statusText;
-      throw new FactusError(
-        message,
-        response.status,
-        errorPayload?.errors ?? [],
-      );
+      const errors = errorPayload?.errors ?? [];
+      const message =
+        errors[0]?.message ?? errorPayload?.message ?? response.statusText;
+      throw new FactusError(message, response.status, errors);
     }
 
     // Some endpoints return 204 No Content
