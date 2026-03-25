@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.2
+
+### Patch Changes
+
+- c92791f: Refactor sandbox tests and error handling:
+  - Remove deprecated error assertion helper
+  - Enhance result reporting
+  - Improve error message handling in HttpClient.
+
 ## 0.1.1
 
 ### Patch Changes
