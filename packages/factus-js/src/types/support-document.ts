@@ -72,7 +72,7 @@ export interface SupportDocument {
   status: number | string;
   errors: string[];
   created_at: string;
-  adjustment_notes?: any[];
+  adjustment_notes?: Array<{ id: number; number: string }>;
 }
 
 // ---------------------------------------------------------------------------
@@ -149,7 +149,7 @@ export interface ViewSupportDocumentData {
   };
   items: SupportDocumentItemResponse[];
   withholding_taxes: DocumentWithholdingTax[];
-  adjustment_notes: any[];
+  adjustment_notes: Array<{ id: number; number: string }>;
   numbering_range: NumberingRangeInfo;
 }
 
@@ -158,8 +158,18 @@ export interface ViewSupportDocumentData {
 // ---------------------------------------------------------------------------
 
 export interface DeleteSupportDocumentResponse extends DeleteResponse {}
-export interface DownloadSupportDocumentXmlResponse extends DownloadXmlData {}
-export interface DownloadSupportDocumentPdfResponse extends DownloadPdfData {}
+
+export interface DownloadSupportDocumentXmlResponse {
+  status: string;
+  message: string;
+  data: DownloadXmlData;
+}
+
+export interface DownloadSupportDocumentPdfResponse {
+  status: string;
+  message: string;
+  data: DownloadPdfData;
+}
 
 // ---------------------------------------------------------------------------
 // List response

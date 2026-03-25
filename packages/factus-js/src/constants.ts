@@ -21,11 +21,11 @@ export type OperationTypeCode =
 
 export const CreditNoteOperationTypeCode = {
   WithReference: {
-    value: "20",
+    value: 20,
     description: "Nota Crédito que referencia una factura electronica.",
   },
   WithoutReference: {
-    value: "22",
+    value: 22,
     description: "Nota Crédito sin referencia a una factura electronica.",
   },
 } as const;
@@ -205,21 +205,21 @@ export type NumberingRangeDocumentTypeCode =
 
 export const AdjustmentNoteReasonCode = {
   PartialReturn: {
-    value: 1,
+    value: "1",
     description:
       "Devolución parcial de los bienes y/o no aceptación parcial del servicio",
   },
   SupportDocumentCancellation: {
-    value: 2,
+    value: "2",
     description:
       "Anulación del documento soporte en adquisiciones efectuadas a sujetos no obligados a expedir factura de venta o documento equivalente",
   },
   PartialOrTotalDiscount: {
-    value: 3,
+    value: "3",
     description: "Rebaja o descuento parcial o total",
   },
-  PriceAdjustment: { value: 4, description: "Ajuste de precio" },
-  Other: { value: 5, description: "Otros" },
+  PriceAdjustment: { value: "4", description: "Ajuste de precio" },
+  Other: { value: "5", description: "Otros" },
 } as const;
 export type AdjustmentNoteReasonCode =
   (typeof AdjustmentNoteReasonCode)[keyof typeof AdjustmentNoteReasonCode]["value"];

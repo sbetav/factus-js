@@ -48,9 +48,7 @@ export class AdjustmentNotesModule {
    * Download the adjustment note XML as a base64-encoded string.
    * GET /v1/adjustment-notes/download-xml/{number}
    */
-  downloadXml(
-    number: string,
-  ): Promise<ApiResponse<DownloadAdjustmentNoteXmlResponse>> {
+  downloadXml(number: string): Promise<DownloadAdjustmentNoteXmlResponse> {
     return this.http.get(`/v1/adjustment-notes/download-xml/${number}`);
   }
 
@@ -58,9 +56,7 @@ export class AdjustmentNotesModule {
    * Download the adjustment note PDF as a base64-encoded string.
    * GET /v1/adjustment-notes/download-pdf/{number}
    */
-  downloadPdf(
-    number: string,
-  ): Promise<ApiResponse<DownloadAdjustmentNotePdfResponse>> {
+  downloadPdf(number: string): Promise<DownloadAdjustmentNotePdfResponse> {
     return this.http.get(`/v1/adjustment-notes/download-pdf/${number}`);
   }
 

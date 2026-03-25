@@ -133,7 +133,7 @@ describe("sandbox integration", () => {
             tribute_id: 1,
           },
         ],
-      } as any),
+      }),
       [409, 422],
     );
 
@@ -186,7 +186,7 @@ describe("sandbox integration", () => {
             tribute_id: 1,
           },
         ],
-      } as any),
+      }),
       [409, 422],
     );
 
@@ -213,7 +213,7 @@ describe("sandbox integration", () => {
         provider: {
           identification_document_id: 6,
           identification: "123456789",
-          dv: "6",
+          dv: 6,
           trade_name: "",
           names: "Alan Turing",
           address: "calle 1 # 2-68",
@@ -233,7 +233,7 @@ describe("sandbox integration", () => {
             standard_code_id: 1,
           },
         ],
-      } as any),
+      }),
       [409, 422],
     );
 
@@ -269,7 +269,7 @@ describe("sandbox integration", () => {
             standard_code_id: 1,
           },
         ],
-      } as any),
+      }),
       [409, 422],
     );
 
@@ -375,18 +375,14 @@ describe("sandbox integration", () => {
   test("unable-to-test endpoints should throw FactusError in sandbox", async () => {
     await expectFactusError(factus.bills.delete("SETP990000049"));
     await expectFactusError(
-      factus.bills.emitRadianEvent(
-        "SETP990000049",
-        "030" as any,
-        {
-          identification_document_code: 13,
-          identification: "12345667",
-          first_name: "Pepito",
-          last_name: "Perez",
-          job_title: "Desarollador de software",
-          organization_department: "Sistemas",
-        } as any,
-      ),
+      factus.bills.emitRadianEvent("SETP990000049", "030", {
+        identification_document_code: 13,
+        identification: "12345667",
+        first_name: "Pepito",
+        last_name: "Perez",
+        job_title: "Desarollador de software",
+        organization_department: "Sistemas",
+      }),
     );
     await expectFactusError(factus.creditNotes.delete("NC856"));
     await expectFactusError(factus.supportDocuments.delete("SEDS984000021"));
@@ -395,14 +391,14 @@ describe("sandbox integration", () => {
       factus.reception.emitEvent(
         {
           bill_id: "SETP990000203",
-          event_type: "030" as any,
+          event_type: "030",
         },
         {
           identification_document_code: 13,
           identification: "12345667",
           first_name: "Pepito",
           last_name: "Perez",
-        } as any,
+        },
       ),
     );
   });

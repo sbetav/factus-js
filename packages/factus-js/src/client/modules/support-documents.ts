@@ -48,9 +48,7 @@ export class SupportDocumentsModule {
    * Download the support document XML as a base64-encoded string.
    * GET /v1/support-documents/download-xml/{number}
    */
-  downloadXml(
-    number: string,
-  ): Promise<ApiResponse<DownloadSupportDocumentXmlResponse>> {
+  downloadXml(number: string): Promise<DownloadSupportDocumentXmlResponse> {
     return this.http.get(`/v1/support-documents/download-xml/${number}`);
   }
 
@@ -58,9 +56,7 @@ export class SupportDocumentsModule {
    * Download the support document PDF as a base64-encoded string.
    * GET /v1/support-documents/download-pdf/{number}
    */
-  downloadPdf(
-    number: string,
-  ): Promise<ApiResponse<DownloadSupportDocumentPdfResponse>> {
+  downloadPdf(number: string): Promise<DownloadSupportDocumentPdfResponse> {
     return this.http.get(`/v1/support-documents/download-pdf/${number}`);
   }
 

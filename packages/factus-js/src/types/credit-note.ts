@@ -1,9 +1,11 @@
 import type {
   ChargeDiscountCode,
   CreditNoteCorrectionCode,
+  CreditNoteOperationTypeCode,
   CustomerTributeId,
   IdentityDocumentTypeId,
   OrganizationTypeId,
+  PaymentFormCode,
   PaymentMethodCode,
   ProductStandardId,
 } from "../constants";
@@ -35,13 +37,13 @@ export interface CreateCreditNoteInput {
   correction_concept_code: CreditNoteCorrectionCode;
   /**
    * Operation type code for the credit note.
-   * The Factus API accepts numeric values: 20 (with reference) or 22 (without reference).
-   * Note: CreditNoteOperationTypeCode constant values are strings ("20"/"22"); use the
-   * numeric literal here to match the actual API contract.
+   * Use `CreditNoteOperationTypeCode.WithReference.value` (20) or
+   * `CreditNoteOperationTypeCode.WithoutReference.value` (22).
    */
-  customization_id: 20 | 22;
+  customization_id: CreditNoteOperationTypeCode;
   bill_id?: number;
   reference_code: string;
+  payment_form?: PaymentFormCode;
   payment_method_code: PaymentMethodCode;
   send_email?: boolean;
   observation?: string;
@@ -112,7 +114,9 @@ export interface CreditNoteListItem {
   created_at: string;
 }
 
-/** @deprecated Use CreditNoteListItem for list responses and ViewCreditNoteData for detail responses. */
+/**
+ * @deprecated Use {@link CreditNoteListItem} for list responses and {@link ViewCreditNoteData} for detail responses.
+ */
 export interface CreditNote extends CreditNoteListItem {
   updated_at?: string;
   qr?: string;

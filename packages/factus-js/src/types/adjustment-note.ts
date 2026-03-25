@@ -142,8 +142,18 @@ export interface AdjustmentNoteFilters {
 // Download responses
 // ---------------------------------------------------------------------------
 
-export interface DownloadAdjustmentNoteXmlResponse extends DownloadXmlData {}
-export interface DownloadAdjustmentNotePdfResponse extends DownloadPdfData {}
+export interface DownloadAdjustmentNoteXmlResponse {
+  status: string;
+  message: string;
+  data: DownloadXmlData;
+}
+
+export interface DownloadAdjustmentNotePdfResponse {
+  status: string;
+  message: string;
+  data: DownloadPdfData;
+}
+
 export interface DeleteAdjustmentNoteResponse extends DeleteResponse {}
 
 // ---------------------------------------------------------------------------

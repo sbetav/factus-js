@@ -30,10 +30,12 @@ interface TokenState {
   expiresAt: number;
 }
 
+/** @internal */
 export class HttpClient {
   private readonly baseUrl: string;
   private readonly config: FactusClientConfig;
   private tokenState: TokenState | null = null;
+  private pendingAuth: Promise<string> | null = null;
 
   constructor(config: FactusClientConfig) {
     this.config = config;
@@ -48,13 +50,18 @@ export class HttpClient {
   private async fetchToken(
     body: LoginInput | RefreshTokenInput,
   ): Promise<TokenState> {
+    const formBody = new URLSearchParams();
+    for (const [key, value] of Object.entries(body)) {
+      formBody.set(key, String(value));
+    }
+
     const response = await fetch(`${this.baseUrl}/oauth/token`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
         Accept: "application/json",
       },
-      body: JSON.stringify(body),
+      body: formBody,
     });
 
     if (!response.ok) {
@@ -102,15 +109,27 @@ export class HttpClient {
     }
   }
 
-  private async ensureAuth(): Promise<string> {
-    if (!this.tokenState || Date.now() >= this.tokenState.expiresAt) {
-      if (this.tokenState?.refreshToken) {
-        await this.refreshToken();
-      } else {
-        await this.login();
-      }
+  private async doAuth(): Promise<string> {
+    if (this.tokenState?.refreshToken) {
+      await this.refreshToken();
+    } else {
+      await this.login();
     }
     return this.tokenState!.accessToken;
+  }
+
+  private async ensureAuth(): Promise<string> {
+    if (this.tokenState && Date.now() < this.tokenState.expiresAt) {
+      return this.tokenState.accessToken;
+    }
+
+    // Deduplicate concurrent auth requests
+    if (!this.pendingAuth) {
+      this.pendingAuth = this.doAuth().finally(() => {
+        this.pendingAuth = null;
+      });
+    }
+    return this.pendingAuth;
   }
 
   // ---------------------------------------------------------------------------

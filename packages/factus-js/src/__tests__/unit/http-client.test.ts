@@ -4,6 +4,7 @@ import {
   createMockFetch,
   jsonResponse,
   parseJsonBody,
+  parseFormBody,
 } from "../helpers/fetch-mock";
 
 const config = {
@@ -47,7 +48,7 @@ describe("HttpClient", () => {
       "https://api-sandbox.factus.com.co/oauth/token",
     );
     expect(mock.calls[0].init?.method).toBe("POST");
-    expect(parseJsonBody(mock.calls[0].init?.body)).toEqual({
+    expect(parseFormBody(mock.calls[0].init?.body)).toEqual({
       grant_type: "password",
       client_id: "client-id",
       client_secret: "client-secret",
@@ -117,7 +118,7 @@ describe("HttpClient", () => {
     expect(mock.calls[2].url).toBe(
       "https://api-sandbox.factus.com.co/oauth/token",
     );
-    expect(parseJsonBody(mock.calls[2].init?.body)).toEqual({
+    expect(parseFormBody(mock.calls[2].init?.body)).toEqual({
       grant_type: "refresh_token",
       client_id: "client-id",
       client_secret: "client-secret",

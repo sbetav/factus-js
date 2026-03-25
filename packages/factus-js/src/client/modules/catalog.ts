@@ -15,6 +15,19 @@ import type {
 import type { HttpClient } from "../http-client";
 import { buildListQueryParams } from "../list-params";
 
+type QueryValue = string | number | boolean | undefined;
+
+function toQueryParams<T extends object>(
+  obj?: T,
+): Record<string, QueryValue> | undefined {
+  if (!obj) return undefined;
+  const params: Record<string, QueryValue> = {};
+  for (const [key, value] of Object.entries(obj)) {
+    if (value !== undefined) params[key] = value as QueryValue;
+  }
+  return params;
+}
+
 export class CatalogModule {
   constructor(private readonly http: HttpClient) {}
 
@@ -55,10 +68,7 @@ export class CatalogModule {
    * GET /v1/tributes/products
    */
   listTributes(filters?: TributeFilters): Promise<ApiResponse<Tribute[]>> {
-    return this.http.get(
-      "/v1/tributes/products",
-      filters as Record<string, string | number | boolean | undefined>,
-    );
+    return this.http.get("/v1/tributes/products", toQueryParams(filters));
   }
 
   // ---------------------------------------------------------------------------
@@ -72,10 +82,7 @@ export class CatalogModule {
   listMeasurementUnits(
     filters?: MeasurementUnitFilters,
   ): Promise<ApiResponse<MeasurementUnit[]>> {
-    return this.http.get(
-      "/v1/measurement-units",
-      filters as Record<string, string | number | boolean | undefined>,
-    );
+    return this.http.get("/v1/measurement-units", toQueryParams(filters));
   }
 
   // ---------------------------------------------------------------------------
@@ -87,12 +94,6 @@ export class CatalogModule {
    * GET /v1/dian/acquirer
    */
   getAcquirer(filters: AcquirerFilters): Promise<ApiResponse<Acquirer>> {
-    return this.http.get(
-      "/v1/dian/acquirer",
-      filters as unknown as Record<
-        string,
-        string | number | boolean | undefined
-      >,
-    );
+    return this.http.get("/v1/dian/acquirer", toQueryParams(filters));
   }
 }

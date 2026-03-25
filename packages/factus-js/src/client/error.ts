@@ -11,5 +11,6 @@ export class FactusError extends Error {
   ) {
     super(message);
     this.name = "FactusError";
+    Object.setPrototypeOf(this, FactusError.prototype);
   }
 }

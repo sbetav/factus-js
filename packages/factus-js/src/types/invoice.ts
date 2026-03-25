@@ -129,7 +129,9 @@ export interface InvoiceListItem {
   debit_notes: Array<{ id: number; number: string }>;
 }
 
-/** @deprecated Use InvoiceListItem instead. */
+/**
+ * @deprecated Use {@link InvoiceListItem} for list responses and {@link ViewInvoiceData} for detail responses.
+ */
 export interface Invoice {
   id: number;
   document: CodeNameObject;
@@ -248,7 +250,12 @@ export interface ViewInvoiceResponse {
 // ---------------------------------------------------------------------------
 
 export interface RadianEventUpdateInput {
-  identification_document_code: IdentityDocumentTypeId;
+  /**
+   * Identity document type code. While common values are 1–11
+   * (see {@link IdentityDocumentTypeId}), the API may accept additional codes
+   * (e.g. 13 for tacit acceptance).
+   */
+  identification_document_code: number;
   identification: string;
   dv?: string;
   first_name: string;

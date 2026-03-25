@@ -43,3 +43,10 @@ export function parseJsonBody(body: BodyInit | null | undefined): unknown {
   if (typeof body !== "string") return undefined;
   return JSON.parse(body);
 }
+
+export function parseFormBody(
+  body: BodyInit | null | undefined,
+): Record<string, string> | undefined {
+  if (!(body instanceof URLSearchParams)) return undefined;
+  return Object.fromEntries(body.entries());
+}
