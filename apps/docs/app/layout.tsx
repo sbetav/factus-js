@@ -25,7 +25,25 @@ export const metadata: Metadata = {
     default: "factus-js — JavaScript SDK para la API de Factus",
   },
   description:
-    "JavaScript/TypeScript SDK para emitir facturas electrónicas, notas crédito y documentos soporte a través de la API de Factus.",
+    "JavaScript/TypeScript SDK para emitir facturas electrónicas, notas crédito y documentos soporte a través de la API de Factus. Integración con la DIAN en Colombia.",
+  keywords: [
+    "facturación electrónica",
+    "factura electrónica",
+    "DIAN",
+    "Colombia",
+    "API",
+    "SDK",
+    "JavaScript",
+    "TypeScript",
+    "Node.js",
+    "Factus",
+    "factus-js",
+    "notas crédito",
+    "documentos soporte",
+    "facturación electrónica Colombia",
+    "integración API",
+    "electronic invoicing",
+  ],
   openGraph: {
     siteName: "factus-js",
     locale: "es_CO",
@@ -35,7 +53,7 @@ export const metadata: Metadata = {
         url: ogImageUrl,
         width: 1200,
         height: 630,
-        alt: "factus-js",
+        alt: "factus-js — JavaScript SDK para la API de facturación electrónica Factus",
       },
     ],
   },
@@ -56,6 +74,35 @@ export default function Layout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <body className="flex flex-col min-h-screen">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SoftwareSourceCode",
+              name: "factus-js",
+              description:
+                "SDK de JavaScript/TypeScript para la API de facturación electrónica Factus. Emite facturas electrónicas, notas crédito y documentos soporte validados ante la DIAN en Colombia.",
+              codeRepository: "https://github.com/sbetav/factus-js",
+              programmingLanguage: ["TypeScript", "JavaScript"],
+              runtimePlatform: "Node.js",
+              license: "https://opensource.org/licenses/MIT",
+              url: getSiteUrl(),
+              author: {
+                "@type": "Person",
+                name: "sbetav",
+                url: "https://github.com/sbetav",
+              },
+              about: {
+                "@type": "SoftwareApplication",
+                name: "Factus",
+                url: "https://www.factus.com.co/",
+                applicationCategory: "BusinessApplication",
+                description: "API de facturación electrónica DIAN Colombia",
+              },
+            }),
+          }}
+        />
         <RootProvider
           i18n={{
             // Keep the locale name aligned with the current search index language

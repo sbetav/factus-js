@@ -1,11 +1,36 @@
 # factus-js
 
-SDK TypeScript para la API de Factus (facturacion electronica en Colombia).
+[![npm version](https://img.shields.io/npm/v/factus-js.svg)](https://www.npmjs.com/package/factus-js)
+[![license](https://img.shields.io/npm/l/factus-js.svg)](https://github.com/sbetav/factus-js/blob/main/LICENSE)
+[![npm downloads](https://img.shields.io/npm/dm/factus-js.svg)](https://www.npmjs.com/package/factus-js)
+
+SDK TypeScript/JavaScript para la API de [Factus](https://www.factus.com.co/) — facturación electrónica en Colombia ante la DIAN.
+
+> **Documentación completa:** [https://factusjs.vercel.app](https://factusjs.vercel.app)
+
+## Características
+
+- Todos los endpoints de la API de Factus: facturas, notas crédito, documentos soporte, notas de ajuste, recepción RADIAN, rangos de numeración, catálogos y más.
+- Autenticación OAuth2 automática con refresh de token.
+- Tipado completo con TypeScript — autocompletado, payloads y respuestas tipados.
+- Constantes DIAN tipadas: medios de pago, formas de pago, tipos de documento, tributos, etc.
+- Compatible con cualquier runtime JavaScript: Node.js, Deno, Bun.
+- Cero dependencias externas.
 
 ## Instalación
 
 ```bash
+# npm
+npm install factus-js
+
+# yarn
+yarn add factus-js
+
+# pnpm
 pnpm add factus-js
+
+# bun
+bun add factus-js
 ```
 
 ## Uso básico
@@ -21,66 +46,53 @@ const factus = new FactusClient({
   environment: "sandbox", // "production" para ambiente real
 });
 
+// Listar facturas
 const bills = await factus.bills.list({ page: 1, per_page: 10 });
 console.log(bills.data.data);
+
+// Crear una factura electrónica
+const invoice = await factus.bills.create({
+  /* payload */
+});
+
+// Descargar PDF
+const pdf = await factus.bills.downloadPdf("SETT1");
 ```
 
 ## Módulos disponibles
 
-- `factus.bills`: facturas electrónicas de venta.
-- `factus.creditNotes`: notas crédito.
-- `factus.supportDocuments`: documentos soporte.
-- `factus.adjustmentNotes`: notas de ajuste para documento soporte.
-- `factus.reception`: recepción y eventos RADIAN.
-- `factus.company`: datos de empresa.
-- `factus.numberingRanges`: rangos de numeración.
-- `factus.subscription`: estado del plan/suscripción.
-- `factus.catalog`: municipios, países, tributos, unidades y adquirentes.
+| Módulo                    | Descripción                                          |
+| ------------------------- | ---------------------------------------------------- |
+| `factus.bills`            | Facturas electrónicas de venta                       |
+| `factus.creditNotes`      | Notas crédito                                        |
+| `factus.supportDocuments` | Documentos soporte                                   |
+| `factus.adjustmentNotes`  | Notas de ajuste para documento soporte               |
+| `factus.reception`        | Recepción de facturas y eventos RADIAN               |
+| `factus.company`          | Datos de empresa                                     |
+| `factus.numberingRanges`  | Rangos de numeración DIAN                            |
+| `factus.subscription`     | Estado del plan/suscripción                          |
+| `factus.catalog`          | Municipios, países, tributos, unidades y adquirentes |
 
 ## Exportaciones
 
-- `FactusClient`
-- `FactusError`
-- Constantes tipadas DIAN (`PaymentMethodCode`, `PaymentFormCode`, `IdentityDocumentTypeId`, etc.)
-- Tipos TypeScript para payloads y respuestas de la API
-
-## Desarrollo del paquete
-
-Desde la raíz del monorepo:
-
-```bash
-pnpm install
-pnpm --filter factus-js dev
+```ts
+import {
+  FactusClient,
+  FactusError,
+  // Constantes DIAN tipadas
+  PaymentMethodCode,
+  PaymentFormCode,
+  IdentityDocumentTypeId,
+  // ... y más
+} from "factus-js";
 ```
 
-### Scripts
+## Documentación
 
-```bash
-pnpm --filter factus-js build
-pnpm --filter factus-js typecheck
-pnpm --filter factus-js test
-pnpm --filter factus-js test:unit
-pnpm --filter factus-js test:sandbox
-pnpm --filter factus-js test:watch
-```
+Para guías completas, referencia de la API, ejemplos y más, visita la documentación:
 
-## Tests sandbox (opcionales)
+**[https://factusjs.vercel.app](https://factusjs.vercel.app)**
 
-1. Crea `packages/factus-js/.env.local` a partir de `packages/factus-js/.env.example`.
-2. Define estas variables:
+## Licencia
 
-```env
-RUN_SANDBOX_TESTS=true
-FACTUS_CLIENT_ID=...
-FACTUS_CLIENT_SECRET=...
-FACTUS_USERNAME=...
-FACTUS_PASSWORD=...
-```
-
-3. Ejecuta:
-
-```bash
-pnpm --filter factus-js test
-```
-
-Por diseño, algunas rutas pueden estar limitadas en sandbox por permisos o por no ser testeables en ese entorno.
+[MIT](https://github.com/sbetav/factus-js/blob/main/LICENSE)

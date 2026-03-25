@@ -1,7 +1,7 @@
 {
   "name": "factus-js",
   "type": "module",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "TypeScript SDK for the Factus Colombian e-invoicing API",
   "author": "sbetav",
   "license": "MIT",
@@ -16,12 +16,20 @@
   "homepage": "https://factusjs.vercel.app",
   "keywords": [
     "factus",
+    "factus-api",
     "colombia",
-    "electronic-invoicing",
     "dian",
+    "electronic-invoicing",
+    "e-invoicing",
+    "facturacion-electronica",
+    "factura-electronica",
+    "invoicing",
+    "billing",
     "api",
     "sdk",
-    "typescript"
+    "typescript",
+    "javascript",
+    "nodejs"
   ],
   "files": [
     "dist",

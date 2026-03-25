@@ -25,10 +25,16 @@ Fuente oficial: [Eliminar factura no validada](https://developers.factus.com.co/
 
 <TypeTable
   type={{
-    "referenceCode": {
+    referenceCode: {
       type: "string",
       required: true,
-      description: <>{"Código de referencia ("}<code>{"reference_code"}</code>{") de la factura no validada a eliminar."}</>,
+      description: (
+        <>
+          {"Código de referencia ("}
+          <code>{"reference_code"}</code>
+          {") de la factura no validada a eliminar."}
+        </>
+      ),
     },
   }}
 />
