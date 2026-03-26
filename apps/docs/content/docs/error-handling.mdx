@@ -19,6 +19,7 @@ class FactusError extends Error {
     detail: string;
     api_version: string;
   }>;
+  validationErrors: Record<string, string> | null;
 }
 ```
 
@@ -39,7 +40,8 @@ class FactusError extends Error {
       required: true,
       description: (
         <div>
-          Lista completa de errores devuelta por la API.
+          Lista completa de errores devuelta por la API. Puede estar vacía para
+          errores de validación (ver <code>validationErrors</code>).
           <TypeTable
             type={{
               code: {
@@ -66,6 +68,12 @@ class FactusError extends Error {
           />
         </div>
       ),
+    },
+    validationErrors: {
+      type: "Record<string, string> | null",
+      required: true,
+      description:
+        "Reglas DIAN que fallaron al validar un documento (típicamente en errores 422). Las claves son los códigos de regla (p. ej. FAK24) y los valores la descripción del rechazo. Es null cuando el error no es de validación.",
     },
   }}
 />
@@ -95,6 +103,45 @@ try {
   } else {
     // Error de red u otro error inesperado
     throw error;
+  }
+}
+```
+
+## Errores de validación
+
+Cuando la API rechaza un documento por reglas de validación (HTTP 422), el SDK extrae los errores DIAN y los expone directamente en `error.validationErrors`:
+
+```ts
+try {
+  const invoice = await factus.bills.create({
+    /* datos de factura */
+  });
+} catch (error) {
+  if (error instanceof FactusError) {
+    console.error("Código HTTP:", error.statusCode); // 422
+
+    if (error.validationErrors) {
+      // Errores de validación de la DIAN — { [código]: descripción }
+      for (const [code, detail] of Object.entries(error.validationErrors)) {
+        console.error(`${code}: ${detail}`);
+        // "FAK24: Regla: FAK24, Rechazo: No está informado el DV del NIT"
+      }
+    }
+  }
+}
+```
+
+La respuesta raw de la API para estos casos tiene la siguiente forma:
+
+```json
+{
+  "status": "Validation error",
+  "message": "El documento contiene errores de validación",
+  "data": {
+    "message": "El documento contiene errores de validación",
+    "errors": {
+      "FAK24": "Regla: FAK24, Rechazo: No está informado el DV del NIT"
+    }
   }
 }
 ```

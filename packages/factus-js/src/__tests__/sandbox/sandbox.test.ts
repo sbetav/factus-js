@@ -1,107 +1,16 @@
 import { FactusClient } from "../../index";
-import { FactusError } from "../../client/error";
 import {
   readSandboxEnv,
   shouldRunSandboxTests,
   uniqueRef,
 } from "../helpers/sandbox-env";
-
-// ---------------------------------------------------------------------------
-// Result collector — accumulates per-method outcomes and prints a summary
-// ---------------------------------------------------------------------------
-
-type MethodResult =
-  | { status: "ok" }
-  | { status: "expected-error"; error: FactusError }
-  | { status: "unexpected-error"; error: unknown };
-
-const results = new Map<string, MethodResult>();
-
-function formatError(error: unknown): string {
-  if (error instanceof FactusError) {
-    if (error.errors.length > 0) {
-      return `${error.statusCode} — ${JSON.stringify(error.errors, null, 2)}`;
-    }
-    return `${error.statusCode} — ${error.message}`;
-  }
-  return String(error);
-}
-
-function printResults(): void {
-  const maxName = Math.max(...[...results.keys()].map((k) => k.length));
-
-  for (const [name, result] of results) {
-    const padded = name.padEnd(maxName);
-    switch (result.status) {
-      case "ok":
-        console.log(`  OK    ${padded}`);
-        break;
-      case "expected-error":
-        console.log(`  WARN  ${padded}  ${formatError(result.error)}`);
-        break;
-      case "unexpected-error":
-        console.log(`  FAIL  ${padded}  ${formatError(result.error)}`);
-        break;
-    }
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Test helpers
-// ---------------------------------------------------------------------------
-
-async function run(name: string, call: Promise<unknown>): Promise<void> {
-  try {
-    const result = await call;
-    expect(result).not.toBeUndefined();
-    results.set(name, { status: "ok" });
-  } catch (error) {
-    results.set(name, { status: "unexpected-error", error });
-    throw error;
-  }
-}
-
-async function runAllowConflict(
-  name: string,
-  call: Promise<unknown>,
-  allowedStatusCodes: number[] = [409],
-): Promise<void> {
-  try {
-    const result = await call;
-    expect(result).not.toBeUndefined();
-    results.set(name, { status: "ok" });
-  } catch (error) {
-    if (
-      error instanceof FactusError &&
-      allowedStatusCodes.includes(error.statusCode)
-    ) {
-      results.set(name, { status: "expected-error", error });
-      return;
-    }
-    results.set(name, { status: "unexpected-error", error });
-    throw error;
-  }
-}
-
-async function runExpectError(
-  name: string,
-  call: Promise<unknown>,
-  allowedStatusCodes: number[] = [400, 401, 403, 404, 405, 409, 422, 429, 500],
-): Promise<void> {
-  try {
-    await call;
-    const error = new Error("Expected FactusError but promise resolved");
-    results.set(name, { status: "unexpected-error", error });
-    throw error;
-  } catch (error) {
-    if (error instanceof FactusError) {
-      expect(allowedStatusCodes).toContain(error.statusCode);
-      results.set(name, { status: "expected-error", error });
-      return;
-    }
-    throw error;
-  }
-}
+import {
+  printResults,
+  run,
+  runAllowConflict,
+  runExpectError,
+  createInvalid,
+} from "../helpers/sandbox-runner";
 
 // ---------------------------------------------------------------------------
 // Tests
@@ -139,11 +48,43 @@ describe("sandbox integration", () => {
   });
 
   test("verified endpoints should resolve", async () => {
-    await runAllowConflict(
-      "bills.create",
+    // -----------------------------------------------------------------
+    // Cleanup — delete any pending bills left from previous test runs.
+    // The sandbox only allows one pending bill at a time, so stale
+    // pending bills would cause 409 when creating new ones.
+    // -----------------------------------------------------------------
+    try {
+      const pending = await factus.bills.list({
+        filter: { status: 0 },
+        per_page: 50,
+      });
+      for (const bill of pending.data.data) {
+        if (bill.reference_code) {
+          try {
+            await factus.bills.delete(bill.reference_code);
+          } catch {
+            // ignore — some bills may not be deletable
+          }
+        }
+      }
+    } catch {
+      // ignore cleanup errors
+    }
+
+    // -----------------------------------------------------------------
+    // Bills — delete flow FIRST (before regular create, to avoid 409
+    // "pending bill" conflicts). Create a bill that passes API input
+    // validation but fails DIAN validation (persisted with errors),
+    // then delete it by reference_code.
+    // Using identification_document_id 6 (NIT) with wrong DV triggers
+    // FAK24 — the doc is persisted but not sent to DIAN.
+    // -----------------------------------------------------------------
+    const deleteBillRef = uniqueRef("DEL-BILL");
+    await createInvalid(
+      "bills.delete (create invalid)",
       factus.bills.create({
         numbering_range_id: 8,
-        reference_code: invoiceReference,
+        reference_code: deleteBillRef,
         payment_form: "2",
         payment_due_date: "2026-12-31",
         payment_method_code: "10",
@@ -174,6 +115,49 @@ describe("sandbox integration", () => {
           },
         ],
       }),
+    );
+    await run("bills.delete", factus.bills.delete(deleteBillRef));
+
+    // -----------------------------------------------------------------
+    // Bills — regular CRUD (after delete clears any pending bill)
+    // -----------------------------------------------------------------
+    await runAllowConflict(
+      "bills.create",
+      factus.bills.create({
+        numbering_range_id: 8,
+        reference_code: invoiceReference,
+        payment_form: "2",
+        payment_due_date: "2026-12-31",
+        payment_method_code: "10",
+        customer: {
+          identification: "123456789",
+          dv: "3",
+          company: "",
+          trade_name: "",
+          names: "Alan Turing",
+          address: "calle 1 # 2-68",
+          email: "alanturing@enigmasas.com",
+          phone: "1234567890",
+          legal_organization_id: 2,
+          tribute_id: 21,
+          identification_document_id: 3,
+          municipality_id: 980,
+        },
+        items: [
+          {
+            code_reference: "12345",
+            name: "producto de prueba",
+            quantity: 1,
+            discount_rate: 20,
+            price: 50000,
+            tax_rate: "19.00",
+            unit_measure_id: 70,
+            standard_code_id: 1,
+            is_excluded: 0,
+            tribute_id: 1,
+          },
+        ],
+      }),
       [409, 422],
     );
 
@@ -187,6 +171,9 @@ describe("sandbox integration", () => {
     await run("bills.downloadXml", factus.bills.downloadXml("SETP990000203"));
     await run("bills.getEvents", factus.bills.getEvents("SETP990000203"));
 
+    // -----------------------------------------------------------------
+    // Credit Notes
+    // -----------------------------------------------------------------
     await runAllowConflict(
       "creditNotes.create",
       factus.creditNotes.create({
@@ -202,6 +189,11 @@ describe("sandbox integration", () => {
           names: "Alan Turing",
           address: "calle 1 # 2-68",
           email: "alanturing@enigmasas.com",
+          phone: "1234567890",
+          legal_organization_id: 2,
+          tribute_id: 21,
+          identification_document_id: 3,
+          municipality_id: 980,
         },
         items: [
           {
@@ -239,21 +231,99 @@ describe("sandbox integration", () => {
       factus.creditNotes.downloadXml("NC856"),
     );
 
-    await runAllowConflict(
-      "supportDocuments.create",
+    // creditNotes.delete — create a credit note that passes API input
+    // validation but fails DIAN validation (persisted with errors),
+    // then delete it by reference_code.
+    // Using NIT (id:6) with wrong DV triggers DIAN rejection.
+    const deleteCreditNoteRef = uniqueRef("DEL-CN");
+    await createInvalid(
+      "creditNotes.delete (create invalid)",
+      factus.creditNotes.create({
+        numbering_range_id: 9,
+        correction_concept_code: 2,
+        customization_id: 20,
+        bill_id: 514,
+        reference_code: deleteCreditNoteRef,
+        payment_method_code: "10",
+        customer: {
+          identification: "123456789",
+          identification_document_id: 6,
+          dv: "3",
+          names: "Alan Turing",
+          address: "calle 1 # 2-68",
+          email: "alanturing@enigmasas.com",
+          phone: "1234567890",
+          legal_organization_id: 2,
+          tribute_id: 21,
+          municipality_id: 980,
+        },
+        items: [
+          {
+            code_reference: "12345",
+            name: "producto de prueba",
+            quantity: 1,
+            discount_rate: 20,
+            price: 50000,
+            tax_rate: "19.00",
+            unit_measure_id: 70,
+            standard_code_id: 1,
+            is_excluded: 0,
+            tribute_id: 1,
+          },
+        ],
+      }),
+    );
+    await run(
+      "creditNotes.delete",
+      factus.creditNotes.delete(deleteCreditNoteRef),
+    );
+
+    // -----------------------------------------------------------------
+    // Support Documents & Adjustment Notes — cleanup, then delete
+    // flows FIRST (before regular creates, to avoid 409 "pending
+    // document" conflicts). The sandbox only allows one pending
+    // support document at a time.
+    // -----------------------------------------------------------------
+    try {
+      const pendingSD = await factus.supportDocuments.list({
+        filter: { status: 0 },
+        per_page: 50,
+      });
+      for (const sd of pendingSD.data.data) {
+        if (sd.reference_code) {
+          try {
+            await factus.supportDocuments.delete(sd.reference_code);
+          } catch {
+            // ignore — some docs may not be deletable
+          }
+        }
+      }
+    } catch {
+      // ignore cleanup errors
+    }
+
+    // supportDocuments.delete — create a support doc that passes API input
+    // validation but fails DIAN validation (persisted but pending),
+    // then delete it. Use identification: "INVALID_DOCUMENT" with a
+    // valid identification_document_id to trigger DIAN rejection.
+    const deleteSupportRef = uniqueRef("DEL-SD");
+    await createInvalid(
+      "supportDocuments.delete (create invalid)",
       factus.supportDocuments.create({
-        reference_code: supportReference,
+        reference_code: deleteSupportRef,
         numbering_range_id: 148,
         payment_method_code: "10",
+        observation: "",
         provider: {
           identification_document_id: 6,
-          identification: "123456789",
+          identification: "INVALID_DOCUMENT",
           dv: 6,
           trade_name: "",
           names: "Alan Turing",
           address: "calle 1 # 2-68",
           email: "alanturing@enigmasas.com",
           phone: "1234567890",
+          is_resident: 1,
           country_code: "CO",
           municipality_id: 980,
         },
@@ -263,6 +333,157 @@ describe("sandbox integration", () => {
             name: "producto de prueba",
             quantity: 1,
             discount_rate: 20,
+            price: 50000,
+            unit_measure_id: 70,
+            standard_code_id: 1,
+            withholding_taxes: [{ code: "06", withholding_tax_rate: "3.50" }],
+          },
+          {
+            code_reference: "54321",
+            name: "producto de prueba 2",
+            quantity: 1,
+            discount_rate: 0,
+            price: 50000,
+            unit_measure_id: 70,
+            standard_code_id: 1,
+          },
+        ],
+      }),
+    );
+    await run(
+      "supportDocuments.delete",
+      factus.supportDocuments.delete(deleteSupportRef),
+    );
+
+    // adjustmentNotes.delete — create a support doc (pending cleared
+    // above), look it up, create an adjustment note for it, then delete.
+    // Use identification: "INVALID_DOCUMENT" to ensure DIAN rejection.
+    const deleteAdjSupportRef = uniqueRef("DEL-ADS");
+    await createInvalid(
+      "adjustmentNotes.delete (create invalid support doc)",
+      factus.supportDocuments.create({
+        reference_code: deleteAdjSupportRef,
+        numbering_range_id: 148,
+        payment_method_code: "10",
+        observation: "",
+        provider: {
+          identification_document_id: 6,
+          identification: "INVALID_DOCUMENT",
+          dv: 0,
+          trade_name: "",
+          names: "Alan Turing",
+          address: "calle 1 # 2-68",
+          email: "alanturing@enigmasas.com",
+          phone: "1234567890",
+          is_resident: 1,
+          country_code: "CO",
+          municipality_id: 980,
+        },
+        items: [
+          {
+            code_reference: "12345",
+            name: "producto de prueba",
+            quantity: 1,
+            discount_rate: 20,
+            price: 50000,
+            unit_measure_id: 70,
+            standard_code_id: 1,
+            withholding_taxes: [{ code: "06", withholding_tax_rate: "3.50" }],
+          },
+          {
+            code_reference: "54321",
+            name: "producto de prueba 2",
+            quantity: 1,
+            discount_rate: 0,
+            price: 50000,
+            unit_measure_id: 70,
+            standard_code_id: 1,
+          },
+        ],
+      }),
+    );
+
+    // Look up the support document to get its id
+    const supportDocList = await factus.supportDocuments.list({
+      filter: { reference_code: deleteAdjSupportRef },
+    });
+    const supportDocId = supportDocList.data.data[0]?.id;
+    expect(supportDocId).toBeDefined();
+
+    // Create an adjustment note for that support document
+    const deleteAdjRef = uniqueRef("DEL-AN");
+    await createInvalid(
+      "adjustmentNotes.delete (create invalid adj note)",
+      factus.adjustmentNotes.create({
+        reference_code: deleteAdjRef,
+        numbering_range_id: 149,
+        support_document_id: supportDocId,
+        correction_concept_code: "2",
+        payment_method_code: "10",
+        items: [
+          {
+            code_reference: "12345",
+            name: "producto de prueba",
+            quantity: 1,
+            discount_rate: 20,
+            price: 50000,
+            unit_measure_id: 70,
+            standard_code_id: 1,
+          },
+        ],
+      }),
+    );
+    await run(
+      "adjustmentNotes.delete",
+      factus.adjustmentNotes.delete(deleteAdjRef),
+    );
+
+    // Delete the support doc used for the adjustment note test
+    try {
+      await factus.supportDocuments.delete(deleteAdjSupportRef);
+    } catch {
+      // ignore — already deleted or not pending
+    }
+
+    // -----------------------------------------------------------------
+    // Support Documents — regular CRUD (after delete flows clear state)
+    // -----------------------------------------------------------------
+    await runAllowConflict(
+      "supportDocuments.create",
+      factus.supportDocuments.create({
+        reference_code: supportReference,
+        numbering_range_id: 148,
+        payment_method_code: "10",
+        observation: "",
+        provider: {
+          identification_document_id: 6,
+          identification: "123456789",
+          dv: 6,
+          trade_name: "",
+          names: "Alan Turing",
+          address: "calle 1 # 2-68",
+          email: "alanturing@enigmasas.com",
+          phone: "1234567890",
+          is_resident: 1,
+          country_code: "CO",
+          municipality_id: 980,
+        },
+        items: [
+          {
+            code_reference: "12345",
+            name: "producto de prueba",
+            quantity: 1,
+            discount_rate: 20,
+            price: 50000,
+            unit_measure_id: 70,
+            standard_code_id: 1,
+            withholding_taxes: [{ code: "06", withholding_tax_rate: "3.50" }],
+          },
+          {
+            code_reference: "54321",
+            name: "producto de prueba 2",
+            quantity: 1,
+            discount_rate: 0,
             price: 50000,
             unit_measure_id: 70,
             standard_code_id: 1,
@@ -289,6 +510,9 @@ describe("sandbox integration", () => {
       factus.supportDocuments.downloadXml("SEDS984000021"),
     );
 
+    // -----------------------------------------------------------------
+    // Adjustment Notes — regular CRUD
+    // -----------------------------------------------------------------
     await runAllowConflict(
       "adjustmentNotes.create",
       factus.adjustmentNotes.create({
@@ -326,6 +550,9 @@ describe("sandbox integration", () => {
       factus.adjustmentNotes.downloadXml("NDS3"),
     );
 
+    // -----------------------------------------------------------------
+    // Catalog
+    // -----------------------------------------------------------------
     await run(
       "catalog.getAcquirer",
       factus.catalog.getAcquirer({
@@ -350,6 +577,9 @@ describe("sandbox integration", () => {
       factus.catalog.listCountries({ filter: { name: "Colombia" } }),
     );
 
+    // -----------------------------------------------------------------
+    // Other
+    // -----------------------------------------------------------------
     await run(
       "numberingRanges.list",
       factus.numberingRanges.list({ page: 1, per_page: 5 }),
@@ -431,7 +661,6 @@ describe("sandbox integration", () => {
   });
 
   test("unable-to-test endpoints should throw FactusError in sandbox", async () => {
-    await runExpectError("bills.delete", factus.bills.delete("SETP990000049"));
     await runExpectError(
       "bills.emitRadianEvent",
       factus.bills.emitRadianEvent("SETP990000049", "030", {
@@ -442,18 +671,6 @@ describe("sandbox integration", () => {
         job_title: "Desarollador de software",
         organization_department: "Sistemas",
       }),
-    );
-    await runExpectError(
-      "creditNotes.delete",
-      factus.creditNotes.delete("NC856"),
-    );
-    await runExpectError(
-      "supportDocuments.delete",
-      factus.supportDocuments.delete("SEDS984000021"),
-    );
-    await runExpectError(
-      "adjustmentNotes.delete",
-      factus.adjustmentNotes.delete("NDS3"),
     );
     await runExpectError(
       "reception.emitEvent",

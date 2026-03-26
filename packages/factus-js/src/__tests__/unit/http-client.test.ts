@@ -162,6 +162,56 @@ describe("HttpClient", () => {
       expect(factusError.statusCode).toBe(403);
       expect(factusError.message).toBe("Forbidden endpoint");
       expect(factusError.errors[0].detail).toBe("No permissions in sandbox");
+      expect(factusError.validationErrors).toBeNull();
+    }
+  });
+
+  test("throws FactusError with validation error data", async () => {
+    const validationPayload = {
+      status: "Validation error",
+      message: "El documento contiene errores de validación",
+      data: {
+        message: "El documento contiene errores de validación",
+        errors: {
+          FAK24: "Regla: FAK24, Rechazo: No está informado el DV del NIT",
+          FAK26: "Regla: FAK26, Rechazo: Otro error de validación",
+        },
+      },
+    };
+
+    const mock = createMockFetch([
+      jsonResponse({
+        access_token: "token-1",
+        refresh_token: "refresh-1",
+        token_type: "Bearer",
+        expires_in: 3600,
+      }),
+      jsonResponse(validationPayload, 422),
+    ]);
+
+    globalThis.fetch = mock.fetch;
+    const http = new HttpClient(config);
+
+    try {
+      await http.post("/v1/bills/validate", { reference_code: "X" });
+      throw new Error("Expected request to throw FactusError");
+    } catch (error) {
+      const factusError = error as FactusError;
+      expect(factusError).toBeInstanceOf(FactusError);
+      expect(factusError.statusCode).toBe(422);
+      expect(factusError.message).toBe(
+        "El documento contiene errores de validación",
+      );
+      expect(factusError.errors).toEqual([]);
+      expect(factusError.validationErrors).toEqual(
+        validationPayload.data.errors,
+      );
+      expect(factusError.validationErrors!.FAK24).toContain(
+        "No está informado el DV",
+      );
+      expect(factusError.validationErrors!.FAK26).toContain(
+        "Otro error de validación",
+      );
     }
   });
 
@@ -182,7 +232,17 @@ describe("HttpClient", () => {
     globalThis.fetch = mock.fetch;
     const http = new HttpClient(config);
 
-    await expect(http.get("/v1/bills")).rejects.toBeInstanceOf(FactusError);
+    try {
+      await http.get("/v1/bills");
+      throw new Error("Expected request to throw FactusError");
+    } catch (error) {
+      const factusError = error as FactusError;
+      expect(factusError).toBeInstanceOf(FactusError);
+      expect(factusError.statusCode).toBe(500);
+      expect(factusError.message).toBe("Internal Server Error");
+      expect(factusError.errors).toEqual([]);
+      expect(factusError.validationErrors).toBeNull();
+    }
   });
 
   test("returns undefined for 204 No Content", async () => {

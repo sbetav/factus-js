@@ -187,16 +187,26 @@ export class HttpClient {
           detail: string;
           api_version: string;
         }>;
+        data?: {
+          message?: string;
+          errors?: Record<string, string>;
+        };
       } | null = null;
       try {
         errorPayload = await response.json();
       } catch {
         // ignore JSON parse errors
       }
-      const errors = errorPayload?.errors ?? [];
+      const errors = Array.isArray(errorPayload?.errors)
+        ? errorPayload.errors
+        : [];
+      const validationErrors = errorPayload?.data?.errors ?? null;
       const message =
-        errors[0]?.message ?? errorPayload?.message ?? response.statusText;
-      throw new FactusError(message, response.status, errors);
+        errors[0]?.message ??
+        errorPayload?.data?.message ??
+        errorPayload?.message ??
+        response.statusText;
+      throw new FactusError(message, response.status, errors, validationErrors);
     }
 
     // Some endpoints return 204 No Content

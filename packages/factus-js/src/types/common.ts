@@ -16,6 +16,31 @@ export interface ErrorResponse {
   errors: ApiError[];
 }
 
+/**
+ * Error response shape returned by the API for validation failures (typically 422).
+ *
+ * ```json
+ * {
+ *   "status": "Validation error",
+ *   "message": "El documento contiene errores de validación",
+ *   "data": {
+ *     "message": "El documento contiene errores de validación",
+ *     "errors": {
+ *       "FAK24": "Regla: FAK24, Rechazo: No está informado el DV del NIT"
+ *     }
+ *   }
+ * }
+ * ```
+ */
+export interface ValidationErrorResponse {
+  status: string;
+  message: string;
+  data: {
+    message: string;
+    errors: Record<string, string>;
+  };
+}
+
 export interface PaginationLink {
   url: string | null;
   label: string | number;
