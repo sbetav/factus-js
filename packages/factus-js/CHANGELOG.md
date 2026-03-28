@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0
+
+### Minor Changes
+
+- 3c31b65: Add `abbreviation` to each entry in `IdentityDocumentTypeId` and `SupportDocumentIdentityTypeId` for UI labels and display. Document the mapping in the reference tables catalog page.
+
 ## 0.1.3
 
 ### Patch Changes
