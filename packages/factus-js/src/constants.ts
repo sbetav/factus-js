@@ -108,35 +108,65 @@ export const EventCode = {
 export type EventCode = (typeof EventCode)[keyof typeof EventCode]["value"];
 
 export const IdentityDocumentTypeId = {
-  CivilRegistration: { value: 1, description: "Registro civil" },
-  IdentityCard: { value: 2, description: "Tarjeta de identidad" },
-  CitizenshipId: { value: 3, description: "Cédula de ciudadanía" },
-  ForeignerCard: { value: 4, description: "Tarjeta de extranjería" },
-  ForeignerId: { value: 5, description: "Cédula de extranjería" },
-  NIT: { value: 6, description: "NIT" },
-  Passport: { value: 7, description: "Pasaporte" },
+  CivilRegistration: {
+    value: 1,
+    description: "Registro civil",
+    abbreviation: "RC",
+  },
+  IdentityCard: {
+    value: 2,
+    description: "Tarjeta de identidad",
+    abbreviation: "TI",
+  },
+  CitizenshipId: {
+    value: 3,
+    description: "Cédula de ciudadanía",
+    abbreviation: "CC",
+  },
+  ForeignerCard: {
+    value: 4,
+    description: "Tarjeta de extranjería",
+    abbreviation: "TE",
+  },
+  ForeignerId: {
+    value: 5,
+    description: "Cédula de extranjería",
+    abbreviation: "CE",
+  },
+  NIT: { value: 6, description: "NIT", abbreviation: "NIT" },
+  Passport: { value: 7, description: "Pasaporte", abbreviation: "PA" },
   ForeignIdentificationDocument: {
     value: 8,
     description: "Documento de identificación extranjero",
+    abbreviation: "DE",
   },
-  PEP: { value: 9, description: "PEP" },
-  ForeignNIT: { value: 10, description: "NIT otro país" },
-  NUIP: { value: 11, description: "NUIP" },
+  PEP: { value: 9, description: "PEP", abbreviation: "PEP" },
+  ForeignNIT: { value: 10, description: "NIT otro país", abbreviation: "NE" },
+  NUIP: { value: 11, description: "NUIP", abbreviation: "NUIP" },
 } as const;
 export type IdentityDocumentTypeId =
   (typeof IdentityDocumentTypeId)[keyof typeof IdentityDocumentTypeId]["value"];
 
 export const SupportDocumentIdentityTypeId = {
-  ForeignerCard: { value: 4, description: "Tarjeta de extranjería" },
-  ForeignerId: { value: 5, description: "Cédula de extranjería" },
-  NIT: { value: 6, description: "NIT" },
-  Passport: { value: 7, description: "Pasaporte" },
+  ForeignerCard: {
+    value: 4,
+    description: "Tarjeta de extranjería",
+    abbreviation: "TE",
+  },
+  ForeignerId: {
+    value: 5,
+    description: "Cédula de extranjería",
+    abbreviation: "CE",
+  },
+  NIT: { value: 6, description: "NIT", abbreviation: "NIT" },
+  Passport: { value: 7, description: "Pasaporte", abbreviation: "PA" },
   ForeignIdentificationDocument: {
     value: 8,
     description: "Documento de identificación extranjero",
+    abbreviation: "DE",
   },
-  PEP: { value: 9, description: "PEP" },
-  ForeignNIT: { value: 10, description: "NIT otro país" },
+  PEP: { value: 9, description: "PEP", abbreviation: "PEP" },
+  ForeignNIT: { value: 10, description: "NIT otro país", abbreviation: "NE" },
 } as const;
 export type SupportDocumentIdentityTypeId =
   (typeof SupportDocumentIdentityTypeId)[keyof typeof SupportDocumentIdentityTypeId]["value"];

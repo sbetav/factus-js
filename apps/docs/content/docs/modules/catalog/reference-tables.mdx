@@ -121,21 +121,27 @@ import { EventCode } from "factus-js";
 
 ```ts
 import { IdentityDocumentTypeId } from "factus-js";
+
+// Código numérico para la API (p. ej. identification_document_id)
+const docType = IdentityDocumentTypeId.CitizenshipId.value; // 3
+
+// Abreviatura habitual (p. ej. etiquetas en UI)
+const abbr = IdentityDocumentTypeId.CitizenshipId.abbreviation; // "CC"
 ```
 
-| Clave                           | Valor | Descripción                            |
-| ------------------------------- | ----- | -------------------------------------- |
-| `CivilRegistration`             | `1`   | Registro civil                         |
-| `IdentityCard`                  | `2`   | Tarjeta de identidad                   |
-| `CitizenshipId`                 | `3`   | Cédula de ciudadanía                   |
-| `ForeignerCard`                 | `4`   | Tarjeta de extranjería                 |
-| `ForeignerId`                   | `5`   | Cédula de extranjería                  |
-| `NIT`                           | `6`   | NIT                                    |
-| `Passport`                      | `7`   | Pasaporte                              |
-| `ForeignIdentificationDocument` | `8`   | Documento de identificación extranjero |
-| `PEP`                           | `9`   | PEP                                    |
-| `ForeignNIT`                    | `10`  | NIT otro país                          |
-| `NUIP`                          | `11`  | NUIP                                   |
+| Clave                           | Valor | Abreviatura | Descripción                            |
+| ------------------------------- | ----- | ----------- | -------------------------------------- |
+| `CivilRegistration`             | `1`   | RC          | Registro civil                         |
+| `IdentityCard`                  | `2`   | TI          | Tarjeta de identidad                   |
+| `CitizenshipId`                 | `3`   | CC          | Cédula de ciudadanía                   |
+| `ForeignerCard`                 | `4`   | TE          | Tarjeta de extranjería                 |
+| `ForeignerId`                   | `5`   | CE          | Cédula de extranjería                  |
+| `NIT`                           | `6`   | NIT         | NIT                                    |
+| `Passport`                      | `7`   | PA          | Pasaporte                              |
+| `ForeignIdentificationDocument` | `8`   | DE          | Documento de identificación extranjero |
+| `PEP`                           | `9`   | PEP         | PEP                                    |
+| `ForeignNIT`                    | `10`  | NE          | NIT otro país                          |
+| `NUIP`                          | `11`  | NUIP        | NUIP                                   |
 
 ## Tipo de identificación para documento soporte (`SupportDocumentIdentityTypeId`)
 
@@ -143,15 +149,15 @@ import { IdentityDocumentTypeId } from "factus-js";
 import { SupportDocumentIdentityTypeId } from "factus-js";
 ```
 
-| Clave                           | Valor | Descripción                            |
-| ------------------------------- | ----- | -------------------------------------- |
-| `ForeignerCard`                 | `4`   | Tarjeta de extranjería                 |
-| `ForeignerId`                   | `5`   | Cédula de extranjería                  |
-| `NIT`                           | `6`   | NIT                                    |
-| `Passport`                      | `7`   | Pasaporte                              |
-| `ForeignIdentificationDocument` | `8`   | Documento de identificación extranjero |
-| `PEP`                           | `9`   | PEP                                    |
-| `ForeignNIT`                    | `10`  | NIT otro país                          |
+| Clave                           | Valor | Abreviatura | Descripción                            |
+| ------------------------------- | ----- | ----------- | -------------------------------------- |
+| `ForeignerCard`                 | `4`   | TE          | Tarjeta de extranjería                 |
+| `ForeignerId`                   | `5`   | CE          | Cédula de extranjería                  |
+| `NIT`                           | `6`   | NIT         | NIT                                    |
+| `Passport`                      | `7`   | PA          | Pasaporte                              |
+| `ForeignIdentificationDocument` | `8`   | DE          | Documento de identificación extranjero |
+| `PEP`                           | `9`   | PEP         | PEP                                    |
+| `ForeignNIT`                    | `10`  | NE          | NIT otro país                          |
 
 ## Tributo del cliente (`CustomerTributeId`)
 
