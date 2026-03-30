@@ -1,4 +1,8 @@
-import type { ClaimConceptCode, EventCode } from "../constants";
+import type {
+  ClaimConceptCode,
+  EventCode,
+  IdentityDocumentTypeId,
+} from "../constants";
 import type { CodeNameObject } from "./shared";
 
 export interface ReceptionBill {
@@ -39,9 +43,14 @@ export interface ReceptionBillFilters {
 export interface EmitEventInput {
   /** Required only when emitting event 031 (invoice claim). */
   claim_concept_code?: ClaimConceptCode;
-  identification_document_code: number;
+  /**
+   * Identity document type code. Common values are provided by {@link IdentityDocumentTypeId};
+   * the API may accept additional codes beyond the defined constants (e.g. `"13"` for tacit
+   * acceptance), so plain strings are also accepted.
+   */
+  identification_document_code: IdentityDocumentTypeId | string;
   identification: string;
-  /** Required when identification_document_code = 6 (NIT). */
+  /** Required when identification_document_code is `"6"` (NIT). */
   dv?: string;
   first_name: string;
   last_name: string;

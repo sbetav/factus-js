@@ -1,4 +1,6 @@
+import { EventCode } from "../../constants";
 import { FactusClient } from "../../index";
+import type { EmitEventInput } from "../../types";
 import {
   readSandboxEnv,
   shouldRunSandboxTests,
@@ -95,9 +97,9 @@ describe("sandbox integration", () => {
           address: "calle 1 # 2-68",
           email: "alanturing@enigmasas.com",
           phone: "1234567890",
-          legal_organization_id: 2,
-          tribute_id: 21,
-          identification_document_id: 6,
+          legal_organization_id: "2",
+          tribute_id: "21",
+          identification_document_id: "6",
           municipality_id: 980,
         },
         items: [
@@ -109,7 +111,7 @@ describe("sandbox integration", () => {
             price: 50000,
             tax_rate: "19.00",
             unit_measure_id: 70,
-            standard_code_id: 1,
+            standard_code_id: "1",
             is_excluded: 0,
             tribute_id: 1,
           },
@@ -138,9 +140,9 @@ describe("sandbox integration", () => {
           address: "calle 1 # 2-68",
           email: "alanturing@enigmasas.com",
           phone: "1234567890",
-          legal_organization_id: 2,
-          tribute_id: 21,
-          identification_document_id: 3,
+          legal_organization_id: "2",
+          tribute_id: "21",
+          identification_document_id: "3",
           municipality_id: 980,
         },
         items: [
@@ -152,7 +154,7 @@ describe("sandbox integration", () => {
             price: 50000,
             tax_rate: "19.00",
             unit_measure_id: 70,
-            standard_code_id: 1,
+            standard_code_id: "1",
             is_excluded: 0,
             tribute_id: 1,
           },
@@ -178,8 +180,8 @@ describe("sandbox integration", () => {
       "creditNotes.create",
       factus.creditNotes.create({
         numbering_range_id: 9,
-        correction_concept_code: 2,
-        customization_id: 20,
+        correction_concept_code: "2",
+        customization_id: "20",
         bill_id: 514,
         reference_code: uniqueRef("CN"),
         payment_method_code: "10",
@@ -190,9 +192,9 @@ describe("sandbox integration", () => {
           address: "calle 1 # 2-68",
           email: "alanturing@enigmasas.com",
           phone: "1234567890",
-          legal_organization_id: 2,
-          tribute_id: 21,
-          identification_document_id: 3,
+          legal_organization_id: "2",
+          tribute_id: "21",
+          identification_document_id: "3",
           municipality_id: 980,
         },
         items: [
@@ -204,7 +206,7 @@ describe("sandbox integration", () => {
             price: 50000,
             tax_rate: "19.00",
             unit_measure_id: 70,
-            standard_code_id: 1,
+            standard_code_id: "1",
             is_excluded: 0,
             tribute_id: 1,
           },
@@ -240,21 +242,21 @@ describe("sandbox integration", () => {
       "creditNotes.delete (create invalid)",
       factus.creditNotes.create({
         numbering_range_id: 9,
-        correction_concept_code: 2,
-        customization_id: 20,
+        correction_concept_code: "2",
+        customization_id: "20",
         bill_id: 514,
         reference_code: deleteCreditNoteRef,
         payment_method_code: "10",
         customer: {
           identification: "123456789",
-          identification_document_id: 6,
+          identification_document_id: "6",
           dv: "3",
           names: "Alan Turing",
           address: "calle 1 # 2-68",
           email: "alanturing@enigmasas.com",
           phone: "1234567890",
-          legal_organization_id: 2,
-          tribute_id: 21,
+          legal_organization_id: "2",
+          tribute_id: "21",
           municipality_id: 980,
         },
         items: [
@@ -266,7 +268,7 @@ describe("sandbox integration", () => {
             price: 50000,
             tax_rate: "19.00",
             unit_measure_id: 70,
-            standard_code_id: 1,
+            standard_code_id: "1",
             is_excluded: 0,
             tribute_id: 1,
           },
@@ -315,7 +317,7 @@ describe("sandbox integration", () => {
         payment_method_code: "10",
         observation: "",
         provider: {
-          identification_document_id: 6,
+          identification_document_id: "6",
           identification: "INVALID_DOCUMENT",
           dv: 6,
           trade_name: "",
@@ -335,7 +337,7 @@ describe("sandbox integration", () => {
             discount_rate: 20,
             price: 50000,
             unit_measure_id: 70,
-            standard_code_id: 1,
+            standard_code_id: "1",
             withholding_taxes: [{ code: "06", withholding_tax_rate: "3.50" }],
           },
           {
@@ -345,7 +347,7 @@ describe("sandbox integration", () => {
             discount_rate: 0,
             price: 50000,
             unit_measure_id: 70,
-            standard_code_id: 1,
+            standard_code_id: "1",
           },
         ],
       }),
@@ -367,7 +369,7 @@ describe("sandbox integration", () => {
         payment_method_code: "10",
         observation: "",
         provider: {
-          identification_document_id: 6,
+          identification_document_id: "6",
           identification: "INVALID_DOCUMENT",
           dv: 0,
           trade_name: "",
@@ -387,7 +389,7 @@ describe("sandbox integration", () => {
             discount_rate: 20,
             price: 50000,
             unit_measure_id: 70,
-            standard_code_id: 1,
+            standard_code_id: "1",
             withholding_taxes: [{ code: "06", withholding_tax_rate: "3.50" }],
           },
           {
@@ -397,7 +399,7 @@ describe("sandbox integration", () => {
             discount_rate: 0,
             price: 50000,
             unit_measure_id: 70,
-            standard_code_id: 1,
+            standard_code_id: "1",
           },
         ],
       }),
@@ -428,7 +430,7 @@ describe("sandbox integration", () => {
             discount_rate: 20,
             price: 50000,
             unit_measure_id: 70,
-            standard_code_id: 1,
+            standard_code_id: "1",
           },
         ],
       }),
@@ -456,7 +458,7 @@ describe("sandbox integration", () => {
         payment_method_code: "10",
         observation: "",
         provider: {
-          identification_document_id: 6,
+          identification_document_id: "6",
           identification: "123456789",
           dv: 6,
           trade_name: "",
@@ -476,7 +478,7 @@ describe("sandbox integration", () => {
             discount_rate: 20,
             price: 50000,
             unit_measure_id: 70,
-            standard_code_id: 1,
+            standard_code_id: "1",
             withholding_taxes: [{ code: "06", withholding_tax_rate: "3.50" }],
           },
           {
@@ -486,7 +488,7 @@ describe("sandbox integration", () => {
             discount_rate: 0,
             price: 50000,
             unit_measure_id: 70,
-            standard_code_id: 1,
+            standard_code_id: "1",
           },
         ],
       }),
@@ -529,7 +531,7 @@ describe("sandbox integration", () => {
             discount_rate: 20,
             price: 50000,
             unit_measure_id: 70,
-            standard_code_id: 1,
+            standard_code_id: "1",
           },
         ],
       }),
@@ -556,7 +558,7 @@ describe("sandbox integration", () => {
     await run(
       "catalog.getAcquirer",
       factus.catalog.getAcquirer({
-        identification_document_id: 3,
+        identification_document_id: "3",
         identification_number: "1399991",
       }),
     );
@@ -664,27 +666,31 @@ describe("sandbox integration", () => {
     await runExpectError(
       "bills.emitRadianEvent",
       factus.bills.emitRadianEvent("SETP990000049", "030", {
-        identification_document_code: 13,
+        // "13" is intentionally out of the IdentityDocumentTypeId enum range to
+        // exercise the API accepting non-standard codes (the API is tolerant here).
+        identification_document_code: "13",
         identification: "12345667",
         first_name: "Pepito",
         last_name: "Perez",
-        job_title: "Desarollador de software",
+        job_title: "Desarrollador de software",
         organization_department: "Sistemas",
       }),
     );
+    const receptionEmitEventInput: EmitEventInput = {
+      // "13" is intentionally out of the IdentityDocumentTypeId enum range (same rationale as above).
+      identification_document_code: "13",
+      identification: "12345667",
+      first_name: "Pepito",
+      last_name: "Perez",
+    };
     await runExpectError(
       "reception.emitEvent",
       factus.reception.emitEvent(
         {
           bill_id: "SETP990000203",
-          event_type: "030",
+          event_type: EventCode.ReceiptAcknowledgement.value,
         },
-        {
-          identification_document_code: 13,
-          identification: "12345667",
-          first_name: "Pepito",
-          last_name: "Perez",
-        },
+        receptionEmitEventInput,
       ),
     );
   });

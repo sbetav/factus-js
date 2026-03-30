@@ -88,7 +88,7 @@ export interface CreateInvoiceInput {
     tribute_id: number;
     withholding_taxes?: Array<WithholdingTax>;
     mandate?: {
-      identification_document_id: number;
+      identification_document_id: IdentityDocumentTypeId;
       identification: string;
     };
   }>;
@@ -181,7 +181,7 @@ export interface InvoiceItemResponse {
   withholding_taxes: ItemWithholdingTax[];
   /** The mandate field shape matches the mandate input on CreateInvoiceInput items. */
   mandate: {
-    identification_document_id: number;
+    identification_document_id: string;
     identification: string;
   } | null;
 }
@@ -251,11 +251,11 @@ export interface ViewInvoiceResponse {
 
 export interface RadianEventUpdateInput {
   /**
-   * Identity document type code. While common values are 1–11
-   * (see {@link IdentityDocumentTypeId}), the API may accept additional codes
-   * (e.g. 13 for tacit acceptance).
+   * Identity document type code. Common values are provided by {@link IdentityDocumentTypeId};
+   * the API may accept additional codes beyond the defined constants (e.g. `"13"` for tacit
+   * acceptance), so plain strings are also accepted.
    */
-  identification_document_code: number;
+  identification_document_code: IdentityDocumentTypeId | string;
   identification: string;
   dv?: string;
   first_name: string;

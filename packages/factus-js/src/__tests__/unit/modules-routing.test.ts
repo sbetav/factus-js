@@ -311,7 +311,7 @@ describe("module routing contract", () => {
     const tributeFilters = { name: "IVA" };
     const unitFilters = { name: "Unidad" };
     const acquirerFilters = {
-      identification_document_id: 3,
+      identification_document_id: "3",
       identification_number: "1399991",
     };
 

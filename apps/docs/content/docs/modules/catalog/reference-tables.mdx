@@ -18,8 +18,8 @@ Si instalaste `factus-js`, las constantes ya están disponibles.
 ```ts
 import { PaymentFormCode, EventCode } from "factus-js";
 
-const paymentForm = PaymentFormCode.CashPayment;
-const event = EventCode.ExpressAcceptance;
+const paymentForm = PaymentFormCode.CashPayment.value;
+const event = EventCode.ExpressAcceptance.value;
 ```
 
 <Callout type="info">
@@ -70,12 +70,12 @@ import { CreditNoteCorrectionCode } from "factus-js";
 
 | Clave                    | Valor | Descripción                                                              |
 | ------------------------ | ----- | ------------------------------------------------------------------------ |
-| `PartialReturn`          | `1`   | Devolución parcial de los bienes y/o no aceptación parcial del servicio. |
-| `InvoiceCancellation`    | `2`   | Anulación de factura electrónica.                                        |
-| `PartialOrTotalDiscount` | `3`   | Rebaja o descuento parcial o total.                                      |
-| `PriceAdjustment`        | `4`   | Ajuste de precio.                                                        |
-| `EarlyPaymentDiscount`   | `5`   | Descuento comercial por pronto pago.                                     |
-| `VolumeDiscount`         | `6`   | Descuento comercial por volumen de ventas.                               |
+| `PartialReturn`          | `"1"` | Devolución parcial de los bienes y/o no aceptación parcial del servicio. |
+| `InvoiceCancellation`    | `"2"` | Anulación de factura electrónica.                                        |
+| `PartialOrTotalDiscount` | `"3"` | Rebaja o descuento parcial o total.                                      |
+| `PriceAdjustment`        | `"4"` | Ajuste de precio.                                                        |
+| `EarlyPaymentDiscount`   | `"5"` | Descuento comercial por pronto pago.                                     |
+| `VolumeDiscount`         | `"6"` | Descuento comercial por volumen de ventas.                               |
 
 ## Estándar de producto (`ProductStandardId`)
 
@@ -85,10 +85,10 @@ import { ProductStandardId } from "factus-js";
 
 | Clave              | Valor | Descripción                            |
 | ------------------ | ----- | -------------------------------------- |
-| `TaxpayerAdoption` | `1`   | Estándar de adopción del contribuyente |
-| `UNSPSC`           | `2`   | UNSPSC                                 |
-| `TariffHeading`    | `3`   | Partida Arancelaria                    |
-| `GTIN`             | `4`   | GTIN                                   |
+| `TaxpayerAdoption` | `"1"` | Estándar de adopción del contribuyente |
+| `UNSPSC`           | `"2"` | UNSPSC                                 |
+| `TariffHeading`    | `"3"` | Partida Arancelaria                    |
+| `GTIN`             | `"4"` | GTIN                                   |
 
 ## Concepto de reclamo (`ClaimConceptCode`)
 
@@ -122,26 +122,26 @@ import { EventCode } from "factus-js";
 ```ts
 import { IdentityDocumentTypeId } from "factus-js";
 
-// Código numérico para la API (p. ej. identification_document_id)
-const docType = IdentityDocumentTypeId.CitizenshipId.value; // 3
+// Código para la API como string (p. ej. identification_document_id)
+const docType = IdentityDocumentTypeId.CitizenshipId.value; // "3"
 
 // Abreviatura habitual (p. ej. etiquetas en UI)
 const abbr = IdentityDocumentTypeId.CitizenshipId.abbreviation; // "CC"
 ```
 
-| Clave                           | Valor | Abreviatura | Descripción                            |
-| ------------------------------- | ----- | ----------- | -------------------------------------- |
-| `CivilRegistration`             | `1`   | RC          | Registro civil                         |
-| `IdentityCard`                  | `2`   | TI          | Tarjeta de identidad                   |
-| `CitizenshipId`                 | `3`   | CC          | Cédula de ciudadanía                   |
-| `ForeignerCard`                 | `4`   | TE          | Tarjeta de extranjería                 |
-| `ForeignerId`                   | `5`   | CE          | Cédula de extranjería                  |
-| `NIT`                           | `6`   | NIT         | NIT                                    |
-| `Passport`                      | `7`   | PA          | Pasaporte                              |
-| `ForeignIdentificationDocument` | `8`   | DE          | Documento de identificación extranjero |
-| `PEP`                           | `9`   | PEP         | PEP                                    |
-| `ForeignNIT`                    | `10`  | NE          | NIT otro país                          |
-| `NUIP`                          | `11`  | NUIP        | NUIP                                   |
+| Clave                           | Valor  | Abreviatura | Descripción                            |
+| ------------------------------- | ------ | ----------- | -------------------------------------- |
+| `CivilRegistration`             | `"1"`  | RC          | Registro civil                         |
+| `IdentityCard`                  | `"2"`  | TI          | Tarjeta de identidad                   |
+| `CitizenshipId`                 | `"3"`  | CC          | Cédula de ciudadanía                   |
+| `ForeignerCard`                 | `"4"`  | TE          | Tarjeta de extranjería                 |
+| `ForeignerId`                   | `"5"`  | CE          | Cédula de extranjería                  |
+| `NIT`                           | `"6"`  | NIT         | NIT                                    |
+| `Passport`                      | `"7"`  | PA          | Pasaporte                              |
+| `ForeignIdentificationDocument` | `"8"`  | DE          | Documento de identificación extranjero |
+| `PEP`                           | `"9"`  | PEP         | PEP                                    |
+| `ForeignNIT`                    | `"10"` | NE          | NIT otro país                          |
+| `NUIP`                          | `"11"` | NUIP        | NUIP                                   |
 
 ## Tipo de identificación para documento soporte (`SupportDocumentIdentityTypeId`)
 
@@ -149,15 +149,15 @@ const abbr = IdentityDocumentTypeId.CitizenshipId.abbreviation; // "CC"
 import { SupportDocumentIdentityTypeId } from "factus-js";
 ```
 
-| Clave                           | Valor | Abreviatura | Descripción                            |
-| ------------------------------- | ----- | ----------- | -------------------------------------- |
-| `ForeignerCard`                 | `4`   | TE          | Tarjeta de extranjería                 |
-| `ForeignerId`                   | `5`   | CE          | Cédula de extranjería                  |
-| `NIT`                           | `6`   | NIT         | NIT                                    |
-| `Passport`                      | `7`   | PA          | Pasaporte                              |
-| `ForeignIdentificationDocument` | `8`   | DE          | Documento de identificación extranjero |
-| `PEP`                           | `9`   | PEP         | PEP                                    |
-| `ForeignNIT`                    | `10`  | NE          | NIT otro país                          |
+| Clave                           | Valor  | Abreviatura | Descripción                            |
+| ------------------------------- | ------ | ----------- | -------------------------------------- |
+| `ForeignerCard`                 | `"4"`  | TE          | Tarjeta de extranjería                 |
+| `ForeignerId`                   | `"5"`  | CE          | Cédula de extranjería                  |
+| `NIT`                           | `"6"`  | NIT         | NIT                                    |
+| `Passport`                      | `"7"`  | PA          | Pasaporte                              |
+| `ForeignIdentificationDocument` | `"8"`  | DE          | Documento de identificación extranjero |
+| `PEP`                           | `"9"`  | PEP         | PEP                                    |
+| `ForeignNIT`                    | `"10"` | NE          | NIT otro país                          |
 
 ## Tributo del cliente (`CustomerTributeId`)
 
@@ -165,10 +165,10 @@ import { SupportDocumentIdentityTypeId } from "factus-js";
 import { CustomerTributeId } from "factus-js";
 ```
 
-| Clave           | Valor | Descripción |
-| --------------- | ----- | ----------- |
-| `IVA`           | `18`  | IVA         |
-| `NotApplicable` | `21`  | No aplica   |
+| Clave           | Valor  | Descripción |
+| --------------- | ------ | ----------- |
+| `IVA`           | `"18"` | IVA         |
+| `NotApplicable` | `"21"` | No aplica   |
 
 ## Tipo de organización (`OrganizationTypeId`)
 
@@ -178,8 +178,8 @@ import { OrganizationTypeId } from "factus-js";
 
 | Clave           | Valor | Descripción      |
 | --------------- | ----- | ---------------- |
-| `LegalEntity`   | `1`   | Persona Jurídica |
-| `NaturalPerson` | `2`   | Persona Natural  |
+| `LegalEntity`   | `"1"` | Persona Jurídica |
+| `NaturalPerson` | `"2"` | Persona Natural  |
 
 ## Método de pago (`PaymentMethodCode`)
 
@@ -237,11 +237,11 @@ import { AdjustmentNoteReasonCode } from "factus-js";
 
 | Clave                         | Valor | Descripción                                                                                                                           |
 | ----------------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `PartialReturn`               | `1`   | Devolución parcial de los bienes y/o no aceptación parcial del servicio                                                               |
-| `SupportDocumentCancellation` | `2`   | Anulación del documento soporte en adquisiciones efectuadas a sujetos no obligados a expedir factura de venta o documento equivalente |
-| `PartialOrTotalDiscount`      | `3`   | Rebaja o descuento parcial o total                                                                                                    |
-| `PriceAdjustment`             | `4`   | Ajuste de precio                                                                                                                      |
-| `Other`                       | `5`   | Otros                                                                                                                                 |
+| `PartialReturn`               | `"1"` | Devolución parcial de los bienes y/o no aceptación parcial del servicio                                                               |
+| `SupportDocumentCancellation` | `"2"` | Anulación del documento soporte en adquisiciones efectuadas a sujetos no obligados a expedir factura de venta o documento equivalente |
+| `PartialOrTotalDiscount`      | `"3"` | Rebaja o descuento parcial o total                                                                                                    |
+| `PriceAdjustment`             | `"4"` | Ajuste de precio                                                                                                                      |
+| `Other`                       | `"5"` | Otros                                                                                                                                 |
 
 ## Tipo de cargo o descuento (`ChargeDiscountCode`)
 

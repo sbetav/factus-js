@@ -7,7 +7,7 @@ import { describe, expect, test } from "vitest";
 describe("IdentityDocumentTypeId abbreviations", () => {
   test("CitizenshipId matches common Colombian abbreviation", () => {
     expect(IdentityDocumentTypeId.CitizenshipId.abbreviation).toBe("CC");
-    expect(IdentityDocumentTypeId.CitizenshipId.value).toBe(3);
+    expect(IdentityDocumentTypeId.CitizenshipId.value).toBe("3");
   });
 
   test("SupportDocumentIdentityTypeId shares abbreviations with main table for overlapping codes", () => {

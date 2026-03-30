@@ -112,8 +112,8 @@ const createInvoice = async () => {
       numbering_range_id: 8,
       reference_code: "I3",
       observation: "Factura de prueba",
-      payment_form: PaymentFormCode.CreditPayment,
-      payment_method_code: PaymentMethodCode.Cash,
+      payment_form: PaymentFormCode.CreditPayment.value,
+      payment_method_code: PaymentMethodCode.Cash.value,
       payment_due_date: "2025-12-31",
       billing_period: {
         start_date: "2025-01-01",
@@ -128,9 +128,9 @@ const createInvoice = async () => {
         address: "calle 1 # 2-68",
         email: "alanturing@enigmasas.com",
         phone: "1234567890",
-        legal_organization_id: OrganizationTypeId.NaturalPerson,
-        tribute_id: CustomerTributeId.IVA,
-        identification_document_id: IdentityDocumentTypeId.NIT,
+        legal_organization_id: OrganizationTypeId.NaturalPerson.value,
+        tribute_id: CustomerTributeId.IVA.value,
+        identification_document_id: IdentityDocumentTypeId.NIT.value,
         municipality_id: 980, // San Gil
       },
       items: [
@@ -142,7 +142,7 @@ const createInvoice = async () => {
           price: 50000,
           tax_rate: "19.00",
           unit_measure_id: 70, // unidad
-          standard_code_id: ProductStandardId.TaxpayerAdoption,
+          standard_code_id: ProductStandardId.TaxpayerAdoption.value,
           is_excluded: 0,
           tribute_id: 1,
         },

@@ -21,11 +21,11 @@ export type OperationTypeCode =
 
 export const CreditNoteOperationTypeCode = {
   WithReference: {
-    value: 20,
+    value: "20",
     description: "Nota Crédito que referencia una factura electronica.",
   },
   WithoutReference: {
-    value: 22,
+    value: "22",
     description: "Nota Crédito sin referencia a una factura electronica.",
   },
 } as const;
@@ -34,25 +34,25 @@ export type CreditNoteOperationTypeCode =
 
 export const CreditNoteCorrectionCode = {
   PartialReturn: {
-    value: 1,
+    value: "1",
     description:
       "Devolución parcial de los bienes y/o no aceptación parcial del servicio.",
   },
   InvoiceCancellation: {
-    value: 2,
+    value: "2",
     description: "Anulación de factura electrónica.",
   },
   PartialOrTotalDiscount: {
-    value: 3,
+    value: "3",
     description: "Rebaja o descuento parcial o total.",
   },
-  PriceAdjustment: { value: 4, description: "Ajuste de precio." },
+  PriceAdjustment: { value: "4", description: "Ajuste de precio." },
   EarlyPaymentDiscount: {
-    value: 5,
+    value: "5",
     description: "Descuento comercial por pronto pago.",
   },
   VolumeDiscount: {
-    value: 6,
+    value: "6",
     description: "Descuento comercial por volumen de ventas.",
   },
 } as const;
@@ -61,12 +61,12 @@ export type CreditNoteCorrectionCode =
 
 export const ProductStandardId = {
   TaxpayerAdoption: {
-    value: 1,
+    value: "1",
     description: "Estándar de adopción del contribuyente",
   },
-  UNSPSC: { value: 2, description: "UNSPSC" },
-  TariffHeading: { value: 3, description: "Partida Arancelaria" },
-  GTIN: { value: 4, description: "GTIN" },
+  UNSPSC: { value: "2", description: "UNSPSC" },
+  TariffHeading: { value: "3", description: "Partida Arancelaria" },
+  GTIN: { value: "4", description: "GTIN" },
 } as const;
 export type ProductStandardId =
   (typeof ProductStandardId)[keyof typeof ProductStandardId]["value"];
@@ -109,78 +109,78 @@ export type EventCode = (typeof EventCode)[keyof typeof EventCode]["value"];
 
 export const IdentityDocumentTypeId = {
   CivilRegistration: {
-    value: 1,
+    value: "1",
     description: "Registro civil",
     abbreviation: "RC",
   },
   IdentityCard: {
-    value: 2,
+    value: "2",
     description: "Tarjeta de identidad",
     abbreviation: "TI",
   },
   CitizenshipId: {
-    value: 3,
+    value: "3",
     description: "Cédula de ciudadanía",
     abbreviation: "CC",
   },
   ForeignerCard: {
-    value: 4,
+    value: "4",
     description: "Tarjeta de extranjería",
     abbreviation: "TE",
   },
   ForeignerId: {
-    value: 5,
+    value: "5",
     description: "Cédula de extranjería",
     abbreviation: "CE",
   },
-  NIT: { value: 6, description: "NIT", abbreviation: "NIT" },
-  Passport: { value: 7, description: "Pasaporte", abbreviation: "PA" },
+  NIT: { value: "6", description: "NIT", abbreviation: "NIT" },
+  Passport: { value: "7", description: "Pasaporte", abbreviation: "PA" },
   ForeignIdentificationDocument: {
-    value: 8,
+    value: "8",
     description: "Documento de identificación extranjero",
     abbreviation: "DE",
   },
-  PEP: { value: 9, description: "PEP", abbreviation: "PEP" },
-  ForeignNIT: { value: 10, description: "NIT otro país", abbreviation: "NE" },
-  NUIP: { value: 11, description: "NUIP", abbreviation: "NUIP" },
+  PEP: { value: "9", description: "PEP", abbreviation: "PEP" },
+  ForeignNIT: { value: "10", description: "NIT otro país", abbreviation: "NE" },
+  NUIP: { value: "11", description: "NUIP", abbreviation: "NUIP" },
 } as const;
 export type IdentityDocumentTypeId =
   (typeof IdentityDocumentTypeId)[keyof typeof IdentityDocumentTypeId]["value"];
 
 export const SupportDocumentIdentityTypeId = {
   ForeignerCard: {
-    value: 4,
+    value: "4",
     description: "Tarjeta de extranjería",
     abbreviation: "TE",
   },
   ForeignerId: {
-    value: 5,
+    value: "5",
     description: "Cédula de extranjería",
     abbreviation: "CE",
   },
-  NIT: { value: 6, description: "NIT", abbreviation: "NIT" },
-  Passport: { value: 7, description: "Pasaporte", abbreviation: "PA" },
+  NIT: { value: "6", description: "NIT", abbreviation: "NIT" },
+  Passport: { value: "7", description: "Pasaporte", abbreviation: "PA" },
   ForeignIdentificationDocument: {
-    value: 8,
+    value: "8",
     description: "Documento de identificación extranjero",
     abbreviation: "DE",
   },
-  PEP: { value: 9, description: "PEP", abbreviation: "PEP" },
-  ForeignNIT: { value: 10, description: "NIT otro país", abbreviation: "NE" },
+  PEP: { value: "9", description: "PEP", abbreviation: "PEP" },
+  ForeignNIT: { value: "10", description: "NIT otro país", abbreviation: "NE" },
 } as const;
 export type SupportDocumentIdentityTypeId =
   (typeof SupportDocumentIdentityTypeId)[keyof typeof SupportDocumentIdentityTypeId]["value"];
 
 export const CustomerTributeId = {
-  IVA: { value: 18, description: "IVA" },
-  NotApplicable: { value: 21, description: "No aplica" },
+  IVA: { value: "18", description: "IVA" },
+  NotApplicable: { value: "21", description: "No aplica" },
 } as const;
 export type CustomerTributeId =
   (typeof CustomerTributeId)[keyof typeof CustomerTributeId]["value"];
 
 export const OrganizationTypeId = {
-  LegalEntity: { value: 1, description: "Persona Jurídica" },
-  NaturalPerson: { value: 2, description: "Persona Natural" },
+  LegalEntity: { value: "1", description: "Persona Jurídica" },
+  NaturalPerson: { value: "2", description: "Persona Natural" },
 } as const;
 export type OrganizationTypeId =
   (typeof OrganizationTypeId)[keyof typeof OrganizationTypeId]["value"];

@@ -60,7 +60,7 @@ Fuente oficial: [Obtener datos de adquiriente](https://developers.factus.com.co/
 import { IdentityDocumentTypeId } from "factus-js";
 
 const response = await factus.catalog.getAcquirer({
-  identification_document_id: IdentityDocumentTypeId.NIT,
+  identification_document_id: IdentityDocumentTypeId.NIT.value,
   identification_number: "1399991",
 });
 

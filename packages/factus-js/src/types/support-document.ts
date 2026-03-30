@@ -28,7 +28,7 @@ export interface CreateSupportDocumentInput {
   provider: {
     identification_document_id: SupportDocumentIdentityTypeId;
     identification: string;
-    dv?: number;
+    dv?: number | string;
     trade_name?: string;
     names: string;
     address: string;

@@ -37,8 +37,8 @@ export interface CreateCreditNoteInput {
   correction_concept_code: CreditNoteCorrectionCode;
   /**
    * Operation type code for the credit note.
-   * Use `CreditNoteOperationTypeCode.WithReference.value` (20) or
-   * `CreditNoteOperationTypeCode.WithoutReference.value` (22).
+   * Use `CreditNoteOperationTypeCode.WithReference.value` (`"20"`) or
+   * `CreditNoteOperationTypeCode.WithoutReference.value` (`"22"`).
    */
   customization_id: CreditNoteOperationTypeCode;
   bill_id?: number;

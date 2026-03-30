@@ -176,7 +176,7 @@ const response = await factus.adjustmentNotes.create({
   numbering_range_id: 149,
   reference_code: "REF007",
   support_document_id: 224,
-  correction_concept_code: AdjustmentNoteReasonCode.PriceAdjustment,
+  correction_concept_code: AdjustmentNoteReasonCode.PriceAdjustment.value,
   observation: "Corrección de precio en documento soporte",
   items: [
     {
@@ -186,7 +186,7 @@ const response = await factus.adjustmentNotes.create({
       discount_rate: 20,
       price: 50000,
       unit_measure_id: 70,
-      standard_code_id: 1,
+      standard_code_id: "1",
     },
   ],
 });

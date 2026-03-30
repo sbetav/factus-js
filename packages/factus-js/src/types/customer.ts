@@ -1,3 +1,9 @@
+import type {
+  CustomerTributeId,
+  IdentityDocumentTypeId,
+  OrganizationTypeId,
+} from "../constants";
+
 export interface Customer {
   identification: string;
   dv?: string;
@@ -7,8 +13,8 @@ export interface Customer {
   address: string;
   email: string;
   phone: string;
-  legal_organization_id: string;
-  tribute_id: string;
-  identification_document_id: string;
+  legal_organization_id: OrganizationTypeId;
+  tribute_id: CustomerTributeId;
+  identification_document_id: IdentityDocumentTypeId;
   municipality_id: string;
 }

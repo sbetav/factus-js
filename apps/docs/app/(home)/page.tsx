@@ -523,12 +523,12 @@ export default async function HomePage() {
             </p>
 
             <p>
-              No es un producto oficial de{" "}
+              *No es un producto oficial de{" "}
               <a
                 href={FACTUS_WEB}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:underline"
+                className="underline"
               >
                 Factus
               </a>

@@ -142,10 +142,10 @@ import { EventCode, ClaimConceptCode } from "factus-js";
 await factus.reception.emitEvent(
   {
     bill_id: "SETP990000203",
-    event_type: EventCode.ReceiptAcknowledgement,
+    event_type: EventCode.ReceiptAcknowledgement.value,
   },
   {
-    identification_document_code: 13,
+    identification_document_code: "13",
     identification: "12345667",
     first_name: "Pepito",
     last_name: "Perez",
@@ -157,11 +157,11 @@ await factus.reception.emitEvent(
 await factus.reception.emitEvent(
   {
     bill_id: "SETP990000203",
-    event_type: EventCode.InvoiceClaim,
+    event_type: EventCode.InvoiceClaim.value,
   },
   {
-    claim_concept_code: ClaimConceptCode.DocumentInconsistencies,
-    identification_document_code: 13,
+    claim_concept_code: ClaimConceptCode.DocumentInconsistencies.value,
+    identification_document_code: "13",
     identification: "12345667",
     first_name: "Pepito",
     last_name: "Perez",
