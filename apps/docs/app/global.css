@@ -28,6 +28,14 @@
   --color-fd-ring: hsl(51 93% 54%);
 }
 
+/* ── Windows 2000 home page background ── */
+#nd-home-layout {
+  background: #008080 !important;
+}
+#nd-home-layout main {
+  background: #d4d0c8 !important;
+}
+
 /* Animations */
 @keyframes fade-up {
   from {
