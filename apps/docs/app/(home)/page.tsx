@@ -1,19 +1,19 @@
-import Link from "next/link";
-import Image from "next/image";
+import { GitHubIcon } from "@/components/icons/github-icon";
+import { getOgImageAbsoluteUrl, getSiteUrl } from "@/lib/site";
 import { highlight } from "fumadocs-core/highlight";
 import {
-  CodeBlock,
-  CodeBlockTab,
-  CodeBlockTabs,
-  CodeBlockTabsList,
-  CodeBlockTabsTrigger,
-  Pre,
+    CodeBlock,
+    CodeBlockTab,
+    CodeBlockTabs,
+    CodeBlockTabsList,
+    CodeBlockTabsTrigger,
+    Pre,
 } from "fumadocs-ui/components/codeblock";
-import { Braces, Zap, RefreshCw, GitBranch, ArrowRight } from "lucide-react";
-import sdkPkg from "../../../../packages/factus-js/package.json";
-import { GitHubIcon } from "@/components/icons/github-icon";
+import { ArrowRight, Braces, GitBranch, RefreshCw, Zap } from "lucide-react";
 import type { Metadata } from "next";
-import { getOgImageAbsoluteUrl, getSiteUrl } from "@/lib/site";
+import Image from "next/image";
+import Link from "next/link";
+import sdkPkg from "../../../../packages/factus-js/package.json";
 
 const siteUrl = getSiteUrl();
 const ogImageUrl = getOgImageAbsoluteUrl();
@@ -240,7 +240,7 @@ export default async function HomePage() {
         >
           <Link
             href="/docs"
-            className="inline-flex items-center gap-2 rounded-lg bg-fd-primary px-6 py-2 xs:py-3 text-sm font-semibold text-fd-primary-foreground shadow-sm transition-all duration-150 hover:opacity-90 active:scale-[0.98] w-full xs:w-auto justify-center"
+            className="inline-flex items-center gap-2 rounded-lg border border-transparent bg-fd-primary px-6 py-2 xs:py-2.5 text-sm font-semibold text-fd-primary-foreground shadow-sm transition-all duration-150 hover:opacity-90 active:scale-[0.98] w-full xs:w-auto justify-center"
           >
             Comenzar ahora
             <ArrowRight className="size-4" />
@@ -249,7 +249,7 @@ export default async function HomePage() {
             href="https://github.com/sbetav/factus-js"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-lg border border-fd-border bg-fd-card px-6 py-2 xs:py-3 text-sm font-semibold text-fd-foreground transition-all duration-150 hover:bg-fd-accent active:scale-[0.98] w-full xs:w-auto justify-center"
+            className="inline-flex items-center gap-2 rounded-lg border border-fd-border bg-fd-card px-6 py-2 xs:py-2.5 text-sm font-semibold text-fd-foreground transition-all duration-150 hover:bg-fd-accent active:scale-[0.98] w-full xs:w-auto justify-center"
           >
             <GitHubIcon className="size-4" />
             GitHub
