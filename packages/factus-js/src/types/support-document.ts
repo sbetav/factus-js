@@ -1,42 +1,49 @@
 import type {
-  PaymentMethodCode,
-  ProductStandardId,
-  SupportDocumentIdentityTypeId,
+    AdjustmentNoteReasonCode,
+    PaymentMethodCode,
+    ProductStandardId,
+    SupportDocumentIdentityTypeId,
 } from "../constants";
 import type { ApiResponse, PaginatedData } from "./common";
 import type {
-  CodeNameIdObject,
-  CodeNameObject,
-  CompanyInfo,
-  DeleteResponse,
-  DocumentWithholdingTax,
-  DownloadPdfData,
-  DownloadXmlData,
-  NumberingRangeInfo,
-  ItemWithholdingTax,
+    CodeNameIdObject,
+    CodeNameObject,
+    CompanyInfo,
+    DeleteResponse,
+    DocumentWithholdingTax,
+    DownloadPdfData,
+    DownloadXmlData,
+    ItemWithholdingTax,
+    NumberingRangeInfo,
 } from "./shared";
 
 // ---------------------------------------------------------------------------
 // Input types
 // ---------------------------------------------------------------------------
 
+export interface SupportDocumentWithholdingTax {
+  code: string;
+  withholding_tax_rate: string;
+}
+
 export interface CreateSupportDocumentInput {
-  reference_code: string;
   numbering_range_id?: number;
+  reference_code: string;
   payment_method_code?: PaymentMethodCode;
   observation?: string;
+  send_email?: boolean;
   provider: {
     identification_document_id: SupportDocumentIdentityTypeId;
     identification: string;
-    dv?: number | string;
+    dv?: string;
     trade_name?: string;
-    names: string;
-    address: string;
-    email: string;
+    names?: string;
+    address?: string;
+    email?: string;
     phone?: string;
-    is_resident?: number;
-    country_code: string;
-    municipality_id?: number;
+    is_resident?: 0 | 1;
+    country_code?: string;
+    municipality_id?: number | string;
   };
   items: Array<{
     code_reference: string;
@@ -46,33 +53,31 @@ export interface CreateSupportDocumentInput {
     price: number;
     unit_measure_id: number;
     standard_code_id: ProductStandardId;
-    withholding_taxes?: Array<{
-      code: string;
-      withholding_tax_rate: string | number;
-    }>;
+    withholding_taxes?: SupportDocumentWithholdingTax[];
   }>;
 }
 
 // ---------------------------------------------------------------------------
-// List item type
+// List item / detail type
 // ---------------------------------------------------------------------------
 
 export interface SupportDocument {
   id: number;
   number: string;
-  api_client_name: string;
-  /** Can be null when no reference code is set. */
+  api_client_name?: string;
   reference_code: string | null;
   identification: string;
   graphic_representation_name: string;
+  company: string;
   trade_name: string | null;
   names: string;
-  email: string;
+  email: string | null;
   total: string;
-  status: number | string;
+  status: number;
   errors: string[];
+  send_email: 0 | 1;
+  payment_method: CodeNameObject;
   created_at: string;
-  adjustment_notes?: Array<{ id: number; number: string }>;
 }
 
 // ---------------------------------------------------------------------------
@@ -89,7 +94,7 @@ export interface SupportDocumentFilters {
 }
 
 // ---------------------------------------------------------------------------
-// View (detail) response
+// View (detail) response data
 // ---------------------------------------------------------------------------
 
 export interface SupportDocumentItemResponse {
@@ -99,82 +104,67 @@ export interface SupportDocumentItemResponse {
   discount_rate: string;
   discount: string;
   gross_value: string;
-  tax_rate: string;
-  taxable_amount: string;
-  tax_amount: string;
   price: string;
-  is_excluded: number;
+  is_excluded: 0 | 1;
   unit_measure: CodeNameIdObject;
   standard_code: CodeNameIdObject;
-  total: number;
   withholding_taxes: ItemWithholdingTax[];
+  total: number;
 }
 
 export interface ViewSupportDocumentData {
   company: CompanyInfo;
   provider: {
+    identification_document: CodeNameIdObject;
     identification: string;
     dv: string;
-    graphic_representation_name: string;
-    trade_name: string | null;
+    trade_name: string;
     names: string;
     address: string;
     email: string;
     phone: string;
-    identification_document: CodeNameIdObject;
-    legal_organization: CodeNameIdObject;
-    tribute: CodeNameIdObject;
-    country: CodeNameIdObject;
+    is_resident: 0 | 1;
+    country: CodeNameObject;
     municipality: CodeNameIdObject;
   };
+  numbering_range: NumberingRangeInfo;
   support_document: {
     id: number;
     number: string;
     reference_code: string;
     status: number;
-    qr: string;
-    cuds: string;
-    validated: string;
-    discount_rate: string;
-    discount: string;
-    gross_value: string;
-    taxable_amount: string;
-    tax_amount: string;
-    total: string;
+    send_email: 0 | 1;
     observation: string | null;
     errors: string[];
-    created_at: string;
-    qr_image: string;
+    validated: string;
+    qr: string;
+    cuds: string;
+    gross_value: string;
+    discount_amount: string;
+    total: string;
     payment_method: CodeNameObject;
+    created_at: string;
   };
   items: SupportDocumentItemResponse[];
   withholding_taxes: DocumentWithholdingTax[];
-  adjustment_notes: Array<{ id: number; number: string }>;
-  numbering_range: NumberingRangeInfo;
+  adjustment_notes: Array<{
+    id: number;
+    number: string;
+    correction_concept_code: AdjustmentNoteReasonCode;
+    reference_code: string;
+    status: number;
+    total: string;
+    created_at: string;
+  }>;
 }
 
 // ---------------------------------------------------------------------------
-// Download / delete responses
+// Download / delete responses (named aliases for discoverability)
 // ---------------------------------------------------------------------------
 
-export interface DeleteSupportDocumentResponse extends DeleteResponse {}
-
-export interface DownloadSupportDocumentXmlResponse {
-  status: string;
-  message: string;
-  data: DownloadXmlData;
-}
-
-export interface DownloadSupportDocumentPdfResponse {
-  status: string;
-  message: string;
-  data: DownloadPdfData;
-}
-
-// ---------------------------------------------------------------------------
-// List response
-// ---------------------------------------------------------------------------
-
-export interface GetSupportDocumentsResponse extends ApiResponse<
+export type DeleteSupportDocumentResponse = DeleteResponse;
+export type DownloadSupportDocumentXmlResponse = ApiResponse<DownloadXmlData>;
+export type DownloadSupportDocumentPdfResponse = ApiResponse<DownloadPdfData>;
+export type GetSupportDocumentsResponse = ApiResponse<
   PaginatedData<SupportDocument>
-> {}
+>;

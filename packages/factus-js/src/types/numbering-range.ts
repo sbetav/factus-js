@@ -50,8 +50,7 @@ export interface SoftwareNumberingRange {
   technical_key: string;
 }
 
+import type { DeleteResponse } from "./shared";
+
 /** Response from DELETE /v1/numbering-ranges/{id} */
-export interface DeleteNumberingRangeResponse {
-  status: string;
-  message: string;
-}
+export type DeleteNumberingRangeResponse = DeleteResponse;

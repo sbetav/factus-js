@@ -1,31 +1,29 @@
 import type {
-  ChargeDiscountCode,
-  CreditNoteCorrectionCode,
-  CreditNoteOperationTypeCode,
-  CustomerTributeId,
-  IdentityDocumentTypeId,
-  OrganizationTypeId,
-  PaymentFormCode,
-  PaymentMethodCode,
-  ProductStandardId,
+    CreditNoteCorrectionCode,
+    CreditNoteOperationTypeCode,
+    CustomerTributeId,
+    IdentityDocumentTypeId,
+    OrganizationTypeId,
+    PaymentMethodCode,
+    ProductStandardId,
 } from "../constants";
-import type { Customer } from "./customer";
 import type { ApiResponse, PaginatedData } from "./common";
+import type { Customer } from "./customer";
 import type {
-  AllowanceChargeResponse,
-  BillingPeriod,
-  CodeNameIdObject,
-  CodeNameObject,
-  CompanyInfo,
-  DeleteResponse,
-  DocumentWithholdingTax,
-  DownloadPdfData,
-  DownloadXmlData,
-  EstablishmentInput,
-  EstablishmentResponse,
-  ItemWithholdingTax,
-  SendEmailInput,
-  SendEmailResponse,
+    AllowanceChargeResponse,
+    CodeNameIdObject,
+    CodeNameObject,
+    CompanyInfo,
+    DeleteResponse,
+    DocumentWithholdingTax,
+    DownloadPdfData,
+    DownloadXmlData,
+    EmailContentData,
+    EstablishmentResponse,
+    ItemWithholdingTax,
+    NumberingRangeInfo,
+    SendEmailInput,
+    SendEmailResponse,
 } from "./shared";
 
 // ---------------------------------------------------------------------------
@@ -35,24 +33,16 @@ import type {
 export interface CreateCreditNoteInput {
   numbering_range_id?: number;
   correction_concept_code: CreditNoteCorrectionCode;
-  /**
-   * Operation type code for the credit note.
-   * Use `CreditNoteOperationTypeCode.WithReference.value` (`"20"`) or
-   * `CreditNoteOperationTypeCode.WithoutReference.value` (`"22"`).
-   */
   customization_id: CreditNoteOperationTypeCode;
-  bill_id?: number;
+  bill_id: number;
   reference_code: string;
-  payment_form?: PaymentFormCode;
-  payment_method_code: PaymentMethodCode;
-  send_email?: boolean;
   observation?: string;
-  billing_period?: BillingPeriod;
-  establishment?: EstablishmentInput;
+  payment_method_code?: PaymentMethodCode;
+  send_email?: boolean;
   customer?: {
-    identification_document_id?: IdentityDocumentTypeId;
+    identification_document_id: IdentityDocumentTypeId;
     identification: string;
-    dv?: number | string;
+    dv?: string;
     company?: string;
     trade_name?: string;
     names?: string;
@@ -64,7 +54,6 @@ export interface CreateCreditNoteInput {
     municipality_id?: number | string;
   };
   items: Array<{
-    note?: string;
     code_reference: string;
     name: string;
     quantity: number;
@@ -73,68 +62,38 @@ export interface CreateCreditNoteInput {
     tax_rate: string;
     unit_measure_id: number;
     standard_code_id: ProductStandardId;
-    is_excluded: number;
+    is_excluded: 0 | 1;
     tribute_id: number;
-    withholding_taxes?: Array<{
-      /** Must be sent as a string (e.g. "06") per the Postman collection. */
-      code: string;
-      withholding_tax_rate: number;
-    }>;
   }>;
   allowance_charges?: Array<{
-    concept_type: ChargeDiscountCode;
     is_surcharge: boolean;
     reason: string;
-    base_amount: number;
-    amount: number;
+    base_amount: number | string;
+    amount: number | string;
   }>;
 }
 
 // ---------------------------------------------------------------------------
 // List item type
-// Note: the list response does NOT include qr, cude, validated, gross_value,
-// taxable_amount, etc. — those only appear in the detail/view response.
 // ---------------------------------------------------------------------------
 
 export interface CreditNoteListItem {
   id: number;
-  api_client_name?: string;
   number: string;
-  reference_code: string;
-  identification?: string;
-  graphic_representation_name?: string;
-  company?: string;
-  trade_name?: string | null;
-  names?: string;
-  email?: string | null;
-  status: number | string;
-  send_email?: number;
+  api_client_name?: string;
+  reference_code: string | null;
+  identification: string;
+  graphic_representation_name: string;
+  company: string;
+  trade_name: string | null;
+  names: string;
+  email: string | null;
   total: string;
-  errors?: string[];
+  status: number;
+  errors: string[];
+  send_email: 0 | 1;
+  payment_form: CodeNameObject;
   created_at: string;
-}
-
-/**
- * @deprecated Use {@link CreditNoteListItem} for list responses and {@link ViewCreditNoteData} for detail responses.
- */
-export interface CreditNote extends CreditNoteListItem {
-  updated_at?: string;
-  qr?: string;
-  cude?: string;
-  validated?: string;
-  gross_value?: string;
-  taxable_amount?: string;
-  tax_amount?: string;
-  discount_amount?: string;
-  surcharge_amount?: string;
-  observation?: string | null;
-  qr_image?: string;
-  bill_id?: number;
-  cufe?: string;
-  number_bill?: string;
-  payment_method?: CodeNameObject;
-  customization_id?: CodeNameObject;
-  correction_concept?: CodeNameObject;
 }
 
 // ---------------------------------------------------------------------------
@@ -147,42 +106,14 @@ export interface CreditNoteFilters {
   number?: string;
   prefix?: string;
   reference_code?: string;
-  status?: string;
+  status?: string | number;
 }
 
 // ---------------------------------------------------------------------------
 // View (detail) response
 // ---------------------------------------------------------------------------
 
-export interface CreditNoteDetail {
-  id: number;
-  number: string;
-  reference_code: string;
-  status: number;
-  send_email: number;
-  qr: string;
-  cude: string;
-  validated: string;
-  gross_value: string;
-  taxable_amount: string;
-  tax_amount: string;
-  discount_amount: string;
-  surcharge_amount: string;
-  total: string;
-  observation: string | null;
-  errors: string[];
-  created_at: string;
-  qr_image: string;
-  bill_id: number | null;
-  cufe: string | null;
-  number_bill: string | null;
-  payment_method: CodeNameObject;
-  customization_id: CodeNameObject;
-  correction_concept: CodeNameObject;
-}
-
 export interface CreditNoteItemResponse {
-  note: string | null;
   code_reference: string;
   name: string;
   quantity: number;
@@ -193,7 +124,7 @@ export interface CreditNoteItemResponse {
   taxable_amount: string;
   tax_amount: string;
   price: string;
-  is_excluded: number;
+  is_excluded: 0 | 1;
   unit_measure: CodeNameIdObject;
   standard_code: CodeNameIdObject;
   tribute: CodeNameIdObject;
@@ -204,7 +135,6 @@ export interface CreditNoteItemResponse {
 export interface ViewCreditNoteData {
   company: CompanyInfo;
   establishment: EstablishmentResponse;
-  billing_period: BillingPeriod | null;
   customer: Customer & {
     graphic_representation_name: string;
     trade_name: string;
@@ -213,45 +143,49 @@ export interface ViewCreditNoteData {
     tribute: CodeNameIdObject;
     municipality: CodeNameIdObject;
   };
-  credit_note: CreditNoteDetail;
+  numbering_range: NumberingRangeInfo;
+  credit_note: {
+    id: number;
+    number: string;
+    reference_code: string;
+    status: number;
+    send_email: 0 | 1;
+    qr: string;
+    cude: string;
+    validated: string;
+    gross_value: string;
+    taxable_amount: string;
+    tax_amount: string;
+    discount_amount: string;
+    surcharge_amount: string;
+    total: string;
+    observation: string | null;
+    errors: string[];
+    created_at: string;
+    payment_method: CodeNameObject;
+    correction_concept: CodeNameObject;
+    customization: CodeNameObject;
+  };
   items: CreditNoteItemResponse[];
   allowance_charges: AllowanceChargeResponse[];
   withholding_taxes: DocumentWithholdingTax[];
 }
 
 // ---------------------------------------------------------------------------
-// Download / email / delete responses
+// Download / email / delete responses (named aliases for discoverability)
 // ---------------------------------------------------------------------------
 
 export interface SendCreditNoteEmailInput extends SendEmailInput {}
-export interface SendCreditNoteEmailResponse extends SendEmailResponse {}
-export interface DeleteCreditNoteResponse extends DeleteResponse {}
-
-export interface GetCreditNoteEmailContentResponse {
-  status: string;
-  message: string;
-  data: {
-    subject: string;
-    attached_document: string;
-  };
-}
-
-export interface DownloadCreditNoteXmlResponse {
-  status: string;
-  message: string;
-  data: DownloadXmlData;
-}
-
-export interface DownloadCreditNotePdfResponse {
-  status: string;
-  message: string;
-  data: DownloadPdfData;
-}
+export type SendCreditNoteEmailResponse = SendEmailResponse;
+export type DeleteCreditNoteResponse = DeleteResponse;
+export type GetCreditNoteEmailContentResponse = ApiResponse<EmailContentData>;
+export type DownloadCreditNoteXmlResponse = ApiResponse<DownloadXmlData>;
+export type DownloadCreditNotePdfResponse = ApiResponse<DownloadPdfData>;
 
 // ---------------------------------------------------------------------------
 // List response
 // ---------------------------------------------------------------------------
 
-export interface GetCreditNotesResponse extends ApiResponse<
+export type GetCreditNotesResponse = ApiResponse<
   PaginatedData<CreditNoteListItem>
-> {}
+>;

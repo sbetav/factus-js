@@ -1,19 +1,17 @@
 import type {
-  AdjustmentNoteReasonCode,
-  PaymentMethodCode,
-  ProductStandardId,
+    AdjustmentNoteReasonCode,
+    PaymentMethodCode,
+    ProductStandardId,
 } from "../constants";
 import type { ApiResponse, PaginatedData } from "./common";
 import type {
-  CodeNameIdObject,
-  CodeNameObject,
-  CompanyInfo,
-  DeleteResponse,
-  DocumentWithholdingTax,
-  DownloadPdfData,
-  DownloadXmlData,
-  EstablishmentResponse,
-  ItemWithholdingTax,
+    CodeNameIdObject,
+    CodeNameObject,
+    DeleteResponse,
+    DocumentWithholdingTax,
+    DownloadPdfData,
+    DownloadXmlData,
+    ItemWithholdingTax,
 } from "./shared";
 
 // ---------------------------------------------------------------------------
@@ -21,12 +19,13 @@ import type {
 // ---------------------------------------------------------------------------
 
 export interface CreateAdjustmentNoteInput {
-  reference_code: string;
   numbering_range_id?: number;
-  payment_method_code?: PaymentMethodCode;
+  reference_code: string;
   support_document_id: number;
   correction_concept_code: AdjustmentNoteReasonCode;
+  payment_method_code?: PaymentMethodCode;
   observation?: string;
+  send_email?: boolean;
   items: Array<{
     code_reference: string;
     name: string;
@@ -35,93 +34,29 @@ export interface CreateAdjustmentNoteInput {
     price: number;
     unit_measure_id: number;
     standard_code_id: ProductStandardId;
-    withholding_taxes?: Array<{
-      code: string;
-      withholding_tax_rate: string;
-    }>;
   }>;
 }
 
 // ---------------------------------------------------------------------------
-// View (detail) response
-// ---------------------------------------------------------------------------
-
-export interface AdjustmentNoteItemResponse {
-  code_reference: string;
-  name: string;
-  quantity: number;
-  discount_rate: string;
-  discount: string;
-  gross_value: string;
-  tax_rate: string;
-  taxable_amount: string;
-  tax_amount: string;
-  price: string;
-  unit_measure: CodeNameIdObject;
-  standard_code: CodeNameIdObject;
-  total: number;
-  withholding_taxes: ItemWithholdingTax[];
-}
-
-export interface ViewAdjustmentNoteData {
-  company: CompanyInfo;
-  /** Present in the detail response per the Postman collection. */
-  establishment: EstablishmentResponse;
-  provider: {
-    identification: string;
-    dv: string;
-    graphic_representation_name: string;
-    trade_name: string | null;
-    names: string;
-    address: string;
-    email: string;
-    phone: string;
-    legal_organization: CodeNameIdObject;
-    tribute: CodeNameIdObject;
-    municipality: CodeNameIdObject;
-  };
-  adjustment_note: {
-    id: number;
-    number: string;
-    reference_code: string;
-    status: number;
-    qr: string;
-    cuds: string;
-    validated: string;
-    discount_rate: string;
-    discount: string;
-    gross_value: string;
-    taxable_amount: string;
-    tax_amount: string;
-    total: string;
-    observation: string | null;
-    errors: string[];
-    created_at: string;
-    qr_image: string;
-    payment_method: CodeNameObject;
-  };
-  items: AdjustmentNoteItemResponse[];
-  withholding_taxes: DocumentWithholdingTax[];
-}
-
-// ---------------------------------------------------------------------------
-// List item type
-// Note: updated_at is NOT present in the Postman list response.
+// List item / detail type
 // ---------------------------------------------------------------------------
 
 export interface AdjustmentNote {
   id: number;
   number: string;
-  api_client_name: string;
-  reference_code: string;
+  api_client_name?: string;
+  reference_code: string | null;
   identification: string;
   graphic_representation_name: string;
+  company: string;
   trade_name: string | null;
   names: string;
-  email: string;
+  email: string | null;
   total: string;
-  status: number | string;
+  status: number;
   errors: string[];
+  send_email: 0 | 1;
+  payment_method: CodeNameObject;
   created_at: string;
 }
 
@@ -139,27 +74,62 @@ export interface AdjustmentNoteFilters {
 }
 
 // ---------------------------------------------------------------------------
-// Download responses
+// View (detail) response data
 // ---------------------------------------------------------------------------
 
-export interface DownloadAdjustmentNoteXmlResponse {
-  status: string;
-  message: string;
-  data: DownloadXmlData;
+export interface AdjustmentNoteItemResponse {
+  code_reference: string;
+  name: string;
+  quantity: number;
+  discount_rate: string;
+  discount: string;
+  gross_value: string;
+  price: string;
+  is_excluded: 0 | 1;
+  unit_measure: CodeNameIdObject;
+  standard_code: CodeNameIdObject;
+  withholding_taxes: ItemWithholdingTax[];
+  total: number;
 }
 
-export interface DownloadAdjustmentNotePdfResponse {
-  status: string;
-  message: string;
-  data: DownloadPdfData;
+export interface ViewAdjustmentNoteData {
+  support_document: {
+    id: number;
+    number: string;
+    reference_code: string;
+    status: number;
+    total: string;
+    created_at: string;
+  };
+  adjustment_note: {
+    id: number;
+    number: string;
+    reference_code: string;
+    status: number;
+    send_email: 0 | 1;
+    observation: string | null;
+    errors: string[];
+    validated: string;
+    qr: string;
+    cuds: string;
+    gross_value: string;
+    discount_amount: string;
+    total: string;
+    payment_method: CodeNameObject;
+    correction_concept: CodeNameObject;
+    created_at: string;
+  };
+  items: AdjustmentNoteItemResponse[];
+  withholding_taxes: DocumentWithholdingTax[];
 }
 
-export interface DeleteAdjustmentNoteResponse extends DeleteResponse {}
-
 // ---------------------------------------------------------------------------
-// List response
+// Download / delete responses (named aliases for discoverability)
 // ---------------------------------------------------------------------------
 
-export interface GetAdjustmentNotesResponse extends ApiResponse<
+export type DeleteAdjustmentNoteResponse = DeleteResponse;
+export type DownloadAdjustmentNoteXmlResponse = ApiResponse<DownloadXmlData>;
+export type DownloadAdjustmentNotePdfResponse = ApiResponse<DownloadPdfData>;
+export type GetAdjustmentNotesResponse = ApiResponse<
   PaginatedData<AdjustmentNote>
-> {}
+>;

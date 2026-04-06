@@ -1,32 +1,33 @@
 import type {
-  ChargeDiscountCode,
-  IdentityDocumentTypeId,
-  InvoiceDocumentType,
-  OperationTypeCode,
-  OrganizationTypeId,
-  CustomerTributeId,
-  PaymentFormCode,
-  PaymentMethodCode,
-  ProductStandardId,
+    ChargeDiscountCode,
+    CustomerTributeId,
+    IdentityDocumentTypeId,
+    InvoiceDocumentType,
+    OperationTypeCode,
+    OrganizationTypeId,
+    PaymentFormCode,
+    PaymentMethodCode,
+    ProductStandardId,
 } from "../constants";
-import type { Customer } from "./customer";
 import type { ApiResponse, PaginatedData } from "./common";
+import type { Customer } from "./customer";
 import type {
-  AllowanceChargeResponse,
-  BillingPeriod,
-  CodeNameIdObject,
-  CodeNameObject,
-  CompanyInfo,
-  DeleteResponse,
-  DocumentWithholdingTax,
-  DownloadPdfData,
-  DownloadXmlData,
-  EstablishmentInput,
-  EstablishmentResponse,
-  ItemWithholdingTax,
-  NumberingRangeInfo,
-  SendEmailInput,
-  SendEmailResponse,
+    AllowanceChargeResponse,
+    BillingPeriod,
+    CodeNameIdObject,
+    CodeNameObject,
+    CompanyInfo,
+    DeleteResponse,
+    DocumentWithholdingTax,
+    DownloadPdfData,
+    DownloadXmlData,
+    EmailContentData,
+    EstablishmentInput,
+    EstablishmentResponse,
+    ItemWithholdingTax,
+    NumberingRangeInfo,
+    SendEmailInput,
+    SendEmailResponse,
 } from "./shared";
 
 // ---------------------------------------------------------------------------
@@ -62,7 +63,7 @@ export interface CreateInvoiceInput {
   customer: {
     identification_document_id: IdentityDocumentTypeId;
     identification: string;
-    dv?: number | string;
+    dv?: string;
     company?: string;
     trade_name?: string;
     names?: string;
@@ -84,7 +85,7 @@ export interface CreateInvoiceInput {
     tax_rate: string;
     unit_measure_id: number;
     standard_code_id: ProductStandardId;
-    is_excluded: number;
+    is_excluded: 0 | 1;
     tribute_id: number;
     withholding_taxes?: Array<WithholdingTax>;
     mandate?: {
@@ -120,27 +121,13 @@ export interface InvoiceListItem {
   total: string;
   status: number;
   errors: string[];
-  send_email: number;
-  has_claim: number;
-  is_negotiable_instrument: number;
+  send_email: 0 | 1;
+  has_claim: 0 | 1;
+  is_negotiable_instrument: 0 | 1;
   payment_form: CodeNameObject;
   created_at: string;
   credit_notes: Array<{ id: number; number: string }>;
   debit_notes: Array<{ id: number; number: string }>;
-}
-
-/**
- * @deprecated Use {@link InvoiceListItem} for list responses and {@link ViewInvoiceData} for detail responses.
- */
-export interface Invoice {
-  id: number;
-  document: CodeNameObject;
-  number: string;
-  reference_code: string;
-  status: string | number;
-  total: string;
-  created_at: string;
-  updated_at?: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -173,7 +160,7 @@ export interface InvoiceItemResponse {
   taxable_amount: string;
   tax_amount: string;
   price: string;
-  is_excluded: number;
+  is_excluded: 0 | 1;
   unit_measure: CodeNameIdObject;
   standard_code: CodeNameIdObject;
   tribute: CodeNameIdObject;
@@ -207,7 +194,7 @@ export interface ViewInvoiceData {
     reference_code: string;
     order_reference: string | null;
     status: number;
-    send_email: number;
+    send_email: 0 | 1;
     qr: string;
     cufe: string;
     validated: string;
@@ -222,8 +209,8 @@ export interface ViewInvoiceData {
     created_at: string;
     payment_due_date: string | null;
     qr_image: string;
-    has_claim: number;
-    is_negotiable_instrument: number;
+    has_claim: 0 | 1;
+    is_negotiable_instrument: 0 | 1;
     payment_form: CodeNameObject;
     payment_method: CodeNameObject;
   };
@@ -237,12 +224,6 @@ export interface ViewInvoiceData {
   withholding_taxes: DocumentWithholdingTax[];
   credit_notes: Array<{ id: number; number: string }>;
   debit_notes: Array<{ id: number; number: string }>;
-}
-
-export interface ViewInvoiceResponse {
-  status: string;
-  message: string;
-  data: ViewInvoiceData;
 }
 
 // ---------------------------------------------------------------------------
@@ -264,11 +245,6 @@ export interface RadianEventUpdateInput {
   organization_department?: string;
 }
 
-export interface RadianEventUpdateResponse {
-  status: string;
-  message: string;
-}
-
 export interface InvoiceEvent {
   number: string;
   cude: string;
@@ -278,45 +254,22 @@ export interface InvoiceEvent {
   effective_time: string;
 }
 
-export interface GetInvoiceEventsResponse {
-  status: string;
-  message: string;
-  data: InvoiceEvent[];
-}
-
 // ---------------------------------------------------------------------------
-// Download / email / delete responses (re-exported aliases for convenience)
+// Download / email / delete responses (named aliases for discoverability)
 // ---------------------------------------------------------------------------
 
 export interface SendInvoiceEmailInput extends SendEmailInput {}
-export interface SendInvoiceEmailResponse extends SendEmailResponse {}
-export interface DeleteInvoiceResponse extends DeleteResponse {}
-
-export interface DownloadInvoiceXmlResponse {
-  status: string;
-  message: string;
-  data: DownloadXmlData;
-}
-
-export interface DownloadInvoicePdfResponse {
-  status: string;
-  message: string;
-  data: DownloadPdfData;
-}
-
-export interface GetInvoiceEmailContentResponse {
-  status: string;
-  message: string;
-  data: {
-    subject: string;
-    attached_document: string;
-  };
-}
+export type SendInvoiceEmailResponse = SendEmailResponse;
+export type DeleteInvoiceResponse = DeleteResponse;
+export type RadianEventUpdateResponse = SendEmailResponse;
+export type ViewInvoiceResponse = ApiResponse<ViewInvoiceData>;
+export type GetInvoiceEventsResponse = ApiResponse<InvoiceEvent[]>;
+export type DownloadInvoiceXmlResponse = ApiResponse<DownloadXmlData>;
+export type DownloadInvoicePdfResponse = ApiResponse<DownloadPdfData>;
+export type GetInvoiceEmailContentResponse = ApiResponse<EmailContentData>;
 
 // ---------------------------------------------------------------------------
 // List response
 // ---------------------------------------------------------------------------
 
-export interface GetInvoicesResponse extends ApiResponse<
-  PaginatedData<InvoiceListItem>
-> {}
+export type GetInvoicesResponse = ApiResponse<PaginatedData<InvoiceListItem>>;

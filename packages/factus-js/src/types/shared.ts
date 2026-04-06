@@ -173,6 +173,12 @@ export interface DownloadPdfData {
   pdf_base_64_encoded: string;
 }
 
+/** Shared email content data returned by email-content endpoints. */
+export interface EmailContentData {
+  subject: string;
+  attached_document: string;
+}
+
 export interface SendEmailInput {
   email: string;
   pdf_base_64_encoded?: string;
