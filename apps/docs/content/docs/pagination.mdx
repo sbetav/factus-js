@@ -9,15 +9,14 @@ Todos los módulos que devuelven listas paginadas exponen un método `listAll()`
 
 ## Módulos con `listAll()`
 
-| Módulo              | Método              |
-| ------------------- | ------------------- |
-| `factus.bills`      | `listAll(filter?)`  |
-| `factus.creditNotes` | `listAll(filter?)` |
+| Módulo                    | Método             |
+| ------------------------- | ------------------ |
+| `factus.bills`            | `listAll(filter?)` |
+| `factus.creditNotes`      | `listAll(filter?)` |
 | `factus.supportDocuments` | `listAll(filter?)` |
-| `factus.adjustmentNotes` | `listAll(filter?)` |
-| `factus.reception`  | `listAll(filter?)`  |
-| `factus.numberingRanges` | `listAll(filter?)` |
-| `factus.subscription` | `listAll(filter?)` |
+| `factus.adjustmentNotes`  | `listAll(filter?)` |
+| `factus.reception`        | `listAll(filter?)` |
+| `factus.numberingRanges`  | `listAll(filter?)` |
 
 ## Ejemplo básico
 
@@ -86,7 +85,10 @@ const controller = new AbortController();
 setTimeout(() => controller.abort(), 5000); // cancelar después de 5 s
 
 try {
-  for await (const invoice of factus.bills.listAll({}, { signal: controller.signal })) {
+  for await (const invoice of factus.bills.listAll(
+    {},
+    { signal: controller.signal },
+  )) {
     console.log(invoice.number);
   }
 } catch (error) {
