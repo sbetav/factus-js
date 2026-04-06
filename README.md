@@ -53,11 +53,13 @@ console.log(bills.data.data);
 
 ### Crear factura electronica
 
+Las constantes DIAN son valores string directos — se usan tal cual en los payloads:
+
 ```ts
 import {
-  PaymentFormCode,
-  PaymentMethodCode,
-  IdentityDocumentTypeId,
+  PaymentFormCode, // e.g. PaymentFormCode.CreditPayment === "2"
+  PaymentMethodCode, // e.g. PaymentMethodCode.Cash === "10"
+  IdentityDocumentTypeId, // e.g. IdentityDocumentTypeId.NIT === "6"
   CustomerTributeId,
   OrganizationTypeId,
   ProductStandardId,
@@ -67,25 +69,19 @@ const response = await factus.bills.create({
   numbering_range_id: 8,
   reference_code: "I3",
   observation: "Factura de prueba",
-  payment_form: PaymentFormCode.CreditPayment,
-  payment_method_code: PaymentMethodCode.Cash,
-  payment_due_date: "2025-12-31",
-  billing_period: {
-    start_date: "2025-01-01",
-    end_date: "2025-01-31",
-  },
+  payment_form: PaymentFormCode.CreditPayment, // "2"
+  payment_method_code: PaymentMethodCode.Cash, // "10"
+  payment_due_date: "2026-12-31",
   customer: {
     identification: "123456789",
     dv: "3",
-    company: "",
-    trade_name: "",
     names: "Alan Turing",
-    address: "calle 1 # 2-68",
-    email: "alanturing@enigmasas.com",
+    address: "Calle 1 # 2-68",
+    email: "alanturing@example.com",
     phone: "1234567890",
-    legal_organization_id: OrganizationTypeId.NaturalPerson,
-    tribute_id: CustomerTributeId.IVA,
-    identification_document_id: IdentityDocumentTypeId.NIT,
+    legal_organization_id: OrganizationTypeId.NaturalPerson, // "2"
+    tribute_id: CustomerTributeId.NotApplicable, // "21"
+    identification_document_id: IdentityDocumentTypeId.NIT, // "6"
     municipality_id: 980,
   },
   items: [
@@ -97,7 +93,7 @@ const response = await factus.bills.create({
       price: 50000,
       tax_rate: "19.00",
       unit_measure_id: 70,
-      standard_code_id: ProductStandardId.TaxpayerAdoption,
+      standard_code_id: ProductStandardId.TaxpayerAdoption, // "1"
       is_excluded: 0,
       tribute_id: 1,
     },
@@ -107,16 +103,27 @@ const response = await factus.bills.create({
 console.log(response.data);
 ```
 
+### Paginación automática
+
+```ts
+// Iterar sobre todas las facturas sin preocuparse por la paginación
+for await (const bill of factus.bills.listAll({ status: 1 })) {
+  console.log(bill.number, bill.total);
+}
+```
+
 ### Manejo de errores
 
 ```ts
 import { FactusError } from "factus-js";
 
 try {
-  await factus.bills.getByNumber("SETP990000001");
+  await factus.bills.get("SETP990000001");
 } catch (error) {
   if (error instanceof FactusError) {
-    console.error(error.status, error.message, error.details);
+    console.error(error.statusCode); // e.g. 404
+    console.error(error.message); // mensaje de la API
+    console.error(error.validationErrors); // errores DIAN en 422
   }
 }
 ```

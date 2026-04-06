@@ -11,10 +11,12 @@ SDK TypeScript/JavaScript para la API de [Factus](https://www.factus.com.co/) �
 ## Características
 
 - Todos los endpoints de la API de Factus: facturas, notas crédito, documentos soporte, notas de ajuste, recepción RADIAN, rangos de numeración, catálogos y más.
-- Autenticación OAuth2 automática con refresh de token.
+- Autenticación OAuth2 automática con refresh y reintento en token expirado.
 - Tipado completo con TypeScript — autocompletado, payloads y respuestas tipados.
-- Constantes DIAN tipadas: medios de pago, formas de pago, tipos de documento, tributos, etc.
-- Compatible con cualquier runtime JavaScript: Node.js, Deno, Bun.
+- Constantes DIAN tipadas (`PaymentFormCode`, `IdentityDocumentTypeId`, etc.) como mapas de valores directos.
+- Iterador de paginación automático (`listAll()`) para iterar sobre todos los resultados.
+- Soporte para `AbortSignal` y `timeout` global por cliente.
+- Compatible con cualquier runtime JavaScript: Node.js ≥ 18, Deno, Bun.
 - Cero dependencias externas.
 
 ## Instalación
@@ -36,7 +38,15 @@ bun add factus-js
 ## Uso básico
 
 ```ts
-import { FactusClient } from "factus-js";
+import {
+  FactusClient,
+  PaymentFormCode,
+  PaymentMethodCode,
+  IdentityDocumentTypeId,
+  OrganizationTypeId,
+  CustomerTributeId,
+  ProductStandardId,
+} from "factus-js";
 
 const factus = new FactusClient({
   clientId: process.env.FACTUS_CLIENT_ID!,
@@ -46,17 +56,63 @@ const factus = new FactusClient({
   environment: "sandbox", // "production" para ambiente real
 });
 
-// Listar facturas
-const bills = await factus.bills.list({ page: 1, per_page: 10 });
-console.log(bills.data.data);
-
 // Crear una factura electrónica
 const invoice = await factus.bills.create({
-  /* payload */
+  numbering_range_id: 8,
+  reference_code: "INV-001",
+  payment_form: PaymentFormCode.CreditPayment, // "2"
+  payment_due_date: "2026-12-31",
+  payment_method_code: PaymentMethodCode.Cash, // "10"
+  customer: {
+    identification_document_id: IdentityDocumentTypeId.CitizenshipId, // "3"
+    identification: "123456789",
+    names: "Alan Turing",
+    address: "Calle 1 # 2-68",
+    email: "alanturing@example.com",
+    phone: "1234567890",
+    legal_organization_id: OrganizationTypeId.NaturalPerson, // "2"
+    tribute_id: CustomerTributeId.NotApplicable, // "21"
+    municipality_id: 980,
+  },
+  items: [
+    {
+      code_reference: "PROD-001",
+      name: "Producto de prueba",
+      quantity: 1,
+      discount_rate: 0,
+      price: 50000,
+      tax_rate: "19.00",
+      unit_measure_id: 70,
+      standard_code_id: ProductStandardId.TaxpayerAdoption, // "1"
+      is_excluded: 0,
+      tribute_id: 1,
+    },
+  ],
 });
 
+// Listar facturas
+const list = await factus.bills.list({
+  filter: { status: 1 },
+  page: 1,
+  per_page: 15,
+});
+console.log(list.data.data);
+
+// Iterar sobre todas las facturas (paginación automática)
+for await (const bill of factus.bills.listAll()) {
+  console.log(bill.number);
+}
+
+// Obtener detalle de una factura
+const detail = await factus.bills.get("SETP990000001");
+
 // Descargar PDF
-const pdf = await factus.bills.downloadPdf("SETT1");
+const pdf = await factus.bills.downloadPdf("SETP990000001");
+
+// Cancelar una solicitud con AbortSignal
+const controller = new AbortController();
+setTimeout(() => controller.abort(), 5000);
+const bills = await factus.bills.list({}, { signal: controller.signal });
 ```
 
 ## Módulos disponibles
@@ -73,6 +129,51 @@ const pdf = await factus.bills.downloadPdf("SETT1");
 | `factus.subscription`     | Estado del plan/suscripción                          |
 | `factus.catalog`          | Municipios, países, tributos, unidades y adquirentes |
 
+## Constantes DIAN
+
+Todas las constantes son mapas de valores directos (strings tipados). Se usan directamente en los payloads sin `.value`:
+
+```ts
+import {
+  PaymentFormCode, // "1" | "2"
+  PaymentMethodCode, // "10" | "42" | "20" | ...
+  IdentityDocumentTypeId, // "1" | "2" | "3" | ...
+  OrganizationTypeId, // "1" | "2"
+  CustomerTributeId, // "18" | "21"
+  ProductStandardId, // "1" | "2" | "3" | "4"
+  EventCode, // "030" | "031" | ...
+  // ... y más
+} from "factus-js";
+
+// Para descripciones / etiquetas de UI, importa los *Info:
+import {
+  PaymentFormCodeInfo,
+  IdentityDocumentTypeIdInfo,
+  // ...
+} from "factus-js";
+
+const label = PaymentFormCodeInfo[PaymentFormCode.CreditPayment].description;
+// → "Pago a crédito"
+```
+
+## Manejo de errores
+
+```ts
+import { FactusClient, FactusError } from "factus-js";
+
+try {
+  await factus.bills.create({
+    /* ... */
+  });
+} catch (error) {
+  if (error instanceof FactusError) {
+    console.error(error.statusCode); // e.g. 422
+    console.error(error.message); // e.g. "Error de validación"
+    console.error(error.validationErrors); // { FAK24: "Regla: FAK24, ..." }
+  }
+}
+```
+
 ## Exportaciones
 
 ```ts
@@ -83,7 +184,12 @@ import {
   PaymentMethodCode,
   PaymentFormCode,
   IdentityDocumentTypeId,
-  // ... y más
+  // Metadata de constantes
+  PaymentFormCodeInfo,
+  IdentityDocumentTypeIdInfo,
+  // Tipos
+  type RequestOptions,
+  type FactusClientConfig,
 } from "factus-js";
 ```
 
