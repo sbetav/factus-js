@@ -2,16 +2,16 @@ import { EventCode } from "../../constants";
 import { FactusClient } from "../../index";
 import type { EmitEventInput } from "../../types";
 import {
-  readSandboxEnv,
-  shouldRunSandboxTests,
-  uniqueRef,
+    readSandboxEnv,
+    shouldRunSandboxTests,
+    uniqueRef,
 } from "../helpers/sandbox-env";
 import {
-  printResults,
-  run,
-  runAllowConflict,
-  runExpectError,
-  createInvalid,
+    createInvalid,
+    printResults,
+    run,
+    runAllowConflict,
+    runExpectError,
 } from "../helpers/sandbox-runner";
 
 // ---------------------------------------------------------------------------
@@ -164,7 +164,7 @@ describe("sandbox integration", () => {
     );
 
     await run("bills.list", factus.bills.list({ page: 1, per_page: 5 }));
-    await run("bills.getByNumber", factus.bills.getByNumber("SETP990000203"));
+    await run("bills.get", factus.bills.get("SETP990000203"));
     await run(
       "bills.getEmailContent",
       factus.bills.getEmailContent("SETP990000203"),
@@ -319,7 +319,7 @@ describe("sandbox integration", () => {
         provider: {
           identification_document_id: "6",
           identification: "INVALID_DOCUMENT",
-          dv: 6,
+          dv: "6",
           trade_name: "",
           names: "Alan Turing",
           address: "calle 1 # 2-68",
@@ -371,7 +371,7 @@ describe("sandbox integration", () => {
         provider: {
           identification_document_id: "6",
           identification: "INVALID_DOCUMENT",
-          dv: 0,
+          dv: "0",
           trade_name: "",
           names: "Alan Turing",
           address: "calle 1 # 2-68",
@@ -460,7 +460,7 @@ describe("sandbox integration", () => {
         provider: {
           identification_document_id: "6",
           identification: "123456789",
-          dv: 6,
+          dv: "6",
           trade_name: "",
           names: "Alan Turing",
           address: "calle 1 # 2-68",
@@ -688,7 +688,7 @@ describe("sandbox integration", () => {
       factus.reception.emitEvent(
         {
           bill_id: "SETP990000203",
-          event_type: EventCode.ReceiptAcknowledgement.value,
+          event_type: EventCode.ReceiptAcknowledgement,
         },
         receptionEmitEventInput,
       ),

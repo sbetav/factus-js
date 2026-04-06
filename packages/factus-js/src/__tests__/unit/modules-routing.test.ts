@@ -1,13 +1,13 @@
 import {
-  AdjustmentNotesModule,
-  BillsModule,
-  CatalogModule,
-  CompanyModule,
-  CreditNotesModule,
-  NumberingRangesModule,
-  ReceptionModule,
-  SubscriptionModule,
-  SupportDocumentsModule,
+    AdjustmentNotesModule,
+    BillsModule,
+    CatalogModule,
+    CompanyModule,
+    CreditNotesModule,
+    NumberingRangesModule,
+    ReceptionModule,
+    SubscriptionModule,
+    SupportDocumentsModule,
 } from "../../client";
 import { createHttpSpy } from "../helpers/http-spy";
 
@@ -24,7 +24,7 @@ describe("module routing contract", () => {
 
     await bills.create(createInput);
     await bills.list(listFilters);
-    await bills.getByNumber("SETP990000203");
+    await bills.get("SETP990000203");
     await bills.downloadXml("SETP990000203");
     await bills.downloadPdf("SETP990000203");
     await bills.getEmailContent("SETP990000203");
