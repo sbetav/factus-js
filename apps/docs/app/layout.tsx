@@ -1,11 +1,11 @@
-import { RootProvider } from "fumadocs-ui/provider/next";
-import "./global.css";
-import { Geist, Geist_Mono } from "next/font/google";
-import type { Metadata } from "next";
 import { getOgImageAbsoluteUrl, getSiteUrl } from "@/lib/site";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import StructuredData from "components/structured-data";
+import { RootProvider } from "fumadocs-ui/provider/next";
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./global.css";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -23,11 +23,17 @@ export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: {
     template: "%s | factus-js",
-    default: "factus-js — JavaScript SDK para la API de Factus",
+    default: "factus-js | SDK JavaScript y TypeScript para Factus API",
   },
   description:
-    "JavaScript/TypeScript SDK para emitir facturas electrónicas, notas crédito y documentos soporte a través de la API de Factus. Integración con la DIAN en Colombia.",
+    "Factus SDK para JavaScript y TypeScript. Integra Factus API en Node.js para emitir facturas electrónicas, notas crédito y documentos soporte validados ante la DIAN en Colombia.",
   keywords: [
+    "Factus SDK",
+    "Factus API",
+    "factus js",
+    "factusjs",
+    "sdk factus",
+    "api factus",
     "facturación electrónica",
     "factura electrónica",
     "DIAN",
@@ -39,16 +45,36 @@ export const metadata: Metadata = {
     "Node.js",
     "Factus",
     "factus-js",
+    "sdk javascript factus",
+    "sdk typescript factus",
     "notas crédito",
     "documentos soporte",
     "facturación electrónica Colombia",
     "integración API",
     "electronic invoicing",
   ],
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
     siteName: "factus-js",
     locale: "es_CO",
     type: "website",
+    title: "factus-js | SDK JavaScript y TypeScript para Factus API",
+    description:
+      "Factus SDK para JavaScript y TypeScript. Integra Factus API en Node.js para emitir facturas electrónicas, notas crédito y documentos soporte.",
+    url: "/",
     images: [
       {
         url: ogImageUrl,
@@ -60,6 +86,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    title: "factus-js | SDK JavaScript y TypeScript para Factus API",
+    description:
+      "Factus SDK para JavaScript y TypeScript con autenticación automática, tipado estricto y soporte para facturación electrónica DIAN.",
     images: [ogImageUrl],
   },
   verification: {

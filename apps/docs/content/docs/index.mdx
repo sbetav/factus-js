@@ -1,14 +1,14 @@
 ---
 title: Introducción
-description: Javascript SDK para la API de facturación electrónica Factus (Colombia).
+description: Documentación del SDK de Factus para JavaScript y TypeScript. Aprende a integrar la API de Factus en Node.js para facturación electrónica DIAN en Colombia.
 ---
 
 import { Cards, Card } from "fumadocs-ui/components/card";
 import { Callout } from "fumadocs-ui/components/callout";
 
-# factus-js
+## factus-js
 
-**factus-js** es un SDK de Javascript para la [API de Factus](https://factus.com.co), una plataforma colombiana de facturación electrónica homologada por la DIAN. El SDK proporciona una capa de abstracción completa sobre la API REST, con autenticación OAuth2 automática y tipado estricto en todos los métodos.
+**factus-js** es un SDK para JavaScript y TypeScript que simplifica la integración de la [API de Factus](https://factus.com.co) en aplicaciones Node.js. El SDK proporciona autenticación OAuth2 automática, tipado estricto y una capa consistente para trabajar con facturas electrónicas, notas crédito, documentos soporte y catálogos DIAN.
 
 <Callout type="info">
   Este no es un producto oficial de Factus. Para más información visita la
@@ -22,6 +22,13 @@ El SDK se distribuye como un único paquete en npm:
 | Paquete     | Descripción                                                                     |
 | ----------- | ------------------------------------------------------------------------------- |
 | `factus-js` | Cliente principal (`FactusClient`) + tipos TypeScript + constantes tipadas DIAN |
+
+## Qué resuelve este SDK
+
+- Integrar Factus API desde Node.js con JavaScript o TypeScript.
+- Emitir facturas electrónicas, notas crédito y documentos soporte.
+- Usar constantes y tablas DIAN tipadas para reducir errores de validación.
+- Centralizar autenticación, refresh de tokens y manejo de errores.
 
 ## Recursos disponibles
 
