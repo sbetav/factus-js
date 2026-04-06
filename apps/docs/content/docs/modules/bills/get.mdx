@@ -6,7 +6,7 @@ description: Obtener el detalle completo de una factura por su número de docume
 ## Firma del método
 
 ```ts
-getByNumber(number: string): Promise<ViewInvoiceResponse>
+get(number: string, options?: RequestOptions): Promise<ViewInvoiceResponse>
 ```
 
 ## Endpoint Factus
@@ -30,16 +30,21 @@ Fuente oficial: [Ver factura](https://developers.factus.com.co/facturas/ver/inde
         </>
       ),
     },
+    options: {
+      type: "RequestOptions",
+      required: false,
+      description: "Opciones opcionales de la solicitud (p. ej. signal para AbortSignal).",
+    },
   }}
 />
+
 ## Ejemplo
 
 ```ts
-const response = await factus.bills.getByNumber("SETP990000203");
+const response = await factus.bills.get("SETP990000203");
 console.log(response.data);
 ```
 
 ## Ejemplo de respuesta
 
 Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/facturas/ver/index.html#ejemplo-de-respuesta)
-

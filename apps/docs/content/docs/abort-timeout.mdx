@@ -1,0 +1,75 @@
+---
+title: Control de solicitudes (AbortSignal)
+description: Cancela solicitudes HTTP en curso usando AbortSignal en cualquier método del SDK.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+Todos los métodos del SDK aceptan un parámetro opcional `options` de tipo `RequestOptions`. Actualmente soporta la propiedad `signal` para pasar un [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) y cancelar la solicitud.
+
+## Firma de `RequestOptions`
+
+```ts
+interface RequestOptions {
+  signal?: AbortSignal;
+}
+```
+
+## Cancelar una solicitud
+
+```ts
+const controller = new AbortController();
+
+// Cancelar después de 3 segundos
+setTimeout(() => controller.abort(), 3000);
+
+try {
+  const response = await factus.bills.list(
+    { filter: { status: "1" } },
+    { signal: controller.signal },
+  );
+  console.log(response.data.data);
+} catch (error) {
+  if (error.name === "AbortError") {
+    console.log("Solicitud cancelada");
+  }
+}
+```
+
+## Timeout con AbortSignal.timeout
+
+Los entornos modernos de Node.js (≥ 18) y navegadores soportan `AbortSignal.timeout()` directamente:
+
+```ts
+// Cancela automáticamente si la respuesta tarda más de 5 s
+const response = await factus.bills.get("SETP990000001", {
+  signal: AbortSignal.timeout(5000),
+});
+```
+
+<Callout type="info">
+  `AbortSignal.timeout()` está disponible en Node.js 18+ y en navegadores
+  modernos. Para entornos más antiguos usa `AbortController` con `setTimeout`
+  como en el ejemplo anterior.
+</Callout>
+
+## Usar con `listAll()`
+
+Puedes pasar el `signal` al iterador `listAll()` para cancelar la paginación en cualquier página intermedia:
+
+```ts
+const controller = new AbortController();
+setTimeout(() => controller.abort(), 10000);
+
+for await (const bill of factus.bills.listAll({}, { signal: controller.signal })) {
+  process(bill);
+}
+```
+
+El iterador se detendrá y lanzará `AbortError` en cuanto la señal sea abortada.
+
+## Compatibilidad
+
+El soporte de `AbortSignal` está disponible en todos los métodos de los módulos:
+`bills`, `creditNotes`, `supportDocuments`, `adjustmentNotes`, `reception`,
+`numberingRanges`, `company`, `subscription` y `catalog`.

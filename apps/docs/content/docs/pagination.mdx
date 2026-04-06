@@ -1,0 +1,108 @@
+---
+title: Paginación automática (listAll)
+description: Recorre todas las páginas de un recurso sin manejar la paginación manualmente usando el iterador listAll().
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+Todos los módulos que devuelven listas paginadas exponen un método `listAll()` que es un [async generator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncGenerator). Itera automáticamente por todas las páginas y entrega los ítems de uno en uno, sin que tengas que gestionar la paginación manualmente.
+
+## Módulos con `listAll()`
+
+| Módulo              | Método              |
+| ------------------- | ------------------- |
+| `factus.bills`      | `listAll(filter?)`  |
+| `factus.creditNotes` | `listAll(filter?)` |
+| `factus.supportDocuments` | `listAll(filter?)` |
+| `factus.adjustmentNotes` | `listAll(filter?)` |
+| `factus.reception`  | `listAll(filter?)`  |
+| `factus.numberingRanges` | `listAll(filter?)` |
+| `factus.subscription` | `listAll(filter?)` |
+
+## Ejemplo básico
+
+```ts
+for await (const invoice of factus.bills.listAll()) {
+  console.log(invoice.number, invoice.status);
+}
+```
+
+El iterador solicita páginas de 100 ítems y pasa automáticamente a la siguiente hasta que no quedan más.
+
+## Con filtros
+
+Pasa un objeto de filtros como primer argumento:
+
+```ts
+import { InvoiceFilters } from "factus-js";
+
+const filters: InvoiceFilters = { status: "2" }; // facturas validadas
+
+for await (const invoice of factus.bills.listAll(filters)) {
+  console.log(invoice.number);
+}
+```
+
+## Recopilar todos los ítems en un array
+
+Si prefieres tener todos los resultados en memoria puedes usar el spread de `Array.from` o un `for await` acumulador:
+
+```ts
+const allBills = [];
+for await (const bill of factus.bills.listAll()) {
+  allBills.push(bill);
+}
+
+// O más conciso con Array.from
+const allBills2 = [];
+for await (const b of factus.bills.listAll()) allBills2.push(b);
+```
+
+<Callout type="warn">
+  Ten cuidado al recopilar grandes volúmenes en memoria. Si solo necesitas
+  procesar los ítems o encontrar uno en concreto, usa `break` para detener el
+  iterador anticipadamente.
+</Callout>
+
+## Detener la iteración anticipadamente
+
+`listAll()` es un generador perezoso: solo solicita la siguiente página cuando el iterador sigue avanzando. Puedes detenerlo con `break` sin que se realicen peticiones innecesarias:
+
+```ts
+for await (const invoice of factus.bills.listAll()) {
+  if (invoice.status === "1") {
+    console.log("Primera factura pendiente:", invoice.number);
+    break; // detiene la iteración y no pide más páginas
+  }
+}
+```
+
+## Con AbortSignal
+
+Pasa un `AbortSignal` como segundo argumento para cancelar la paginación en cualquier momento:
+
+```ts
+const controller = new AbortController();
+setTimeout(() => controller.abort(), 5000); // cancelar después de 5 s
+
+try {
+  for await (const invoice of factus.bills.listAll({}, { signal: controller.signal })) {
+    console.log(invoice.number);
+  }
+} catch (error) {
+  if (error.name === "AbortError") {
+    console.log("Iteración cancelada");
+  }
+}
+```
+
+## Firma del método
+
+```ts
+listAll(
+  filter?: TFilters,
+  options?: RequestOptions,
+): AsyncIterable<TItem>
+```
+
+Donde `TFilters` y `TItem` varían según el módulo (por ejemplo, `InvoiceFilters` / `InvoiceListItem` en `factus.bills`).

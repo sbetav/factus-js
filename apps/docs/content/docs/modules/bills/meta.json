@@ -3,7 +3,7 @@
   "pages": [
     "index",
     "create",
-    "get-by-number",
+    "get",
     "list",
     "download-pdf",
     "download-xml",

@@ -20,6 +20,7 @@ class FactusError extends Error {
     api_version: string;
   }>;
   validationErrors: Record<string, string> | null;
+  cause?: unknown;
 }
 ```
 
@@ -75,6 +76,12 @@ class FactusError extends Error {
       description:
         "Reglas DIAN que fallaron al validar un documento (típicamente en errores 422). Las claves son los códigos de regla (p. ej. FAK24) y los valores la descripción del rechazo. Es null cuando el error no es de validación.",
     },
+    cause: {
+      type: "unknown",
+      required: false,
+      description:
+        "Error subyacente original que causó este error (si lo hay). Útil para depurar errores de red envueltos.",
+    },
   }}
 />
 
@@ -94,7 +101,7 @@ const factus = new FactusClient({
 });
 
 try {
-  const invoice = await factus.bills.getByNumber("NO-EXISTE");
+  const invoice = await factus.bills.get("NO-EXISTE");
 } catch (error) {
   if (error instanceof FactusError) {
     console.error("Error de la API:", error.message);

@@ -113,9 +113,9 @@ import { EventCode, IdentityDocumentTypeId } from "factus-js";
 
 await factus.bills.emitRadianEvent(
   "SETP990000049",
-  EventCode.TacitAcceptance.value,
+  EventCode.TacitAcceptance,
   {
-    identification_document_code: IdentityDocumentTypeId.CitizenshipId.value,
+    identification_document_code: IdentityDocumentTypeId.CitizenshipId,
     identification: "12345667",
     first_name: "Pepito",
     last_name: "Perez",

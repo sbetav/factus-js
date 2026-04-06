@@ -13,13 +13,14 @@ Fuente oficial:
 
 ## Modo de uso
 
-Si instalaste `factus-js`, las constantes ya están disponibles.
+Si instalaste `factus-js`, las constantes ya están disponibles. Cada constante es un mapa de claves a valores string, por lo que puedes usarlas directamente en los campos de la API:
 
 ```ts
 import { PaymentFormCode, EventCode } from "factus-js";
 
-const paymentForm = PaymentFormCode.CashPayment.value;
-const event = EventCode.ExpressAcceptance.value;
+// Usar directamente en un payload de API
+const paymentForm = PaymentFormCode.CashPayment;   // "1"
+const event = EventCode.ExpressAcceptance;          // "033"
 ```
 
 <Callout type="info">
@@ -27,6 +28,29 @@ const event = EventCode.ExpressAcceptance.value;
   Para datos dinámicos (países, municipios, tributos, adquirientes), usa los
   demás métodos de `factus.catalog`.
 </Callout>
+
+## Descripciones y abreviaturas (`*Info`)
+
+Para mostrar etiquetas legibles en una interfaz de usuario (selectores, tablas, etc.), importa los mapas `*Info` complementarios desde `factus-js`:
+
+```ts
+import {
+  PaymentFormCode,
+  PaymentFormCodeInfo,
+  IdentityDocumentTypeId,
+  IdentityDocumentTypeIdInfo,
+} from "factus-js";
+
+// Obtener descripción de un valor
+const desc = PaymentFormCodeInfo[PaymentFormCode.CashPayment].description;
+// "Pago de contado"
+
+// Obtener abreviatura (disponible en documentos de identidad)
+const abbr = IdentityDocumentTypeIdInfo[IdentityDocumentTypeId.CitizenshipId].abbreviation;
+// "CC"
+```
+
+Cada `*Info` exportado tiene una entrada por cada clave del mapa de constantes correspondiente, con al menos `description` y, cuando aplica, `abbreviation`.
 
 ## Tipo de documento de factura (`InvoiceDocumentType`)
 
@@ -123,10 +147,7 @@ import { EventCode } from "factus-js";
 import { IdentityDocumentTypeId } from "factus-js";
 
 // Código para la API como string (p. ej. identification_document_id)
-const docType = IdentityDocumentTypeId.CitizenshipId.value; // "3"
-
-// Abreviatura habitual (p. ej. etiquetas en UI)
-const abbr = IdentityDocumentTypeId.CitizenshipId.abbreviation; // "CC"
+const docType = IdentityDocumentTypeId.CitizenshipId; // "3"
 ```
 
 | Clave                           | Valor  | Abreviatura | Descripción                            |

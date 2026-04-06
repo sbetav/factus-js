@@ -20,7 +20,8 @@ Accede al modulo a traves de `factus.bills`.
 | ------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------ |
 | `create(input)`                             | `POST /v1/bills/validate`                                   | Crear y validar una nueva factura          |
 | `list(params?)`                             | `GET /v1/bills`                                             | Listar facturas con filtros opcionales     |
-| `getByNumber(number)`                       | `GET /v1/bills/show/{number}`                               | Obtener detalle por numero de documento    |
+| `listAll(params?)`                          | `GET /v1/bills` *(paginación automática)*                   | Iterador async que recorre todas las páginas |
+| `get(number)`                               | `GET /v1/bills/show/{number}`                               | Obtener detalle por numero de documento    |
 | `downloadXml(number)`                       | `GET /v1/bills/download-xml/{number}`                       | Descargar XML en base64                    |
 | `downloadPdf(number)`                       | `GET /v1/bills/download-pdf/{number}`                       | Descargar PDF en base64                    |
 | `getEmailContent(number)`                   | `GET /v1/bills/{number}/email-content`                      | Obtener asunto y adjunto para envío manual |

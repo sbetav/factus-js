@@ -17,6 +17,9 @@
     "modules/numbering-ranges",
     "modules/reception",
     "modules/subscription",
-    "modules/catalog"
+    "modules/catalog",
+    "---Avanzado---",
+    "pagination",
+    "abort-timeout"
   ]
 }
