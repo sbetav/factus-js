@@ -1,32 +1,19 @@
 import type {
-  Municipality,
-  MunicipalityFilters,
-  Country,
-  CountryFilters,
-  ListParams,
-  Tribute,
-  TributeFilters,
-  MeasurementUnit,
-  MeasurementUnitFilters,
-  Acquirer,
-  AcquirerFilters,
-  ApiResponse,
+    Acquirer,
+    AcquirerFilters,
+    ApiResponse,
+    Country,
+    CountryFilters,
+    ListParams,
+    MeasurementUnit,
+    MeasurementUnitFilters,
+    Municipality,
+    MunicipalityFilters,
+    Tribute,
+    TributeFilters,
 } from "../../types";
-import type { HttpClient } from "../http-client";
-import { buildListQueryParams } from "../list-params";
-
-type QueryValue = string | number | boolean | undefined;
-
-function toQueryParams<T extends object>(
-  obj?: T,
-): Record<string, QueryValue> | undefined {
-  if (!obj) return undefined;
-  const params: Record<string, QueryValue> = {};
-  for (const [key, value] of Object.entries(obj)) {
-    if (value !== undefined) params[key] = value as QueryValue;
-  }
-  return params;
-}
+import type { HttpClient, RequestOptions } from "../http-client";
+import { buildListQueryParams, buildSimpleQueryParams } from "../list-params";
 
 export class CatalogModule {
   constructor(private readonly http: HttpClient) {}
@@ -38,11 +25,18 @@ export class CatalogModule {
   /**
    * List all municipalities, optionally filtered by name.
    * GET /v1/municipalities
+   *
+   * Note: uses `filter[name]=...` query format (Laravel-style).
    */
   listMunicipalities(
     params?: ListParams<MunicipalityFilters>,
+    options?: RequestOptions,
   ): Promise<ApiResponse<Municipality[]>> {
-    return this.http.get("/v1/municipalities", buildListQueryParams(params));
+    return this.http.get(
+      "/v1/municipalities",
+      buildListQueryParams(params),
+      options?.signal,
+    );
   }
 
   // ---------------------------------------------------------------------------
@@ -52,11 +46,18 @@ export class CatalogModule {
   /**
    * List all countries, optionally filtered by name.
    * GET /v1/countries
+   *
+   * Note: uses `filter[name]=...` query format (Laravel-style).
    */
   listCountries(
     params?: ListParams<CountryFilters>,
+    options?: RequestOptions,
   ): Promise<ApiResponse<Country[]>> {
-    return this.http.get("/v1/countries", buildListQueryParams(params));
+    return this.http.get(
+      "/v1/countries",
+      buildListQueryParams(params),
+      options?.signal,
+    );
   }
 
   // ---------------------------------------------------------------------------
@@ -66,9 +67,18 @@ export class CatalogModule {
   /**
    * List all tribute (tax) codes, optionally filtered by name.
    * GET /v1/tributes/products
+   *
+   * Note: uses bare `name=...` query format (not Laravel-style).
    */
-  listTributes(filters?: TributeFilters): Promise<ApiResponse<Tribute[]>> {
-    return this.http.get("/v1/tributes/products", toQueryParams(filters));
+  listTributes(
+    filters?: TributeFilters,
+    options?: RequestOptions,
+  ): Promise<ApiResponse<Tribute[]>> {
+    return this.http.get(
+      "/v1/tributes/products",
+      buildSimpleQueryParams(filters),
+      options?.signal,
+    );
   }
 
   // ---------------------------------------------------------------------------
@@ -78,11 +88,18 @@ export class CatalogModule {
   /**
    * List all measurement units, optionally filtered by name.
    * GET /v1/measurement-units
+   *
+   * Note: uses bare `name=...` query format (not Laravel-style).
    */
   listMeasurementUnits(
     filters?: MeasurementUnitFilters,
+    options?: RequestOptions,
   ): Promise<ApiResponse<MeasurementUnit[]>> {
-    return this.http.get("/v1/measurement-units", toQueryParams(filters));
+    return this.http.get(
+      "/v1/measurement-units",
+      buildSimpleQueryParams(filters),
+      options?.signal,
+    );
   }
 
   // ---------------------------------------------------------------------------
@@ -93,7 +110,14 @@ export class CatalogModule {
    * Look up an acquirer (existing customer) by their identification.
    * GET /v1/dian/acquirer
    */
-  getAcquirer(filters: AcquirerFilters): Promise<ApiResponse<Acquirer>> {
-    return this.http.get("/v1/dian/acquirer", toQueryParams(filters));
+  getAcquirer(
+    filters: AcquirerFilters,
+    options?: RequestOptions,
+  ): Promise<ApiResponse<Acquirer>> {
+    return this.http.get(
+      "/v1/dian/acquirer",
+      buildSimpleQueryParams(filters),
+      options?.signal,
+    );
   }
 }

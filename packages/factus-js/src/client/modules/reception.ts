@@ -1,16 +1,16 @@
 import type {
-  ReceptionBill,
-  ReceptionBillFilters,
-  ListParams,
-  EmitEventInput,
-  EmitEventParams,
-  UploadReceptionBillInput,
-  UploadedReceptionBill,
-  ReceptionBillEvent,
-  ApiResponse,
-  PaginatedData,
+    ApiResponse,
+    EmitEventInput,
+    EmitEventParams,
+    ListParams,
+    PaginatedData,
+    ReceptionBill,
+    ReceptionBillEvent,
+    ReceptionBillFilters,
+    UploadReceptionBillInput,
+    UploadedReceptionBill,
 } from "../../types";
-import type { HttpClient } from "../http-client";
+import type { HttpClient, RequestOptions } from "../http-client";
 import { buildListQueryParams } from "../list-params";
 
 export class ReceptionModule {
@@ -22,8 +22,33 @@ export class ReceptionModule {
    */
   list(
     params?: ListParams<ReceptionBillFilters>,
+    options?: RequestOptions,
   ): Promise<ApiResponse<PaginatedData<ReceptionBill>>> {
-    return this.http.get("/v1/receptions/bills", buildListQueryParams(params));
+    return this.http.get(
+      "/v1/receptions/bills",
+      buildListQueryParams(params),
+      options?.signal,
+    );
+  }
+
+  /**
+   * Iterate over all received invoices automatically across pages, yielding
+   * one item at a time. Wraps `list()` and follows pagination until exhausted.
+   */
+  async *listAll(
+    filter?: ReceptionBillFilters,
+    options?: RequestOptions,
+  ): AsyncIterable<ReceptionBill> {
+    let page = 1;
+    while (true) {
+      const response = await this.list(
+        { filter, page, per_page: 100 },
+        options,
+      );
+      for (const item of response.data.data) yield item;
+      if (page >= response.data.pagination.last_page) break;
+      page++;
+    }
   }
 
   /**
@@ -32,8 +57,9 @@ export class ReceptionModule {
    */
   upload(
     input: UploadReceptionBillInput,
+    options?: RequestOptions,
   ): Promise<ApiResponse<UploadedReceptionBill>> {
-    return this.http.post("/v1/receptions/upload", input);
+    return this.http.post("/v1/receptions/upload", input, options?.signal);
   }
 
   /**
@@ -43,10 +69,12 @@ export class ReceptionModule {
   emitEvent(
     params: EmitEventParams,
     input: EmitEventInput,
+    options?: RequestOptions,
   ): Promise<ApiResponse<ReceptionBillEvent[]>> {
     return this.http.patch(
       `/v1/receptions/bills/${params.bill_id}/radian/events/${params.event_type}`,
       input,
+      options?.signal,
     );
   }
 }
