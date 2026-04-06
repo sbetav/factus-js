@@ -1,292 +1,166 @@
 export const InvoiceDocumentType = {
-  ElectronicSalesInvoice: {
-    value: "01",
-    description: "Factura electronica de venta.",
-  },
-  ElectronicTransmissionType03: {
-    value: "03",
-    description: "Instrumento electrónico de transmisión - tipo 03.",
-  },
+  ElectronicSalesInvoice: "01",
+  ElectronicTransmissionType03: "03",
 } as const;
 export type InvoiceDocumentType =
-  (typeof InvoiceDocumentType)[keyof typeof InvoiceDocumentType]["value"];
+  (typeof InvoiceDocumentType)[keyof typeof InvoiceDocumentType];
 
 export const OperationTypeCode = {
-  Standard: { value: "10", description: "Estándar." },
-  Mandates: { value: "11", description: "Mandatos." },
-  Transport: { value: "12", description: "Transporte." },
+  Standard: "10",
+  Mandates: "11",
+  Transport: "12",
 } as const;
 export type OperationTypeCode =
-  (typeof OperationTypeCode)[keyof typeof OperationTypeCode]["value"];
+  (typeof OperationTypeCode)[keyof typeof OperationTypeCode];
 
 export const CreditNoteOperationTypeCode = {
-  WithReference: {
-    value: "20",
-    description: "Nota Crédito que referencia una factura electronica.",
-  },
-  WithoutReference: {
-    value: "22",
-    description: "Nota Crédito sin referencia a una factura electronica.",
-  },
+  WithReference: "20",
+  WithoutReference: "22",
 } as const;
 export type CreditNoteOperationTypeCode =
-  (typeof CreditNoteOperationTypeCode)[keyof typeof CreditNoteOperationTypeCode]["value"];
+  (typeof CreditNoteOperationTypeCode)[keyof typeof CreditNoteOperationTypeCode];
 
 export const CreditNoteCorrectionCode = {
-  PartialReturn: {
-    value: "1",
-    description:
-      "Devolución parcial de los bienes y/o no aceptación parcial del servicio.",
-  },
-  InvoiceCancellation: {
-    value: "2",
-    description: "Anulación de factura electrónica.",
-  },
-  PartialOrTotalDiscount: {
-    value: "3",
-    description: "Rebaja o descuento parcial o total.",
-  },
-  PriceAdjustment: { value: "4", description: "Ajuste de precio." },
-  EarlyPaymentDiscount: {
-    value: "5",
-    description: "Descuento comercial por pronto pago.",
-  },
-  VolumeDiscount: {
-    value: "6",
-    description: "Descuento comercial por volumen de ventas.",
-  },
+  PartialReturn: "1",
+  InvoiceCancellation: "2",
+  PartialOrTotalDiscount: "3",
+  PriceAdjustment: "4",
+  EarlyPaymentDiscount: "5",
+  VolumeDiscount: "6",
 } as const;
 export type CreditNoteCorrectionCode =
-  (typeof CreditNoteCorrectionCode)[keyof typeof CreditNoteCorrectionCode]["value"];
+  (typeof CreditNoteCorrectionCode)[keyof typeof CreditNoteCorrectionCode];
 
 export const ProductStandardId = {
-  TaxpayerAdoption: {
-    value: "1",
-    description: "Estándar de adopción del contribuyente",
-  },
-  UNSPSC: { value: "2", description: "UNSPSC" },
-  TariffHeading: { value: "3", description: "Partida Arancelaria" },
-  GTIN: { value: "4", description: "GTIN" },
+  TaxpayerAdoption: "1",
+  UNSPSC: "2",
+  TariffHeading: "3",
+  GTIN: "4",
 } as const;
 export type ProductStandardId =
-  (typeof ProductStandardId)[keyof typeof ProductStandardId]["value"];
+  (typeof ProductStandardId)[keyof typeof ProductStandardId];
 
 export const ClaimConceptCode = {
-  DocumentInconsistencies: {
-    value: "01",
-    description: "Documento con inconsistencias",
-  },
-  GoodsNotDeliveredTotal: {
-    value: "02",
-    description: "Mercancía no entregada totalmente",
-  },
-  GoodsNotDeliveredPartial: {
-    value: "03",
-    description: "Mercancía no entregada parcialmente",
-  },
-  ServiceNotProvided: { value: "04", description: "Servicio no prestado" },
+  DocumentInconsistencies: "01",
+  GoodsNotDeliveredTotal: "02",
+  GoodsNotDeliveredPartial: "03",
+  ServiceNotProvided: "04",
 } as const;
 export type ClaimConceptCode =
-  (typeof ClaimConceptCode)[keyof typeof ClaimConceptCode]["value"];
+  (typeof ClaimConceptCode)[keyof typeof ClaimConceptCode];
 
 export const EventCode = {
-  ReceiptAcknowledgement: {
-    value: "030",
-    description: "Acuse de recibo de Factura Electronica de Venta",
-  },
-  InvoiceClaim: {
-    value: "031",
-    description: "Reclamo de la Factura Electronica de Venta",
-  },
-  GoodsOrServiceReceipt: {
-    value: "032",
-    description: "Recibo del bien y/o prestación del servicio",
-  },
-  ExpressAcceptance: { value: "033", description: "Aceptación expresa" },
-  TacitAcceptance: { value: "034", description: "Aceptación tacita" },
+  ReceiptAcknowledgement: "030",
+  InvoiceClaim: "031",
+  GoodsOrServiceReceipt: "032",
+  ExpressAcceptance: "033",
+  TacitAcceptance: "034",
 } as const;
-export type EventCode = (typeof EventCode)[keyof typeof EventCode]["value"];
+export type EventCode = (typeof EventCode)[keyof typeof EventCode];
 
 export const IdentityDocumentTypeId = {
-  CivilRegistration: {
-    value: "1",
-    description: "Registro civil",
-    abbreviation: "RC",
-  },
-  IdentityCard: {
-    value: "2",
-    description: "Tarjeta de identidad",
-    abbreviation: "TI",
-  },
-  CitizenshipId: {
-    value: "3",
-    description: "Cédula de ciudadanía",
-    abbreviation: "CC",
-  },
-  ForeignerCard: {
-    value: "4",
-    description: "Tarjeta de extranjería",
-    abbreviation: "TE",
-  },
-  ForeignerId: {
-    value: "5",
-    description: "Cédula de extranjería",
-    abbreviation: "CE",
-  },
-  NIT: { value: "6", description: "NIT", abbreviation: "NIT" },
-  Passport: { value: "7", description: "Pasaporte", abbreviation: "PA" },
-  ForeignIdentificationDocument: {
-    value: "8",
-    description: "Documento de identificación extranjero",
-    abbreviation: "DE",
-  },
-  PEP: { value: "9", description: "PEP", abbreviation: "PEP" },
-  ForeignNIT: { value: "10", description: "NIT otro país", abbreviation: "NE" },
-  NUIP: { value: "11", description: "NUIP", abbreviation: "NUIP" },
+  CivilRegistration: "1",
+  IdentityCard: "2",
+  CitizenshipId: "3",
+  ForeignerCard: "4",
+  ForeignerId: "5",
+  NIT: "6",
+  Passport: "7",
+  ForeignIdentificationDocument: "8",
+  PEP: "9",
+  ForeignNIT: "10",
+  NUIP: "11",
 } as const;
 export type IdentityDocumentTypeId =
-  (typeof IdentityDocumentTypeId)[keyof typeof IdentityDocumentTypeId]["value"];
+  (typeof IdentityDocumentTypeId)[keyof typeof IdentityDocumentTypeId];
 
 export const SupportDocumentIdentityTypeId = {
-  ForeignerCard: {
-    value: "4",
-    description: "Tarjeta de extranjería",
-    abbreviation: "TE",
-  },
-  ForeignerId: {
-    value: "5",
-    description: "Cédula de extranjería",
-    abbreviation: "CE",
-  },
-  NIT: { value: "6", description: "NIT", abbreviation: "NIT" },
-  Passport: { value: "7", description: "Pasaporte", abbreviation: "PA" },
-  ForeignIdentificationDocument: {
-    value: "8",
-    description: "Documento de identificación extranjero",
-    abbreviation: "DE",
-  },
-  PEP: { value: "9", description: "PEP", abbreviation: "PEP" },
-  ForeignNIT: { value: "10", description: "NIT otro país", abbreviation: "NE" },
+  ForeignerCard: "4",
+  ForeignerId: "5",
+  NIT: "6",
+  Passport: "7",
+  ForeignIdentificationDocument: "8",
+  PEP: "9",
+  ForeignNIT: "10",
 } as const;
 export type SupportDocumentIdentityTypeId =
-  (typeof SupportDocumentIdentityTypeId)[keyof typeof SupportDocumentIdentityTypeId]["value"];
+  (typeof SupportDocumentIdentityTypeId)[keyof typeof SupportDocumentIdentityTypeId];
 
 export const CustomerTributeId = {
-  IVA: { value: "18", description: "IVA" },
-  NotApplicable: { value: "21", description: "No aplica" },
+  IVA: "18",
+  NotApplicable: "21",
 } as const;
 export type CustomerTributeId =
-  (typeof CustomerTributeId)[keyof typeof CustomerTributeId]["value"];
+  (typeof CustomerTributeId)[keyof typeof CustomerTributeId];
 
 export const OrganizationTypeId = {
-  LegalEntity: { value: "1", description: "Persona Jurídica" },
-  NaturalPerson: { value: "2", description: "Persona Natural" },
+  LegalEntity: "1",
+  NaturalPerson: "2",
 } as const;
 export type OrganizationTypeId =
-  (typeof OrganizationTypeId)[keyof typeof OrganizationTypeId]["value"];
+  (typeof OrganizationTypeId)[keyof typeof OrganizationTypeId];
 
 export const PaymentMethodCode = {
-  Cash: { value: "10", description: "Efectivo" },
-  BankDeposit: { value: "42", description: "Consignación" },
-  Check: { value: "20", description: "Cheque" },
-  Transfer: { value: "47", description: "Transferencia" },
-  Bonds: { value: "71", description: "Bonos" },
-  Vouchers: { value: "72", description: "Vales" },
-  Undefined: { value: "1", description: "Medio de pago no definido" },
-  DebitCard: { value: "49", description: "Tarjeta Débito" },
-  CreditCard: { value: "48", description: "Tarjeta Crédito" },
-  Other: { value: "ZZZ", description: "Otro" },
+  Cash: "10",
+  BankDeposit: "42",
+  Check: "20",
+  Transfer: "47",
+  Bonds: "71",
+  Vouchers: "72",
+  Undefined: "1",
+  DebitCard: "49",
+  CreditCard: "48",
+  Other: "ZZZ",
 } as const;
 export type PaymentMethodCode =
-  (typeof PaymentMethodCode)[keyof typeof PaymentMethodCode]["value"];
+  (typeof PaymentMethodCode)[keyof typeof PaymentMethodCode];
 
 export const PaymentFormCode = {
-  CashPayment: { value: "1", description: "Pago de contado" },
-  CreditPayment: { value: "2", description: "Pago a crédito" },
+  CashPayment: "1",
+  CreditPayment: "2",
 } as const;
 export type PaymentFormCode =
-  (typeof PaymentFormCode)[keyof typeof PaymentFormCode]["value"];
+  (typeof PaymentFormCode)[keyof typeof PaymentFormCode];
 
 export const NumberingRangeDocumentTypeCode = {
-  SalesInvoice: { value: "21", description: "Factura de Venta" },
-  CreditNote: { value: "22", description: "Nota Crédito" },
-  DebitNote: { value: "23", description: "Nota Débito" },
-  SupportDocument: { value: "24", description: "Documento Soporte" },
-  SupportDocumentAdjustmentNote: {
-    value: "25",
-    description: "Nota de Ajuste Documento Soporte",
-  },
-  Payroll: { value: "26", description: "Nomina" },
-  PayrollAdjustmentNote: {
-    value: "27",
-    description: "Nota de Ajuste Nomina",
-  },
-  PayrollDeletionNote: {
-    value: "28",
-    description: "Nota de eliminación de nomina",
-  },
-  PaperOrStubInvoice: {
-    value: "30",
-    description: "Factura de talonario y de papel",
-  },
+  SalesInvoice: "21",
+  CreditNote: "22",
+  DebitNote: "23",
+  SupportDocument: "24",
+  SupportDocumentAdjustmentNote: "25",
+  Payroll: "26",
+  PayrollAdjustmentNote: "27",
+  PayrollDeletionNote: "28",
+  PaperOrStubInvoice: "30",
 } as const;
 export type NumberingRangeDocumentTypeCode =
-  (typeof NumberingRangeDocumentTypeCode)[keyof typeof NumberingRangeDocumentTypeCode]["value"];
+  (typeof NumberingRangeDocumentTypeCode)[keyof typeof NumberingRangeDocumentTypeCode];
 
 export const AdjustmentNoteReasonCode = {
-  PartialReturn: {
-    value: "1",
-    description:
-      "Devolución parcial de los bienes y/o no aceptación parcial del servicio",
-  },
-  SupportDocumentCancellation: {
-    value: "2",
-    description:
-      "Anulación del documento soporte en adquisiciones efectuadas a sujetos no obligados a expedir factura de venta o documento equivalente",
-  },
-  PartialOrTotalDiscount: {
-    value: "3",
-    description: "Rebaja o descuento parcial o total",
-  },
-  PriceAdjustment: { value: "4", description: "Ajuste de precio" },
-  Other: { value: "5", description: "Otros" },
+  PartialReturn: "1",
+  SupportDocumentCancellation: "2",
+  PartialOrTotalDiscount: "3",
+  PriceAdjustment: "4",
+  Other: "5",
 } as const;
 export type AdjustmentNoteReasonCode =
-  (typeof AdjustmentNoteReasonCode)[keyof typeof AdjustmentNoteReasonCode]["value"];
+  (typeof AdjustmentNoteReasonCode)[keyof typeof AdjustmentNoteReasonCode];
 
 export const ChargeDiscountCode = {
-  UnconditionalDiscount: {
-    value: "00",
-    description: "Descuento no condicionado (disponible próximamente)",
-  },
-  ConditionalDiscount: {
-    value: "01",
-    description: "Descuento condicionado (disponible próximamente)",
-  },
-  UnconditionalSurcharge: {
-    value: "02",
-    description: "Recargo no condicionado (disponible próximamente)",
-  },
-  ConditionalSurcharge: {
-    value: "03",
-    description: "Recargo condicionado",
-  },
+  UnconditionalDiscount: "00",
+  ConditionalDiscount: "01",
+  UnconditionalSurcharge: "02",
+  ConditionalSurcharge: "03",
 } as const;
 export type ChargeDiscountCode =
-  (typeof ChargeDiscountCode)[keyof typeof ChargeDiscountCode]["value"];
+  (typeof ChargeDiscountCode)[keyof typeof ChargeDiscountCode];
 
 export const FiscalResponsibilityCode = {
-  LargeTaxpayer: { value: "O-13", description: "Gran contribuyente" },
-  SelfWithholdingAgent: { value: "0-15", description: "Autorretenedor" },
-  VATWithholdingAgent: {
-    value: "0-23",
-    description: "Agente de retención de IVA",
-  },
-  SimpleTaxRegime: {
-    value: "0-47",
-    description: "Regimen simple de tributación",
-  },
-  NotResponsible: { value: "R-99-PN", description: "No responsable" },
+  LargeTaxpayer: "O-13",
+  SelfWithholdingAgent: "0-15",
+  VATWithholdingAgent: "0-23",
+  SimpleTaxRegime: "0-47",
+  NotResponsible: "R-99-PN",
 } as const;
 export type FiscalResponsibilityCode =
-  (typeof FiscalResponsibilityCode)[keyof typeof FiscalResponsibilityCode]["value"];
+  (typeof FiscalResponsibilityCode)[keyof typeof FiscalResponsibilityCode];
