@@ -57,6 +57,7 @@
     "build": "tsdown",
     "dev": "tsdown --watch",
     "typecheck": "tsc --noEmit",
+    "docs:sync": "node ./scripts/sync-external-factus-docs.mjs",
     "test": "vitest run src/__tests__",
     "test:unit": "vitest run src/__tests__/unit",
     "test:watch": "vitest src/__tests__/unit",

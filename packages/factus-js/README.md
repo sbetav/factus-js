@@ -93,6 +93,30 @@ Para guías completas, referencia de la API, ejemplos y más, visita la document
 
 **[https://factusjs.vercel.app](https://factusjs.vercel.app)**
 
+## Contexto para agentes (usando docs oficiales)
+
+Si quieres generar contexto en Markdown desde la documentación oficial de Factus
+(`https://developers.factus.com.co/`):
+
+```bash
+pnpm --filter factus-js docs:sync
+```
+
+El script intenta usar `wget` en modo mirror. Si `wget` no está disponible,
+hace fallback automático a un crawler en Node.js.
+
+Para reducir ruido y ahorrar tokens, el script recorta payloads
+base64 largos y los reemplaza con un
+placeholder como `[TRIMMED_BASE64_12345_CHARS]`.
+
+Puedes ajustar el margen con `FACTUS_DOCS_BASE64_TRIM_THRESHOLD`
+(por defecto `320`).
+
+La salida generada será:
+
+- `packages/factus-js/.external-factus-docs/`
+- `packages/factus-js/.external-factus-mirror/`
+
 ## Licencia
 
 [MIT](https://github.com/sbetav/factus-js/blob/main/LICENSE)
