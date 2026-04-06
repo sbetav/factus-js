@@ -24,6 +24,21 @@ Run these from the repo root:
 
 The docs site lives in `apps/docs`. If your PR changes SDK behavior or public APIs, please also update the relevant docs/MDX pages where appropriate.
 
+## Agent context (from official docs)
+
+To generate local markdown context from the official Factus docs (`https://developers.factus.com.co/`):
+
+```bash
+pnpm --filter factus-js docs:sync
+```
+
+The script tries to use `wget` mirror mode and falls back to a Node.js crawler when `wget` is not available. It also trims long base64 payloads into placeholders like `[TRIMMED_BASE64_12345_CHARS]` to keep context size manageable.
+
+Output folders:
+
+- `packages/factus-js/.external-factus-docs/`
+- `packages/factus-js/.external-factus-mirror/`
+
 ## Releases
 
 Releases are automated using Changesets. Contributors typically only need to submit code changes and versioning/publishing is handled in CI/CD.

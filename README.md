@@ -1,34 +1,34 @@
 <p align="center">
-  <img src="./assets/banner.png" alt="JavaScript SDK para la API de Factus" />
+  <img src="./assets/banner.png" alt="JavaScript SDK for the Factus API" />
 </p>
 
 # factus-js
 
-JavaScript/TypeScript SDK para la API de Factus.
+TypeScript/JavaScript SDK for the Factus API (Colombian e-invoicing).
 
-## Instalación
+## Install
 
 ```bash
 npm install factus-js
 ```
 
-## Requisitos
+## Requirements
 
-- Node.js 18+ (usa `fetch` nativo).
-- Credenciales de API de Factus.
+- Node.js 18+ (uses native `fetch`).
+- Factus API credentials.
 
 ## Quickstart
 
-### 1) Configura variables de entorno
+### 1) Set environment variables
 
 ```env
-FACTUS_CLIENT_ID=tu-client-id
-FACTUS_CLIENT_SECRET=tu-client-secret
-FACTUS_USERNAME=tu-usuario
-FACTUS_PASSWORD=tu-password
+FACTUS_CLIENT_ID=your-client-id
+FACTUS_CLIENT_SECRET=your-client-secret
+FACTUS_USERNAME=your-username
+FACTUS_PASSWORD=your-password
 ```
 
-### 2) Inicializa el cliente
+### 2) Create the client
 
 ```ts
 import { FactusClient } from "factus-js";
@@ -38,28 +38,28 @@ const factus = new FactusClient({
   clientSecret: process.env.FACTUS_CLIENT_SECRET!,
   username: process.env.FACTUS_USERNAME!,
   password: process.env.FACTUS_PASSWORD!,
-  environment: "sandbox", // usa "production" para ambiente real
+  environment: "sandbox", // use "production" for live usage
 });
 ```
 
-### 3) Haz tu primera llamada
+### 3) Make your first request
 
 ```ts
 const bills = await factus.bills.list({ page: 1, per_page: 10 });
 console.log(bills.data.data);
 ```
 
-## Ejemplos de uso
+## Examples
 
-### Crear factura electronica
+### Create an invoice
 
-Las constantes DIAN son valores string directos — se usan tal cual en los payloads:
+DIAN constants are direct string values and should be used directly in payloads:
 
 ```ts
 import {
-  PaymentFormCode, // e.g. PaymentFormCode.CreditPayment === "2"
-  PaymentMethodCode, // e.g. PaymentMethodCode.Cash === "10"
-  IdentityDocumentTypeId, // e.g. IdentityDocumentTypeId.NIT === "6"
+  PaymentFormCode,
+  PaymentMethodCode,
+  IdentityDocumentTypeId,
   CustomerTributeId,
   OrganizationTypeId,
   ProductStandardId,
@@ -68,9 +68,9 @@ import {
 const response = await factus.bills.create({
   numbering_range_id: 8,
   reference_code: "I3",
-  observation: "Factura de prueba",
-  payment_form: PaymentFormCode.CreditPayment, // "2"
-  payment_method_code: PaymentMethodCode.Cash, // "10"
+  observation: "Test invoice",
+  payment_form: PaymentFormCode.CreditPayment,
+  payment_method_code: PaymentMethodCode.Cash,
   payment_due_date: "2026-12-31",
   customer: {
     identification: "123456789",
@@ -79,21 +79,21 @@ const response = await factus.bills.create({
     address: "Calle 1 # 2-68",
     email: "alanturing@example.com",
     phone: "1234567890",
-    legal_organization_id: OrganizationTypeId.NaturalPerson, // "2"
-    tribute_id: CustomerTributeId.NotApplicable, // "21"
-    identification_document_id: IdentityDocumentTypeId.NIT, // "6"
+    legal_organization_id: OrganizationTypeId.NaturalPerson,
+    tribute_id: CustomerTributeId.NotApplicable,
+    identification_document_id: IdentityDocumentTypeId.NIT,
     municipality_id: 980,
   },
   items: [
     {
       code_reference: "12345",
-      name: "Producto de ejemplo",
+      name: "Example product",
       quantity: 1,
       discount_rate: 20,
       price: 50000,
       tax_rate: "19.00",
       unit_measure_id: 70,
-      standard_code_id: ProductStandardId.TaxpayerAdoption, // "1"
+      standard_code_id: ProductStandardId.TaxpayerAdoption,
       is_excluded: 0,
       tribute_id: 1,
     },
@@ -103,16 +103,15 @@ const response = await factus.bills.create({
 console.log(response.data);
 ```
 
-### Paginación automática
+### Automatic pagination
 
 ```ts
-// Iterar sobre todas las facturas sin preocuparse por la paginación
 for await (const bill of factus.bills.listAll({ status: 1 })) {
   console.log(bill.number, bill.total);
 }
 ```
 
-### Manejo de errores
+### Error handling
 
 ```ts
 import { FactusError } from "factus-js";
@@ -122,13 +121,13 @@ try {
 } catch (error) {
   if (error instanceof FactusError) {
     console.error(error.statusCode); // e.g. 404
-    console.error(error.message); // mensaje de la API
-    console.error(error.validationErrors); // errores DIAN en 422
+    console.error(error.message);
+    console.error(error.validationErrors); // DIAN validation errors on 422
   }
 }
 ```
 
-## Módulos disponibles
+## Available modules
 
 - `bills`
 - `creditNotes`
@@ -140,16 +139,15 @@ try {
 - `subscription`
 - `catalog`
 
-## Documentación
+## Documentation
 
-- Guía completa: `https://developers.factus.com.co/`
-- Docs del SDK (este repositorio): `https://factusjs.vercel.app/`
-- README del paquete: `packages/factus-js/README.md`
+- Official Factus API docs: `https://developers.factus.com.co/`
+- SDK docs site: `https://factusjs.vercel.app/`
+- Package README: `packages/factus-js/README.md`
 
 ## Monorepo
 
-Este repositorio también contiene el sitio de documentación y tooling de desarrollo.
-Si vas a contribuir:
+This repository also contains the docs application and development tooling.
 
 ```bash
 pnpm install

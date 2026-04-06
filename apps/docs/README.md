@@ -1,29 +1,29 @@
 # @factus-js/docs
 
-Aplicación de documentación de `factus-js`, construida con Next.js y Fumadocs.
+Documentation app for `factus-js`, built with Next.js and Fumadocs.
 
-## Variables de entorno
+## Environment variables
 
-| Variable                                | Descripción                                                                                                                                                                                                                                     |
-| --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL`                  | URL pública (sin barra final), ej. `https://factusjs.vercel.app`. Define `metadataBase` y la URL absoluta de `og:image`. Si no está, se usa `VERCEL_PROJECT_PRODUCTION_URL` y, en último caso, `VERCEL_URL`. En local: `http://localhost:3000`. |
-| `NEXT_PUBLIC_GITHUB_USER`               | Usuario u organización de GitHub (por defecto `sbetav`).                                                                                                                                                                                        |
-| `NEXT_PUBLIC_GITHUB_REPO`               | Nombre del repositorio (por defecto `factus-js`).                                                                                                                                                                                               |
-| `NEXT_PUBLIC_GITHUB_BRANCH`             | Rama para enlaces “Abrir en GitHub” (por defecto `main`).                                                                                                                                                                                       |
-| `NEXT_PUBLIC_DOCS_CONTENT_PATH_IN_REPO` | Ruta desde la raíz del repo hasta `content/docs`, p. ej. `apps/docs/content/docs` (valor por defecto).                                                                                                                                          |
+| Variable                                | Description                                                                                                                                                                                                                                             |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`                  | Public URL without trailing slash, for example `https://factusjs.vercel.app`. Sets `metadataBase` and absolute `og:image`. If not defined, it falls back to `VERCEL_PROJECT_PRODUCTION_URL`, then `VERCEL_URL`. Local default: `http://localhost:3000`. |
+| `NEXT_PUBLIC_GITHUB_USER`               | GitHub user or organization for "Open on GitHub" links. Default: `sbetav`.                                                                                                                                                                              |
+| `NEXT_PUBLIC_GITHUB_REPO`               | Repository name for "Open on GitHub" links. Default: `factus-js`.                                                                                                                                                                                       |
+| `NEXT_PUBLIC_GITHUB_BRANCH`             | Branch used for source links. Default: `main`.                                                                                                                                                                                                          |
+| `NEXT_PUBLIC_DOCS_CONTENT_PATH_IN_REPO` | Path from repository root to docs content folder (for example `apps/docs/content/docs`). Default uses this value.                                                                                                                                       |
 
-Plantilla: copia [`.env.example`](.env.example) a `.env.local` y ajusta lo que necesites.
+Template: copy [`.env.example`](.env.example) to `.env.local` and adjust as needed.
 
-## Ejecutar localmente
+## Run locally
 
-Desde la raíz del monorepo:
+From the monorepo root:
 
 ```bash
 pnpm install
 pnpm --filter @factus-js/docs dev
 ```
 
-Abre `http://localhost:3000`.
+Open `http://localhost:3000`.
 
 ## Scripts
 
@@ -36,23 +36,23 @@ pnpm --filter @factus-js/docs format
 pnpm --filter @factus-js/docs types:check
 ```
 
-## Estructura principal
+## Main structure
 
-| Ruta                      | Descripción                                |
-| ------------------------- | ------------------------------------------ |
-| `content/docs`            | Contenido MDX de la documentación del SDK. |
-| `app/docs`                | Rutas y layout de la sección de docs.      |
-| `app/(home)`              | Landing y paginas publicas.                |
-| `app/api/search/route.ts` | Endpoint de búsqueda.                      |
-| `lib/source.ts`           | Adaptador de contenido (`loader()`).       |
-| `public/og.png`           | Imagen OG compartida (1200×630).           |
-| `source.config.ts`        | Configuración de Fumadocs MDX.             |
+| Path                      | Description                        |
+| ------------------------- | ---------------------------------- |
+| `content/docs`            | MDX content for SDK documentation. |
+| `app/docs`                | Documentation routes and layout.   |
+| `app/(home)`              | Landing page and public pages.     |
+| `app/api/search/route.ts` | Search endpoint.                   |
+| `lib/source.ts`           | Content adapter (`loader()`).      |
+| `public/og.png`           | Shared OG image (1200x630).        |
+| `source.config.ts`        | Fumadocs MDX configuration.        |
 
-## Flujo de contribución recomendado
+## Recommended contribution flow
 
-1. Crea o edita archivos en `content/docs`.
-2. Verifica en local con `pnpm --filter @factus-js/docs dev`.
-3. Corre los checks antes de abrir PR:
+1. Create or edit files in `content/docs`.
+2. Validate locally with `pnpm --filter @factus-js/docs dev`.
+3. Run checks before opening a PR:
 
 ```bash
 pnpm --filter @factus-js/docs lint
@@ -60,7 +60,7 @@ pnpm --filter @factus-js/docs types:check
 pnpm --filter @factus-js/docs build
 ```
 
-## Referencias
+## References
 
 - [Fumadocs](https://fumadocs.dev)
 - [Next.js](https://nextjs.org/docs)
