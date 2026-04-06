@@ -1,4 +1,4 @@
-import type { TokenResponse, LoginInput, RefreshTokenInput } from "../types";
+import type { LoginInput, RefreshTokenInput, TokenResponse } from "../types";
 import { FactusError } from "./error";
 
 export interface FactusClientConfig {
@@ -16,6 +16,20 @@ export interface FactusClientConfig {
    * When provided, the `environment` option is ignored.
    */
   baseUrl?: string;
+  /**
+   * Default request timeout in milliseconds. Applied to every request.
+   * Can be overridden per-request by passing a custom `signal`.
+   */
+  timeout?: number;
+}
+
+/**
+ * Options that can be passed to any SDK method to control the underlying
+ * fetch request.
+ */
+export interface RequestOptions {
+  /** An AbortSignal to cancel the request. */
+  signal?: AbortSignal;
 }
 
 export const BASE_URLS = {
@@ -66,11 +80,9 @@ export class HttpClient {
 
     if (!response.ok) {
       const text = await response.text();
-      throw new FactusError(
-        `Authentication failed: ${text}`,
-        response.status,
-        [],
-      );
+      throw new FactusError(`Authentication failed: ${text}`, {
+        statusCode: response.status,
+      });
     }
 
     const data = (await response.json()) as TokenResponse;
@@ -133,6 +145,38 @@ export class HttpClient {
   }
 
   // ---------------------------------------------------------------------------
+  // Signal helpers
+  // ---------------------------------------------------------------------------
+
+  /**
+   * Combines a per-request signal with the global timeout from config.
+   * Works on Node 18+ without requiring AbortSignal.any().
+   */
+  private buildSignal(requestSignal?: AbortSignal): AbortSignal | undefined {
+    const signals: AbortSignal[] = [];
+    if (requestSignal) signals.push(requestSignal);
+    if (this.config.timeout != null) {
+      signals.push(AbortSignal.timeout(this.config.timeout));
+    }
+    if (signals.length === 0) return undefined;
+    if (signals.length === 1) return signals[0];
+
+    // Polyfill for AbortSignal.any (available in Node 20+)
+    const controller = new AbortController();
+    for (const sig of signals) {
+      if (sig.aborted) {
+        controller.abort(sig.reason);
+        break;
+      }
+      sig.addEventListener("abort", () => controller.abort(sig.reason), {
+        once: true,
+        signal: controller.signal,
+      });
+    }
+    return controller.signal;
+  }
+
+  // ---------------------------------------------------------------------------
   // Core request helpers
   // ---------------------------------------------------------------------------
 
@@ -143,7 +187,9 @@ export class HttpClient {
       params?: Record<string, string | number | boolean | undefined>;
       body?: unknown;
       formData?: FormData;
+      signal?: AbortSignal;
     } = {},
+    retried = false,
   ): Promise<T> {
     const token = await this.ensureAuth();
 
@@ -165,7 +211,7 @@ export class HttpClient {
     let fetchBody: BodyInit | undefined;
     if (options.formData) {
       fetchBody = options.formData;
-      // Do NOT set Content-Type — the browser / fetch sets it automatically with boundary
+      // Do NOT set Content-Type — fetch sets it automatically with boundary
     } else if (options.body !== undefined) {
       headers["Content-Type"] = "application/json";
       fetchBody = JSON.stringify(options.body);
@@ -175,7 +221,15 @@ export class HttpClient {
       method,
       headers,
       body: fetchBody,
+      signal: this.buildSignal(options.signal),
     });
+
+    // Retry once on 401 with a fresh token (handles token expiry race)
+    if (response.status === 401 && !retried) {
+      this.tokenState = null;
+      this.pendingAuth = null;
+      return this.request<T>(method, path, options, true);
+    }
 
     if (!response.ok) {
       let errorPayload: {
@@ -206,7 +260,11 @@ export class HttpClient {
         errorPayload?.data?.message ??
         errorPayload?.message ??
         response.statusText;
-      throw new FactusError(message, response.status, errors, validationErrors);
+      throw new FactusError(message, {
+        statusCode: response.status,
+        errors,
+        validationErrors,
+      });
     }
 
     // Some endpoints return 204 No Content
@@ -220,27 +278,32 @@ export class HttpClient {
   get<T>(
     path: string,
     params?: Record<string, string | number | boolean | undefined>,
+    signal?: AbortSignal,
   ): Promise<T> {
-    return this.request<T>("GET", path, { params });
+    return this.request<T>("GET", path, { params, signal });
   }
 
-  post<T>(path: string, body?: unknown): Promise<T> {
-    return this.request<T>("POST", path, { body });
+  post<T>(path: string, body?: unknown, signal?: AbortSignal): Promise<T> {
+    return this.request<T>("POST", path, { body, signal });
   }
 
-  patch<T>(path: string, body?: unknown): Promise<T> {
-    return this.request<T>("PATCH", path, { body });
+  patch<T>(path: string, body?: unknown, signal?: AbortSignal): Promise<T> {
+    return this.request<T>("PATCH", path, { body, signal });
   }
 
-  put<T>(path: string, body?: unknown): Promise<T> {
-    return this.request<T>("PUT", path, { body });
+  put<T>(path: string, body?: unknown, signal?: AbortSignal): Promise<T> {
+    return this.request<T>("PUT", path, { body, signal });
   }
 
-  delete<T>(path: string): Promise<T> {
-    return this.request<T>("DELETE", path);
+  delete<T>(path: string, signal?: AbortSignal): Promise<T> {
+    return this.request<T>("DELETE", path, { signal });
   }
 
-  postForm<T>(path: string, formData: FormData): Promise<T> {
-    return this.request<T>("POST", path, { formData });
+  postForm<T>(
+    path: string,
+    formData: FormData,
+    signal?: AbortSignal,
+  ): Promise<T> {
+    return this.request<T>("POST", path, { formData, signal });
   }
 }

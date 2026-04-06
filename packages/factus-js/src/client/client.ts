@@ -1,14 +1,14 @@
-import { HttpClient } from "./http-client";
 import type { FactusClientConfig } from "./http-client";
-import { BillsModule } from "./modules/bills";
-import { CreditNotesModule } from "./modules/credit-notes";
-import { SupportDocumentsModule } from "./modules/support-documents";
+import { HttpClient } from "./http-client";
 import { AdjustmentNotesModule } from "./modules/adjustment-notes";
-import { ReceptionModule } from "./modules/reception";
-import { CompanyModule } from "./modules/company";
-import { NumberingRangesModule } from "./modules/numbering-ranges";
-import { SubscriptionModule } from "./modules/subscription";
+import { BillsModule } from "./modules/bills";
 import { CatalogModule } from "./modules/catalog";
+import { CompanyModule } from "./modules/company";
+import { CreditNotesModule } from "./modules/credit-notes";
+import { NumberingRangesModule } from "./modules/numbering-ranges";
+import { ReceptionModule } from "./modules/reception";
+import { SubscriptionModule } from "./modules/subscription";
+import { SupportDocumentsModule } from "./modules/support-documents";
 
 /**
  * Main entry point for the Factus API SDK.
@@ -34,6 +34,11 @@ import { CatalogModule } from "./modules/catalog";
  *   page: 1,
  *   per_page: 15,
  * });
+ *
+ * // Automatic pagination
+ * for await (const bill of factus.bills.listAll()) {
+ *   console.log(bill.number);
+ * }
  * ```
  */
 export class FactusClient {
@@ -67,6 +72,19 @@ export class FactusClient {
   readonly catalog: CatalogModule;
 
   constructor(config: FactusClientConfig) {
+    if (!config.clientId) {
+      throw new Error("FactusClient: clientId is required");
+    }
+    if (!config.clientSecret) {
+      throw new Error("FactusClient: clientSecret is required");
+    }
+    if (!config.username) {
+      throw new Error("FactusClient: username is required");
+    }
+    if (!config.password) {
+      throw new Error("FactusClient: password is required");
+    }
+
     this.http = new HttpClient(config);
 
     this.bills = new BillsModule(this.http);
