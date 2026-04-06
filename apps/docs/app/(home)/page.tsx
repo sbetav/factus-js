@@ -143,7 +143,7 @@ export default async function HomePage() {
         {/* Dot grid background — fades out radially */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 -z-20"
+          className="pointer-events-none absolute inset-y-0 left-1/2 -z-20 w-dvw -translate-x-1/2"
           style={{
             backgroundImage:
               "radial-gradient(circle, color-mix(in srgb, var(--color-fd-border) 100%, transparent) 1px, transparent 1px)",
