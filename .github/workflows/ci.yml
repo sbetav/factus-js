@@ -20,7 +20,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: pnpm
 
       - name: Install
@@ -28,6 +28,12 @@ jobs:
 
       - name: Test factus-js
         run: pnpm --filter factus-js test
+
+      - name: Type tests (experimental)
+        run: pnpm --filter factus-js test:types
+
+      - name: Coverage
+        run: pnpm --filter factus-js test:coverage
 
       - name: Build docs (and workspace deps)
         run: pnpm turbo run build --filter=@factus-js/docs

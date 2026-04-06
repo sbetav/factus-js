@@ -52,6 +52,10 @@
       }
     }
   },
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "prepublishOnly": "pnpm run build",
     "build": "tsdown",
@@ -62,10 +66,13 @@
     "test:unit": "vitest run src/__tests__/unit",
     "test:watch": "vitest src/__tests__/unit",
     "test:sandbox": "vitest run src/__tests__/sandbox",
-    "test:all": "vitest run src/__tests__"
+    "test:all": "vitest run src/__tests__",
+    "test:types": "vitest run --typecheck",
+    "test:coverage": "vitest run src/__tests__/unit --coverage"
   },
   "devDependencies": {
     "@types/node": "^24.5.2",
+    "@vitest/coverage-v8": "^3.2.4",
     "tsdown": "^0.21.3",
     "typescript": "5.9.2",
     "vitest": "^3.2.4"
