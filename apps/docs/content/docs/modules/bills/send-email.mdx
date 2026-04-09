@@ -8,7 +8,7 @@ import { Callout } from "fumadocs-ui/components/callout";
 ## Firma del método
 
 ```ts
-sendEmail(number: string, input: SendInvoiceEmailInput): Promise<SendInvoiceEmailResponse>
+sendEmail(number: string, input: SendBillEmailInput): Promise<SendBillEmailResponse>
 ```
 
 ## Endpoint Factus
@@ -27,7 +27,7 @@ Fuente oficial: [Enviar correo](https://developers.factus.com.co/facturas/enviar
       description: "Número del documento de la factura a enviar.",
     },
     input: {
-      type: "SendInvoiceEmailInput (object)",
+      type: "SendBillEmailInput (object)",
       required: true,
       description: (
         <div>
@@ -63,4 +63,3 @@ await factus.bills.sendEmail("SETP990000203", {
 ## Ejemplo de respuesta
 
 Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/facturas/enviar-correo/index.html#ejemplo-de-respuesta)
-

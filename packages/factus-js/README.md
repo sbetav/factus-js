@@ -56,7 +56,7 @@ const factus = new FactusClient({
   environment: "sandbox", // use "production" for live usage
 });
 
-const invoice = await factus.bills.create({
+const bill = await factus.bills.create({
   numbering_range_id: 8,
   reference_code: "INV-001",
   payment_form: PaymentFormCode.CreditPayment,
@@ -89,18 +89,18 @@ const invoice = await factus.bills.create({
   ],
 });
 
-console.log(invoice.data);
+console.log(bill.data);
 ```
 
 ## Available modules
 
 | Module                    | Description                                     |
 | ------------------------- | ----------------------------------------------- |
-| `factus.bills`            | Electronic sales invoices                       |
+| `factus.bills`            | Electronic sales bills                          |
 | `factus.creditNotes`      | Credit notes                                    |
 | `factus.supportDocuments` | Support documents                               |
 | `factus.adjustmentNotes`  | Adjustment notes for support documents          |
-| `factus.reception`        | RADIAN reception and invoice events             |
+| `factus.reception`        | RADIAN reception and bill events                |
 | `factus.company`          | Company data                                    |
 | `factus.numberingRanges`  | DIAN numbering ranges                           |
 | `factus.subscription`     | Subscription and quota status                   |

@@ -6,23 +6,23 @@
  */
 
 import type {
-    AdjustmentNoteReasonCode,
-    ChargeDiscountCode,
-    ClaimConceptCode,
-    CreditNoteCorrectionCode,
-    CreditNoteOperationTypeCode,
-    CustomerTributeId,
-    EventCode,
-    FiscalResponsibilityCode,
-    IdentityDocumentTypeId,
-    InvoiceDocumentType,
-    NumberingRangeDocumentTypeCode,
-    OperationTypeCode,
-    OrganizationTypeId,
-    PaymentFormCode,
-    PaymentMethodCode,
-    ProductStandardId,
-    SupportDocumentIdentityTypeId,
+  AdjustmentNoteReasonCode,
+  BillDocumentType,
+  ChargeDiscountCode,
+  ClaimConceptCode,
+  CreditNoteCorrectionCode,
+  CreditNoteOperationTypeCode,
+  CustomerTributeId,
+  EventCode,
+  FiscalResponsibilityCode,
+  IdentityDocumentTypeId,
+  NumberingRangeDocumentTypeCode,
+  OperationTypeCode,
+  OrganizationTypeId,
+  PaymentFormCode,
+  PaymentMethodCode,
+  ProductStandardId,
+  SupportDocumentIdentityTypeId,
 } from "./constants";
 
 export interface ConstantInfo {
@@ -33,13 +33,13 @@ export interface ConstantInfoWithAbbreviation extends ConstantInfo {
   abbreviation: string;
 }
 
-export const InvoiceDocumentTypeInfo: Record<
-  InvoiceDocumentType,
-  ConstantInfo
-> = {
+export const BillDocumentTypeInfo: Record<BillDocumentType, ConstantInfo> = {
   "01": { description: "Factura electronica de venta." },
   "03": { description: "Instrumento electrónico de transmisión - tipo 03." },
 };
+
+/** @deprecated Use `BillDocumentTypeInfo` instead. */
+export const InvoiceDocumentTypeInfo = BillDocumentTypeInfo;
 
 export const OperationTypeCodeInfo: Record<OperationTypeCode, ConstantInfo> = {
   "10": { description: "Estándar." },

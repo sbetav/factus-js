@@ -19,8 +19,8 @@ Si instalaste `factus-js`, las constantes ya están disponibles. Cada constante 
 import { PaymentFormCode, EventCode } from "factus-js";
 
 // Usar directamente en un payload de API
-const paymentForm = PaymentFormCode.CashPayment;   // "1"
-const event = EventCode.ExpressAcceptance;          // "033"
+const paymentForm = PaymentFormCode.CashPayment; // "1"
+const event = EventCode.ExpressAcceptance; // "033"
 ```
 
 <Callout type="info">
@@ -46,16 +46,17 @@ const desc = PaymentFormCodeInfo[PaymentFormCode.CashPayment].description;
 // "Pago de contado"
 
 // Obtener abreviatura (disponible en documentos de identidad)
-const abbr = IdentityDocumentTypeIdInfo[IdentityDocumentTypeId.CitizenshipId].abbreviation;
+const abbr =
+  IdentityDocumentTypeIdInfo[IdentityDocumentTypeId.CitizenshipId].abbreviation;
 // "CC"
 ```
 
 Cada `*Info` exportado tiene una entrada por cada clave del mapa de constantes correspondiente, con al menos `description` y, cuando aplica, `abbreviation`.
 
-## Tipo de documento de factura (`InvoiceDocumentType`)
+## Tipo de documento de factura (`BillDocumentType`)
 
 ```ts
-import { InvoiceDocumentType } from "factus-js";
+import { BillDocumentType } from "factus-js";
 ```
 
 | Clave                          | Valor  | Descripción                                       |

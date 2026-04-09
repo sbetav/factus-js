@@ -1,9 +1,14 @@
-export const InvoiceDocumentType = {
+export const BillDocumentType = {
   ElectronicSalesInvoice: "01",
   ElectronicTransmissionType03: "03",
 } as const;
-export type InvoiceDocumentType =
-  (typeof InvoiceDocumentType)[keyof typeof InvoiceDocumentType];
+export type BillDocumentType =
+  (typeof BillDocumentType)[keyof typeof BillDocumentType];
+
+/** @deprecated Use `BillDocumentType` instead. */
+export const InvoiceDocumentType = BillDocumentType;
+/** @deprecated Use `BillDocumentType` instead. */
+export type InvoiceDocumentType = BillDocumentType;
 
 export const OperationTypeCode = {
   Standard: "10",

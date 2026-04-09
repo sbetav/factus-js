@@ -21,8 +21,8 @@ Todos los módulos que devuelven listas paginadas exponen un método `listAll()`
 ## Ejemplo básico
 
 ```ts
-for await (const invoice of factus.bills.listAll()) {
-  console.log(invoice.number, invoice.status);
+for await (const bill of factus.bills.listAll()) {
+  console.log(bill.number, bill.status);
 }
 ```
 
@@ -33,12 +33,12 @@ El iterador solicita páginas de 100 ítems y pasa automáticamente a la siguien
 Pasa un objeto de filtros como primer argumento:
 
 ```ts
-import { InvoiceFilters } from "factus-js";
+import { BillFilters } from "factus-js";
 
-const filters: InvoiceFilters = { status: "2" }; // facturas validadas
+const filters: BillFilters = { status: "2" }; // facturas validadas
 
-for await (const invoice of factus.bills.listAll(filters)) {
-  console.log(invoice.number);
+for await (const bill of factus.bills.listAll(filters)) {
+  console.log(bill.number);
 }
 ```
 
@@ -68,9 +68,9 @@ for await (const b of factus.bills.listAll()) allBills2.push(b);
 `listAll()` es un generador perezoso: solo solicita la siguiente página cuando el iterador sigue avanzando. Puedes detenerlo con `break` sin que se realicen peticiones innecesarias:
 
 ```ts
-for await (const invoice of factus.bills.listAll()) {
-  if (invoice.status === "1") {
-    console.log("Primera factura pendiente:", invoice.number);
+for await (const bill of factus.bills.listAll()) {
+  if (bill.status === "1") {
+    console.log("Primera factura pendiente:", bill.number);
     break; // detiene la iteración y no pide más páginas
   }
 }
@@ -85,11 +85,11 @@ const controller = new AbortController();
 setTimeout(() => controller.abort(), 5000); // cancelar después de 5 s
 
 try {
-  for await (const invoice of factus.bills.listAll(
+  for await (const bill of factus.bills.listAll(
     {},
     { signal: controller.signal },
   )) {
-    console.log(invoice.number);
+    console.log(bill.number);
   }
 } catch (error) {
   if (error.name === "AbortError") {
@@ -107,4 +107,4 @@ listAll(
 ): AsyncIterable<TItem>
 ```
 
-Donde `TFilters` y `TItem` varían según el módulo (por ejemplo, `InvoiceFilters` / `InvoiceListItem` en `factus.bills`).
+Donde `TFilters` y `TItem` varían según el módulo (por ejemplo, `BillFilters` / `BillListItem` en `factus.bills`).

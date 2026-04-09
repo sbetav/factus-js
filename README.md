@@ -51,7 +51,7 @@ console.log(bills.data.data);
 
 ## Examples
 
-### Create an invoice
+### Create a bill
 
 DIAN constants are direct string values and should be used directly in payloads:
 
@@ -68,7 +68,7 @@ import {
 const response = await factus.bills.create({
   numbering_range_id: 8,
   reference_code: "I3",
-  observation: "Test invoice",
+  observation: "Test bill",
   payment_form: PaymentFormCode.CreditPayment,
   payment_method_code: PaymentMethodCode.Cash,
   payment_due_date: "2026-12-31",

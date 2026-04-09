@@ -2,16 +2,16 @@ import { EventCode } from "../../constants";
 import { FactusClient } from "../../index";
 import type { EmitEventInput } from "../../types";
 import {
-    readSandboxEnv,
-    shouldRunSandboxTests,
-    uniqueRef,
+  readSandboxEnv,
+  shouldRunSandboxTests,
+  uniqueRef,
 } from "../helpers/sandbox-env";
 import {
-    createInvalid,
-    printResults,
-    run,
-    runAllowConflict,
-    runExpectError,
+  createInvalid,
+  printResults,
+  run,
+  runAllowConflict,
+  runExpectError,
 } from "../helpers/sandbox-runner";
 
 // ---------------------------------------------------------------------------
@@ -39,7 +39,7 @@ describe("sandbox integration", () => {
     environment: "sandbox",
   });
 
-  const invoiceReference = uniqueRef("I3");
+  const billReference = uniqueRef("B3");
   const supportReference = uniqueRef("REF0017");
   const adjustmentReference = uniqueRef("REF007");
 
@@ -127,7 +127,7 @@ describe("sandbox integration", () => {
       "bills.create",
       factus.bills.create({
         numbering_range_id: 8,
-        reference_code: invoiceReference,
+        reference_code: billReference,
         payment_form: "2",
         payment_due_date: "2026-12-31",
         payment_method_code: "10",

@@ -1,14 +1,14 @@
 import type {
-    ApiResponse,
-    EmitEventInput,
-    EmitEventParams,
-    ListParams,
-    PaginatedData,
-    ReceptionBill,
-    ReceptionBillEvent,
-    ReceptionBillFilters,
-    UploadReceptionBillInput,
-    UploadedReceptionBill,
+  ApiResponse,
+  EmitEventInput,
+  EmitEventParams,
+  ListParams,
+  PaginatedData,
+  ReceptionBill,
+  ReceptionBillEvent,
+  ReceptionBillFilters,
+  UploadReceptionBillInput,
+  UploadedReceptionBill,
 } from "../../types";
 import type { HttpClient, RequestOptions } from "../http-client";
 import { buildListQueryParams } from "../list-params";
@@ -17,7 +17,7 @@ export class ReceptionModule {
   constructor(private readonly http: HttpClient) {}
 
   /**
-   * List received (incoming) invoices with optional filters and pagination.
+   * List received (incoming) bills with optional filters and pagination.
    * GET /v1/receptions/bills
    */
   list(
@@ -32,8 +32,8 @@ export class ReceptionModule {
   }
 
   /**
-   * Iterate over all received invoices automatically across pages, yielding
-   * one item at a time. Wraps `list()` and follows pagination until exhausted.
+   * Iterate over all received bills automatically across pages, yielding one
+   * item at a time. Wraps `list()` and follows pagination until exhausted.
    */
   async *listAll(
     filter?: ReceptionBillFilters,
@@ -52,7 +52,7 @@ export class ReceptionModule {
   }
 
   /**
-   * Upload (register) a new received invoice via its DIAN track ID.
+   * Upload (register) a new received bill via its DIAN track ID.
    * POST /v1/receptions/upload
    */
   upload(
@@ -63,7 +63,7 @@ export class ReceptionModule {
   }
 
   /**
-   * Emit a RADIAN lifecycle event (030–034) on a received invoice.
+   * Emit a RADIAN lifecycle event (030–034) on a received bill.
    * PATCH /v1/receptions/bills/{bill_id}/radian/events/{event_type}
    */
   emitEvent(

@@ -149,7 +149,7 @@ export interface BillingPeriod {
   end_time?: string;
 }
 
-/** Establishment block sent in CreateInvoiceInput and CreateCreditNoteInput. */
+/** Establishment block sent in CreateBillInput and CreateCreditNoteInput. */
 export interface EstablishmentInput {
   name: string;
   address: string;

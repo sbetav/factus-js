@@ -25,7 +25,7 @@ import { SupportDocumentsModule } from "./modules/support-documents";
  *   environment: "sandbox",
  * });
  *
- * // Create an invoice
+ * // Create a bill
  * const response = await factus.bills.create({ ... });
  *
  * // List bills
@@ -56,7 +56,7 @@ export class FactusClient {
   /** Adjustment notes for support documents. */
   readonly adjustmentNotes: AdjustmentNotesModule;
 
-  /** Incoming / received invoices via RADIAN. */
+  /** Incoming / received bills via RADIAN. */
   readonly reception: ReceptionModule;
 
   /** Company profile management. */

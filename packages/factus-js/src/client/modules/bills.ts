@@ -1,21 +1,21 @@
 import type {
-    ApiResponse,
-    CreateInvoiceInput,
-    DeleteInvoiceResponse,
-    DownloadInvoicePdfResponse,
-    DownloadInvoiceXmlResponse,
-    EventCode,
-    GetInvoiceEmailContentResponse,
-    GetInvoiceEventsResponse,
-    GetInvoicesResponse,
-    InvoiceFilters,
-    InvoiceListItem,
-    ListParams,
-    RadianEventUpdateInput,
-    RadianEventUpdateResponse,
-    SendInvoiceEmailInput,
-    SendInvoiceEmailResponse,
-    ViewInvoiceResponse,
+  ApiResponse,
+  BillFilters,
+  BillListItem,
+  CreateBillInput,
+  DeleteBillResponse,
+  DownloadBillPdfResponse,
+  DownloadBillXmlResponse,
+  EventCode,
+  GetBillEmailContentResponse,
+  GetBillEventsResponse,
+  GetBillsResponse,
+  ListParams,
+  RadianEventUpdateInput,
+  RadianEventUpdateResponse,
+  SendBillEmailInput,
+  SendBillEmailResponse,
+  ViewBillResponse,
 } from "../../types";
 import type { HttpClient, RequestOptions } from "../http-client";
 import { buildListQueryParams } from "../list-params";
@@ -24,24 +24,24 @@ export class BillsModule {
   constructor(private readonly http: HttpClient) {}
 
   /**
-   * Create (issue) a new electronic sales invoice.
+   * Create (issue) a new electronic sales bill.
    * POST /v1/bills/validate
    */
   create(
-    input: CreateInvoiceInput,
+    input: CreateBillInput,
     options?: RequestOptions,
-  ): Promise<ApiResponse<InvoiceListItem>> {
+  ): Promise<ApiResponse<BillListItem>> {
     return this.http.post("/v1/bills/validate", input, options?.signal);
   }
 
   /**
-   * List invoices with optional filters and pagination.
+   * List bills with optional filters and pagination.
    * GET /v1/bills
    */
   list(
-    params?: ListParams<InvoiceFilters>,
+    params?: ListParams<BillFilters>,
     options?: RequestOptions,
-  ): Promise<GetInvoicesResponse> {
+  ): Promise<GetBillsResponse> {
     return this.http.get(
       "/v1/bills",
       buildListQueryParams(params),
@@ -50,13 +50,13 @@ export class BillsModule {
   }
 
   /**
-   * Iterate over all invoices automatically across pages, yielding one item
+   * Iterate over all bills automatically across pages, yielding one item
    * at a time. Wraps `list()` and follows pagination until exhausted.
    */
   async *listAll(
-    filter?: InvoiceFilters,
+    filter?: BillFilters,
     options?: RequestOptions,
-  ): AsyncIterable<InvoiceListItem> {
+  ): AsyncIterable<BillListItem> {
     let page = 1;
     while (true) {
       const response = await this.list(
@@ -70,10 +70,10 @@ export class BillsModule {
   }
 
   /**
-   * Get full detail of a single invoice by its document number (e.g. "SETP990000001").
+   * Get full detail of a single bill by its document number (e.g. "SETP990000001").
    * GET /v1/bills/show/{number}
    */
-  get(number: string, options?: RequestOptions): Promise<ViewInvoiceResponse> {
+  get(number: string, options?: RequestOptions): Promise<ViewBillResponse> {
     return this.http.get(
       `/v1/bills/show/${number}`,
       undefined,
@@ -82,13 +82,13 @@ export class BillsModule {
   }
 
   /**
-   * Download the invoice XML as a base64-encoded string.
+   * Download the bill XML as a base64-encoded string.
    * GET /v1/bills/download-xml/{number}
    */
   downloadXml(
     number: string,
     options?: RequestOptions,
-  ): Promise<DownloadInvoiceXmlResponse> {
+  ): Promise<DownloadBillXmlResponse> {
     return this.http.get(
       `/v1/bills/download-xml/${number}`,
       undefined,
@@ -97,13 +97,13 @@ export class BillsModule {
   }
 
   /**
-   * Download the invoice PDF as a base64-encoded string.
+   * Download the bill PDF as a base64-encoded string.
    * GET /v1/bills/download-pdf/{number}
    */
   downloadPdf(
     number: string,
     options?: RequestOptions,
-  ): Promise<DownloadInvoicePdfResponse> {
+  ): Promise<DownloadBillPdfResponse> {
     return this.http.get(
       `/v1/bills/download-pdf/${number}`,
       undefined,
@@ -112,13 +112,13 @@ export class BillsModule {
   }
 
   /**
-   * Get the email content (subject + attached document) for an invoice.
+   * Get the email content (subject + attached document) for a bill.
    * GET /v1/bills/{number}/email-content
    */
   getEmailContent(
     number: string,
     options?: RequestOptions,
-  ): Promise<GetInvoiceEmailContentResponse> {
+  ): Promise<GetBillEmailContentResponse> {
     return this.http.get(
       `/v1/bills/${number}/email-content`,
       undefined,
@@ -127,14 +127,14 @@ export class BillsModule {
   }
 
   /**
-   * Send the invoice by email (max 2 per invoice per day).
+   * Send the bill by email (max 2 per bill per day).
    * POST /v1/bills/send-email/{number}
    */
   sendEmail(
     number: string,
-    input: SendInvoiceEmailInput,
+    input: SendBillEmailInput,
     options?: RequestOptions,
-  ): Promise<SendInvoiceEmailResponse> {
+  ): Promise<SendBillEmailResponse> {
     return this.http.post(
       `/v1/bills/send-email/${number}`,
       input,
@@ -143,7 +143,7 @@ export class BillsModule {
   }
 
   /**
-   * Emit a RADIAN event on an invoice by document number and event type.
+   * Emit a RADIAN event on a bill by document number and event type.
    * POST /v1/bills/radian/events/update/{number}/{event_type}
    */
   emitRadianEvent(
@@ -160,13 +160,13 @@ export class BillsModule {
   }
 
   /**
-   * Get the list of RADIAN events recorded for an invoice by its document number.
+   * Get the list of RADIAN events recorded for a bill by its document number.
    * GET /v1/bills/{number}/radian/events
    */
   getEvents(
     number: string,
     options?: RequestOptions,
-  ): Promise<GetInvoiceEventsResponse> {
+  ): Promise<GetBillEventsResponse> {
     return this.http.get(
       `/v1/bills/${number}/radian/events`,
       undefined,
@@ -175,13 +175,13 @@ export class BillsModule {
   }
 
   /**
-   * Delete (void) an invoice that has not yet been validated by the DIAN.
+   * Delete (void) a bill that has not yet been validated by the DIAN.
    * DELETE /v1/bills/destroy/reference/{reference_code}
    */
   delete(
     referenceCode: string,
     options?: RequestOptions,
-  ): Promise<DeleteInvoiceResponse> {
+  ): Promise<DeleteBillResponse> {
     return this.http.delete(
       `/v1/bills/destroy/reference/${referenceCode}`,
       options?.signal,

@@ -6,7 +6,7 @@ description: Crear y validar una factura electronica de venta ante la DIAN.
 ## Firma del método
 
 ```ts
-create(input: CreateInvoiceInput): Promise<ApiResponse<InvoiceListItem>>
+create(input: CreateBillInput): Promise<ApiResponse<BillListItem>>
 ```
 
 ## Endpoint Factus
@@ -27,13 +27,13 @@ Fuente oficial: [Factura avanzada](https://developers.factus.com.co/facturas/cre
         "ID del rango de numeración. Si existe un único rango activo, puede omitirse.",
     },
     document: {
-      type: "InvoiceDocumentType",
+      type: "BillDocumentType",
       required: false,
       description: (
         <>
           {"Tipo de documento — Ver "}
-          <a href="/docs/modules/catalog/reference-tables#tipo-de-documento-de-factura-invoicedocumenttype">
-            {"InvoiceDocumentType"}
+          <a href="/docs/modules/catalog/reference-tables#tipo-de-documento-de-factura-billdocumenttype">
+            {"BillDocumentType"}
           </a>
           {"."}
         </>
@@ -625,4 +625,3 @@ console.log(response.data.number);
 ## Ejemplo de respuesta
 
 Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/facturas/crear-y-validar-factura/factura-avanzada/index.html#ejemplo-de-respuesta)
-

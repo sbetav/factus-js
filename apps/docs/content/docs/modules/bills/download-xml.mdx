@@ -6,7 +6,7 @@ description: Descargar XML de una factura en base64 usando el numero del documen
 ## Firma del método
 
 ```ts
-downloadXml(number: string): Promise<DownloadInvoiceXmlResponse>
+downloadXml(number: string): Promise<DownloadBillXmlResponse>
 ```
 
 ## Endpoint Factus
@@ -38,4 +38,3 @@ const xml = Buffer.from(response.data.xml_base_64_encoded, "base64").toString(
 ## Ejemplo de respuesta
 
 Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/facturas/descargar-xml/index.html#variables-de-ruta-path-variables)
-

@@ -6,7 +6,7 @@ description: Obtener el detalle completo de una factura por su número de docume
 ## Firma del método
 
 ```ts
-get(number: string, options?: RequestOptions): Promise<ViewInvoiceResponse>
+get(number: string, options?: RequestOptions): Promise<ViewBillResponse>
 ```
 
 ## Endpoint Factus
@@ -33,7 +33,8 @@ Fuente oficial: [Ver factura](https://developers.factus.com.co/facturas/ver/inde
     options: {
       type: "RequestOptions",
       required: false,
-      description: "Opciones opcionales de la solicitud (p. ej. signal para AbortSignal).",
+      description:
+        "Opciones opcionales de la solicitud (p. ej. signal para AbortSignal).",
     },
   }}
 />

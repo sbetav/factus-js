@@ -6,7 +6,7 @@ description: Listar facturas con filtros y paginación.
 ## Firma del método
 
 ```ts
-list(params?: ListParams<InvoiceFilters>): Promise<GetInvoicesResponse>
+list(params?: ListParams<BillFilters>): Promise<GetBillsResponse>
 ```
 
 ## Endpoint Factus
@@ -20,7 +20,7 @@ Fuente oficial: [Ver y filtrar facturas](https://developers.factus.com.co/factur
 <TypeTable
   type={{
     params: {
-      type: "ListParams<InvoiceFilters> (object)",
+      type: "ListParams<BillFilters> (object)",
       required: false,
       description: (
         <div>
@@ -28,7 +28,7 @@ Fuente oficial: [Ver y filtrar facturas](https://developers.factus.com.co/factur
           <TypeTable
             type={{
               filter: {
-                type: "InvoiceFilters",
+                type: "BillFilters",
                 required: false,
                 description: (
                   <TypeTable
@@ -107,4 +107,3 @@ const paginacion = response.data.pagination;
 ## Ejemplo de respuesta
 
 Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/facturas/ver-y-filtrar/index.html#respuesta-del-endpoint)
-
