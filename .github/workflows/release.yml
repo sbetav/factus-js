@@ -32,13 +32,11 @@ jobs:
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Verify generated docs changelog is current
-        run: pnpm --filter @factus-js/docs generate:changelog && git diff --exit-code -- apps/docs/content/docs/changelog.mdx
-
       - name: Create Release PR or Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
+          version: pnpm changeset version && pnpm --filter @factus-js/docs generate:changelog
           publish: pnpm release
           createGithubReleases: true
         env:
