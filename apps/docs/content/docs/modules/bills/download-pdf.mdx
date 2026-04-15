@@ -13,7 +13,7 @@ downloadPdf(number: string): Promise<DownloadBillPdfResponse>
 
 `GET /v1/bills/download-pdf/{number}`
 
-Fuente oficial: [Descargar PDF](https://developers.factus.com.co/facturas/descargar-factura/index.html)
+Fuente oficial: [Descargar PDF](https://developers.factus.com.co/v1/facturas/descargar-factura/index.html)
 
 ## Parámetros
 
@@ -35,4 +35,4 @@ const pdfBuffer = Buffer.from(response.data.pdf_base_64_encoded, "base64");
 
 ## Ejemplo de respuesta
 
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/facturas/descargar-factura/index.html#ejemplo-de-respuesta)
+Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/facturas/descargar-factura/index.html#ejemplo-de-respuesta)

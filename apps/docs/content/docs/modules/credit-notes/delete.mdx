@@ -15,7 +15,7 @@ delete(referenceCode: string): Promise<DeleteCreditNoteResponse>
 
 `DELETE /v1/credit-notes/reference/{reference_code}`
 
-Fuente oficial: [Eliminar nota crédito](https://developers.factus.com.co/notas-credito/eliminar/index.html)
+Fuente oficial: [Eliminar nota crédito](https://developers.factus.com.co/v1/notas-credito/eliminar/index.html)
 
 <Callout type="warn">
   Solo se pueden eliminar notas crédito que no hayan sido validadas por la DIAN.
@@ -46,5 +46,5 @@ await factus.creditNotes.delete("NC856");
 
 ## Ejemplo de respuesta
 
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/notas-credito/eliminar/index.html#ejemplo-de-respuesta)
+Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/notas-credito/eliminar/index.html#ejemplo-de-respuesta)
 

@@ -19,7 +19,7 @@ const __dirname = path.dirname(__filename);
 const packageRoot = path.resolve(__dirname, "..");
 
 const BASE_URL =
-  process.env.FACTUS_DOCS_BASE_URL ?? "https://developers.factus.com.co/";
+  process.env.FACTUS_DOCS_BASE_URL ?? "https://developers.factus.com.co/v1/";
 const base = new URL(BASE_URL);
 
 const mirrorDir = path.join(packageRoot, ".external-factus-mirror");

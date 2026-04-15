@@ -141,7 +141,7 @@ try {
 
 ## Documentation
 
-- Official Factus API docs: `https://developers.factus.com.co/`
+- Official Factus API docs: `https://developers.factus.com.co/v1/`
 - SDK docs site: `https://factusjs.vercel.app/`
 - Package README: `packages/factus-js/README.md`
 

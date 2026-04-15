@@ -34,7 +34,7 @@ This updates `apps/docs/content/docs/changelog.mdx`, which is committed so deplo
 
 ## Agent context (from official docs)
 
-To generate local markdown context from the official Factus docs (`https://developers.factus.com.co/`):
+To generate local markdown context from the official Factus docs (`https://developers.factus.com.co/v1/`):
 
 ```bash
 pnpm --filter factus-js docs:sync

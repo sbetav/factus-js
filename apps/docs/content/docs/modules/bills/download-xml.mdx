@@ -13,7 +13,7 @@ downloadXml(number: string): Promise<DownloadBillXmlResponse>
 
 `GET /v1/bills/download-xml/{number}`
 
-Fuente oficial: [Descargar XML](https://developers.factus.com.co/facturas/descargar-xml/index.html)
+Fuente oficial: [Descargar XML](https://developers.factus.com.co/v1/facturas/descargar-xml/index.html)
 
 ## Parámetros
 
@@ -37,4 +37,4 @@ const xml = Buffer.from(response.data.xml_base_64_encoded, "base64").toString(
 
 ## Ejemplo de respuesta
 
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/facturas/descargar-xml/index.html#variables-de-ruta-path-variables)
+Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/facturas/descargar-xml/index.html#variables-de-ruta-path-variables)

@@ -115,7 +115,7 @@ const pkgManagers = [
 
 /** Official Factus product + HTTP API reference (this site documents the JS SDK). */
 const FACTUS_WEB = "https://www.factus.com.co/";
-const FACTUS_API_DOCS = "https://developers.factus.com.co/";
+const FACTUS_API_DOCS = "https://developers.factus.com.co/v1/";
 
 /* ─────────────────────────────────────────────────────────── */
 /*  Page (async Server Component for syntax highlighting)      */
