@@ -56,7 +56,7 @@ Cada `*Info` exportado tiene una entrada por cada clave del mapa de constantes c
 ## Tipo de documento de factura (`BillDocumentType`)
 
 ```ts
-import { BillDocumentType } from "factus-js";
+import { BillDocumentType, BillDocumentTypeInfo } from "factus-js";
 ```
 
 | Clave                          | Valor  | Descripción                                       |
@@ -67,7 +67,7 @@ import { BillDocumentType } from "factus-js";
 ## Tipo de operación (`OperationTypeCode`)
 
 ```ts
-import { OperationTypeCode } from "factus-js";
+import { OperationTypeCode, OperationTypeCodeInfo } from "factus-js";
 ```
 
 | Clave       | Valor  | Descripción |
@@ -79,7 +79,7 @@ import { OperationTypeCode } from "factus-js";
 ## Tipo de operación en nota crédito (`CreditNoteOperationTypeCode`)
 
 ```ts
-import { CreditNoteOperationTypeCode } from "factus-js";
+import { CreditNoteOperationTypeCode, CreditNoteOperationTypeCodeInfo } from "factus-js";
 ```
 
 | Clave              | Valor  | Descripción                                            |
@@ -90,7 +90,7 @@ import { CreditNoteOperationTypeCode } from "factus-js";
 ## Concepto de corrección de nota crédito (`CreditNoteCorrectionCode`)
 
 ```ts
-import { CreditNoteCorrectionCode } from "factus-js";
+import { CreditNoteCorrectionCode, CreditNoteCorrectionCodeInfo } from "factus-js";
 ```
 
 | Clave                    | Valor | Descripción                                                              |
@@ -105,7 +105,7 @@ import { CreditNoteCorrectionCode } from "factus-js";
 ## Estándar de producto (`ProductStandardId`)
 
 ```ts
-import { ProductStandardId } from "factus-js";
+import { ProductStandardId, ProductStandardIdInfo } from "factus-js";
 ```
 
 | Clave              | Valor | Descripción                            |
@@ -118,7 +118,7 @@ import { ProductStandardId } from "factus-js";
 ## Concepto de reclamo (`ClaimConceptCode`)
 
 ```ts
-import { ClaimConceptCode } from "factus-js";
+import { ClaimConceptCode, ClaimConceptCodeInfo } from "factus-js";
 ```
 
 | Clave                      | Valor  | Descripción                         |
@@ -131,7 +131,7 @@ import { ClaimConceptCode } from "factus-js";
 ## Código de evento (`EventCode`)
 
 ```ts
-import { EventCode } from "factus-js";
+import { EventCode, EventCodeInfo } from "factus-js";
 ```
 
 | Clave                    | Valor   | Descripción                                     |
@@ -145,7 +145,7 @@ import { EventCode } from "factus-js";
 ## Tipo de documento de identificación (`IdentityDocumentTypeId`)
 
 ```ts
-import { IdentityDocumentTypeId } from "factus-js";
+import { IdentityDocumentTypeId, IdentityDocumentTypeIdInfo } from "factus-js";
 
 // Código para la API como string (p. ej. identification_document_id)
 const docType = IdentityDocumentTypeId.CitizenshipId; // "3"
@@ -168,7 +168,7 @@ const docType = IdentityDocumentTypeId.CitizenshipId; // "3"
 ## Tipo de identificación para documento soporte (`SupportDocumentIdentityTypeId`)
 
 ```ts
-import { SupportDocumentIdentityTypeId } from "factus-js";
+import { SupportDocumentIdentityTypeId, SupportDocumentIdentityTypeIdInfo } from "factus-js";
 ```
 
 | Clave                           | Valor  | Abreviatura | Descripción                            |
@@ -184,7 +184,7 @@ import { SupportDocumentIdentityTypeId } from "factus-js";
 ## Tributo del cliente (`CustomerTributeId`)
 
 ```ts
-import { CustomerTributeId } from "factus-js";
+import { CustomerTributeId, CustomerTributeIdInfo } from "factus-js";
 ```
 
 | Clave           | Valor  | Descripción |
@@ -195,7 +195,7 @@ import { CustomerTributeId } from "factus-js";
 ## Tipo de organización (`OrganizationTypeId`)
 
 ```ts
-import { OrganizationTypeId } from "factus-js";
+import { OrganizationTypeId, OrganizationTypeIdInfo } from "factus-js";
 ```
 
 | Clave           | Valor | Descripción      |
@@ -206,7 +206,7 @@ import { OrganizationTypeId } from "factus-js";
 ## Método de pago (`PaymentMethodCode`)
 
 ```ts
-import { PaymentMethodCode } from "factus-js";
+import { PaymentMethodCode, PaymentMethodCodeInfo } from "factus-js";
 ```
 
 | Clave         | Valor   | Descripción               |
@@ -225,7 +225,7 @@ import { PaymentMethodCode } from "factus-js";
 ## Forma de pago (`PaymentFormCode`)
 
 ```ts
-import { PaymentFormCode } from "factus-js";
+import { PaymentFormCode, PaymentFormCodeInfo } from "factus-js";
 ```
 
 | Clave           | Valor | Descripción     |
@@ -236,7 +236,7 @@ import { PaymentFormCode } from "factus-js";
 ## Tipo de documento en rangos de numeración (`NumberingRangeDocumentTypeCode`)
 
 ```ts
-import { NumberingRangeDocumentTypeCode } from "factus-js";
+import { NumberingRangeDocumentTypeCode, NumberingRangeDocumentTypeCodeInfo } from "factus-js";
 ```
 
 | Clave                           | Valor  | Descripción                      |
@@ -254,7 +254,7 @@ import { NumberingRangeDocumentTypeCode } from "factus-js";
 ## Concepto de corrección de nota de ajuste (`AdjustmentNoteReasonCode`)
 
 ```ts
-import { AdjustmentNoteReasonCode } from "factus-js";
+import { AdjustmentNoteReasonCode, AdjustmentNoteReasonCodeInfo } from "factus-js";
 ```
 
 | Clave                         | Valor | Descripción                                                                                                                           |
@@ -268,7 +268,7 @@ import { AdjustmentNoteReasonCode } from "factus-js";
 ## Tipo de cargo o descuento (`ChargeDiscountCode`)
 
 ```ts
-import { ChargeDiscountCode } from "factus-js";
+import { ChargeDiscountCode, ChargeDiscountCodeInfo } from "factus-js";
 ```
 
 | Clave                    | Valor  | Descripción                                         |
@@ -281,7 +281,7 @@ import { ChargeDiscountCode } from "factus-js";
 ## Responsabilidad fiscal (`FiscalResponsibilityCode`)
 
 ```ts
-import { FiscalResponsibilityCode } from "factus-js";
+import { FiscalResponsibilityCode, FiscalResponsibilityCodeInfo } from "factus-js";
 ```
 
 | Clave                  | Valor       | Descripción                   |
