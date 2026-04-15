@@ -2,12 +2,12 @@ import { GitHubIcon } from "@/components/icons/github-icon";
 import { getOgImageAbsoluteUrl, getSiteUrl } from "@/lib/site";
 import { highlight } from "fumadocs-core/highlight";
 import {
-    CodeBlock,
-    CodeBlockTab,
-    CodeBlockTabs,
-    CodeBlockTabsList,
-    CodeBlockTabsTrigger,
-    Pre,
+  CodeBlock,
+  CodeBlockTab,
+  CodeBlockTabs,
+  CodeBlockTabsList,
+  CodeBlockTabsTrigger,
+  Pre,
 } from "fumadocs-ui/components/codeblock";
 import { ArrowRight, Braces, GitBranch, RefreshCw, Zap } from "lucide-react";
 import type { Metadata } from "next";
@@ -188,6 +188,7 @@ export default async function HomePage() {
         </div>
 
         {/* Version badge */}
+
         <span
           className="animate-fade-up mb-5 sm:mb-8 inline-flex items-center gap-2 rounded-full border border-fd-border bg-fd-card px-3.5 py-1.5 text-xs font-medium text-fd-muted-foreground"
           style={{ animationDelay: "80ms" }}
@@ -258,10 +259,10 @@ export default async function HomePage() {
 
         {/* Install — package manager tabs */}
         <div
-          className="animate-fade-up mt-8 w-full max-w-lg"
+          className="animate-fade-up mt-8 w-full max-w-lg flex flex-col items-center gap-2 relative"
           style={{ animationDelay: "400ms" }}
         >
-          <CodeBlockTabs defaultValue="npm" className="my-0 text-sm">
+          <CodeBlockTabs defaultValue="npm" className="my-0 text-sm w-full">
             <CodeBlockTabsList>
               {pkgManagers.map(({ id }) => (
                 <CodeBlockTabsTrigger key={id} value={id}>
@@ -277,6 +278,14 @@ export default async function HomePage() {
               </CodeBlockTab>
             ))}
           </CodeBlockTabs>
+          <a
+            href="https://developers.factus.com.co/coleccion"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-fd-muted-foreground text-xs absolute top-2 right-1 font-semibold mr-2 hover:text-fd-foreground hover:underline transition-all duration-150"
+          >
+            ¿SDK v2? 👀
+          </a>
         </div>
       </section>
 
