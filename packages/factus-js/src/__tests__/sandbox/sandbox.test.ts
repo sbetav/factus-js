@@ -134,7 +134,7 @@ describe("sandbox integration", () => {
         customer: {
           identification: "123456789",
           dv: "3",
-          company: "",
+          company: "Enigma SAS",
           trade_name: "",
           names: "Alan Turing",
           address: "calle 1 # 2-68",
