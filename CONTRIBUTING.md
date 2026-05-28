@@ -34,18 +34,23 @@ This updates `apps/docs/content/docs/changelog.mdx`, which is committed so deplo
 
 ## Agent context (from official docs)
 
-To generate local markdown context from the official Factus docs (`https://developers.factus.com.co/v1/`):
+To generate local markdown context from the official Factus docs, run this command from the repo root:
 
 ```bash
-pnpm --filter factus-js docs:sync
+pnpm sync-factus-docs
 ```
 
-The script tries to use `wget` mirror mode and falls back to a Node.js crawler when `wget` is not available. It also trims long base64 payloads into placeholders like `[TRIMMED_BASE64_12345_CHARS]` to keep context size manageable.
+The script opens an interactive version selector:
+
+- `v1`: `https://developers.factus.com.co/v1`
+- `v2`: `https://developers.factus.com.co/`
+
+The script tries to use `wget` mirror mode and falls back to a Node.js crawler if not available. The crawler follows every reachable documentation page under the selected docs URL. It extracts the page content and convert it to Markdown, also it trims long base64 payloads to keep context size manageable.
 
 Output folders:
 
-- `packages/factus-js/.external-factus-docs/`
-- `packages/factus-js/.external-factus-mirror/`
+- Markdown snapshots: `factus-docs/v1/` and `factus-docs/v2/`
+- Temporary site mirrors: `.temp/factus-docs-mirror-v1/` and `.temp/factus-docs-mirror-v2/`
 
 ## Releases
 

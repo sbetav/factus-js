@@ -18,6 +18,9 @@ coverage
 # Turbo
 .turbo
 
+# Temporary generated files
+.temp/
+
 # Vercel
 .vercel
 
