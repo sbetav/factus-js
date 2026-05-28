@@ -1,0 +1,452 @@
+{
+  "generatedAt": "2026-05-28T19:53:49.146Z",
+  "baseUrl": "https://developers.factus.com.co/",
+  "totalFiles": 89,
+  "entries": [
+    {
+      "title": "Autenticación",
+      "sourceUrl": "https://developers.factus.com.co/autenticacion/auth",
+      "path": "autenticacion\\auth.md"
+    },
+    {
+      "title": "Introducción a la autenticación",
+      "sourceUrl": "https://developers.factus.com.co/autenticacion/introduccion",
+      "path": "autenticacion\\introduccion.md"
+    },
+    {
+      "title": "Refresh Token",
+      "sourceUrl": "https://developers.factus.com.co/autenticacion/refresh-token",
+      "path": "autenticacion\\refresh-token.md"
+    },
+    {
+      "title": "Cambios de V1 a V2",
+      "sourceUrl": "https://developers.factus.com.co/buenas-practicas/cambios-v2-v1",
+      "path": "buenas-practicas\\cambios-v2-v1.md"
+    },
+    {
+      "title": "Conceptos para la creación de facturas",
+      "sourceUrl": "https://developers.factus.com.co/buenas-practicas/primeros-pasos",
+      "path": "buenas-practicas\\primeros-pasos.md"
+    },
+    {
+      "title": "Colección de Factus API v2",
+      "sourceUrl": "https://developers.factus.com.co/coleccion",
+      "path": "coleccion.md"
+    },
+    {
+      "title": "Crear Doc. Soporte",
+      "sourceUrl": "https://developers.factus.com.co/documentos-soporte/crear-validar",
+      "path": "documentos-soporte\\crear-validar.md"
+    },
+    {
+      "title": "Descargar PDF",
+      "sourceUrl": "https://developers.factus.com.co/documentos-soporte/descargar-pdf",
+      "path": "documentos-soporte\\descargar-pdf.md"
+    },
+    {
+      "title": "Descargar XML",
+      "sourceUrl": "https://developers.factus.com.co/documentos-soporte/descargar-xml",
+      "path": "documentos-soporte\\descargar-xml.md"
+    },
+    {
+      "title": "Campos documentos soporte",
+      "sourceUrl": "https://developers.factus.com.co/documentos-soporte/descripcion-de-campos",
+      "path": "documentos-soporte\\descripcion-de-campos.md"
+    },
+    {
+      "title": "Eliminar Doc. Soporte",
+      "sourceUrl": "https://developers.factus.com.co/documentos-soporte/eliminar",
+      "path": "documentos-soporte\\eliminar.md"
+    },
+    {
+      "title": "Listar Doc. Soporte",
+      "sourceUrl": "https://developers.factus.com.co/documentos-soporte/ver-y-filtrar",
+      "path": "documentos-soporte\\ver-y-filtrar.md"
+    },
+    {
+      "title": "Ver Doc. soporte",
+      "sourceUrl": "https://developers.factus.com.co/documentos-soporte/ver",
+      "path": "documentos-soporte\\ver.md"
+    },
+    {
+      "title": "Descargar XML",
+      "sourceUrl": "https://developers.factus.com.co/documentos/descargar-xml",
+      "path": "documentos\\descargar-xml.md"
+    },
+    {
+      "title": "Actualizar Logo",
+      "sourceUrl": "https://developers.factus.com.co/empresas/actualizar-imagen",
+      "path": "empresas\\actualizar-imagen.md"
+    },
+    {
+      "title": "Actualizar Empresa",
+      "sourceUrl": "https://developers.factus.com.co/empresas/actualizar",
+      "path": "empresas\\actualizar.md"
+    },
+    {
+      "title": "Ver Empresa",
+      "sourceUrl": "https://developers.factus.com.co/empresas/ver",
+      "path": "empresas\\ver.md"
+    },
+    {
+      "title": "Aceptación tacita",
+      "sourceUrl": "https://developers.factus.com.co/facturas/aceptacion-tacita",
+      "path": "facturas\\aceptacion-tacita.md"
+    },
+    {
+      "title": "Crear y validar",
+      "sourceUrl": "https://developers.factus.com.co/facturas/crear-y-validar",
+      "path": "facturas\\crear-y-validar.md"
+    },
+    {
+      "title": "Descargar PDF",
+      "sourceUrl": "https://developers.factus.com.co/facturas/descargar-pdf",
+      "path": "facturas\\descargar-pdf.md"
+    },
+    {
+      "title": "Descargar XML AttachedDocument",
+      "sourceUrl": "https://developers.factus.com.co/facturas/descargar-xml-attacheddocument",
+      "path": "facturas\\descargar-xml-attacheddocument.md"
+    },
+    {
+      "title": "Descargar XML",
+      "sourceUrl": "https://developers.factus.com.co/facturas/descargar-xml",
+      "path": "facturas\\descargar-xml.md"
+    },
+    {
+      "title": "Campos de la factura",
+      "sourceUrl": "https://developers.factus.com.co/facturas/descripcion-de-campos",
+      "path": "facturas\\descripcion-de-campos.md"
+    },
+    {
+      "title": "Factura Anticipo",
+      "sourceUrl": "https://developers.factus.com.co/facturas/ejemplos/estandar-anticipo",
+      "path": "facturas\\ejemplos\\estandar-anticipo.md"
+    },
+    {
+      "title": "Informar autorretenciones",
+      "sourceUrl": "https://developers.factus.com.co/facturas/ejemplos/estandar-autorrentenciones",
+      "path": "facturas\\ejemplos\\estandar-autorrentenciones.md"
+    },
+    {
+      "title": "Factura Consumidor Final",
+      "sourceUrl": "https://developers.factus.com.co/facturas/ejemplos/estandar-consumidor-final",
+      "path": "facturas\\ejemplos\\estandar-consumidor-final.md"
+    },
+    {
+      "title": "Factura a crédito",
+      "sourceUrl": "https://developers.factus.com.co/facturas/ejemplos/estandar-credito",
+      "path": "facturas\\ejemplos\\estandar-credito.md"
+    },
+    {
+      "title": "Informar establecimiento",
+      "sourceUrl": "https://developers.factus.com.co/facturas/ejemplos/estandar-establecimiento",
+      "path": "facturas\\ejemplos\\estandar-establecimiento.md"
+    },
+    {
+      "title": "Impuesto excluido",
+      "sourceUrl": "https://developers.factus.com.co/facturas/ejemplos/estandar-impuesto-excluido",
+      "path": "facturas\\ejemplos\\estandar-impuesto-excluido.md"
+    },
+    {
+      "title": "Informar propina",
+      "sourceUrl": "https://developers.factus.com.co/facturas/ejemplos/estandar-propina",
+      "path": "facturas\\ejemplos\\estandar-propina.md"
+    },
+    {
+      "title": "Redondeo en medios de pago",
+      "sourceUrl": "https://developers.factus.com.co/facturas/ejemplos/redondeo-medios-pago",
+      "path": "facturas\\ejemplos\\redondeo-medios-pago.md"
+    },
+    {
+      "title": "Eliminar factura",
+      "sourceUrl": "https://developers.factus.com.co/facturas/eliminar",
+      "path": "facturas\\eliminar.md"
+    },
+    {
+      "title": "Enviar correo",
+      "sourceUrl": "https://developers.factus.com.co/facturas/enviar-correo",
+      "path": "facturas\\enviar-correo.md"
+    },
+    {
+      "title": "Eventos de una factura",
+      "sourceUrl": "https://developers.factus.com.co/facturas/eventos-de-facturas",
+      "path": "facturas\\eventos-de-facturas.md"
+    },
+    {
+      "title": "Listar facturas",
+      "sourceUrl": "https://developers.factus.com.co/facturas/listar-y-filtrar",
+      "path": "facturas\\listar-y-filtrar.md"
+    },
+    {
+      "title": "Obtener contenido de correo",
+      "sourceUrl": "https://developers.factus.com.co/facturas/obtener-contenido-de-correo",
+      "path": "facturas\\obtener-contenido-de-correo.md"
+    },
+    {
+      "title": "Representación gráfica",
+      "sourceUrl": "https://developers.factus.com.co/facturas/representacion-grafica",
+      "path": "facturas\\representacion-grafica.md"
+    },
+    {
+      "title": "10 - Estándar",
+      "sourceUrl": "https://developers.factus.com.co/facturas/tipos-de-factura/estandar",
+      "path": "facturas\\tipos-de-factura\\estandar.md"
+    },
+    {
+      "title": "11 - Mandatos",
+      "sourceUrl": "https://developers.factus.com.co/facturas/tipos-de-factura/mandatos",
+      "path": "facturas\\tipos-de-factura\\mandatos.md"
+    },
+    {
+      "title": "SS CUDE",
+      "sourceUrl": "https://developers.factus.com.co/facturas/tipos-de-factura/ss-cude",
+      "path": "facturas\\tipos-de-factura\\ss-cude.md"
+    },
+    {
+      "title": "SS CUFE",
+      "sourceUrl": "https://developers.factus.com.co/facturas/tipos-de-factura/ss-cufe",
+      "path": "facturas\\tipos-de-factura\\ss-cufe.md"
+    },
+    {
+      "title": "SS NUM",
+      "sourceUrl": "https://developers.factus.com.co/facturas/tipos-de-factura/ss-num",
+      "path": "facturas\\tipos-de-factura\\ss-num.md"
+    },
+    {
+      "title": "SS Recaudo",
+      "sourceUrl": "https://developers.factus.com.co/facturas/tipos-de-factura/ss-recaudo",
+      "path": "facturas\\tipos-de-factura\\ss-recaudo.md"
+    },
+    {
+      "title": "SS Reporte",
+      "sourceUrl": "https://developers.factus.com.co/facturas/tipos-de-factura/ss-reporte",
+      "path": "facturas\\tipos-de-factura\\ss-reporte.md"
+    },
+    {
+      "title": "SS Sin Aporte",
+      "sourceUrl": "https://developers.factus.com.co/facturas/tipos-de-factura/ss-sin-aporte",
+      "path": "facturas\\tipos-de-factura\\ss-sin-aporte.md"
+    },
+    {
+      "title": "12 - Transporte",
+      "sourceUrl": "https://developers.factus.com.co/facturas/tipos-de-factura/transporte",
+      "path": "facturas\\tipos-de-factura\\transporte.md"
+    },
+    {
+      "title": "Ver factura",
+      "sourceUrl": "https://developers.factus.com.co/facturas/ver",
+      "path": "facturas\\ver.md"
+    },
+    {
+      "title": "Glosario",
+      "sourceUrl": "https://developers.factus.com.co/glosario",
+      "path": "glosario.md"
+    },
+    {
+      "title": "Introducción a Factus API",
+      "sourceUrl": "https://developers.factus.com.co/",
+      "path": "index.md"
+    },
+    {
+      "title": "Obtener datos de adquirientes",
+      "sourceUrl": "https://developers.factus.com.co/informacion-adquirientes/obtener-datos-adquiriente",
+      "path": "informacion-adquirientes\\obtener-datos-adquiriente.md"
+    },
+    {
+      "title": "Introducción a Factus API",
+      "sourceUrl": "https://developers.factus.com.co/limite-de-request",
+      "path": "limite-de-request.md"
+    },
+    {
+      "title": "Manejo de respuestas API FACTUS",
+      "sourceUrl": "https://developers.factus.com.co/manejo-errores",
+      "path": "manejo-errores.md"
+    },
+    {
+      "title": "Crear y validar",
+      "sourceUrl": "https://developers.factus.com.co/notas-ajuste-documentos-soporte/crear-validar",
+      "path": "notas-ajuste-documentos-soporte\\crear-validar.md"
+    },
+    {
+      "title": "Descargar PDF",
+      "sourceUrl": "https://developers.factus.com.co/notas-ajuste-documentos-soporte/descargar-pdf",
+      "path": "notas-ajuste-documentos-soporte\\descargar-pdf.md"
+    },
+    {
+      "title": "Descargar XML",
+      "sourceUrl": "https://developers.factus.com.co/notas-ajuste-documentos-soporte/descargar-xml",
+      "path": "notas-ajuste-documentos-soporte\\descargar-xml.md"
+    },
+    {
+      "title": "Campos nota de ajuste",
+      "sourceUrl": "https://developers.factus.com.co/notas-ajuste-documentos-soporte/descripcion-de-campos",
+      "path": "notas-ajuste-documentos-soporte\\descripcion-de-campos.md"
+    },
+    {
+      "title": "Eliminar nota de ajuste",
+      "sourceUrl": "https://developers.factus.com.co/notas-ajuste-documentos-soporte/eliminar",
+      "path": "notas-ajuste-documentos-soporte\\eliminar.md"
+    },
+    {
+      "title": "Listar notas de ajuste",
+      "sourceUrl": "https://developers.factus.com.co/notas-ajuste-documentos-soporte/ver-y-filtrar",
+      "path": "notas-ajuste-documentos-soporte\\ver-y-filtrar.md"
+    },
+    {
+      "title": "Ver nota de ajuste",
+      "sourceUrl": "https://developers.factus.com.co/notas-ajuste-documentos-soporte/ver",
+      "path": "notas-ajuste-documentos-soporte\\ver.md"
+    },
+    {
+      "title": "Crear y Validar",
+      "sourceUrl": "https://developers.factus.com.co/notas-credito/crear-y-validar",
+      "path": "notas-credito\\crear-y-validar.md"
+    },
+    {
+      "title": "Descargar PDF",
+      "sourceUrl": "https://developers.factus.com.co/notas-credito/descargar-pdf",
+      "path": "notas-credito\\descargar-pdf.md"
+    },
+    {
+      "title": "Descargar XML AttachedDocument",
+      "sourceUrl": "https://developers.factus.com.co/notas-credito/descargar-xml-attacheddocument",
+      "path": "notas-credito\\descargar-xml-attacheddocument.md"
+    },
+    {
+      "title": "Descargar XML",
+      "sourceUrl": "https://developers.factus.com.co/notas-credito/descargar-xml",
+      "path": "notas-credito\\descargar-xml.md"
+    },
+    {
+      "title": "Campos de la nota crédito",
+      "sourceUrl": "https://developers.factus.com.co/notas-credito/descripcion-de-campos",
+      "path": "notas-credito\\descripcion-de-campos.md"
+    },
+    {
+      "title": "Eliminar Nota Crédito",
+      "sourceUrl": "https://developers.factus.com.co/notas-credito/eliminar",
+      "path": "notas-credito\\eliminar.md"
+    },
+    {
+      "title": "Enviar correo",
+      "sourceUrl": "https://developers.factus.com.co/notas-credito/enviar-correo",
+      "path": "notas-credito\\enviar-correo.md"
+    },
+    {
+      "title": "Obtener contenido de correo",
+      "sourceUrl": "https://developers.factus.com.co/notas-credito/obtener-contenido-de-correo",
+      "path": "notas-credito\\obtener-contenido-de-correo.md"
+    },
+    {
+      "title": "Listar Notas Crédito",
+      "sourceUrl": "https://developers.factus.com.co/notas-credito/ver-filtrar",
+      "path": "notas-credito\\ver-filtrar.md"
+    },
+    {
+      "title": "Ver Nota Crédito",
+      "sourceUrl": "https://developers.factus.com.co/notas-credito/ver",
+      "path": "notas-credito\\ver.md"
+    },
+    {
+      "title": "Actualizar consecutivo",
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/actualizar-consecutivo",
+      "path": "rangos-de-numeracion\\actualizar-consecutivo.md"
+    },
+    {
+      "title": "Cambiar Estado",
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/cambiar-estado",
+      "path": "rangos-de-numeracion\\cambiar-estado.md"
+    },
+    {
+      "title": "Crear Rango",
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/crear-rango",
+      "path": "rangos-de-numeracion\\crear-rango.md"
+    },
+    {
+      "title": "Crear Rango documento soporte",
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-documento-soporte",
+      "path": "rangos-de-numeracion\\ejemplos\\crear-rango-para-documento-soporte.md"
+    },
+    {
+      "title": "Crear Rango para facturación",
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-facturacion",
+      "path": "rangos-de-numeracion\\ejemplos\\crear-rango-para-facturacion.md"
+    },
+    {
+      "title": "Crear Rango para notas crédito",
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-notas-credito",
+      "path": "rangos-de-numeracion\\ejemplos\\crear-rango-para-notas-credito.md"
+    },
+    {
+      "title": "Eliminar Rango",
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/eliminar-rango",
+      "path": "rangos-de-numeracion\\eliminar-rango.md"
+    },
+    {
+      "title": "Introducción",
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/introduccion",
+      "path": "rangos-de-numeracion\\introduccion.md"
+    },
+    {
+      "title": "Listar rangos",
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/obtener-rangos",
+      "path": "rangos-de-numeracion\\obtener-rangos.md"
+    },
+    {
+      "title": "Rangos asociados al software",
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/rangos-asociados-al-software",
+      "path": "rangos-de-numeracion\\rangos-asociados-al-software.md"
+    },
+    {
+      "title": "Ver Rango",
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/ver-rango",
+      "path": "rangos-de-numeracion\\ver-rango.md"
+    },
+    {
+      "title": "Cargar Factura",
+      "sourceUrl": "https://developers.factus.com.co/recepcion-de-documentos/cargar-factura",
+      "path": "recepcion-de-documentos\\cargar-factura.md"
+    },
+    {
+      "title": "Emitir Evento",
+      "sourceUrl": "https://developers.factus.com.co/recepcion-de-documentos/emitir-evento",
+      "path": "recepcion-de-documentos\\emitir-evento.md"
+    },
+    {
+      "title": "Ver Facturas",
+      "sourceUrl": "https://developers.factus.com.co/recepcion-de-documentos/ver-facturas",
+      "path": "recepcion-de-documentos\\ver-facturas.md"
+    },
+    {
+      "title": "Respuestas del API",
+      "sourceUrl": "https://developers.factus.com.co/respuestas-del-api",
+      "path": "respuestas-del-api.md"
+    },
+    {
+      "title": "Suscripciones",
+      "sourceUrl": "https://developers.factus.com.co/suscripciones/suscripciones",
+      "path": "suscripciones\\suscripciones.md"
+    },
+    {
+      "title": "Países",
+      "sourceUrl": "https://developers.factus.com.co/tablas-de-referencia/countries",
+      "path": "tablas-de-referencia\\countries.md"
+    },
+    {
+      "title": "Municipios",
+      "sourceUrl": "https://developers.factus.com.co/tablas-de-referencia/municipios",
+      "path": "tablas-de-referencia\\municipios.md"
+    },
+    {
+      "title": "Tablas",
+      "sourceUrl": "https://developers.factus.com.co/tablas-de-referencia/tablas",
+      "path": "tablas-de-referencia\\tablas.md"
+    },
+    {
+      "title": "Unidades de medida",
+      "sourceUrl": "https://developers.factus.com.co/tablas-de-referencia/unit-measures",
+      "path": "tablas-de-referencia\\unit-measures.md"
+    }
+  ]
+}
