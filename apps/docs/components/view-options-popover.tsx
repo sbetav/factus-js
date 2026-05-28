@@ -30,12 +30,12 @@ export function ViewOptionsPopover({
     // Keep the same URLs/behavior as `fumadocs-ui`; only translate labels.
     return [
       {
-        title: "Abrir Markdown",
+        title: "Markdown",
         href: markdownUrl,
         icon: <TextIcon />,
       },
       {
-        title: "Abrir en GitHub",
+        title: "GitHub",
         href: githubUrl,
         icon: (
           <svg fill="currentColor" role="img" viewBox="0 0 24 24">
@@ -46,7 +46,7 @@ export function ViewOptionsPopover({
       },
 
       {
-        title: "Abrir en ChatGPT",
+        title: "ChatGPT",
         href: `https://chatgpt.com/?${new URLSearchParams({
           hints: "search",
           q,
@@ -64,7 +64,7 @@ export function ViewOptionsPopover({
         ),
       },
       {
-        title: "Abrir en Claude",
+        title: "Claude",
         href: `https://claude.ai/new?${new URLSearchParams({ q })}`,
         icon: (
           <svg
@@ -79,7 +79,7 @@ export function ViewOptionsPopover({
         ),
       },
       {
-        title: "Abrir en Cursor",
+        title: "Cursor",
         href: `https://cursor.com/link/prompt?${new URLSearchParams({ text: q })}`,
         icon: (
           <svg
@@ -111,10 +111,10 @@ export function ViewOptionsPopover({
           .filter(Boolean)
           .join(" ")}
       >
-        {children ?? "Abrir"}
+        {children ?? "Abrir con"}
         <ChevronDown className="size-3.5 text-fd-muted-foreground" />
       </PopoverTrigger>
-      <PopoverContent className="flex flex-col">
+      <PopoverContent className="flex flex-col" >
         {items.map((item) => (
           <a
             key={item.href}

@@ -1,17 +1,17 @@
 import { getMDXComponents } from "@/components/mdx";
 import { ViewOptionsPopover } from "@/components/view-options-popover";
 import {
-    getGithubDocsBlobUrl,
-    getOgImageAbsoluteUrl,
-    getSiteUrl,
+  getGithubDocsBlobUrl,
+  getOgImageAbsoluteUrl,
+  getSiteUrl,
 } from "@/lib/site";
 import { source } from "@/lib/source";
 import {
-    DocsBody,
-    DocsDescription,
-    DocsPage,
-    DocsTitle,
-    MarkdownCopyButton,
+  DocsBody,
+  DocsDescription,
+  DocsPage,
+  DocsTitle,
+  MarkdownCopyButton,
 } from "fumadocs-ui/layouts/docs/page";
 import { createRelativeLink } from "fumadocs-ui/mdx";
 import type { Metadata } from "next";
@@ -113,9 +113,7 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
         <ViewOptionsPopover
           markdownUrl={`${page.url}.mdx`}
           githubUrl={getGithubDocsBlobUrl(page.path)}
-        >
-          Abrir
-        </ViewOptionsPopover>
+        />
       </div>
       <DocsBody>
         <MDX
