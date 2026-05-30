@@ -1,13 +1,14 @@
 import {
-    AdjustmentNotesModule,
-    BillsModule,
-    CatalogModule,
-    CompanyModule,
-    CreditNotesModule,
-    NumberingRangesModule,
-    ReceptionModule,
-    SubscriptionModule,
-    SupportDocumentsModule,
+  AdjustmentNotesModule,
+  AcquirerModule,
+  BillsModule,
+  CompanyModule,
+  CreditNotesModule,
+  DocumentsModule,
+  NumberingRangesModule,
+  ReceptionModule,
+  SubscriptionModule,
+  SupportDocumentsModule,
 } from "../../client";
 import { createHttpSpy } from "../helpers/http-spy";
 
@@ -26,6 +27,7 @@ describe("module routing contract", () => {
     await bills.list(listFilters);
     await bills.get("SETP990000203");
     await bills.downloadXml("SETP990000203");
+    await bills.downloadAttachedDocumentXml("SETP990000203");
     await bills.downloadPdf("SETP990000203");
     await bills.getEmailContent("SETP990000203");
     await bills.sendEmail("SETP990000203", sendInput);
@@ -34,46 +36,51 @@ describe("module routing contract", () => {
     await bills.delete("SETP990000049");
 
     expect(spy.calls).toEqual([
-      { method: "post", path: "/v1/bills/validate", payload: createInput },
-      { method: "get", path: "/v1/bills", payload: listQuery },
+      { method: "post", path: "/v2/bills/validate", payload: createInput },
+      { method: "get", path: "/v2/bills", payload: listQuery },
       {
         method: "get",
-        path: "/v1/bills/show/SETP990000203",
+        path: "/v2/bills/SETP990000203",
         payload: undefined,
       },
       {
         method: "get",
-        path: "/v1/bills/download-xml/SETP990000203",
+        path: "/v2/bills/SETP990000203/download-xml",
         payload: undefined,
       },
       {
         method: "get",
-        path: "/v1/bills/download-pdf/SETP990000203",
+        path: "/v2/bills/SETP990000203/download-attached-document-xml",
         payload: undefined,
       },
       {
         method: "get",
-        path: "/v1/bills/SETP990000203/email-content",
+        path: "/v2/bills/SETP990000203/download-pdf",
+        payload: undefined,
+      },
+      {
+        method: "get",
+        path: "/v2/bills/SETP990000203/email-content",
         payload: undefined,
       },
       {
         method: "post",
-        path: "/v1/bills/send-email/SETP990000203",
+        path: "/v2/bills/SETP990000203/send-email",
         payload: sendInput,
       },
       {
         method: "post",
-        path: "/v1/bills/radian/events/update/SETP990000049/030",
+        path: "/v2/bills/SETP990000049/radian/events/030",
         payload: eventInput,
       },
       {
         method: "get",
-        path: "/v1/bills/SETP990000203/radian/events",
+        path: "/v2/bills/SETP990000203/radian/events",
         payload: undefined,
       },
       {
         method: "delete",
-        path: "/v1/bills/destroy/reference/SETP990000049",
+        path: "/v2/bills/destroy/reference/SETP990000049",
       },
     ]);
   });
@@ -91,6 +98,7 @@ describe("module routing contract", () => {
     await creditNotes.list(listFilters);
     await creditNotes.get("NC856");
     await creditNotes.downloadXml("NC856");
+    await creditNotes.downloadAttachedDocumentXml("NC856");
     await creditNotes.downloadPdf("NC856");
     await creditNotes.getEmailContent("NC856");
     await creditNotes.sendEmail("NC856", sendInput);
@@ -99,32 +107,37 @@ describe("module routing contract", () => {
     expect(spy.calls).toEqual([
       {
         method: "post",
-        path: "/v1/credit-notes/validate",
+        path: "/v2/credit-notes/validate",
         payload: createInput,
       },
-      { method: "get", path: "/v1/credit-notes", payload: listQuery },
-      { method: "get", path: "/v1/credit-notes/NC856", payload: undefined },
+      { method: "get", path: "/v2/credit-notes", payload: listQuery },
+      { method: "get", path: "/v2/credit-notes/NC856", payload: undefined },
       {
         method: "get",
-        path: "/v1/credit-notes/download-xml/NC856",
+        path: "/v2/credit-notes/NC856/download-xml",
         payload: undefined,
       },
       {
         method: "get",
-        path: "/v1/credit-notes/download-pdf/NC856",
+        path: "/v2/credit-notes/NC856/download-attached-document-xml",
         payload: undefined,
       },
       {
         method: "get",
-        path: "/v1/credit-notes/NC856/email-content",
+        path: "/v2/credit-notes/NC856/download-pdf",
+        payload: undefined,
+      },
+      {
+        method: "get",
+        path: "/v2/credit-notes/NC856/email-content",
         payload: undefined,
       },
       {
         method: "post",
-        path: "/v1/credit-notes/send-email/NC856",
+        path: "/v2/credit-notes/NC856/send-email",
         payload: sendInput,
       },
-      { method: "delete", path: "/v1/credit-notes/reference/NC856" },
+      { method: "delete", path: "/v2/credit-notes/reference/NC856" },
     ]);
   });
 
@@ -146,28 +159,28 @@ describe("module routing contract", () => {
     expect(spy.calls).toEqual([
       {
         method: "post",
-        path: "/v1/support-documents/validate",
+        path: "/v2/support-documents/validate",
         payload: createInput,
       },
-      { method: "get", path: "/v1/support-documents", payload: listQuery },
+      { method: "get", path: "/v2/support-documents", payload: listQuery },
       {
         method: "get",
-        path: "/v1/support-documents/show/SEDS984000021",
+        path: "/v2/support-documents/SEDS984000021",
         payload: undefined,
       },
       {
         method: "get",
-        path: "/v1/support-documents/download-xml/SEDS984000021",
+        path: "/v2/support-documents/SEDS984000021/download-xml",
         payload: undefined,
       },
       {
         method: "get",
-        path: "/v1/support-documents/download-pdf/SEDS984000021",
+        path: "/v2/support-documents/SEDS984000021/download-pdf",
         payload: undefined,
       },
       {
         method: "delete",
-        path: "/v1/support-documents/reference/SEDS984000021",
+        path: "/v2/support-documents/reference/SEDS984000021",
       },
     ]);
   });
@@ -190,22 +203,22 @@ describe("module routing contract", () => {
     expect(spy.calls).toEqual([
       {
         method: "post",
-        path: "/v1/adjustment-notes/validate",
+        path: "/v2/adjustment-notes/validate",
         payload: createInput,
       },
-      { method: "get", path: "/v1/adjustment-notes", payload: listQuery },
-      { method: "get", path: "/v1/adjustment-notes/NDS3", payload: undefined },
+      { method: "get", path: "/v2/adjustment-notes", payload: listQuery },
+      { method: "get", path: "/v2/adjustment-notes/NDS3", payload: undefined },
       {
         method: "get",
-        path: "/v1/adjustment-notes/download-xml/NDS3",
+        path: "/v2/adjustment-notes/NDS3/download-xml",
         payload: undefined,
       },
       {
         method: "get",
-        path: "/v1/adjustment-notes/download-pdf/NDS3",
+        path: "/v2/adjustment-notes/NDS3/download-pdf",
         payload: undefined,
       },
-      { method: "delete", path: "/v1/adjustment-notes/reference/NDS3" },
+      { method: "delete", path: "/v2/adjustment-notes/reference/NDS3" },
     ]);
   });
 
@@ -234,11 +247,11 @@ describe("module routing contract", () => {
     );
 
     expect(spy.calls).toEqual([
-      { method: "get", path: "/v1/receptions/bills", payload: listQuery },
-      { method: "post", path: "/v1/receptions/upload", payload: uploadInput },
+      { method: "get", path: "/v2/receptions/bills", payload: listQuery },
+      { method: "post", path: "/v2/receptions/upload", payload: uploadInput },
       {
         method: "patch",
-        path: "/v1/receptions/bills/SETP990000203/radian/events/030",
+        path: "/v2/receptions/bills/SETP990000203/radian/events/030",
         payload: eventInput,
       },
     ]);
@@ -257,20 +270,26 @@ describe("module routing contract", () => {
     await numberingRanges.get(8);
     await numberingRanges.create(createInput);
     await numberingRanges.updateCurrent(10, updateInput);
+    await numberingRanges.toggleStatus(10);
     await numberingRanges.getSoftwareRange();
     await numberingRanges.delete(8);
 
     expect(spy.calls).toEqual([
-      { method: "get", path: "/v1/numbering-ranges", payload: listQuery },
-      { method: "get", path: "/v1/numbering-ranges/8", payload: undefined },
-      { method: "post", path: "/v1/numbering-ranges", payload: createInput },
+      { method: "get", path: "/v2/numbering-ranges", payload: listQuery },
+      { method: "get", path: "/v2/numbering-ranges/8", payload: undefined },
+      { method: "post", path: "/v2/numbering-ranges", payload: createInput },
       {
         method: "patch",
-        path: "/v1/numbering-ranges/10/current",
+        path: "/v2/numbering-ranges/10/current",
         payload: updateInput,
       },
-      { method: "get", path: "/v1/numbering-ranges/dian", payload: undefined },
-      { method: "delete", path: "/v1/numbering-ranges/8" },
+      {
+        method: "patch",
+        path: "/v2/numbering-ranges/10/toggle-status",
+        payload: undefined,
+      },
+      { method: "get", path: "/v2/numbering-ranges/dian", payload: undefined },
+      { method: "delete", path: "/v2/numbering-ranges/8" },
     ]);
   });
 
@@ -286,53 +305,42 @@ describe("module routing contract", () => {
 
     expect(spy.calls[0]).toEqual({
       method: "get",
-      path: "/v1/company",
+      path: "/v2/companies",
       payload: undefined,
     });
     expect(spy.calls[1]).toEqual({
       method: "put",
-      path: "/v1/company",
+      path: "/v2/companies",
       payload: updateInput,
     });
     expect(spy.calls[2].method).toBe("postForm");
-    expect(spy.calls[2].path).toBe("/v1/company/logo");
+    expect(spy.calls[2].path).toBe("/v2/companies/logo");
     expect(spy.calls[2].payload).toBeInstanceOf(FormData);
   });
 
-  test("catalog and subscription methods map to expected routes and verbs", async () => {
+  test("acquirer, documents and subscription methods map to expected routes and verbs", async () => {
     const spy = createHttpSpy();
-    const catalog = new CatalogModule(spy.client as never);
+    const acquirer = new AcquirerModule(spy.client as never);
+    const documents = new DocumentsModule(spy.client as never);
     const subscription = new SubscriptionModule(spy.client as never);
 
-    const municipalityFilters = { filter: { name: "San Gil" } };
-    const municipalityQuery = { "filter[name]": "San Gil" };
-    const countryFilters = { filter: { name: "Colombia" } };
-    const countryQuery = { "filter[name]": "Colombia" };
-    const tributeFilters = { name: "IVA" };
-    const unitFilters = { name: "Unidad" };
     const acquirerFilters = {
-      identification_document_id: "3",
+      identification_document_code: "13",
       identification_number: "1399991",
     };
 
-    await catalog.listMunicipalities(municipalityFilters);
-    await catalog.listCountries(countryFilters);
-    await catalog.listTributes(tributeFilters);
-    await catalog.listMeasurementUnits(unitFilters);
-    await catalog.getAcquirer(acquirerFilters as never);
+    await acquirer.get(acquirerFilters as never);
+    await documents.downloadXml("CUFE123");
     await subscription.list();
 
     expect(spy.calls).toEqual([
+      { method: "get", path: "/v2/dian/acquirer", payload: acquirerFilters },
       {
         method: "get",
-        path: "/v1/municipalities",
-        payload: municipalityQuery,
+        path: "/v2/documents/CUFE123/download-xml",
+        payload: undefined,
       },
-      { method: "get", path: "/v1/countries", payload: countryQuery },
-      { method: "get", path: "/v1/tributes/products", payload: tributeFilters },
-      { method: "get", path: "/v1/measurement-units", payload: unitFilters },
-      { method: "get", path: "/v1/dian/acquirer", payload: acquirerFilters },
-      { method: "get", path: "/v1/subscriptions", payload: undefined },
+      { method: "get", path: "/v2/subscriptions", payload: undefined },
     ]);
   });
 });

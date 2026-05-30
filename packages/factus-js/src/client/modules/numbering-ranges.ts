@@ -1,13 +1,13 @@
 import type {
-    ApiResponse,
-    CreateNumberingRangeInput,
-    DeleteNumberingRangeResponse,
-    ListParams,
-    NumberingRange,
-    NumberingRangeFilters,
-    PaginatedData,
-    SoftwareNumberingRange,
-    UpdateNumberingRangeCurrentInput,
+  ApiResponse,
+  CreateNumberingRangeInput,
+  DeleteNumberingRangeResponse,
+  ListParams,
+  NumberingRange,
+  NumberingRangeFilters,
+  PaginatedData,
+  SoftwareNumberingRange,
+  UpdateNumberingRangeCurrentInput,
 } from "../../types";
 import type { HttpClient, RequestOptions } from "../http-client";
 import { buildListQueryParams } from "../list-params";
@@ -17,14 +17,14 @@ export class NumberingRangesModule {
 
   /**
    * List numbering ranges with optional filters and pagination.
-   * GET /v1/numbering-ranges
+   * GET /v2/numbering-ranges
    */
   list(
     params?: ListParams<NumberingRangeFilters>,
     options?: RequestOptions,
   ): Promise<ApiResponse<PaginatedData<NumberingRange>>> {
     return this.http.get(
-      "/v1/numbering-ranges",
+      "/v2/numbering-ranges",
       buildListQueryParams(params),
       options?.signal,
     );
@@ -52,14 +52,14 @@ export class NumberingRangesModule {
 
   /**
    * Get a single numbering range by its numeric ID.
-   * GET /v1/numbering-ranges/{id}
+   * GET /v2/numbering-ranges/{id}
    */
   get(
     id: number,
     options?: RequestOptions,
   ): Promise<ApiResponse<NumberingRange>> {
     return this.http.get(
-      `/v1/numbering-ranges/${id}`,
+      `/v2/numbering-ranges/${id}`,
       undefined,
       options?.signal,
     );
@@ -67,18 +67,18 @@ export class NumberingRangesModule {
 
   /**
    * Create a new numbering range.
-   * POST /v1/numbering-ranges
+   * POST /v2/numbering-ranges
    */
   create(
     input: CreateNumberingRangeInput,
     options?: RequestOptions,
   ): Promise<ApiResponse<NumberingRange>> {
-    return this.http.post("/v1/numbering-ranges", input, options?.signal);
+    return this.http.post("/v2/numbering-ranges", input, options?.signal);
   }
 
   /**
    * Update the current consecutive number of a numbering range.
-   * PATCH /v1/numbering-ranges/{id}/current
+   * PATCH /v2/numbering-ranges/{id}/current
    */
   updateCurrent(
     id: number,
@@ -86,21 +86,36 @@ export class NumberingRangesModule {
     options?: RequestOptions,
   ): Promise<ApiResponse<NumberingRange>> {
     return this.http.patch(
-      `/v1/numbering-ranges/${id}/current`,
+      `/v2/numbering-ranges/${id}/current`,
       input,
       options?.signal,
     );
   }
 
   /**
+   * Toggle the active/inactive state of a numbering range.
+   * PATCH /v2/numbering-ranges/{id}/toggle-status
+   */
+  toggleStatus(
+    id: number,
+    options?: RequestOptions,
+  ): Promise<ApiResponse<NumberingRange>> {
+    return this.http.patch(
+      `/v2/numbering-ranges/${id}/toggle-status`,
+      undefined,
+      options?.signal,
+    );
+  }
+
+  /**
    * Get the software numbering range registered with the DIAN.
-   * GET /v1/numbering-ranges/dian
+   * GET /v2/numbering-ranges/dian
    */
   getSoftwareRange(
     options?: RequestOptions,
   ): Promise<ApiResponse<SoftwareNumberingRange[]>> {
     return this.http.get(
-      "/v1/numbering-ranges/dian",
+      "/v2/numbering-ranges/dian",
       undefined,
       options?.signal,
     );
@@ -108,12 +123,12 @@ export class NumberingRangesModule {
 
   /**
    * Delete a numbering range by its numeric ID.
-   * DELETE /v1/numbering-ranges/{id}
+   * DELETE /v2/numbering-ranges/{id}
    */
   delete(
     id: number,
     options?: RequestOptions,
   ): Promise<DeleteNumberingRangeResponse> {
-    return this.http.delete(`/v1/numbering-ranges/${id}`, options?.signal);
+    return this.http.delete(`/v2/numbering-ranges/${id}`, options?.signal);
   }
 }

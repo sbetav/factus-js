@@ -1,28 +1,27 @@
 /**
  * Human-readable metadata (descriptions, abbreviations) for each constant
  * value. Import these when you need to display labels in a UI or build
- * select menus — the primary constant maps remain plain string enums for
- * easy use in API payloads.
+ * select menus.
  */
 
 import type {
   AdjustmentNoteReasonCode,
-  BillDocumentType,
+  BillDocumentCode,
   ChargeDiscountCode,
   ClaimConceptCode,
   CreditNoteCorrectionCode,
-  CreditNoteOperationTypeCode,
-  CustomerTributeId,
+  CreditNoteOperationCode,
+  CustomerTributeCode,
   EventCode,
   FiscalResponsibilityCode,
-  IdentityDocumentTypeId,
+  IdentityDocumentCode,
   NumberingRangeDocumentTypeCode,
   OperationTypeCode,
-  OrganizationTypeId,
+  OrganizationTypeCode,
   PaymentFormCode,
   PaymentMethodCode,
-  ProductStandardId,
-  SupportDocumentIdentityTypeId,
+  ProductStandardCode,
+  SupportDocumentIdentityDocumentCode,
 } from "./constants";
 
 export interface ConstantInfo {
@@ -33,22 +32,25 @@ export interface ConstantInfoWithAbbreviation extends ConstantInfo {
   abbreviation: string;
 }
 
-export const BillDocumentTypeInfo: Record<BillDocumentType, ConstantInfo> = {
+export const BillDocumentCodeInfo: Record<BillDocumentCode, ConstantInfo> = {
   "01": { description: "Factura electronica de venta." },
   "03": { description: "Instrumento electrónico de transmisión - tipo 03." },
 };
-
-/** @deprecated Use `BillDocumentTypeInfo` instead. */
-export const InvoiceDocumentTypeInfo = BillDocumentTypeInfo;
 
 export const OperationTypeCodeInfo: Record<OperationTypeCode, ConstantInfo> = {
   "10": { description: "Estándar." },
   "11": { description: "Mandatos." },
   "12": { description: "Transporte." },
+  "SS-CUFE": { description: "Sector Salud - CUFE." },
+  "SS-Reporte": { description: "Sector Salud - Reporte." },
+  "SS-SinAporte": { description: "Sector Salud - Sin Aporte." },
+  "SS-Recaudo": {
+    description: "Sector Salud - Recaudo de cuotas moderadoras o copagos.",
+  },
 };
 
-export const CreditNoteOperationTypeCodeInfo: Record<
-  CreditNoteOperationTypeCode,
+export const CreditNoteOperationCodeInfo: Record<
+  CreditNoteOperationCode,
   ConstantInfo
 > = {
   "20": {
@@ -74,11 +76,14 @@ export const CreditNoteCorrectionCodeInfo: Record<
   "6": { description: "Descuento comercial por volumen de ventas." },
 };
 
-export const ProductStandardIdInfo: Record<ProductStandardId, ConstantInfo> = {
-  "1": { description: "Estándar de adopción del contribuyente" },
-  "2": { description: "UNSPSC" },
-  "3": { description: "Partida Arancelaria" },
-  "4": { description: "GTIN" },
+export const ProductStandardCodeInfo: Record<
+  ProductStandardCode,
+  ConstantInfo
+> = {
+  "999": { description: "Estándar de adopción del contribuyente" },
+  "001": { description: "UNSPSC" },
+  "020": { description: "Partida Arancelaria" },
+  "010": { description: "GTIN" },
 };
 
 export const ClaimConceptCodeInfo: Record<ClaimConceptCode, ConstantInfo> = {
@@ -98,52 +103,61 @@ export const EventCodeInfo: Record<EventCode, ConstantInfo> = {
   "034": { description: "Aceptación tacita" },
 };
 
-export const IdentityDocumentTypeIdInfo: Record<
-  IdentityDocumentTypeId,
+export const IdentityDocumentCodeInfo: Record<
+  IdentityDocumentCode,
   ConstantInfoWithAbbreviation
 > = {
-  "1": { description: "Registro civil", abbreviation: "RC" },
-  "2": { description: "Tarjeta de identidad", abbreviation: "TI" },
-  "3": { description: "Cédula de ciudadanía", abbreviation: "CC" },
-  "4": { description: "Tarjeta de extranjería", abbreviation: "TE" },
-  "5": { description: "Cédula de extranjería", abbreviation: "CE" },
-  "6": { description: "NIT", abbreviation: "NIT" },
-  "7": { description: "Pasaporte", abbreviation: "PA" },
-  "8": {
+  "11": { description: "Registro civil", abbreviation: "RC" },
+  "12": { description: "Tarjeta de identidad", abbreviation: "TI" },
+  "13": { description: "Cédula de ciudadanía", abbreviation: "CC" },
+  "21": { description: "Tarjeta de extranjería", abbreviation: "TE" },
+  "22": { description: "Cédula de extranjería", abbreviation: "CE" },
+  "31": { description: "NIT", abbreviation: "NIT" },
+  "41": { description: "Pasaporte", abbreviation: "PA" },
+  "42": {
     description: "Documento de identificación extranjero",
     abbreviation: "DE",
   },
-  "9": { description: "PEP", abbreviation: "PEP" },
-  "10": { description: "NIT otro país", abbreviation: "NE" },
-  "11": { description: "NUIP", abbreviation: "NUIP" },
+  "47": { description: "PEP", abbreviation: "PEP" },
+  "48": {
+    description: "PPT (Permiso Protección Temporal)",
+    abbreviation: "PPT",
+  },
+  "50": { description: "NIT otro país", abbreviation: "NE" },
+  "91": { description: "NUIP", abbreviation: "NUIP" },
 };
 
-export const SupportDocumentIdentityTypeIdInfo: Record<
-  SupportDocumentIdentityTypeId,
+export const SupportDocumentIdentityDocumentCodeInfo: Record<
+  SupportDocumentIdentityDocumentCode,
   ConstantInfoWithAbbreviation
 > = {
-  "4": { description: "Tarjeta de extranjería", abbreviation: "TE" },
-  "5": { description: "Cédula de extranjería", abbreviation: "CE" },
-  "6": { description: "NIT", abbreviation: "NIT" },
-  "7": { description: "Pasaporte", abbreviation: "PA" },
-  "8": {
+  "21": { description: "Tarjeta de extranjería", abbreviation: "TE" },
+  "22": { description: "Cédula de extranjería", abbreviation: "CE" },
+  "31": { description: "NIT", abbreviation: "NIT" },
+  "41": { description: "Pasaporte", abbreviation: "PA" },
+  "42": {
     description: "Documento de identificación extranjero",
     abbreviation: "DE",
   },
-  "9": { description: "PEP", abbreviation: "PEP" },
-  "10": { description: "NIT otro país", abbreviation: "NE" },
+  "47": { description: "PEP", abbreviation: "PEP" },
+  "50": { description: "NIT otro país", abbreviation: "NE" },
 };
 
-export const CustomerTributeIdInfo: Record<CustomerTributeId, ConstantInfo> = {
-  "18": { description: "IVA" },
-  "21": { description: "No aplica" },
+export const CustomerTributeCodeInfo: Record<
+  CustomerTributeCode,
+  ConstantInfo
+> = {
+  "01": { description: "IVA" },
+  ZZ: { description: "No aplica" },
 };
 
-export const OrganizationTypeIdInfo: Record<OrganizationTypeId, ConstantInfo> =
-  {
-    "1": { description: "Persona Jurídica" },
-    "2": { description: "Persona Natural" },
-  };
+export const OrganizationTypeCodeInfo: Record<
+  OrganizationTypeCode,
+  ConstantInfo
+> = {
+  "1": { description: "Persona Jurídica" },
+  "2": { description: "Persona Natural" },
+};
 
 export const PaymentMethodCodeInfo: Record<PaymentMethodCode, ConstantInfo> = {
   "10": { description: "Efectivo" },

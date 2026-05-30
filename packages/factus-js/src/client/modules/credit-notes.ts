@@ -1,17 +1,18 @@
 import type {
-    ApiResponse,
-    CreateCreditNoteInput,
-    CreditNoteFilters,
-    CreditNoteListItem,
-    DeleteCreditNoteResponse,
-    DownloadCreditNotePdfResponse,
-    DownloadCreditNoteXmlResponse,
-    GetCreditNoteEmailContentResponse,
-    GetCreditNotesResponse,
-    ListParams,
-    SendCreditNoteEmailInput,
-    SendCreditNoteEmailResponse,
-    ViewCreditNoteData,
+  CreateCreditNoteInput,
+  CreateCreditNoteResponse,
+  CreditNoteFilters,
+  CreditNoteListItem,
+  DeleteCreditNoteResponse,
+  DownloadCreditNoteAttachedDocumentXmlResponse,
+  DownloadCreditNotePdfResponse,
+  DownloadCreditNoteXmlResponse,
+  GetCreditNoteEmailContentResponse,
+  GetCreditNotesResponse,
+  ListParams,
+  SendCreditNoteEmailInput,
+  SendCreditNoteEmailResponse,
+  ViewCreditNoteResponse,
 } from "../../types";
 import type { HttpClient, RequestOptions } from "../http-client";
 import { buildListQueryParams } from "../list-params";
@@ -21,25 +22,25 @@ export class CreditNotesModule {
 
   /**
    * Create (issue) a new credit note.
-   * POST /v1/credit-notes/validate
+   * POST /v2/credit-notes/validate
    */
   create(
     input: CreateCreditNoteInput,
     options?: RequestOptions,
-  ): Promise<ApiResponse<CreditNoteListItem>> {
-    return this.http.post("/v1/credit-notes/validate", input, options?.signal);
+  ): Promise<CreateCreditNoteResponse> {
+    return this.http.post("/v2/credit-notes/validate", input, options?.signal);
   }
 
   /**
    * List credit notes with optional filters and pagination.
-   * GET /v1/credit-notes
+   * GET /v2/credit-notes
    */
   list(
     params?: ListParams<CreditNoteFilters>,
     options?: RequestOptions,
   ): Promise<GetCreditNotesResponse> {
     return this.http.get(
-      "/v1/credit-notes",
+      "/v2/credit-notes",
       buildListQueryParams(params),
       options?.signal,
     );
@@ -67,14 +68,13 @@ export class CreditNotesModule {
 
   /**
    * Get full detail of a credit note by its document number.
-   * GET /v1/credit-notes/{number}
-   */
-  get(
+   * GET /v2/credit-notes/{number}
+   */ get(
     number: string,
     options?: RequestOptions,
-  ): Promise<ApiResponse<ViewCreditNoteData>> {
+  ): Promise<ViewCreditNoteResponse> {
     return this.http.get(
-      `/v1/credit-notes/${number}`,
+      `/v2/credit-notes/${number}`,
       undefined,
       options?.signal,
     );
@@ -82,14 +82,30 @@ export class CreditNotesModule {
 
   /**
    * Download the credit note XML as a base64-encoded string.
-   * GET /v1/credit-notes/download-xml/{number}
+   * GET /v2/credit-notes/{number}/download-xml
    */
   downloadXml(
     number: string,
     options?: RequestOptions,
   ): Promise<DownloadCreditNoteXmlResponse> {
     return this.http.get(
-      `/v1/credit-notes/download-xml/${number}`,
+      `/v2/credit-notes/${number}/download-xml`,
+      undefined,
+      options?.signal,
+    );
+  }
+
+  /**
+   * Download the credit note AttachedDocument XML as a base64-encoded string,
+   * including the associated file name.
+   * GET /v2/credit-notes/{number}/download-attached-document-xml
+   */
+  downloadAttachedDocumentXml(
+    number: string,
+    options?: RequestOptions,
+  ): Promise<DownloadCreditNoteAttachedDocumentXmlResponse> {
+    return this.http.get(
+      `/v2/credit-notes/${number}/download-attached-document-xml`,
       undefined,
       options?.signal,
     );
@@ -97,14 +113,14 @@ export class CreditNotesModule {
 
   /**
    * Download the credit note PDF as a base64-encoded string.
-   * GET /v1/credit-notes/download-pdf/{number}
+   * GET /v2/credit-notes/{number}/download-pdf
    */
   downloadPdf(
     number: string,
     options?: RequestOptions,
   ): Promise<DownloadCreditNotePdfResponse> {
     return this.http.get(
-      `/v1/credit-notes/download-pdf/${number}`,
+      `/v2/credit-notes/${number}/download-pdf`,
       undefined,
       options?.signal,
     );
@@ -112,14 +128,14 @@ export class CreditNotesModule {
 
   /**
    * Get the email content for a credit note.
-   * GET /v1/credit-notes/{number}/email-content
+   * GET /v2/credit-notes/{number}/email-content
    */
   getEmailContent(
     number: string,
     options?: RequestOptions,
   ): Promise<GetCreditNoteEmailContentResponse> {
     return this.http.get(
-      `/v1/credit-notes/${number}/email-content`,
+      `/v2/credit-notes/${number}/email-content`,
       undefined,
       options?.signal,
     );
@@ -127,7 +143,7 @@ export class CreditNotesModule {
 
   /**
    * Send the credit note by email (max 2 per document per day).
-   * POST /v1/credit-notes/send-email/{number}
+   * POST /v2/credit-notes/{number}/send-email
    */
   sendEmail(
     number: string,
@@ -135,7 +151,7 @@ export class CreditNotesModule {
     options?: RequestOptions,
   ): Promise<SendCreditNoteEmailResponse> {
     return this.http.post(
-      `/v1/credit-notes/send-email/${number}`,
+      `/v2/credit-notes/${number}/send-email`,
       input,
       options?.signal,
     );
@@ -143,14 +159,14 @@ export class CreditNotesModule {
 
   /**
    * Delete (void) a credit note that has not yet been validated by the DIAN.
-   * DELETE /v1/credit-notes/reference/{reference_code}
+   * DELETE /v2/credit-notes/reference/{reference_code}
    */
   delete(
     referenceCode: string,
     options?: RequestOptions,
   ): Promise<DeleteCreditNoteResponse> {
     return this.http.delete(
-      `/v1/credit-notes/reference/${referenceCode}`,
+      `/v2/credit-notes/reference/${referenceCode}`,
       options?.signal,
     );
   }

@@ -1,3 +1,4 @@
+export * from "./acquirer";
 export * from "./auth";
 export * from "./constants";
 export * from "./shared";
@@ -9,6 +10,5 @@ export * from "./customer";
 export * from "./adjustment-note";
 export * from "./numbering-range";
 export * from "./reception";
-export * from "./reference";
 export * from "./subscription";
 export * from "./support-document";

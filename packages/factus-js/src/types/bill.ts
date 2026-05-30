@@ -1,31 +1,46 @@
 import type {
-  BillDocumentType,
+  BillDocumentCode,
   ChargeDiscountCode,
-  CustomerTributeId,
-  IdentityDocumentTypeId,
+  EventCode,
+  IdentityDocumentCode,
   OperationTypeCode,
-  OrganizationTypeId,
-  PaymentFormCode,
-  PaymentMethodCode,
-  ProductStandardId,
 } from "../constants";
-import type { ApiResponse, PaginatedData } from "./common";
-import type { Customer } from "./customer";
+import type { CustomerInput } from "./customer";
 import type {
+  ApiResponse,
+  DateRangeFilter,
+  LiteralUnion,
+  PaginatedData,
+} from "./common";
+import type {
+  AllowanceChargeInput,
   AllowanceChargeResponse,
   BillingPeriod,
-  CodeNameIdObject,
   CodeNameObject,
   CompanyInfo,
   DeleteResponse,
+  DocumentErrors,
+  DocumentHealthData,
+  DocumentItemInput,
+  DocumentItemResponse,
+  DocumentLinks,
+  DocumentParty,
+  DocumentPaymentDetail,
+  DocumentPaymentDetailInput,
+  DocumentBeneficiary,
+  DocumentReference,
+  DocumentTaxSummary,
+  DocumentTotals,
   DocumentWithholdingTax,
   DownloadPdfData,
   DownloadXmlData,
   EmailContentData,
   EstablishmentInput,
-  EstablishmentResponse,
-  ItemWithholdingTax,
   NumberingRangeInfo,
+  PrepaymentDetail,
+  PrepaymentDetailInput,
+  RelatedDocumentsReference,
+  RelatedNotes,
   SendEmailInput,
   SendEmailResponse,
 } from "./shared";
@@ -34,105 +49,55 @@ import type {
 // Input types
 // ---------------------------------------------------------------------------
 
-export interface WithholdingTax {
-  code: string;
-  withholding_tax_rate: number;
-}
-
 export interface CreateBillInput {
-  numbering_range_id?: number;
-  document?: BillDocumentType;
   reference_code: string;
-  observation?: string;
-  payment_form?: PaymentFormCode;
-  payment_due_date?: string;
-  payment_method_code?: PaymentMethodCode;
+  created_time?: string;
+  document?: BillDocumentCode;
+  numbering_range_id?: number;
   operation_type?: OperationTypeCode;
+  send_email?: boolean;
+  observation?: string;
+  prepayment_details?: PrepaymentDetailInput[];
+  payment_details: DocumentPaymentDetailInput[];
+  cash_rounding_amount?: string | number;
+  establishment?: EstablishmentInput;
+  billing_period?: BillingPeriod;
   order_reference?: {
     reference_code: string;
     issue_date?: string;
   };
-  send_email?: boolean;
-  related_documents?: Array<{
-    code: string;
-    issue_date: string;
-    number: string;
-  }>;
-  billing_period?: BillingPeriod;
-  establishment?: EstablishmentInput;
-  customer: {
-    identification_document_id: IdentityDocumentTypeId;
-    identification: string;
-    dv?: string;
-    company?: string;
-    trade_name?: string;
-    names?: string;
-    address?: string;
-    email?: string;
-    phone?: string;
-    legal_organization_id: OrganizationTypeId;
-    tribute_id: CustomerTributeId;
-    municipality_id?: number | string;
-  };
-  items: Array<{
-    scheme_id?: string;
-    note?: string;
-    code_reference: string;
-    name: string;
-    quantity: number;
-    discount_rate: number;
-    price: number;
-    tax_rate: string;
-    unit_measure_id: number;
-    standard_code_id: ProductStandardId;
-    is_excluded: 0 | 1;
-    tribute_id: number;
-    withholding_taxes?: Array<WithholdingTax>;
-    mandate?: {
-      identification_document_id: IdentityDocumentTypeId;
-      identification: string;
-    };
-  }>;
-  allowance_charges?: Array<{
-    concept_type: ChargeDiscountCode;
-    is_surcharge: boolean;
-    reason: string;
-    base_amount: number | string;
-    amount: number | string;
-  }>;
+  related_documents?: RelatedDocumentsReference[];
+  customer: CustomerInput;
+  items: DocumentItemInput[];
+  allowance_charges?: Array<
+    Omit<AllowanceChargeInput, "concept_type"> & {
+      concept_type: ChargeDiscountCode;
+    }
+  >;
+  health?: DocumentHealthData;
+  beneficiary?: DocumentBeneficiary;
 }
 
 // ---------------------------------------------------------------------------
-// List item type
+// List item / filters
 // ---------------------------------------------------------------------------
 
 export interface BillListItem {
-  id: number;
-  document: CodeNameObject;
+  api_client_name?: string | null;
   number: string;
-  api_client_name?: string;
   reference_code: string | null;
-  identification: string;
-  graphic_representation_name: string;
-  company: string;
-  trade_name: string | null;
-  names: string;
-  email: string | null;
+  customer?: DocumentParty;
+  identification?: string;
+  names?: string;
   total: string;
-  status: number;
-  errors: string[];
-  send_email: 0 | 1;
-  has_claim: 0 | 1;
-  is_negotiable_instrument: 0 | 1;
-  payment_form: CodeNameObject;
+  errors: DocumentErrors;
+  send_email?: boolean;
+  has_claim?: boolean;
+  is_negotiable_instrument?: boolean;
+  is_validated?: boolean;
+  validated_at?: string | null;
   created_at: string;
-  credit_notes: Array<{ id: number; number: string }>;
-  debit_notes: Array<{ id: number; number: string }>;
 }
-
-// ---------------------------------------------------------------------------
-// Filters
-// ---------------------------------------------------------------------------
 
 export interface BillFilters {
   identification?: string;
@@ -140,103 +105,55 @@ export interface BillFilters {
   number?: string;
   prefix?: string;
   reference_code?: string;
-  status?: string | number;
+  status?: string | number | boolean;
+  created_at?: DateRangeFilter;
 }
 
 // ---------------------------------------------------------------------------
-// View (detail) response
+// View response data
 // ---------------------------------------------------------------------------
-
-export interface BillItemResponse {
-  scheme_id: string | null;
-  note: string | null;
-  code_reference: string;
-  name: string;
-  quantity: number;
-  discount_rate: string;
-  discount: string;
-  gross_value: string;
-  tax_rate: string;
-  taxable_amount: string;
-  tax_amount: string;
-  price: string;
-  is_excluded: 0 | 1;
-  unit_measure: CodeNameIdObject;
-  standard_code: CodeNameIdObject;
-  tribute: CodeNameIdObject;
-  total: number;
-  withholding_taxes: ItemWithholdingTax[];
-  /** The mandate field shape matches the mandate input on CreateBillInput items. */
-  mandate: {
-    identification_document_id: string;
-    identification: string;
-  } | null;
-}
 
 export interface ViewBillData {
+  reference_code: string;
+  number: string;
+  order_reference?: string | null;
+  send_email?: boolean;
+  has_claim?: boolean;
+  is_negotiable_instrument?: boolean;
+  is_validated: boolean;
+  validated_at: string | null;
+  errors: DocumentErrors;
+  observation?: string | null;
+  created_at: string;
+  document_type?: CodeNameObject;
+  operation_type?: CodeNameObject;
+  billing_period?: BillingPeriod | null;
+  payment_details: DocumentPaymentDetail[];
+  numbering_range?: NumberingRangeInfo;
+  health?: DocumentHealthData | null;
+  beneficiary?: DocumentBeneficiary | null;
   company: CompanyInfo;
-  establishment: EstablishmentResponse;
-  customer: Customer & {
-    graphic_representation_name: string;
-    trade_name: string;
-    company: string;
-    legal_organization: CodeNameIdObject;
-    tribute: CodeNameIdObject;
-    municipality: CodeNameIdObject;
-  };
-  numbering_range: NumberingRangeInfo;
-  billing_period: BillingPeriod | null;
-  bill: {
-    id: number;
-    document: CodeNameObject;
-    operation_type: CodeNameObject;
-    number: string;
-    reference_code: string;
-    order_reference: string | null;
-    status: number;
-    send_email: 0 | 1;
-    qr: string;
-    cufe: string;
-    validated: string;
-    gross_value: string;
-    taxable_amount: string;
-    tax_amount: string;
-    discount_amount: string;
-    surcharge_amount: string;
-    total: string;
-    observation: string | null;
-    errors: string[];
-    created_at: string;
-    payment_due_date: string | null;
-    qr_image: string;
-    has_claim: 0 | 1;
-    is_negotiable_instrument: 0 | 1;
-    payment_form: CodeNameObject;
-    payment_method: CodeNameObject;
-  };
-  related_documents: Array<{
-    code: string;
-    issue_date: string;
-    number: string;
-  }>;
-  items: BillItemResponse[];
-  allowance_charges: AllowanceChargeResponse[];
-  withholding_taxes: DocumentWithholdingTax[];
-  credit_notes: Array<{ id: number; number: string }>;
-  debit_notes: Array<{ id: number; number: string }>;
+  customer: DocumentParty;
+  items: DocumentItemResponse[];
+  prepayment_details?: PrepaymentDetail[];
+  allowance_charges?: AllowanceChargeResponse[];
+  taxes?: DocumentTaxSummary[];
+  withholding_taxes?: DocumentWithholdingTax[];
+  totals?: DocumentTotals;
+  related_documents?: RelatedDocumentsReference[];
+  related_notes?: RelatedNotes;
+  links?: DocumentLinks;
+  cufe?: string;
+  qr?: string;
+  qr_image?: string;
 }
 
 // ---------------------------------------------------------------------------
-// RADIAN event types
+// RADIAN events
 // ---------------------------------------------------------------------------
 
 export interface RadianEventUpdateInput {
-  /**
-   * Identity document type code. Common values are provided by {@link IdentityDocumentTypeId};
-   * the API may accept additional codes beyond the defined constants (e.g. `"13"` for tacit
-   * acceptance), so plain strings are also accepted.
-   */
-  identification_document_code: IdentityDocumentTypeId | string;
+  identification_document_code: LiteralUnion<IdentityDocumentCode>;
   identification: string;
   dv?: string;
   first_name: string;
@@ -248,59 +165,29 @@ export interface RadianEventUpdateInput {
 export interface BillEvent {
   number: string;
   cude: string;
-  event_code: string;
+  event_code: LiteralUnion<EventCode>;
   event_name: string;
   effective_date: string;
   effective_time: string;
 }
 
 // ---------------------------------------------------------------------------
-// Download / email / delete responses (named aliases for discoverability)
+// Named response aliases
 // ---------------------------------------------------------------------------
 
 export interface SendBillEmailInput extends SendEmailInput {}
+
+export type CreateBillResponse = ApiResponse<ViewBillData>;
+export type ViewBillResponse = ApiResponse<ViewBillData>;
+export type GetBillsResponse = ApiResponse<PaginatedData<BillListItem>>;
+export type GetBillEventsResponse = ApiResponse<BillEvent[]>;
 export type SendBillEmailResponse = SendEmailResponse;
 export type DeleteBillResponse = DeleteResponse;
 export type RadianEventUpdateResponse = SendEmailResponse;
-export type ViewBillResponse = ApiResponse<ViewBillData>;
-export type GetBillEventsResponse = ApiResponse<BillEvent[]>;
 export type DownloadBillXmlResponse = ApiResponse<DownloadXmlData>;
+export type DownloadBillAttachedDocumentXmlResponse =
+  ApiResponse<DownloadXmlData>;
 export type DownloadBillPdfResponse = ApiResponse<DownloadPdfData>;
 export type GetBillEmailContentResponse = ApiResponse<EmailContentData>;
-
-// ---------------------------------------------------------------------------
-// List response
-// ---------------------------------------------------------------------------
-
-export type GetBillsResponse = ApiResponse<PaginatedData<BillListItem>>;
-
-/** @deprecated Use `CreateBillInput` instead. */
-export type CreateInvoiceInput = CreateBillInput;
-/** @deprecated Use `BillListItem` instead. */
-export type InvoiceListItem = BillListItem;
-/** @deprecated Use `BillFilters` instead. */
-export type InvoiceFilters = BillFilters;
-/** @deprecated Use `BillItemResponse` instead. */
-export type InvoiceItemResponse = BillItemResponse;
-/** @deprecated Use `ViewBillData` instead. */
-export type ViewInvoiceData = ViewBillData;
-/** @deprecated Use `BillEvent` instead. */
-export type InvoiceEvent = BillEvent;
-/** @deprecated Use `SendBillEmailInput` instead. */
-export type SendInvoiceEmailInput = SendBillEmailInput;
-/** @deprecated Use `SendBillEmailResponse` instead. */
-export type SendInvoiceEmailResponse = SendBillEmailResponse;
-/** @deprecated Use `DeleteBillResponse` instead. */
-export type DeleteInvoiceResponse = DeleteBillResponse;
-/** @deprecated Use `ViewBillResponse` instead. */
-export type ViewInvoiceResponse = ViewBillResponse;
-/** @deprecated Use `GetBillEventsResponse` instead. */
-export type GetInvoiceEventsResponse = GetBillEventsResponse;
-/** @deprecated Use `DownloadBillXmlResponse` instead. */
-export type DownloadInvoiceXmlResponse = DownloadBillXmlResponse;
-/** @deprecated Use `DownloadBillPdfResponse` instead. */
-export type DownloadInvoicePdfResponse = DownloadBillPdfResponse;
-/** @deprecated Use `GetBillEmailContentResponse` instead. */
-export type GetInvoiceEmailContentResponse = GetBillEmailContentResponse;
-/** @deprecated Use `GetBillsResponse` instead. */
-export type GetInvoicesResponse = GetBillsResponse;
+export type BillRelatedNote = DocumentReference;
+export type BillItemResponse = DocumentItemResponse;

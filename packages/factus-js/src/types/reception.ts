@@ -1,4 +1,5 @@
-import type { EventCode } from "../constants";
+import type { EventCode, IdentityDocumentCode } from "../constants";
+import type { LiteralUnion } from "./common";
 
 // ---------------------------------------------------------------------------
 // Input types
@@ -17,10 +18,8 @@ export interface EmitEventParams {
 export interface EmitEventInput {
   /**
    * Identity document type code for the person emitting the event.
-   * Common values are provided by {@link IdentityDocumentTypeId};
-   * the API may accept additional codes beyond the defined constants.
    */
-  identification_document_code: string;
+  identification_document_code: LiteralUnion<IdentityDocumentCode>;
   identification: string;
   dv?: string;
   first_name: string;
@@ -51,13 +50,16 @@ export interface ReceptionBill {
   accepted: boolean | null;
   created_at: string;
   claim: boolean;
-  event_type: string | null;
+  event_type: LiteralUnion<EventCode> | null;
 }
 
 export interface ReceptionBillFilters {
+  id?: string | number;
   number?: string;
-  sender_nit?: string;
-  status?: string | number;
+  issue_date?: string;
+  cufe?: string;
+  company_nit?: string;
+  company_name?: string;
   completed_events?: string | number;
 }
 
@@ -68,7 +70,7 @@ export interface UploadedReceptionBill {
 }
 
 export interface ReceptionBillEvent {
-  event_type: string;
+  event_type: LiteralUnion<EventCode>;
   event_name: string;
   effective_date: string;
   effective_time: string;

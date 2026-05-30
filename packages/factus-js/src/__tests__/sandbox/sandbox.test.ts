@@ -43,6 +43,119 @@ describe("sandbox integration", () => {
   const supportReference = uniqueRef("REF0017");
   const adjustmentReference = uniqueRef("REF007");
 
+  const creditPaymentDetails = [
+    {
+      payment_form: "2",
+      payment_method_code: "10",
+      amount: "50000.00",
+      due_date: "2026-12-31",
+    },
+  ];
+
+  const cashPaymentDetails = [
+    {
+      payment_form: "1",
+      payment_method_code: "10",
+      amount: "50000.00",
+    },
+  ];
+
+  const billItem = {
+    code_reference: "12345",
+    name: "producto de prueba",
+    quantity: "1.00",
+    discount_rate: "20.00",
+    price: "50000.00",
+    unit_measure_code: "94",
+    standard_code: "999",
+    taxes: [{ code: "01", rate: "19.00" }],
+  };
+
+  const supportItems = [
+    {
+      code_reference: "12345",
+      name: "producto de prueba",
+      quantity: "1.00",
+      discount_rate: "20.00",
+      price: "50000.00",
+      unit_measure_code: "94",
+      standard_code: "999",
+      withholding_taxes: [{ code: "06", rate: "3.50" }],
+      taxes: [{ code: "01", rate: "19.00" }],
+    },
+    {
+      code_reference: "54321",
+      name: "producto de prueba 2",
+      quantity: "1.00",
+      discount_rate: "0.00",
+      price: "50000.00",
+      unit_measure_code: "94",
+      standard_code: "999",
+      taxes: [{ code: "01", rate: "19.00" }],
+    },
+  ];
+
+  const naturalCustomer = {
+    identification_document_code: "13",
+    identification: "123456789",
+    dv: "3",
+    company: "Enigma SAS",
+    trade_name: "",
+    names: "Alan Turing",
+    address: "calle 1 # 2-68",
+    email: "alanturing@enigmasas.com",
+    phone: "1234567890",
+    legal_organization_code: "2",
+    tribute_code: "ZZ",
+    municipality_code: "68679",
+  };
+
+  const invalidNitCustomer = {
+    identification_document_code: "31",
+    identification: "123456789",
+    dv: "3",
+    names: "Alan Turing",
+    address: "calle 1 # 2-68",
+    email: "alanturing@enigmasas.com",
+    phone: "1234567890",
+    legal_organization_code: "2",
+    tribute_code: "ZZ",
+    municipality_code: "68679",
+  };
+
+  const validProvider = {
+    identification_document_code: "31",
+    identification: "123456789",
+    dv: "6",
+    trade_name: "",
+    names: "Alan Turing",
+    address: "calle 1 # 2-68",
+    email: "alanturing@enigmasas.com",
+    phone: "1234567890",
+    country_code: "CO",
+    municipality_code: "68679",
+    legal_organization_code: "1",
+  };
+
+  const invalidProvider = {
+    identification_document_code: "31",
+    identification: "INVALID_DOCUMENT",
+    dv: "6",
+    trade_name: "",
+    names: "Alan Turing",
+    address: "calle 1 # 2-68",
+    email: "alanturing@enigmasas.com",
+    phone: "1234567890",
+    country_code: "CO",
+    municipality_code: "68679",
+    legal_organization_code: "1",
+  };
+
+  const invalidProviderForAdjustment = {
+    ...invalidProvider,
+    dv: "0",
+  };
+
   afterAll(() => {
     console.log("\n--- Sandbox Results ---\n");
     printResults();
@@ -78,7 +191,7 @@ describe("sandbox integration", () => {
     // "pending bill" conflicts). Create a bill that passes API input
     // validation but fails DIAN validation (persisted with errors),
     // then delete it by reference_code.
-    // Using identification_document_id 6 (NIT) with wrong DV triggers
+    // Using identification_document_code 31 (NIT) with wrong DV triggers
     // FAK24 — the doc is persisted but not sent to DIAN.
     // -----------------------------------------------------------------
     const deleteBillRef = uniqueRef("DEL-BILL");
@@ -87,35 +200,9 @@ describe("sandbox integration", () => {
       factus.bills.create({
         numbering_range_id: 8,
         reference_code: deleteBillRef,
-        payment_form: "2",
-        payment_due_date: "2026-12-31",
-        payment_method_code: "10",
-        customer: {
-          identification: "123456789",
-          dv: "3",
-          names: "Alan Turing",
-          address: "calle 1 # 2-68",
-          email: "alanturing@enigmasas.com",
-          phone: "1234567890",
-          legal_organization_id: "2",
-          tribute_id: "21",
-          identification_document_id: "6",
-          municipality_id: 980,
-        },
-        items: [
-          {
-            code_reference: "12345",
-            name: "producto de prueba",
-            quantity: 1,
-            discount_rate: 20,
-            price: 50000,
-            tax_rate: "19.00",
-            unit_measure_id: 70,
-            standard_code_id: "1",
-            is_excluded: 0,
-            tribute_id: 1,
-          },
-        ],
+        payment_details: creditPaymentDetails,
+        customer: invalidNitCustomer,
+        items: [billItem],
       }),
     );
     await run("bills.delete", factus.bills.delete(deleteBillRef));
@@ -128,37 +215,9 @@ describe("sandbox integration", () => {
       factus.bills.create({
         numbering_range_id: 8,
         reference_code: billReference,
-        payment_form: "2",
-        payment_due_date: "2026-12-31",
-        payment_method_code: "10",
-        customer: {
-          identification: "123456789",
-          dv: "3",
-          company: "Enigma SAS",
-          trade_name: "",
-          names: "Alan Turing",
-          address: "calle 1 # 2-68",
-          email: "alanturing@enigmasas.com",
-          phone: "1234567890",
-          legal_organization_id: "2",
-          tribute_id: "21",
-          identification_document_id: "3",
-          municipality_id: 980,
-        },
-        items: [
-          {
-            code_reference: "12345",
-            name: "producto de prueba",
-            quantity: 1,
-            discount_rate: 20,
-            price: 50000,
-            tax_rate: "19.00",
-            unit_measure_id: 70,
-            standard_code_id: "1",
-            is_excluded: 0,
-            tribute_id: 1,
-          },
-        ],
+        payment_details: creditPaymentDetails,
+        customer: naturalCustomer,
+        items: [billItem],
       }),
       [409, 422],
     );
@@ -184,33 +243,9 @@ describe("sandbox integration", () => {
         customization_id: "20",
         bill_id: 514,
         reference_code: uniqueRef("CN"),
-        payment_method_code: "10",
-        customer: {
-          identification: "123456789",
-          dv: "3",
-          names: "Alan Turing",
-          address: "calle 1 # 2-68",
-          email: "alanturing@enigmasas.com",
-          phone: "1234567890",
-          legal_organization_id: "2",
-          tribute_id: "21",
-          identification_document_id: "3",
-          municipality_id: 980,
-        },
-        items: [
-          {
-            code_reference: "12345",
-            name: "producto de prueba",
-            quantity: 1,
-            discount_rate: 20,
-            price: 50000,
-            tax_rate: "19.00",
-            unit_measure_id: 70,
-            standard_code_id: "1",
-            is_excluded: 0,
-            tribute_id: 1,
-          },
-        ],
+        payment_details: cashPaymentDetails,
+        customer: naturalCustomer,
+        items: [billItem],
       }),
       [409, 422],
     );
@@ -236,7 +271,7 @@ describe("sandbox integration", () => {
     // creditNotes.delete — create a credit note that passes API input
     // validation but fails DIAN validation (persisted with errors),
     // then delete it by reference_code.
-    // Using NIT (id:6) with wrong DV triggers DIAN rejection.
+    // Using NIT (code:31) with wrong DV triggers DIAN rejection.
     const deleteCreditNoteRef = uniqueRef("DEL-CN");
     await createInvalid(
       "creditNotes.delete (create invalid)",
@@ -246,33 +281,9 @@ describe("sandbox integration", () => {
         customization_id: "20",
         bill_id: 514,
         reference_code: deleteCreditNoteRef,
-        payment_method_code: "10",
-        customer: {
-          identification: "123456789",
-          identification_document_id: "6",
-          dv: "3",
-          names: "Alan Turing",
-          address: "calle 1 # 2-68",
-          email: "alanturing@enigmasas.com",
-          phone: "1234567890",
-          legal_organization_id: "2",
-          tribute_id: "21",
-          municipality_id: 980,
-        },
-        items: [
-          {
-            code_reference: "12345",
-            name: "producto de prueba",
-            quantity: 1,
-            discount_rate: 20,
-            price: 50000,
-            tax_rate: "19.00",
-            unit_measure_id: 70,
-            standard_code_id: "1",
-            is_excluded: 0,
-            tribute_id: 1,
-          },
-        ],
+        payment_details: cashPaymentDetails,
+        customer: invalidNitCustomer,
+        items: [billItem],
       }),
     );
     await run(
@@ -307,49 +318,17 @@ describe("sandbox integration", () => {
     // supportDocuments.delete — create a support doc that passes API input
     // validation but fails DIAN validation (persisted but pending),
     // then delete it. Use identification: "INVALID_DOCUMENT" with a
-    // valid identification_document_id to trigger DIAN rejection.
+    // valid identification_document_code to trigger DIAN rejection.
     const deleteSupportRef = uniqueRef("DEL-SD");
     await createInvalid(
       "supportDocuments.delete (create invalid)",
       factus.supportDocuments.create({
         reference_code: deleteSupportRef,
         numbering_range_id: 148,
-        payment_method_code: "10",
         observation: "",
-        provider: {
-          identification_document_id: "6",
-          identification: "INVALID_DOCUMENT",
-          dv: "6",
-          trade_name: "",
-          names: "Alan Turing",
-          address: "calle 1 # 2-68",
-          email: "alanturing@enigmasas.com",
-          phone: "1234567890",
-          is_resident: 1,
-          country_code: "CO",
-          municipality_id: 980,
-        },
-        items: [
-          {
-            code_reference: "12345",
-            name: "producto de prueba",
-            quantity: 1,
-            discount_rate: 20,
-            price: 50000,
-            unit_measure_id: 70,
-            standard_code_id: "1",
-            withholding_taxes: [{ code: "06", withholding_tax_rate: "3.50" }],
-          },
-          {
-            code_reference: "54321",
-            name: "producto de prueba 2",
-            quantity: 1,
-            discount_rate: 0,
-            price: 50000,
-            unit_measure_id: 70,
-            standard_code_id: "1",
-          },
-        ],
+        payment_details: cashPaymentDetails,
+        provider: invalidProvider,
+        items: supportItems,
       }),
     );
     await run(
@@ -366,51 +345,12 @@ describe("sandbox integration", () => {
       factus.supportDocuments.create({
         reference_code: deleteAdjSupportRef,
         numbering_range_id: 148,
-        payment_method_code: "10",
         observation: "",
-        provider: {
-          identification_document_id: "6",
-          identification: "INVALID_DOCUMENT",
-          dv: "0",
-          trade_name: "",
-          names: "Alan Turing",
-          address: "calle 1 # 2-68",
-          email: "alanturing@enigmasas.com",
-          phone: "1234567890",
-          is_resident: 1,
-          country_code: "CO",
-          municipality_id: 980,
-        },
-        items: [
-          {
-            code_reference: "12345",
-            name: "producto de prueba",
-            quantity: 1,
-            discount_rate: 20,
-            price: 50000,
-            unit_measure_id: 70,
-            standard_code_id: "1",
-            withholding_taxes: [{ code: "06", withholding_tax_rate: "3.50" }],
-          },
-          {
-            code_reference: "54321",
-            name: "producto de prueba 2",
-            quantity: 1,
-            discount_rate: 0,
-            price: 50000,
-            unit_measure_id: 70,
-            standard_code_id: "1",
-          },
-        ],
+        payment_details: cashPaymentDetails,
+        provider: invalidProviderForAdjustment,
+        items: supportItems,
       }),
     );
-
-    // Look up the support document to get its id
-    const supportDocList = await factus.supportDocuments.list({
-      filter: { reference_code: deleteAdjSupportRef },
-    });
-    const supportDocId = supportDocList.data.data[0]?.id;
-    expect(supportDocId).toBeDefined();
 
     // Create an adjustment note for that support document
     const deleteAdjRef = uniqueRef("DEL-AN");
@@ -419,20 +359,11 @@ describe("sandbox integration", () => {
       factus.adjustmentNotes.create({
         reference_code: deleteAdjRef,
         numbering_range_id: 149,
-        support_document_id: supportDocId,
+        support_document_number: "SEDS984000129",
         correction_concept_code: "2",
-        payment_method_code: "10",
-        items: [
-          {
-            code_reference: "12345",
-            name: "producto de prueba",
-            quantity: 1,
-            discount_rate: 20,
-            price: 50000,
-            unit_measure_id: 70,
-            standard_code_id: "1",
-          },
-        ],
+        payment_details: cashPaymentDetails,
+        provider: invalidProviderForAdjustment,
+        items: [supportItems[0]],
       }),
     );
     await run(
@@ -455,42 +386,10 @@ describe("sandbox integration", () => {
       factus.supportDocuments.create({
         reference_code: supportReference,
         numbering_range_id: 148,
-        payment_method_code: "10",
         observation: "",
-        provider: {
-          identification_document_id: "6",
-          identification: "123456789",
-          dv: "6",
-          trade_name: "",
-          names: "Alan Turing",
-          address: "calle 1 # 2-68",
-          email: "alanturing@enigmasas.com",
-          phone: "1234567890",
-          is_resident: 1,
-          country_code: "CO",
-          municipality_id: 980,
-        },
-        items: [
-          {
-            code_reference: "12345",
-            name: "producto de prueba",
-            quantity: 1,
-            discount_rate: 20,
-            price: 50000,
-            unit_measure_id: 70,
-            standard_code_id: "1",
-            withholding_taxes: [{ code: "06", withholding_tax_rate: "3.50" }],
-          },
-          {
-            code_reference: "54321",
-            name: "producto de prueba 2",
-            quantity: 1,
-            discount_rate: 0,
-            price: 50000,
-            unit_measure_id: 70,
-            standard_code_id: "1",
-          },
-        ],
+        payment_details: cashPaymentDetails,
+        provider: validProvider,
+        items: supportItems,
       }),
       [409, 422],
     );
@@ -520,20 +419,11 @@ describe("sandbox integration", () => {
       factus.adjustmentNotes.create({
         reference_code: adjustmentReference,
         numbering_range_id: 149,
-        payment_method_code: "10",
-        support_document_id: 224,
+        support_document_number: "SEDS984000129",
         correction_concept_code: "2",
-        items: [
-          {
-            code_reference: "12345",
-            name: "producto de prueba",
-            quantity: 1,
-            discount_rate: 20,
-            price: 50000,
-            unit_measure_id: 70,
-            standard_code_id: "1",
-          },
-        ],
+        payment_details: cashPaymentDetails,
+        provider: validProvider,
+        items: [supportItems[0]],
       }),
       [409, 422],
     );
@@ -553,30 +443,20 @@ describe("sandbox integration", () => {
     );
 
     // -----------------------------------------------------------------
-    // Catalog
+    // Acquirer
     // -----------------------------------------------------------------
     await run(
-      "catalog.getAcquirer",
-      factus.catalog.getAcquirer({
-        identification_document_id: "3",
+      "acquirer.get",
+      factus.acquirer.get({
+        identification_document_code: "13",
         identification_number: "1399991",
       }),
     );
     await run(
-      "catalog.listMunicipalities",
-      factus.catalog.listMunicipalities({ filter: { name: "San Gil" } }),
-    );
-    await run(
-      "catalog.listTributes",
-      factus.catalog.listTributes({ name: "IVA" }),
-    );
-    await run(
-      "catalog.listMeasurementUnits",
-      factus.catalog.listMeasurementUnits({ name: "Unidad" }),
-    );
-    await run(
-      "catalog.listCountries",
-      factus.catalog.listCountries({ filter: { name: "Colombia" } }),
+      "documents.downloadXml",
+      factus.documents.downloadXml(
+        "79760c1d956a143a1076c9d06808b0916f90eb3eec5d34697fd875a2f4be1c3c18ae583d902671161d443c5dfbd48a4d",
+      ),
     );
 
     // -----------------------------------------------------------------
@@ -626,6 +506,10 @@ describe("sandbox integration", () => {
       factus.numberingRanges.updateCurrent(10, { current: 985000001 }),
     );
     await runExpectError(
+      "numberingRanges.toggleStatus",
+      factus.numberingRanges.toggleStatus(10),
+    );
+    await runExpectError(
       "numberingRanges.delete",
       factus.numberingRanges.delete(8),
     );
@@ -666,8 +550,8 @@ describe("sandbox integration", () => {
     await runExpectError(
       "bills.emitRadianEvent",
       factus.bills.emitRadianEvent("SETP990000049", "030", {
-        // "13" is intentionally out of the IdentityDocumentTypeId enum range to
-        // exercise the API accepting non-standard codes (the API is tolerant here).
+        // The official event docs are inconsistent, so we keep this field as a
+        // plain string and exercise a valid v2 code directly.
         identification_document_code: "13",
         identification: "12345667",
         first_name: "Pepito",
@@ -677,7 +561,7 @@ describe("sandbox integration", () => {
       }),
     );
     const receptionEmitEventInput: EmitEventInput = {
-      // "13" is intentionally out of the IdentityDocumentTypeId enum range (same rationale as above).
+      // Same rationale as the direct bills event call above.
       identification_document_code: "13",
       identification: "12345667",
       first_name: "Pepito",

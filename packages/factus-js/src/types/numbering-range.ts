@@ -1,4 +1,10 @@
 import type { NumberingRangeDocumentTypeCode } from "../constants";
+import type { LiteralUnion } from "./common";
+import type { DeleteResponse } from "./shared";
+
+// ---------------------------------------------------------------------------
+// Response types
+// ---------------------------------------------------------------------------
 
 export interface NumberingRange {
   id: number;
@@ -14,11 +20,15 @@ export interface NumberingRange {
   end_date: string;
   technical_key: string | null;
   is_expired: boolean;
-  is_active: 0 | 1;
+  is_active: boolean | 0 | 1;
   deleted_at?: string | null;
   created_at: string;
   updated_at: string;
 }
+
+// ---------------------------------------------------------------------------
+// Input types
+// ---------------------------------------------------------------------------
 
 export interface UpdateNumberingRangeCurrentInput {
   current: number;
@@ -32,13 +42,21 @@ export interface CreateNumberingRangeInput {
   resolution_number?: string;
 }
 
+// ---------------------------------------------------------------------------
+// Filters
+// ---------------------------------------------------------------------------
+
 export interface NumberingRangeFilters {
-  id?: string;
-  document?: string;
+  id?: string | number;
+  document?: LiteralUnion<NumberingRangeDocumentTypeCode>;
   resolution_number?: string;
   technical_key?: string;
-  is_active?: string;
+  is_active?: string | number | boolean;
 }
+
+// ---------------------------------------------------------------------------
+// Related response types
+// ---------------------------------------------------------------------------
 
 export interface SoftwareNumberingRange {
   resolution_number: string;
@@ -50,7 +68,8 @@ export interface SoftwareNumberingRange {
   technical_key: string;
 }
 
-import type { DeleteResponse } from "./shared";
+// ---------------------------------------------------------------------------
+// Named response aliases
+// ---------------------------------------------------------------------------
 
-/** Response from DELETE /v1/numbering-ranges/{id} */
 export type DeleteNumberingRangeResponse = DeleteResponse;

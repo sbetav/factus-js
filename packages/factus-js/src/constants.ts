@@ -1,33 +1,32 @@
-export const BillDocumentType = {
+export const BillDocumentCode = {
   ElectronicSalesInvoice: "01",
   ElectronicTransmissionType03: "03",
 } as const;
-export type BillDocumentType =
-  (typeof BillDocumentType)[keyof typeof BillDocumentType];
-
-/** @deprecated Use `BillDocumentType` instead. */
-export const InvoiceDocumentType = BillDocumentType;
-/** @deprecated Use `BillDocumentType` instead. */
-export type InvoiceDocumentType = BillDocumentType;
+export type BillDocumentCode =
+  (typeof BillDocumentCode)[keyof typeof BillDocumentCode];
 
 export const OperationTypeCode = {
   Standard: "10",
   Mandates: "11",
   Transport: "12",
+  HealthCufe: "SS-CUFE",
+  HealthReport: "SS-Reporte",
+  HealthNoContribution: "SS-SinAporte",
+  HealthCollection: "SS-Recaudo",
 } as const;
 export type OperationTypeCode =
   (typeof OperationTypeCode)[keyof typeof OperationTypeCode];
 
-export const CreditNoteOperationTypeCode = {
+export const CreditNoteOperationCode = {
   WithReference: "20",
   WithoutReference: "22",
 } as const;
-export type CreditNoteOperationTypeCode =
-  (typeof CreditNoteOperationTypeCode)[keyof typeof CreditNoteOperationTypeCode];
+export type CreditNoteOperationCode =
+  (typeof CreditNoteOperationCode)[keyof typeof CreditNoteOperationCode];
 
 export const CreditNoteCorrectionCode = {
   PartialReturn: "1",
-  InvoiceCancellation: "2",
+  ElectronicInvoiceCancellation: "2",
   PartialOrTotalDiscount: "3",
   PriceAdjustment: "4",
   EarlyPaymentDiscount: "5",
@@ -36,14 +35,14 @@ export const CreditNoteCorrectionCode = {
 export type CreditNoteCorrectionCode =
   (typeof CreditNoteCorrectionCode)[keyof typeof CreditNoteCorrectionCode];
 
-export const ProductStandardId = {
-  TaxpayerAdoption: "1",
-  UNSPSC: "2",
-  TariffHeading: "3",
-  GTIN: "4",
+export const ProductStandardCode = {
+  TaxpayerAdoption: "999",
+  UNSPSC: "001",
+  TariffHeading: "020",
+  GTIN: "010",
 } as const;
-export type ProductStandardId =
-  (typeof ProductStandardId)[keyof typeof ProductStandardId];
+export type ProductStandardCode =
+  (typeof ProductStandardCode)[keyof typeof ProductStandardCode];
 
 export const ClaimConceptCode = {
   DocumentInconsistencies: "01",
@@ -56,54 +55,55 @@ export type ClaimConceptCode =
 
 export const EventCode = {
   ReceiptAcknowledgement: "030",
-  InvoiceClaim: "031",
+  BillClaim: "031",
   GoodsOrServiceReceipt: "032",
   ExpressAcceptance: "033",
   TacitAcceptance: "034",
 } as const;
 export type EventCode = (typeof EventCode)[keyof typeof EventCode];
 
-export const IdentityDocumentTypeId = {
-  CivilRegistration: "1",
-  IdentityCard: "2",
-  CitizenshipId: "3",
-  ForeignerCard: "4",
-  ForeignerId: "5",
-  NIT: "6",
-  Passport: "7",
-  ForeignIdentificationDocument: "8",
-  PEP: "9",
-  ForeignNIT: "10",
-  NUIP: "11",
+export const IdentityDocumentCode = {
+  CivilRegistration: "11",
+  IdentityCard: "12",
+  CitizenshipCard: "13",
+  ForeignerIdentityCard: "21",
+  ForeignerId: "22",
+  NIT: "31",
+  Passport: "41",
+  ForeignIdentificationDocument: "42",
+  PEP: "47",
+  PPT: "48",
+  ForeignNIT: "50",
+  NUIP: "91",
 } as const;
-export type IdentityDocumentTypeId =
-  (typeof IdentityDocumentTypeId)[keyof typeof IdentityDocumentTypeId];
+export type IdentityDocumentCode =
+  (typeof IdentityDocumentCode)[keyof typeof IdentityDocumentCode];
 
-export const SupportDocumentIdentityTypeId = {
-  ForeignerCard: "4",
-  ForeignerId: "5",
-  NIT: "6",
-  Passport: "7",
-  ForeignIdentificationDocument: "8",
-  PEP: "9",
-  ForeignNIT: "10",
+export const SupportDocumentIdentityDocumentCode = {
+  ForeignerIdentityCard: "21",
+  ForeignerId: "22",
+  NIT: "31",
+  Passport: "41",
+  ForeignIdentificationDocument: "42",
+  PEP: "47",
+  ForeignNIT: "50",
 } as const;
-export type SupportDocumentIdentityTypeId =
-  (typeof SupportDocumentIdentityTypeId)[keyof typeof SupportDocumentIdentityTypeId];
+export type SupportDocumentIdentityDocumentCode =
+  (typeof SupportDocumentIdentityDocumentCode)[keyof typeof SupportDocumentIdentityDocumentCode];
 
-export const CustomerTributeId = {
-  IVA: "18",
-  NotApplicable: "21",
+export const CustomerTributeCode = {
+  IVA: "01",
+  NotApplicable: "ZZ",
 } as const;
-export type CustomerTributeId =
-  (typeof CustomerTributeId)[keyof typeof CustomerTributeId];
+export type CustomerTributeCode =
+  (typeof CustomerTributeCode)[keyof typeof CustomerTributeCode];
 
-export const OrganizationTypeId = {
+export const OrganizationTypeCode = {
   LegalEntity: "1",
   NaturalPerson: "2",
 } as const;
-export type OrganizationTypeId =
-  (typeof OrganizationTypeId)[keyof typeof OrganizationTypeId];
+export type OrganizationTypeCode =
+  (typeof OrganizationTypeCode)[keyof typeof OrganizationTypeCode];
 
 export const PaymentMethodCode = {
   Cash: "10",

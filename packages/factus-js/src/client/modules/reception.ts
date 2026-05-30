@@ -18,14 +18,14 @@ export class ReceptionModule {
 
   /**
    * List received (incoming) bills with optional filters and pagination.
-   * GET /v1/receptions/bills
+   * GET /v2/receptions/bills
    */
   list(
     params?: ListParams<ReceptionBillFilters>,
     options?: RequestOptions,
   ): Promise<ApiResponse<PaginatedData<ReceptionBill>>> {
     return this.http.get(
-      "/v1/receptions/bills",
+      "/v2/receptions/bills",
       buildListQueryParams(params),
       options?.signal,
     );
@@ -53,18 +53,18 @@ export class ReceptionModule {
 
   /**
    * Upload (register) a new received bill via its DIAN track ID.
-   * POST /v1/receptions/upload
+   * POST /v2/receptions/upload
    */
   upload(
     input: UploadReceptionBillInput,
     options?: RequestOptions,
   ): Promise<ApiResponse<UploadedReceptionBill>> {
-    return this.http.post("/v1/receptions/upload", input, options?.signal);
+    return this.http.post("/v2/receptions/upload", input, options?.signal);
   }
 
   /**
    * Emit a RADIAN lifecycle event (030–034) on a received bill.
-   * PATCH /v1/receptions/bills/{bill_id}/radian/events/{event_type}
+   * PATCH /v2/receptions/bills/{bill_id}/radian/events/{event_type}
    */
   emitEvent(
     params: EmitEventParams,
@@ -72,7 +72,7 @@ export class ReceptionModule {
     options?: RequestOptions,
   ): Promise<ApiResponse<ReceptionBillEvent[]>> {
     return this.http.patch(
-      `/v1/receptions/bills/${params.bill_id}/radian/events/${params.event_type}`,
+      `/v2/receptions/bills/${params.bill_id}/radian/events/${params.event_type}`,
       input,
       options?.signal,
     );

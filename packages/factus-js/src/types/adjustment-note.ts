@@ -1,17 +1,23 @@
+import type { AdjustmentNoteReasonCode } from "../constants";
+import type { ApiResponse, DateRangeFilter, PaginatedData } from "./common";
+import type { ProviderInput } from "./customer";
 import type {
-    AdjustmentNoteReasonCode,
-    PaymentMethodCode,
-    ProductStandardId,
-} from "../constants";
-import type { ApiResponse, PaginatedData } from "./common";
-import type {
-    CodeNameIdObject,
-    CodeNameObject,
-    DeleteResponse,
-    DocumentWithholdingTax,
-    DownloadPdfData,
-    DownloadXmlData,
-    ItemWithholdingTax,
+  CodeNameObject,
+  CompanyInfo,
+  DeleteResponse,
+  DocumentErrors,
+  DocumentItemInput,
+  DocumentItemResponse,
+  DocumentLinks,
+  DocumentParty,
+  DocumentPaymentDetail,
+  DocumentPaymentDetailInput,
+  DocumentReference,
+  DocumentTaxSummary,
+  DocumentTotals,
+  DocumentWithholdingTax,
+  DownloadPdfData,
+  DownloadXmlData,
 } from "./shared";
 
 // ---------------------------------------------------------------------------
@@ -19,50 +25,36 @@ import type {
 // ---------------------------------------------------------------------------
 
 export interface CreateAdjustmentNoteInput {
-  numbering_range_id?: number;
   reference_code: string;
-  support_document_id: number;
+  created_time?: string;
+  numbering_range_id?: number;
+  support_document_number: string;
   correction_concept_code: AdjustmentNoteReasonCode;
-  payment_method_code?: PaymentMethodCode;
   observation?: string;
-  send_email?: boolean;
-  items: Array<{
-    code_reference: string;
-    name: string;
-    quantity: number;
-    discount_rate: number;
-    price: number;
-    unit_measure_id: number;
-    standard_code_id: ProductStandardId;
-  }>;
+  payment_details: DocumentPaymentDetailInput[];
+  cash_rounding_amount?: string | number;
+  provider: ProviderInput;
+  items: DocumentItemInput[];
 }
 
 // ---------------------------------------------------------------------------
-// List item / detail type
+// List item / filters
 // ---------------------------------------------------------------------------
 
-export interface AdjustmentNote {
-  id: number;
+export interface AdjustmentNoteListItem {
+  api_client_name?: string | null;
   number: string;
-  api_client_name?: string;
   reference_code: string | null;
-  identification: string;
-  graphic_representation_name: string;
-  company: string;
-  trade_name: string | null;
-  names: string;
-  email: string | null;
+  provider?: DocumentParty;
+  identification?: string;
+  names?: string;
   total: string;
-  status: number;
-  errors: string[];
-  send_email: 0 | 1;
-  payment_method: CodeNameObject;
+  errors: DocumentErrors;
+  send_email?: boolean;
+  is_validated?: boolean;
+  validated_at?: string | null;
   created_at: string;
 }
-
-// ---------------------------------------------------------------------------
-// Filters
-// ---------------------------------------------------------------------------
 
 export interface AdjustmentNoteFilters {
   identification?: string;
@@ -70,66 +62,45 @@ export interface AdjustmentNoteFilters {
   number?: string;
   prefix?: string;
   reference_code?: string;
-  status?: string | number;
+  status?: string | number | boolean;
+  created_at?: DateRangeFilter;
 }
 
 // ---------------------------------------------------------------------------
-// View (detail) response data
+// View response data
 // ---------------------------------------------------------------------------
-
-export interface AdjustmentNoteItemResponse {
-  code_reference: string;
-  name: string;
-  quantity: number;
-  discount_rate: string;
-  discount: string;
-  gross_value: string;
-  price: string;
-  is_excluded: 0 | 1;
-  unit_measure: CodeNameIdObject;
-  standard_code: CodeNameIdObject;
-  withholding_taxes: ItemWithholdingTax[];
-  total: number;
-}
 
 export interface ViewAdjustmentNoteData {
-  support_document: {
-    id: number;
-    number: string;
-    reference_code: string;
-    status: number;
-    total: string;
-    created_at: string;
-  };
-  adjustment_note: {
-    id: number;
-    number: string;
-    reference_code: string;
-    status: number;
-    send_email: 0 | 1;
-    observation: string | null;
-    errors: string[];
-    validated: string;
-    qr: string;
-    cuds: string;
-    gross_value: string;
-    discount_amount: string;
-    total: string;
-    payment_method: CodeNameObject;
-    correction_concept: CodeNameObject;
-    created_at: string;
-  };
-  items: AdjustmentNoteItemResponse[];
-  withholding_taxes: DocumentWithholdingTax[];
+  reference_code: string;
+  number: string;
+  payment_details: DocumentPaymentDetail[];
+  correction_concept: CodeNameObject;
+  is_validated: boolean;
+  validated_at: string | null;
+  errors: DocumentErrors;
+  observation?: string | null;
+  created_at: string;
+  company: CompanyInfo;
+  provider: DocumentParty;
+  support_document?: DocumentReference;
+  items: DocumentItemResponse[];
+  taxes?: DocumentTaxSummary[];
+  withholding_taxes?: DocumentWithholdingTax[];
+  totals?: DocumentTotals;
+  links?: DocumentLinks;
+  cuds?: string;
+  qr?: string;
 }
 
 // ---------------------------------------------------------------------------
-// Download / delete responses (named aliases for discoverability)
+// Named response aliases
 // ---------------------------------------------------------------------------
 
+export type CreateAdjustmentNoteResponse = ApiResponse<ViewAdjustmentNoteData>;
+export type ViewAdjustmentNoteResponse = ApiResponse<ViewAdjustmentNoteData>;
 export type DeleteAdjustmentNoteResponse = DeleteResponse;
 export type DownloadAdjustmentNoteXmlResponse = ApiResponse<DownloadXmlData>;
 export type DownloadAdjustmentNotePdfResponse = ApiResponse<DownloadPdfData>;
 export type GetAdjustmentNotesResponse = ApiResponse<
-  PaginatedData<AdjustmentNote>
+  PaginatedData<AdjustmentNoteListItem>
 >;

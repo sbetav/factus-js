@@ -1,27 +1,36 @@
 import { describe, expect, test } from "vitest";
 import {
-    EventCode,
-    IdentityDocumentTypeId,
-    PaymentFormCode,
-    PaymentMethodCode,
-    SupportDocumentIdentityTypeId,
+  CustomerTributeCode,
+  EventCode,
+  IdentityDocumentCode,
+  OperationTypeCode,
+  PaymentFormCode,
+  PaymentMethodCode,
+  ProductStandardCode,
+  SupportDocumentIdentityDocumentCode,
 } from "../../constants";
 import {
-    EventCodeInfo,
-    IdentityDocumentTypeIdInfo,
-    PaymentFormCodeInfo,
-    PaymentMethodCodeInfo,
-    SupportDocumentIdentityTypeIdInfo,
+  CustomerTributeCodeInfo,
+  EventCodeInfo,
+  IdentityDocumentCodeInfo,
+  OperationTypeCodeInfo,
+  PaymentFormCodeInfo,
+  PaymentMethodCodeInfo,
+  ProductStandardCodeInfo,
+  SupportDocumentIdentityDocumentCodeInfo,
 } from "../../constants-info";
 
 describe("constants — value map structure", () => {
   test("constant values are plain strings (not objects)", () => {
-    expect(typeof IdentityDocumentTypeId.CitizenshipId).toBe("string");
-    expect(IdentityDocumentTypeId.CitizenshipId).toBe("3");
+    expect(typeof IdentityDocumentCode.CitizenshipCard).toBe("string");
+    expect(IdentityDocumentCode.CitizenshipCard).toBe("13");
     expect(typeof PaymentFormCode.CreditPayment).toBe("string");
     expect(PaymentFormCode.CreditPayment).toBe("2");
     expect(typeof EventCode.ReceiptAcknowledgement).toBe("string");
     expect(EventCode.ReceiptAcknowledgement).toBe("030");
+    expect(OperationTypeCode.HealthCollection).toBe("SS-Recaudo");
+    expect(ProductStandardCode.TaxpayerAdoption).toBe("999");
+    expect(CustomerTributeCode.NotApplicable).toBe("ZZ");
   });
 
   test("all PaymentFormCode values are defined in PaymentFormCodeInfo", () => {
@@ -49,19 +58,45 @@ describe("constants — value map structure", () => {
       expect(typeof info.description).toBe("string");
     }
   });
-});
 
-describe("IdentityDocumentTypeId abbreviations", () => {
-  test("CitizenshipId matches common Colombian abbreviation CC", () => {
-    const info =
-      IdentityDocumentTypeIdInfo[IdentityDocumentTypeId.CitizenshipId];
-    expect(info.abbreviation).toBe("CC");
-    expect(IdentityDocumentTypeId.CitizenshipId).toBe("3");
+  test("all OperationTypeCode values are defined in OperationTypeCodeInfo", () => {
+    for (const value of Object.values(OperationTypeCode)) {
+      const info =
+        OperationTypeCodeInfo[value as keyof typeof OperationTypeCodeInfo];
+      expect(info).toBeDefined();
+      expect(typeof info.description).toBe("string");
+    }
   });
 
-  test("SupportDocumentIdentityTypeId shares abbreviations with main table for overlapping codes", () => {
+  test("all ProductStandardCode values are defined in ProductStandardCodeInfo", () => {
+    for (const value of Object.values(ProductStandardCode)) {
+      const info =
+        ProductStandardCodeInfo[value as keyof typeof ProductStandardCodeInfo];
+      expect(info).toBeDefined();
+      expect(typeof info.description).toBe("string");
+    }
+  });
+
+  test("all CustomerTributeCode values are defined in CustomerTributeCodeInfo", () => {
+    for (const value of Object.values(CustomerTributeCode)) {
+      const info =
+        CustomerTributeCodeInfo[value as keyof typeof CustomerTributeCodeInfo];
+      expect(info).toBeDefined();
+      expect(typeof info.description).toBe("string");
+    }
+  });
+});
+
+describe("IdentityDocumentCode abbreviations", () => {
+  test("CitizenshipCard matches common Colombian abbreviation CC", () => {
+    const info = IdentityDocumentCodeInfo[IdentityDocumentCode.CitizenshipCard];
+    expect(info.abbreviation).toBe("CC");
+    expect(IdentityDocumentCode.CitizenshipCard).toBe("13");
+  });
+
+  test("Support document identity codes share abbreviations with main table for overlapping codes", () => {
     const sharedKeys = [
-      "ForeignerCard",
+      "ForeignerIdentityCard",
       "ForeignerId",
       "NIT",
       "Passport",
@@ -71,10 +106,10 @@ describe("IdentityDocumentTypeId abbreviations", () => {
     ] as const;
 
     for (const key of sharedKeys) {
-      const supportValue = SupportDocumentIdentityTypeId[key];
-      const mainValue = IdentityDocumentTypeId[key];
-      const supportInfo = SupportDocumentIdentityTypeIdInfo[supportValue];
-      const mainInfo = IdentityDocumentTypeIdInfo[mainValue];
+      const supportValue = SupportDocumentIdentityDocumentCode[key];
+      const mainValue = IdentityDocumentCode[key];
+      const supportInfo = SupportDocumentIdentityDocumentCodeInfo[supportValue];
+      const mainInfo = IdentityDocumentCodeInfo[mainValue];
       expect(supportInfo.abbreviation).toBe(mainInfo.abbreviation);
     }
   });

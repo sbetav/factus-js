@@ -1,10 +1,11 @@
 import type { FactusClientConfig } from "./http-client";
 import { HttpClient } from "./http-client";
+import { AcquirerModule } from "./modules/acquirer";
 import { AdjustmentNotesModule } from "./modules/adjustment-notes";
 import { BillsModule } from "./modules/bills";
-import { CatalogModule } from "./modules/catalog";
 import { CompanyModule } from "./modules/company";
 import { CreditNotesModule } from "./modules/credit-notes";
+import { DocumentsModule } from "./modules/documents";
 import { NumberingRangesModule } from "./modules/numbering-ranges";
 import { ReceptionModule } from "./modules/reception";
 import { SubscriptionModule } from "./modules/subscription";
@@ -59,17 +60,20 @@ export class FactusClient {
   /** Incoming / received bills via RADIAN. */
   readonly reception: ReceptionModule;
 
+  /** Customer/acquirer lookup helpers. */
+  readonly acquirer: AcquirerModule;
+
   /** Company profile management. */
   readonly company: CompanyModule;
 
   /** Numbering ranges (prefixes). */
   readonly numberingRanges: NumberingRangesModule;
 
-  /** Current subscription details. */
+  /** Active subscriptions for the current account. */
   readonly subscription: SubscriptionModule;
 
-  /** Catalog data: municipalities, countries, tributes, measurement units, acquirers. */
-  readonly catalog: CatalogModule;
+  /** Generic document helpers across emitted/received document families. */
+  readonly documents: DocumentsModule;
 
   constructor(config: FactusClientConfig) {
     if (!config.clientId) {
@@ -92,9 +96,10 @@ export class FactusClient {
     this.supportDocuments = new SupportDocumentsModule(this.http);
     this.adjustmentNotes = new AdjustmentNotesModule(this.http);
     this.reception = new ReceptionModule(this.http);
+    this.acquirer = new AcquirerModule(this.http);
     this.company = new CompanyModule(this.http);
     this.numberingRanges = new NumberingRangesModule(this.http);
     this.subscription = new SubscriptionModule(this.http);
-    this.catalog = new CatalogModule(this.http);
+    this.documents = new DocumentsModule(this.http);
   }
 }

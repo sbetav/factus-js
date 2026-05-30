@@ -1,93 +1,96 @@
 import { describe, expectTypeOf, test } from "vitest";
 import type {
-    AdjustmentNoteReasonCode as AdjustmentNoteReasonCodeType,
-    ChargeDiscountCode as ChargeDiscountCodeType,
-    EventCode as EventCodeType,
-    IdentityDocumentTypeId as IdentityDocumentTypeIdType,
-    PaymentFormCode as PaymentFormCodeType,
-    PaymentMethodCode as PaymentMethodCodeType,
-    ProductStandardId as ProductStandardIdType,
-    SupportDocumentIdentityTypeId as SupportDocumentIdentityTypeIdType,
+  AdjustmentNoteReasonCode as AdjustmentNoteReasonCodeType,
+  ChargeDiscountCode as ChargeDiscountCodeType,
+  EventCode as EventCodeType,
+  IdentityDocumentCode as IdentityDocumentCodeType,
+  OperationTypeCode as OperationTypeCodeType,
+  PaymentFormCode as PaymentFormCodeType,
+  PaymentMethodCode as PaymentMethodCodeType,
+  ProductStandardCode as ProductStandardCodeType,
+  SupportDocumentIdentityDocumentCode as SupportDocumentIdentityDocumentCodeType,
 } from "../../constants";
 import {
-    AdjustmentNoteReasonCode,
-    ChargeDiscountCode,
-    EventCode,
-    IdentityDocumentTypeId,
-    PaymentFormCode,
-    PaymentMethodCode,
-    ProductStandardId,
-    SupportDocumentIdentityTypeId,
+  AdjustmentNoteReasonCode,
+  ChargeDiscountCode,
+  EventCode,
+  IdentityDocumentCode,
+  OperationTypeCode,
+  PaymentFormCode,
+  PaymentMethodCode,
+  ProductStandardCode,
+  SupportDocumentIdentityDocumentCode,
 } from "../../constants";
 
 describe("constant values satisfy their type alias", () => {
   test("PaymentFormCode values satisfy PaymentFormCode type", () => {
-    expectTypeOf(
-      PaymentFormCode.CashPayment,
-    ).toMatchTypeOf<PaymentFormCodeType>();
-    expectTypeOf(
-      PaymentFormCode.CreditPayment,
-    ).toMatchTypeOf<PaymentFormCodeType>();
+    expectTypeOf(PaymentFormCode.CashPayment).toExtend<PaymentFormCodeType>();
+    expectTypeOf(PaymentFormCode.CreditPayment).toExtend<PaymentFormCodeType>();
   });
 
   test("PaymentMethodCode values satisfy PaymentMethodCode type", () => {
-    expectTypeOf(PaymentMethodCode.Cash).toMatchTypeOf<PaymentMethodCodeType>();
+    expectTypeOf(PaymentMethodCode.Cash).toExtend<PaymentMethodCodeType>();
     expectTypeOf(
       PaymentMethodCode.CreditCard,
-    ).toMatchTypeOf<PaymentMethodCodeType>();
-    expectTypeOf(
-      PaymentMethodCode.Other,
-    ).toMatchTypeOf<PaymentMethodCodeType>();
+    ).toExtend<PaymentMethodCodeType>();
+    expectTypeOf(PaymentMethodCode.Other).toExtend<PaymentMethodCodeType>();
   });
 
   test("EventCode values satisfy EventCode type", () => {
-    expectTypeOf(
-      EventCode.ReceiptAcknowledgement,
-    ).toMatchTypeOf<EventCodeType>();
-    expectTypeOf(EventCode.ExpressAcceptance).toMatchTypeOf<EventCodeType>();
+    expectTypeOf(EventCode.ReceiptAcknowledgement).toExtend<EventCodeType>();
+    expectTypeOf(EventCode.ExpressAcceptance).toExtend<EventCodeType>();
   });
 
-  test("IdentityDocumentTypeId values satisfy IdentityDocumentTypeId type", () => {
+  test("IdentityDocumentCode values satisfy IdentityDocumentCode type", () => {
     expectTypeOf(
-      IdentityDocumentTypeId.CitizenshipId,
-    ).toMatchTypeOf<IdentityDocumentTypeIdType>();
-    expectTypeOf(
-      IdentityDocumentTypeId.NIT,
-    ).toMatchTypeOf<IdentityDocumentTypeIdType>();
+      IdentityDocumentCode.CitizenshipCard,
+    ).toExtend<IdentityDocumentCodeType>();
+    expectTypeOf(IdentityDocumentCode.NIT).toExtend<IdentityDocumentCodeType>();
   });
 
-  test("SupportDocumentIdentityTypeId satisfies its type alias", () => {
+  test("SupportDocumentIdentityDocumentCode satisfies its type alias", () => {
     expectTypeOf(
-      SupportDocumentIdentityTypeId.NIT,
-    ).toMatchTypeOf<SupportDocumentIdentityTypeIdType>();
+      SupportDocumentIdentityDocumentCode.NIT,
+    ).toExtend<SupportDocumentIdentityDocumentCodeType>();
   });
 
-  test("ProductStandardId values satisfy ProductStandardId type", () => {
+  test("ProductStandardCode values satisfy ProductStandardCode type", () => {
     expectTypeOf(
-      ProductStandardId.TaxpayerAdoption,
-    ).toMatchTypeOf<ProductStandardIdType>();
-    expectTypeOf(ProductStandardId.GTIN).toMatchTypeOf<ProductStandardIdType>();
+      ProductStandardCode.TaxpayerAdoption,
+    ).toExtend<ProductStandardCodeType>();
+    expectTypeOf(ProductStandardCode.GTIN).toExtend<ProductStandardCodeType>();
+  });
+
+  test("OperationTypeCode values satisfy OperationTypeCode type", () => {
+    expectTypeOf(OperationTypeCode.Standard).toExtend<OperationTypeCodeType>();
+    expectTypeOf(
+      OperationTypeCode.HealthCollection,
+    ).toExtend<OperationTypeCodeType>();
   });
 
   test("AdjustmentNoteReasonCode values satisfy their type alias", () => {
     expectTypeOf(
       AdjustmentNoteReasonCode.PartialReturn,
-    ).toMatchTypeOf<AdjustmentNoteReasonCodeType>();
+    ).toExtend<AdjustmentNoteReasonCodeType>();
     expectTypeOf(
       AdjustmentNoteReasonCode.Other,
-    ).toMatchTypeOf<AdjustmentNoteReasonCodeType>();
+    ).toExtend<AdjustmentNoteReasonCodeType>();
   });
 
   test("ChargeDiscountCode values satisfy their type alias", () => {
     expectTypeOf(
       ChargeDiscountCode.ConditionalSurcharge,
-    ).toMatchTypeOf<ChargeDiscountCodeType>();
+    ).toExtend<ChargeDiscountCodeType>();
   });
 
   test("constant map values are strings, not objects", () => {
     expectTypeOf(PaymentFormCode.CashPayment).toEqualTypeOf<"1">();
     expectTypeOf(PaymentFormCode.CreditPayment).toEqualTypeOf<"2">();
     expectTypeOf(EventCode.ReceiptAcknowledgement).toEqualTypeOf<"030">();
-    expectTypeOf(IdentityDocumentTypeId.CitizenshipId).toEqualTypeOf<"3">();
+    expectTypeOf(IdentityDocumentCode.CitizenshipCard).toEqualTypeOf<"13">();
+    expectTypeOf(ProductStandardCode.TaxpayerAdoption).toEqualTypeOf<"999">();
+    expectTypeOf(
+      OperationTypeCode.HealthCollection,
+    ).toEqualTypeOf<"SS-Recaudo">();
   });
 });

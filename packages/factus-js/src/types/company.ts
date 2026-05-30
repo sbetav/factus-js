@@ -1,3 +1,9 @@
+import type {
+  CustomerTributeCode,
+  FiscalResponsibilityCode,
+  OrganizationTypeCode,
+} from "../constants";
+import type { LiteralUnion } from "./common";
 import type { CodeNameObject } from "./shared";
 
 export interface Company {
@@ -29,19 +35,19 @@ export interface Company {
 }
 
 export interface UpdateCompanyInput {
-  legal_organization_code: string;
+  legal_organization_code: LiteralUnion<OrganizationTypeCode>;
   company?: string | null;
   trade_name?: string | null;
   names?: string | null;
   surnames?: string | null;
   registration_code?: string | null;
-  economic_activity: string;
-  phone: string;
-  email: string;
-  address: string;
-  tribute_code: string;
+  economic_activity?: string;
+  phone?: string;
+  email?: string;
+  address?: string;
+  tribute_code?: LiteralUnion<CustomerTributeCode>;
   municipality_code: string;
-  responsibilities: string;
+  responsibilities?: LiteralUnion<FiscalResponsibilityCode>;
 }
 
 export interface UploadCompanyLogoInput {
@@ -50,8 +56,5 @@ export interface UploadCompanyLogoInput {
 }
 
 export interface UploadCompanyLogoResponse {
-  /**
-   * Note: the Factus API returns "url_log" (not "url_logo") in this endpoint's response.
-   */
-  url_log: string;
+  url_logo: string;
 }

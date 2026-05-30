@@ -3,9 +3,9 @@ import { FactusClient } from "../../client/client";
 import { FactusError } from "../../client/error";
 import { HttpClient } from "../../client/http-client";
 import {
-    jsonResponse,
-    parseFormBody,
-    parseJsonBody,
+  jsonResponse,
+  parseFormBody,
+  parseJsonBody,
 } from "../helpers/fetch-mock";
 
 const config = {
@@ -39,7 +39,7 @@ describe("HttpClient", () => {
     const http = new HttpClient(config);
 
     const response = await http.get<{ data: Array<{ number: string }> }>(
-      "/v1/bills",
+      "/v2/bills",
       { "filter[number]": "SETP99", page: 1, per_page: 15 },
     );
 
@@ -59,7 +59,7 @@ describe("HttpClient", () => {
     });
 
     expect(mockFetch.mock.calls[1][0]).toBe(
-      "https://api-sandbox.factus.com.co/v1/bills?filter%5Bnumber%5D=SETP99&page=1&per_page=15",
+      "https://api-sandbox.factus.com.co/v2/bills?filter%5Bnumber%5D=SETP99&page=1&per_page=15",
     );
     expect(mockFetch.mock.calls[1][1]?.method).toBe("GET");
     expect(mockFetch.mock.calls[1][1]?.headers).toMatchObject({
@@ -78,7 +78,7 @@ describe("HttpClient", () => {
     const http = new HttpClient(config);
     const payload = { reference_code: "I3", numbering_range_id: 8 };
 
-    await http.post("/v1/bills/validate", payload);
+    await http.post("/v2/bills/validate", payload);
 
     expect(mockFetch).toHaveBeenCalledTimes(2);
     expect(mockFetch.mock.calls[1][1]?.method).toBe("POST");
@@ -106,8 +106,8 @@ describe("HttpClient", () => {
     vi.stubGlobal("fetch", mockFetch);
     const http = new HttpClient(config);
 
-    await http.get("/v1/subscriptions");
-    await http.get("/v1/subscriptions");
+    await http.get("/v2/subscriptions");
+    await http.get("/v2/subscriptions");
 
     expect(mockFetch.mock.calls[2][0]).toBe(
       "https://api-sandbox.factus.com.co/oauth/token",
@@ -131,13 +131,13 @@ describe("HttpClient", () => {
     vi.stubGlobal("fetch", mockFetch);
     const http = new HttpClient(config);
 
-    const result = await http.get<{ data: unknown[] }>("/v1/bills");
+    const result = await http.get<{ data: unknown[] }>("/v2/bills");
 
     expect(result.data).toEqual([]);
     // 4 calls: initial auth + 401 request + re-auth + retry request
     expect(mockFetch).toHaveBeenCalledTimes(4);
     expect(mockFetch.mock.calls[2][0]).toContain("/oauth/token");
-    expect(mockFetch.mock.calls[3][0]).toContain("/v1/bills");
+    expect(mockFetch.mock.calls[3][0]).toContain("/v2/bills");
     // Second request uses the fresh token
     expect(mockFetch.mock.calls[3][1]?.headers).toMatchObject({
       Authorization: "Bearer token-2",
@@ -147,7 +147,7 @@ describe("HttpClient", () => {
   test("does not retry 401 a second time (no infinite loop)", async () => {
     // All calls after the initial auth return 401, so:
     // call 1: /oauth/token → authResponse(1) OK
-    // call 2: /v1/bills → 401, triggers retry
+    // call 2: /v2/bills → 401, triggers retry
     // call 3: /oauth/token → 401 (re-auth fails → FactusError thrown)
     const mockFetch = vi
       .fn()
@@ -157,7 +157,7 @@ describe("HttpClient", () => {
     vi.stubGlobal("fetch", mockFetch);
     const http = new HttpClient(config);
 
-    await expect(http.get("/v1/bills")).rejects.toBeInstanceOf(FactusError);
+    await expect(http.get("/v2/bills")).rejects.toBeInstanceOf(FactusError);
     // auth + first request (401) + re-auth attempt (also 401, throws)
     expect(mockFetch).toHaveBeenCalledTimes(3);
   });
@@ -173,9 +173,9 @@ describe("HttpClient", () => {
     const http = new HttpClient(config);
 
     await Promise.all([
-      http.get("/v1/bills"),
-      http.get("/v1/bills"),
-      http.get("/v1/bills"),
+      http.get("/v2/bills"),
+      http.get("/v2/bills"),
+      http.get("/v2/bills"),
     ]);
 
     const authCalls = mockFetch.mock.calls.filter((c) =>
@@ -197,7 +197,7 @@ describe("HttpClient", () => {
                 code: 123,
                 message: "Forbidden endpoint",
                 detail: "No permissions in sandbox",
-                api_version: "v1",
+                api_version: "v2",
               },
             ],
           },
@@ -208,7 +208,7 @@ describe("HttpClient", () => {
     vi.stubGlobal("fetch", mockFetch);
     const http = new HttpClient(config);
 
-    await expect(http.get("/v1/company/logo")).rejects.toSatisfy(
+    await expect(http.get("/v2/companies/logo")).rejects.toSatisfy(
       (e: unknown) => {
         const err = e as FactusError;
         return (
@@ -244,7 +244,7 @@ describe("HttpClient", () => {
     const http = new HttpClient(config);
 
     await expect(
-      http.post("/v1/bills/validate", { reference_code: "X" }),
+      http.post("/v2/bills/validate", { reference_code: "X" }),
     ).rejects.toSatisfy((e: unknown) => {
       const err = e as FactusError;
       return (
@@ -274,7 +274,7 @@ describe("HttpClient", () => {
     vi.stubGlobal("fetch", mockFetch);
     const http = new HttpClient(config);
 
-    await expect(http.get("/v1/bills")).rejects.toSatisfy((e: unknown) => {
+    await expect(http.get("/v2/bills")).rejects.toSatisfy((e: unknown) => {
       const err = e as FactusError;
       return (
         err instanceof FactusError &&
@@ -296,7 +296,7 @@ describe("HttpClient", () => {
     const http = new HttpClient(config);
 
     const result = await http.delete<undefined>(
-      "/v1/bills/destroy/reference/X",
+      "/v2/bills/destroy/reference/X",
     );
     expect(result).toBeUndefined();
   });
@@ -309,7 +309,7 @@ describe("HttpClient", () => {
     vi.stubGlobal("fetch", mockFetch);
     const http = new HttpClient(config);
 
-    await expect(http.get("/v1/bills")).rejects.toSatisfy((e: unknown) => {
+    await expect(http.get("/v2/bills")).rejects.toSatisfy((e: unknown) => {
       const err = e as FactusError;
       return (
         err instanceof FactusError &&

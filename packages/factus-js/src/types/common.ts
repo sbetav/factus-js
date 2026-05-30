@@ -4,6 +4,17 @@ export interface ApiResponse<T> {
   data: T;
 }
 
+/**
+ * Preserves autocomplete for known literal unions while still allowing any
+ * custom string accepted by the API.
+ */
+export type LiteralUnion<T extends string> = T | (string & {});
+
+export interface DateRangeFilter {
+  start_date?: string;
+  end_date?: string;
+}
+
 export interface ApiError {
   code: number;
   message: string;

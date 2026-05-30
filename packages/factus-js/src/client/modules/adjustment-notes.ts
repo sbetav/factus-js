@@ -1,14 +1,14 @@
 import type {
-    AdjustmentNote,
-    AdjustmentNoteFilters,
-    ApiResponse,
-    CreateAdjustmentNoteInput,
-    DeleteAdjustmentNoteResponse,
-    DownloadAdjustmentNotePdfResponse,
-    DownloadAdjustmentNoteXmlResponse,
-    GetAdjustmentNotesResponse,
-    ListParams,
-    ViewAdjustmentNoteData,
+  AdjustmentNoteFilters,
+  AdjustmentNoteListItem,
+  CreateAdjustmentNoteInput,
+  CreateAdjustmentNoteResponse,
+  DeleteAdjustmentNoteResponse,
+  DownloadAdjustmentNotePdfResponse,
+  DownloadAdjustmentNoteXmlResponse,
+  GetAdjustmentNotesResponse,
+  ListParams,
+  ViewAdjustmentNoteResponse,
 } from "../../types";
 import type { HttpClient, RequestOptions } from "../http-client";
 import { buildListQueryParams } from "../list-params";
@@ -18,14 +18,14 @@ export class AdjustmentNotesModule {
 
   /**
    * Create (issue) a new adjustment note for a support document.
-   * POST /v1/adjustment-notes/validate
+   * POST /v2/adjustment-notes/validate
    */
   create(
     input: CreateAdjustmentNoteInput,
     options?: RequestOptions,
-  ): Promise<ApiResponse<AdjustmentNote>> {
+  ): Promise<CreateAdjustmentNoteResponse> {
     return this.http.post(
-      "/v1/adjustment-notes/validate",
+      "/v2/adjustment-notes/validate",
       input,
       options?.signal,
     );
@@ -33,14 +33,14 @@ export class AdjustmentNotesModule {
 
   /**
    * List adjustment notes with optional filters and pagination.
-   * GET /v1/adjustment-notes
+   * GET /v2/adjustment-notes
    */
   list(
     params?: ListParams<AdjustmentNoteFilters>,
     options?: RequestOptions,
   ): Promise<GetAdjustmentNotesResponse> {
     return this.http.get(
-      "/v1/adjustment-notes",
+      "/v2/adjustment-notes",
       buildListQueryParams(params),
       options?.signal,
     );
@@ -53,7 +53,7 @@ export class AdjustmentNotesModule {
   async *listAll(
     filter?: AdjustmentNoteFilters,
     options?: RequestOptions,
-  ): AsyncIterable<AdjustmentNote> {
+  ): AsyncIterable<AdjustmentNoteListItem> {
     let page = 1;
     while (true) {
       const response = await this.list(
@@ -68,14 +68,14 @@ export class AdjustmentNotesModule {
 
   /**
    * Get full detail of an adjustment note by its document number.
-   * GET /v1/adjustment-notes/{number}
+   * GET /v2/adjustment-notes/{number}
    */
   get(
     number: string,
     options?: RequestOptions,
-  ): Promise<ApiResponse<ViewAdjustmentNoteData>> {
+  ): Promise<ViewAdjustmentNoteResponse> {
     return this.http.get(
-      `/v1/adjustment-notes/${number}`,
+      `/v2/adjustment-notes/${number}`,
       undefined,
       options?.signal,
     );
@@ -83,14 +83,14 @@ export class AdjustmentNotesModule {
 
   /**
    * Download the adjustment note XML as a base64-encoded string.
-   * GET /v1/adjustment-notes/download-xml/{number}
+   * GET /v2/adjustment-notes/{number}/download-xml
    */
   downloadXml(
     number: string,
     options?: RequestOptions,
   ): Promise<DownloadAdjustmentNoteXmlResponse> {
     return this.http.get(
-      `/v1/adjustment-notes/download-xml/${number}`,
+      `/v2/adjustment-notes/${number}/download-xml`,
       undefined,
       options?.signal,
     );
@@ -98,14 +98,14 @@ export class AdjustmentNotesModule {
 
   /**
    * Download the adjustment note PDF as a base64-encoded string.
-   * GET /v1/adjustment-notes/download-pdf/{number}
+   * GET /v2/adjustment-notes/{number}/download-pdf
    */
   downloadPdf(
     number: string,
     options?: RequestOptions,
   ): Promise<DownloadAdjustmentNotePdfResponse> {
     return this.http.get(
-      `/v1/adjustment-notes/download-pdf/${number}`,
+      `/v2/adjustment-notes/${number}/download-pdf`,
       undefined,
       options?.signal,
     );
@@ -113,14 +113,14 @@ export class AdjustmentNotesModule {
 
   /**
    * Delete (void) an adjustment note that has not yet been validated by the DIAN.
-   * DELETE /v1/adjustment-notes/reference/{reference_code}
+   * DELETE /v2/adjustment-notes/reference/{reference_code}
    */
   delete(
     referenceCode: string,
     options?: RequestOptions,
   ): Promise<DeleteAdjustmentNoteResponse> {
     return this.http.delete(
-      `/v1/adjustment-notes/reference/${referenceCode}`,
+      `/v2/adjustment-notes/reference/${referenceCode}`,
       options?.signal,
     );
   }

@@ -6,9 +6,9 @@ export class SubscriptionModule {
 
   /**
    * List all available subscriptions for the account.
-   * GET /v1/subscriptions
+   * GET /v2/subscriptions
    */
   list(options?: RequestOptions): Promise<ApiResponse<Subscription[]>> {
-    return this.http.get("/v1/subscriptions", undefined, options?.signal);
+    return this.http.get("/v2/subscriptions", undefined, options?.signal);
   }
 }

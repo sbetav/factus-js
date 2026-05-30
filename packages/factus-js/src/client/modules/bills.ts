@@ -1,12 +1,10 @@
 import type {
-  ApiResponse,
-  BillFilters,
-  BillListItem,
   CreateBillInput,
+  CreateBillResponse,
   DeleteBillResponse,
+  DownloadBillAttachedDocumentXmlResponse,
   DownloadBillPdfResponse,
   DownloadBillXmlResponse,
-  EventCode,
   GetBillEmailContentResponse,
   GetBillEventsResponse,
   GetBillsResponse,
@@ -16,6 +14,9 @@ import type {
   SendBillEmailInput,
   SendBillEmailResponse,
   ViewBillResponse,
+  BillFilters,
+  BillListItem,
+  EventCode,
 } from "../../types";
 import type { HttpClient, RequestOptions } from "../http-client";
 import { buildListQueryParams } from "../list-params";
@@ -25,25 +26,25 @@ export class BillsModule {
 
   /**
    * Create (issue) a new electronic sales bill.
-   * POST /v1/bills/validate
+   * POST /v2/bills/validate
    */
   create(
     input: CreateBillInput,
     options?: RequestOptions,
-  ): Promise<ApiResponse<BillListItem>> {
-    return this.http.post("/v1/bills/validate", input, options?.signal);
+  ): Promise<CreateBillResponse> {
+    return this.http.post("/v2/bills/validate", input, options?.signal);
   }
 
   /**
    * List bills with optional filters and pagination.
-   * GET /v1/bills
+   * GET /v2/bills
    */
   list(
     params?: ListParams<BillFilters>,
     options?: RequestOptions,
   ): Promise<GetBillsResponse> {
     return this.http.get(
-      "/v1/bills",
+      "/v2/bills",
       buildListQueryParams(params),
       options?.signal,
     );
@@ -71,26 +72,38 @@ export class BillsModule {
 
   /**
    * Get full detail of a single bill by its document number (e.g. "SETP990000001").
-   * GET /v1/bills/show/{number}
+   * GET /v2/bills/{number}
    */
   get(number: string, options?: RequestOptions): Promise<ViewBillResponse> {
+    return this.http.get(`/v2/bills/${number}`, undefined, options?.signal);
+  }
+
+  /**
+   * Download the bill XML as a base64-encoded string.
+   * GET /v2/bills/{number}/download-xml
+   */
+
+  downloadXml(
+    number: string,
+    options?: RequestOptions,
+  ): Promise<DownloadBillXmlResponse> {
     return this.http.get(
-      `/v1/bills/show/${number}`,
+      `/v2/bills/${number}/download-xml`,
       undefined,
       options?.signal,
     );
   }
 
   /**
-   * Download the bill XML as a base64-encoded string.
-   * GET /v1/bills/download-xml/{number}
+   * Download the bill AttachedDocument XML as a base64-encoded string.
+   * GET /v2/bills/{number}/download-attached-document-xml
    */
-  downloadXml(
+  downloadAttachedDocumentXml(
     number: string,
     options?: RequestOptions,
-  ): Promise<DownloadBillXmlResponse> {
+  ): Promise<DownloadBillAttachedDocumentXmlResponse> {
     return this.http.get(
-      `/v1/bills/download-xml/${number}`,
+      `/v2/bills/${number}/download-attached-document-xml`,
       undefined,
       options?.signal,
     );
@@ -98,14 +111,14 @@ export class BillsModule {
 
   /**
    * Download the bill PDF as a base64-encoded string.
-   * GET /v1/bills/download-pdf/{number}
+   * GET /v2/bills/{number}/download-pdf
    */
   downloadPdf(
     number: string,
     options?: RequestOptions,
   ): Promise<DownloadBillPdfResponse> {
     return this.http.get(
-      `/v1/bills/download-pdf/${number}`,
+      `/v2/bills/${number}/download-pdf`,
       undefined,
       options?.signal,
     );
@@ -113,14 +126,14 @@ export class BillsModule {
 
   /**
    * Get the email content (subject + attached document) for a bill.
-   * GET /v1/bills/{number}/email-content
+   * GET /v2/bills/{number}/email-content
    */
   getEmailContent(
     number: string,
     options?: RequestOptions,
   ): Promise<GetBillEmailContentResponse> {
     return this.http.get(
-      `/v1/bills/${number}/email-content`,
+      `/v2/bills/${number}/email-content`,
       undefined,
       options?.signal,
     );
@@ -128,7 +141,7 @@ export class BillsModule {
 
   /**
    * Send the bill by email (max 2 per bill per day).
-   * POST /v1/bills/send-email/{number}
+   * POST /v2/bills/{number}/send-email
    */
   sendEmail(
     number: string,
@@ -136,7 +149,7 @@ export class BillsModule {
     options?: RequestOptions,
   ): Promise<SendBillEmailResponse> {
     return this.http.post(
-      `/v1/bills/send-email/${number}`,
+      `/v2/bills/${number}/send-email`,
       input,
       options?.signal,
     );
@@ -144,7 +157,7 @@ export class BillsModule {
 
   /**
    * Emit a RADIAN event on a bill by document number and event type.
-   * POST /v1/bills/radian/events/update/{number}/{event_type}
+   * POST /v2/bills/{number}/radian/events/{event_type}
    */
   emitRadianEvent(
     number: string,
@@ -153,7 +166,7 @@ export class BillsModule {
     options?: RequestOptions,
   ): Promise<RadianEventUpdateResponse> {
     return this.http.post(
-      `/v1/bills/radian/events/update/${number}/${eventType}`,
+      `/v2/bills/${number}/radian/events/${eventType}`,
       input,
       options?.signal,
     );
@@ -161,14 +174,14 @@ export class BillsModule {
 
   /**
    * Get the list of RADIAN events recorded for a bill by its document number.
-   * GET /v1/bills/{number}/radian/events
+   * GET /v2/bills/{number}/radian/events
    */
   getEvents(
     number: string,
     options?: RequestOptions,
   ): Promise<GetBillEventsResponse> {
     return this.http.get(
-      `/v1/bills/${number}/radian/events`,
+      `/v2/bills/${number}/radian/events`,
       undefined,
       options?.signal,
     );
@@ -176,14 +189,14 @@ export class BillsModule {
 
   /**
    * Delete (void) a bill that has not yet been validated by the DIAN.
-   * DELETE /v1/bills/destroy/reference/{reference_code}
+   * DELETE /v2/bills/destroy/reference/{reference_code}
    */
   delete(
     referenceCode: string,
     options?: RequestOptions,
   ): Promise<DeleteBillResponse> {
     return this.http.delete(
-      `/v1/bills/destroy/reference/${referenceCode}`,
+      `/v2/bills/destroy/reference/${referenceCode}`,
       options?.signal,
     );
   }

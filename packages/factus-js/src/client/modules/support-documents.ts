@@ -1,14 +1,14 @@
 import type {
-    ApiResponse,
-    CreateSupportDocumentInput,
-    DeleteSupportDocumentResponse,
-    DownloadSupportDocumentPdfResponse,
-    DownloadSupportDocumentXmlResponse,
-    GetSupportDocumentsResponse,
-    ListParams,
-    SupportDocument,
-    SupportDocumentFilters,
-    ViewSupportDocumentData,
+  CreateSupportDocumentInput,
+  CreateSupportDocumentResponse,
+  DeleteSupportDocumentResponse,
+  DownloadSupportDocumentPdfResponse,
+  DownloadSupportDocumentXmlResponse,
+  GetSupportDocumentsResponse,
+  ListParams,
+  SupportDocumentFilters,
+  SupportDocumentListItem,
+  ViewSupportDocumentResponse,
 } from "../../types";
 import type { HttpClient, RequestOptions } from "../http-client";
 import { buildListQueryParams } from "../list-params";
@@ -18,14 +18,14 @@ export class SupportDocumentsModule {
 
   /**
    * Create (issue) a new support document.
-   * POST /v1/support-documents/validate
+   * POST /v2/support-documents/validate
    */
   create(
     input: CreateSupportDocumentInput,
     options?: RequestOptions,
-  ): Promise<ApiResponse<SupportDocument>> {
+  ): Promise<CreateSupportDocumentResponse> {
     return this.http.post(
-      "/v1/support-documents/validate",
+      "/v2/support-documents/validate",
       input,
       options?.signal,
     );
@@ -33,14 +33,14 @@ export class SupportDocumentsModule {
 
   /**
    * List support documents with optional filters and pagination.
-   * GET /v1/support-documents
+   * GET /v2/support-documents
    */
   list(
     params?: ListParams<SupportDocumentFilters>,
     options?: RequestOptions,
   ): Promise<GetSupportDocumentsResponse> {
     return this.http.get(
-      "/v1/support-documents",
+      "/v2/support-documents",
       buildListQueryParams(params),
       options?.signal,
     );
@@ -53,7 +53,7 @@ export class SupportDocumentsModule {
   async *listAll(
     filter?: SupportDocumentFilters,
     options?: RequestOptions,
-  ): AsyncIterable<SupportDocument> {
+  ): AsyncIterable<SupportDocumentListItem> {
     let page = 1;
     while (true) {
       const response = await this.list(
@@ -68,14 +68,14 @@ export class SupportDocumentsModule {
 
   /**
    * Get full detail of a support document by its document number.
-   * GET /v1/support-documents/show/{number}
+   * GET /v2/support-documents/{number}
    */
   get(
     number: string,
     options?: RequestOptions,
-  ): Promise<ApiResponse<ViewSupportDocumentData>> {
+  ): Promise<ViewSupportDocumentResponse> {
     return this.http.get(
-      `/v1/support-documents/show/${number}`,
+      `/v2/support-documents/${number}`,
       undefined,
       options?.signal,
     );
@@ -83,14 +83,14 @@ export class SupportDocumentsModule {
 
   /**
    * Download the support document XML as a base64-encoded string.
-   * GET /v1/support-documents/download-xml/{number}
+   * GET /v2/support-documents/{number}/download-xml
    */
   downloadXml(
     number: string,
     options?: RequestOptions,
   ): Promise<DownloadSupportDocumentXmlResponse> {
     return this.http.get(
-      `/v1/support-documents/download-xml/${number}`,
+      `/v2/support-documents/${number}/download-xml`,
       undefined,
       options?.signal,
     );
@@ -98,14 +98,14 @@ export class SupportDocumentsModule {
 
   /**
    * Download the support document PDF as a base64-encoded string.
-   * GET /v1/support-documents/download-pdf/{number}
+   * GET /v2/support-documents/{number}/download-pdf
    */
   downloadPdf(
     number: string,
     options?: RequestOptions,
   ): Promise<DownloadSupportDocumentPdfResponse> {
     return this.http.get(
-      `/v1/support-documents/download-pdf/${number}`,
+      `/v2/support-documents/${number}/download-pdf`,
       undefined,
       options?.signal,
     );
@@ -113,14 +113,14 @@ export class SupportDocumentsModule {
 
   /**
    * Delete (void) a support document that has not yet been validated by the DIAN.
-   * DELETE /v1/support-documents/reference/{reference_code}
+   * DELETE /v2/support-documents/reference/{reference_code}
    */
   delete(
     referenceCode: string,
     options?: RequestOptions,
   ): Promise<DeleteSupportDocumentResponse> {
     return this.http.delete(
-      `/v1/support-documents/reference/${referenceCode}`,
+      `/v2/support-documents/reference/${referenceCode}`,
       options?.signal,
     );
   }
