@@ -32,3 +32,52 @@ for (const subscription of subscriptions) {
   console.log(subscription.documents_available);
 }
 ```
+
+{/* using response example from v1. TODO: update to table once available */}
+
+## Ejemplo de respuesta
+
+```json
+{
+  "status": "OK",
+  "message": "Solicitud exitosa",
+  "data": [
+    {
+      "name": "Facturación",
+      "supported_document_types": [
+        "Factura de Venta",
+        "Nota Crédito",
+        "Nota Débito",
+        "Documento Soporte",
+        "Nota de Ajuste Documento Soporte"
+      ],
+      "documents_quota": 0,
+      "documents_consumed": 0,
+      "documents_available": "Ilimitado",
+      "days_until_expiration": 365,
+      "activated_at": "2025-12-10T00:00:00Z",
+      "expires_at": "2026-12-10T00:00:00Z",
+      "has_expired": false,
+      "is_active": true,
+      "has_unlimited_quota": true
+    },
+    {
+      "name": "Nómina",
+      "supported_document_types": [
+        "Nómina",
+        "Nota de Ajuste Nómina",
+        "Nota de eliminación de nómina"
+      ],
+      "documents_quota": 100,
+      "documents_consumed": 0,
+      "documents_available": 100,
+      "days_until_expiration": 365,
+      "activated_at": "2025-12-10T00:00:00Z",
+      "expires_at": "2026-12-10T00:00:00Z",
+      "has_expired": false,
+      "is_active": true,
+      "has_unlimited_quota": false
+    }
+  ]
+}
+```

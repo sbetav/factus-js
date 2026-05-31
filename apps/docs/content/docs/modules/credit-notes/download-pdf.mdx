@@ -36,3 +36,18 @@ Fuente oficial: [Descargar PDF](https://developers.factus.com.co/notas-credito/d
 const response = await factus.creditNotes.downloadPdf("NC856");
 const pdfBuffer = Buffer.from(response.data.pdf_base_64_encoded, "base64");
 ```
+
+{/* using response example from v1. TODO: update to table once available */}
+
+## Ejemplo de respuesta
+
+```json
+{
+  "status": "OK",
+  "message": "Solicitud exitosa",
+  "data": {
+    "file_name": "nc09008257590002400000072",
+    "pdf_base_64_encoded": "[TRIMMED_BASE64_87000_CHARS]"
+  }
+}
+```

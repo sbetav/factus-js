@@ -71,3 +71,22 @@ const response = await factus.acquirer.get({
 console.log(response.data.name);
 console.log(response.data.email);
 ```
+
+## Respuesta
+
+{/* using response table from v2 */}
+
+<TypeTable
+  type={{
+    name: {
+      type: "string",
+      required: false,
+      description: "Nombre del adquiriente.",
+    },
+    email: {
+      type: "string",
+      required: false,
+      description: "Email del adquiriente.",
+    },
+  }}
+/>

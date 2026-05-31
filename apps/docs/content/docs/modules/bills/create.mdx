@@ -781,3 +781,1126 @@ const response = await factus.bills.create({
 
 console.log(response.data.number);
 ```
+
+## Respuesta
+
+{/* using response table from v2 */}
+
+<TypeTable
+  type={{
+    status: {
+      type: "string",
+      required: false,
+      description: "Estado HTTP de la respuesta. Ejemplo: Created.",
+    },
+    message: {
+      type: "string",
+      required: false,
+      description:
+        "Mensaje descriptivo del resultado de la operación. Ejemplo: Documento con el código de referencia FACT-2026-0124 registrado y validado con éxito.",
+    },
+    data: {
+      type: "object",
+      required: false,
+      description: (
+        <div>
+          Objeto principal que contiene toda la información del documento
+          generado.
+          <TypeTable
+            type={{
+              reference_code: {
+                type: "string",
+                required: false,
+                description:
+                  "Código de referencia único asignado a la factura. Corresponde al reference_code enviado en la solicitud.",
+              },
+              number: {
+                type: "string",
+                required: false,
+                description:
+                  "Número consecutivo de la factura asignado por el sistema según el rango de numeración activo. Ejemplo: SETP990000550.",
+              },
+              order_reference: {
+                type: "string | null",
+                required: false,
+                description:
+                  "Referencia a la orden de compra asociada. Retorna null si no aplica.",
+              },
+              send_email: {
+                type: "boolean",
+                required: false,
+                description:
+                  "Indica si el correo electrónico fue enviado al cliente al momento de la validación.",
+              },
+              has_claim: {
+                type: "boolean",
+                required: false,
+                description:
+                  "Indica si la factura tiene alguna reclamación registrada.",
+              },
+              is_negotiable_instrument: {
+                type: "boolean",
+                required: false,
+                description:
+                  "Indica si la factura es un título valor (instrumento negociable).",
+              },
+              is_validated: {
+                type: "boolean",
+                required: false,
+                description:
+                  "Indica si la factura fue validada exitosamente ante la DIAN. true: validada, false: pendiente de validación.",
+              },
+              validated_at: {
+                type: "string | null",
+                required: false,
+                description:
+                  "Fecha y hora en que la DIAN validó el documento. Formato: DD-MM-YYYY HH:mm:ss AM/PM. Retorna null si aún no está validada.",
+              },
+              errors: {
+                type: "object",
+                required: false,
+                description:
+                  "Objeto con las notificaciones o advertencias retornadas por la DIAN durante la validación. Las claves son los códigos de regla (ej. FAJ44b) y los valores son el mensaje descriptivo. Este campo puede estar vacío si no hay notificaciones.",
+              },
+              observation: {
+                type: "string | null",
+                required: false,
+                description:
+                  "Observación adicional incluida en la factura. Retorna null si no se especificó.",
+              },
+              created_at: {
+                type: "string",
+                required: false,
+                description:
+                  "Fecha y hora de creación del documento en el sistema. Formato: DD-MM-YYYY HH:mm:ss AM/PM.",
+              },
+              cufe: {
+                type: "string",
+                required: false,
+                description:
+                  "Código Único de Factura Electrónica (CUFE) generado por la DIAN. Es el identificador oficial y único del documento ante la DIAN.",
+              },
+              document_type: {
+                type: "object",
+                required: false,
+                description: (
+                  <div>
+                    Objeto con la información del tipo de documento electrónico
+                    generado.
+                    <TypeTable
+                      type={{
+                        code: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Código del tipo de documento. Ejemplo: 01 para Factura electrónica de Venta.",
+                        },
+                        name: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Nombre descriptivo del tipo de documento. Ejemplo: Factura electrónica de Venta.",
+                        },
+                      }}
+                    />
+                  </div>
+                ),
+              },
+              operation_type: {
+                type: "object",
+                required: false,
+                description: (
+                  <div>
+                    Objeto con el tipo de operación utilizado en la factura.
+                    <TypeTable
+                      type={{
+                        code: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Código del tipo de operación. Ejemplo: 10 (Estándar), SS-CUFE (Sector Salud).",
+                        },
+                        name: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Nombre descriptivo del tipo de operación.",
+                        },
+                      }}
+                    />
+                  </div>
+                ),
+              },
+              billing_period: {
+                type: "object | null",
+                required: false,
+                description: (
+                  <div>
+                    Objeto con el período de facturación. Retorna null si no se
+                    especificó.
+                    <TypeTable
+                      type={{
+                        start_date: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Fecha de inicio del período de facturación en formato DD-MM-YYYY.",
+                        },
+                        start_time: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Hora de inicio del período en formato HH:mm:ss.",
+                        },
+                        end_date: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Fecha de fin del período de facturación en formato DD-MM-YYYY.",
+                        },
+                        end_time: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Hora de fin del período en formato HH:mm:ss.",
+                        },
+                      }}
+                    />
+                  </div>
+                ),
+              },
+              payment_details: {
+                type: "Array<object>",
+                required: false,
+                description: (
+                  <div>
+                    Array de objetos con los detalles de cada medio de pago
+                    utilizado en la factura.
+                    <TypeTable
+                      type={{
+                        payment_form: {
+                          type: "object",
+                          required: false,
+                          description: (
+                            <div>
+                              Objeto con la forma de pago (contado o crédito).
+                              <TypeTable
+                                type={{
+                                  code: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Código de la forma de pago. Ejemplo: 1 (Pago de contado).",
+                                  },
+                                  name: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Nombre descriptivo de la forma de pago. Ejemplo: Pago de contado.",
+                                  },
+                                }}
+                              />
+                            </div>
+                          ),
+                        },
+                        payment_method: {
+                          type: "object",
+                          required: false,
+                          description: (
+                            <div>
+                              Objeto con el método de pago utilizado.
+                              <TypeTable
+                                type={{
+                                  code: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Código del método de pago. Ejemplo: 10 (Efectivo).",
+                                  },
+                                  name: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Nombre descriptivo del método de pago. Ejemplo: Efectivo.",
+                                  },
+                                }}
+                              />
+                            </div>
+                          ),
+                        },
+                        reference_code: {
+                          type: "string | null",
+                          required: false,
+                          description:
+                            "Código de referencia del pago. Retorna null si no aplica.",
+                        },
+                        amount: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Monto correspondiente a este medio de pago.",
+                        },
+                        due_date: {
+                          type: "string | null",
+                          required: false,
+                          description:
+                            "Fecha de vencimiento del pago en formato DD-MM-YYYY. Retorna null para pagos de contado.",
+                        },
+                      }}
+                    />
+                  </div>
+                ),
+              },
+              numbering_range: {
+                type: "object",
+                required: false,
+                description: (
+                  <div>
+                    Objeto con la información del rango de numeración utilizado
+                    para generar el consecutivo de la factura.
+                    <TypeTable
+                      type={{
+                        prefix: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Prefijo del rango de numeración. Ejemplo: SETP.",
+                        },
+                        from: {
+                          type: "integer",
+                          required: false,
+                          description:
+                            "Número inicial del rango de numeración autorizado.",
+                        },
+                        to: {
+                          type: "integer",
+                          required: false,
+                          description:
+                            "Número final del rango de numeración autorizado.",
+                        },
+                        resolution_number: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Número de resolución emitida por la DIAN para este rango.",
+                        },
+                        start_date: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Fecha de inicio de vigencia del rango en formato DD-MM-YYYY.",
+                        },
+                        end_date: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Fecha de fin de vigencia del rango en formato DD-MM-YYYY.",
+                        },
+                        months: {
+                          type: "integer",
+                          required: false,
+                          description:
+                            "Duración total del rango de numeración en meses.",
+                        },
+                      }}
+                    />
+                  </div>
+                ),
+              },
+              health: {
+                type: "null",
+                required: false,
+                description:
+                  "Siempre retorna null en facturas estándar. Este campo aplica únicamente para facturas del sector salud (tipo de operación SS-CUFE).",
+              },
+              beneficiary: {
+                type: "object | null",
+                required: false,
+                description:
+                  "Objeto con los datos del beneficiario. Retorna null si no aplica.",
+              },
+              company: {
+                type: "object",
+                required: false,
+                description: (
+                  <div>
+                    Objeto con la información de la empresa emisora de la
+                    factura.
+                    <TypeTable
+                      type={{
+                        url_logo: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "URL de la imagen del logotipo de la empresa.",
+                        },
+                        nit: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "NIT de la empresa emisora (sin dígito de verificación).",
+                        },
+                        dv: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Dígito de verificación del NIT de la empresa.",
+                        },
+                        economic_activity: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Código CIIU de la actividad económica principal de la empresa.",
+                        },
+                        establishment: {
+                          type: "object",
+                          required: false,
+                          description: (
+                            <div>
+                              Objeto con los datos del establecimiento comercial
+                              de la empresa.
+                              <TypeTable
+                                type={{
+                                  name: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Nombre o razón social del establecimiento.",
+                                  },
+                                  address: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Dirección física del establecimiento.",
+                                  },
+                                  phone_number: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Número de teléfono del establecimiento.",
+                                  },
+                                  email: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Correo electrónico del establecimiento.",
+                                  },
+                                  municipality: {
+                                    type: "object",
+                                    required: false,
+                                    description: (
+                                      <div>
+                                        Objeto con el municipio donde está
+                                        ubicado el establecimiento.
+                                        <TypeTable
+                                          type={{
+                                            code: {
+                                              type: "string",
+                                              required: false,
+                                              description:
+                                                "Código DIVIPOLA del municipio.",
+                                            },
+                                            name: {
+                                              type: "string",
+                                              required: false,
+                                              description:
+                                                "Nombre del municipio.",
+                                            },
+                                            department: {
+                                              type: "object",
+                                              required: false,
+                                              description: (
+                                                <div>
+                                                  Objeto con el departamento al
+                                                  que pertenece el municipio.
+                                                  <TypeTable
+                                                    type={{
+                                                      code: {
+                                                        type: "string",
+                                                        required: false,
+                                                        description:
+                                                          "Código DIVIPOLA del departamento.",
+                                                      },
+                                                      name: {
+                                                        type: "string",
+                                                        required: false,
+                                                        description:
+                                                          "Nombre del departamento.",
+                                                      },
+                                                    }}
+                                                  />
+                                                </div>
+                                              ),
+                                            },
+                                          }}
+                                        />
+                                      </div>
+                                    ),
+                                  },
+                                }}
+                              />
+                            </div>
+                          ),
+                        },
+                      }}
+                    />
+                  </div>
+                ),
+              },
+              customer: {
+                type: "object",
+                required: false,
+                description: (
+                  <div>
+                    Objeto con la información completa del cliente receptor de
+                    la factura.
+                    <TypeTable
+                      type={{
+                        identification_document: {
+                          type: "object",
+                          required: false,
+                          description: (
+                            <div>
+                              Objeto con el tipo de documento de identidad del
+                              cliente.
+                              <TypeTable
+                                type={{
+                                  code: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Código del tipo de documento. Ejemplo: 13 (Cédula ciudadanía).",
+                                  },
+                                  name: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Nombre descriptivo del tipo de documento. Ejemplo: Cédula ciudadanía.",
+                                  },
+                                }}
+                              />
+                            </div>
+                          ),
+                        },
+                        identification: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Número del documento de identidad del cliente.",
+                        },
+                        dv: {
+                          type: "string | null",
+                          required: false,
+                          description:
+                            "Dígito de verificación del documento. Retorna null para personas naturales con cédula.",
+                        },
+                        graphic_representation_name: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Nombre que aparece en la representación gráfica (PDF) de la factura.",
+                        },
+                        trade_name: {
+                          type: "string | null",
+                          required: false,
+                          description:
+                            "Nombre comercial del cliente. Retorna null si no aplica.",
+                        },
+                        company: {
+                          type: "string | null",
+                          required: false,
+                          description:
+                            "Razón social si el cliente es una empresa. Retorna null para personas naturales.",
+                        },
+                        names: {
+                          type: "string",
+                          required: false,
+                          description: "Nombre completo del cliente.",
+                        },
+                        address: {
+                          type: "string",
+                          required: false,
+                          description: "Dirección del cliente.",
+                        },
+                        email: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Correo electrónico del cliente al que se envía la factura.",
+                        },
+                        phone: {
+                          type: "string",
+                          required: false,
+                          description: "Número de teléfono del cliente.",
+                        },
+                        legal_organization: {
+                          type: "object",
+                          required: false,
+                          description: (
+                            <div>
+                              Objeto con el tipo de organización legal del
+                              cliente.
+                              <TypeTable
+                                type={{
+                                  code: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Código de la organización legal. Ejemplo: 2 (Persona Natural).",
+                                  },
+                                  name: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Nombre de la organización legal. Ejemplo: Persona Natural.",
+                                  },
+                                }}
+                              />
+                            </div>
+                          ),
+                        },
+                        tribute: {
+                          type: "object",
+                          required: false,
+                          description: (
+                            <div>
+                              Objeto con el tipo de tributo o responsabilidad
+                              fiscal del cliente.
+                              <TypeTable
+                                type={{
+                                  code: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Código del tributo. Ejemplo: ZZ (No aplica).",
+                                  },
+                                  name: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Nombre del tributo. Ejemplo: No aplica.",
+                                  },
+                                }}
+                              />
+                            </div>
+                          ),
+                        },
+                        municipality: {
+                          type: "object",
+                          required: false,
+                          description: (
+                            <div>
+                              Objeto con el municipio del cliente.
+                              <TypeTable
+                                type={{
+                                  code: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Código DIVIPOLA del municipio del cliente.",
+                                  },
+                                  name: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Nombre del municipio del cliente.",
+                                  },
+                                  department: {
+                                    type: "object",
+                                    required: false,
+                                    description: (
+                                      <div>
+                                        Objeto con el departamento del municipio
+                                        del cliente.
+                                        <TypeTable
+                                          type={{
+                                            code: {
+                                              type: "string",
+                                              required: false,
+                                              description:
+                                                "Código DIVIPOLA del departamento.",
+                                            },
+                                            name: {
+                                              type: "string",
+                                              required: false,
+                                              description:
+                                                "Nombre del departamento.",
+                                            },
+                                          }}
+                                        />
+                                      </div>
+                                    ),
+                                  },
+                                }}
+                              />
+                            </div>
+                          ),
+                        },
+                      }}
+                    />
+                  </div>
+                ),
+              },
+              items: {
+                type: "Array<object>",
+                required: false,
+                description: (
+                  <div>
+                    Array de objetos con el detalle de cada producto o servicio
+                    incluido en la factura.
+                    <TypeTable
+                      type={{
+                        code_reference: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Código interno de referencia del producto o servicio.",
+                        },
+                        name: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Nombre o descripción del producto o servicio.",
+                        },
+                        quantity: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Cantidad del producto o servicio facturado.",
+                        },
+                        unit_measure: {
+                          type: "object",
+                          required: false,
+                          description: (
+                            <div>
+                              Objeto con la unidad de medida del producto.
+                              <TypeTable
+                                type={{
+                                  code: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Código de la unidad de medida. Ejemplo: 94 (unidad).",
+                                  },
+                                  name: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Nombre de la unidad de medida. Ejemplo: unidad.",
+                                  },
+                                }}
+                              />
+                            </div>
+                          ),
+                        },
+                        standard_code: {
+                          type: "object",
+                          required: false,
+                          description: (
+                            <div>
+                              Objeto con el estándar de codificación del
+                              producto.
+                              <TypeTable
+                                type={{
+                                  code: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Código del estándar. Ejemplo: 999 (Estándar de adopción del contribuyente).",
+                                  },
+                                  name: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Nombre del estándar de codificación.",
+                                  },
+                                }}
+                              />
+                            </div>
+                          ),
+                        },
+                        discount_rate: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Porcentaje de descuento aplicado al ítem.",
+                        },
+                        discount: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Valor absoluto del descuento aplicado al ítem.",
+                        },
+                        gross_value: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Valor bruto del ítem antes de impuestos.",
+                        },
+                        price: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Precio unitario del producto o servicio.",
+                        },
+                        total: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Valor total del ítem (precio x cantidad - descuento).",
+                        },
+                        note: {
+                          type: "string",
+                          required: false,
+                          description: "Nota o descripción adicional del ítem.",
+                        },
+                        scheme_id: {
+                          type: "string | null",
+                          required: false,
+                          description:
+                            "Identificador del esquema de codificación del ítem. Retorna null si no aplica.",
+                        },
+                        collection_concept: {
+                          type: "string | null",
+                          required: false,
+                          description:
+                            "Concepto de recaudo asociado al ítem. Retorna null si no aplica.",
+                        },
+                        mandate: {
+                          type: "object | null",
+                          required: false,
+                          description:
+                            "Información del mandato para facturas de mandatos. Retorna null si no aplica.",
+                        },
+                        additional_properties: {
+                          type: "array",
+                          required: false,
+                          description:
+                            "Array de propiedades adicionales del ítem. Vacío si no se especificaron propiedades adicionales.",
+                        },
+                        taxes: {
+                          type: "Array<object>",
+                          required: false,
+                          description: (
+                            <div>
+                              Array de objetos con los impuestos (IVA, INC,
+                              etc.) aplicados al ítem.
+                              <TypeTable
+                                type={{
+                                  tribute: {
+                                    type: "object",
+                                    required: false,
+                                    description: (
+                                      <div>
+                                        Objeto con el tipo de tributo del
+                                        impuesto.
+                                        <TypeTable
+                                          type={{
+                                            code: {
+                                              type: "string",
+                                              required: false,
+                                              description:
+                                                "Código del tributo. Ejemplo: 01 (IVA), 04 (INC).",
+                                            },
+                                            name: {
+                                              type: "string",
+                                              required: false,
+                                              description:
+                                                "Nombre del tributo. Ejemplo: IVA.",
+                                            },
+                                          }}
+                                        />
+                                      </div>
+                                    ),
+                                  },
+                                  is_excluded: {
+                                    type: "boolean",
+                                    required: false,
+                                    description:
+                                      "Indica si el ítem está excluido de este impuesto. true: excluido, false: no excluido.",
+                                  },
+                                  rates: {
+                                    type: "Array<object>",
+                                    required: false,
+                                    description: (
+                                      <div>
+                                        Array de objetos con las tarifas del
+                                        impuesto aplicadas al ítem.
+                                        <TypeTable
+                                          type={{
+                                            taxable_amount: {
+                                              type: "string",
+                                              required: false,
+                                              description:
+                                                "Base gravable sobre la cual se calcula el impuesto.",
+                                            },
+                                            tax_amount: {
+                                              type: "string",
+                                              required: false,
+                                              description:
+                                                "Valor calculado del impuesto.",
+                                            },
+                                            rate: {
+                                              type: "string",
+                                              required: false,
+                                              description:
+                                                "Porcentaje de la tarifa del impuesto.",
+                                            },
+                                          }}
+                                        />
+                                      </div>
+                                    ),
+                                  },
+                                }}
+                              />
+                            </div>
+                          ),
+                        },
+                        withholding_taxes: {
+                          type: "array",
+                          required: false,
+                          description:
+                            "Array de retenciones aplicadas al ítem. Vacío si no aplican retenciones.",
+                        },
+                      }}
+                    />
+                  </div>
+                ),
+              },
+              prepayment_details: {
+                type: "Array<object>",
+                required: false,
+                description: (
+                  <div>
+                    Array de objetos con los anticipos asociados a la factura.
+                    Vacío si no hay anticipos.
+                    <TypeTable
+                      type={{
+                        reference_code: {
+                          type: "string",
+                          required: false,
+                          description: "Código de referencia del anticipo.",
+                        },
+                        received_date: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Fecha en que se recibió el anticipo en formato YYYY-MM-DD.",
+                        },
+                        amount: {
+                          type: "string",
+                          required: false,
+                          description: "Monto del anticipo registrado.",
+                        },
+                        note: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Nota o descripción adicional del anticipo.",
+                        },
+                      }}
+                    />
+                  </div>
+                ),
+              },
+              allowance_charges: {
+                type: "array",
+                required: false,
+                description:
+                  "Array de cargos o descuentos a nivel de factura (no a nivel de ítem). Vacío si no aplican.",
+              },
+              taxes: {
+                type: "Array<object>",
+                required: false,
+                description: (
+                  <div>
+                    Array de objetos con el resumen de impuestos a nivel de
+                    factura (totalizados por tipo de tributo).
+                    <TypeTable
+                      type={{
+                        tribute: {
+                          type: "object",
+                          required: false,
+                          description: (
+                            <div>
+                              Objeto con el tipo de tributo resumido.
+                              <TypeTable
+                                type={{
+                                  code: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Código del tributo. Ejemplo: 01 (IVA).",
+                                  },
+                                  name: {
+                                    type: "string",
+                                    required: false,
+                                    description: "Nombre del tributo.",
+                                  },
+                                }}
+                              />
+                            </div>
+                          ),
+                        },
+                        is_excluded: {
+                          type: "boolean",
+                          required: false,
+                          description:
+                            "Indica si el tributo está excluido a nivel global de la factura.",
+                        },
+                        rates: {
+                          type: "Array<object>",
+                          required: false,
+                          description: (
+                            <div>
+                              Array de objetos con las tarifas del tributo
+                              resumidas a nivel de factura.
+                              <TypeTable
+                                type={{
+                                  taxable_amount: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Base gravable total para esta tarifa de impuesto.",
+                                  },
+                                  tax_amount: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Valor total del impuesto para esta tarifa.",
+                                  },
+                                  rate: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Porcentaje de la tarifa del impuesto.",
+                                  },
+                                }}
+                              />
+                            </div>
+                          ),
+                        },
+                      }}
+                    />
+                  </div>
+                ),
+              },
+              withholding_taxes: {
+                type: "array",
+                required: false,
+                description:
+                  "Array de retenciones a nivel de factura. Vacío si no aplican retenciones globales.",
+              },
+              totals: {
+                type: "object",
+                required: false,
+                description: (
+                  <div>
+                    Objeto con los totales calculados de la factura.
+                    <TypeTable
+                      type={{
+                        prepayment_amount: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Suma total de los anticipos registrados en la factura.",
+                        },
+                        gross_amount: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Valor bruto total de la factura antes de impuestos y descuentos.",
+                        },
+                        taxable_amount: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Base gravable total sobre la cual se calculan los impuestos.",
+                        },
+                        tax_amount: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Valor total de los impuestos calculados en la factura.",
+                        },
+                        surcharge_amount: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Valor total de cargos adicionales (recargos) aplicados a la factura.",
+                        },
+                        total: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Valor total a pagar de la factura (después de anticipos, impuestos y descuentos).",
+                        },
+                      }}
+                    />
+                  </div>
+                ),
+              },
+              related_documents: {
+                type: "array",
+                required: false,
+                description:
+                  "Array de documentos relacionados con la factura (órdenes de compra, etc.). Vacío si no hay documentos relacionados.",
+              },
+              related_notes: {
+                type: "object",
+                required: false,
+                description: (
+                  <div>
+                    Objeto con las notas crédito y débito relacionadas con esta
+                    factura.
+                    <TypeTable
+                      type={{
+                        credit_notes: {
+                          type: "array",
+                          required: false,
+                          description:
+                            "Array de notas crédito asociadas a esta factura. Vacío si no hay notas crédito.",
+                        },
+                        debit_notes: {
+                          type: "array",
+                          required: false,
+                          description:
+                            "Array de notas débito asociadas a esta factura. Vacío si no hay notas débito.",
+                        },
+                      }}
+                    />
+                  </div>
+                ),
+              },
+              links: {
+                type: "object",
+                required: false,
+                description: (
+                  <div>
+                    Objeto con los enlaces generados para acceder al documento.
+                    <TypeTable
+                      type={{
+                        qr: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "URL del código QR que apunta al portal de la DIAN para consultar el documento.",
+                        },
+                        public_url: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "URL pública para visualizar la representación gráfica del documento en el portal de Factus.",
+                        },
+                      }}
+                    />
+                  </div>
+                ),
+              },
+            }}
+          />
+        </div>
+      ),
+    },
+  }}
+/>

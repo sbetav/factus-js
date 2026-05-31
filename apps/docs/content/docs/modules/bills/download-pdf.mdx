@@ -35,3 +35,18 @@ Fuente oficial: [Descargar PDF](https://developers.factus.com.co/facturas/descar
 const response = await factus.bills.downloadPdf("SETP990000203");
 const pdfBuffer = Buffer.from(response.data.pdf_base_64_encoded, "base64");
 ```
+
+{/* using response example from v1. TODO: update to table once available */}
+
+## Ejemplo de respuesta
+
+```json
+{
+  "status": "OK",
+  "message": "Solicitud exitosa",
+  "data": {
+    "file_name": "fv09008257590002400000241",
+    "pdf_base_64_encoded": "[TRIMMED_BASE64_86392_CHARS]"
+  }
+}
+```

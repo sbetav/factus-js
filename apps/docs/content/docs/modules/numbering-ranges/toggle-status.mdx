@@ -33,3 +33,87 @@ console.log(response.data.is_active);
   Es probable que este método no funcione en entorno sandbox. Úsalo en
   producción o con credenciales autorizadas.
 </Callout>
+
+## Respuesta
+
+{/* using response table from v2 */}
+
+<TypeTable
+  type={{
+    id: {
+      type: "number",
+      required: false,
+      description: "ID del rango de numeración.",
+    },
+    document: {
+      type: "NumberingRangeDocumentTypeCode",
+      required: false,
+      description: "Código del documento electrónico.",
+    },
+    document_name: {
+      type: "string",
+      required: false,
+      description: "Nombre del documento electrónico.",
+    },
+    prefix: {
+      type: "string",
+      required: false,
+      description: "Prefijo del rango de numeración.",
+    },
+    from: {
+      type: "number",
+      required: false,
+      description: "Número inicial del rango de numeración.",
+    },
+    to: {
+      type: "number",
+      required: false,
+      description: "Número final del rango de numeración.",
+    },
+    current: {
+      type: "number",
+      required: false,
+      description: "Número actual del rango de numeración.",
+    },
+    resolution_number: {
+      type: "string | null",
+      required: false,
+      description: "Número de resolución del rango de numeración.",
+    },
+    start_date: {
+      type: "string",
+      required: false,
+      description: "Fecha de inicio del rango de numeración.",
+    },
+    end_date: {
+      type: "string",
+      required: false,
+      description: "Fecha de fin del rango de numeración.",
+    },
+    technical_key: {
+      type: "string | null",
+      required: false,
+      description: "Clave técnica del rango de numeración.",
+    },
+    is_expired: {
+      type: "boolean",
+      required: false,
+      description: "Indica si el rango de numeración ha expirado.",
+    },
+    is_active: {
+      type: "boolean | 0 | 1",
+      required: false,
+      description: "Indica si el rango de numeración está activo.",
+    },
+    created_at: {
+      type: "string",
+      required: false,
+      description: "Fecha de creación del rango de numeración.",
+    },
+    updated_at: {
+      type: "string",
+      required: false,
+      description: "Fecha de última actualización del rango de numeración.",
+    },
+  }}
+/>

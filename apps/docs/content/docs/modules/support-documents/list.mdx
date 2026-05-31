@@ -105,3 +105,36 @@ const pagination = response.data.pagination;
 ```
 
 `response.data.data` contiene la página actual y `response.data.pagination` la metadata de paginación.
+
+## Ejemplo de respuesta
+
+{/* using response example from v1. TODO: update to table once available */}
+
+```json
+{
+  "status": "OK",
+  "message": "Solicitud exitosa",
+  "data": {
+    "data": [
+      {
+        "id": 6,
+        "number": "SEDS984000021",
+        "api_client_name": "[email protected]",
+        "reference_code": "REF0017",
+        "identification": "123456789",
+        "graphic_representation_name": "Alan Turing",
+        "trade_name": null,
+        "names": "Alan Turing",
+        "email": "[email protected]",
+        "total": "90000.00",
+        "status": 1,
+        "errors": [
+          "Regla: DSAB19b, Notificación: NIT del Prestador de Servicios no está autorizado por la DIAN"
+        ],
+        "created_at": "11-02-2025 10:16:18 PM",
+        "adjustment_notes": []
+      }
+    ]
+  }
+}
+```

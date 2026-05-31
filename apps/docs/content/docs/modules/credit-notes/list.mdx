@@ -103,3 +103,38 @@ const response = await factus.creditNotes.list({
 const creditNotes = response.data.data;
 const pagination = response.data.pagination;
 ```
+
+## Ejemplo de respuesta
+
+{/* using response example from v1. TODO: update to table once available */}
+
+```json
+{
+  "status": "OK",
+  "message": "Solicitud exitosa",
+  "data": {
+    "data": [
+      {
+        "id": 140,
+        "api_client_name": "Factus",
+        "reference_code": "REF010",
+        "number": "NC81",
+        "identification": "12345678",
+        "graphic_representation_name": "Pepito Perez",
+        "company": "",
+        "trade_name": null,
+        "names": "Pepito Perez",
+        "email": null,
+        "total": "50000.00",
+        "status": 1,
+        "errors": [
+          "Regla: CBF02, Notificación: No se informo el numero de la factura referenciada",
+          "Regla: CAK55, Notificación: Correo electrónico no informado"
+        ],
+        "send_email": 0,
+        "created_at": "30-09-2024 10:13:00 AM"
+      }
+    ]
+  }
+}
+```

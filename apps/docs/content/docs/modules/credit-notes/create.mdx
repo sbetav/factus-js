@@ -622,3 +622,143 @@ const response = await factus.creditNotes.create({
 
 console.log(response.data.number);
 ```
+
+{/* using response example from v1. TODO: update to table once available */}
+
+## Ejemplo de respuesta
+
+```json
+{
+  "status": "Created",
+  "message": "Documento con el código de referencia 5 registrado y validado con éxito",
+  "data": {
+    "company": {
+      "url_logo": "http://api.test/storage/images/logos/uKWIKmmwxeELNzmrxyKoGgbCtimDV1zInzQqgNin.png",
+      "nit": "900825759",
+      "dv": "7",
+      "company": "HALLTEC S.A.S.",
+      "name": "HALLTEC",
+      "registration_code": "3FJ3253427",
+      "economic_activity": "6311",
+      "phone": "3165584659",
+      "email": "[email protected]",
+      "direction": "cra 10 # 9 - 04",
+      "municipality": "San Gil"
+    },
+    "establishment": {
+      "name": "SuperMarket",
+      "address": "calle 10 # 3-13",
+      "phone_number": "0987654321",
+      "email": "[email protected]",
+      "municipality_id": {
+        "id": 996,
+        "code": "68872",
+        "name": "Villanueva",
+        "department": {
+          "id": 28,
+          "code": "68",
+          "name": "Santander"
+        }
+      }
+    },
+    "customer": {
+      "identification": "123456789",
+      "dv": null,
+      "graphic_representation_name": "Alan Turing",
+      "trade_name": "",
+      "company": "",
+      "names": "Alan Turing",
+      "address": "calle 1 # 2-68",
+      "email": "[email protected]",
+      "phone": "1234567890",
+      "legal_organization": {
+        "id": 2,
+        "code": "2",
+        "name": "Persona Natural"
+      },
+      "tribute": {
+        "id": 21,
+        "code": "ZZ",
+        "name": "No aplica"
+      },
+      "municipality": {
+        "id": 980,
+        "code": "68679",
+        "name": "San Gil"
+      }
+    },
+    "credit_note": {
+      "id": 132,
+      "number": "NC76",
+      "reference_code": "5",
+      "status": 1,
+      "send_email": 0,
+      "qr": "https://catalogo-vpfe-hab.dian.gov.co/document/searchqr?documentkey=eee1fc09684c19aaa7cee1b97d3923e286b1ccf12bdd0d185b4ddcbbab87bcbe9d589a9daf9eee9f55132c782c1b8bc0",
+      "cude": "eee1fc09684c19aaa7cee1b97d3923e286b1ccf12bdd0d185b4ddcbbab87bcbe9d589a9daf9eee9f55132c782c1b8bc0",
+      "validated": "20-09-2024 09:13:43 AM",
+      "gross_value": "67226.89",
+      "taxable_amount": "67226.89",
+      "tax_amount": "12773.11",
+      "discount_amount": "0.00",
+      "surcharge_amount": "0.00",
+      "total": "80000.00",
+      "observation": null,
+      "errors": [
+        "Regla: CBF02, Notificación: No se informo el numero de la factura referenciada",
+        "Regla: CAK55, Notificación: Correo electrónico no informado"
+      ],
+      "created_at": "20-09-2024 09:13:42 AM",
+      "qr_image": "data:image/png;base64, [TRIMMED_BASE64_13356_CHARS]",
+      "bill_id": 514,
+      "cufe": "025972ce686eb5fc89a78ab8e9de34c3dea87d23982694ff25843b7f3046b0ac42815f9bb7a1f7469062ef0c11f2eac0",
+      "number_bill": "SETP990000302",
+      "payment_method": {
+        "name": "Efectivo",
+        "code": "10"
+      },
+      "customization_id": {
+        "code": "20",
+        "name": "Nota Crédito que referencia una factura electrónica."
+      },
+      "correction_concept": {
+        "code": "2",
+        "name": "Anulación de factura electrónica"
+      }
+    },
+    "items": [
+      {
+        "note": null,
+        "code_reference": "123456",
+        "name": "Aspirina",
+        "quantity": 1,
+        "discount_rate": "0.00",
+        "discount": "0.00",
+        "gross_value": "67226.89",
+        "tax_rate": "19.00",
+        "taxable_amount": "67226.89",
+        "tax_amount": "12773.11",
+        "price": "80000.00",
+        "is_excluded": 0,
+        "unit_measure": {
+          "id": 70,
+          "code": "94",
+          "name": "unidad"
+        },
+        "standard_code": {
+          "id": 1,
+          "code": "999",
+          "name": "Estándar de adopción del contribuyente"
+        },
+        "tribute": {
+          "id": 1,
+          "code": "01",
+          "name": "IVA"
+        },
+        "total": 80000,
+        "withholding_taxes": []
+      }
+    ],
+    "withholding_taxes": []
+  }
+}
+```

@@ -25,11 +25,12 @@ const response = await factus.documents.downloadXml(
   "79760c1d956a143a1076c9d06808b0916f90eb3eec5d34697fd875a2f4be1c3c18ae583d902671161d443c5dfbd48a4d",
 );
 
-const xml = Buffer.from(
-  response.data.xml_base_64_encoded,
-  "base64",
-).toString("utf-8");
+const xml = Buffer.from(response.data.xml_base_64_encoded, "base64").toString(
+  "utf-8",
+);
 
 console.log(response.data.file_name);
 console.log(xml.slice(0, 80));
 ```
+
+{/* using no official response content yet. TODO: add official v2 response example or response fields once available */}

@@ -106,3 +106,50 @@ const response = await factus.bills.list({
 const facturas = response.data.data;
 const paginacion = response.data.pagination;
 ```
+
+## Ejemplo de respuesta
+
+{/* using response example from v1. TODO: update to table once available */}
+
+```json
+{
+  "status": "OK",
+  "message": "Solicitud exitosa",
+  "data": {
+    "data": [
+      {
+        "id": 400,
+        "document": {
+          "code": "01",
+          "name": "Factura electrónica de Venta"
+        },
+        "number": "SETP990000203",
+        "api_client_name": "Halltec",
+        "reference_code": "I3",
+        "identification": "123456789",
+        "graphic_representation_name": "Alan Turing",
+        "company": "",
+        "trade_name": "",
+        "names": "Alan Turing",
+        "email": "[email protected]",
+        "total": "90000.00",
+        "status": 1,
+        "errors": [
+          "Regla: FAJ43b, Notificación: Nombre informado No corresponde al registrado en el RUT con respecto al Nit suministrado.",
+          "Regla: FAJ43b, Notificación: Nombre informado No corresponde al registrado en el RUT con respecto al Nit suministrado."
+        ],
+        "send_email": 1,
+        "has_claim": 0,
+        "is_negotiable_instrument": 0,
+        "payment_form": {
+          "code": "1",
+          "name": "Pago de contado"
+        },
+        "created_at": "17-07-2024 03:54:10 PM",
+        "credit_notes": [],
+        "debit_notes": []
+      }
+    ]
+  }
+}
+```

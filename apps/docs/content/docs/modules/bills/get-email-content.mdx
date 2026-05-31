@@ -36,3 +36,18 @@ Fuente oficial: [Obtener contenido de correo](https://developers.factus.com.co/f
 const response = await factus.bills.getEmailContent("SETP990000203");
 console.log(response.data.subject);
 ```
+
+{/* using response example from v1. TODO: update to table once available */}
+
+## Ejemplo de respuesta
+
+```json
+{
+  "status": "OK",
+  "message": "Solicitud exitosa",
+  "data": {
+    "subject": "901724254;FACTUS SAS;SETP990000748;01;FACTUS SAS",
+    "attached_document": "[TRIMMED_BASE64_69784_CHARS]"
+  }
+}
+```

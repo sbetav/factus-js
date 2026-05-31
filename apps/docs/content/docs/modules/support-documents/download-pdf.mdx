@@ -35,3 +35,18 @@ Fuente oficial: [Descargar PDF](https://developers.factus.com.co/documentos-sopo
 const response = await factus.supportDocuments.downloadPdf("SEDS984000085");
 const pdfBuffer = Buffer.from(response.data.pdf_base_64_encoded, "base64");
 ```
+
+{/* using response example from v1. TODO: update to table once available */}
+
+## Ejemplo de respuesta
+
+```json
+{
+  "status": "OK",
+  "message": "Solicitud exitosa",
+  "data": {
+    "file_name": "ds09017242540002500000006",
+    "pdf_base_64_encoded": "[TRIMMED_BASE64_60832_CHARS]"
+  }
+}
+```

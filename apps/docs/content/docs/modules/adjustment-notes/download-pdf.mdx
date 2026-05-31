@@ -39,4 +39,15 @@ const pdfBuffer = Buffer.from(response.data.pdf_base_64_encoded, "base64");
 
 ## Ejemplo de respuesta
 
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/notas-ajuste-documentos-soporte/descargar-pdf#ejemplo-de-respuesta)
+{/* using response example from v2. TODO: update to table once available */}
+
+```json
+{
+  "status": "OK",
+  "message": "Solicitud exitosa",
+  "data": {
+    "file_name": "nas09008257590002500000017",
+    "pdf_base_64_encoded": "[TRIMMED_BASE64_60360_CHARS]"
+  }
+}
+```

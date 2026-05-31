@@ -36,3 +36,38 @@ Fuente oficial: [Eventos de facturas](https://developers.factus.com.co/facturas/
 const response = await factus.bills.getEvents("SETP990000203");
 console.log(response.data);
 ```
+
+## Respuesta
+
+{/* using response table from v2 */}
+
+<TypeTable
+  type={{
+    number: {
+      type: "string",
+      required: false,
+      description: "Número del evento.",
+    },
+    cude: { type: "string", required: false, description: "CUDE del evento." },
+    event_code: {
+      type: "EventCode",
+      required: false,
+      description: "Código del evento.",
+    },
+    event_name: {
+      type: "string",
+      required: false,
+      description: "Nombre del evento.",
+    },
+    effective_date: {
+      type: "string",
+      required: false,
+      description: "Fecha de emisión del evento.",
+    },
+    effective_time: {
+      type: "string",
+      required: false,
+      description: "Hora de emisión del evento.",
+    },
+  }}
+/>

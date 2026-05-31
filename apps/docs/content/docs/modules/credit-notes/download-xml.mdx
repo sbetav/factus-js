@@ -38,3 +38,18 @@ const xml = Buffer.from(response.data.xml_base_64_encoded, "base64").toString(
   "utf-8",
 );
 ```
+
+{/* using response example from v1. TODO: update to table once available */}
+
+## Ejemplo de respuesta
+
+```json
+{
+  "status": "OK",
+  "message": "Solicitud exitosa",
+  "data": {
+    "file_name": "nc09008257590002400000072",
+    "xml_base_64_encoded": "[TRIMMED_BASE64_25240_CHARS]"
+  }
+}
+```
