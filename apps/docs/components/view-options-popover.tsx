@@ -114,7 +114,7 @@ export function ViewOptionsPopover({
         {children ?? "Abrir con"}
         <ChevronDown className="size-3.5 text-fd-muted-foreground" />
       </PopoverTrigger>
-      <PopoverContent className="flex flex-col" >
+      <PopoverContent className="flex flex-col bg-fd-popover">
         {items.map((item) => (
           <a
             key={item.href}
