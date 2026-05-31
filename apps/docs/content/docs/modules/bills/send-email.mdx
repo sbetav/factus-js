@@ -8,14 +8,18 @@ import { Callout } from "fumadocs-ui/components/callout";
 ## Firma del método
 
 ```ts
-sendEmail(number: string, input: SendBillEmailInput): Promise<SendBillEmailResponse>
+sendEmail(
+  number: string,
+  input: SendBillEmailInput,
+  options?: RequestOptions,
+): Promise<SendBillEmailResponse>
 ```
 
 ## Endpoint Factus
 
-`POST /v1/bills/send-email/{number}`
+`POST /v2/bills/{number}/send-email`
 
-Fuente oficial: [Enviar correo](https://developers.factus.com.co/v1/facturas/enviar-correo/index.html)
+Fuente oficial: [Enviar correo](https://developers.factus.com.co/facturas/enviar-correo)
 
 ## Parámetros
 
@@ -39,6 +43,12 @@ Fuente oficial: [Enviar correo](https://developers.factus.com.co/v1/facturas/env
                 required: true,
                 description: "Correo destinatario.",
               },
+              pdf_base_64_encoded: {
+                type: "string",
+                required: false,
+                description:
+                  "PDF opcional en base64 para adjuntar manualmente.",
+              },
             }}
           />
         </div>
@@ -59,7 +69,3 @@ await factus.bills.sendEmail("SETP990000203", {
   Es probable que este método no funcione en entorno sandbox. Úsalo en
   producción o con credenciales autorizadas.
 </Callout>
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/facturas/enviar-correo/index.html#ejemplo-de-respuesta)

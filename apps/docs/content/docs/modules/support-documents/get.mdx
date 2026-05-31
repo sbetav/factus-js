@@ -6,14 +6,17 @@ description: Obtener detalle de un documento soporte por numero.
 ## Firma del método
 
 ```ts
-get(number: string): Promise<ApiResponse<ViewSupportDocumentData>>
+get(
+  number: string,
+  options?: RequestOptions,
+): Promise<ViewSupportDocumentResponse>
 ```
 
 ## Endpoint Factus
 
-`GET /v1/support-documents/show/{number}`
+`GET /v2/support-documents/{number}`
 
-Fuente oficial: [Ver documento soporte](https://developers.factus.com.co/v1/documentos-soporte/ver/index.html)
+Fuente oficial: [Ver documento soporte](https://developers.factus.com.co/documentos-soporte/ver)
 
 ## Parámetros
 
@@ -30,10 +33,6 @@ Fuente oficial: [Ver documento soporte](https://developers.factus.com.co/v1/docu
 
 ```ts
 const response = await factus.supportDocuments.get("SEDS984000085");
-console.log(response.data.support_document.total);
+console.log(response.data.number);
+console.log(response.data.totals?.total);
 ```
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/documentos-soporte/ver/index.html#ejemplo-de-respuesta)
-

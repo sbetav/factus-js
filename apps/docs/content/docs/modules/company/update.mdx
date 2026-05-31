@@ -8,14 +8,17 @@ import { Callout } from "fumadocs-ui/components/callout";
 ## Firma del método
 
 ```ts
-update(input: UpdateCompanyInput): Promise<ApiResponse<Company>>
+update(
+  input: UpdateCompanyInput,
+  options?: RequestOptions,
+): Promise<ApiResponse<Company>>
 ```
 
 ## Endpoint Factus
 
-`PUT /v1/company`
+`PUT /v2/companies`
 
-Fuente oficial: [Actualizar empresa](https://developers.factus.com.co/v1/empresas/actualizar/index.html)
+Fuente oficial: [Actualizar empresa](https://developers.factus.com.co/empresas/actualizar)
 
 ## Parámetros
 
@@ -105,7 +108,7 @@ Fuente oficial: [Actualizar empresa](https://developers.factus.com.co/v1/empresa
     },
     responsibilities: {
       type: "string",
-      required: true,
+      required: false,
       description:
         "Código(s) de responsabilidad fiscal, en el formato esperado por Factus.",
     },
@@ -121,14 +124,14 @@ const response = await factus.company.update({
   company: null,
   names: "Alan",
   surnames: "Turing",
-  responsibilities: "5",
+  responsibilities: "R-99-PN",
   economic_activity: "6920",
   email: "alanturing@enigmasas.com",
   address: "calle 100 #50-80",
   trade_name: null,
   registration_code: null,
   phone: "0987654321",
-  municipality_code: "68872",
+  municipality_code: "11001",
   tribute_code: "ZZ",
 });
 
@@ -139,8 +142,3 @@ console.log(response.data.updated_at);
   Es probable que este método no funcione en entorno sandbox. Úsalo en
   producción o con credenciales autorizadas.
 </Callout>
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/empresas/actualizar/index.html#ejemplo-de-la-respuesta)
-

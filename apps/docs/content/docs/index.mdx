@@ -1,6 +1,6 @@
 ---
 title: Introducción
-description: Documentación del SDK de Factus para JavaScript y TypeScript. Aprende a integrar la API de Factus en Node.js para facturación electrónica DIAN en Colombia.
+description: Documentación del SDK de Factus para JavaScript y TypeScript. Integra Factus API v2 con un cliente tipado, autenticación automática y módulos listos para usar.
 ---
 
 import { Cards, Card } from "fumadocs-ui/components/card";
@@ -8,16 +8,11 @@ import { Callout } from "fumadocs-ui/components/callout";
 
 ## factus-js
 
-**factus-js** es un SDK para JavaScript y TypeScript que simplifica la integración de la [API de Factus](https://factus.com.co) en aplicaciones Node.js. El SDK proporciona autenticación OAuth2 automática, tipado estricto y una capa consistente para trabajar con facturas electrónicas, notas crédito, documentos soporte y catálogos DIAN.
+**factus-js** es un SDK para JavaScript y TypeScript que simplifica la integración de la [API de Factus](https://factus.com.co) en aplicaciones Node.js. El SDK proporciona autenticación OAuth2 automática, tipado estricto y una capa consistente para trabajar con facturas electrónicas, notas crédito, documentos soporte y más.
 
 <Callout type="info">
   Este no es un producto oficial de Factus. Para más información visita la
-  [documentación oficial](https://developers.factus.com.co/v1/).
-</Callout>
-
-<Callout type="warn">
-  Este SDK utiliza la **API v1** de Factus, asegúrate de que tus credenciales
-  estén habilitadas para usar este entorno.
+  [documentación oficial](https://developers.factus.com.co/).
 </Callout>
 
 ## Paquete
@@ -30,10 +25,9 @@ El SDK se distribuye como un único paquete en npm:
 
 ## Qué resuelve este SDK
 
-- Integrar Factus API desde Node.js con JavaScript o TypeScript.
-- Emitir facturas electrónicas, notas crédito y documentos soporte.
-- Usar constantes y tablas DIAN tipadas para reducir errores de validación.
-- Centralizar autenticación, refresh de tokens y manejo de errores.
+- Integrar Factus API v2 utilizando JavaScript/TypeScript.
+- Centralizar autenticación, refresh de tokens, timeouts, cancelación y manejo de errores.
+- Proveer constantes tipadas para los códigos estables del API.
 
 ## Recursos disponibles
 
@@ -59,6 +53,11 @@ El SDK se distribuye como un único paquete en npm:
     description="Notas de ajuste para corregir documentos soporte."
   />
   <Card
+    title="Documentos"
+    href="/docs/modules/documents"
+    description="Descarga XML genérico por track ID, CUFE, CUDE o CUDS."
+  />
+  <Card
     title="Empresa"
     href="/docs/modules/company"
     description="Consultar y actualizar el perfil de la empresa."
@@ -79,8 +78,13 @@ El SDK se distribuye como un único paquete en npm:
     description="Consultar el estado de la suscripción y los documentos disponibles."
   />
   <Card
-    title="Catálogo"
-    href="/docs/modules/catalog"
-    description="Municipios, países, tributos, unidades de medida y adquirentes."
+    title="Adquirientes"
+    href="/docs/modules/acquirer"
+    description="Consultar nombre y correo del adquiriente por tipo y número de documento."
+  />
+  <Card
+    title="Tablas de referencia"
+    href="/docs/reference-tables"
+    description="Constantes tipadas del SDK y enlaces oficiales para países, municipios y unidades de medida."
   />
 </Cards>

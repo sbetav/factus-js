@@ -8,14 +8,17 @@ import { Callout } from "fumadocs-ui/components/callout";
 ## Firma del método
 
 ```ts
-delete(referenceCode: string): Promise<DeleteCreditNoteResponse>
+delete(
+  referenceCode: string,
+  options?: RequestOptions,
+): Promise<DeleteCreditNoteResponse>
 ```
 
 ## Endpoint Factus
 
-`DELETE /v1/credit-notes/reference/{reference_code}`
+`DELETE /v2/credit-notes/reference/{reference_code}`
 
-Fuente oficial: [Eliminar nota crédito](https://developers.factus.com.co/v1/notas-credito/eliminar/index.html)
+Fuente oficial: [Eliminar nota crédito](https://developers.factus.com.co/notas-credito/eliminar)
 
 <Callout type="warn">
   Solo se pueden eliminar notas crédito que no hayan sido validadas por la DIAN.
@@ -43,8 +46,3 @@ Fuente oficial: [Eliminar nota crédito](https://developers.factus.com.co/v1/not
 ```ts
 await factus.creditNotes.delete("NC856");
 ```
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/notas-credito/eliminar/index.html#ejemplo-de-respuesta)
-

@@ -6,14 +6,16 @@ description: Obtener los rangos de numeración asociados al software.
 ## Firma del método
 
 ```ts
-getSoftwareRange(): Promise<ApiResponse<SoftwareNumberingRange[]>>
+getSoftwareRange(
+  options?: RequestOptions,
+): Promise<ApiResponse<SoftwareNumberingRange[]>>
 ```
 
 ## Endpoint Factus
 
-`GET /v1/numbering-ranges/dian`
+`GET /v2/numbering-ranges/dian`
 
-Fuente oficial: [Rangos asociados al software](https://developers.factus.com.co/v1/rangos-de-numeracion/rangos-asociados-al-software/index.html)
+Fuente oficial: [Rangos asociados al software](https://developers.factus.com.co/rangos-de-numeracion/rangos-asociados-al-software)
 
 ## Parámetros
 
@@ -29,8 +31,3 @@ for (const numberingRange of numberingRanges) {
   console.log(numberingRange.prefix, numberingRange.from, numberingRange.to);
 }
 ```
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/rangos-de-numeracion/rangos-asociados-al-software/index.html#ejemplo-de-respuesta)
-

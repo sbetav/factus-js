@@ -1,6 +1,6 @@
 ---
 title: Introducción
-description: Emitir, consultar y gestionar notas crédito usando la API de Factus.
+description: Emitir, consultar y gestionar notas crédito con Factus API v2.
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
@@ -8,21 +8,23 @@ import { Callout } from "fumadocs-ui/components/callout";
 Accede al modulo a traves de `factus.creditNotes`.
 
 <Callout type="info">
-  Esta sección sigue los endpoints oficiales de Factus para notas crédito. Para
-  detalle completo de validaciones DIAN y reglas de negocio, revisa: [Crear y
-  validar nota
-  crédito](https://developers.factus.com.co/v1/notas-credito/crear-y-validar/index.html).
+  Documentación oficial: [Notas
+  crédito](https://developers.factus.com.co/notas-credito/crear-y-validar).
 </Callout>
 
 ## Métodos disponibles
 
-| Método                     | Método HTTP + Endpoint                               | Descripción                                 |
-| -------------------------- | ---------------------------------------------------- | ------------------------------------------- |
-| `create(input)`            | `POST /v1/credit-notes/validate`                     | Crear y validar una nueva nota crédito      |
-| `list(params?)`            | `GET /v1/credit-notes`                               | Listar notas crédito con filtros opcionales |
-| `get(number)`              | `GET /v1/credit-notes/{number}`                      | Obtener detalle por número de documento     |
-| `downloadXml(number)`      | `GET /v1/credit-notes/download-xml/{number}`         | Descargar XML en base64                     |
-| `downloadPdf(number)`      | `GET /v1/credit-notes/download-pdf/{number}`         | Descargar PDF en base64                     |
-| `getEmailContent(number)`  | `GET /v1/credit-notes/{number}/email-content`        | Obtener asunto y adjunto para envío manual  |
-| `sendEmail(number, input)` | `POST /v1/credit-notes/send-email/{number}`          | Enviar la nota crédito por email            |
-| `delete(referenceCode)`    | `DELETE /v1/credit-notes/reference/{reference_code}` | Eliminar una nota crédito no validada       |
+| Método                                          | Método HTTP + Endpoint                                         | Descripción                                   |
+| ----------------------------------------------- | -------------------------------------------------------------- | --------------------------------------------- |
+| `create(input, options?)`                       | `POST /v2/credit-notes/validate`                               | Crear y validar una nota crédito              |
+| `list(params?, options?)`                       | `GET /v2/credit-notes`                                         | Listar notas crédito con filtros y paginación |
+| `listAll(filter?, options?)`                    | `GET /v2/credit-notes`                                         | Recorrer todas las páginas automáticamente    |
+| `get(number, options?)`                         | `GET /v2/credit-notes/{number}`                                | Obtener el detalle de una nota crédito        |
+| `downloadXml(number, options?)`                 | `GET /v2/credit-notes/{number}/download-xml`                   | Descargar el XML firmado                      |
+| `downloadAttachedDocumentXml(number, options?)` | `GET /v2/credit-notes/{number}/download-attached-document-xml` | Descargar el AttachedDocument XML             |
+| `downloadPdf(number, options?)`                 | `GET /v2/credit-notes/{number}/download-pdf`                   | Descargar la representación PDF               |
+| `getEmailContent(number, options?)`             | `GET /v2/credit-notes/{number}/email-content`                  | Obtener asunto y adjunto para envío manual    |
+| `sendEmail(number, input, options?)`            | `POST /v2/credit-notes/{number}/send-email`                    | Enviar la nota crédito por correo             |
+| `delete(referenceCode, options?)`               | `DELETE /v2/credit-notes/reference/{reference_code}`           | Eliminar una nota crédito no validada         |
+
+Consulta [Paginación automática](/docs/pagination) para el uso de `listAll()`.

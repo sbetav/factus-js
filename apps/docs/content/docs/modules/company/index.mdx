@@ -1,6 +1,6 @@
 ---
 title: Introducción
-description: Consultar y actualizar la empresa emisora usando la API de Factus.
+description: Consultar y actualizar la empresa emisora registrada en Factus.
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
@@ -8,18 +8,16 @@ import { Callout } from "fumadocs-ui/components/callout";
 Accede al modulo a traves de `factus.company`.
 
 <Callout type="info">
-  Esta sección sigue los endpoints oficiales de Factus para empresa. Fuentes:
-  [Ver empresa](https://developers.factus.com.co/v1/empresas/ver/index.html),
-  [Actualizar
-  empresa](https://developers.factus.com.co/v1/empresas/actualizar/index.html),
-  [Actualizar
-  imagen](https://developers.factus.com.co/v1/empresas/actualizar-imagen/index.html).
+  Fuentes oficiales: [Ver
+  empresa](https://developers.factus.com.co/empresas/ver), [Actualizar
+  empresa](https://developers.factus.com.co/empresas/actualizar) y [Actualizar
+  imagen](https://developers.factus.com.co/empresas/actualizar-imagen).
 </Callout>
 
 ## Métodos disponibles
 
-| Método              | Método HTTP + Endpoint  | Descripción                     |
-| ------------------- | ----------------------- | ------------------------------- |
-| `get()`             | `GET /v1/company`       | Obtener perfil de la empresa    |
-| `update(input)`     | `PUT /v1/company`       | Actualizar perfil de la empresa |
-| `uploadLogo(image)` | `POST /v1/company/logo` | Subir logotipo de la empresa    |
+| Método                        | Método HTTP + Endpoint    | Descripción                     |
+| ----------------------------- | ------------------------- | ------------------------------- |
+| `get(options?)`               | `GET /v2/companies`       | Obtener el perfil de la empresa |
+| `update(input, options?)`     | `PUT /v2/companies`       | Actualizar el perfil            |
+| `uploadLogo(image, options?)` | `POST /v2/companies/logo` | Subir o reemplazar el logotipo  |

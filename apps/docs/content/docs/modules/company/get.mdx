@@ -6,14 +6,14 @@ description: Obtener los datos del perfil de la empresa autenticada en Factus.
 ## Firma del método
 
 ```ts
-get(): Promise<ApiResponse<Company>>
+get(options?: RequestOptions): Promise<ApiResponse<Company>>
 ```
 
 ## Endpoint Factus
 
-`GET /v1/company`
+`GET /v2/companies`
 
-Fuente oficial: [Ver empresa](https://developers.factus.com.co/v1/empresas/ver/index.html)
+Fuente oficial: [Ver empresa](https://developers.factus.com.co/empresas/ver)
 
 ## Parámetros
 
@@ -29,8 +29,3 @@ console.log(company.graphic_representation_name);
 console.log(company.nit);
 console.log(company.email);
 ```
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/empresas/ver/index.html#ejemplo-de-respuesta)
-

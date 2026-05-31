@@ -1,4 +1,8 @@
-import type { EventCode, IdentityDocumentCode } from "../constants";
+import type {
+  ClaimConceptCode,
+  EventCode,
+  IdentityDocumentCode,
+} from "../constants";
 import type { LiteralUnion } from "./common";
 
 // ---------------------------------------------------------------------------
@@ -16,6 +20,7 @@ export interface EmitEventParams {
 }
 
 export interface EmitEventInput {
+  claim_concept_code?: ClaimConceptCode;
   /**
    * Identity document type code for the person emitting the event.
    */

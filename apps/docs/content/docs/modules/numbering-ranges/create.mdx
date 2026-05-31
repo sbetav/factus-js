@@ -8,14 +8,17 @@ import { Callout } from "fumadocs-ui/components/callout";
 ## Firma del método
 
 ```ts
-create(input: CreateNumberingRangeInput): Promise<ApiResponse<NumberingRange>>
+create(
+  input: CreateNumberingRangeInput,
+  options?: RequestOptions,
+): Promise<ApiResponse<NumberingRange>>
 ```
 
 ## Endpoint Factus
 
-`POST /v1/numbering-ranges`
+`POST /v2/numbering-ranges`
 
-Fuente oficial: [Crear rango](https://developers.factus.com.co/v1/rangos-de-numeracion/crear-rango/index.html)
+Fuente oficial: [Crear rango](https://developers.factus.com.co/rangos-de-numeracion/crear-rango)
 
 ## Parámetros
 
@@ -28,7 +31,7 @@ Fuente oficial: [Crear rango](https://developers.factus.com.co/v1/rangos-de-nume
       description: (
         <>
         {"Código del tipo de documento para el rango — Ver "}
-        <a href="/docs/modules/catalog/reference-tables#tipo-de-documento-en-rangos-de-numeración-numberingrangedocumenttypecode">
+        <a href="/docs/reference-tables#tipo-de-documento-en-rangos-de-numeración-numberingrangedocumenttypecode">
           {"tipo de documento en rangos de numeración"}
         </a>
         {"."}
@@ -74,8 +77,3 @@ console.log(response.data.id);
   Es probable que este método no funcione en entorno sandbox. Úsalo en
   producción o con credenciales autorizadas.
 </Callout>
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/rangos-de-numeracion/crear-rango/index.html#ejemplo-de-respuesta)
-

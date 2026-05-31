@@ -6,14 +6,17 @@ description: Listar notas crédito con filtros y paginación.
 ## Firma del método
 
 ```ts
-list(params?: ListParams<CreditNoteFilters>): Promise<GetCreditNotesResponse>
+list(
+  params?: ListParams<CreditNoteFilters>,
+  options?: RequestOptions,
+): Promise<GetCreditNotesResponse>
 ```
 
 ## Endpoint Factus
 
-`GET /v1/credit-notes`
+`GET /v2/credit-notes`
 
-Fuente oficial: [Ver y filtrar notas crédito](https://developers.factus.com.co/v1/notas-credito/ver-filtrar/index.html)
+Fuente oficial: [Listar notas crédito](https://developers.factus.com.co/notas-credito/ver-filtrar)
 
 ## Parámetros
 
@@ -100,8 +103,3 @@ const response = await factus.creditNotes.list({
 const creditNotes = response.data.data;
 const pagination = response.data.pagination;
 ```
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/notas-credito/ver-filtrar/index.html#respuesta-del-endpoint)
-

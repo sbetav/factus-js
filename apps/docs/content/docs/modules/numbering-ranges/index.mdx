@@ -1,6 +1,6 @@
 ---
 title: Introducción
-description: Crear y gestionar rangos de numeración autorizados por la DIAN usando la API de Factus.
+description: Crear y gestionar rangos de numeración autorizados por la DIAN usando Factus API v2.
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
@@ -8,18 +8,21 @@ import { Callout } from "fumadocs-ui/components/callout";
 Accede al modulo a traves de `factus.numberingRanges`.
 
 <Callout type="info">
-  Esta sección sigue los endpoints oficiales de Factus para rangos de
-  numeración. Referencia base:
-  [Introducción](https://developers.factus.com.co/v1/rangos-de-numeracion/introduccion/index.html).
+  Documentación oficial: [Rangos de
+  numeración](https://developers.factus.com.co/rangos-de-numeracion/introduccion).
 </Callout>
 
 ## Métodos disponibles
 
-| Método                     | Método HTTP + Endpoint                    | Descripción                          |
-| -------------------------- | ----------------------------------------- | ------------------------------------ |
-| `list(params?)`            | `GET /v1/numbering-ranges`                | Listar rangos con filtros opcionales |
-| `get(id)`                  | `GET /v1/numbering-ranges/{id}`           | Obtener un rango por ID              |
-| `create(input)`            | `POST /v1/numbering-ranges`               | Crear un nuevo rango                 |
-| `updateCurrent(id, input)` | `PATCH /v1/numbering-ranges/{id}/current` | Actualizar el consecutivo actual     |
-| `getSoftwareRange()`       | `GET /v1/numbering-ranges/dian`           | Obtener rangos asociados al software |
-| `delete(id)`               | `DELETE /v1/numbering-ranges/{id}`        | Eliminar un rango                    |
+| Método                               | Método HTTP + Endpoint                          | Descripción                                |
+| ------------------------------------ | ----------------------------------------------- | ------------------------------------------ |
+| `list(params?, options?)`            | `GET /v2/numbering-ranges`                      | Listar rangos con filtros y paginación     |
+| `listAll(filter?, options?)`         | `GET /v2/numbering-ranges`                      | Recorrer todas las páginas automáticamente |
+| `get(id, options?)`                  | `GET /v2/numbering-ranges/{id}`                 | Obtener un rango por ID                    |
+| `create(input, options?)`            | `POST /v2/numbering-ranges`                     | Crear un rango                             |
+| `updateCurrent(id, input, options?)` | `PATCH /v2/numbering-ranges/{id}/current`       | Actualizar el consecutivo actual           |
+| `toggleStatus(id, options?)`         | `PATCH /v2/numbering-ranges/{id}/toggle-status` | Activar o desactivar un rango              |
+| `getSoftwareRange(options?)`         | `GET /v2/numbering-ranges/dian`                 | Consultar rangos asociados al software     |
+| `delete(id, options?)`               | `DELETE /v2/numbering-ranges/{id}`              | Eliminar un rango                          |
+
+Consulta [Paginación automática](/docs/pagination) para el uso de `listAll()`.

@@ -1,6 +1,6 @@
 ---
 title: Introducción
-description: Crear, consultar, descargar y gestionar facturas electrónicas usando la API de Factus.
+description: Crear, consultar, descargar y gestionar facturas electrónicas con Factus API v2.
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
@@ -8,24 +8,25 @@ import { Callout } from "fumadocs-ui/components/callout";
 Accede al modulo a traves de `factus.bills`.
 
 <Callout type="info">
-  Esta sección sigue los endpoints oficiales de Factus para facturas. Para el
-  detalle completo de campos y reglas DIAN, revisa la documentación original:
-  [Introducción
-  Facturas](https://developers.factus.com.co/v1/facturas/introduccion/index.html).
+  Documentación oficial:
+  [Facturas](https://developers.factus.com.co/facturas/crear-y-validar).
 </Callout>
 
 ## Métodos disponibles
 
-| Método                                      | Método HTTP + Endpoint                                      | Descripción                                  |
-| ------------------------------------------- | ----------------------------------------------------------- | -------------------------------------------- |
-| `create(input)`                             | `POST /v1/bills/validate`                                   | Crear y validar una nueva factura            |
-| `list(params?)`                             | `GET /v1/bills`                                             | Listar facturas con filtros opcionales       |
-| `listAll(params?)`                          | `GET /v1/bills` _(paginación automática)_                   | Iterador async que recorre todas las páginas |
-| `get(number)`                               | `GET /v1/bills/show/{number}`                               | Obtener detalle por numero de documento      |
-| `downloadXml(number)`                       | `GET /v1/bills/download-xml/{number}`                       | Descargar XML en base64                      |
-| `downloadPdf(number)`                       | `GET /v1/bills/download-pdf/{number}`                       | Descargar PDF en base64                      |
-| `getEmailContent(number)`                   | `GET /v1/bills/{number}/email-content`                      | Obtener asunto y adjunto para envío manual   |
-| `sendEmail(number, input)`                  | `POST /v1/bills/send-email/{number}`                        | Enviar la factura por email                  |
-| `emitRadianEvent(number, eventType, input)` | `POST /v1/bills/radian/events/update/{number}/{event_type}` | Emitir evento RADIAN                         |
-| `getEvents(number)`                         | `GET /v1/bills/{number}/radian/events`                      | Obtener eventos RADIAN                       |
-| `delete(referenceCode)`                     | `DELETE /v1/bills/destroy/reference/{reference_code}`       | Eliminar una factura no validada             |
+| Método                                                | Método HTTP + Endpoint                                  | Descripción                                |
+| ----------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------ |
+| `create(input, options?)`                             | `POST /v2/bills/validate`                               | Crear y validar una factura                |
+| `list(params?, options?)`                             | `GET /v2/bills`                                         | Listar facturas con filtros y paginación   |
+| `listAll(filter?, options?)`                          | `GET /v2/bills`                                         | Recorrer todas las páginas automáticamente |
+| `get(number, options?)`                               | `GET /v2/bills/{number}`                                | Obtener el detalle de una factura          |
+| `downloadXml(number, options?)`                       | `GET /v2/bills/{number}/download-xml`                   | Descargar el XML firmado                   |
+| `downloadAttachedDocumentXml(number, options?)`       | `GET /v2/bills/{number}/download-attached-document-xml` | Descargar el AttachedDocument XML          |
+| `downloadPdf(number, options?)`                       | `GET /v2/bills/{number}/download-pdf`                   | Descargar la representación PDF            |
+| `getEmailContent(number, options?)`                   | `GET /v2/bills/{number}/email-content`                  | Obtener asunto y adjunto para envío manual |
+| `sendEmail(number, input, options?)`                  | `POST /v2/bills/{number}/send-email`                    | Enviar la factura por correo               |
+| `emitRadianEvent(number, eventType, input, options?)` | `POST /v2/bills/{number}/radian/events/{event_type}`    | Emitir un evento RADIAN                    |
+| `getEvents(number, options?)`                         | `GET /v2/bills/{number}/radian/events`                  | Consultar eventos RADIAN emitidos          |
+| `delete(referenceCode, options?)`                     | `DELETE /v2/bills/destroy/reference/{reference_code}`   | Eliminar una factura no validada           |
+
+Consulta [Paginación automática](/docs/pagination) para el uso de `listAll()`.

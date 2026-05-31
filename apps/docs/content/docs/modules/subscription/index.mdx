@@ -1,6 +1,6 @@
 ---
 title: Introducción
-description: Consultar suscripciones activas y capacidad disponible usando la API de Factus.
+description: Consultar suscripciones activas y capacidad disponible.
 status: new
 ---
 
@@ -10,11 +10,11 @@ Accede al modulo a traves de `factus.subscription`.
 
 <Callout type="info">
   Esta sección sigue el endpoint oficial de Factus para suscripciones:
-  [Suscripciones](https://developers.factus.com.co/v1/suscripciones/suscripciones).
+  [Suscripciones](https://developers.factus.com.co/suscripciones/suscripciones).
 </Callout>
 
 ## Métodos disponibles
 
-| Método   | Método HTTP + Endpoint  | Descripción                                |
-| -------- | ----------------------- | ------------------------------------------ |
-| `list()` | `GET /v1/subscriptions` | Listar suscripciones activas (recomendado) |
+| Método           | Método HTTP + Endpoint  | Descripción                  |
+| ---------------- | ----------------------- | ---------------------------- |
+| `list(options?)` | `GET /v2/subscriptions` | Listar suscripciones activas |

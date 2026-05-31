@@ -8,14 +8,17 @@ import { Callout } from "fumadocs-ui/components/callout";
 ## Firma del método
 
 ```ts
-delete(id: number): Promise<DeleteNumberingRangeResponse>
+delete(
+  id: number,
+  options?: RequestOptions,
+): Promise<DeleteNumberingRangeResponse>
 ```
 
 ## Endpoint Factus
 
-`DELETE /v1/numbering-ranges/{numbering_range_id}`
+`DELETE /v2/numbering-ranges/{id}`
 
-Fuente oficial: [Eliminar rango](https://developers.factus.com.co/v1/rangos-de-numeracion/eliminar-rango/index.html)
+Fuente oficial: [Eliminar rango](https://developers.factus.com.co/rangos-de-numeracion/eliminar-rango)
 
 <Callout type="warn">
   Si el rango no se ha usado, se elimina permanentemente. Si ya se usó, queda
@@ -46,5 +49,4 @@ await factus.numberingRanges.delete(8);
 
 ## Ejemplo de respuesta
 
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/rangos-de-numeracion/eliminar-rango/index.html#ejemplo-de-respuesta)
-
+Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/rangos-de-numeracion/eliminar-rango#ejemplo-de-respuesta)

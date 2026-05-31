@@ -8,14 +8,18 @@ import { Callout } from "fumadocs-ui/components/callout";
 ## Firma del método
 
 ```ts
-updateCurrent(id: number, input: UpdateNumberingRangeCurrentInput): Promise<ApiResponse<NumberingRange>>
+updateCurrent(
+  id: number,
+  input: UpdateNumberingRangeCurrentInput,
+  options?: RequestOptions,
+): Promise<ApiResponse<NumberingRange>>
 ```
 
 ## Endpoint Factus
 
-`PATCH /v1/numbering-ranges/{numbering_range_id}/current`
+`PATCH /v2/numbering-ranges/{id}/current`
 
-Fuente oficial: [Actualizar consecutivo](https://developers.factus.com.co/v1/rangos-de-numeracion/actualizar-consecutivo/index.html)
+Fuente oficial: [Actualizar consecutivo](https://developers.factus.com.co/rangos-de-numeracion/actualizar-consecutivo)
 
 ## Parámetros
 
@@ -61,8 +65,3 @@ console.log(response.data.current);
   Es probable que este método no funcione en entorno sandbox. Úsalo en
   producción o con credenciales autorizadas.
 </Callout>
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/rangos-de-numeracion/actualizar-consecutivo/index.html#ejemplo-de-respuesta)
-

@@ -6,14 +6,17 @@ description: Listar facturas con filtros y paginación.
 ## Firma del método
 
 ```ts
-list(params?: ListParams<BillFilters>): Promise<GetBillsResponse>
+list(
+  params?: ListParams<BillFilters>,
+  options?: RequestOptions,
+): Promise<GetBillsResponse>
 ```
 
 ## Endpoint Factus
 
-`GET /v1/bills`
+`GET /v2/bills`
 
-Fuente oficial: [Ver y filtrar facturas](https://developers.factus.com.co/v1/facturas/ver-y-filtrar/index.html)
+Fuente oficial: [Listar facturas](https://developers.factus.com.co/facturas/listar-y-filtrar)
 
 ## Parámetros
 
@@ -103,7 +106,3 @@ const response = await factus.bills.list({
 const facturas = response.data.data;
 const paginacion = response.data.pagination;
 ```
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/facturas/ver-y-filtrar/index.html#respuesta-del-endpoint)

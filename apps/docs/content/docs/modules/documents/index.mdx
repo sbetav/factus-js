@@ -1,0 +1,21 @@
+---
+title: Introducción
+description: Descargar XML genérico de documentos emitidos o recibidos usando un track ID, CUFE, CUDE o CUDS.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+Accede al modulo a traves de `factus.documents`.
+
+<Callout type="info">
+  Documentación oficial: [Descargar
+  XML](https://developers.factus.com.co/documentos/descargar-xml).
+</Callout>
+
+## Métodos disponibles
+
+| Método                           | Método HTTP + Endpoint                      | Descripción                                                          |
+| -------------------------------- | ------------------------------------------- | -------------------------------------------------------------------- |
+| `downloadXml(trackId, options?)` | `GET /v2/documents/{track_id}/download-xml` | Descargar el XML de un documento a partir de su identificador global |
+
+Usa este módulo cuando ya tienes un `track_id`, `CUFE`, `CUDE` o `CUDS` y no necesitas navegar por un módulo específico como `bills`, `creditNotes` o `supportDocuments`.

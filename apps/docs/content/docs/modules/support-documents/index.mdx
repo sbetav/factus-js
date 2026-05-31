@@ -1,6 +1,6 @@
 ---
 title: Introducción
-description: Crear, consultar y gestionar documentos soporte con la API de Factus.
+description: Crear, consultar y gestionar documentos soporte con Factus API v2.
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
@@ -8,18 +8,20 @@ import { Callout } from "fumadocs-ui/components/callout";
 Accede al modulo a traves de `factus.supportDocuments`.
 
 <Callout type="info">
-  Esta sección sigue los endpoints oficiales de Factus para documentos soporte.
-  Para reglas DIAN y contexto funcional, revisa: [Introducción documentos
-  soporte](https://developers.factus.com.co/v1/documentos-soporte/introduccion/index.html).
+  Documentación oficial: [Documentos
+  soporte](https://developers.factus.com.co/documentos-soporte/crear-validar).
 </Callout>
 
 ## Métodos disponibles
 
-| Método                  | Método HTTP + Endpoint                                    | Descripción                                      |
-| ----------------------- | --------------------------------------------------------- | ------------------------------------------------ |
-| `create(input)`         | `POST /v1/support-documents/validate`                     | Crear y validar un nuevo documento soporte       |
-| `list(params?)`         | `GET /v1/support-documents`                               | Listar documentos soporte con filtros opcionales |
-| `get(number)`           | `GET /v1/support-documents/show/{number}`                 | Obtener detalle por número de documento          |
-| `downloadXml(number)`   | `GET /v1/support-documents/download-xml/{number}`         | Descargar XML en base64                          |
-| `downloadPdf(number)`   | `GET /v1/support-documents/download-pdf/{number}`         | Descargar PDF en base64                          |
-| `delete(referenceCode)` | `DELETE /v1/support-documents/reference/{reference_code}` | Eliminar un documento soporte no validado        |
+| Método                            | Método HTTP + Endpoint                                    | Descripción                                |
+| --------------------------------- | --------------------------------------------------------- | ------------------------------------------ |
+| `create(input, options?)`         | `POST /v2/support-documents/validate`                     | Crear y validar un documento soporte       |
+| `list(params?, options?)`         | `GET /v2/support-documents`                               | Listar documentos soporte                  |
+| `listAll(filter?, options?)`      | `GET /v2/support-documents`                               | Recorrer todas las páginas automáticamente |
+| `get(number, options?)`           | `GET /v2/support-documents/{number}`                      | Obtener el detalle del documento           |
+| `downloadXml(number, options?)`   | `GET /v2/support-documents/{number}/download-xml`         | Descargar el XML firmado                   |
+| `downloadPdf(number, options?)`   | `GET /v2/support-documents/{number}/download-pdf`         | Descargar el PDF                           |
+| `delete(referenceCode, options?)` | `DELETE /v2/support-documents/reference/{reference_code}` | Eliminar un documento no validado          |
+
+Consulta [Paginación automática](/docs/pagination) para el uso de `listAll()`.

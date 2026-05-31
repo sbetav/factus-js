@@ -6,14 +6,17 @@ description: Listar documentos soporte con filtros y paginación.
 ## Firma del método
 
 ```ts
-list(params?: ListParams<SupportDocumentFilters>): Promise<ApiResponse<PaginatedData<SupportDocument>>>
+list(
+  params?: ListParams<SupportDocumentFilters>,
+  options?: RequestOptions,
+): Promise<GetSupportDocumentsResponse>
 ```
 
 ## Endpoint Factus
 
-`GET /v1/support-documents`
+`GET /v2/support-documents`
 
-Fuente oficial: [Filtrar documentos soporte](https://developers.factus.com.co/v1/documentos-soporte/ver-y-filtrar/index.html)
+Fuente oficial: [Listar documentos soporte](https://developers.factus.com.co/documentos-soporte/ver-y-filtrar)
 
 ## Parámetros
 
@@ -101,7 +104,4 @@ const supportDocuments = response.data.data;
 const pagination = response.data.pagination;
 ```
 
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/documentos-soporte/ver-y-filtrar/index.html#respuesta-del-endpoint)
-
+`response.data.data` contiene la página actual y `response.data.pagination` la metadata de paginación.

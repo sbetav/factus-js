@@ -57,11 +57,6 @@ bun add factus-js
 
 Crea un archivo `.env.local` en la raíz de tu proyecto:
 
-<Callout type="warn">
-  factus-js utiliza la **API v1** de Factus, asegúrate de que tus credenciales
-  estén habilitadas para usar este entorno.
-</Callout>
-
 ```bash title=".env.local"
 FACTUS_CLIENT_ID=tu-client-id
 FACTUS_CLIENT_SECRET=tu-client-secret
@@ -100,56 +95,58 @@ export const factus = new FactusClient({
 ## Crea tu primera factura
 
 ```ts
-import factus from "./factus";
+import { factus } from "./factus";
 import {
+  CustomerTributeCode,
   PaymentFormCode,
   PaymentMethodCode,
-  IdentityDocumentTypeId,
-  CustomerTributeId,
-  OrganizationTypeId,
-  ProductStandardId,
   FactusError,
+  IdentityDocumentCode,
+  OperationTypeCode,
+  OrganizationTypeCode,
+  ProductStandardCode,
 } from "factus-js";
 
 const createBill = async () => {
   try {
     const response = await factus.bills.create({
       numbering_range_id: 8,
-      reference_code: "I3",
+      reference_code: "FACT-2026-0001",
       observation: "Factura de prueba",
-      payment_form: PaymentFormCode.CreditPayment,
-      payment_method_code: PaymentMethodCode.Cash,
-      payment_due_date: "2025-12-31",
+      operation_type: OperationTypeCode.Standard,
+      payment_details: [
+        {
+          payment_form: PaymentFormCode.CreditPayment,
+          payment_method_code: PaymentMethodCode.Cash,
+          amount: "50000.00",
+          due_date: "2026-12-31",
+        },
+      ],
       billing_period: {
-        start_date: "2025-01-01",
-        end_date: "2025-01-31",
+        start_date: "2026-01-01",
+        end_date: "2026-01-31",
       },
       customer: {
         identification: "123456789",
-        dv: "3",
-        company: "Enigma SAS",
-        trade_name: "",
         names: "Alan Turing",
-        address: "calle 1 # 2-68",
+        address: "Calle 1 # 2-68",
         email: "alanturing@enigmasas.com",
         phone: "1234567890",
-        legal_organization_id: OrganizationTypeId.NaturalPerson,
-        tribute_id: CustomerTributeId.IVA,
-        identification_document_id: IdentityDocumentTypeId.NIT,
-        municipality_id: "980", // San Gil
+        legal_organization_code: OrganizationTypeCode.NaturalPerson,
+        tribute_code: CustomerTributeCode.NotApplicable,
+        identification_document_code: IdentityDocumentCode.CitizenshipCard,
+        municipality_code: "11001",
       },
       items: [
         {
-          code_reference: "12345",
+          code_reference: "PROD-001",
           name: "Producto de ejemplo",
-          quantity: 1,
-          discount_rate: 20,
-          price: 50000,
-          tax_rate: "19.00",
-          unit_measure_id: 70, // unidad
-          standard_code_id: ProductStandardId.TaxpayerAdoption,
-          is_excluded: 0,
-          tribute_id: 1,
+          quantity: "1.00",
+          discount_rate: "0.00",
+          price: "50000.00",
+          unit_measure_code: "94",
+          standard_code: ProductStandardCode.TaxpayerAdoption,
+          taxes: [{ code: "01", rate: "19.00" }],
         },
       ],
     });

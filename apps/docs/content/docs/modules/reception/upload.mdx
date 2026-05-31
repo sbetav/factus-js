@@ -8,14 +8,17 @@ import { Callout } from "fumadocs-ui/components/callout";
 ## Firma del método
 
 ```ts
-upload(input: UploadReceptionBillInput): Promise<ApiResponse<UploadedReceptionBill>>
+upload(
+  input: UploadReceptionBillInput,
+  options?: RequestOptions,
+): Promise<ApiResponse<UploadedReceptionBill>>
 ```
 
 ## Endpoint Factus
 
-`POST /v1/receptions/upload`
+`POST /v2/receptions/upload`
 
-Fuente oficial: [Cargar factura](https://developers.factus.com.co/v1/recepcion-de-documentos/cargar-factura/index.html)
+Fuente oficial: [Cargar factura](https://developers.factus.com.co/recepcion-de-documentos/cargar-factura)
 
 ## Parámetros
 
@@ -40,7 +43,8 @@ const response = await factus.reception.upload({
     "79760c1d956a143a1076c9d06808b0916f90eb3eec5d34697fd875a2f4be1c3c18ae583d902671161d443c5dfbd48a4d",
 });
 
-console.log(response.data.number);
+console.log(response.data.track_id);
+console.log(response.data.status);
 ```
 
 <Callout type="warn">

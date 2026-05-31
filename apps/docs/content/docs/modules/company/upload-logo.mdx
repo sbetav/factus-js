@@ -8,14 +8,17 @@ import { Callout } from "fumadocs-ui/components/callout";
 ## Firma del método
 
 ```ts
-uploadLogo(image: File | Blob): Promise<ApiResponse<UploadCompanyLogoResponse>>
+uploadLogo(
+  image: File | Blob,
+  options?: RequestOptions,
+): Promise<ApiResponse<UploadCompanyLogoResponse>>
 ```
 
 ## Endpoint Factus
 
-`POST /v1/company/logo`
+`POST /v2/companies/logo`
 
-Fuente oficial: [Actualizar logo de la empresa](https://developers.factus.com.co/v1/empresas/actualizar-imagen/index.html)
+Fuente oficial: [Actualizar logo de la empresa](https://developers.factus.com.co/empresas/actualizar-imagen)
 
 ## Parámetros
 
@@ -37,19 +40,10 @@ const imageBuffer = readFileSync("./logo.png");
 const imageBlob = new Blob([imageBuffer], { type: "image/png" });
 
 const response = await factus.company.uploadLogo(imageBlob);
-console.log(response.data.url_log);
+console.log(response.data.url_logo);
 ```
-
-<Callout type="info">
-  La API retorna `url_log` (no `url_logo`) en este endpoint.
-</Callout>
 
 <Callout type="warn">
   Es probable que este método no funcione en entorno sandbox. Úsalo en
   producción o con credenciales autorizadas.
 </Callout>
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/empresas/actualizar-imagen/index.html#ejemplo-de-la-respuesta)
-

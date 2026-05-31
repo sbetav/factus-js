@@ -1,11 +1,13 @@
 ---
 title: Control de solicitudes (AbortSignal)
-description: Cancela solicitudes HTTP en curso usando AbortSignal en cualquier método del SDK.
+description: Cancela solicitudes HTTP en curso y configura timeouts por defecto en cualquier método del SDK.
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
 
 Todos los métodos del SDK aceptan un parámetro opcional `options` de tipo `RequestOptions`. Actualmente soporta la propiedad `signal` para pasar un [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) y cancelar la solicitud.
+
+Además, el constructor de `FactusClient` acepta `timeout` en milisegundos para aplicar un tiempo máximo por defecto a todas las peticiones.
 
 ## Firma de `RequestOptions`
 
@@ -47,6 +49,21 @@ const response = await factus.bills.get("SETP990000001", {
 });
 ```
 
+## Timeout por defecto del cliente
+
+```ts
+const factus = new FactusClient({
+  clientId: process.env.FACTUS_CLIENT_ID!,
+  clientSecret: process.env.FACTUS_CLIENT_SECRET!,
+  username: process.env.FACTUS_USERNAME!,
+  password: process.env.FACTUS_PASSWORD!,
+  environment: "sandbox",
+  timeout: 10_000,
+});
+```
+
+Si además pasas `options.signal`, el SDK combina ambas señales y aborta cuando se dispara cualquiera de las dos.
+
 <Callout type="info">
   `AbortSignal.timeout()` está disponible en Node.js 18+ y en navegadores
   modernos. Para entornos más antiguos usa `AbortController` con `setTimeout`
@@ -61,7 +78,10 @@ Puedes pasar el `signal` al iterador `listAll()` para cancelar la paginación en
 const controller = new AbortController();
 setTimeout(() => controller.abort(), 10000);
 
-for await (const bill of factus.bills.listAll({}, { signal: controller.signal })) {
+for await (const bill of factus.bills.listAll(
+  {},
+  { signal: controller.signal },
+)) {
   process(bill);
 }
 ```
@@ -70,6 +90,4 @@ El iterador se detendrá y lanzará `AbortError` en cuanto la señal sea abortad
 
 ## Compatibilidad
 
-El soporte de `AbortSignal` está disponible en todos los métodos de los módulos:
-`bills`, `creditNotes`, `supportDocuments`, `adjustmentNotes`, `reception`,
-`numberingRanges`, `company`, `subscription` y `catalog`.
+El soporte de `AbortSignal` está disponible en todos los métodos del SDK.

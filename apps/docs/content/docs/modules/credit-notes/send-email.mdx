@@ -8,14 +8,18 @@ import { Callout } from "fumadocs-ui/components/callout";
 ## Firma del método
 
 ```ts
-sendEmail(number: string, input: SendCreditNoteEmailInput): Promise<SendCreditNoteEmailResponse>
+sendEmail(
+  number: string,
+  input: SendCreditNoteEmailInput,
+  options?: RequestOptions,
+): Promise<SendCreditNoteEmailResponse>
 ```
 
 ## Endpoint Factus
 
-`POST /v1/credit-notes/send-email/{number}`
+`POST /v2/credit-notes/{number}/send-email`
 
-Fuente oficial: [Enviar correo](https://developers.factus.com.co/v1/notas-credito/enviar-correo/index.html)
+Fuente oficial: [Enviar correo](https://developers.factus.com.co/notas-credito/enviar-correo)
 
 ## Parámetros
 
@@ -66,8 +70,3 @@ await factus.creditNotes.sendEmail("NC856", {
   Es probable que este método no funcione en entorno sandbox. Úsalo en
   producción o con credenciales autorizadas.
 </Callout>
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/notas-credito/enviar-correo/index.html#ejemplo-de-respuesta)
-

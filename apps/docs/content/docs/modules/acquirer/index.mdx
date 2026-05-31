@@ -1,0 +1,19 @@
+---
+title: Introducción
+description: Consultar adquirientes por tipo y número de documento usando el módulo acquirer.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+Accede al módulo a través de `factus.acquirer`.
+
+<Callout type="info">
+  Documentación oficial: [Obtener datos de
+  adquirientes](https://developers.factus.com.co/informacion-adquirientes/obtener-datos-adquiriente).
+</Callout>
+
+## Métodos disponibles
+
+| Método                   | Método HTTP + Endpoint  | Descripción                                                            |
+| ------------------------ | ----------------------- | ---------------------------------------------------------------------- |
+| `get(filters, options?)` | `GET /v2/dian/acquirer` | Obtener nombre y correo del adquiriente por tipo y número de documento |

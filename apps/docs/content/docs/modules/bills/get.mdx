@@ -11,9 +11,9 @@ get(number: string, options?: RequestOptions): Promise<ViewBillResponse>
 
 ## Endpoint Factus
 
-`GET /v1/bills/show/{number}`
+`GET /v2/bills/{number}`
 
-Fuente oficial: [Ver factura](https://developers.factus.com.co/v1/facturas/ver/index.html)
+Fuente oficial: [Ver factura](https://developers.factus.com.co/facturas/ver)
 
 ## Parámetros
 
@@ -45,7 +45,3 @@ Fuente oficial: [Ver factura](https://developers.factus.com.co/v1/facturas/ver/i
 const response = await factus.bills.get("SETP990000203");
 console.log(response.data);
 ```
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/facturas/ver/index.html#ejemplo-de-respuesta)

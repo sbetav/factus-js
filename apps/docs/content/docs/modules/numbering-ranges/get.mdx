@@ -8,14 +8,14 @@ import { Callout } from "fumadocs-ui/components/callout";
 ## Firma del método
 
 ```ts
-get(id: number): Promise<ApiResponse<NumberingRange>>
+get(id: number, options?: RequestOptions): Promise<ApiResponse<NumberingRange>>
 ```
 
 ## Endpoint Factus
 
-`GET /v1/numbering-ranges/{numbering_range_id}`
+`GET /v2/numbering-ranges/{id}`
 
-Fuente oficial: [Ver rango](https://developers.factus.com.co/v1/rangos-de-numeracion/ver-rango/index.html)
+Fuente oficial: [Ver rango](https://developers.factus.com.co/rangos-de-numeracion/ver-rango)
 
 ## Parámetros
 
@@ -43,8 +43,3 @@ console.log(numberingRange.document);
   Es probable que este método no funcione en entorno sandbox. Úsalo en
   producción o con credenciales autorizadas.
 </Callout>
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/rangos-de-numeracion/ver-rango/index.html#ejemplo-de-respuesta)
-

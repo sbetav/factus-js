@@ -6,14 +6,17 @@ description: Descargar XML de una nota de ajuste en base64 por numero.
 ## Firma del método
 
 ```ts
-downloadXml(number: string): Promise<ApiResponse<DownloadAdjustmentNoteXmlResponse>>
+downloadXml(
+  number: string,
+  options?: RequestOptions,
+): Promise<DownloadAdjustmentNoteXmlResponse>
 ```
 
 ## Endpoint Factus
 
-`GET /v1/adjustment-notes/download-xml/{number}`
+`GET /v2/adjustment-notes/{number}/download-xml`
 
-Fuente oficial: [Descargar XML](https://developers.factus.com.co/v1/notas-ajuste-documentos-soporte/descargar-xml/index.html)
+Fuente oficial: [Descargar XML](https://developers.factus.com.co/notas-ajuste-documentos-soporte/descargar-xml)
 
 ## Parámetros
 
@@ -35,8 +38,3 @@ const xml = Buffer.from(response.data.xml_base_64_encoded, "base64").toString(
   "utf-8",
 );
 ```
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/notas-ajuste-documentos-soporte/descargar-xml/index.html#variables-de-ruta-path-variables)
-

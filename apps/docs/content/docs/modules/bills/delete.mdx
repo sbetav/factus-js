@@ -8,14 +8,17 @@ import { Callout } from "fumadocs-ui/components/callout";
 ## Firma del método
 
 ```ts
-delete(referenceCode: string): Promise<DeleteBillResponse>
+delete(
+  referenceCode: string,
+  options?: RequestOptions,
+): Promise<DeleteBillResponse>
 ```
 
 ## Endpoint Factus
 
-`DELETE /v1/bills/destroy/reference/{reference_code}`
+`DELETE /v2/bills/destroy/reference/{reference_code}`
 
-Fuente oficial: [Eliminar factura no validada](https://developers.factus.com.co/v1/facturas/eliminar/index.html)
+Fuente oficial: [Eliminar factura](https://developers.factus.com.co/facturas/eliminar)
 
 <Callout type="warn">
   Solo se pueden eliminar facturas que no hayan sido validadas por la DIAN.
@@ -43,7 +46,3 @@ Fuente oficial: [Eliminar factura no validada](https://developers.factus.com.co/
 ```ts
 await factus.bills.delete("SETP990000049");
 ```
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/facturas/eliminar/index.html#ejemplo-de-respuesta)

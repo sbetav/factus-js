@@ -6,14 +6,17 @@ description: Obtener el detalle completo de una nota crédito por numero.
 ## Firma del método
 
 ```ts
-get(number: string): Promise<ApiResponse<ViewCreditNoteData>>
+get(
+  number: string,
+  options?: RequestOptions,
+): Promise<ViewCreditNoteResponse>
 ```
 
 ## Endpoint Factus
 
-`GET /v1/credit-notes/{number}`
+`GET /v2/credit-notes/{number}`
 
-Fuente oficial: [Ver nota crédito](https://developers.factus.com.co/v1/notas-credito/ver/index.html)
+Fuente oficial: [Ver nota crédito](https://developers.factus.com.co/notas-credito/ver)
 
 ## Parámetros
 
@@ -30,10 +33,6 @@ Fuente oficial: [Ver nota crédito](https://developers.factus.com.co/v1/notas-cr
 
 ```ts
 const response = await factus.creditNotes.get("NC856");
-console.log(response.data.credit_note.total);
+console.log(response.data.number);
+console.log(response.data.totals?.total);
 ```
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/notas-credito/ver/index.html#ejemplo-de-respuesta)
-

@@ -6,14 +6,17 @@ description: Obtener asunto y adjunto (base64) para envío manual de correo.
 ## Firma del método
 
 ```ts
-getEmailContent(number: string): Promise<GetBillEmailContentResponse>
+getEmailContent(
+  number: string,
+  options?: RequestOptions,
+): Promise<GetBillEmailContentResponse>
 ```
 
 ## Endpoint Factus
 
-`GET /v1/bills/{number}/email-content`
+`GET /v2/bills/{number}/email-content`
 
-Fuente oficial: [Obtener contenido de correo](https://developers.factus.com.co/v1/facturas/obtener-contenido-de-correo/index.html)
+Fuente oficial: [Obtener contenido de correo](https://developers.factus.com.co/facturas/obtener-contenido-de-correo)
 
 ## Parámetros
 
@@ -33,7 +36,3 @@ Fuente oficial: [Obtener contenido de correo](https://developers.factus.com.co/v
 const response = await factus.bills.getEmailContent("SETP990000203");
 console.log(response.data.subject);
 ```
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/facturas/obtener-contenido-de-correo/index.html#ejemplo-de-respuesta)

@@ -6,14 +6,17 @@ description: Listar y filtrar facturas electrónicas recibidas.
 ## Firma del método
 
 ```ts
-list(params?: ListParams<ReceptionBillFilters>): Promise<ApiResponse<PaginatedData<ReceptionBill>>>
+list(
+  params?: ListParams<ReceptionBillFilters>,
+  options?: RequestOptions,
+): Promise<ApiResponse<PaginatedData<ReceptionBill>>>
 ```
 
 ## Endpoint Factus
 
-`GET /v1/receptions/bills`
+`GET /v2/receptions/bills`
 
-Fuente oficial: [Ver facturas](https://developers.factus.com.co/v1/recepcion-de-documentos/ver-facturas/index.html)
+Fuente oficial: [Ver facturas](https://developers.factus.com.co/recepcion-de-documentos/ver-facturas)
 
 ## Parámetros
 

@@ -1,6 +1,7 @@
 import type {
   BillDocumentCode,
   ChargeDiscountCode,
+  ClaimConceptCode,
   EventCode,
   IdentityDocumentCode,
   OperationTypeCode,
@@ -153,6 +154,7 @@ export interface ViewBillData {
 // ---------------------------------------------------------------------------
 
 export interface RadianEventUpdateInput {
+  claim_concept_code?: ClaimConceptCode;
   identification_document_code: LiteralUnion<IdentityDocumentCode>;
   identification: string;
   dv?: string;

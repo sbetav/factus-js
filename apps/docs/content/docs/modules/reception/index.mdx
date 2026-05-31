@@ -1,6 +1,6 @@
 ---
 title: Introducción
-description: Listar facturas recibidas y emitir eventos RADIAN usando la API de Factus.
+description: Listar facturas recibidas, cargarlas y emitir eventos RADIAN.
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
@@ -8,19 +8,21 @@ import { Callout } from "fumadocs-ui/components/callout";
 Accede al modulo a traves de `factus.reception`.
 
 <Callout type="info">
-  El flujo RADIAN tiene requisitos específicos de campos por tipo de evento.
-  Para referencia oficial, revisa: [Ver
-  facturas](https://developers.factus.com.co/v1/recepcion-de-documentos/ver-facturas/index.html),
+  Fuentes oficiales: [Ver
+  facturas](https://developers.factus.com.co/recepcion-de-documentos/ver-facturas),
   [Cargar
-  factura](https://developers.factus.com.co/v1/recepcion-de-documentos/cargar-factura/index.html),
-  [Emitir
-  evento](https://developers.factus.com.co/v1/recepcion-de-documentos/emitir-evento/index.html).
+  factura](https://developers.factus.com.co/recepcion-de-documentos/cargar-factura)
+  y [Emitir
+  evento](https://developers.factus.com.co/recepcion-de-documentos/emitir-evento).
 </Callout>
 
 ## Métodos disponibles
 
-| Método                     | Método HTTP + Endpoint                                            | Descripción                                         |
-| -------------------------- | ----------------------------------------------------------------- | --------------------------------------------------- |
-| `list(params?)`            | `GET /v1/receptions/bills`                                        | Listar facturas recibidas                           |
-| `upload(input)`            | `POST /v1/receptions/upload`                                      | Registrar factura recibida por track_id (CUFE/CUDE) |
-| `emitEvent(params, input)` | `PATCH /v1/receptions/bills/{bill_id}/radian/events/{event_type}` | Emitir evento RADIAN                                |
+| Método                               | Método HTTP + Endpoint                                            | Descripción                                   |
+| ------------------------------------ | ----------------------------------------------------------------- | --------------------------------------------- |
+| `list(params?, options?)`            | `GET /v2/receptions/bills`                                        | Listar facturas recibidas                     |
+| `listAll(filter?, options?)`         | `GET /v2/receptions/bills`                                        | Recorrer todas las páginas automáticamente    |
+| `upload(input, options?)`            | `POST /v2/receptions/upload`                                      | Registrar una factura recibida por `track_id` |
+| `emitEvent(params, input, options?)` | `PATCH /v2/receptions/bills/{bill_id}/radian/events/{event_type}` | Emitir un evento RADIAN                       |
+
+Consulta [Paginación automática](/docs/pagination) para el uso de `listAll()`.

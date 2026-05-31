@@ -8,14 +8,17 @@ import { Callout } from "fumadocs-ui/components/callout";
 ## Firma del método
 
 ```ts
-delete(referenceCode: string): Promise<DeleteSupportDocumentResponse>
+delete(
+  referenceCode: string,
+  options?: RequestOptions,
+): Promise<DeleteSupportDocumentResponse>
 ```
 
 ## Endpoint Factus
 
-`DELETE /v1/support-documents/reference/{reference_code}`
+`DELETE /v2/support-documents/reference/{reference_code}`
 
-Fuente oficial: [Eliminar documento soporte](https://developers.factus.com.co/v1/documentos-soporte/eliminar/index.html)
+Fuente oficial: [Eliminar documento soporte](https://developers.factus.com.co/documentos-soporte/eliminar)
 
 <Callout type="warn">
   Solo se pueden eliminar documentos soporte que no hayan sido validados por la
@@ -44,8 +47,3 @@ Fuente oficial: [Eliminar documento soporte](https://developers.factus.com.co/v1
 ```ts
 await factus.supportDocuments.delete("REF0017");
 ```
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/documentos-soporte/eliminar/index.html#ejemplo-de-respuesta)
-

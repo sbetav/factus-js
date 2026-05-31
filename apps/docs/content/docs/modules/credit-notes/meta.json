@@ -7,6 +7,7 @@
     "list",
     "download-pdf",
     "download-xml",
+    "download-attached-document-xml",
     "get-email-content",
     "send-email",
     "delete"

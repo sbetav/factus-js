@@ -1,0 +1,33 @@
+---
+title: Descargar AttachedDocument XML
+description: Descargar el AttachedDocument XML de una factura electrónica.
+---
+
+## Firma del método
+
+```ts
+downloadAttachedDocumentXml(
+  number: string,
+  options?: RequestOptions,
+): Promise<DownloadBillAttachedDocumentXmlResponse>
+```
+
+## Endpoint Factus
+
+`GET /v2/bills/{number}/download-attached-document-xml`
+
+Fuente oficial: [Descargar XML AttachedDocument](https://developers.factus.com.co/facturas/descargar-xml-attacheddocument)
+
+## Ejemplo
+
+```ts
+const response =
+  await factus.bills.downloadAttachedDocumentXml("SETP990000203");
+
+const xml = Buffer.from(response.data.xml_base_64_encoded, "base64").toString(
+  "utf-8",
+);
+
+console.log(response.data.file_name);
+console.log(xml.slice(0, 80));
+```

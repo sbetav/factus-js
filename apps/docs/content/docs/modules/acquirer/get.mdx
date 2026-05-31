@@ -1,19 +1,22 @@
 ---
 title: Obtener adquiriente
-description: Consultar nombre y correo del adquiriente por tipo y numero de documento.
+description: Consultar nombre y correo del adquiriente por tipo y número de documento.
 ---
 
 ## Firma del método
 
 ```ts
-getAcquirer(filters: AcquirerFilters): Promise<ApiResponse<Acquirer>>
+get(
+  filters: AcquirerFilters,
+  options?: RequestOptions,
+): Promise<ApiResponse<Acquirer>>
 ```
 
 ## Endpoint Factus
 
-`GET /v1/dian/acquirer`
+`GET /v2/dian/acquirer`
 
-Fuente oficial: [Obtener datos de adquiriente](https://developers.factus.com.co/v1/informacion-adquirientes/obtener-datos-adquiriente/index.html)
+Fuente oficial: [Obtener datos de adquiriente](https://developers.factus.com.co/informacion-adquirientes/obtener-datos-adquiriente)
 
 ## Parámetros
 
@@ -27,16 +30,16 @@ Fuente oficial: [Obtener datos de adquiriente](https://developers.factus.com.co/
           Datos de identificación para buscar el adquiriente.
           <TypeTable
             type={{
-              identification_document_id: {
-                type: "IdentityDocumentTypeId",
+              identification_document_code: {
+                type: "IdentityDocumentCode",
                 required: true,
                 description: (
                   <>
                     {
                       "Tipo de documento de identificación del adquiriente — Ver "
                     }
-                    <a href="/docs/modules/catalog/reference-tables#tipo-de-documento-de-identificación-identitydocumenttypeid">
-                      {"IdentityDocumentTypeId"}
+                    <a href="/docs/reference-tables#tipo-de-documento-de-identidad-identitydocumentcode">
+                      {"IdentityDocumentCode"}
                     </a>
                     {"."}
                   </>
@@ -54,21 +57,17 @@ Fuente oficial: [Obtener datos de adquiriente](https://developers.factus.com.co/
     },
   }}
 />
+
 ## Ejemplo
 
 ```ts
-import { IdentityDocumentTypeId } from "factus-js";
+import { IdentityDocumentCode } from "factus-js";
 
-const response = await factus.catalog.getAcquirer({
-  identification_document_id: IdentityDocumentTypeId.NIT,
+const response = await factus.acquirer.get({
+  identification_document_code: IdentityDocumentCode.NIT,
   identification_number: "1399991",
 });
 
 console.log(response.data.name);
 console.log(response.data.email);
 ```
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/informacion-adquirientes/obtener-datos-adquiriente/index.html#ejemplo-de-respuesta)
-

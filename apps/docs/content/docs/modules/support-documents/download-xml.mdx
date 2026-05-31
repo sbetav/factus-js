@@ -6,14 +6,17 @@ description: Descargar XML de un documento soporte en base64 por numero.
 ## Firma del método
 
 ```ts
-downloadXml(number: string): Promise<ApiResponse<DownloadSupportDocumentXmlResponse>>
+downloadXml(
+  number: string,
+  options?: RequestOptions,
+): Promise<DownloadSupportDocumentXmlResponse>
 ```
 
 ## Endpoint Factus
 
-`GET /v1/support-documents/download-xml/{number}`
+`GET /v2/support-documents/{number}/download-xml`
 
-Fuente oficial: [Descargar XML](https://developers.factus.com.co/v1/documentos-soporte/descargar-xml/index.html)
+Fuente oficial: [Descargar XML](https://developers.factus.com.co/documentos-soporte/descargar-xml)
 
 ## Parámetros
 
@@ -34,8 +37,3 @@ const xml = Buffer.from(response.data.xml_base_64_encoded, "base64").toString(
   "utf-8",
 );
 ```
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/documentos-soporte/descargar-xml/index.html#variables-de-ruta-path-variables)
-

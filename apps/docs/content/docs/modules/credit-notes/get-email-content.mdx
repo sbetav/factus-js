@@ -6,14 +6,17 @@ description: Obtener asunto y adjunto base64 para envío manual de correo.
 ## Firma del método
 
 ```ts
-getEmailContent(number: string): Promise<GetCreditNoteEmailContentResponse>
+getEmailContent(
+  number: string,
+  options?: RequestOptions,
+): Promise<GetCreditNoteEmailContentResponse>
 ```
 
 ## Endpoint Factus
 
-`GET /v1/credit-notes/{number}/email-content`
+`GET /v2/credit-notes/{number}/email-content`
 
-Fuente oficial: [Obtener contenido de correo](https://developers.factus.com.co/v1/notas-credito/obtener-contenido-de-correo/index.html)
+Fuente oficial: [Obtener contenido de correo](https://developers.factus.com.co/notas-credito/obtener-contenido-de-correo)
 
 ## Parámetros
 
@@ -33,8 +36,3 @@ Fuente oficial: [Obtener contenido de correo](https://developers.factus.com.co/v
 const response = await factus.creditNotes.getEmailContent("NC856");
 console.log(response.data.subject);
 ```
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/notas-credito/obtener-contenido-de-correo/index.html#ejemplo-de-respuesta)
-

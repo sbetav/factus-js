@@ -1,8 +1,11 @@
 import { describe, expectTypeOf, test } from "vitest";
 import type {
+  ClaimConceptCode,
   CreateCreditNoteInput,
   EmailContentData,
   FactusClient,
+  EmitEventInput,
+  RadianEventUpdateInput,
 } from "../../index";
 
 type HasKey<T, K extends PropertyKey> = K extends keyof T ? true : false;
@@ -49,5 +52,14 @@ describe("public type contracts", () => {
     expectTypeOf<
       AssertFalse<HasKey<FactusClient, "catalog">>
     >().toEqualTypeOf<false>();
+  });
+
+  test("radian event inputs include claim concept code", () => {
+    expectTypeOf<RadianEventUpdateInput["claim_concept_code"]>().toEqualTypeOf<
+      ClaimConceptCode | undefined
+    >();
+    expectTypeOf<EmitEventInput["claim_concept_code"]>().toEqualTypeOf<
+      ClaimConceptCode | undefined
+    >();
   });
 });

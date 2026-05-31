@@ -1,21 +1,24 @@
 ---
 title: Crear y validar
-description: Crear y validar una nota de ajuste a documento soporte.
+description: Crear y validar una nota de ajuste para un documento soporte.
 ---
 
 ## Firma del método
 
 ```ts
-create(input: CreateAdjustmentNoteInput): Promise<ApiResponse<AdjustmentNote>>
+create(
+  input: CreateAdjustmentNoteInput,
+  options?: RequestOptions,
+): Promise<CreateAdjustmentNoteResponse>
 ```
 
 ## Endpoint Factus
 
-`POST /v1/adjustment-notes/validate`
+`POST /v2/adjustment-notes/validate`
 
-Fuente oficial: [Crear y validar](https://developers.factus.com.co/v1/notas-ajuste-documentos-soporte/crear-validar/index.html)
+Fuente oficial: [Crear y validar](https://developers.factus.com.co/notas-ajuste-documentos-soporte/crear-validar)
 
-## Parámetros
+## Campos principales
 
 <TypeTable
   type={{
@@ -24,37 +27,29 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/v1/notas-ajus
       required: true,
       description: "Código único interno de referencia.",
     },
+    created_time: {
+      type: "string",
+      required: false,
+      description:
+        "Hora de creación del documento cuando necesitas informarla manualmente.",
+    },
     numbering_range_id: {
       type: "number",
       required: false,
-      description:
-        "ID del rango de numeración de la nota de ajuste.",
+      description: "ID del rango de numeración de la nota de ajuste.",
     },
-    payment_method_code: {
-      type: "PaymentMethodCode",
-      required: false,
-      description: (
-        <>
-          {"Método de pago DIAN — Ver "}
-          <a href="/docs/modules/catalog/reference-tables#método-de-pago-paymentmethodcode">
-            {"PaymentMethodCode"}
-          </a>
-          {"."}
-        </>
-      ),
-    },
-    support_document_id: {
-      type: "number",
+    support_document_number: {
+      type: "string",
       required: true,
-      description: "ID del documento soporte relacionado.",
+      description: "Número del documento soporte relacionado.",
     },
     correction_concept_code: {
       type: "AdjustmentNoteReasonCode",
       required: true,
       description: (
         <>
-          {"Concepto de corrección — Ver "}
-          <a href="/docs/modules/catalog/reference-tables#concepto-de-corrección-de-nota-de-ajuste-adjustmentnotereasoncode">
+          {"Motivo de corrección — Ver "}
+          <a href="/docs/reference-tables#concepto-de-corrección-de-nota-de-ajuste-adjustmentnotereasoncode">
             {"AdjustmentNoteReasonCode"}
           </a>
           {"."}
@@ -66,135 +61,403 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/v1/notas-ajus
       required: false,
       description: "Observaciones del documento.",
     },
+    payment_details: {
+      type: "DocumentPaymentDetailInput[]",
+      required: true,
+      description: (
+        <div>
+          Detalle de medios de pago.
+          <TypeTable
+            type={{
+              payment_form: {
+                type: "PaymentFormCode",
+                required: true,
+                description: (
+                  <>
+                    {"Forma de pago — Ver "}
+                    <a href="/docs/reference-tables#forma-de-pago-paymentformcode">
+                      {"PaymentFormCode"}
+                    </a>
+                    {"."}
+                  </>
+                ),
+              },
+              payment_method_code: {
+                type: "PaymentMethodCode",
+                required: true,
+                description: (
+                  <>
+                    {"Método de pago — Ver "}
+                    <a href="/docs/reference-tables#método-de-pago-paymentmethodcode">
+                      {"PaymentMethodCode"}
+                    </a>
+                    {"."}
+                  </>
+                ),
+              },
+              reference_code: {
+                type: "string",
+                required: false,
+                description: "Referencia interna del pago.",
+              },
+              amount: {
+                type: "string | number",
+                required: true,
+                description: "Monto aplicado a este medio de pago.",
+              },
+              due_date: {
+                type: "string",
+                required: false,
+                description:
+                  "Fecha de vencimiento cuando la forma de pago es a crédito.",
+              },
+            }}
+          />
+        </div>
+      ),
+    },
+    cash_rounding_amount: {
+      type: "string | number",
+      required: false,
+      description: "Redondeo de efectivo cuando aplica.",
+    },
+    provider: {
+      type: "ProviderInput",
+      required: true,
+      description: (
+        <div>
+          Proveedor asociado al documento soporte referenciado.
+          <TypeTable
+            type={{
+              identification_document_code: {
+                type: "SupportDocumentIdentityDocumentCode",
+                required: true,
+                description: (
+                  <>
+                    {"Tipo de documento del proveedor — Ver "}
+                    <a href="/docs/reference-tables#tipo-de-identidad-para-documento-soporte-supportdocumentidentitydocumentcode">
+                      {"SupportDocumentIdentityDocumentCode"}
+                    </a>
+                    {"."}
+                  </>
+                ),
+              },
+              identification: {
+                type: "string",
+                required: true,
+                description: "Número de identificación del proveedor.",
+              },
+              dv: {
+                type: "string",
+                required: false,
+                description:
+                  "Dígito de verificación, normalmente usado con NIT.",
+              },
+              trade_name: {
+                type: "string",
+                required: false,
+                description: "Nombre comercial del proveedor.",
+              },
+              names: {
+                type: "string",
+                required: true,
+                description: "Nombres o razón social del proveedor.",
+              },
+              address: {
+                type: "string",
+                required: true,
+                description: "Dirección del proveedor.",
+              },
+              country_code: {
+                type: "string",
+                required: true,
+                description:
+                  "Código del país. Consulta el catálogo oficial de países en la guía de tablas de referencia.",
+              },
+              municipality_code: {
+                type: "string",
+                required: true,
+                description:
+                  "Código del municipio del proveedor. Consulta el catálogo oficial de municipios en la guía de tablas de referencia.",
+              },
+              email: {
+                type: "string",
+                required: false,
+                description: "Correo del proveedor.",
+              },
+              phone: {
+                type: "string",
+                required: false,
+                description: "Teléfono del proveedor.",
+              },
+              legal_organization_code: {
+                type: "OrganizationTypeCode",
+                required: false,
+                description: (
+                  <>
+                    {"Tipo de organización — Ver "}
+                    <a href="/docs/reference-tables#tipo-de-organización-organizationtypecode">
+                      {"OrganizationTypeCode"}
+                    </a>
+                    {"."}
+                  </>
+                ),
+              },
+              tribute_code: {
+                type: "CustomerTributeCode",
+                required: false,
+                description: (
+                  <>
+                    {"Tributo del proveedor — Ver "}
+                    <a href="/docs/reference-tables#tributo-del-cliente-customertributecode">
+                      {"CustomerTributeCode"}
+                    </a>
+                    {"."}
+                  </>
+                ),
+              },
+            }}
+          />
+        </div>
+      ),
+    },
     items: {
-      type: "Array<object>",
+      type: "DocumentItemInput[]",
       required: true,
       description: (
         <div>
           Ítems de la nota de ajuste.
-            <TypeTable
-              type={{
-                code_reference: {
-                  type: "string",
-                  required: true,
-                  description:
-                    "Código interno del producto o servicio.",
-                },
-                name: {
-                  type: "string",
-                  required: true,
-                  description: "Nombre del producto o servicio.",
-                },
-                quantity: {
-                  type: "number",
-                  required: true,
-                  description: "Cantidad.",
-                },
-                discount_rate: {
-                  type: "number",
-                  required: true,
-                  description: "Porcentaje de descuento del ítem.",
-                },
-                price: {
-                  type: "number",
-                  required: true,
-                  description: "Precio unitario del ítem.",
-                },
-                unit_measure_id: {
-                  type: "number",
-                  required: true,
-                  description: (
-                    <>
-                      {"ID de unidad de medida — Consulta "}
-                      <a href="/docs/modules/catalog/measurement-units">
-                        {"unidades de medida"}
-                      </a>
-                      {"."}
-                    </>
-                  ),
-                },
-                standard_code_id: {
-                  type: "ProductStandardId",
-                  required: true,
-                  description: (
-                    <>
-                      {"Estándar del producto/servicio — Ver "}
-                      <a href="/docs/modules/catalog/reference-tables#estándar-de-producto-productstandardid">
-                        {"ProductStandardId"}
-                      </a>
-                      {"."}
-                    </>
-                  ),
-                },
-                withholding_taxes: {
-                  type: "Array<object>",
-                  required: false,
-                  description: (
-                    <div>
-                      Autorretenciones del ítem.
-                        <TypeTable
-                          type={{
-                            code: {
-                              type: "string",
-                              required: true,
-                              description:(
-                                <>
-                                  {"Código de retención aplicada. — Consulta "}
-                                  <a href="/docs/modules/catalog/tributes">
-                                    {"tributos"}
-                                  </a>
-                                  {"."}
-                                </>)
-                            },
-                            withholding_tax_rate:
-                              {
-                                type: "string",
-                                required: true,
-                                description:
-                                  "Tasa de retención aplicada.",
-                              },
-                          }}
-                        />
-                    </div>
-                  ),
-                },
-              }}
-            />
+          <TypeTable
+            type={{
+              scheme_id: {
+                type: "string",
+                required: false,
+                description: "Esquema del ítem cuando aplica.",
+              },
+              note: {
+                type: "string",
+                required: false,
+                description: "Nota libre del ítem.",
+              },
+              collection_concept_code: {
+                type: "string",
+                required: false,
+                description: "Código de concepto de recaudo cuando aplica.",
+              },
+              code_reference: {
+                type: "string",
+                required: true,
+                description: "Código de referencia del ítem.",
+              },
+              name: {
+                type: "string",
+                required: true,
+                description: "Nombre del ítem.",
+              },
+              quantity: {
+                type: "string | number",
+                required: true,
+                description: "Cantidad del ítem.",
+              },
+              discount_rate: {
+                type: "string | number",
+                required: true,
+                description: "Porcentaje de descuento del ítem.",
+              },
+              price: {
+                type: "string | number",
+                required: true,
+                description: "Precio unitario del ítem.",
+              },
+              unit_measure_code: {
+                type: "string",
+                required: true,
+                description:
+                  "Código de unidad de medida. Consulta el catálogo oficial de unidades de medida en la guía de tablas de referencia.",
+              },
+              standard_code: {
+                type: "ProductStandardCode",
+                required: true,
+                description: (
+                  <>
+                    {"Código del estándar del producto — Ver "}
+                    <a href="/docs/reference-tables#estándar-de-producto-productstandardcode">
+                      {"ProductStandardCode"}
+                    </a>
+                    {"."}
+                  </>
+                ),
+              },
+              taxes: {
+                type: "DocumentTaxInput[]",
+                required: true,
+                description: (
+                  <div>
+                    Impuestos del ítem.
+                    <TypeTable
+                      type={{
+                        code: {
+                          type: "string",
+                          required: true,
+                          description: "Código del impuesto.",
+                        },
+                        rate: {
+                          type: "string | number",
+                          required: true,
+                          description: "Tarifa del impuesto.",
+                        },
+                        is_excluded: {
+                          type: "boolean",
+                          required: false,
+                          description:
+                            "Marca el impuesto como excluido cuando aplica.",
+                        },
+                      }}
+                    />
+                  </div>
+                ),
+              },
+              withholding_taxes: {
+                type: "DocumentWithholdingTaxInput[]",
+                required: false,
+                description: (
+                  <div>
+                    Retenciones del ítem.
+                    <TypeTable
+                      type={{
+                        code: {
+                          type: "string",
+                          required: true,
+                          description: "Código de la retención.",
+                        },
+                        rate: {
+                          type: "string | number",
+                          required: true,
+                          description: "Tarifa de la retención.",
+                        },
+                      }}
+                    />
+                  </div>
+                ),
+              },
+              additional_properties: {
+                type: "DocumentItemAdditionalPropertyInput[]",
+                required: false,
+                description: (
+                  <div>
+                    Propiedades adicionales del ítem.
+                    <TypeTable
+                      type={{
+                        code: {
+                          type: "string",
+                          required: true,
+                          description: "Código de la propiedad adicional.",
+                        },
+                        value: {
+                          type: "string",
+                          required: true,
+                          description: "Valor de la propiedad adicional.",
+                        },
+                        quantity: {
+                          type: "string | number",
+                          required: false,
+                          description: "Cantidad asociada a la propiedad.",
+                        },
+                        unit_measure_code: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Código de unidad de medida de la propiedad adicional.",
+                        },
+                      }}
+                    />
+                  </div>
+                ),
+              },
+              mandate: {
+                type: "DocumentItemMandateInput",
+                required: false,
+                description: (
+                  <div>
+                    Datos de mandato del ítem cuando aplica.
+                    <TypeTable
+                      type={{
+                        identification_document_code: {
+                          type: "IdentityDocumentCode",
+                          required: true,
+                          description: (
+                            <>
+                              {"Tipo de documento del mandante — Ver "}
+                              <a href="/docs/reference-tables#tipo-de-documento-de-identidad-identitydocumentcode">
+                                {"IdentityDocumentCode"}
+                              </a>
+                              {"."}
+                            </>
+                          ),
+                        },
+                        identification: {
+                          type: "string",
+                          required: true,
+                          description: "Número de identificación del mandante.",
+                        },
+                      }}
+                    />
+                  </div>
+                ),
+              },
+            }}
+          />
         </div>
       ),
     },
-
-}}
+  }}
 />
 
 ## Ejemplo
 
 ```ts
-import { AdjustmentNoteReasonCode } from "factus-js";
+import {
+  AdjustmentNoteReasonCode,
+  PaymentFormCode,
+  PaymentMethodCode,
+  ProductStandardCode,
+  SupportDocumentIdentityDocumentCode,
+} from "factus-js";
 
 const response = await factus.adjustmentNotes.create({
   numbering_range_id: 149,
   reference_code: "REF007",
-  support_document_id: 224,
+  support_document_number: "SEDS984000085",
   correction_concept_code: AdjustmentNoteReasonCode.PriceAdjustment,
   observation: "Corrección de precio en documento soporte",
+  payment_details: [
+    {
+      payment_form: PaymentFormCode.CashPayment,
+      payment_method_code: PaymentMethodCode.Cash,
+      amount: "50000.00",
+    },
+  ],
+  provider: {
+    identification_document_code: SupportDocumentIdentityDocumentCode.NIT,
+    identification: "123456789",
+    names: "Alan Turing",
+    address: "calle 1 # 2-68",
+    country_code: "CO",
+    municipality_code: "11001",
+  },
   items: [
     {
-      code_reference: "12345",
-      name: "producto de prueba",
-      quantity: 1,
-      discount_rate: 20,
-      price: 50000,
-      unit_measure_id: 70,
-      standard_code_id: "1",
+      code_reference: "SRV-001",
+      name: "Servicio ajustado",
+      quantity: "1.00",
+      discount_rate: "0.00",
+      price: "50000.00",
+      unit_measure_code: "94",
+      standard_code: ProductStandardCode.TaxpayerAdoption,
+      taxes: [{ code: "01", rate: "19.00" }],
     },
   ],
 });
 
 console.log(response.data.number);
 ```
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/notas-ajuste-documentos-soporte/crear-validar/index.html#ejemplo-de-respuesta)
-

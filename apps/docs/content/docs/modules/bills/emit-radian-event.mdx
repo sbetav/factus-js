@@ -12,14 +12,15 @@ emitRadianEvent(
   number: string,
   eventType: EventCode,
   input: RadianEventUpdateInput,
+  options?: RequestOptions,
 ): Promise<RadianEventUpdateResponse>
 ```
 
 ## Endpoint Factus
 
-`POST /v1/bills/radian/events/update/{number}/{event_type}`
+`POST /v2/bills/{number}/radian/events/{event_type}`
 
-Fuente oficial: [Aceptación tacita](https://developers.factus.com.co/v1/facturas/aceptacion-tacita/index.html)
+Fuente oficial: [Aceptación tácita](https://developers.factus.com.co/facturas/aceptacion-tacita)
 
 ## Parámetros
 
@@ -37,7 +38,7 @@ Fuente oficial: [Aceptación tacita](https://developers.factus.com.co/v1/factura
       description: (
         <>
           {"Código del evento RADIAN — Ver "}
-          <a href="/docs/modules/catalog/reference-tables#código-de-evento-eventcode">
+          <a href="/docs/reference-tables#código-de-evento-eventcode">
             {"EventCode"}
           </a>
           {"."}
@@ -49,93 +50,93 @@ Fuente oficial: [Aceptación tacita](https://developers.factus.com.co/v1/factura
       required: true,
       description: (
         <div>
-          Datos para actualizar el evento RADIAN.
+          Datos de la persona que reporta el evento.
           <TypeTable
             type={{
-            identification_document_code: {
-              type: "IdentityDocumentTypeId",
-              required: true,
-              description: (
-                <>
-                  {"Tipo de documento de identificación de quien reporta el evento — Ver "}
-                  <a href="/docs/modules/catalog/reference-tables#tipo-de-documento-de-identificaci%C3%B3n-identitydocumenttypeid">
-                    {"IdentityDocumentTypeId"}
-                  </a>
-                  {"."}
-                </>
-              ),
-            },
-          identification: {
-            type: "string",
-            required: true,
-            description:
-              "Número de identificación de quien reporta el evento.",
-          },
-          dv: {
-            type: "string",
-            required: false,
-            description:
-              "Dígito de verificación (requerido si el tipo de documento es NIT).",
-          },
-          first_name: {
-            type: "string",
-            required: true,
-            description: "Nombres de quien reporta el evento.",
-          },
-          last_name: {
-            type: "string",
-            required: true,
-            description: "Apellidos de quien reporta el evento.",
-          },
-          job_title: {
-            type: "string",
-            required: false,
-              description: "Cargo de quien reporta el evento.",
-            },
-            organization_department: {
-              type: "string",
-              required: false,
-              description: "Área/departamento de quien reporta el evento.",
-            },
+              claim_concept_code: {
+                type: "ClaimConceptCode",
+                required: false,
+                description: (
+                  <>
+                    {
+                      "Requerido cuando `eventType` es `EventCode.BillClaim` — Ver "
+                    }
+                    <a href="/docs/reference-tables#concepto-de-reclamo-claimconceptcode">
+                      {"ClaimConceptCode"}
+                    </a>
+                    {"."}
+                  </>
+                ),
+              },
+              identification_document_code: {
+                type: "IdentityDocumentCode",
+                required: true,
+                description: (
+                  <>
+                    {"Tipo de documento de identificación de la persona — Ver "}
+                    <a href="/docs/reference-tables#tipo-de-documento-de-identidad-identitydocumentcode">
+                      {"IdentityDocumentCode"}
+                    </a>
+                    {"."}
+                  </>
+                ),
+              },
+              identification: {
+                type: "string",
+                required: true,
+                description:
+                  "Número de identificación de quien reporta el evento.",
+              },
+              dv: {
+                type: "string",
+                required: false,
+                description:
+                  "Dígito de verificación, normalmente usado con NIT.",
+              },
+              first_name: {
+                type: "string",
+                required: true,
+                description: "Nombres de quien reporta el evento.",
+              },
+              last_name: {
+                type: "string",
+                required: true,
+                description: "Apellidos de quien reporta el evento.",
+              },
+              job_title: {
+                type: "string",
+                required: false,
+                description: "Cargo de quien reporta el evento.",
+              },
+              organization_department: {
+                type: "string",
+                required: false,
+                description: "Área o dependencia de quien reporta el evento.",
+              },
             }}
           />
         </div>
       ),
     },
-
-}}
+  }}
 />
 
 ## Ejemplo
 
 ```ts
-import { EventCode, IdentityDocumentTypeId } from "factus-js";
+import { EventCode, IdentityDocumentCode } from "factus-js";
 
-await factus.bills.emitRadianEvent(
-  "SETP990000049",
-  EventCode.TacitAcceptance,
-  {
-    identification_document_code: IdentityDocumentTypeId.CitizenshipId,
-    identification: "12345667",
-    first_name: "Pepito",
-    last_name: "Perez",
-    job_title: "Desarrollador de software",
-    organization_department: "Sistemas",
-  },
-);
+await factus.bills.emitRadianEvent("SETP990000049", EventCode.TacitAcceptance, {
+  identification_document_code: IdentityDocumentCode.CitizenshipCard,
+  identification: "12345667",
+  first_name: "Pepito",
+  last_name: "Perez",
+  job_title: "Desarrollador de software",
+  organization_department: "Sistemas",
+});
 ```
-
-<Callout type="info">
-  Este método cubre el flujo documentado por Factus para emisión de eventos
-  RADIAN (incluyendo aceptación tacita, según el `eventType`).
-</Callout>
 
 <Callout type="warn">
   Es probable que este método no funcione en entorno sandbox. Úsalo en
   producción o con credenciales autorizadas.
 </Callout>
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/facturas/aceptacion-tacita/index.html#ejemplo-de-respuesta)
-

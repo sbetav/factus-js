@@ -6,14 +6,17 @@ description: Obtener la lista de eventos RADIAN registrados en una factura.
 ## Firma del método
 
 ```ts
-getEvents(number: string): Promise<GetBillEventsResponse>
+getEvents(
+  number: string,
+  options?: RequestOptions,
+): Promise<GetBillEventsResponse>
 ```
 
 ## Endpoint Factus
 
-`GET /v1/bills/{number}/radian/events`
+`GET /v2/bills/{number}/radian/events`
 
-Fuente oficial: [Eventos de facturas](https://developers.factus.com.co/v1/facturas/eventos-de-facturas/index.html)
+Fuente oficial: [Eventos de facturas](https://developers.factus.com.co/facturas/eventos-de-facturas)
 
 ## Parámetros
 
@@ -33,7 +36,3 @@ Fuente oficial: [Eventos de facturas](https://developers.factus.com.co/v1/factur
 const response = await factus.bills.getEvents("SETP990000203");
 console.log(response.data);
 ```
-
-## Ejemplo de respuesta
-
-Ver respuesta oficial: [Ejemplo de respuesta](https://developers.factus.com.co/v1/facturas/eventos-de-facturas/index.html#ejemplo-de-respuesta)
