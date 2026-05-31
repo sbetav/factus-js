@@ -22,6 +22,13 @@ emitRadianEvent(
 
 Fuente oficial: [Aceptación tácita](https://developers.factus.com.co/facturas/aceptacion-tacita)
 
+<Callout type="warn">
+  La documentación oficial v2 de Factus publica este endpoint en la sección de
+  `Aceptación tácita`. Sin embargo, la ruta incluye `event_type` y la respuesta
+  devuelve eventos RADIAN. Verifica con tu cuenta de Factus qué códigos están
+  habilitados para tu flujo antes de usarlo en producción.
+</Callout>
+
 ## Parámetros
 
 <TypeTable
@@ -126,14 +133,18 @@ Fuente oficial: [Aceptación tácita](https://developers.factus.com.co/facturas/
 ```ts
 import { EventCode, IdentityDocumentCode } from "factus-js";
 
-await factus.bills.emitRadianEvent("SETP990000049", EventCode.TacitAcceptance, {
-  identification_document_code: IdentityDocumentCode.CitizenshipCard,
-  identification: "12345667",
-  first_name: "Pepito",
-  last_name: "Perez",
-  job_title: "Desarrollador de software",
-  organization_department: "Sistemas",
-});
+await factus.bills.emitRadianEvent(
+  "SETP990000049",
+  EventCode.ReceiptAcknowledgement,
+  {
+    identification_document_code: IdentityDocumentCode.CitizenshipCard,
+    identification: "12345667",
+    first_name: "Pepito",
+    last_name: "Perez",
+    job_title: "Desarrollador de software",
+    organization_department: "Sistemas",
+  },
+);
 ```
 
 <Callout type="warn">

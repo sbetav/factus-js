@@ -1,6 +1,6 @@
 ---
 title: Obtener contenido de correo
-description: Obtener asunto y adjunto base64 para envío manual de correo.
+description: Obtener asunto y archivo ZIP en base64 para envío manual de correo.
 ---
 
 ## Firma del método
@@ -17,6 +17,15 @@ getEmailContent(
 `GET /v2/credit-notes/{number}/email-content`
 
 Fuente oficial: [Obtener contenido de correo](https://developers.factus.com.co/notas-credito/obtener-contenido-de-correo)
+
+## Cuándo usar este endpoint
+
+Este endpoint está pensado principalmente para escenarios donde la nota crédito se creó con `send_email = false` y el integrador necesita encargarse del envío manual al cliente.
+
+El campo `attached_document` contiene un archivo ZIP codificado en base64 con:
+
+- El PDF de la nota crédito
+- El XML `AttachedDocument` que Factus enviaría en el correo oficial
 
 ## Parámetros
 
@@ -35,6 +44,7 @@ Fuente oficial: [Obtener contenido de correo](https://developers.factus.com.co/n
 ```ts
 const response = await factus.creditNotes.getEmailContent("NC856");
 console.log(response.data.subject);
+console.log(response.data.attached_document);
 ```
 
 {/* using response example from v1. TODO: update to table once available */}

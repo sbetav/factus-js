@@ -1,6 +1,6 @@
 ---
 title: Descargar XML
-description: Descargar XML genérico de un documento usando track ID, CUFE, CUDE o CUDS.
+description: Descargar XML genérico de un documento usando track ID, CUFE, CUDE, CUDS, CUNE u otros identificadores equivalentes.
 ---
 
 ## Firma del método
@@ -17,6 +17,18 @@ downloadXml(
 `GET /v2/documents/{track_id}/download-xml`
 
 Fuente oficial: [Descargar XML](https://developers.factus.com.co/documentos/descargar-xml)
+
+## Identificadores soportados
+
+El parámetro `trackId` corresponde al identificador único del documento y puede variar según el tipo de documento:
+
+- `CUFE`: facturas electrónicas
+- `CUDE`: notas crédito o débito
+- `CUDS`: documentos soporte
+- `CUNE`: nómina electrónica
+- Otros identificadores equivalentes definidos por la DIAN
+
+Este endpoint permite recuperar el XML original usando cualquiera de esos identificadores.
 
 ## Ejemplo
 

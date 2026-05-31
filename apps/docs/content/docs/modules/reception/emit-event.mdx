@@ -1,6 +1,6 @@
 ---
 title: Emitir evento
-description: Emitir eventos RADIAN (030-034) para una factura recibida.
+description: Emitir eventos RADIAN manuales (030-033) para una factura recibida.
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
@@ -40,11 +40,13 @@ Fuente oficial: [Emitir evento](https://developers.factus.com.co/recepcion-de-do
                   "ID del documento recibido sobre el cual se emitirá el evento.",
               },
               event_type: {
-                type: "EventCode",
+                type: '"030" | "031" | "032" | "033"',
                 required: true,
                 description: (
                   <>
-                    {"Código del evento RADIAN — Ver "}
+                    {
+                      "Código del evento RADIAN que puede emitirse manualmente (030-033). El evento 034 (Aceptación tácita) no puede emitirse desde este endpoint porque Factus lo genera automáticamente tras 3 días hábiles cuando aplica. Ver "
+                    }
                     <a href="/docs/reference-tables#código-de-evento-eventcode">
                       {"EventCode"}
                     </a>
@@ -154,6 +156,12 @@ await factus.reception.emitEvent(
   },
 );
 ```
+
+<Callout type="warn">
+  El evento `034` (Aceptación tácita) no puede emitirse manualmente. Según la
+  documentación oficial de Factus, ese evento se genera automáticamente después
+  de 3 días hábiles cuando corresponde.
+</Callout>
 
 <Callout type="warn">
   Es probable que este método no funcione en entorno sandbox. Úsalo en
