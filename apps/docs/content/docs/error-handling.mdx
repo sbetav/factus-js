@@ -165,6 +165,13 @@ La respuesta raw de la API para estos casos tiene la siguiente forma:
 | `429`       | Límite de solicitudes superado                        |
 | `500`       | Error interno del servidor de Factus                  |
 
+<Callout type="warn">
+  Factus tiene un límite de **80 solicitudes por minuto**. Si se excede, la API
+  responde `429 Too Many Requests` y puede incluir headers como
+  `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` y
+  `Retry-After`.
+</Callout>
+
 ## Errores de red
 
 Las llamadas de red que fallen antes de llegar al servidor (sin conexión, DNS, timeout) lanzarán el error nativo del `fetch` API, no un `FactusError`. Comprueba siempre `instanceof FactusError` antes de acceder a las propiedades adicionales.
