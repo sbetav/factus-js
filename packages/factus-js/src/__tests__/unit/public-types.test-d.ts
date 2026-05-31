@@ -1,12 +1,16 @@
 import { describe, expectTypeOf, test } from "vitest";
 import type {
+  ApiResponse,
+  BillEvent,
   ClaimConceptCode,
   CreateCreditNoteInput,
   EmailContentData,
   FactusClient,
   EmitEventInput,
+  ManualReceptionEventCode,
   RadianEventUpdateInput,
 } from "../../index";
+import { EventCode } from "../../index";
 
 type HasKey<T, K extends PropertyKey> = K extends keyof T ? true : false;
 type AssertTrue<T extends true> = T;
@@ -61,5 +65,20 @@ describe("public type contracts", () => {
     expectTypeOf<EmitEventInput["claim_concept_code"]>().toEqualTypeOf<
       ClaimConceptCode | undefined
     >();
+  });
+
+  test("bill RADIAN updates return event data", () => {
+    expectTypeOf<
+      Awaited<ReturnType<FactusClient["bills"]["emitRadianEvent"]>>
+    >().toEqualTypeOf<ApiResponse<BillEvent[]>>();
+  });
+
+  test("reception emitEvent excludes tacit acceptance", () => {
+    expectTypeOf<ManualReceptionEventCode>().toEqualTypeOf<
+      "030" | "031" | "032" | "033"
+    >();
+    expectTypeOf<
+      typeof EventCode.TacitAcceptance
+    >().not.toExtend<ManualReceptionEventCode>();
   });
 });

@@ -13,10 +13,12 @@ export interface UploadReceptionBillInput {
   track_id: string;
 }
 
+export type ManualReceptionEventCode = Exclude<EventCode, "034">;
+
 export interface EmitEventParams {
   bill_id: string;
   /** RADIAN event type code. */
-  event_type: EventCode;
+  event_type: ManualReceptionEventCode;
 }
 
 export interface EmitEventInput {

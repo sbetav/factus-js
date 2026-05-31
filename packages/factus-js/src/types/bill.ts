@@ -185,7 +185,7 @@ export type GetBillsResponse = ApiResponse<PaginatedData<BillListItem>>;
 export type GetBillEventsResponse = ApiResponse<BillEvent[]>;
 export type SendBillEmailResponse = SendEmailResponse;
 export type DeleteBillResponse = DeleteResponse;
-export type RadianEventUpdateResponse = SendEmailResponse;
+export type RadianEventUpdateResponse = ApiResponse<BillEvent[]>;
 export type DownloadBillXmlResponse = ApiResponse<DownloadXmlData>;
 export type DownloadBillAttachedDocumentXmlResponse =
   ApiResponse<DownloadXmlData>;
