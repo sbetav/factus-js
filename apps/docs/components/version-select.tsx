@@ -81,7 +81,7 @@ export function VersionSelect() {
               onClick={() => handleVersionClick(version.href)}
               className={cn(
                 "cursor-pointer text-left text-sm py-1.5 px-3 inline-flex items-center gap-2 hover:text-fd-accent-foreground hover:bg-fd-accent",
-                isCurrent && "bg-fd-accent",
+                isCurrent && "bg-fd-accent text-fd-accent-foreground",
               )}
             >
               API {version.label}
