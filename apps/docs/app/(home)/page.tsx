@@ -194,7 +194,12 @@ export default async function HomePage() {
           style={{ animationDelay: "80ms" }}
         >
           <span className="size-1.5 rounded-full bg-emerald-500" aria-hidden />v
-          {VERSION} · factus-js
+          {VERSION}
+          <span className="h-3 w-px bg-fd-border" aria-hidden />
+          <span className="inline-flex items-center gap-1  text-[11px] font-medium text-fd-foreground">
+            <span className="text-fd-primary font-semibold">NUEVA</span> API v2
+            🔥
+          </span>
         </span>
 
         {/* Headline */}
