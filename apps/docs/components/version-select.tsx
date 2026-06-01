@@ -9,8 +9,9 @@ import {
 import { cn } from "lib/cn";
 import { Badge } from "./badge";
 import { useState } from "react";
+import { SDK_MAJOR_VERSION } from "@/lib/sdk";
 
-const CURRENT_VERSION = "v2";
+const CURRENT_VERSION = SDK_MAJOR_VERSION;
 
 const versions: {
   label: string;
@@ -25,7 +26,7 @@ const versions: {
     badge: {
       label: "Última",
     },
-    href: null,
+    href: CURRENT_VERSION === "v2" ? null : "https://factusjs.vercel.app/docs",
   },
   {
     label: "v1",
@@ -33,12 +34,16 @@ const versions: {
       label: "Legacy",
       variant: "muted",
     },
-    href: "https://factusjs-v1.vercel.app/docs",
+    href:
+      CURRENT_VERSION === "v1" ? null : "https://factusjs-v1.vercel.app/docs",
   },
 ];
 
 export function VersionSelect() {
   const [open, setOpen] = useState(false);
+  const currentVersion =
+    versions.find((version) => version.label === CURRENT_VERSION) ??
+    versions[0];
 
   const handleVersionClick = (href: string | null) => {
     if (href) {
@@ -59,12 +64,14 @@ export function VersionSelect() {
         >
           Factus API {CURRENT_VERSION}
           <div className="flex items-center gap-1">
-            <Badge>Última</Badge>
+            <Badge variant={currentVersion.badge.variant}>
+              {currentVersion.badge.label}
+            </Badge>
             <ChevronsUpDown className="size-3.5 text-fd-muted-foreground" />
           </div>
         </button>
       </PopoverTrigger>
-      <PopoverContent className="flex flex-col space-y-1 bg-fd-popover">
+      <PopoverContent className="flex flex-col divide-y bg-fd-popover p-0 rounded-lg">
         {versions.map((version) => {
           const isCurrent = version.label === CURRENT_VERSION;
           return (
@@ -73,7 +80,7 @@ export function VersionSelect() {
               type="button"
               onClick={() => handleVersionClick(version.href)}
               className={cn(
-                "cursor-pointer text-left text-sm p-2 rounded-lg inline-flex items-center gap-2 hover:text-fd-accent-foreground hover:bg-fd-accent",
+                "cursor-pointer text-left text-sm py-1.5 px-3 inline-flex items-center gap-2 hover:text-fd-accent-foreground hover:bg-fd-accent",
                 isCurrent && "bg-fd-accent",
               )}
             >

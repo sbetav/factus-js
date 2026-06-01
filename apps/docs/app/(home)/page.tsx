@@ -278,14 +278,6 @@ export default async function HomePage() {
               </CodeBlockTab>
             ))}
           </CodeBlockTabs>
-          <a
-            href="https://developers.factus.com.co/coleccion"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-fd-muted-foreground text-xs absolute top-2 right-1 font-semibold mr-2 hover:text-fd-foreground hover:underline transition-all duration-150"
-          >
-            ¿SDK v2? 👀
-          </a>
         </div>
       </section>
 
