@@ -2,6 +2,7 @@ import { getOgImageAbsoluteUrl, getSiteUrl } from "@/lib/site";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import StructuredData from "components/structured-data";
+import { Banner } from "fumadocs-ui/components/banner";
 import { RootProvider } from "fumadocs-ui/provider/next";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -104,6 +105,20 @@ export default function Layout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <body className="flex flex-col min-h-screen">
+        <Banner className="border-b text-fd-muted-foreground">
+          <span>
+            <span className="text-fd-foreground">ℹ️</span> Estás viendo la
+            documentación para factus-js v1 — Encuentra la última versión{" "}
+            <a
+              href="https://factusjs.vercel.app/"
+              className="underline underline-offset-4 font-medium text-fd-foreground"
+            >
+              aquí
+            </a>
+            .
+          </span>
+        </Banner>
+
         <StructuredData />
         <RootProvider
           i18n={{

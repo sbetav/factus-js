@@ -13,7 +13,7 @@ import { ArrowRight, Braces, GitBranch, RefreshCw, Zap } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import sdkPkg from "../../../../packages/factus-js/package.json";
+import { installCommands, SDK_VERSION } from "@/lib/sdk";
 
 const siteUrl = getSiteUrl();
 const ogImageUrl = getOgImageAbsoluteUrl();
@@ -50,8 +50,6 @@ export const metadata: Metadata = {
 /* ─────────────────────────────────────────────────────────── */
 /*  Data                                                       */
 /* ─────────────────────────────────────────────────────────── */
-
-const VERSION = sdkPkg.version;
 
 const features: Array<{
   icon: typeof Braces;
@@ -106,12 +104,7 @@ const factus = new FactusClient({
 const response = await factus.bills.create({ ... });
 console.log(response.data.number); // "SETP990000001"`;
 
-const pkgManagers = [
-  { id: "npm", cmd: "npm install factus-js" },
-  { id: "pnpm", cmd: "pnpm add factus-js" },
-  { id: "yarn", cmd: "yarn add factus-js" },
-  { id: "bun", cmd: "bun add factus-js" },
-] as const;
+const pkgManagers = installCommands;
 
 /** Official Factus product + HTTP API reference (this site documents the JS SDK). */
 const FACTUS_WEB = "https://www.factus.com.co/";
@@ -194,7 +187,7 @@ export default async function HomePage() {
           style={{ animationDelay: "80ms" }}
         >
           <span className="size-1.5 rounded-full bg-emerald-500" aria-hidden />v
-          {VERSION} · factus-js
+          {SDK_VERSION} · factus-js
         </span>
 
         {/* Headline */}
@@ -278,14 +271,6 @@ export default async function HomePage() {
               </CodeBlockTab>
             ))}
           </CodeBlockTabs>
-          <a
-            href="https://developers.factus.com.co/coleccion"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-fd-muted-foreground text-xs absolute top-2 right-1 font-semibold mr-2 hover:text-fd-foreground hover:underline transition-all duration-150"
-          >
-            ¿SDK v2? 👀
-          </a>
         </div>
       </section>
 

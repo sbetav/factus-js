@@ -3,7 +3,7 @@ name: Release (Changesets)
 on:
   push:
     branches:
-      - main
+      - v1
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -31,6 +31,41 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Enforce patch-only changesets
+        run: |
+          node <<'EOF'
+          const { readdirSync, readFileSync } = require('node:fs');
+          const { join } = require('node:path');
+
+          const changesetDir = join(process.cwd(), '.changeset');
+          const files = readdirSync(changesetDir).filter(
+            (file) => file.endsWith('.md') && file !== 'README.md',
+          );
+
+          const disallowed = [];
+
+          for (const file of files) {
+            const content = readFileSync(join(changesetDir, file), 'utf8');
+            const match = content.match(/---\s*([\s\S]*?)\s*---/);
+
+            if (!match) continue;
+
+            const frontmatter = match[1];
+            const hasMinorOrMajorRelease = /^\s*['\"]?[^'\"\n]+['\"]?\s*:\s*(minor|major)\s*$/m.test(frontmatter);
+
+            if (hasMinorOrMajorRelease) {
+              disallowed.push(file);
+            }
+          }
+
+          if (disallowed.length > 0) {
+            console.error(
+              `v1 only supports patch releases. Update these changesets to patch: ${disallowed.join(', ')}`,
+            );
+            process.exit(1);
+          }
+          EOF
 
       - name: Create Release PR or Publish to npm
         id: changesets

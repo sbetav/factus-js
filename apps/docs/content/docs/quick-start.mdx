@@ -5,7 +5,6 @@ description: Configura FactusClient y emite tu primera factura electrónica  usa
 
 import { Steps, Step } from "fumadocs-ui/components/steps";
 import { Callout } from "fumadocs-ui/components/callout";
-import { Tabs, Tab } from "fumadocs-ui/components/tabs";
 
 <Steps>
 
@@ -13,41 +12,7 @@ import { Tabs, Tab } from "fumadocs-ui/components/tabs";
 
 ## Instala los paquetes
 
-<Tabs items={['npm', 'yarn', 'pnpm', 'bun']}>
-
-<Tab value="npm">
-
-```bash
-npm install factus-js
-```
-
-</Tab>
-
-<Tab value="yarn">
-
-```bash
-yarn add factus-js
-```
-
-</Tab>
-
-<Tab value="pnpm">
-
-```bash
-pnpm add factus-js
-```
-
-</Tab>
-
-<Tab value="bun">
-
-```bash
-bun add factus-js
-```
-
-</Tab>
-
-</Tabs>
+<InstallCommands />
 
 </Step>
 
@@ -58,8 +23,9 @@ bun add factus-js
 Crea un archivo `.env.local` en la raíz de tu proyecto:
 
 <Callout type="warn">
-  factus-js utiliza la **API v1** de Factus, asegúrate de que tus credenciales
-  estén habilitadas para usar este entorno.
+  Esta versión del SDK utiliza la **API v1** de Factus, asegúrate de que tus
+  credenciales estén habilitadas para usar este entorno — Encuentra la ultima
+  versión del SDK [aquí](https://factusjs.vercel.app).
 </Callout>
 
 ```bash title=".env.local"
