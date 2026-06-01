@@ -8,6 +8,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
     "sync-factus-docs": "node ./scripts/sync-factus-docs.mjs",
+    "version-packages": "changeset version && pnpm --filter @factus-js/docs generate:changelog",
     "release": "pnpm --filter factus-js build && changeset publish",
     "release:factus-js": "pnpm --filter factus-js publish --access public"
   },
