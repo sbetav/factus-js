@@ -1,5 +1,12 @@
 # @factus-js/docs
 
+## 0.0.4
+
+### Patch Changes
+
+- Updated dependencies [f705557]
+  - factus-js@2.0.0
+
 ## 0.0.3
 
 ### Patch Changes
