@@ -65,7 +65,7 @@ for await (const b of factus.bills.listAll()) allBills2.push(b);
 
 ## Detener la iteración anticipadamente
 
-`listAll()` es un generador perezoso: solo solicita la siguiente página cuando el iterador sigue avanzando. Puedes detenerlo con `break` sin que se realicen peticiones innecesarias:
+`listAll()` solo solicita la siguiente página cuando el iterador sigue avanzando. Puedes detenerlo con `break` sin que se realicen peticiones innecesarias:
 
 ```ts
 for await (const bill of factus.bills.listAll()) {
