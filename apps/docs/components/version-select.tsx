@@ -71,7 +71,7 @@ export function VersionSelect() {
           </div>
         </button>
       </PopoverTrigger>
-      <PopoverContent className="flex flex-col divide-y bg-fd-popover p-0 rounded-lg">
+      <PopoverContent className="flex flex-col divide-y bg-fd-popover p-0 rounded-lg w-(--radix-popover-trigger-width)">
         {versions.map((version) => {
           const isCurrent = version.label === CURRENT_VERSION;
           return (
