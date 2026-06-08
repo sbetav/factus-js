@@ -9,7 +9,7 @@ TypeScript/JavaScript SDK for the Factus API (Colombian e-invoicing).
 ## Install
 
 ```bash
-npm install factus-js
+npm install factus-js@1.1.0
 ```
 
 ## Requirements
