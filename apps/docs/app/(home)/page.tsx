@@ -94,15 +94,16 @@ const steps = [
 
 const QUICKSTART_SNIPPET = `import { FactusClient } from "factus-js";
 
+// Inicializa el cliente
 const factus = new FactusClient({
-  clientId:     process.env.FACTUS_CLIENT_ID!,
+  clientId: process.env.FACTUS_CLIENT_ID!,
   clientSecret: process.env.FACTUS_CLIENT_SECRET!,
-  username:     process.env.FACTUS_USERNAME!,
-  password:     process.env.FACTUS_PASSWORD!,
-  environment:  "sandbox",
+  username: process.env.FACTUS_USERNAME!,
+  password: process.env.FACTUS_PASSWORD!,
+  environment: "sandbox",
 });
 
-// Crear una factura electrónica
+// Crea una factura electrónica
 const response = await factus.bills.create({ ... });
 console.log(response.data.number); // "SETP990000001"`;
 
