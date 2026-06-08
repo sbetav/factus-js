@@ -4,7 +4,7 @@
 
 # factus-js
 
-TypeScript/JavaScript SDK for the Factus API (Colombian e-invoicing).
+TypeScript/JavaScript SDK for the Factus API v2 (Colombian e-invoicing).
 
 ## Install
 
@@ -59,30 +59,35 @@ DIAN constants are direct string values and should be used directly in payloads:
 import {
   PaymentFormCode,
   PaymentMethodCode,
-  IdentityDocumentTypeId,
-  CustomerTributeId,
-  OrganizationTypeId,
-  ProductStandardId,
+  IdentityDocumentCode,
+  CustomerTributeCode,
+  OrganizationTypeCode,
+  ProductStandardCode,
 } from "factus-js";
 
 const response = await factus.bills.create({
   numbering_range_id: 8,
   reference_code: "I3",
   observation: "Test bill",
-  payment_form: PaymentFormCode.CreditPayment,
-  payment_method_code: PaymentMethodCode.Cash,
-  payment_due_date: "2026-12-31",
+  payment_details: [
+    {
+      payment_form: PaymentFormCode.CreditPayment,
+      payment_method_code: PaymentMethodCode.Cash,
+      amount: "50000.00",
+      due_date: "2026-12-31",
+    },
+  ],
   customer: {
+    identification_document_code: IdentityDocumentCode.NIT,
     identification: "123456789",
     dv: "3",
     names: "Alan Turing",
     address: "Calle 1 # 2-68",
     email: "alanturing@example.com",
     phone: "1234567890",
-    legal_organization_id: OrganizationTypeId.NaturalPerson,
-    tribute_id: CustomerTributeId.NotApplicable,
-    identification_document_id: IdentityDocumentTypeId.NIT,
-    municipality_id: 980,
+    legal_organization_code: OrganizationTypeCode.NaturalPerson,
+    tribute_code: CustomerTributeCode.NotApplicable,
+    municipality_code: "68679",
   },
   items: [
     {
@@ -91,11 +96,9 @@ const response = await factus.bills.create({
       quantity: 1,
       discount_rate: 20,
       price: 50000,
-      tax_rate: "19.00",
-      unit_measure_id: 70,
-      standard_code_id: ProductStandardId.TaxpayerAdoption,
-      is_excluded: 0,
-      tribute_id: 1,
+      unit_measure_code: "94",
+      standard_code: ProductStandardCode.TaxpayerAdoption,
+      taxes: [{ code: "01", rate: "19.00" }],
     },
   ],
 });
@@ -134,15 +137,16 @@ try {
 - `supportDocuments`
 - `adjustmentNotes`
 - `reception`
+- `acquirer`
 - `company`
 - `numberingRanges`
 - `subscription`
-- `catalog`
+- `documents`
 
 ## Documentation
 
-- Official Factus API docs: `https://developers.factus.com.co/v1/`
-- SDK docs site: `https://factusjs.vercel.app/`
+- Official Factus API docs: `https://developers.factus.com.co`
+- SDK docs site: `https://factusjs.vercel.app`
 - Package README: `packages/factus-js/README.md`
 
 ## Monorepo
