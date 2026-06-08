@@ -1,11 +1,11 @@
 ---
 title: Tablas de referencia (Constantes)
-description: Códigos DIAN y tablas de negocio expuestos como constantes tipadas.
+description: Constantes tipadas del SDK y enlaces oficiales para datos de referencia en Factus API v1.
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
 
-Esta página consolida las tablas oficiales de Factus y su equivalente en
+Esta guía consolida las tablas oficiales de Factus y su equivalente en
 constantes de `factus-js`.
 
 Fuente oficial:
@@ -13,50 +13,39 @@ Fuente oficial:
 
 ## Modo de uso
 
-Si instalaste `factus-js`, las constantes ya están disponibles. Cada constante es un mapa de claves a valores string, por lo que puedes usarlas directamente en los campos de la API:
+Cada tabla de referencia se expone desde la raíz del paquete y sigue el mismo
+patrón:
+
+- **Mapa de constantes** — clave-valor para usar directamente en los campos de la API.
+- **Mapa `*Info`** — metadatos legibles. Siempre incluye `description` y, en algunos casos (como documentos de identidad), también `abbreviation`.
+
+### Ejemplo
 
 ```ts
-import { PaymentFormCode, EventCode } from "factus-js";
+import { IdentityDocumentTypeId, IdentityDocumentTypeIdInfo } from "factus-js";
 
-// Usar directamente en un payload de API
-const paymentForm = PaymentFormCode.CashPayment; // "1"
-const event = EventCode.ExpressAcceptance; // "033"
+// Usar un código en un payload de la API
+const docType = IdentityDocumentTypeId.CitizenshipId; // "3"
+
+// Descripción y abreviatura del código
+const docInfo = IdentityDocumentTypeIdInfo[docType];
+console.log(docInfo.description); // "Cédula de ciudadanía"
+console.log(docInfo.abbreviation); // "CC"
 ```
 
 <Callout type="info">
-  Estas tablas no se consultan por HTTP: se exponen como constantes tipadas.
-  Para datos dinámicos (países, municipios, tributos, adquirientes), usa los
-  demás métodos de `factus.catalog`.
+  Estas constantes están declaradas explícitamente y no realizan llamadas HTTP.
 </Callout>
-
-## Descripciones y abreviaturas (`*Info`)
-
-Para mostrar etiquetas legibles en una interfaz de usuario (selectores, tablas, etc.), importa los mapas `*Info` complementarios desde `factus-js`:
-
-```ts
-import {
-  PaymentFormCode,
-  PaymentFormCodeInfo,
-  IdentityDocumentTypeId,
-  IdentityDocumentTypeIdInfo,
-} from "factus-js";
-
-// Obtener descripción de un valor
-const desc = PaymentFormCodeInfo[PaymentFormCode.CashPayment].description;
-// "Pago de contado"
-
-// Obtener abreviatura (disponible en documentos de identidad)
-const abbr =
-  IdentityDocumentTypeIdInfo[IdentityDocumentTypeId.CitizenshipId].abbreviation;
-// "CC"
-```
-
-Cada `*Info` exportado tiene una entrada por cada clave del mapa de constantes correspondiente, con al menos `description` y, cuando aplica, `abbreviation`.
 
 ## Tipo de documento de factura (`BillDocumentType`)
 
 ```ts
 import { BillDocumentType, BillDocumentTypeInfo } from "factus-js";
+
+const code = BillDocumentType.ElectronicSalesInvoice;
+
+console.log(code); // "01"
+console.log(BillDocumentTypeInfo[code].description); // "Factura electronica de venta."
 ```
 
 | Clave                          | Valor  | Descripción                                       |
@@ -68,6 +57,11 @@ import { BillDocumentType, BillDocumentTypeInfo } from "factus-js";
 
 ```ts
 import { OperationTypeCode, OperationTypeCodeInfo } from "factus-js";
+
+const code = OperationTypeCode.Standard;
+
+console.log(code); // "10"
+console.log(OperationTypeCodeInfo[code].description); // "Estándar."
 ```
 
 | Clave       | Valor  | Descripción |
@@ -79,7 +73,15 @@ import { OperationTypeCode, OperationTypeCodeInfo } from "factus-js";
 ## Tipo de operación en nota crédito (`CreditNoteOperationTypeCode`)
 
 ```ts
-import { CreditNoteOperationTypeCode, CreditNoteOperationTypeCodeInfo } from "factus-js";
+import {
+  CreditNoteOperationTypeCode,
+  CreditNoteOperationTypeCodeInfo,
+} from "factus-js";
+
+const code = CreditNoteOperationTypeCode.WithReference;
+
+console.log(code); // "20"
+console.log(CreditNoteOperationTypeCodeInfo[code].description); // "Nota Crédito que referencia una factura electronica."
 ```
 
 | Clave              | Valor  | Descripción                                            |
@@ -90,7 +92,15 @@ import { CreditNoteOperationTypeCode, CreditNoteOperationTypeCodeInfo } from "fa
 ## Concepto de corrección de nota crédito (`CreditNoteCorrectionCode`)
 
 ```ts
-import { CreditNoteCorrectionCode, CreditNoteCorrectionCodeInfo } from "factus-js";
+import {
+  CreditNoteCorrectionCode,
+  CreditNoteCorrectionCodeInfo,
+} from "factus-js";
+
+const code = CreditNoteCorrectionCode.PriceAdjustment;
+
+console.log(code); // "4"
+console.log(CreditNoteCorrectionCodeInfo[code].description); // "Ajuste de precio."
 ```
 
 | Clave                    | Valor | Descripción                                                              |
@@ -106,6 +116,11 @@ import { CreditNoteCorrectionCode, CreditNoteCorrectionCodeInfo } from "factus-j
 
 ```ts
 import { ProductStandardId, ProductStandardIdInfo } from "factus-js";
+
+const code = ProductStandardId.TaxpayerAdoption;
+
+console.log(code); // "1"
+console.log(ProductStandardIdInfo[code].description); // "Estándar de adopción del contribuyente"
 ```
 
 | Clave              | Valor | Descripción                            |
@@ -119,6 +134,11 @@ import { ProductStandardId, ProductStandardIdInfo } from "factus-js";
 
 ```ts
 import { ClaimConceptCode, ClaimConceptCodeInfo } from "factus-js";
+
+const code = ClaimConceptCode.DocumentInconsistencies;
+
+console.log(code); // "01"
+console.log(ClaimConceptCodeInfo[code].description); // "Documento con inconsistencias"
 ```
 
 | Clave                      | Valor  | Descripción                         |
@@ -132,6 +152,11 @@ import { ClaimConceptCode, ClaimConceptCodeInfo } from "factus-js";
 
 ```ts
 import { EventCode, EventCodeInfo } from "factus-js";
+
+const code = EventCode.ExpressAcceptance;
+
+console.log(code); // "033"
+console.log(EventCodeInfo[code].description); // "Aceptación expresa"
 ```
 
 | Clave                    | Valor   | Descripción                                     |
@@ -147,8 +172,11 @@ import { EventCode, EventCodeInfo } from "factus-js";
 ```ts
 import { IdentityDocumentTypeId, IdentityDocumentTypeIdInfo } from "factus-js";
 
-// Código para la API como string (p. ej. identification_document_id)
-const docType = IdentityDocumentTypeId.CitizenshipId; // "3"
+const code = IdentityDocumentTypeId.CitizenshipId;
+
+console.log(code); // "3"
+console.log(IdentityDocumentTypeIdInfo[code].abbreviation); // "CC"
+console.log(IdentityDocumentTypeIdInfo[code].description); // "Cédula de ciudadanía"
 ```
 
 | Clave                           | Valor  | Abreviatura | Descripción                            |
@@ -168,7 +196,16 @@ const docType = IdentityDocumentTypeId.CitizenshipId; // "3"
 ## Tipo de identificación para documento soporte (`SupportDocumentIdentityTypeId`)
 
 ```ts
-import { SupportDocumentIdentityTypeId, SupportDocumentIdentityTypeIdInfo } from "factus-js";
+import {
+  SupportDocumentIdentityTypeId,
+  SupportDocumentIdentityTypeIdInfo,
+} from "factus-js";
+
+const code = SupportDocumentIdentityTypeId.NIT;
+
+console.log(code); // "6"
+console.log(SupportDocumentIdentityTypeIdInfo[code].abbreviation); // "NIT"
+console.log(SupportDocumentIdentityTypeIdInfo[code].description); // "NIT"
 ```
 
 | Clave                           | Valor  | Abreviatura | Descripción                            |
@@ -185,6 +222,11 @@ import { SupportDocumentIdentityTypeId, SupportDocumentIdentityTypeIdInfo } from
 
 ```ts
 import { CustomerTributeId, CustomerTributeIdInfo } from "factus-js";
+
+const code = CustomerTributeId.IVA;
+
+console.log(code); // "18"
+console.log(CustomerTributeIdInfo[code].description); // "IVA"
 ```
 
 | Clave           | Valor  | Descripción |
@@ -196,6 +238,11 @@ import { CustomerTributeId, CustomerTributeIdInfo } from "factus-js";
 
 ```ts
 import { OrganizationTypeId, OrganizationTypeIdInfo } from "factus-js";
+
+const code = OrganizationTypeId.NaturalPerson;
+
+console.log(code); // "2"
+console.log(OrganizationTypeIdInfo[code].description); // "Persona Natural"
 ```
 
 | Clave           | Valor | Descripción      |
@@ -207,6 +254,11 @@ import { OrganizationTypeId, OrganizationTypeIdInfo } from "factus-js";
 
 ```ts
 import { PaymentMethodCode, PaymentMethodCodeInfo } from "factus-js";
+
+const code = PaymentMethodCode.Transfer;
+
+console.log(code); // "47"
+console.log(PaymentMethodCodeInfo[code].description); // "Transferencia"
 ```
 
 | Clave         | Valor   | Descripción               |
@@ -226,6 +278,11 @@ import { PaymentMethodCode, PaymentMethodCodeInfo } from "factus-js";
 
 ```ts
 import { PaymentFormCode, PaymentFormCodeInfo } from "factus-js";
+
+const code = PaymentFormCode.CreditPayment;
+
+console.log(code); // "2"
+console.log(PaymentFormCodeInfo[code].description); // "Pago a crédito"
 ```
 
 | Clave           | Valor | Descripción     |
@@ -236,7 +293,15 @@ import { PaymentFormCode, PaymentFormCodeInfo } from "factus-js";
 ## Tipo de documento en rangos de numeración (`NumberingRangeDocumentTypeCode`)
 
 ```ts
-import { NumberingRangeDocumentTypeCode, NumberingRangeDocumentTypeCodeInfo } from "factus-js";
+import {
+  NumberingRangeDocumentTypeCode,
+  NumberingRangeDocumentTypeCodeInfo,
+} from "factus-js";
+
+const code = NumberingRangeDocumentTypeCode.SalesInvoice;
+
+console.log(code); // "21"
+console.log(NumberingRangeDocumentTypeCodeInfo[code].description); // "Factura de Venta"
 ```
 
 | Clave                           | Valor  | Descripción                      |
@@ -254,7 +319,15 @@ import { NumberingRangeDocumentTypeCode, NumberingRangeDocumentTypeCodeInfo } fr
 ## Concepto de corrección de nota de ajuste (`AdjustmentNoteReasonCode`)
 
 ```ts
-import { AdjustmentNoteReasonCode, AdjustmentNoteReasonCodeInfo } from "factus-js";
+import {
+  AdjustmentNoteReasonCode,
+  AdjustmentNoteReasonCodeInfo,
+} from "factus-js";
+
+const code = AdjustmentNoteReasonCode.PriceAdjustment;
+
+console.log(code); // "4"
+console.log(AdjustmentNoteReasonCodeInfo[code].description); // "Ajuste de precio"
 ```
 
 | Clave                         | Valor | Descripción                                                                                                                           |
@@ -269,6 +342,11 @@ import { AdjustmentNoteReasonCode, AdjustmentNoteReasonCodeInfo } from "factus-j
 
 ```ts
 import { ChargeDiscountCode, ChargeDiscountCodeInfo } from "factus-js";
+
+const code = ChargeDiscountCode.ConditionalSurcharge;
+
+console.log(code); // "03"
+console.log(ChargeDiscountCodeInfo[code].description); // "Recargo condicionado"
 ```
 
 | Clave                    | Valor  | Descripción                                         |
@@ -281,7 +359,15 @@ import { ChargeDiscountCode, ChargeDiscountCodeInfo } from "factus-js";
 ## Responsabilidad fiscal (`FiscalResponsibilityCode`)
 
 ```ts
-import { FiscalResponsibilityCode, FiscalResponsibilityCodeInfo } from "factus-js";
+import {
+  FiscalResponsibilityCode,
+  FiscalResponsibilityCodeInfo,
+} from "factus-js";
+
+const code = FiscalResponsibilityCode.NotResponsible;
+
+console.log(code); // "R-99-PN"
+console.log(FiscalResponsibilityCodeInfo[code].description); // "No responsable"
 ```
 
 | Clave                  | Valor       | Descripción                   |
