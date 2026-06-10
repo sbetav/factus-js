@@ -51,10 +51,7 @@ const SKIPPABLE_PATH_EXTENSIONS = [
 const NON_HTTP_LINK_PREFIXES = ["#", "mailto:", "tel:"];
 let mirrorDirForErrorReporting;
 
-const base64TrimThreshold = Number.parseInt(
-  process.env.FACTUS_DOCS_BASE64_TRIM_THRESHOLD ?? "320",
-  10,
-);
+const base64TrimThreshold = 320;
 const turndown = new TurndownService({
   codeBlockStyle: "fenced",
   headingStyle: "atx",
