@@ -37,6 +37,12 @@ Código del tipo de documento. [Tipos de documentos disponibles.](https://develo
 ID del rango de numeración. Es obligatorio solo si tienes múltiples rangos activos. Si se omite, el sistema utilizará el único rango disponible por defecto. [Rangos de numeración.](https://developers.factus.com.co/rangos-de-numeracion/obtener-rangos) |
 | **`operation_type`** `string` `default:10` `opcional`
 Código del tipo de operación. Si el tipo de operación no se agrega, por defecto el API agrega el código 10 (estándar). [Tipos de operación disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#c%C3%B3digos-de-tipos-de-operaci%C3%B3n) |
+| **`currency`** `object` `opcional`
+Objeto utilizado para mostrar los totales de la factura en una moneda extranjera dentro de su representación gráfica. Si se envía el campo `currency`, los campos internos son obligatorios. |
+| **`currency.code`** `string`
+Código internacional de la moneda extranjera que se desea mostrar en la factura. Debe ser una moneda distinta a la moneda local de emisión. [Códigos de monedas disponibles.](https://developers.factus.com.co/tablas-de-referencia/currency) |
+| **`currency.exchange_rate`** `string`
+Tasa de cambio utilizada para convertir los montos de la moneda local a la moneda extranjera especificada. |
 | **`send_email`** `boolean` `default:true` `opcional`
 Indica si el sistema debe enviar el correo electrónico al cliente. Útil cuando el envío del correo se gestiona de forma externa o personalizada por el integrador. Por defecto, este campo tiene un valor de true, lo que implica que el correo electrónico será enviado al cliente. Si se establece en false, el correo no será enviado. |
 | **`observation`** `string` `opcional`
@@ -139,8 +145,12 @@ Código de referencia del producto o servicio. |
 Nombre del producto o servicio. |
 | **`items.*.quantity`** `string`
 Cantidad del producto o servicio (máximo dos decimales). |
-| **`items.*.discount_rate`** `string`
-Porcentaje del descuento del producto o servicio (máximo dos decimales). |
+| **`items.*.discount_rate`** `string` `opcional`
+Porcentaje del descuento del producto o servicio (máximo dos decimales).
+Para aplicar descuentos use alguno de los dos campos, en porcentaje `discount_rate` o monto `discount_amount`, no es necesario enviar ambos campos para informar un descuento. |
+| **`items.*.discount_amount`** `string` `opcional`
+Monto del descuento del producto o servicio (máximo dos decimales).
+Para aplicar descuentos use alguno de los dos campos, en porcentaje `discount_rate` o monto `discount_amount`, no es necesario enviar ambos campos para informar un descuento. |
 | **`items.*.price`** `string`
 Precio por unidad del producto o servicio sin impuestos incluidos ni descuentos, valor neto (máximo dos decimales). |
 | **`items.*.unit_measure_code`** `string`

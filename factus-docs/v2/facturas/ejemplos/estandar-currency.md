@@ -1,13 +1,13 @@
-# SS Reporte
+# Factura con tipo de moneda
 
-Esta sección describe los campos que podría contener la factura electrónica del sector salud con tipo de operación **SS-Reporte**.
+Esta sección describe los compos que podría contener la factura.
 
 **Método:** POST
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/facturas/tipos-de-factura/ss-reporte#tab-panel-126)
-* [Producción](https://developers.factus.com.co/facturas/tipos-de-factura/ss-reporte#tab-panel-127)
+* [Sandbox](https://developers.factus.com.co/facturas/ejemplos/estandar-currency#tab-panel-367)
+* [Producción](https://developers.factus.com.co/facturas/ejemplos/estandar-currency#tab-panel-368)
 
 ```
 https://api-sandbox.factus.com.co/v2/bills/validate
@@ -27,7 +27,7 @@ Incluye los siguientes encabezados.
 
 Ver aquí la descripción de los campos.
 
-| Parámetros Factura SS Reporte |
+| Parámetros Factura Estándar |
 | --- |
 | **`reference_code`** `string`
 Código único que sirve para identificar cada factura de manera unívoca en el sistema y garantizar que no haya duplicados. Esto nos ayuda a prevenir que se genere más de una factura con la misma información. |
@@ -55,8 +55,6 @@ Este es un array de objetos para los detalles de anticipos. Se debe enviar un ob
 Código de referencia del anticipo. |
 | **`prepayment_details.*.received_date`** `string`
 Fecha en que se recibió el anticipo en formato `YYYY-MM-DD`. |
-| **`prepayment_details.*.concept_code`** `string` `opcional`
-Código del concepto del anticipo o recaudo previo. Requerido para SS-CUFE y SS-Reporte. [Conceptos disponibles](https://developers.factus.com.co/tablas-de-referencia/tablas/#conceptos-de-anticipo-o-recaudo-previo-en-salud) |
 | **`prepayment_details.*.amount`** `string`
 Monto del anticipo. |
 | **`prepayment_details.*.note`** `string` `opcional`
@@ -75,28 +73,6 @@ Monto pagado por ese medio y método de pago. |
 Fecha de vencimiento de la factura en formato `YYYY-MM-DD`. Requerido solo cuando la forma de pago (`payment_form`) contiene el valor de 2 (pago a crédito). |
 | **`cash_rounding_amount`** `string` `opcional`
 Ajuste opcional que reconcilia la diferencia entre la suma de los montos en `⁠payment_details` y el `total` de la factura, causada por las limitaciones de denominación de la moneda local. Acepta valores negativos (redondeo hacia abajo) o positivos (redondeo hacia arriba). El valor máximo permitido es ±500.00. |
-| **`beneficiary`** `object` `opcional`
-Objeto con los datos del beneficiario del servicio de salud (paciente). Obligatorio para SS-Recaudo. Si se envía, los campos marcados como requeridos son obligatorios. |
-| **`beneficiary.identification_document_code`** `string`
-Código del tipo de documento del paciente. Utiliza los códigos propios del sector salud. [Documentos de identificación para sector salud.](https://developers.factus.com.co/tablas-de-referencia/tablas/#documentos-de-identificacion-para-sector-salud) |
-| **`beneficiary.identification_number`** `string` `opcional`
-Número de identificación del paciente. Obligatorio salvo que `identification_document_code` sea `SI`, `MS` o `AS`. |
-| **`beneficiary.names`** `string` `opcional`
-Nombres del paciente. |
-| **`beneficiary.surnames`** `string` `opcional`
-Apellidos del paciente. |
-| **`health`** `object` `opcional`
-Objeto con los datos del sector salud. Obligatorio para SS-CUFE, SS-Reporte y SS-SinAporte. Si se envía, todos sus campos internos son obligatorios. |
-| **`health.provider_code`** `string`
-Código del prestador de servicios de salud (IPS/EPS). |
-| **`health.payment_method_code`** `string`
-Código del método de pago en salud. [Métodos de pago en salud disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#metodos-de-pago-en-salud) |
-| **`health.coverage_code`** `string`
-Código del plan de cobertura en salud. [Planes de cobertura disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#planes-de-cobertura-en-salud) |
-| **`health.contract_number`** `string`
-Número del contrato con la entidad pagadora. |
-| **`health.policy_number`** `string` `opcional`
-Número de póliza. Requerido cuando el plan de cobertura corresponde a una póliza (SOAT, ARL, etc.). |
 | **`establishment`** `object` `opcional`
 Este es un objeto que contendrá la información sobre el establecimiento. Úsalo cuando manejes más de un establecimiento y necesites que los datos correspondientes se reflejen en la factura. Si envías el campo `establishment` los campos internos son obligatorios. |
 | **`establishment.name`** `string`
@@ -163,12 +139,8 @@ Número de teléfono del cliente. |
 Código que corresponda al municipio donde vive el cliente. Se debe enviar el código del municipio únicamente si el municipio es de Colombia; si es extranjero, el valor del campo no aplica. [Municipios disponibles.](https://developers.factus.com.co/tablas-de-referencia/municipios) |
 | **`items`** `array`
 Este es un array de objetos (items) que corresponde a los productos o servicios de la factura, se debe enviar un objeto por cada producto o servicio. |
-| **`items.*.scheme_id`** `string`
-Este campo es requerido si el campo operation\_type contiene el valor de 11 (mandatos) o 12 (transporte) o SS-Recaudo (Salud). Agregue el valor de 0 cuando sea ingreso propio y 1 para ingresos recibidos para terceros. |
 | **`items.*.note`** `string` `opcional`
 Añade información adicional del producto o servicio. |
-| **`items.*.collection_concept_code`** `string` `opcional`
-Código del concepto de recaudo. Requerido para SS-Recaudo. Valores: `COP` (Copago), `CUO` (Cuota Moderadora), `PAC` (Pagos compartidos en planes voluntarios de salud). |
 | **`items.*.code_reference`** `string`
 Código de referencia del producto o servicio. |
 | **`items.*.name`** `string`
@@ -201,12 +173,6 @@ Este es un array de objetos (autorretenciones) para informar las retenciones que
 Código de la retención aplicada al producto o servicio. [Códigos retenciones disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#c%C3%B3digos-de-retenciones) |
 | **`items.*.withholding_taxes.*.rate`** `string`
 Porcentaje de la retención aplicada al producto o servicio (máximo dos decimales). |
-| **`items.*.mandate`** `object` `opcional`
-Este es un objeto que contendrá la información del mandante. Este campo es requerido si `items.*.scheme_id` = 1 (ingresos recibidos para terceros) y `operation_type` = 11 (mandatos) o `operation_type` = SS-Recaudo (Salud). |
-| **`items.*.mandate.identification_document_code`** `string`
-Código que corresponda al tipo de identificación del mandante. [Tipos de documentos disponibles](https://developers.factus.com.co/tablas-de-referencia/tablas/#c%C3%B3digos-de-tipos-de-documentos-de-identidad) |
-| **`items.*.mandate.identification`** `string`
-Número de identificación del mandante. |
 | **`allowance_charges`** `array` `opcional`
 Este es un array de objetos que corresponden a los descuentos o recargos que se aplican a la factura; se debe enviar un objeto por cada descuento o recargo. |
 | **`allowance_charges.*.concept_type`** `string`
@@ -222,14 +188,14 @@ Valor del descuento o recargo aplicado (máximo dos decimales). |
 
 * * *
 
-#### Ejemplo de Solicitud
+### Ejemplo de Solicitud
 
-[Sección titulada «Ejemplo de Solicitud»](https://developers.factus.com.co/facturas/tipos-de-factura/ss-reporte#ejemplo-de-solicitud)
+[Sección titulada «Ejemplo de Solicitud»](https://developers.factus.com.co/facturas/ejemplos/estandar-currency#ejemplo-de-solicitud)
 
-* [SS Reporte](https://developers.factus.com.co/facturas/tipos-de-factura/ss-reporte#tab-panel-128)
+* [Factura de venta](https://developers.factus.com.co/facturas/ejemplos/estandar-currency#tab-panel-369)
 
 ```
-{ "reference_code": "FACT-2026-0127", "document": "01", "numbering_range_id": 4, "operation_type": "SS-Reporte", "send_email": false, "billing_period": { "start_date": "2025-01-01", "start_time": "05:11:00", "end_date": "2025-01-02", "end_time": "11:59:59" }, "payment_details": [ { "payment_form": 1, "payment_method_code": "10", "amount": "10000" } ], "cash_rounding_amount": "0.00", "health": { "provider_code": "1920304050", "payment_method_code": "04", "coverage_code": "10", "contract_number": "CONT1230", "policy_number": "" }, "prepayment_details": [ { "reference_code": "1", "received_date": "2025-08-01", "concept_code": "01", "amount": "5000.00", "note": "texto libre para notas" } ], "customer": { "identification_document_code": "13", "identification": "123456789", "names": "Alan Turing", "address": "calle 1 # 1-1", "email": "[email protected]", "phone": "1234567890", "legal_organization_code": "2", "tribute_code": "ZZ", "municipality_code": "68679" }, "items": [ { "code_reference": "SRV-000A", "name": "XXXXXXXXXX", "quantity": "1.00", "discount_rate": "0.00", "price": "10000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "is_excluded": true } ] } ]}
+{ "reference_code": "FACT-2026-0129", "document": "01", "numbering_range_id": 389, "operation_type": "10", "currency": { "type": "USD", "exchange_rate": "3565.07" }, "observation": "Observación de factura con anticipo", "payment_details": [ { "payment_form": "1", "payment_method_code": "10", "reference_code": "pago-001", "amount": "83300" } ], "prepayment_details": [ { "reference_code": "1", "received_date": "2025-08-01", "amount": "3300", "note": "texto libre para notas" } ], "cash_rounding_amount": "0.00", "customer": { "identification_document_code": "31", "identification": "123456789", "company": "Alan company name", "trade_name": "Alan trade name", "address": "calle 1 # 1-1", "email": "[email protected]", "phone": "1234567890", "legal_organization_code": "1", "tribute_code": "ZZ", "municipality_code": "68679" }, "items": [ { "code_reference": "PROD-000A", "name": "Producto A", "quantity": "1.00", "discount_rate": "0.00", "price": "10000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] }, { "code_reference": "PROD-000B", "name": "Producto B", "quantity": "3.00", "discount_rate": "0.00", "price": "20000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] } ]}
 ```
 
 * * *

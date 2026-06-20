@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-05-28T19:53:49.146Z",
+  "generatedAt": "2026-06-20T21:43:18.043Z",
   "baseUrl": "https://developers.factus.com.co/",
-  "totalFiles": 89,
+  "totalFiles": 92,
   "entries": [
     {
       "title": "Autenticación",
@@ -139,6 +139,11 @@
       "path": "facturas\\ejemplos\\estandar-credito.md"
     },
     {
+      "title": "Factura con tipo de moneda",
+      "sourceUrl": "https://developers.factus.com.co/facturas/ejemplos/estandar-currency",
+      "path": "facturas\\ejemplos\\estandar-currency.md"
+    },
+    {
       "title": "Informar establecimiento",
       "sourceUrl": "https://developers.factus.com.co/facturas/ejemplos/estandar-establecimiento",
       "path": "facturas\\ejemplos\\estandar-establecimiento.md"
@@ -187,6 +192,11 @@
       "title": "Representación gráfica",
       "sourceUrl": "https://developers.factus.com.co/facturas/representacion-grafica",
       "path": "facturas\\representacion-grafica.md"
+    },
+    {
+      "title": "Contingencia Tipo 03",
+      "sourceUrl": "https://developers.factus.com.co/facturas/tipos-de-factura/contingencia-tipo-03",
+      "path": "facturas\\tipos-de-factura\\contingencia-tipo-03.md"
     },
     {
       "title": "10 - Estándar",
@@ -432,6 +442,11 @@
       "title": "Países",
       "sourceUrl": "https://developers.factus.com.co/tablas-de-referencia/countries",
       "path": "tablas-de-referencia\\countries.md"
+    },
+    {
+      "title": "Tipos de moneda",
+      "sourceUrl": "https://developers.factus.com.co/tablas-de-referencia/currency",
+      "path": "tablas-de-referencia\\currency.md"
     },
     {
       "title": "Municipios",

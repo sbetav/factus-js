@@ -137,8 +137,12 @@ Código de referencia del producto o servicio. |
 Nombre del producto o servicio. |
 | **`items.*.quantity`** `string`
 Cantidad del producto o servicio (máximo dos decimales). |
-| **`items.*.discount_rate`** `string`
-Porcentaje del descuento del producto o servicio (máximo dos decimales). |
+| **`items.*.discount_rate`** `string` `opcional`
+Porcentaje del descuento del producto o servicio (máximo dos decimales).
+Para aplicar descuentos use alguno de los dos campos, en porcentaje `discount_rate` o monto `discount_amount`, no es necesario enviar ambos campos para informar un descuento. |
+| **`items.*.discount_amount`** `string` `opcional`
+Monto del descuento del producto o servicio (máximo dos decimales).
+Para aplicar descuentos use alguno de los dos campos, en porcentaje `discount_rate` o monto `discount_amount`, no es necesario enviar ambos campos para informar un descuento. |
 | **`items.*.price`** `string`
 Precio por unidad del producto o servicio sin impuestos incluidos ni descuentos, valor neto (máximo dos decimales). |
 | **`items.*.unit_measure_code`** `string`

@@ -1,8 +1,8 @@
 # External Factus Docs Index
 
-- Generated at: 2026-05-28T19:53:49.146Z
+- Generated at: 2026-06-20T21:43:18.043Z
 - Base URL: https://developers.factus.com.co/
-- Files: 89
+- Files: 92
 
 ## Autenticación
 
@@ -139,6 +139,11 @@
 - Source: https://developers.factus.com.co/facturas/ejemplos/estandar-credito
 - File: facturas\ejemplos\estandar-credito.md
 
+## Factura con tipo de moneda
+
+- Source: https://developers.factus.com.co/facturas/ejemplos/estandar-currency
+- File: facturas\ejemplos\estandar-currency.md
+
 ## Informar establecimiento
 
 - Source: https://developers.factus.com.co/facturas/ejemplos/estandar-establecimiento
@@ -188,6 +193,11 @@
 
 - Source: https://developers.factus.com.co/facturas/representacion-grafica
 - File: facturas\representacion-grafica.md
+
+## Contingencia Tipo 03
+
+- Source: https://developers.factus.com.co/facturas/tipos-de-factura/contingencia-tipo-03
+- File: facturas\tipos-de-factura\contingencia-tipo-03.md
 
 ## 10 - Estándar
 
@@ -433,6 +443,11 @@
 
 - Source: https://developers.factus.com.co/tablas-de-referencia/countries
 - File: tablas-de-referencia\countries.md
+
+## Tipos de moneda
+
+- Source: https://developers.factus.com.co/tablas-de-referencia/currency
+- File: tablas-de-referencia\currency.md
 
 ## Municipios
 
