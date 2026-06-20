@@ -54,5 +54,5 @@ Aquí tienes un ejemplo de cómo debería quedar el cuerpo de la solicitud en fo
 * [200 - Envío de correo](https://developers.factus.com.co/notas-credito/enviar-correo#tab-panel-54)
 
 ```
-{ "email": "[email protected]", "pdf_base_64_encoded": "[TRIMMED_BASE64_60784_CHARS]"}
+{ "email": "alanturing@enigmasas.com.com", "pdf_base_64_encoded": "[TRIMMED_BASE64_60784_CHARS]"}
 ```

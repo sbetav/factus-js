@@ -101,5 +101,5 @@ Código de los tipos de responsabilidad fiscal. Para saber los tipos de responsa
 * [200 -Empresa](https://developers.factus.com.co/empresas/actualizar#tab-panel-14)
 
 ```
-{ "legal_organization_code": "2", "company": null, "names": "Alan", "surnames": "Turing", "responsibilities": "5", "economic_activity": "6920", "email": "[email protected]", "address": "calle 100 #50-80", "trade_name": null, "registration_code": null, "phone": "0987654321", "municipality_code": "68872", "tribute_code": "ZZ"}
+{ "legal_organization_code": "2", "company": null, "names": "Alan", "surnames": "Turing", "responsibilities": "5", "economic_activity": "6920", "email": "alanturing@enigmasas.com", "address": "calle 100 #50-80", "trade_name": null, "registration_code": null, "phone": "0987654321", "municipality_code": "68872", "tribute_code": "ZZ"}
 ```

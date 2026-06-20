@@ -54,5 +54,5 @@ Aquí tienes un ejemplo de cómo debería quedar el cuerpo de la solicitud en fo
 * [200 - Envío de correo](https://developers.factus.com.co/facturas/enviar-correo#tab-panel-19)
 
 ```
-{ "email": "[email protected]"}
+{ "email": "alanturing@enigmasas.com"}
 ```
