@@ -49,6 +49,7 @@ const SKIPPABLE_PATH_EXTENSIONS = [
   ".js",
 ];
 const NON_HTTP_LINK_PREFIXES = ["#", "mailto:", "tel:"];
+const OBFUSCATED_EMAIL_PLACEHOLDER = "example@email.com";
 let mirrorDirForErrorReporting;
 
 const base64TrimThreshold = 320;
@@ -129,18 +130,16 @@ const run = async () => {
   );
 };
 
-const createSyncConfig = (target) => {
-  return {
-    target,
-    base: new URL(target.baseUrl),
-    mirrorDir: path.join(
-      repoRoot,
-      ".temp",
-      `factus-docs-mirror-${target.outputName}`,
-    ),
-    outputDir: path.join(repoRoot, "factus-docs", target.outputName),
-  };
-};
+const createSyncConfig = (target) => ({
+  target,
+  base: new URL(target.baseUrl),
+  mirrorDir: path.join(
+    repoRoot,
+    ".temp",
+    `factus-docs-mirror-${target.outputName}`,
+  ),
+  outputDir: path.join(repoRoot, "factus-docs", target.outputName),
+});
 
 const resolveSyncTarget = async () => {
   if (!process.stdin.isTTY || !process.stdout.isTTY) {
@@ -150,16 +149,10 @@ const resolveSyncTarget = async () => {
   const prompt = new enquirer.Select({
     message: "Which Factus docs source should be synced?",
     initial: Object.keys(docTargets).indexOf(defaultTarget),
-    choices: [
-      {
-        name: "v1",
-        message: `v1 - ${docTargets.v1.baseUrl}`,
-      },
-      {
-        name: "v2",
-        message: `v2 - ${docTargets.v2.baseUrl}`,
-      },
-    ],
+    choices: Object.entries(docTargets).map(([name, target]) => ({
+      name,
+      message: `${name} - ${target.baseUrl}`,
+    })),
   });
 
   const answer = await prompt.run();
@@ -425,53 +418,148 @@ const htmlToMarkdown = (html, sourceUrl) => {
     }
   });
 
-  const markdown = cleanupMarkdown(turndown.turndown(content.html() ?? ""));
-  return trimLargeBase64Payloads(markdown);
+  normalizeObfuscatedEmailsInHtml($, content);
+
+  return cleanupMarkdown(
+    normalizeObfuscatedEmailsInMarkdown(
+      trimLargeBase64Payloads(turndown.turndown(content.html() ?? "")),
+    ),
+  );
+};
+
+const decodeCloudflareEmail = (encoded) => {
+  if (
+    !encoded ||
+    encoded.length < 4 ||
+    encoded.length % 2 !== 0 ||
+    !/^[\da-f]+$/i.test(encoded)
+  ) {
+    return null;
+  }
+
+  const key = Number.parseInt(encoded.slice(0, 2), 16);
+  if (Number.isNaN(key)) return null;
+
+  let out = "";
+  for (let index = 2; index < encoded.length; index += 2) {
+    const code = Number.parseInt(encoded.slice(index, index + 2), 16);
+    if (Number.isNaN(code)) return null;
+    out += String.fromCharCode(code ^ key);
+  }
+
+  return out.includes("@") ? out : null;
+};
+
+const resolveObfuscatedEmail = ($, node) => {
+  const candidates = [
+    node.find("[data-cfemail]").attr("data-cfemail"),
+    node.attr("data-cfemail"),
+    node.attr("href")?.match(/email-protection#([0-9a-f]+)/i)?.[1],
+  ];
+
+  return (
+    candidates.map(decodeCloudflareEmail).find(Boolean) ??
+    OBFUSCATED_EMAIL_PLACEHOLDER
+  );
+};
+
+const mergePartialEmailPrefix = ($, anchor, decodedEmail) => {
+  const previous = anchor[0]?.previousSibling;
+  if (!previous || previous.type !== "text") {
+    return decodedEmail;
+  }
+
+  const text = previous.data ?? "";
+  const trimmedPrefix = text.trimEnd();
+  const shouldMergePrefix =
+    /Mail[_\s]/i.test(trimmedPrefix) && !trimmedPrefix.includes("@");
+
+  if (shouldMergePrefix) {
+    $(previous).remove();
+    return decodedEmail.startsWith("Mail")
+      ? decodedEmail
+      : `${trimmedPrefix}${decodedEmail}`;
+  }
+
+  return decodedEmail;
+};
+
+const normalizeObfuscatedEmailsInHtml = ($, root) => {
+  root.find('a[href*="email-protection"]').each((_, element) => {
+    const node = $(element);
+    const decodedEmail = resolveObfuscatedEmail($, node);
+    node.replaceWith(mergePartialEmailPrefix($, node, decodedEmail));
+  });
+
+  root.find("[data-cfemail], .__cf_email__").each((_, element) => {
+    const node = $(element);
+    if (node.closest('a[href*="email-protection"]').length > 0) {
+      return;
+    }
+
+    const decoded = decodeCloudflareEmail(node.attr("data-cfemail"));
+    node.replaceWith(decoded ?? OBFUSCATED_EMAIL_PLACEHOLDER);
+  });
+};
+
+const normalizeObfuscatedEmailsInMarkdown = (markdown) => {
+  return markdown
+    .replace(
+      /\[[^\]]*\]\([^)]*email-protection#([0-9a-f]+)[^)]*\)/gi,
+      (_, hash) => decodeCloudflareEmail(hash) ?? OBFUSCATED_EMAIL_PLACEHOLDER,
+    )
+    .replace(
+      /\[[^\]]*\]\([^)]*email-protection[^)]*\)/gi,
+      OBFUSCATED_EMAIL_PLACEHOLDER,
+    )
+    .replace(
+      /\\?\[\\?\[?\s*email\s+protected\s*\]?\\?\]/gi,
+      OBFUSCATED_EMAIL_PLACEHOLDER,
+    )
+    .replace(
+      // Repair older sync output where a partial prefix was glued to EXAMPLE_EMAIL.
+      /Mail\\?_.+?(?:EXAMPLE\\_EMAIL|EXAMPLE_EMAIL)/gi,
+      OBFUSCATED_EMAIL_PLACEHOLDER,
+    )
+    .replace(/EXAMPLE\\_EMAIL/g, OBFUSCATED_EMAIL_PLACEHOLDER)
+    .replace(/EXAMPLE_EMAIL/g, OBFUSCATED_EMAIL_PLACEHOLDER);
 };
 
 const trimLargeBase64Payloads = (markdown) => {
-  const threshold = Number.isFinite(base64TrimThreshold)
-    ? base64TrimThreshold
-    : 320;
+  const trimValue = (value) => {
+    const compact = value.replace(/[\r\n]/g, "");
+    return compact.length < base64TrimThreshold
+      ? value
+      : `[TRIMMED_BASE64_${compact.length}_CHARS]`;
+  };
 
   let out = markdown;
 
   out = out.replace(
     /((?:"[^"\n]*(?:base64|base_64|b64)[^"\n]*"|[a-zA-Z0-9_.-]*(?:base64|base_64|b64)[a-zA-Z0-9_.-]*)\s*:\s*")([A-Za-z0-9+/=\r\n]+)(")/gi,
-    (match, prefix, value, suffix) => {
-      const compact = value.replace(/[\r\n]/g, "");
-      if (compact.length < threshold) return match;
-      return `${prefix}[TRIMMED_BASE64_${compact.length}_CHARS]${suffix}`;
-    },
+    (_, prefix, value, suffix) => `${prefix}${trimValue(value)}${suffix}`,
   );
 
   out = out.replace(
     /(data:[^;\s]+;base64,)([A-Za-z0-9+/=\r\n]+)/gi,
-    (match, prefix, value) => {
-      const compact = value.replace(/[\r\n]/g, "");
-      if (compact.length < threshold) return match;
-      return `${prefix}[TRIMMED_BASE64_${compact.length}_CHARS]`;
-    },
+    (_, prefix, value) => `${prefix}${trimValue(value)}`,
   );
 
-  out = out.replace(/([A-Za-z0-9+/]{420,}={0,2})/g, (value) => {
-    if (value.length < threshold) return value;
-    return `[TRIMMED_BASE64_${value.length}_CHARS]`;
-  });
+  out = out.replace(/([A-Za-z0-9+/]{420,}={0,2})/g, trimValue);
 
   return out;
 };
 
-const cleanupMarkdown = (value) => {
-  let out = value.replace(/\u00a0/g, " ");
-  out = out.replace(/\t/g, " ");
-  out = out.replace(/[ \f\v]+\n/g, "\n");
-  out = out.replace(/\n{3,}/g, "\n\n");
-  out = out.replace(/[ ]{2,}/g, " ");
-  out = out.replace(/\n +/g, "\n");
-  out = out.replace(/ +\n/g, "\n");
-  return out.trim();
-};
+const cleanupMarkdown = (value) =>
+  value
+    .replace(/\u00a0/g, " ")
+    .replace(/\t/g, " ")
+    .replace(/[ \f\v]+\n/g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .replace(/[ ]{2,}/g, " ")
+    .replace(/\n +/g, "\n")
+    .replace(/ +\n/g, "\n")
+    .trim();
 
 const extractLinks = (html, sourceUrl) => {
   const $ = cheerio.load(html);
