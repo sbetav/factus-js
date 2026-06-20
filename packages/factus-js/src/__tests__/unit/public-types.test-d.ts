@@ -3,7 +3,9 @@ import type {
   ApiResponse,
   BillEvent,
   ClaimConceptCode,
+  CreateBillInput,
   CreateCreditNoteInput,
+  DocumentItemInput,
   EmailContentData,
   FactusClient,
   EmitEventInput,
@@ -27,6 +29,31 @@ describe("public type contracts", () => {
     expectTypeOf<
       AssertFalse<HasKey<CreateCreditNoteInput, "bill_number">>
     >().toEqualTypeOf<false>();
+  });
+
+  test("bill input supports optional foreign currency", () => {
+    expectTypeOf<
+      AssertTrue<HasKey<CreateBillInput, "currency">>
+    >().toEqualTypeOf<true>();
+    expectTypeOf<CreateBillInput["currency"]>().toEqualTypeOf<
+      | {
+          code: string;
+          exchange_rate: string | number;
+        }
+      | undefined
+    >();
+  });
+
+  test("document item input supports optional discount fields", () => {
+    expectTypeOf<DocumentItemInput["discount_rate"]>().toEqualTypeOf<
+      string | number | undefined
+    >();
+    expectTypeOf<DocumentItemInput["discount_amount"]>().toEqualTypeOf<
+      string | number | undefined
+    >();
+    expectTypeOf<
+      AssertTrue<HasKey<DocumentItemInput, "discount_amount">>
+    >().toEqualTypeOf<true>();
   });
 
   test("email content uses attached_document", () => {

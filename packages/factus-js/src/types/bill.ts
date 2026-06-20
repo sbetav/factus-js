@@ -16,6 +16,7 @@ import type {
 import type {
   AllowanceChargeInput,
   AllowanceChargeResponse,
+  BillCurrencyInput,
   BillingPeriod,
   CodeNameObject,
   CompanyInfo,
@@ -56,6 +57,7 @@ export interface CreateBillInput {
   document?: BillDocumentCode;
   numbering_range_id?: number;
   operation_type?: OperationTypeCode;
+  currency?: BillCurrencyInput;
   send_email?: boolean;
   observation?: string;
   prepayment_details?: PrepaymentDetailInput[];

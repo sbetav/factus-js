@@ -222,6 +222,22 @@ describe("sandbox integration", () => {
       [409, 422],
     );
 
+    await runAllowConflict(
+      "bills.create (foreign currency)",
+      factus.bills.create({
+        numbering_range_id: 8,
+        reference_code: uniqueRef("B3-CUR"),
+        currency: {
+          code: "USD",
+          exchange_rate: "4000.00",
+        },
+        payment_details: cashPaymentDetails,
+        customer: naturalCustomer,
+        items: [billItem],
+      }),
+      [409, 422],
+    );
+
     await run("bills.list", factus.bills.list({ page: 1, per_page: 5 }));
     await run("bills.get", factus.bills.get("SETP990000203"));
     await run(

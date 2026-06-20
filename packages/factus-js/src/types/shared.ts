@@ -118,6 +118,11 @@ export interface DocumentPaymentDetail {
   due_date: string | null;
 }
 
+export interface BillCurrencyInput {
+  code: string;
+  exchange_rate: string | number;
+}
+
 export interface PrepaymentDetailInput {
   reference_code: string;
   received_date: string;
@@ -199,7 +204,8 @@ export interface DocumentItemInput {
   code_reference: string;
   name: string;
   quantity: string | number;
-  discount_rate: string | number;
+  discount_rate?: string | number;
+  discount_amount?: string | number;
   price: string | number;
   unit_measure_code: string;
   standard_code: LiteralUnion<ProductStandardCode>;
