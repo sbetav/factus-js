@@ -282,8 +282,15 @@ Fuente oficial: [Crear documento soporte](https://developers.factus.com.co/docum
               },
               discount_rate: {
                 type: "string | number",
-                required: true,
-                description: "Porcentaje de descuento del ítem.",
+                required: false,
+                description:
+                  "Porcentaje de descuento del ítem. Usa este campo o discount_amount, no ambos.",
+              },
+              discount_amount: {
+                type: "string | number",
+                required: false,
+                description:
+                  "Monto fijo de descuento del ítem. Usa este campo o discount_rate, no ambos.",
               },
               price: {
                 type: "string | number",
