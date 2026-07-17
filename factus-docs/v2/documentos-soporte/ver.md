@@ -1,4 +1,4 @@
-# Ver Doc. soporte
+# Ver
 
 Este endpoint `devuelve` un documento soporte pasando el **número del mismo** como parámetro en la solicitud `GET`. Puede encontrar el número del documento soporte, debe ver la respuesta de la [creación del documento soporte](https://developers.factus.com.co/documentos-soporte/crear-validar/#ejemplo-de-respuesta) o en [filtrar documento soporte](https://developers.factus.com.co/documentos-soporte/ver-y-filtrar#respuesta-del-endpoint) data.data.\*.number .
 

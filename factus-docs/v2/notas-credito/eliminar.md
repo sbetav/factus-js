@@ -1,4 +1,4 @@
-# Eliminar Nota Crédito
+# Eliminar no validada
 
 Este endpoint `elimina` una nota crédito usando el código de referencia `reference_code` con el cual se creó.
 Las notas crédito se pueden eliminar siempre y cuando no se encuentren validadas por la DIAN.

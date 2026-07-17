@@ -1,4 +1,4 @@
-# Informar establecimiento
+# Con establecimiento
 
 Esta sección describe los compos que podría contener la factura.
 

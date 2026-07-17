@@ -1,6 +1,6 @@
 # Ver
 
-Este endpoint `devuelve` una nota crédito específica pasando el **número de la nota crédito** como parámetro en la solicitud `GET`. Puede encontrar el número de la nota crédito en la respuesta de la creación de la nota crédito, `data.number`.
+Este endpoint `devuelve` una nota débito específica pasando el **número de la nota débito** como parámetro en la solicitud `GET`. Puede encontrar el número de la nota débito en la respuesta de la creación de la nota débito, `data.number`.
 
 **Método:** GET
 
@@ -9,13 +9,13 @@ Este endpoint `devuelve` una nota crédito específica pasando el **número de l
 **Sandbox**
 
 ```
-https://api-sandbox.factus.com.co/v2/credit-notes/:number
+https://api-sandbox.factus.com.co/v2/debit-notes/:number
 ```
 
 **Producción**
 
 ```
-https://api.factus.com.co/v2/credit-notes/:number
+https://api.factus.com.co/v2/debit-notes/:number
 ```
 
 ### **Encabezados de la Solicitud**
@@ -30,9 +30,9 @@ Incluye los siguientes encabezados.
 
 ### Variables de Ruta, Path Variables
 
-[Sección titulada «Variables de Ruta, Path Variables»](https://developers.factus.com.co/notas-credito/ver#variables-de-ruta-path-variables)
+[Sección titulada «Variables de Ruta, Path Variables»](https://developers.factus.com.co/notas-debito/ver#variables-de-ruta-path-variables)
 
 | |
 | --- |
 | **`number`** `string`
-Número de nota crédito. Se recomienda guardar el número de la nota crédito una vez se haga la creación de la misma para poder hacer uso de este endpoint fácilmente. |
+Número de nota débito. Se recomienda guardar el número de la nota débito una vez se haga la creación de la misma para poder hacer uso de este endpoint fácilmente. |

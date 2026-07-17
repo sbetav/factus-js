@@ -29,9 +29,9 @@
 | `SS-SinAporte` | Sector Salud - Sin Aporte. |
 | `SS-Recaudo` | Sector Salud - Recaudo de cuotas moderadoras o copagos. |
 
-#### Códigos de corrección
+#### Códigos de corrección (notas crédito)
 
-[Sección titulada «Códigos de corrección»](https://developers.factus.com.co/tablas-de-referencia/tablas#c%C3%B3digos-de-correcci%C3%B3n)
+[Sección titulada «Códigos de corrección (notas crédito)»](https://developers.factus.com.co/tablas-de-referencia/tablas#c%C3%B3digos-de-correcci%C3%B3n-notas-cr%C3%A9dito)
 
 | **Código** | **Descripción** |
 | --- | --- |
@@ -50,6 +50,26 @@
 | --- | --- |
 | `20` | Nota Crédito que referencia una factura electrónica. |
 | `22` | Nota Crédito sin referencia a una factura electrónica. |
+
+#### Códigos de corrección (notas débito)
+
+[Sección titulada «Códigos de corrección (notas débito)»](https://developers.factus.com.co/tablas-de-referencia/tablas#c%C3%B3digos-de-correcci%C3%B3n-notas-d%C3%A9bito)
+
+| **Código** | **Descripción** |
+| --- | --- |
+| `1` | Intereses. |
+| `2` | Gastos por cobrar. |
+| `3` | Cambio del valor. |
+| `4` | Otros. |
+
+#### Códigos de tipos de operación (notas débito)
+
+[Sección titulada «Códigos de tipos de operación (notas débito)»](https://developers.factus.com.co/tablas-de-referencia/tablas#c%C3%B3digos-de-tipos-de-operaci%C3%B3n-notas-d%C3%A9bito)
+
+| **Código** | **Descripción** |
+| --- | --- |
+| `30` | Nota Débito que referencia una factura electrónica. |
+| `32` | Nota Débito sin referencia a una factura electrónica. |
 
 #### Códigos de estándar de identificación del producto
 
@@ -182,9 +202,6 @@
 | `23` | Nota Débito |
 | `24` | Documento Soporte |
 | `25` | Nota de Ajuste Documento Soporte |
-| `26` | Nómina |
-| `27` | Nota de Ajuste Nómina |
-| `28` | Nota de eliminación de nómina |
 | `30` | Factura de talonario y de papel |
 
 #### Códigos de tipos de documentos de identidad para Documentos Soporte y Notas de ajuste

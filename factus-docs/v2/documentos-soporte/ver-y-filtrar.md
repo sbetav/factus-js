@@ -1,4 +1,4 @@
-# Listar Doc. Soporte
+# Listar
 
 Este endpoint `devuelve` una lista de documentos soporte que cumplen con los criterios de búsqueda especificados en los [filtros de búsqueda](https://developers.factus.com.co/documentos-soporte/ver-y-filtrar/#filtros-de-b%C3%BAsqueda) descritos abajo.
 

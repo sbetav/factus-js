@@ -1,4 +1,4 @@
-# Listar Notas Crédito
+# Listar
 
 Este endpoint `devuelve` una lista de notas crédito que cumple con los criterios de búsqueda especificados en los [filtros de búsqueda](https://developers.factus.com.co/notas-credito/ver-filtrar/#filtros-de-b%C3%BAsqueda) descritos abajo.
 

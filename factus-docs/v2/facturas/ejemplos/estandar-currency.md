@@ -1,4 +1,4 @@
-# Factura con tipo de moneda
+# Con doble moneda
 
 Esta sección describe los compos que podría contener la factura.
 

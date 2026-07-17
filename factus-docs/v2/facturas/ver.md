@@ -1,4 +1,4 @@
-# Ver factura
+# Ver
 
 Este endpoint `devuelve` una factura específica pasando el **número de la factura** como parámetro en la solicitud `GET`. Puede encontrar el número de la factura, debe ver la respuesta de la [creación de la factura](https://developers.factus.com.co/facturas/crear-y-validar/#response) o en [filtrar factura](https://developers.factus.com.co/facturas/listar-y-filtrar#respuesta-del-endpoint) data.data.\*.number.
 

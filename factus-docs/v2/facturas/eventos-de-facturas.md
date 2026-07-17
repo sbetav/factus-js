@@ -1,4 +1,4 @@
-# Eventos de una factura
+# Eventos
 
 Este endpoint permite `consultar` los eventos generados a una factura por su número de factura.
 

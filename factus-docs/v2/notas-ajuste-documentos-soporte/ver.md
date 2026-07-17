@@ -1,4 +1,4 @@
-# Ver nota de ajuste
+# Ver
 
 El endpoint devuelve una _**nota de ajuste a documento soporte**_ pasando el **número del soporte** como parámetro en la solicitud `GET`. Puede encontrar el número del documento soporte, debe ver la respuesta de la [creación del documento soporte](https://developers.factus.com.co/documentos-soporte/crear-validar#ejemplo-de-respuesta) o en [filtrar documento soporte](https://developers.factus.com.co/documentos-soporte/ver-y-filtrar) , data.support\_document.number .
 

@@ -1,4 +1,4 @@
-# Ver Rango
+# Ver
 
 **Método:** GET
 

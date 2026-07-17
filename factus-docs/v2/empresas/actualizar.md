@@ -1,4 +1,4 @@
-# Actualizar Empresa
+# Actualizar
 
 Este endpoint permite actualizar la Información de la empresa del usuario correspondiente
 

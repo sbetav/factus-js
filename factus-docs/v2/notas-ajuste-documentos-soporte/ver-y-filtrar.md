@@ -1,4 +1,4 @@
-# Listar notas de ajuste
+# Listar
 
 Esta sección explica cómo utilizar este endpoint para buscar y filtrar las _**notas de ajuste a documentos soporte**_, la respuesta de cada nota de ajuste es general si quiere información especifica de una nota de ajuste a documento soporte debe usar el endpoint: [Ver nota de ajuste a documento soporte](https://developers.factus.com.co/notas-ajuste-documentos-soporte/ver#_top) .
 

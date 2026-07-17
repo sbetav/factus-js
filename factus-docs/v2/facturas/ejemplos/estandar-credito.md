@@ -1,4 +1,4 @@
-# Factura a crédito
+# A crédito
 
 Esta sección describe los compos que podría contener la factura.
 

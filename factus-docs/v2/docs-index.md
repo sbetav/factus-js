@@ -1,8 +1,8 @@
 # External Factus Docs Index
 
-- Generated at: 2026-07-17T04:01:02.986Z
+- Generated at: 2026-07-17T22:37:25.293Z
 - Base URL: https://developers.factus.com.co/
-- Files: 94
+- Files: 113
 
 ## Autenticación
 
@@ -34,7 +34,7 @@
 - Source: https://developers.factus.com.co/coleccion
 - File: coleccion.md
 
-## Crear Doc. Soporte
+## Crear y validar
 
 - Source: https://developers.factus.com.co/documentos-soporte/crear-validar
 - File: documentos-soporte\crear-validar.md
@@ -54,17 +54,17 @@
 - Source: https://developers.factus.com.co/documentos-soporte/descripcion-de-campos
 - File: documentos-soporte\descripcion-de-campos.md
 
-## Eliminar Doc. Soporte
+## Eliminar no validada
 
 - Source: https://developers.factus.com.co/documentos-soporte/eliminar
 - File: documentos-soporte\eliminar.md
 
-## Listar Doc. Soporte
+## Listar
 
 - Source: https://developers.factus.com.co/documentos-soporte/ver-y-filtrar
 - File: documentos-soporte\ver-y-filtrar.md
 
-## Ver Doc. soporte
+## Ver
 
 - Source: https://developers.factus.com.co/documentos-soporte/ver
 - File: documentos-soporte\ver.md
@@ -79,12 +79,12 @@
 - Source: https://developers.factus.com.co/empresas/actualizar-imagen
 - File: empresas\actualizar-imagen.md
 
-## Actualizar Empresa
+## Actualizar
 
 - Source: https://developers.factus.com.co/empresas/actualizar
 - File: empresas\actualizar.md
 
-## Ver Empresa
+## Ver
 
 - Source: https://developers.factus.com.co/empresas/ver
 - File: empresas\ver.md
@@ -119,7 +119,7 @@
 - Source: https://developers.factus.com.co/facturas/descripcion-de-campos
 - File: facturas\descripcion-de-campos.md
 
-## Factura Anticipo
+## Con anticipo
 
 - Source: https://developers.factus.com.co/facturas/ejemplos/estandar-anticipo
 - File: facturas\ejemplos\estandar-anticipo.md
@@ -129,22 +129,22 @@
 - Source: https://developers.factus.com.co/facturas/ejemplos/estandar-autorrentenciones
 - File: facturas\ejemplos\estandar-autorrentenciones.md
 
-## Factura Consumidor Final
+## Con consumidor final
 
 - Source: https://developers.factus.com.co/facturas/ejemplos/estandar-consumidor-final
 - File: facturas\ejemplos\estandar-consumidor-final.md
 
-## Factura a crédito
+## A crédito
 
 - Source: https://developers.factus.com.co/facturas/ejemplos/estandar-credito
 - File: facturas\ejemplos\estandar-credito.md
 
-## Factura con tipo de moneda
+## Con doble moneda
 
 - Source: https://developers.factus.com.co/facturas/ejemplos/estandar-currency
 - File: facturas\ejemplos\estandar-currency.md
 
-## Informar establecimiento
+## Con establecimiento
 
 - Source: https://developers.factus.com.co/facturas/ejemplos/estandar-establecimiento
 - File: facturas\ejemplos\estandar-establecimiento.md
@@ -154,12 +154,12 @@
 - Source: https://developers.factus.com.co/facturas/ejemplos/estandar-impuesto-excluido
 - File: facturas\ejemplos\estandar-impuesto-excluido.md
 
-## Factura con orden de servicio
+## Con orden de servicio
 
 - Source: https://developers.factus.com.co/facturas/ejemplos/estandar-orden-servicio
 - File: facturas\ejemplos\estandar-orden-servicio.md
 
-## Informar propina
+## Con propina
 
 - Source: https://developers.factus.com.co/facturas/ejemplos/estandar-propina
 - File: facturas\ejemplos\estandar-propina.md
@@ -169,7 +169,7 @@
 - Source: https://developers.factus.com.co/facturas/ejemplos/redondeo-medios-pago
 - File: facturas\ejemplos\redondeo-medios-pago.md
 
-## Eliminar factura
+## Eliminar no validada
 
 - Source: https://developers.factus.com.co/facturas/eliminar
 - File: facturas\eliminar.md
@@ -179,12 +179,12 @@
 - Source: https://developers.factus.com.co/facturas/enviar-correo
 - File: facturas\enviar-correo.md
 
-## Eventos de una factura
+## Eventos
 
 - Source: https://developers.factus.com.co/facturas/eventos-de-facturas
 - File: facturas\eventos-de-facturas.md
 
-## Listar facturas
+## Listar
 
 - Source: https://developers.factus.com.co/facturas/listar-y-filtrar
 - File: facturas\listar-y-filtrar.md
@@ -249,7 +249,7 @@
 - Source: https://developers.factus.com.co/facturas/tipos-de-factura/transporte
 - File: facturas\tipos-de-factura\transporte.md
 
-## Ver factura
+## Ver
 
 - Source: https://developers.factus.com.co/facturas/ver
 - File: facturas\ver.md
@@ -281,6 +281,51 @@
 
 ## Crear y validar
 
+- Source: https://developers.factus.com.co/nomina/crear-y-validar
+- File: nomina\crear-y-validar.md
+
+## Campos de la nómina
+
+- Source: https://developers.factus.com.co/nomina/descripcion-de-campos
+- File: nomina\descripcion-de-campos.md
+
+## Eliminar no validada
+
+- Source: https://developers.factus.com.co/nomina/eliminar
+- File: nomina\eliminar.md
+
+## Listar
+
+- Source: https://developers.factus.com.co/nomina/listar
+- File: nomina\listar.md
+
+## Ver
+
+- Source: https://developers.factus.com.co/nomina/ver
+- File: nomina\ver.md
+
+## Crear y validar
+
+- Source: https://developers.factus.com.co/nota-ajuste-nomina/crear-y-validar
+- File: nota-ajuste-nomina\crear-y-validar.md
+
+## Eliminar no validada
+
+- Source: https://developers.factus.com.co/nota-ajuste-nomina/eliminar
+- File: nota-ajuste-nomina\eliminar.md
+
+## Listar
+
+- Source: https://developers.factus.com.co/nota-ajuste-nomina/listar
+- File: nota-ajuste-nomina\listar.md
+
+## Ver
+
+- Source: https://developers.factus.com.co/nota-ajuste-nomina/ver
+- File: nota-ajuste-nomina\ver.md
+
+## Crear y validar
+
 - Source: https://developers.factus.com.co/notas-ajuste-documentos-soporte/crear-validar
 - File: notas-ajuste-documentos-soporte\crear-validar.md
 
@@ -299,17 +344,17 @@
 - Source: https://developers.factus.com.co/notas-ajuste-documentos-soporte/descripcion-de-campos
 - File: notas-ajuste-documentos-soporte\descripcion-de-campos.md
 
-## Eliminar nota de ajuste
+## Eliminar no validada
 
 - Source: https://developers.factus.com.co/notas-ajuste-documentos-soporte/eliminar
 - File: notas-ajuste-documentos-soporte\eliminar.md
 
-## Listar notas de ajuste
+## Listar
 
 - Source: https://developers.factus.com.co/notas-ajuste-documentos-soporte/ver-y-filtrar
 - File: notas-ajuste-documentos-soporte\ver-y-filtrar.md
 
-## Ver nota de ajuste
+## Ver
 
 - Source: https://developers.factus.com.co/notas-ajuste-documentos-soporte/ver
 - File: notas-ajuste-documentos-soporte\ver.md
@@ -339,7 +384,7 @@
 - Source: https://developers.factus.com.co/notas-credito/descripcion-de-campos
 - File: notas-credito\descripcion-de-campos.md
 
-## Eliminar Nota Crédito
+## Eliminar no validada
 
 - Source: https://developers.factus.com.co/notas-credito/eliminar
 - File: notas-credito\eliminar.md
@@ -354,15 +399,65 @@
 - Source: https://developers.factus.com.co/notas-credito/obtener-contenido-de-correo
 - File: notas-credito\obtener-contenido-de-correo.md
 
-## Listar Notas Crédito
+## Listar
 
 - Source: https://developers.factus.com.co/notas-credito/ver-filtrar
 - File: notas-credito\ver-filtrar.md
 
-## Ver Nota Crédito
+## Ver
 
 - Source: https://developers.factus.com.co/notas-credito/ver
 - File: notas-credito\ver.md
+
+## Crear y Validar
+
+- Source: https://developers.factus.com.co/notas-debito/crear-y-validar
+- File: notas-debito\crear-y-validar.md
+
+## Descargar PDF
+
+- Source: https://developers.factus.com.co/notas-debito/descargar-pdf
+- File: notas-debito\descargar-pdf.md
+
+## Descargar XML AttachedDocument
+
+- Source: https://developers.factus.com.co/notas-debito/descargar-xml-attacheddocument
+- File: notas-debito\descargar-xml-attacheddocument.md
+
+## Descargar XML
+
+- Source: https://developers.factus.com.co/notas-debito/descargar-xml
+- File: notas-debito\descargar-xml.md
+
+## Campos de la nota débito
+
+- Source: https://developers.factus.com.co/notas-debito/descripcion-de-campos
+- File: notas-debito\descripcion-de-campos.md
+
+## Eliminar no validada
+
+- Source: https://developers.factus.com.co/notas-debito/eliminar
+- File: notas-debito\eliminar.md
+
+## Enviar correo
+
+- Source: https://developers.factus.com.co/notas-debito/enviar-correo
+- File: notas-debito\enviar-correo.md
+
+## Obtener contenido de correo
+
+- Source: https://developers.factus.com.co/notas-debito/obtener-contenido-de-correo
+- File: notas-debito\obtener-contenido-de-correo.md
+
+## Listar
+
+- Source: https://developers.factus.com.co/notas-debito/ver-filtrar
+- File: notas-debito\ver-filtrar.md
+
+## Ver
+
+- Source: https://developers.factus.com.co/notas-debito/ver
+- File: notas-debito\ver.md
 
 ## Actualizar consecutivo
 
@@ -394,7 +489,7 @@
 - Source: https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-notas-credito
 - File: rangos-de-numeracion\ejemplos\crear-rango-para-notas-credito.md
 
-## Eliminar Rango
+## Eliminar
 
 - Source: https://developers.factus.com.co/rangos-de-numeracion/eliminar-rango
 - File: rangos-de-numeracion\eliminar-rango.md
@@ -404,7 +499,7 @@
 - Source: https://developers.factus.com.co/rangos-de-numeracion/introduccion
 - File: rangos-de-numeracion\introduccion.md
 
-## Listar rangos
+## Listar
 
 - Source: https://developers.factus.com.co/rangos-de-numeracion/obtener-rangos
 - File: rangos-de-numeracion\obtener-rangos.md
@@ -414,7 +509,7 @@
 - Source: https://developers.factus.com.co/rangos-de-numeracion/rangos-asociados-al-software
 - File: rangos-de-numeracion\rangos-asociados-al-software.md
 
-## Ver Rango
+## Ver
 
 - Source: https://developers.factus.com.co/rangos-de-numeracion/ver-rango
 - File: rangos-de-numeracion\ver-rango.md

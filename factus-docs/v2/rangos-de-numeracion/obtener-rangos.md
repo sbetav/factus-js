@@ -1,4 +1,4 @@
-# Listar rangos
+# Listar
 
 El endpoint **Rangos de Numeración** permite obtener los rangos de numeración disponibles en la API de Factus. Este recurso es útil para obtener información precisa sobre los rangos de numeración de documentos específicos, incluyendo su prefijo, rango de numeración, resolución, fecha de inicio y fin, entre otros.
 

@@ -1,4 +1,4 @@
-# Eliminar Doc. Soporte
+# Eliminar no validada
 
 Este endpoint **elimina** un documento soporte usando el código de referencia con el cual se creó. Los documentos soporte se pueden eliminar siempre y cuando no se encuentren validados por la DIAN. Se suele eliminar un documento soporte cuando contiene errores de validación notificados por la DIAN para crearla nuevamente corregida.
 

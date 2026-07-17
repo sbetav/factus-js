@@ -1,8 +1,6 @@
 # Eliminar no validada
 
-Este endpoint `Elimina` una factura usando el código de referencia `reference_code` con el cual se creó.
-Las facturas se pueden eliminar siempre y cuando no se encuentren validadas por la DIAN.
-Se suele eliminar una factura cuando contiene errores de validación notificados por la DIAN para crearla nuevamente corregida.
+Este endpoint `elimina` una nómina de ajuste usando el código de referencia `reference_code` con el cual se creó.
 
 **Método:** DELETE
 
@@ -11,13 +9,13 @@ Se suele eliminar una factura cuando contiene errores de validación notificados
 **Sandbox**
 
 ```
-https://api-sandbox.factus.com.co/v2/bills/destroy/reference/:reference_code
+https://api-sandbox.factus.com.co/v2/adjustment-payrolls/reference/:reference_code
 ```
 
 **Producción**
 
 ```
-https://api.factus.com.co/v2/bills/destroy/reference/:reference_code
+https://api.factus.com.co/v2/adjustment-payrolls/reference/:reference_code
 ```
 
 ### **Encabezados de la Solicitud**
@@ -32,9 +30,9 @@ Incluye los siguientes encabezados.
 
 ### Variables de Ruta, Path Variables
 
-[Sección titulada «Variables de Ruta, Path Variables»](https://developers.factus.com.co/facturas/eliminar#variables-de-ruta-path-variables)
+[Sección titulada «Variables de Ruta, Path Variables»](https://developers.factus.com.co/nota-ajuste-nomina/eliminar#variables-de-ruta-path-variables)
 
 | |
 | --- |
 | **`reference_code`** `string`
-Código de referencia de la factura. El `reference_code` se utiliza para identificar de manera única la factura que se desea eliminar, es el que usas para identificarla al momento de crearla. |
+Código de referencia de la nómina de eliminación. El `reference_code` se utiliza para identificar de manera única la nómina de eliminación que se desea eliminar; es el mismo que usas para identificarla al momento de crearla. |

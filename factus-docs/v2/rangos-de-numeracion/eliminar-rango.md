@@ -1,4 +1,4 @@
-# Eliminar Rango
+# Eliminar
 
 Este endpoint permite eliminar un rango de numeración en específico. Es útil para eliminar un rango de numeración en particular.
 

@@ -1,4 +1,4 @@
-# Ver Empresa
+# Ver
 
 Este endpoint permite ver la Información de la empresa del usuario correspondiente
 

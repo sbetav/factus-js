@@ -46,6 +46,12 @@ Emite y gestiona notas crédito, con validación y descarga en PDF y XML.
 
 ](https://developers.factus.com.co/notas-credito/crear-y-validar)[
 
+Notas débito
+
+Emite y gestiona notas débito, con validación y descarga en PDF y XML.
+
+](https://developers.factus.com.co/notas-debito/crear-y-validar)[
+
 Documentos soporte
 
 Gestión de documentos soporte electrónicos ante la DIAN.
@@ -56,13 +62,19 @@ Notas de ajuste a documentos soporte
 
 Emisión de notas de ajuste asociadas a documentos soporte.
 
-](https://developers.factus.com.co/notas-ajuste-documentos-soporte/descripcion-de-campos/)
+](https://developers.factus.com.co/notas-ajuste-documentos-soporte/crear-validar)[
 
-Nómina electrónicaPronto
+Nómina electrónica
 
 Gestión y transmisión de nómina electrónica ante la DIAN.
 
-[
+](https://developers.factus.com.co/nomina/crear-y-validar)[
+
+Notas de ajuste a nómina
+
+Gestión y transmisión de notas de ajuste a nómina ante la DIAN.
+
+](https://developers.factus.com.co/nota-ajuste-nomina/crear-y-validar)[
 
 Rangos de numeración
 

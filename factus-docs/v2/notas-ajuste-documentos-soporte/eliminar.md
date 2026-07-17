@@ -1,4 +1,4 @@
-# Eliminar nota de ajuste
+# Eliminar no validada
 
 Elimina una nota de ajuste a documento soporte usando el código de referencia con el cual se creó. Las notas de ajuste se pueden eliminar siempre y cuando no se encuentren validados por la DIAN. Se suele eliminar una nota de ajuste cuando contiene errores de validación notificados por la DIAN para crearla nuevamente corregida.
 

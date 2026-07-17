@@ -1,6 +1,6 @@
 # Enviar correo
 
-Este endpoint `envía` por correo electrónico la nota crédito en un archivo ZIP que incluye un PDF y un archivo XML (AttachedDocument). El PDF puede ser generado y enviado en formato **Base64**. En caso de no proporcionarse, se utilizará por defecto la representación gráfica generada por el sistema.
+Este endpoint `envía` por correo electrónico la nota débito en un archivo ZIP que incluye un PDF y un archivo XML (AttachedDocument). El PDF puede ser generado y enviado en formato **Base64**. En caso de no proporcionarse, se utilizará por defecto la representación gráfica generada por el sistema.
 
 **Método:** POST
 
@@ -9,13 +9,13 @@ Este endpoint `envía` por correo electrónico la nota crédito en un archivo ZI
 **Sandbox**
 
 ```
-https://api-sandbox.factus.com.co/v2/credit-notes/:number/send-email
+https://api-sandbox.factus.com.co/v2/debit-notes/:number/send-email
 ```
 
 **Producción**
 
 ```
-https://api.factus.com.co/v2/credit-notes/:number/send-email
+https://api.factus.com.co/v2/debit-notes/:number/send-email
 ```
 
 ### **Encabezados de la Solicitud**
@@ -30,27 +30,27 @@ Incluye los siguientes encabezados.
 
 ### Variables de Ruta, Path Variables
 
-[Sección titulada «Variables de Ruta, Path Variables»](https://developers.factus.com.co/notas-credito/enviar-correo#variables-de-ruta-path-variables)
+[Sección titulada «Variables de Ruta, Path Variables»](https://developers.factus.com.co/notas-debito/enviar-correo#variables-de-ruta-path-variables)
 
 | |
 | --- |
 | **`number`** `string`
-Número de nota crédito. Se recomienda guardar el número de la nota crédito una vez se haga la creación de la misma para poder hacer uso de este endpoint fácilmente. |
+Número de nota débito. Se recomienda guardar el número de la nota débito una vez se haga la creación de la misma para poder hacer uso de este endpoint fácilmente. |
 
 ### Parámetros del Cuerpo (Body)
 
-[Sección titulada «Parámetros del Cuerpo (Body)»](https://developers.factus.com.co/notas-credito/enviar-correo#par%C3%A1metros-del-cuerpo-body)
+[Sección titulada «Parámetros del Cuerpo (Body)»](https://developers.factus.com.co/notas-debito/enviar-correo#par%C3%A1metros-del-cuerpo-body)
 
 El cuerpo (Body) de la solicitud debe enviarse en formato JSON y debe incluir los siguientes parámetros:
 
 | **Parámetro y Tipo** | **Descripción** |
 | --- | --- |
-| `email (string)` | Correo electrónico al cual se desea enviar la nota crédito |
+| `email (string)` | Correo electrónico al cual se desea enviar la nota débito |
 | `pdf_base_64_encoded (string)` | (Opcional) PDF, enviado como cadena codificada en Base64 |
 
 ### Ejemplo de Solicitud
 
-[Sección titulada «Ejemplo de Solicitud»](https://developers.factus.com.co/notas-credito/enviar-correo#ejemplo-de-solicitud)
+[Sección titulada «Ejemplo de Solicitud»](https://developers.factus.com.co/notas-debito/enviar-correo#ejemplo-de-solicitud)
 
 Aquí tienes un ejemplo de cómo debería quedar el cuerpo de la solicitud en formato JSON:
 

@@ -1,4 +1,4 @@
-# Informar propina
+# Con propina
 
 Esta sección describe los compos que podría contener la factura.
 

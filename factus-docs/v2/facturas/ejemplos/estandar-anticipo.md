@@ -1,4 +1,4 @@
-# Factura Anticipo
+# Con anticipo
 
 Esta sección describe los compos que podría contener la factura.
 

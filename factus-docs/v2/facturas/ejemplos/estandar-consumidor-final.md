@@ -1,4 +1,4 @@
-# Factura Consumidor Final
+# Con consumidor final
 
 Esta sección describe los compos que podría contener la factura.
 

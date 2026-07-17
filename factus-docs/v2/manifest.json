@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-17T04:01:02.986Z",
+  "generatedAt": "2026-07-17T22:37:25.293Z",
   "baseUrl": "https://developers.factus.com.co/",
-  "totalFiles": 94,
+  "totalFiles": 113,
   "entries": [
     {
       "title": "Autenticación",
@@ -34,7 +34,7 @@
       "path": "coleccion.md"
     },
     {
-      "title": "Crear Doc. Soporte",
+      "title": "Crear y validar",
       "sourceUrl": "https://developers.factus.com.co/documentos-soporte/crear-validar",
       "path": "documentos-soporte\\crear-validar.md"
     },
@@ -54,17 +54,17 @@
       "path": "documentos-soporte\\descripcion-de-campos.md"
     },
     {
-      "title": "Eliminar Doc. Soporte",
+      "title": "Eliminar no validada",
       "sourceUrl": "https://developers.factus.com.co/documentos-soporte/eliminar",
       "path": "documentos-soporte\\eliminar.md"
     },
     {
-      "title": "Listar Doc. Soporte",
+      "title": "Listar",
       "sourceUrl": "https://developers.factus.com.co/documentos-soporte/ver-y-filtrar",
       "path": "documentos-soporte\\ver-y-filtrar.md"
     },
     {
-      "title": "Ver Doc. soporte",
+      "title": "Ver",
       "sourceUrl": "https://developers.factus.com.co/documentos-soporte/ver",
       "path": "documentos-soporte\\ver.md"
     },
@@ -79,12 +79,12 @@
       "path": "empresas\\actualizar-imagen.md"
     },
     {
-      "title": "Actualizar Empresa",
+      "title": "Actualizar",
       "sourceUrl": "https://developers.factus.com.co/empresas/actualizar",
       "path": "empresas\\actualizar.md"
     },
     {
-      "title": "Ver Empresa",
+      "title": "Ver",
       "sourceUrl": "https://developers.factus.com.co/empresas/ver",
       "path": "empresas\\ver.md"
     },
@@ -119,7 +119,7 @@
       "path": "facturas\\descripcion-de-campos.md"
     },
     {
-      "title": "Factura Anticipo",
+      "title": "Con anticipo",
       "sourceUrl": "https://developers.factus.com.co/facturas/ejemplos/estandar-anticipo",
       "path": "facturas\\ejemplos\\estandar-anticipo.md"
     },
@@ -129,22 +129,22 @@
       "path": "facturas\\ejemplos\\estandar-autorrentenciones.md"
     },
     {
-      "title": "Factura Consumidor Final",
+      "title": "Con consumidor final",
       "sourceUrl": "https://developers.factus.com.co/facturas/ejemplos/estandar-consumidor-final",
       "path": "facturas\\ejemplos\\estandar-consumidor-final.md"
     },
     {
-      "title": "Factura a crédito",
+      "title": "A crédito",
       "sourceUrl": "https://developers.factus.com.co/facturas/ejemplos/estandar-credito",
       "path": "facturas\\ejemplos\\estandar-credito.md"
     },
     {
-      "title": "Factura con tipo de moneda",
+      "title": "Con doble moneda",
       "sourceUrl": "https://developers.factus.com.co/facturas/ejemplos/estandar-currency",
       "path": "facturas\\ejemplos\\estandar-currency.md"
     },
     {
-      "title": "Informar establecimiento",
+      "title": "Con establecimiento",
       "sourceUrl": "https://developers.factus.com.co/facturas/ejemplos/estandar-establecimiento",
       "path": "facturas\\ejemplos\\estandar-establecimiento.md"
     },
@@ -154,12 +154,12 @@
       "path": "facturas\\ejemplos\\estandar-impuesto-excluido.md"
     },
     {
-      "title": "Factura con orden de servicio",
+      "title": "Con orden de servicio",
       "sourceUrl": "https://developers.factus.com.co/facturas/ejemplos/estandar-orden-servicio",
       "path": "facturas\\ejemplos\\estandar-orden-servicio.md"
     },
     {
-      "title": "Informar propina",
+      "title": "Con propina",
       "sourceUrl": "https://developers.factus.com.co/facturas/ejemplos/estandar-propina",
       "path": "facturas\\ejemplos\\estandar-propina.md"
     },
@@ -169,7 +169,7 @@
       "path": "facturas\\ejemplos\\redondeo-medios-pago.md"
     },
     {
-      "title": "Eliminar factura",
+      "title": "Eliminar no validada",
       "sourceUrl": "https://developers.factus.com.co/facturas/eliminar",
       "path": "facturas\\eliminar.md"
     },
@@ -179,12 +179,12 @@
       "path": "facturas\\enviar-correo.md"
     },
     {
-      "title": "Eventos de una factura",
+      "title": "Eventos",
       "sourceUrl": "https://developers.factus.com.co/facturas/eventos-de-facturas",
       "path": "facturas\\eventos-de-facturas.md"
     },
     {
-      "title": "Listar facturas",
+      "title": "Listar",
       "sourceUrl": "https://developers.factus.com.co/facturas/listar-y-filtrar",
       "path": "facturas\\listar-y-filtrar.md"
     },
@@ -249,7 +249,7 @@
       "path": "facturas\\tipos-de-factura\\transporte.md"
     },
     {
-      "title": "Ver factura",
+      "title": "Ver",
       "sourceUrl": "https://developers.factus.com.co/facturas/ver",
       "path": "facturas\\ver.md"
     },
@@ -280,6 +280,51 @@
     },
     {
       "title": "Crear y validar",
+      "sourceUrl": "https://developers.factus.com.co/nomina/crear-y-validar",
+      "path": "nomina\\crear-y-validar.md"
+    },
+    {
+      "title": "Campos de la nómina",
+      "sourceUrl": "https://developers.factus.com.co/nomina/descripcion-de-campos",
+      "path": "nomina\\descripcion-de-campos.md"
+    },
+    {
+      "title": "Eliminar no validada",
+      "sourceUrl": "https://developers.factus.com.co/nomina/eliminar",
+      "path": "nomina\\eliminar.md"
+    },
+    {
+      "title": "Listar",
+      "sourceUrl": "https://developers.factus.com.co/nomina/listar",
+      "path": "nomina\\listar.md"
+    },
+    {
+      "title": "Ver",
+      "sourceUrl": "https://developers.factus.com.co/nomina/ver",
+      "path": "nomina\\ver.md"
+    },
+    {
+      "title": "Crear y validar",
+      "sourceUrl": "https://developers.factus.com.co/nota-ajuste-nomina/crear-y-validar",
+      "path": "nota-ajuste-nomina\\crear-y-validar.md"
+    },
+    {
+      "title": "Eliminar no validada",
+      "sourceUrl": "https://developers.factus.com.co/nota-ajuste-nomina/eliminar",
+      "path": "nota-ajuste-nomina\\eliminar.md"
+    },
+    {
+      "title": "Listar",
+      "sourceUrl": "https://developers.factus.com.co/nota-ajuste-nomina/listar",
+      "path": "nota-ajuste-nomina\\listar.md"
+    },
+    {
+      "title": "Ver",
+      "sourceUrl": "https://developers.factus.com.co/nota-ajuste-nomina/ver",
+      "path": "nota-ajuste-nomina\\ver.md"
+    },
+    {
+      "title": "Crear y validar",
       "sourceUrl": "https://developers.factus.com.co/notas-ajuste-documentos-soporte/crear-validar",
       "path": "notas-ajuste-documentos-soporte\\crear-validar.md"
     },
@@ -299,17 +344,17 @@
       "path": "notas-ajuste-documentos-soporte\\descripcion-de-campos.md"
     },
     {
-      "title": "Eliminar nota de ajuste",
+      "title": "Eliminar no validada",
       "sourceUrl": "https://developers.factus.com.co/notas-ajuste-documentos-soporte/eliminar",
       "path": "notas-ajuste-documentos-soporte\\eliminar.md"
     },
     {
-      "title": "Listar notas de ajuste",
+      "title": "Listar",
       "sourceUrl": "https://developers.factus.com.co/notas-ajuste-documentos-soporte/ver-y-filtrar",
       "path": "notas-ajuste-documentos-soporte\\ver-y-filtrar.md"
     },
     {
-      "title": "Ver nota de ajuste",
+      "title": "Ver",
       "sourceUrl": "https://developers.factus.com.co/notas-ajuste-documentos-soporte/ver",
       "path": "notas-ajuste-documentos-soporte\\ver.md"
     },
@@ -339,7 +384,7 @@
       "path": "notas-credito\\descripcion-de-campos.md"
     },
     {
-      "title": "Eliminar Nota Crédito",
+      "title": "Eliminar no validada",
       "sourceUrl": "https://developers.factus.com.co/notas-credito/eliminar",
       "path": "notas-credito\\eliminar.md"
     },
@@ -354,14 +399,64 @@
       "path": "notas-credito\\obtener-contenido-de-correo.md"
     },
     {
-      "title": "Listar Notas Crédito",
+      "title": "Listar",
       "sourceUrl": "https://developers.factus.com.co/notas-credito/ver-filtrar",
       "path": "notas-credito\\ver-filtrar.md"
     },
     {
-      "title": "Ver Nota Crédito",
+      "title": "Ver",
       "sourceUrl": "https://developers.factus.com.co/notas-credito/ver",
       "path": "notas-credito\\ver.md"
+    },
+    {
+      "title": "Crear y Validar",
+      "sourceUrl": "https://developers.factus.com.co/notas-debito/crear-y-validar",
+      "path": "notas-debito\\crear-y-validar.md"
+    },
+    {
+      "title": "Descargar PDF",
+      "sourceUrl": "https://developers.factus.com.co/notas-debito/descargar-pdf",
+      "path": "notas-debito\\descargar-pdf.md"
+    },
+    {
+      "title": "Descargar XML AttachedDocument",
+      "sourceUrl": "https://developers.factus.com.co/notas-debito/descargar-xml-attacheddocument",
+      "path": "notas-debito\\descargar-xml-attacheddocument.md"
+    },
+    {
+      "title": "Descargar XML",
+      "sourceUrl": "https://developers.factus.com.co/notas-debito/descargar-xml",
+      "path": "notas-debito\\descargar-xml.md"
+    },
+    {
+      "title": "Campos de la nota débito",
+      "sourceUrl": "https://developers.factus.com.co/notas-debito/descripcion-de-campos",
+      "path": "notas-debito\\descripcion-de-campos.md"
+    },
+    {
+      "title": "Eliminar no validada",
+      "sourceUrl": "https://developers.factus.com.co/notas-debito/eliminar",
+      "path": "notas-debito\\eliminar.md"
+    },
+    {
+      "title": "Enviar correo",
+      "sourceUrl": "https://developers.factus.com.co/notas-debito/enviar-correo",
+      "path": "notas-debito\\enviar-correo.md"
+    },
+    {
+      "title": "Obtener contenido de correo",
+      "sourceUrl": "https://developers.factus.com.co/notas-debito/obtener-contenido-de-correo",
+      "path": "notas-debito\\obtener-contenido-de-correo.md"
+    },
+    {
+      "title": "Listar",
+      "sourceUrl": "https://developers.factus.com.co/notas-debito/ver-filtrar",
+      "path": "notas-debito\\ver-filtrar.md"
+    },
+    {
+      "title": "Ver",
+      "sourceUrl": "https://developers.factus.com.co/notas-debito/ver",
+      "path": "notas-debito\\ver.md"
     },
     {
       "title": "Actualizar consecutivo",
@@ -394,7 +489,7 @@
       "path": "rangos-de-numeracion\\ejemplos\\crear-rango-para-notas-credito.md"
     },
     {
-      "title": "Eliminar Rango",
+      "title": "Eliminar",
       "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/eliminar-rango",
       "path": "rangos-de-numeracion\\eliminar-rango.md"
     },
@@ -404,7 +499,7 @@
       "path": "rangos-de-numeracion\\introduccion.md"
     },
     {
-      "title": "Listar rangos",
+      "title": "Listar",
       "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/obtener-rangos",
       "path": "rangos-de-numeracion\\obtener-rangos.md"
     },
@@ -414,7 +509,7 @@
       "path": "rangos-de-numeracion\\rangos-asociados-al-software.md"
     },
     {
-      "title": "Ver Rango",
+      "title": "Ver",
       "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/ver-rango",
       "path": "rangos-de-numeracion\\ver-rango.md"
     },

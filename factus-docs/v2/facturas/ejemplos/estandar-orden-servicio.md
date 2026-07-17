@@ -1,4 +1,4 @@
-# Factura con orden de servicio
+# Con orden de servicio
 
 Esta sección describe los compos que podría contener la factura.
 
