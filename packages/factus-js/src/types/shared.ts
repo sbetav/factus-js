@@ -155,8 +155,7 @@ export interface EstablishmentInput {
   address: string;
   phone_number: string;
   email: string;
-  /** Sent as a string (e.g. "980") per the Postman collection. */
-  municipality_id: string;
+  municipality_id: number | string;
 }
 
 // ---------------------------------------------------------------------------

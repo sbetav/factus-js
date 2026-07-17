@@ -1,29 +1,33 @@
 import type {
-    CreditNoteCorrectionCode,
-    CreditNoteOperationTypeCode,
-    CustomerTributeId,
-    IdentityDocumentTypeId,
-    OrganizationTypeId,
-    PaymentMethodCode,
-    ProductStandardId,
+  ChargeDiscountCode,
+  CreditNoteCorrectionCode,
+  CreditNoteOperationTypeCode,
+  CustomerTributeId,
+  IdentityDocumentTypeId,
+  OrganizationTypeId,
+  PaymentMethodCode,
+  ProductStandardId,
 } from "../constants";
+import type { WithholdingTax } from "./bill";
 import type { ApiResponse, PaginatedData } from "./common";
 import type { Customer } from "./customer";
 import type {
-    AllowanceChargeResponse,
-    CodeNameIdObject,
-    CodeNameObject,
-    CompanyInfo,
-    DeleteResponse,
-    DocumentWithholdingTax,
-    DownloadPdfData,
-    DownloadXmlData,
-    EmailContentData,
-    EstablishmentResponse,
-    ItemWithholdingTax,
-    NumberingRangeInfo,
-    SendEmailInput,
-    SendEmailResponse,
+  AllowanceChargeResponse,
+  BillingPeriod,
+  CodeNameIdObject,
+  CodeNameObject,
+  CompanyInfo,
+  DeleteResponse,
+  DocumentWithholdingTax,
+  DownloadPdfData,
+  DownloadXmlData,
+  EmailContentData,
+  EstablishmentInput,
+  EstablishmentResponse,
+  ItemWithholdingTax,
+  NumberingRangeInfo,
+  SendEmailInput,
+  SendEmailResponse,
 } from "./shared";
 
 // ---------------------------------------------------------------------------
@@ -34,11 +38,13 @@ export interface CreateCreditNoteInput {
   numbering_range_id?: number;
   correction_concept_code: CreditNoteCorrectionCode;
   customization_id: CreditNoteOperationTypeCode;
-  bill_id: number;
+  bill_id?: number;
   reference_code: string;
   observation?: string;
   payment_method_code?: PaymentMethodCode;
   send_email?: boolean;
+  billing_period?: BillingPeriod;
+  establishment?: EstablishmentInput;
   customer?: {
     identification_document_id: IdentityDocumentTypeId;
     identification: string;
@@ -54,6 +60,7 @@ export interface CreateCreditNoteInput {
     municipality_id?: number | string;
   };
   items: Array<{
+    note?: string;
     code_reference: string;
     name: string;
     quantity: number;
@@ -64,8 +71,10 @@ export interface CreateCreditNoteInput {
     standard_code_id: ProductStandardId;
     is_excluded: 0 | 1;
     tribute_id: number;
+    withholding_taxes?: Array<WithholdingTax>;
   }>;
   allowance_charges?: Array<{
+    concept_type: ChargeDiscountCode;
     is_surcharge: boolean;
     reason: string;
     base_amount: number | string;
