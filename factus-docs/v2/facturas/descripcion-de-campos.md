@@ -6,8 +6,8 @@ Esta sección describe los campos que puede contener la factura. Selecciona el t
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/facturas/descripcion-de-campos)
-* [Producción](https://developers.factus.com.co/facturas/descripcion-de-campos)
+* Sandbox
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v2/bills/validate
@@ -39,10 +39,10 @@ Para crear una factura debemos tener en cuenta los datos agrupados en 3 aspectos
 
 El cuerpo (Body) de la solicitud debe enviarse en formato JSON y debe incluir los siguientes parámetros:
 
-* [Estándar](https://developers.factus.com.co/facturas/descripcion-de-campos)
-* [Mandatos](https://developers.factus.com.co/facturas/descripcion-de-campos)
-* [Transporte](https://developers.factus.com.co/facturas/descripcion-de-campos)
-* [Sector Salud](https://developers.factus.com.co/facturas/descripcion-de-campos)
+* Estándar
+* Mandatos
+* Transporte
+* Sector Salud
 
 | Parámetros Factura Estándar |
 | --- |
@@ -213,9 +213,9 @@ El (\*) al lado del nombre de un campo indica que se pueden enviar múltiples ob
 
 [Sección titulada «Respuestas»](https://developers.factus.com.co/facturas/descripcion-de-campos#respuestas)
 
-* [Estandar](https://developers.factus.com.co/facturas/descripcion-de-campos)
-* [Mandatos](https://developers.factus.com.co/facturas/descripcion-de-campos)
-* [Transporte](https://developers.factus.com.co/facturas/descripcion-de-campos)
+* Estandar
+* Mandatos
+* Transporte
 
 Descripción respuesta Factura Estandar Campos Base
 

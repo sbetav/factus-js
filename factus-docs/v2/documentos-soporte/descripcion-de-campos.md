@@ -6,8 +6,8 @@ Esta sección describe los campos que puede contener el documento soporte.
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/documentos-soporte/descripcion-de-campos)
-* [Producción](https://developers.factus.com.co/documentos-soporte/descripcion-de-campos)
+* Sandbox
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v2/support-documents/validate

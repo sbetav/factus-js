@@ -6,8 +6,8 @@ Esta sección describe cómo crear un rango de numeración para facturación.
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-facturacion)
-* [Producción](https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-facturacion)
+* Sandbox
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v2/numbering-ranges
@@ -56,7 +56,7 @@ Número actual del consecutivo. El número del siguiente factura electrónica qu
 
 [Sección titulada «Ejemplo de Solicitud»](https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-facturacion#ejemplo-de-solicitud)
 
-* [Factura de venta](https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-facturacion)
+* Factura de venta
 
 ```
 { "document": "21", "prefix": "SETP", "resolution_number": "18760000009", "current": 984000000}

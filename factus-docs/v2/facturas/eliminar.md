@@ -8,8 +8,8 @@ Se suele eliminar una factura cuando contiene errores de validación notificados
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/facturas/eliminar)
-* [Producción](https://developers.factus.com.co/facturas/eliminar)
+* Sandbox
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v2/bills/destroy/reference/:reference_code

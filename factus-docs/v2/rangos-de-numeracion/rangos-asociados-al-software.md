@@ -6,8 +6,8 @@ El endpoint **Rangos Asociados al Software** permite obtener los rangos de numer
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/rangos-de-numeracion/rangos-asociados-al-software)
-* [Producción](https://developers.factus.com.co/rangos-de-numeracion/rangos-asociados-al-software)
+* Sandbox
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v2/numbering-ranges/dian

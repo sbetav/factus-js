@@ -4,8 +4,8 @@
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/rangos-de-numeracion/ver-rango)
-* [Producción](https://developers.factus.com.co/rangos-de-numeracion/ver-rango)
+* Sandbox
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v2/numbering-ranges/:numbering_range_id

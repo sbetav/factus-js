@@ -6,8 +6,8 @@ Este endpoint permite actualizar el token de acceso mediante el uso de un **refr
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/autenticacion/refresh-token)
-* [Producción](https://developers.factus.com.co/autenticacion/refresh-token)
+* Sandbox
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/oauth/token
@@ -53,9 +53,9 @@ El refresh token previamente generado |
 
 A continuación, se muestra un ejemplo de cómo enviar una solicitud al endpoint:
 
-* [Laravel php](https://developers.factus.com.co/autenticacion/refresh-token)
-* [Node js](https://developers.factus.com.co/autenticacion/refresh-token)
-* [Curl](https://developers.factus.com.co/autenticacion/refresh-token)
+* Laravel php
+* Node js
+* Curl
 
 Ventana de terminal
 

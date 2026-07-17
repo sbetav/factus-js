@@ -6,8 +6,8 @@ Este endpoint `devuelve` una lista de facturas que cumplen con los criterios de 
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/facturas/listar-y-filtrar)
-* [Producción](https://developers.factus.com.co/facturas/listar-y-filtrar)
+* Sandbox
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v2/bills

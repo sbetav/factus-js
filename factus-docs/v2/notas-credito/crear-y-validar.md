@@ -6,8 +6,8 @@ Este endpoint permite crear una nota crédito y validarla.
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/notas-credito/crear-y-validar)
-* [Producción](https://developers.factus.com.co/notas-credito/crear-y-validar)
+* Sandbox
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v2/credit-notes/validate
@@ -186,7 +186,7 @@ Valor del descuento o recargo aplicado (máximo dos decimales). |
 
 Aquí tienes un ejemplo de cómo debería quedar el cuerpo de la solicitud en formato JSON:
 
-* [Nota crédito](https://developers.factus.com.co/notas-credito/crear-y-validar)
+* Nota crédito
 
 ```
 { "reference_code": "NOTA-2026-0015", "correction_concept_code": "2", "customization_id": "20", "bill_number": "SETP990002519", "numbering_range_id": 1776, "observation": "Nota crédito, ahora puedes revisar la factura y buscar el campo related_notes.credit_notes", "payment_details": [ { "payment_form": "1", "payment_method_code": "42", "reference_code": "pago-001", "amount": "83300" } ], "customer": { "identification_document_code": "31", "identification": "123456789", "company": "Alan company name", "trade_name": "Alan trade name", "address": "calle 1 # 1-1", "email": "alan.company@email.com", "phone": "1234567890", "legal_organization_code": "1", "tribute_code": "ZZ", "country_code": "CO", "municipality_code": "68679" }, "items": [ { "code_reference": "PROD-000A", "name": "Producto A", "quantity": "1.00", "discount_rate": "0.00", "price": "10000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] }, { "code_reference": "PROD-000B", "name": "Producto B", "quantity": "3.00", "discount_rate": "0.00", "price": "20000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] } ]}

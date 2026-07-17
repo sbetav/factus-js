@@ -6,8 +6,8 @@ Este endpoint permite actualizar el consecutivo de un rango de numeración en es
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/rangos-de-numeracion/actualizar-consecutivo)
-* [Producción](https://developers.factus.com.co/rangos-de-numeracion/actualizar-consecutivo)
+* Sandbox
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v2/numbering-ranges/:numbering_range_id/current

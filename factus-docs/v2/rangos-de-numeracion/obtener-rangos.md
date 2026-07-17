@@ -8,8 +8,8 @@ El endpoint **Rangos de Numeración** permite obtener los rangos de numeración 
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/rangos-de-numeracion/obtener-rangos)
-* [Producción](https://developers.factus.com.co/rangos-de-numeracion/obtener-rangos)
+* Sandbox
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v2/numbering-ranges?filter[id]&filter[document]&filter[resolution_number]&filter[technical_key]&filter[is_active]

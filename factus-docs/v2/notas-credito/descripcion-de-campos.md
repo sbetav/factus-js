@@ -6,8 +6,8 @@ Esta sección describe los campos que puede contener la nota crédito.
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/notas-credito/descripcion-de-campos)
-* [Producción](https://developers.factus.com.co/notas-credito/descripcion-de-campos)
+* Sandbox
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v2/credit-notes/validate

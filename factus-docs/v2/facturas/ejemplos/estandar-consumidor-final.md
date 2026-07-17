@@ -6,8 +6,8 @@ Esta sección describe los compos que podría contener la factura.
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/facturas/ejemplos/estandar-consumidor-final)
-* [Producción](https://developers.factus.com.co/facturas/ejemplos/estandar-consumidor-final)
+* Sandbox
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v2/bills/validate
@@ -194,7 +194,7 @@ Valor del descuento o recargo aplicado (máximo dos decimales). |
 
 [Sección titulada «Ejemplo de Solicitud»](https://developers.factus.com.co/facturas/ejemplos/estandar-consumidor-final#ejemplo-de-solicitud)
 
-* [Factura de venta](https://developers.factus.com.co/facturas/ejemplos/estandar-consumidor-final)
+* Factura de venta
 
 ```
 { "reference_code": "FACT-2026-0129", "document": "01", "numbering_range_id": 389, "operation_type": "10", "observation": "Observación de factura con anticipo", "payment_details": [ { "payment_form": "1", "payment_method_code": "10", "reference_code": "pago-001", "amount": "83300" } ], "customer": { "identification_document_code": "13", "identification": "22222222222", "names": "Consumidor Final" }, "items": [ { "code_reference": "PROD-000A", "name": "Producto A", "quantity": "1.00", "discount_rate": "0.00", "price": "10000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] }, { "code_reference": "PROD-000B", "name": "Producto B", "quantity": "3.00", "discount_rate": "0.00", "price": "20000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] } ]}

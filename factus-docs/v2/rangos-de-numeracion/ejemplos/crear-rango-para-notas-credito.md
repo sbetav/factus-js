@@ -6,8 +6,8 @@ Esta sección describe cómo crear un rango de numeración para notas crédito.
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-notas-credito)
-* [Producción](https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-notas-credito)
+* Sandbox
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v2/numbering-ranges
@@ -51,7 +51,7 @@ Número actual del consecutivo. El número del siguiente nota crédito que se ge
 
 [Sección titulada «Ejemplo de Solicitud»](https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-notas-credito#ejemplo-de-solicitud)
 
-* [Factura de venta](https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-notas-credito)
+* Factura de venta
 
 ```
 { "document": "22", "prefix": "NC", "current": 1}

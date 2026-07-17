@@ -6,8 +6,8 @@ Este endpoint `devuelve` una nota crédito específica pasando el **número de l
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/notas-credito/ver)
-* [Producción](https://developers.factus.com.co/notas-credito/ver)
+* Sandbox
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v2/credit-notes/:number

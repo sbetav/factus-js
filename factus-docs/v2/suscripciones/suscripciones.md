@@ -11,8 +11,8 @@ Este endpoint permite consultar todas las suscripciones activas. Devuelve inform
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/suscripciones/suscripciones)
-* [Producción](https://developers.factus.com.co/suscripciones/suscripciones)
+* Sandbox
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v2/subscriptions

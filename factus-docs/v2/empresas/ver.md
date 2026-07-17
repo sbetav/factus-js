@@ -6,8 +6,8 @@ Este endpoint permite ver la Información de la empresa del usuario correspondie
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/empresas/ver)
-* [Producción](https://developers.factus.com.co/empresas/ver)
+* Sandbox
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v2/companies

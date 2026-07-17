@@ -6,8 +6,8 @@ Este endpoint `devuelve` un documento soporte pasando el **número del mismo** c
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/documentos-soporte/ver)
-* [Producción](https://developers.factus.com.co/documentos-soporte/ver)
+* Sandbox
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v2/support-documents/:number

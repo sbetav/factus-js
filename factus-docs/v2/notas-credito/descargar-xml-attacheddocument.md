@@ -7,8 +7,8 @@ Para utilizar el archivo, deberás decodificar el contenido de la propiedad `xml
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/notas-credito/descargar-xml-attacheddocument)
-* [Producción](https://developers.factus.com.co/notas-credito/descargar-xml-attacheddocument)
+* Sandbox
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v2/credit-notes/:number/download-attached-document-xml

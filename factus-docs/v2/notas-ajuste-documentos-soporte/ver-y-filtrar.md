@@ -6,8 +6,8 @@ Esta sección explica cómo utilizar este endpoint para buscar y filtrar las _**
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/notas-ajuste-documentos-soporte/ver-y-filtrar)
-* [Producción](https://developers.factus.com.co/notas-ajuste-documentos-soporte/ver-y-filtrar)
+* Sandbox
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v2/adjustment-notes?filter[identification]&filter[names]&filter[number]&filter[prefix]&filter[reference_code]&filter[status]
@@ -52,7 +52,7 @@ Filtrar por página. |
 
 [Sección titulada «Respuesta del Endpoint»](https://developers.factus.com.co/notas-ajuste-documentos-soporte/ver-y-filtrar#respuesta-del-endpoint)
 
-* [Status 200](https://developers.factus.com.co/notas-ajuste-documentos-soporte/ver-y-filtrar)
+* Status 200
 
 ```
 { "status": "OK", "message": "Solicitud exitosa", "data": { "data": [ { "api_client_name": "test-oscar", "number": "NA1", "reference_code": "2fca4b6c-638c-4bd9-bbb2-7981f99a05ba", "provider": { "identification_document": { "code": "31", "name": "NIT" }, "identification": "2343543", "dv": "7", "trade_name": null, "names": "Pepito Perez", "address": "calle 4", "email": null, "phone": null, "legal_organization": { "code": "2", "name": "Persona Natural" }, "municipality": { "code": "68679", "name": "San Gil", "department": { "code": "68", "name": "Santander" } } }, "total": "100000.00", "errors": [ "Regla: NSAX04, Notificación: No se encuentra el grupo TaxSubtotal", "Regla: NSAJ44b, Notificación: Nit o Documento de Identificación informado No corresponde al registrado en el RUT con respecto a la razón social o nombre comercial suministrado.", "Regla: NSAJ43b, Notificación: Nombre informado No corresponde al registrado en el RUT con respecto al Nit suminstrado." ], "send_email": false, "is_validated": true, "validated_at": "06-05-2026 11:44:12 AM", "created_at": "06-05-2026 11:44:11 AM" } ], "pagination": { "total": 1, "per_page": 10, "current_page": 1, "last_page": 1, "from": 1, "to": 1, "links": [ { "url": null, "label": "&laquo; Anterior", "active": false }, { "url": "https://api-sandbox.factus.com.co/v2/adjustment-notes?page=1", "label": 1, "active": true, "page": 1 }, { "url": null, "label": "Siguiente &raquo;", "active": false, "page": 2 } ] } }}

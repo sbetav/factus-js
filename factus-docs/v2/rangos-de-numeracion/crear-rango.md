@@ -6,8 +6,8 @@ Este endpoint permite crear un rango de numeración en específico. Es útil par
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/rangos-de-numeracion/crear-rango)
-* [Producción](https://developers.factus.com.co/rangos-de-numeracion/crear-rango)
+* Sandbox
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v2/numbering-ranges
