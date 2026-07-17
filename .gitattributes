@@ -1,0 +1,2 @@
+# Keep mirrored Factus docs as LF on every OS so sync diffs stay content-only.
+factus-docs/** text eol=lf

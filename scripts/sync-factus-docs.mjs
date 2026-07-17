@@ -77,7 +77,6 @@ const run = async () => {
 
   log(`Starting ${config.target.outputName} sync from ${config.base.href}`);
   await rm(config.mirrorDir, { recursive: true, force: true });
-  await rm(config.outputDir, { recursive: true, force: true });
   await mkdir(config.mirrorDir, { recursive: true });
   await mkdir(config.outputDir, { recursive: true });
 
@@ -91,6 +90,7 @@ const run = async () => {
   log(`Transforming ${htmlFiles.length} HTML files into Markdown`);
   const manifest = [];
   const writtenPaths = new Set();
+  let updatedFiles = 0;
 
   for (const filePath of htmlFiles) {
     const html = await readFile(filePath, "utf8");
@@ -108,8 +108,9 @@ const run = async () => {
     if (writtenPaths.has(outputPath)) continue;
     writtenPaths.add(outputPath);
 
-    await mkdir(path.dirname(outputPath), { recursive: true });
-    await writeFile(outputPath, `${markdown.trim()}\n`, "utf8");
+    if (await writeTextFileIfChanged(outputPath, `${markdown.trim()}\n`)) {
+      updatedFiles += 1;
+    }
 
     manifest.push({
       title: findTitle(html, sourceUrl),
@@ -119,10 +120,14 @@ const run = async () => {
   }
 
   manifest.sort((a, b) => a.path.localeCompare(b.path));
-  await writeManifestFiles(manifest, config);
+  updatedFiles += await writeManifestFiles(manifest, config, writtenPaths);
+  const removedFiles = await removeStaleOutputFiles(
+    config.outputDir,
+    writtenPaths,
+  );
 
   log(
-    `Done. Generated ${manifest.length} Markdown files at ${relativePathFromRoot(config.outputDir)}`,
+    `Done. Generated ${manifest.length} Markdown files at ${relativePathFromRoot(config.outputDir)} (${updatedFiles} updated, ${removedFiles} removed)`,
   );
 };
 
@@ -674,7 +679,7 @@ const hasExtension = (filePath, extension) => {
   return filePath.toLowerCase().endsWith(extension.toLowerCase());
 };
 
-const writeManifestFiles = async (entries, config) => {
+const writeManifestFiles = async (entries, config, writtenPaths) => {
   const generatedAt = new Date().toISOString();
   const indexLines = [
     "# External Factus Docs Index",
@@ -693,11 +698,8 @@ const writeManifestFiles = async (entries, config) => {
     indexLines.push("");
   }
 
-  await writeFile(
-    path.join(config.outputDir, DOCS_INDEX_FILE_NAME),
-    `${indexLines.join("\n")}\n`,
-    "utf8",
-  );
+  const indexPath = path.join(config.outputDir, DOCS_INDEX_FILE_NAME);
+  writtenPaths.add(indexPath);
 
   const manifest = {
     generatedAt,
@@ -705,12 +707,79 @@ const writeManifestFiles = async (entries, config) => {
     totalFiles: entries.length,
     entries,
   };
+  const manifestPath = path.join(config.outputDir, "manifest.json");
+  writtenPaths.add(manifestPath);
 
-  await writeFile(
-    path.join(config.outputDir, "manifest.json"),
-    `${JSON.stringify(manifest, null, 2)}\n`,
-    "utf8",
-  );
+  let updatedFiles = 0;
+  if (await writeTextFileIfChanged(indexPath, `${indexLines.join("\n")}\n`)) {
+    updatedFiles += 1;
+  }
+  if (
+    await writeTextFileIfChanged(
+      manifestPath,
+      `${JSON.stringify(manifest, null, 2)}\n`,
+    )
+  ) {
+    updatedFiles += 1;
+  }
+
+  return updatedFiles;
+};
+
+const normalizeNewlines = (value) =>
+  value.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+
+const writeTextFileIfChanged = async (filePath, content) => {
+  // Always write LF. Skip untouched files so mtime churn doesn't mark them dirty in git.
+  const next = normalizeNewlines(content);
+
+  try {
+    const existing = await readFile(filePath, "utf8");
+    if (normalizeNewlines(existing) === next) {
+      return false;
+    }
+  } catch {
+    // File does not exist yet.
+  }
+
+  await mkdir(path.dirname(filePath), { recursive: true });
+  await writeFile(filePath, next, "utf8");
+  return true;
+};
+
+const removeStaleOutputFiles = async (dir, keepPaths) => {
+  const existingFiles = await collectTextOutputFiles(dir);
+  let removed = 0;
+
+  for (const filePath of existingFiles) {
+    if (keepPaths.has(filePath)) continue;
+    await rm(filePath, { force: true });
+    removed += 1;
+  }
+
+  return removed;
+};
+
+const collectTextOutputFiles = async (dir) => {
+  const files = [];
+  const entries = await readdir(dir, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      files.push(...(await collectTextOutputFiles(fullPath)));
+      continue;
+    }
+
+    if (
+      entry.isFile() &&
+      (hasExtension(fullPath, ".md") || hasExtension(fullPath, ".json"))
+    ) {
+      files.push(fullPath);
+    }
+  }
+
+  return files;
 };
 
 const relativePathFromRoot = (absolutePath) => {
