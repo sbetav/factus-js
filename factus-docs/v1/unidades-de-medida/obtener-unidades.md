@@ -8,11 +8,16 @@ Busca unidades de medida utilizando un parámetro opcional (`name`) para filtrar
 
 #### **Endpoint**
 
-* Pruebas
-* Producción
+**Pruebas**
 
 ```
 https://api-sandbox.factus.com.co/v1/measurement-units
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v1/measurement-units
 ```
 
 ### **Encabezados de la Solicitud**
@@ -53,7 +58,7 @@ La respuesta contiene los siguientes valores:
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/v1/unidades-de-medida/obtener-unidades#ejemplo-de-respuesta)
 
-* status 200
+**status 200**
 
 ```
 { "status": "OK", "message": "Solicitud exitosa", "data": [ { "id": 70, "code": "94", "name": "unidad" }, { "id": 414, "code": "KGM", "name": "kilogramo" }, { "id": 449, "code": "LBR", "name": "libra" }, { "id": 512, "code": "MTR", "name": "metro" }, { "id": 874, "code": "GLL", "name": "galón" } ]}

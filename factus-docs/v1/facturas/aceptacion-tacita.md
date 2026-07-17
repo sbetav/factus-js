@@ -8,11 +8,16 @@ Este evento permite emitir el evento de aceptación tacita. Este evento solo es 
 
 #### **Endpoint**
 
-* Pruebas
-* Producción
+**Pruebas**
 
 ```
 https://api-sandbox.factus.com.co/v1/bills/radian/events/update/:number/:event_type
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v1/bills/radian/events/update/:number/:event_type
 ```
 
 ### **Encabezados de la Solicitud**
@@ -60,7 +65,7 @@ El cuerpo (Body) de la solicitud debe enviarse en formato JSON y debe incluir lo
 
 [Sección titulada «Ejemplo de solicitud»](https://developers.factus.com.co/v1/facturas/aceptacion-tacita#ejemplo-de-solicitud)
 
-* example
+**example**
 
 ```
 { "identification_document_code": "13", "identification": "12345667", "dv": "", "first_name": "Pepito", "last_name": "Perez", "job_title": "Desarrollador de software", "organization_department": "Sistemas"}
@@ -70,4 +75,4 @@ El cuerpo (Body) de la solicitud debe enviarse en formato JSON y debe incluir lo
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/v1/facturas/aceptacion-tacita#ejemplo-de-respuesta)
 
-* status 200
+**status 200**

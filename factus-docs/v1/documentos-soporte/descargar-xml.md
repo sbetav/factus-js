@@ -9,11 +9,16 @@ Para utilizar el archivo, deberás decodificar el contenido de la propiedad `pdf
 
 #### **Endpoint**
 
-* Pruebas
-* Producción
+**Pruebas**
 
 ```
 https://api-sandbox.factus.com.co/v1/support-documents/download-xml/:number
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v1/support-documents/download-xml/:number
 ```
 
 ### **Encabezados de la Solicitud**
@@ -40,7 +45,7 @@ Puede encontrar el número del documento soporte, debe ver la respuesta de la [c
 
 * * *
 
-* status 200
+**status 200**
 
 ```
 { "status": "OK", "message": "Solicitud exitosa", "data": { "file_name": "ds09017242540002500000006", "xml_base_64_encoded": "[TRIMMED_BASE64_21068_CHARS]" }}

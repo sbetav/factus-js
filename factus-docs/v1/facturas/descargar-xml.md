@@ -9,11 +9,16 @@ Para utilizar el archivo, deberás decodificar el contenido de la propiedad `pdf
 
 #### **Endpoint**
 
-* Pruebas
-* Producción
+**Pruebas**
 
 ```
 https://api-sandbox.factus.com.co/v1/bills/download-xml/:number
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v1/bills/download-xml/:number
 ```
 
 ### **Encabezados de la Solicitud**
@@ -38,7 +43,7 @@ Para realizar la solicitud es necesario incluir los siguientes encabezados:
 
 * * *
 
-* status 200
+**status 200**
 
 ```
 { "status": "OK", "message": "Solicitud exitosa", "data": { "file_name": "fv09008257590002400000241", "xml_base_64_encoded": "[TRIMMED_BASE64_20808_CHARS]" }}

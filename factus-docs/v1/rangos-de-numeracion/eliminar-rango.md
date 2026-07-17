@@ -8,11 +8,16 @@ Este endpoint permite eliminar un rango de numeración en específico. Es útil 
 
 #### **Endpoint**
 
-* Pruebas
-* Producción
+**Pruebas**
 
 ```
 https://api-sandbox.factus.com.co/v1/numbering-ranges/:numbering_range_id
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v1/numbering-ranges/:numbering_range_id
 ```
 
 ### **Encabezados de la Solicitud**
@@ -41,7 +46,7 @@ Para realizar la solicitud es necesario incluir los siguientes encabezados:
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/v1/rangos-de-numeracion/eliminar-rango#ejemplo-de-respuesta)
 
-* status 200
+**status 200**
 
 ```
 { "status": "OK", "message": "Rango de numeración eliminado con éxito"}

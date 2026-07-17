@@ -8,11 +8,16 @@ Este endpoint envía por correo electrónico la factura en un archivo ZIP que in
 
 #### **Endpoint**
 
-* Pruebas
-* Producción
+**Pruebas**
 
 ```
 https://api-sandbox.factus.com.co/v1/bills/send-email/:number
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v1/bills/send-email/:number
 ```
 
 ### **Encabezados de la Solicitud**
@@ -58,7 +63,7 @@ El cuerpo (Body) de la solicitud debe enviarse en formato JSON y debe incluir lo
 
 Aquí tienes un ejemplo de cómo debería quedar el cuerpo de la solicitud en formato JSON:
 
-* 200 - Envío de correo
+**200 - Envío de correo**
 
 ```
 { "email": "alanturing@enigmasas.com"}
@@ -68,7 +73,7 @@ Aquí tienes un ejemplo de cómo debería quedar el cuerpo de la solicitud en fo
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/v1/facturas/enviar-correo#ejemplo-de-respuesta)
 
-* status 200
+**status 200**
 
 ```
 { "status": "OK", "message": "Factura enviada al cliente con éxito"}

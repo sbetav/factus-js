@@ -9,11 +9,16 @@ Para utilizar el archivo, deberás decodificar el contenido de la propiedad `pdf
 
 #### **Endpoint**
 
-* Pruebas
-* Producción
+**Pruebas**
 
 ```
 https://api-sandbox.factus.com.co/v1/credit-notes/download-pdf/:number
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v1/credit-notes/download-pdf/:number
 ```
 
 ### **Encabezados de la Solicitud**
@@ -42,10 +47,20 @@ Para realizar la solicitud es necesario incluir los siguientes encabezados:
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/v1/notas-credito/descargar-pdf#ejemplo-de-respuesta)
 
-* status 200
-* status 404
-* status 409
+**status 200**
 
 ```
 { "status": "OK", "message": "Solicitud exitosa", "data": { "file_name": "nc09008257590002400000072", "pdf_base_64_encoded": "[TRIMMED_BASE64_87000_CHARS]" }}
+```
+
+**status 404**
+
+```
+{ "status": "Not Found", "message": "No se encontró el documento NC7222"}
+```
+
+**status 409**
+
+```
+{ "status": "Conflict", "message": "El documento NC82 no ha sido validado"}
 ```

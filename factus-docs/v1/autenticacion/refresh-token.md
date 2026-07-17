@@ -8,10 +8,13 @@ Este contenido es para V1. Cambia a la [versión más reciente](https://develope
 
 [Sección titulada «Endpoint»](https://developers.factus.com.co/v1/autenticacion/refresh-token#endpoint)
 
-* Pruebas
-* Producción
+**Pruebas**
 
 `https://api-sandbox.factus.com.co/oauth/token`
+
+**Producción**
+
+`https://api.factus.com.co/oauth/token`
 
 #### **Descripción**
 
@@ -55,9 +58,7 @@ La solicitud debe enviarse en formato `form-data`. A continuación se detallan l
 
 A continuación, se muestra un ejemplo de cómo enviar una solicitud al endpoint:
 
-* Laravel php
-* Node js
-* Curl
+**Laravel php**
 
 Ventana de terminal
 
@@ -75,6 +76,26 @@ try { // Realizar la solicitud POST $response = $client->post($url, $data);
 // Aquí puedes hacer lo que necesites con el nuevo access token return response()->json([ 'access_token' => $accessToken, 'expires_in' => $expiresIn, ]); }
 // Si no se encuentra el token, devolver error return response()->json([ 'error' => 'No se pudo obtener el token', ], 400);
 } catch (RequestException $e) { // Manejar los errores de la solicitud (ej. conexión fallida) return response()->json([ 'error' => 'Error en la solicitud', 'message' => $e->getMessage(), ], 500); } }
+```
+
+**Node js**
+
+```
+const axios = require('axios');
+async function refreshToken() { const url = 'https://api-sandbox.factus.com.co/oauth/token';
+// Parámetros necesarios para la solicitud const data = new URLSearchParams(); data.append('grant_type', 'refresh_token'); data.append('client_id', 'tu client id'); data.append('client_secret', 'tu client secret'); data.append('refresh_token', 'tu refresh token');
+try { // Realizar la solicitud POST const response = await axios.post(url, data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded', }, });
+// Verificar que la respuesta contiene el access_token const { access_token, expires_in } = response.data;
+if (access_token) { // Mostrar los tokens (o devolverlos como respuesta) console.log('Access Token:', access_token); console.log('Expires In:', expires_in); return { access_token: access_token, expires_in: expires_in }; } else { throw new Error('No se pudo obtener el access_token'); } } catch (error) { // Manejo de errores en caso de que falle la solicitud console.error('Error al obtener el token:', error.response ? error.response.data : error.message); return { error: 'Error al obtener el token', message: error.response ? error.response.data : error.message, }; } }
+// Llamar a la función refreshToken();
+```
+
+**Curl**
+
+Ventana de terminal
+
+```
+curl -X POST https://api-sandbox.factus.com.co/oauth/token \ -H "Accept: application/json" \ -d "grant_type=refresh_token" \ -d "client_id=tu client id" \ -d "client_secret=tu client secret" \ -d "refresh_token=tu refresh token"
 ```
 
 #### Response Success

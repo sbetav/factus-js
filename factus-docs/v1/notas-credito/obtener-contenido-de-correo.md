@@ -8,11 +8,16 @@ Este endpoint permite obtener el asunto y el zip adjunto (en formato Base64) que
 
 #### **Endpoint**
 
-* Pruebas
-* Producción
+**Pruebas**
 
 ```
 https://api-sandbox.factus.com.co/v1/credit-notes/:number/email-content
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v1/credit-notes/:number/email-content
 ```
 
 ### **Encabezados de la Solicitud**
@@ -41,7 +46,7 @@ Para realizar la solicitud es necesario incluir los siguientes encabezados:
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/v1/notas-credito/obtener-contenido-de-correo#ejemplo-de-respuesta)
 
-* status 200
+**status 200**
 
 ```
 { "status": "OK", "message": "Solicitud exitosa", "data": { "subject": "900825759;HALLTEC S.A.S.;NC150;91;HALLTEC S.A.S.", "attached_document": "[TRIMMED_BASE64_65232_CHARS]" }}
