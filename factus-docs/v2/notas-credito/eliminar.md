@@ -8,8 +8,8 @@ Se suele eliminar una nota crédito cuando contiene errores de validación notif
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/notas-credito/eliminar#tab-panel-64)
-* [Producción](https://developers.factus.com.co/notas-credito/eliminar#tab-panel-65)
+* [Sandbox](https://developers.factus.com.co/notas-credito/eliminar)
+* [Producción](https://developers.factus.com.co/notas-credito/eliminar)
 
 ```
 https://api-sandbox.factus.com.co/v2/credit-notes/reference/:reference_code

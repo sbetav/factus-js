@@ -6,8 +6,8 @@ Esta sección describe los campos que podría contener la factura electrónica d
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/facturas/tipos-de-factura/ss-sin-aporte#tab-panel-129)
-* [Producción](https://developers.factus.com.co/facturas/tipos-de-factura/ss-sin-aporte#tab-panel-130)
+* [Sandbox](https://developers.factus.com.co/facturas/tipos-de-factura/ss-sin-aporte)
+* [Producción](https://developers.factus.com.co/facturas/tipos-de-factura/ss-sin-aporte)
 
 ```
 https://api-sandbox.factus.com.co/v2/bills/validate
@@ -159,6 +159,8 @@ Dirección del cliente. |
 Correo electrónico del cliente. |
 | **`customer.phone`** `string` `opcional`
 Número de teléfono del cliente. |
+| **`customer.country_code`** `string` `opcional`
+Código del país del cliente. [Países disponibles](https://developers.factus.com.co/tablas-de-referencia/countries) |
 | **`customer.municipality_code`** `string` `opcional`
 Código que corresponda al municipio donde vive el cliente. Se debe enviar el código del municipio únicamente si el municipio es de Colombia; si es extranjero, el valor del campo no aplica. [Municipios disponibles.](https://developers.factus.com.co/tablas-de-referencia/municipios) |
 | **`items`** `array`
@@ -226,7 +228,7 @@ Valor del descuento o recargo aplicado (máximo dos decimales). |
 
 [Sección titulada «Ejemplo de Solicitud»](https://developers.factus.com.co/facturas/tipos-de-factura/ss-sin-aporte#ejemplo-de-solicitud)
 
-* [SS Sin Aporte](https://developers.factus.com.co/facturas/tipos-de-factura/ss-sin-aporte#tab-panel-131)
+* [SS Sin Aporte](https://developers.factus.com.co/facturas/tipos-de-factura/ss-sin-aporte)
 
 ```
 { "reference_code": "FACT-2026-0128", "document": "01", "numbering_range_id": 4, "operation_type": "SS-SinAporte", "send_email": false, "billing_period": { "start_date": "2025-01-01", "start_time": "05:11:00", "end_date": "2025-01-02", "end_time": "11:59:59" }, "payment_details": [ { "payment_form": 1, "payment_method_code": "10", "amount": "10000" } ], "cash_rounding_amount": "0.00", "health": { "provider_code": "1920304050", "payment_method_code": "04", "coverage_code": "10", "contract_number": "CONT1230", "policy_number": "" }, "prepayment_details": [ { "reference_code": "1", "received_date": "2025-08-01", "concept_code": "01", "amount": "5000.00", "note": "texto libre para notas" } ], "customer": { "identification_document_code": "13", "identification": "123456789", "names": "Alan Turing", "address": "calle 1 # 1-1", "email": "alan.company@email.com", "phone": "1234567890", "legal_organization_code": "2", "tribute_code": "ZZ", "municipality_code": "68679" }, "items": [ { "code_reference": "SRV-000A", "name": "XXXXXXXXXX", "quantity": "1.00", "discount_rate": "0.00", "price": "10000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "is_excluded": true } ] } ]}

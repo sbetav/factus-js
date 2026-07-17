@@ -8,8 +8,8 @@ Este endpoint permite `cambiar` la representación gráfica por defecto de la fa
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/facturas/representacion-grafica#tab-panel-363)
-* [Producción](https://developers.factus.com.co/facturas/representacion-grafica#tab-panel-364)
+* [Sandbox](https://developers.factus.com.co/facturas/representacion-grafica)
+* [Producción](https://developers.factus.com.co/facturas/representacion-grafica)
 
 ```
 https://api-sandbox.factus.com.co/v2/bills/:number/send-email
@@ -55,7 +55,7 @@ PDF, enviado como cadena codificada en Base64 |
 
 Aquí tienes un ejemplo de cómo debería quedar el cuerpo de la solicitud en formato JSON:
 
-* [200 - Envío de correo](https://developers.factus.com.co/facturas/representacion-grafica#tab-panel-365)
+* [200 - Envío de correo](https://developers.factus.com.co/facturas/representacion-grafica)
 
 ```
 { "email": "alanturing@enigmasas.com", "pdf_base_64_encoded": "[TRIMMED_BASE64_60784_CHARS]"}

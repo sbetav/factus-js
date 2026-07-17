@@ -6,8 +6,8 @@ Este endpoint permite actualizar el logo de la empresa del usuario correspondien
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/empresas/actualizar-imagen#tab-panel-10)
-* [Producción](https://developers.factus.com.co/empresas/actualizar-imagen#tab-panel-11)
+* [Sandbox](https://developers.factus.com.co/empresas/actualizar-imagen)
+* [Producción](https://developers.factus.com.co/empresas/actualizar-imagen)
 
 ```
 https://api-sandbox.factus.com.co/v2/companies/logo

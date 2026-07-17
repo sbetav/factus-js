@@ -6,8 +6,8 @@ Esta sección describe los compos que podría contener la factura.
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/facturas/ejemplos/estandar-autorrentenciones#tab-panel-98)
-* [Producción](https://developers.factus.com.co/facturas/ejemplos/estandar-autorrentenciones#tab-panel-99)
+* [Sandbox](https://developers.factus.com.co/facturas/ejemplos/estandar-autorrentenciones)
+* [Producción](https://developers.factus.com.co/facturas/ejemplos/estandar-autorrentenciones)
 
 ```
 https://api-sandbox.factus.com.co/v2/bills/validate
@@ -135,6 +135,8 @@ Dirección del cliente. |
 Correo electrónico del cliente. |
 | **`customer.phone`** `string` `opcional`
 Número de teléfono del cliente. |
+| **`customer.country_code`** `string` `opcional`
+Código del país del cliente. [Países disponibles](https://developers.factus.com.co/tablas-de-referencia/countries) |
 | **`customer.municipality_code`** `string` `opcional`
 Código que corresponda al municipio donde vive el cliente. Se debe enviar el código del municipio únicamente si el municipio es de Colombia; si es extranjero, el valor del campo no aplica. [Municipios disponibles.](https://developers.factus.com.co/tablas-de-referencia/municipios) |
 | **`items`** `array`
@@ -192,7 +194,7 @@ Valor del descuento o recargo aplicado (máximo dos decimales). |
 
 [Sección titulada «Ejemplo de Solicitud»](https://developers.factus.com.co/facturas/ejemplos/estandar-autorrentenciones#ejemplo-de-solicitud)
 
-* [Factura de venta](https://developers.factus.com.co/facturas/ejemplos/estandar-autorrentenciones#tab-panel-100)
+* [Factura de venta](https://developers.factus.com.co/facturas/ejemplos/estandar-autorrentenciones)
 
 ```
 { "reference_code": "FACT-2026-0131", "document": "01", "numbering_range_id": 389, "operation_type": "10", "observation": "Observación de factura con autorretenciones", "payment_details": [ { "payment_form": "1", "payment_method_code": "47", "reference_code": "pago-001", "amount": "1190000" } ], "cash_rounding_amount": "0.00", "customer": { "identification_document_code": "31", "identification": "123456789", "company": "Alan company name", "trade_name": "Alan trade name", "address": "calle 1 # 1-1", "email": "alan.company@email.com", "phone": "1234567890", "legal_organization_code": "1", "tribute_code": "ZZ", "municipality_code": "68679" }, "items": [ { "code_reference": "PROD-000A", "name": "Producto A", "quantity": "1.00", "discount_rate": "0.00", "price": "1000000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ], "withholding_taxes": [ { "code": "05", "rate": "2.00" }, { "code": "06", "rate": "4.00" } ] } ]}

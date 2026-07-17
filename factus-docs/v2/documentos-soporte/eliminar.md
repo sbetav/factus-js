@@ -8,8 +8,8 @@ Este endpoint **elimina** un documento soporte usando el código de referencia c
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/documentos-soporte/eliminar#tab-panel-324)
-* [Producción](https://developers.factus.com.co/documentos-soporte/eliminar#tab-panel-325)
+* [Sandbox](https://developers.factus.com.co/documentos-soporte/eliminar)
+* [Producción](https://developers.factus.com.co/documentos-soporte/eliminar)
 
 ```
 https://api-sandbox.factus.com.co/v2/support-documents/reference/:reference_code

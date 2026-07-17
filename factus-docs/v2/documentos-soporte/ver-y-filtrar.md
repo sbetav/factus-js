@@ -6,8 +6,8 @@ Este endpoint `devuelve` una lista de documentos soporte que cumplen con los cri
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/documentos-soporte/ver-y-filtrar#tab-panel-326)
-* [Producción](https://developers.factus.com.co/documentos-soporte/ver-y-filtrar#tab-panel-327)
+* [Sandbox](https://developers.factus.com.co/documentos-soporte/ver-y-filtrar)
+* [Producción](https://developers.factus.com.co/documentos-soporte/ver-y-filtrar)
 
 ```
 https://api-sandbox.factus.com.co/v2/support-documents?filter[identification]&filter[names]&filter[number]&filter[prefix]&filter[reference_code]&filter[status]

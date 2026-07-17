@@ -6,8 +6,8 @@ Esta sección describe los campos que podría contener la factura.
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/facturas/tipos-de-factura/transporte#tab-panel-132)
-* [Producción](https://developers.factus.com.co/facturas/tipos-de-factura/transporte#tab-panel-133)
+* [Sandbox](https://developers.factus.com.co/facturas/tipos-de-factura/transporte)
+* [Producción](https://developers.factus.com.co/facturas/tipos-de-factura/transporte)
 
 ```
 https://api-sandbox.factus.com.co/v2/bills/validate
@@ -135,6 +135,8 @@ Dirección del cliente. |
 Correo electrónico del cliente. |
 | **`customer.phone`** `string` `opcional`
 Número de teléfono del cliente. |
+| **`customer.country_code`** `string` `opcional`
+Código del país del cliente. [Países disponibles](https://developers.factus.com.co/tablas-de-referencia/countries) |
 | **`customer.municipality_code`** `string` `opcional`
 Código que corresponda al municipio donde vive el cliente. Se debe enviar el código del municipio únicamente si el municipio es de Colombia; si es extranjero, el valor del campo no aplica. [Municipios disponibles.](https://developers.factus.com.co/tablas-de-referencia/municipios) |
 | **`items`** `array`
@@ -204,7 +206,7 @@ Valor del descuento o recargo aplicado (máximo dos decimales). |
 
 [Sección titulada «Ejemplo de Solicitud»](https://developers.factus.com.co/facturas/tipos-de-factura/transporte#ejemplo-de-solicitud)
 
-* [Factura de venta](https://developers.factus.com.co/facturas/tipos-de-factura/transporte#tab-panel-134)
+* [Factura de venta](https://developers.factus.com.co/facturas/tipos-de-factura/transporte)
 
 ```
 { "reference_code": "FACT-2026-0126", "document": "01", "numbering_range_id": 389, "operation_type": "12", "payment_details": [ { "payment_form": "1", "payment_method_code": "10", "reference_code": "pago-001", "amount": "2000000" }, { "payment_form": "1", "payment_method_code": "42", "reference_code": "pago-002", "amount": "400000" } ], "cash_rounding_amount": "0.00", "observation": "Observación de prueba", "customer": { "identification_document_code": "31", "identification": "123456789", "company": "Alan company name", "trade_name": "Alan trade name", "address": "calle 1 # 1-1", "email": "alan.company@email.com", "phone": "1234567890", "legal_organization_code": "1", "tribute_code": "ZZ", "municipality_code": "68679" }, "items": [ { "scheme_id": "1", "code_reference": "PROD-000A", "name": "Pantalones", "quantity": "10.00", "discount_rate": "0.00", "price": "200000.00", "unit_measure_code": "KGM", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ], "additional_properties": [ { "code": "01", "value": "13456" }, { "code": "02", "value": "REM0001" }, { "code": "03", "value": 250000, "quantity": 10, "unit_measure_code": "KGM" } ] }, { "scheme_id": "0", "code_reference": "PROD-000B", "name": "flete", "quantity": "1.00", "discount_rate": "0.00", "price": "20000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "is_excluded": true } ] } ]}

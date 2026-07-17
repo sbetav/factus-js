@@ -6,8 +6,8 @@ Este endpoint permite actualizar la Información de la empresa del usuario corre
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/empresas/actualizar#tab-panel-12)
-* [Producción](https://developers.factus.com.co/empresas/actualizar#tab-panel-13)
+* [Sandbox](https://developers.factus.com.co/empresas/actualizar)
+* [Producción](https://developers.factus.com.co/empresas/actualizar)
 
 ```
 https://api-sandbox.factus.com.co/v2/companies
@@ -98,7 +98,7 @@ Código de los tipos de responsabilidad fiscal. Para saber los tipos de responsa
 
 [Sección titulada «Ejemplo de solicitud»](https://developers.factus.com.co/empresas/actualizar#ejemplo-de-solicitud)
 
-* [200 -Empresa](https://developers.factus.com.co/empresas/actualizar#tab-panel-14)
+* [200 -Empresa](https://developers.factus.com.co/empresas/actualizar)
 
 ```
 { "legal_organization_code": "2", "company": null, "names": "Alan", "surnames": "Turing", "responsibilities": "5", "economic_activity": "6920", "email": "alanturing@enigmasas.com", "address": "calle 100 #50-80", "trade_name": null, "registration_code": null, "phone": "0987654321", "municipality_code": "68872", "tribute_code": "ZZ"}

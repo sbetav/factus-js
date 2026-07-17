@@ -6,8 +6,8 @@ Esta sección describe los compos que podría contener la factura.
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/facturas/ejemplos/estandar-consumidor-final#tab-panel-360)
-* [Producción](https://developers.factus.com.co/facturas/ejemplos/estandar-consumidor-final#tab-panel-361)
+* [Sandbox](https://developers.factus.com.co/facturas/ejemplos/estandar-consumidor-final)
+* [Producción](https://developers.factus.com.co/facturas/ejemplos/estandar-consumidor-final)
 
 ```
 https://api-sandbox.factus.com.co/v2/bills/validate
@@ -135,6 +135,8 @@ Dirección del cliente. |
 Correo electrónico del cliente. |
 | **`customer.phone`** `string` `opcional`
 Número de teléfono del cliente. |
+| **`customer.country_code`** `string` `opcional`
+Código del país del cliente. [Países disponibles](https://developers.factus.com.co/tablas-de-referencia/countries) |
 | **`customer.municipality_code`** `string` `opcional`
 Código que corresponda al municipio donde vive el cliente. Se debe enviar el código del municipio únicamente si el municipio es de Colombia; si es extranjero, el valor del campo no aplica. [Municipios disponibles.](https://developers.factus.com.co/tablas-de-referencia/municipios) |
 | **`items`** `array`
@@ -192,7 +194,7 @@ Valor del descuento o recargo aplicado (máximo dos decimales). |
 
 [Sección titulada «Ejemplo de Solicitud»](https://developers.factus.com.co/facturas/ejemplos/estandar-consumidor-final#ejemplo-de-solicitud)
 
-* [Factura de venta](https://developers.factus.com.co/facturas/ejemplos/estandar-consumidor-final#tab-panel-362)
+* [Factura de venta](https://developers.factus.com.co/facturas/ejemplos/estandar-consumidor-final)
 
 ```
 { "reference_code": "FACT-2026-0129", "document": "01", "numbering_range_id": 389, "operation_type": "10", "observation": "Observación de factura con anticipo", "payment_details": [ { "payment_form": "1", "payment_method_code": "10", "reference_code": "pago-001", "amount": "83300" } ], "customer": { "identification_document_code": "13", "identification": "22222222222", "names": "Consumidor Final" }, "items": [ { "code_reference": "PROD-000A", "name": "Producto A", "quantity": "1.00", "discount_rate": "0.00", "price": "10000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] }, { "code_reference": "PROD-000B", "name": "Producto B", "quantity": "3.00", "discount_rate": "0.00", "price": "20000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] } ]}

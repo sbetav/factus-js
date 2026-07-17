@@ -6,8 +6,8 @@ Este endpoint permite `consultar` los eventos generados a una factura por su nú
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/facturas/eventos-de-facturas#tab-panel-41)
-* [Producción](https://developers.factus.com.co/facturas/eventos-de-facturas#tab-panel-42)
+* [Sandbox](https://developers.factus.com.co/facturas/eventos-de-facturas)
+* [Producción](https://developers.factus.com.co/facturas/eventos-de-facturas)
 
 ```
 https://api-sandbox.factus.com.co/v2/bills/:number/radian/events

@@ -7,8 +7,8 @@ Para utilizar el archivo, deberás decodificar el contenido de la propiedad `xml
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/notas-credito/descargar-xml#tab-panel-60)
-* [Producción](https://developers.factus.com.co/notas-credito/descargar-xml#tab-panel-61)
+* [Sandbox](https://developers.factus.com.co/notas-credito/descargar-xml)
+* [Producción](https://developers.factus.com.co/notas-credito/descargar-xml)
 
 ```
 https://api-sandbox.factus.com.co/v2/credit-notes/:number/download-xml

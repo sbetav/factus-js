@@ -1,8 +1,8 @@
 # External Factus Docs Index
 
-- Generated at: 2026-06-20T22:49:00.905Z
+- Generated at: 2026-07-17T02:59:16.893Z
 - Base URL: https://developers.factus.com.co/
-- Files: 92
+- Files: 94
 
 ## Autenticación
 
@@ -153,6 +153,11 @@
 
 - Source: https://developers.factus.com.co/facturas/ejemplos/estandar-impuesto-excluido
 - File: facturas\ejemplos\estandar-impuesto-excluido.md
+
+## Factura con orden de servicio
+
+- Source: https://developers.factus.com.co/facturas/ejemplos/estandar-orden-servicio
+- File: facturas\ejemplos\estandar-orden-servicio.md
 
 ## Informar propina
 
@@ -453,6 +458,11 @@
 
 - Source: https://developers.factus.com.co/tablas-de-referencia/municipios
 - File: tablas-de-referencia\municipios.md
+
+## Tablas nómina electrónica
+
+- Source: https://developers.factus.com.co/tablas-de-referencia/tablas-referencia-nomina
+- File: tablas-de-referencia\tablas-referencia-nomina.md
 
 ## Tablas
 

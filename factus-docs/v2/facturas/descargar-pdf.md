@@ -7,8 +7,8 @@ Para utilizar el archivo, deberás decodificar el contenido de la propiedad `pdf
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/facturas/descargar-pdf#tab-panel-26)
-* [Producción](https://developers.factus.com.co/facturas/descargar-pdf#tab-panel-27)
+* [Sandbox](https://developers.factus.com.co/facturas/descargar-pdf)
+* [Producción](https://developers.factus.com.co/facturas/descargar-pdf)
 
 ```
 https://api-sandbox.factus.com.co/v2/bills/:number/download-pdf

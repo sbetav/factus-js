@@ -6,8 +6,8 @@ Este endpoint `envía` la factura por correo electrónico dentro de un archivo Z
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/facturas/enviar-correo#tab-panel-17)
-* [Producción](https://developers.factus.com.co/facturas/enviar-correo#tab-panel-18)
+* [Sandbox](https://developers.factus.com.co/facturas/enviar-correo)
+* [Producción](https://developers.factus.com.co/facturas/enviar-correo)
 
 ```
 https://api-sandbox.factus.com.co/v2/bills/:number/send-email
@@ -51,7 +51,7 @@ Correo electrónico al cual se desea enviar la factura |
 
 Aquí tienes un ejemplo de cómo debería quedar el cuerpo de la solicitud en formato JSON:
 
-* [200 - Envío de correo](https://developers.factus.com.co/facturas/enviar-correo#tab-panel-19)
+* [200 - Envío de correo](https://developers.factus.com.co/facturas/enviar-correo)
 
 ```
 { "email": "alanturing@enigmasas.com"}

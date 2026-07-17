@@ -6,8 +6,8 @@ Esta sección describe cómo crear un rango de numeración para documento soport
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-documento-soporte#tab-panel-135)
-* [Producción](https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-documento-soporte#tab-panel-136)
+* [Sandbox](https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-documento-soporte)
+* [Producción](https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-documento-soporte)
 
 ```
 https://api-sandbox.factus.com.co/v2/numbering-ranges
@@ -56,7 +56,7 @@ Número actual del consecutivo. El número del siguiente documento que se genera
 
 [Sección titulada «Ejemplo de Solicitud»](https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-documento-soporte#ejemplo-de-solicitud)
 
-* [Factura de venta](https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-documento-soporte#tab-panel-137)
+* [Factura de venta](https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-documento-soporte)
 
 ```
 { "document": "24", "prefix": "DS", "resolution_number": "18760000009", "current": 1}

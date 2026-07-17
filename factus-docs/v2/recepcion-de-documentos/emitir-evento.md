@@ -44,8 +44,8 @@ Este evento no puede ser emitido por ti. Será generado automáticamente por la 
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/recepcion-de-documentos/emitir-evento#tab-panel-89)
-* [Producción](https://developers.factus.com.co/recepcion-de-documentos/emitir-evento#tab-panel-90)
+* [Sandbox](https://developers.factus.com.co/recepcion-de-documentos/emitir-evento)
+* [Producción](https://developers.factus.com.co/recepcion-de-documentos/emitir-evento)
 
 ```
 https://api-sandbox.factus.com.co/v2/receptions/bills/:bill_id/radian/events/:event_type

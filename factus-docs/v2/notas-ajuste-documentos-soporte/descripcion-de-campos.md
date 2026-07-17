@@ -4,8 +4,8 @@
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/notas-ajuste-documentos-soporte/descripcion-de-campos#tab-panel-341)
-* [Producción](https://developers.factus.com.co/notas-ajuste-documentos-soporte/descripcion-de-campos#tab-panel-342)
+* [Sandbox](https://developers.factus.com.co/notas-ajuste-documentos-soporte/descripcion-de-campos)
+* [Producción](https://developers.factus.com.co/notas-ajuste-documentos-soporte/descripcion-de-campos)
 
 ```
 https://api-sandbox.factus.com.co/v2/adjustment-notes/validate

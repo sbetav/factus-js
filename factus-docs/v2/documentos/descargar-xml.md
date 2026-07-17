@@ -19,8 +19,8 @@ A través de este endpoint, es posible recuperar el XML original del documento u
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/documentos/descargar-xml#tab-panel-313)
-* [Producción](https://developers.factus.com.co/documentos/descargar-xml#tab-panel-314)
+* [Sandbox](https://developers.factus.com.co/documentos/descargar-xml)
+* [Producción](https://developers.factus.com.co/documentos/descargar-xml)
 
 ```
 https://api-sandbox.factus.com.co/v2/documents/:trackId/download-xml

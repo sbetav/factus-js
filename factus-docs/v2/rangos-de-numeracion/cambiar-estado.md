@@ -6,8 +6,8 @@ Este endpoint permite cambiar el estado de un rango de numeración en específic
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/rangos-de-numeracion/cambiar-estado#tab-panel-74)
-* [Producción](https://developers.factus.com.co/rangos-de-numeracion/cambiar-estado#tab-panel-75)
+* [Sandbox](https://developers.factus.com.co/rangos-de-numeracion/cambiar-estado)
+* [Producción](https://developers.factus.com.co/rangos-de-numeracion/cambiar-estado)
 
 ```
 https://api-sandbox.factus.com.co/v2/numbering-ranges/:numbering_range_id/toggle-status

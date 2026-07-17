@@ -1,20 +1,13 @@
-# Redondeo en medios de pago
+# Factura con orden de servicio
 
-Este ejemplo muestra cómo se maneja el redondeo en los medios de pago, como tal se debe tener en cuenta el campo `cash_rounding_amount`.
-
-| Parámetros Factura Estándar |
-| --- |
-| **`cash_rounding_amount`** `string` `opcional`
-Ajuste opcional que reconcilia la diferencia entre la suma de los montos en `⁠payment_details` y el `total` de la factura, causada por las limitaciones de denominación de la moneda local. Acepta valores negativos (redondeo hacia abajo) o positivos (redondeo hacia arriba). El valor máximo permitido es ±500.00.
-
-|
+Esta sección describe los compos que podría contener la factura.
 
 **Método:** POST
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/facturas/ejemplos/redondeo-medios-pago)
-* [Producción](https://developers.factus.com.co/facturas/ejemplos/redondeo-medios-pago)
+* [Sandbox](https://developers.factus.com.co/facturas/ejemplos/estandar-orden-servicio)
+* [Producción](https://developers.factus.com.co/facturas/ejemplos/estandar-orden-servicio)
 
 ```
 https://api-sandbox.factus.com.co/v2/bills/validate
@@ -199,12 +192,12 @@ Valor del descuento o recargo aplicado (máximo dos decimales). |
 
 ### Ejemplo de Solicitud
 
-[Sección titulada «Ejemplo de Solicitud»](https://developers.factus.com.co/facturas/ejemplos/redondeo-medios-pago#ejemplo-de-solicitud)
+[Sección titulada «Ejemplo de Solicitud»](https://developers.factus.com.co/facturas/ejemplos/estandar-orden-servicio#ejemplo-de-solicitud)
 
-* [Factura de venta](https://developers.factus.com.co/facturas/ejemplos/redondeo-medios-pago)
+* [Factura de venta](https://developers.factus.com.co/facturas/ejemplos/estandar-orden-servicio)
 
 ```
-{ "reference_code": "FACT-2026-0129", "document": "01", "numbering_range_id": 389, "operation_type": "10", "observation": "Observación de factura con redondeo en medios de pago", "payment_details": [ { "payment_form": 1, "payment_method_code": "48", "reference_code": "REF_PAY_1962-1", "amount": "100000" }, { "payment_form": 1, "payment_method_code": "10", "reference_code": "REF_PAY_1962-1", "amount": "160550" } ], "cash_rounding_amount": "-14.81", "customer": { "identification_document_code": "13", "identification": "222222222222", "names": "Consumidor Final", "address": "kra 37A 5-14", "email": "valjulsansas@gmail.com", "phone": "3015763570", "legal_organization_code": "2", "tribute_code": "01" }, "items": [ { "code_reference": "11", "name": "BOTELLA AGUA", "quantity": "1.00", "discount_rate": "0.00", "price": "175925.93", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "04", "rate": "8.00" } ] }, { "code_reference": "92", "name": "Energizante", "quantity": "2.00", "discount_rate": "0.00", "price": "14814.81", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "04", "rate": "8.00" } ] }, { "code_reference": "693", "name": "MANZANA VERDE", "quantity": "1.00", "discount_rate": "0.00", "price": "32407.41", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] } ]}
+{ "reference_code": "FACT-2026-0130", "numbering_range_id": 389, "operation_type": "10", "observation": "Observación de prueba", "payment_details": [ { "payment_form": "1", "payment_method_code": "42", "reference_code": "pago-001", "amount": "83300" } ], "order_reference": { "reference_code": "ORD-2026-0130", "issue_date": "2023-06-23" }, "cash_rounding_amount": "0.00", "customer": { "identification_document_code": "31", "identification": "123456789", "company": "Alan company name", "trade_name": "Alan trade name", "address": "calle 1 # 1-1", "email": "alan.company@email.com", "phone": "1234567890", "legal_organization_code": "1", "tribute_code": "ZZ", "municipality_code": "68679" }, "items": [ { "code_reference": "PROD-000A", "name": "Producto A", "quantity": "1.00", "discount_rate": "0.00", "price": "10000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] }, { "code_reference": "PROD-000B", "name": "Producto B", "quantity": "3.00", "discount_rate": "0.00", "price": "20000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] } ]}
 ```
 
 * * *

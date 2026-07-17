@@ -7,8 +7,8 @@ Para utilizar el archivo, deberás decodificar el contenido de la propiedad `xml
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/facturas/descargar-xml#tab-panel-28)
-* [Producción](https://developers.factus.com.co/facturas/descargar-xml#tab-panel-29)
+* [Sandbox](https://developers.factus.com.co/facturas/descargar-xml)
+* [Producción](https://developers.factus.com.co/facturas/descargar-xml)
 
 ```
 https://api-sandbox.factus.com.co/v2/bills/:number/download-xml/

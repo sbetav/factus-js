@@ -12,8 +12,8 @@ Este endpoint permite obtener un token de acceso para autenticar solicitudes a l
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/autenticacion/auth#tab-panel-3)
-* [Producción](https://developers.factus.com.co/autenticacion/auth#tab-panel-4)
+* [Sandbox](https://developers.factus.com.co/autenticacion/auth)
+* [Producción](https://developers.factus.com.co/autenticacion/auth)
 
 ```
 https://api-sandbox.factus.com.co/oauth/token
@@ -55,9 +55,9 @@ Contraseña del usuario |
 
 A continuación, se muestra un ejemplo de cómo enviar una solicitud al endpoint:
 
-* [Laravel php](https://developers.factus.com.co/autenticacion/auth#tab-panel-0)
-* [Node js](https://developers.factus.com.co/autenticacion/auth#tab-panel-1)
-* [Curl](https://developers.factus.com.co/autenticacion/auth#tab-panel-2)
+* [Laravel php](https://developers.factus.com.co/autenticacion/auth)
+* [Node js](https://developers.factus.com.co/autenticacion/auth)
+* [Curl](https://developers.factus.com.co/autenticacion/auth)
 
 Ventana de terminal
 

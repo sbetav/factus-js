@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-20T22:49:00.905Z",
+  "generatedAt": "2026-07-17T02:59:16.893Z",
   "baseUrl": "https://developers.factus.com.co/",
-  "totalFiles": 92,
+  "totalFiles": 94,
   "entries": [
     {
       "title": "Autenticación",
@@ -152,6 +152,11 @@
       "title": "Impuesto excluido",
       "sourceUrl": "https://developers.factus.com.co/facturas/ejemplos/estandar-impuesto-excluido",
       "path": "facturas\\ejemplos\\estandar-impuesto-excluido.md"
+    },
+    {
+      "title": "Factura con orden de servicio",
+      "sourceUrl": "https://developers.factus.com.co/facturas/ejemplos/estandar-orden-servicio",
+      "path": "facturas\\ejemplos\\estandar-orden-servicio.md"
     },
     {
       "title": "Informar propina",
@@ -452,6 +457,11 @@
       "title": "Municipios",
       "sourceUrl": "https://developers.factus.com.co/tablas-de-referencia/municipios",
       "path": "tablas-de-referencia\\municipios.md"
+    },
+    {
+      "title": "Tablas nómina electrónica",
+      "sourceUrl": "https://developers.factus.com.co/tablas-de-referencia/tablas-referencia-nomina",
+      "path": "tablas-de-referencia\\tablas-referencia-nomina.md"
     },
     {
       "title": "Tablas",

@@ -4,8 +4,8 @@
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/documentos-soporte/crear-validar#tab-panel-315)
-* [Producción](https://developers.factus.com.co/documentos-soporte/crear-validar#tab-panel-316)
+* [Sandbox](https://developers.factus.com.co/documentos-soporte/crear-validar)
+* [Producción](https://developers.factus.com.co/documentos-soporte/crear-validar)
 
 ```
 https://api-sandbox.factus.com.co/v2/support-documents/validate
@@ -118,7 +118,7 @@ Indica si el ítem está excluido de impuestos. Valor: `true` o `false`. |
 
 [Sección titulada «Ejemplo de Solicitud»](https://developers.factus.com.co/documentos-soporte/crear-validar#ejemplo-de-solicitud)
 
-* [201 - Documento Soporte](https://developers.factus.com.co/documentos-soporte/crear-validar#tab-panel-317)
+* [201 - Documento Soporte](https://developers.factus.com.co/documentos-soporte/crear-validar)
 
 ```
 { "reference_code": "DS-2026-v2-0001", "created_time": "15:30:00", "observation": "", "payment_details": [ { "payment_form": "1", "payment_method_code": "42", "reference_code": "pago-002", "amount": "40000" }, { "payment_form": "2", "payment_method_code": "10", "reference_code": "pago-003", "amount": "40000", "due_date": "2026-05-25" } ], "cash_rounding_amount": "0.00", "establishment": { "name": "nombre establecimiento", "address": "direccion del establecimiento", "phone_number": "1234567890", "email": "establecieminto@tuempresa.com", "municipality_code": "91263" }, "provider": { "identification_document_code": "31", "identification": "2343543", "dv": "7", "names": "Pepito Perez", "address": "calle 4", "country_code": "CO", "municipality_code": "68679", "legal_organization_code": "1" }, "items": [ { "code_reference": "12345", "name": "producto de prueba", "quantity": "2.00", "discount_rate": "20.00", "price": "50000.00", "unit_measure_code": "94", "standard_code": "999", "withholding_taxes": [ { "code": "06", "rate": "3.50" } ], "taxes": [ { "code": "01", "rate": "19.00" } ] } ]}

@@ -8,8 +8,8 @@ El archivo adjunto corresponde al archivo zip que contiene el pdf de la nota cr�
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/notas-credito/obtener-contenido-de-correo#tab-panel-66)
-* [Producción](https://developers.factus.com.co/notas-credito/obtener-contenido-de-correo#tab-panel-67)
+* [Sandbox](https://developers.factus.com.co/notas-credito/obtener-contenido-de-correo)
+* [Producción](https://developers.factus.com.co/notas-credito/obtener-contenido-de-correo)
 
 ```
 https://api-sandbox.factus.com.co/v2/credit-notes/:number/email-content

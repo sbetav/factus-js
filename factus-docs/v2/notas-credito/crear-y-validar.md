@@ -6,8 +6,8 @@ Este endpoint permite crear una nota crédito y validarla.
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/notas-credito/crear-y-validar#tab-panel-55)
-* [Producción](https://developers.factus.com.co/notas-credito/crear-y-validar#tab-panel-56)
+* [Sandbox](https://developers.factus.com.co/notas-credito/crear-y-validar)
+* [Producción](https://developers.factus.com.co/notas-credito/crear-y-validar)
 
 ```
 https://api-sandbox.factus.com.co/v2/credit-notes/validate
@@ -39,6 +39,12 @@ Código del tipo de operación de la nota crédito. Si no se envía, por defecto
 ID de la factura a la que se le generará la nota crédito. Este campo es opcional únicamente cuando el campo \`customization\_id\` es 22 (Nota crédito sin referencia a una factura electrónica). |
 | **`numbering_range_id`** `integer` `opcional`
 ID del rango de numeración. Es obligatorio solo si tienes múltiples rangos activos. Si se omite, el sistema utilizará el único rango disponible por defecto. [Rangos de numeración.](https://developers.factus.com.co/rangos-de-numeracion/obtener-rangos) |
+| **`currency`** `object` `opcional`
+Objeto utilizado para mostrar los totales de la factura en una moneda extranjera dentro de su representación gráfica. Si se envía el campo `currency`, los campos internos son obligatorios. |
+| **`currency.code`** `string`
+Código internacional de la moneda extranjera que se desea mostrar en la factura. Debe ser una moneda distinta a la moneda local de emisión. [Códigos de monedas disponibles.](https://developers.factus.com.co/tablas-de-referencia/currency) |
+| **`currency.exchange_rate`** `string`
+Tasa de cambio utilizada para convertir los montos de la moneda local a la moneda extranjera especificada. |
 | **`observation`** `string` `opcional`
 Agrega una observación a la nota crédito. No debe tener más de 250 caracteres. |
 | **`payment_details`** `array`
@@ -113,6 +119,8 @@ Número de teléfono del cliente. |
 Código que corresponda al tipo de organización. [Tipos de organizaciones disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#c%C3%B3digo-de-tipos-de-organizaciones) |
 | **`customer.tribute_code`** `string` `default:ZZ` `opcional`
 Código del tributo. [Tipos de tributos disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#c%C3%B3digos-de-tributos-clientes) |
+| **`customer.country_code`** `string` `opcional`
+Código del país del cliente. [Países disponibles](https://developers.factus.com.co/tablas-de-referencia/countries) |
 | **`customer.municipality_code`** `string` `opcional`
 Código que corresponda al municipio donde vive el cliente. Se debe enviar el código del municipio únicamente si el municipio es de Colombia; si es extranjero, el valor del campo no aplica. [Municipios disponibles.](https://developers.factus.com.co/tablas-de-referencia/municipios) |
 | **`items`** `array`
@@ -178,8 +186,8 @@ Valor del descuento o recargo aplicado (máximo dos decimales). |
 
 Aquí tienes un ejemplo de cómo debería quedar el cuerpo de la solicitud en formato JSON:
 
-* [Nota crédito](https://developers.factus.com.co/notas-credito/crear-y-validar#tab-panel-57)
+* [Nota crédito](https://developers.factus.com.co/notas-credito/crear-y-validar)
 
 ```
-{ "reference_code": "NOTA-2026-0015", "correction_concept_code": "2", "customization_id": "20", "bill_number": "SETP990002519", "numbering_range_id": 1776, "observation": "Nota crédito, ahora puedes revisar la factura y buscar el campo related_notes.credit_notes", "payment_details": [ { "payment_form": "1", "payment_method_code": "42", "reference_code": "pago-001", "amount": "83300" } ], "customer": { "identification_document_code": "31", "identification": "123456789", "company": "Alan company name", "trade_name": "Alan trade name", "address": "calle 1 # 1-1", "email": "alan.company@email.com", "phone": "1234567890", "legal_organization_code": "1", "tribute_code": "ZZ", "municipality_code": "68679" }, "items": [ { "code_reference": "PROD-000A", "name": "Producto A", "quantity": "1.00", "discount_rate": "0.00", "price": "10000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] }, { "code_reference": "PROD-000B", "name": "Producto B", "quantity": "3.00", "discount_rate": "0.00", "price": "20000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] } ]}
+{ "reference_code": "NOTA-2026-0015", "correction_concept_code": "2", "customization_id": "20", "bill_number": "SETP990002519", "numbering_range_id": 1776, "observation": "Nota crédito, ahora puedes revisar la factura y buscar el campo related_notes.credit_notes", "payment_details": [ { "payment_form": "1", "payment_method_code": "42", "reference_code": "pago-001", "amount": "83300" } ], "customer": { "identification_document_code": "31", "identification": "123456789", "company": "Alan company name", "trade_name": "Alan trade name", "address": "calle 1 # 1-1", "email": "alan.company@email.com", "phone": "1234567890", "legal_organization_code": "1", "tribute_code": "ZZ", "country_code": "CO", "municipality_code": "68679" }, "items": [ { "code_reference": "PROD-000A", "name": "Producto A", "quantity": "1.00", "discount_rate": "0.00", "price": "10000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] }, { "code_reference": "PROD-000B", "name": "Producto B", "quantity": "3.00", "discount_rate": "0.00", "price": "20000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] } ]}
 ```

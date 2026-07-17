@@ -8,8 +8,8 @@ El archivo adjunto corresponde al archivo zip que contiene el pdf de la factura 
 
 #### **Endpoint**
 
-* [Sandbox](https://developers.factus.com.co/facturas/obtener-contenido-de-correo#tab-panel-45)
-* [Producción](https://developers.factus.com.co/facturas/obtener-contenido-de-correo#tab-panel-46)
+* [Sandbox](https://developers.factus.com.co/facturas/obtener-contenido-de-correo)
+* [Producción](https://developers.factus.com.co/facturas/obtener-contenido-de-correo)
 
 ```
 https://api-sandbox.factus.com.co/v2/bills/:number/email-content
