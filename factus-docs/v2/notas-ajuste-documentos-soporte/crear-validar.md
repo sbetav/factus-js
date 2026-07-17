@@ -4,11 +4,16 @@
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/adjustment-notes/validate
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/adjustment-notes/validate
 ```
 
 ### **Encabezados de la Solicitud**
@@ -112,7 +117,7 @@ Indica si el ítem está excluido de impuestos. Valor: `true` o `false`. |
 
 Aquí tienes un ejemplo de cómo debería quedar el cuerpo de la solicitud en formato JSON:
 
-* 201 - Nota de ajuste a documento Soporte
+**201 - Nota de ajuste a documento Soporte**
 
 ```
 { "reference_code": "AN-2026-v2-0005", "support_document_number": "SEDS984000129", "correction_concept_code": "2", "created_time": "15:26:00", "payment_details": [ { "payment_form": "1", "payment_method_code": "42", "reference_code": "pago-001", "amount": "60000.00" }, { "payment_form": "1", "payment_method_code": "10", "reference_code": "pago-002", "amount": "59000.00" } ], "provider": { "identification_document_code": "31", "identification": "2343543", "dv": "7", "names": "Pepito Perez", "address": "calle 4", "country_code": "CO", "municipality_code": "68679" }, "items": [ { "code_reference": "12345", "name": "producto de prueba", "quantity": "2.00", "discount_rate": "0.00", "price": "50000.00", "unit_measure_code": "94", "standard_code": "999", "withholding_taxes": [ { "code": "06", "rate": "3.50" } ], "taxes": [ { "code": "01", "rate": "19.00" } ] } ]}

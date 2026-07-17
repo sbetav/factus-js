@@ -6,11 +6,16 @@ Este endpoint se utiliza para cargar las facturas electrónicas que hayan sido g
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/receptions/upload
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/receptions/upload
 ```
 
 ### **Encabezados de la Solicitud**

@@ -6,11 +6,16 @@ Este endpoint permite cambiar el estado de un rango de numeración en específic
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/numbering-ranges/:numbering_range_id/toggle-status
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/numbering-ranges/:numbering_range_id/toggle-status
 ```
 
 ### **Encabezados de la Solicitud**

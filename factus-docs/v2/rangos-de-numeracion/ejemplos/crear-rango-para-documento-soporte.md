@@ -6,11 +6,16 @@ Esta sección describe cómo crear un rango de numeración para documento soport
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/numbering-ranges
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/numbering-ranges
 ```
 
 ### **Encabezados de la Solicitud**
@@ -56,7 +61,7 @@ Número actual del consecutivo. El número del siguiente documento que se genera
 
 [Sección titulada «Ejemplo de Solicitud»](https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-documento-soporte#ejemplo-de-solicitud)
 
-* Factura de venta
+**Factura de venta**
 
 ```
 { "document": "24", "prefix": "DS", "resolution_number": "18760000009", "current": 1}

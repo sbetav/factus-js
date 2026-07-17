@@ -19,11 +19,16 @@ A través de este endpoint, es posible recuperar el XML original del documento u
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/documents/:trackId/download-xml
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/documents/:trackId/download-xml
 ```
 
 ### **Encabezados de la Solicitud**

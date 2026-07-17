@@ -8,11 +8,16 @@ La DIAN ha implementado un nuevo servicio de consulta para completar la informac
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/dian/acquirer?identification_document_code=&identification_number=
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/dian/acquirer?identification_document_code=&identification_number=
 ```
 
 ### **Encabezados de la Solicitud**
@@ -56,7 +61,7 @@ La consulta devuelve un objecto con el nombre y correo del adquiriente.
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/informacion-adquirientes/obtener-datos-adquiriente#ejemplo-de-respuesta)
 
-* status 200
+**status 200**
 
 ```
 { "status": "OK", "message": "Solicitud exitosa", "data": { "name": "Nombre Cédula de ciudadanía 5", "email": "Mail_Cédula de ciudadanía_5@mail.com" }}

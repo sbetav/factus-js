@@ -8,11 +8,16 @@ Elimina una nota de ajuste a documento soporte usando el código de referencia c
 
 #### **Endpoint**
 
-* Pruebas
-* Producción
+**Pruebas**
 
 ```
 https://api-sandbox.factus.com.co/v1/adjustment-notes/reference/:reference_code
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v1/adjustment-notes/reference/:reference_code
 ```
 
 ### **Encabezados de la Solicitud**
@@ -41,7 +46,7 @@ Para realizar la solicitud es necesario incluir los siguientes encabezados:
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/notas-ajuste-documentos-soporte/eliminar#ejemplo-de-respuesta)
 
-* status 200
+**status 200**
 
 ```
 { "status": "OK", "message": "Documento con código de referencia REF007 eliminado con éxito"}

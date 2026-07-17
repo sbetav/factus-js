@@ -8,11 +8,16 @@ Este endpoint permite `cambiar` la representación gráfica por defecto de la fa
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/bills/:number/send-email
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/bills/:number/send-email
 ```
 
 ### **Encabezados de la Solicitud**
@@ -55,7 +60,7 @@ PDF, enviado como cadena codificada en Base64 |
 
 Aquí tienes un ejemplo de cómo debería quedar el cuerpo de la solicitud en formato JSON:
 
-* 200 - Envío de correo
+**200 - Envío de correo**
 
 ```
 { "email": "alanturing@enigmasas.com", "pdf_base_64_encoded": "[TRIMMED_BASE64_60784_CHARS]"}

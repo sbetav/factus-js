@@ -7,11 +7,16 @@ Para utilizar el archivo, deberás decodificar el contenido de la propiedad `xml
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/credit-notes/:number/download-xml
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/credit-notes/:number/download-xml
 ```
 
 ### **Encabezados de la Solicitud**

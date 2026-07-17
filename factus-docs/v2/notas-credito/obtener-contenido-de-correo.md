@@ -8,11 +8,16 @@ El archivo adjunto corresponde al archivo zip que contiene el pdf de la nota cr�
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/credit-notes/:number/email-content
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/credit-notes/:number/email-content
 ```
 
 ### **Encabezados de la Solicitud**

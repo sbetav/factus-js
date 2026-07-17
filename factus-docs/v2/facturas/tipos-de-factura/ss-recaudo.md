@@ -6,11 +6,16 @@ Esta sección describe los campos que podría contener la factura electrónica d
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/bills/validate
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/bills/validate
 ```
 
 ### **Encabezados de la Solicitud**
@@ -228,11 +233,16 @@ Valor del descuento o recargo aplicado (máximo dos decimales). |
 
 [Sección titulada «Ejemplo de Solicitud»](https://developers.factus.com.co/facturas/tipos-de-factura/ss-recaudo#ejemplo-de-solicitud)
 
-* Ingreso propio
-* Ingreso para terceros
+**Ingreso propio**
 
 ```
 { "reference_code": "FACT-2026-0125", "document": "01", "numbering_range_id": 4, "operation_type": "SS-Recaudo", "send_email": false, "payment_details": [ { "payment_form": 1, "payment_method_code": "10", "amount": "10000" } ], "cash_rounding_amount": "0.00", "beneficiary": { "identification_document_code": "CC", "identification_number": "12345678", "names": "", "surnames": "" }, "customer": { "identification_document_code": "13", "identification": "123456789", "names": "Alan Turing", "address": "calle 1 # 1-1", "email": "alan.company@email.com", "phone": "1234567890", "legal_organization_code": "2", "tribute_code": "ZZ", "municipality_code": "68679" }, "items": [ { "scheme_id": 0, "collection_concept_code": "PAC", "code_reference": "PROD-000A", "name": "Servicio de salud", "quantity": "1.00", "discount_rate": "0.00", "price": "10000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "is_excluded": true } ] } ]}
+```
+
+**Ingreso para terceros**
+
+```
+{ "reference_code": "FACT-2026-0126", "document": "01", "numbering_range_id": 4, "operation_type": "SS-Recaudo", "send_email": false, "payment_details": [ { "payment_form": 1, "payment_method_code": "10", "amount": "10000" } ], "cash_rounding_amount": "0.00", "beneficiary": { "identification_document_code": "CC", "identification_number": "12345678", "names": "", "surnames": "" }, "customer": { "identification_document_code": "13", "identification": "123456789", "names": "Alan Turing", "address": "calle 1 # 1-1", "email": "alan.company@email.com", "phone": "1234567890", "legal_organization_code": "2", "tribute_code": "ZZ", "municipality_code": "68679" }, "items": [ { "scheme_id": 1, "collection_concept_code": "PAC", "code_reference": "PROD-000A", "name": "Servicio de salud", "quantity": "1.00", "discount_rate": "0.00", "price": "10000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "is_excluded": true } ], "mandate": { "identification_document_code": "13", "identification": "123456789" } } ]}
 ```
 
 * * *

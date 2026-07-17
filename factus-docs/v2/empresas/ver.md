@@ -6,11 +6,16 @@ Este endpoint permite ver la Información de la empresa del usuario correspondie
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/companies
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/companies
 ```
 
 ### **Encabezados de la Solicitud**

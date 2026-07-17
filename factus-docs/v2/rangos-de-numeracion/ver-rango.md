@@ -4,11 +4,16 @@
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/numbering-ranges/:numbering_range_id
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/numbering-ranges/:numbering_range_id
 ```
 
 Este endpoint permite ver un rango de numeración en específico. Es útil para obtener información detallada sobre un rango de numeración en particular, incluyendo su prefijo, rango de numeración, resolución, fecha de inicio y fin, entre otros.

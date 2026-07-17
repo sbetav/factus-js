@@ -8,11 +8,16 @@ El endpoint **Rangos de Numeración** permite obtener los rangos de numeración 
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/numbering-ranges?filter[id]&filter[document]&filter[resolution_number]&filter[technical_key]&filter[is_active]
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/numbering-ranges?filter[id]&filter[document]&filter[resolution_number]&filter[technical_key]&filter[is_active]
 ```
 
 ### **Encabezados de la Solicitud**

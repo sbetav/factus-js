@@ -1,6 +1,6 @@
 # External Factus Docs Index
 
-- Generated at: 2026-07-17T03:34:53.630Z
+- Generated at: 2026-07-17T04:01:02.986Z
 - Base URL: https://developers.factus.com.co/
 - Files: 94
 

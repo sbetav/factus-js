@@ -6,11 +6,16 @@ Este endpoint `devuelve` un documento soporte pasando el **número del mismo** c
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/support-documents/:number
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/support-documents/:number
 ```
 
 ### **Encabezados de la Solicitud**

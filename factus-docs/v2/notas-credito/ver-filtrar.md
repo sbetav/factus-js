@@ -6,11 +6,16 @@ Este endpoint `devuelve` una lista de notas crédito que cumple con los criterio
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/credit-notes?filter[identification]&filter[names]&filter[number]&filter[prefix]&filter[reference_code]&filter[status]
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/credit-notes?filter[identification]&filter[names]&filter[number]&filter[prefix]&filter[reference_code]&filter[status]
 ```
 
 ### **Encabezados de la Solicitud**

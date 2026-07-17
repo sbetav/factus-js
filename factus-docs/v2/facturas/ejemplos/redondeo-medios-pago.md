@@ -13,11 +13,16 @@ Ajuste opcional que reconcilia la diferencia entre la suma de los montos en `⁠
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/bills/validate
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/bills/validate
 ```
 
 ### **Encabezados de la Solicitud**
@@ -201,7 +206,7 @@ Valor del descuento o recargo aplicado (máximo dos decimales). |
 
 [Sección titulada «Ejemplo de Solicitud»](https://developers.factus.com.co/facturas/ejemplos/redondeo-medios-pago#ejemplo-de-solicitud)
 
-* Factura de venta
+**Factura de venta**
 
 ```
 { "reference_code": "FACT-2026-0129", "document": "01", "numbering_range_id": 389, "operation_type": "10", "observation": "Observación de factura con redondeo en medios de pago", "payment_details": [ { "payment_form": 1, "payment_method_code": "48", "reference_code": "REF_PAY_1962-1", "amount": "100000" }, { "payment_form": 1, "payment_method_code": "10", "reference_code": "REF_PAY_1962-1", "amount": "160550" } ], "cash_rounding_amount": "-14.81", "customer": { "identification_document_code": "13", "identification": "222222222222", "names": "Consumidor Final", "address": "kra 37A 5-14", "email": "valjulsansas@gmail.com", "phone": "3015763570", "legal_organization_code": "2", "tribute_code": "01" }, "items": [ { "code_reference": "11", "name": "BOTELLA AGUA", "quantity": "1.00", "discount_rate": "0.00", "price": "175925.93", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "04", "rate": "8.00" } ] }, { "code_reference": "92", "name": "Energizante", "quantity": "2.00", "discount_rate": "0.00", "price": "14814.81", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "04", "rate": "8.00" } ] }, { "code_reference": "693", "name": "MANZANA VERDE", "quantity": "1.00", "discount_rate": "0.00", "price": "32407.41", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] } ]}

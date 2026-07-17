@@ -6,11 +6,16 @@ Este endpoint permite `consultar` los eventos generados a una factura por su nú
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/bills/:number/radian/events
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/bills/:number/radian/events
 ```
 
 ### **Encabezados de la Solicitud**

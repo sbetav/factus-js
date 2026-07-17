@@ -6,11 +6,16 @@ Esta sección describe los campos que puede contener la nota crédito.
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/credit-notes/validate
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/credit-notes/validate
 ```
 
 ### **Encabezados de la Solicitud**

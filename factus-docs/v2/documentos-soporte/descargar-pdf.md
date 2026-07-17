@@ -6,11 +6,16 @@ El endpoint devuelve un pdf del documento soporte en formato **Base64** y el nom
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/support-documents/:number/download-pdf
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/support-documents/:number/download-pdf
 ```
 
 ### **Encabezados de la Solicitud**

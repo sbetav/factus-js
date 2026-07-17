@@ -4,11 +4,16 @@
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/adjustment-notes/validate
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/adjustment-notes/validate
 ```
 
 ### **Encabezados de la Solicitud**

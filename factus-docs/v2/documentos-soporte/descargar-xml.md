@@ -6,11 +6,16 @@ El endpoint devuelve el xml del documento en formato **Base64** y el nombre del 
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/support-documents/:number/download-xml
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/support-documents/:number/download-xml
 ```
 
 ### **Encabezados de la Solicitud**

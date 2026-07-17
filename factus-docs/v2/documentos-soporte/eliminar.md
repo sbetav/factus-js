@@ -8,11 +8,16 @@ Este endpoint **elimina** un documento soporte usando el código de referencia c
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/support-documents/reference/:reference_code
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/support-documents/reference/:reference_code
 ```
 
 ### **Encabezados de la Solicitud**

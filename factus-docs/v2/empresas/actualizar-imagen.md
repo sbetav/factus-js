@@ -6,11 +6,16 @@ Este endpoint permite actualizar el logo de la empresa del usuario correspondien
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/companies/logo
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/companies/logo
 ```
 
 ### **Encabezados de la Solicitud**

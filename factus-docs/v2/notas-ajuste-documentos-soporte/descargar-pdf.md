@@ -7,11 +7,16 @@ Para utilizar el archivo, deberás decodificar el contenido de la propiedad `pdf
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/adjustment-notes/:number/download-pdf
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/adjustment-notes/:number/download-pdf
 ```
 
 ### **Encabezados de la Solicitud**
@@ -41,7 +46,7 @@ Puede encontrar el número de la nota de ajuste a documento soporte en la respue
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/notas-ajuste-documentos-soporte/descargar-pdf#ejemplo-de-respuesta)
 
-* status 200
+**status 200**
 
 ```
 { "status": "OK", "message": "Solicitud exitosa", "data": { "file_name": "nas09008257590002500000017", "pdf_base_64_encoded": "[TRIMMED_BASE64_60360_CHARS]" }}

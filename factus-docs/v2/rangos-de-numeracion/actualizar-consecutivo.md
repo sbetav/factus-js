@@ -6,11 +6,16 @@ Este endpoint permite actualizar el consecutivo de un rango de numeración en es
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/numbering-ranges/:numbering_range_id/current
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/numbering-ranges/:numbering_range_id/current
 ```
 
 ### **Encabezados de la Solicitud**

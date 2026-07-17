@@ -7,11 +7,16 @@ Para utilizar el archivo, deberás decodificar el contenido de la propiedad `pdf
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/bills/:number/download-pdf
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/bills/:number/download-pdf
 ```
 
 ### **Encabezados de la Solicitud**

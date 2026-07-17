@@ -44,11 +44,16 @@ Este evento no puede ser emitido por ti. Será generado automáticamente por la 
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/receptions/bills/:bill_id/radian/events/:event_type
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/receptions/bills/:bill_id/radian/events/:event_type
 ```
 
 ### **Encabezados de la Solicitud**

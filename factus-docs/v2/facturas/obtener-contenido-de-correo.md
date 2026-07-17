@@ -8,11 +8,16 @@ El archivo adjunto corresponde al archivo zip que contiene el pdf de la factura 
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/bills/:number/email-content
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/bills/:number/email-content
 ```
 
 ### **Encabezados de la Solicitud**

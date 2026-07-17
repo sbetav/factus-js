@@ -6,11 +6,16 @@ Este endpoint permite actualizar la Información de la empresa del usuario corre
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/companies
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/companies
 ```
 
 ### **Encabezados de la Solicitud**
@@ -98,7 +103,7 @@ Código de los tipos de responsabilidad fiscal. Para saber los tipos de responsa
 
 [Sección titulada «Ejemplo de solicitud»](https://developers.factus.com.co/empresas/actualizar#ejemplo-de-solicitud)
 
-* 200 -Empresa
+**200 -Empresa**
 
 ```
 { "legal_organization_code": "2", "company": null, "names": "Alan", "surnames": "Turing", "responsibilities": "5", "economic_activity": "6920", "email": "alanturing@enigmasas.com", "address": "calle 100 #50-80", "trade_name": null, "registration_code": null, "phone": "0987654321", "municipality_code": "68872", "tribute_code": "ZZ"}

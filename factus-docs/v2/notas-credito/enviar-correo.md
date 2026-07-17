@@ -6,11 +6,16 @@ Este endpoint `envía` por correo electrónico la nota crédito en un archivo ZI
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/credit-notes/:number/send-email
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/credit-notes/:number/send-email
 ```
 
 ### **Encabezados de la Solicitud**
@@ -51,7 +56,7 @@ El cuerpo (Body) de la solicitud debe enviarse en formato JSON y debe incluir lo
 
 Aquí tienes un ejemplo de cómo debería quedar el cuerpo de la solicitud en formato JSON:
 
-* 200 - Envío de correo
+**200 - Envío de correo**
 
 ```
 { "email": "alanturing@enigmasas.com.com", "pdf_base_64_encoded": "[TRIMMED_BASE64_60784_CHARS]"}

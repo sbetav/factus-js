@@ -6,11 +6,16 @@ Esta sección describe los campos que puede contener el documento soporte.
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/support-documents/validate
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/support-documents/validate
 ```
 
 ### **Encabezados de la Solicitud**

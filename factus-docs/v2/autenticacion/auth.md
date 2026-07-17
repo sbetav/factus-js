@@ -12,11 +12,16 @@ Este endpoint permite obtener un token de acceso para autenticar solicitudes a l
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/oauth/token
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/oauth/token
 ```
 
 * * *
@@ -55,9 +60,7 @@ Contraseña del usuario |
 
 A continuación, se muestra un ejemplo de cómo enviar una solicitud al endpoint:
 
-* Laravel php
-* Node js
-* Curl
+**Laravel php**
 
 Ventana de terminal
 
@@ -70,6 +73,23 @@ use Illuminate\Support\Facades\Http;
 class AuthController extends Controller { public function getToken() { // Parámetros necesarios para la solicitud $response = Http::asForm()->post('https://api-sandbox.factus.com.co/oauth/token', [ 'grant_type' => 'password', 'client_id' => 'tu client id', 'client_secret' => 'tu client secret', 'username' => 'tu username', 'password' => 'tu password', ]);
 // Verificamos si la respuesta es exitosa if ($response->successful()) { // Acceder a los datos del token $data = $response->json(); $accessToken = $data['access_token']; $refreshToken = $data['refresh_token'];
 // Mostrar los tokens (o devolverlos en la respuesta de la API) return response()->json([ 'access_token' => $accessToken, 'refresh_token' => $refreshToken, ]); } else { // En caso de error, devolver el mensaje de error return response()->json([ 'error' => 'No se pudo obtener el token', 'message' => $response->body(), ], 400); } } }
+```
+
+**Node js**
+
+```
+const axios = require('axios'); const qs = require('qs'); // Para enviar datos en formato `application/x-www-form-urlencoded`
+// Datos de la solicitud const data = qs.stringify({ grant_type: 'password', client_id: 'tu client id', client_secret: 'tu client secret', username: 'tu username', password: 'tu password' });
+// Configuración de la solicitud const config = { method: 'post', url: 'https://api-sandbox.factus.com.co/oauth/token', headers: { 'Accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' }, data: data };
+// Realizando la solicitud POST axios(config) .then((response) => { console.log('Token de acceso:', response.data.access_token); console.log('Token de actualización:', response.data.refresh_token); }) .catch((error) => { console.error('Error en la solicitud:', error.response ? error.response.data : error.message); });
+```
+
+**Curl**
+
+Ventana de terminal
+
+```
+curl -X POST https://api-sandbox.factus.com.co/oauth/token \ -H "Accept: application/json" \ -d "grant_type=password" \ -d "client_id=tu client id" \ -d "client_secret=tu client secret" \ -d "username=tu username" \ -d "password=tu password"
 ```
 
 #### Response Success

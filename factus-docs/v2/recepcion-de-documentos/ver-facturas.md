@@ -6,11 +6,16 @@ Este endpoint se utiliza para obtener y filtrar las facturas electrónicas.
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/receptions/bills?filter[id]=&filter[number]=&filter[issue_date]&filter[cufe]&filter[company_nit]&filter[company_name]&filter[completed_events]=
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/receptions/bills?filter[id]=&filter[number]=&filter[issue_date]&filter[cufe]&filter[company_nit]&filter[company_name]&filter[completed_events]=
 ```
 
 ### **Encabezados de la Solicitud**

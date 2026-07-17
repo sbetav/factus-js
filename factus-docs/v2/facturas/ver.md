@@ -6,11 +6,16 @@ Este endpoint `devuelve` una factura específica pasando el **número de la fact
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/bills/:number
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/bills/:number
 ```
 
 ### **Encabezados de la Solicitud**

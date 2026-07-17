@@ -6,11 +6,16 @@ Esta sección describe los compos que podría contener la factura.
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/bills/validate
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/bills/validate
 ```
 
 ### **Encabezados de la Solicitud**
@@ -194,7 +199,7 @@ Valor del descuento o recargo aplicado (máximo dos decimales). |
 
 [Sección titulada «Ejemplo de Solicitud»](https://developers.factus.com.co/facturas/ejemplos/estandar-orden-servicio#ejemplo-de-solicitud)
 
-* Factura de venta
+**Factura de venta**
 
 ```
 { "reference_code": "FACT-2026-0130", "numbering_range_id": 389, "operation_type": "10", "observation": "Observación de prueba", "payment_details": [ { "payment_form": "1", "payment_method_code": "42", "reference_code": "pago-001", "amount": "83300" } ], "order_reference": { "reference_code": "ORD-2026-0130", "issue_date": "2023-06-23" }, "cash_rounding_amount": "0.00", "customer": { "identification_document_code": "31", "identification": "123456789", "company": "Alan company name", "trade_name": "Alan trade name", "address": "calle 1 # 1-1", "email": "alan.company@email.com", "phone": "1234567890", "legal_organization_code": "1", "tribute_code": "ZZ", "municipality_code": "68679" }, "items": [ { "code_reference": "PROD-000A", "name": "Producto A", "quantity": "1.00", "discount_rate": "0.00", "price": "10000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] }, { "code_reference": "PROD-000B", "name": "Producto B", "quantity": "3.00", "discount_rate": "0.00", "price": "20000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] } ]}

@@ -6,11 +6,16 @@ Este endpoint permite eliminar un rango de numeración en específico. Es útil 
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/numbering-ranges/:numbering_range_id
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/numbering-ranges/:numbering_range_id
 ```
 
 ### **Encabezados de la Solicitud**
@@ -36,7 +41,7 @@ ID del rango de numeración. Se recomienda guardar el ID del rango de numeració
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/rangos-de-numeracion/eliminar-rango#ejemplo-de-respuesta)
 
-* status 200
+**status 200**
 
 ```
 { "status": "OK", "message": "Rango de numeración eliminado con éxito"}

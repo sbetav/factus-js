@@ -6,11 +6,16 @@ Este endpoint permite `emitir` el evento de aceptación tacita. Este evento solo
 
 #### **Endpoint**
 
-* Sandbox
-* Producción
+**Sandbox**
 
 ```
 https://api-sandbox.factus.com.co/v2/bills/:number/radian/events/:event_type
+```
+
+**Producción**
+
+```
+https://api.factus.com.co/v2/bills/:number/radian/events/:event_type
 ```
 
 ### **Encabezados de la Solicitud**
@@ -63,7 +68,7 @@ código del evento. Para ver el código que pertenece a la aceptación tacita, p
 
 [Sección titulada «Ejemplo de solicitud»](https://developers.factus.com.co/facturas/aceptacion-tacita#ejemplo-de-solicitud)
 
-* example
+**example**
 
 ```
 { "identification_document_code": "13", "identification": "12345667", "dv": "", "first_name": "Pepito", "last_name": "Perez", "job_title": "Desarrollador de software", "organization_department": "Sistemas"}
