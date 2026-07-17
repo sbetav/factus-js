@@ -325,9 +325,8 @@ const htmlToMarkdown = (html, sourceUrl) => {
     const href = $(element).attr("href");
     if (!href || href.startsWith("javascript:")) return;
 
-    const stableHref = removeStarlightTabPanelHash(href, sourceUrl);
-    if (stableHref) {
-      $(element).attr("href", stableHref);
+    if (isStarlightTabPanelHref(href, sourceUrl)) {
+      $(element).replaceWith($(element).text());
       return;
     }
 
@@ -341,7 +340,7 @@ const htmlToMarkdown = (html, sourceUrl) => {
   normalizeObfuscatedEmailsInHtml($, content);
 
   return cleanupMarkdown(
-    stripStarlightTabPanelLinkHashes(
+    unwrapStarlightTabPanelLinks(
       normalizeObfuscatedEmailsInMarkdown(
         trimLargeBase64Payloads(turndown.turndown(content.html() ?? "")),
       ),
@@ -349,26 +348,16 @@ const htmlToMarkdown = (html, sourceUrl) => {
   );
 };
 
-const removeStarlightTabPanelHash = (href, sourceUrl) => {
+const isStarlightTabPanelHref = (href, sourceUrl) => {
   try {
-    const url = new URL(href, sourceUrl);
-    if (!/^tab-panel-\d+$/i.test(url.hash.slice(1))) {
-      return null;
-    }
-    url.hash = "";
-    return url.href;
+    return /^tab-panel-\d+$/i.test(new URL(href, sourceUrl).hash.slice(1));
   } catch {
-    return /#tab-panel-\d+$/i.test(href)
-      ? href.replace(/#tab-panel-\d+$/i, "")
-      : null;
+    return /^#tab-panel-\d+$/i.test(href);
   }
 };
 
-const stripStarlightTabPanelLinkHashes = (markdown) =>
-  markdown.replace(
-    /\[([^\]]+)\]\(([^)\s]*#tab-panel-\d+)\)/gi,
-    (_, label, href) => `[${label}](${href.replace(/#tab-panel-\d+$/i, "")})`,
-  );
+const unwrapStarlightTabPanelLinks = (markdown) =>
+  markdown.replace(/\[([^\]]+)\]\(([^)\s]*#tab-panel-\d+)\)/gi, "$1");
 
 const decodeCloudflareEmail = (encoded) => {
   if (
