@@ -8,6 +8,7 @@ import type { CustomerInput } from "./customer";
 import type {
   AllowanceChargeInput,
   AllowanceChargeResponse,
+  BillCurrencyInput,
   BillingPeriod,
   CodeNameObject,
   CompanyInfo,
@@ -43,6 +44,7 @@ export interface CreateCreditNoteInput {
   customization_id?: CreditNoteOperationCode;
   bill_id?: number;
   numbering_range_id?: number;
+  currency?: BillCurrencyInput;
   observation?: string;
   payment_details: DocumentPaymentDetailInput[];
   establishment?: EstablishmentInput;

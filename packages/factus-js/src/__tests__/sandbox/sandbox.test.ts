@@ -107,6 +107,7 @@ describe("sandbox integration", () => {
     phone: "1234567890",
     legal_organization_code: "2",
     tribute_code: "ZZ",
+    country_code: "CO",
     municipality_code: "68679",
   };
 
@@ -120,6 +121,7 @@ describe("sandbox integration", () => {
     phone: "1234567890",
     legal_organization_code: "2",
     tribute_code: "ZZ",
+    country_code: "CO",
     municipality_code: "68679",
   };
 

@@ -22,6 +22,7 @@ export interface CustomerInput {
   phone?: string;
   legal_organization_code: LiteralUnion<OrganizationTypeCode>;
   tribute_code?: LiteralUnion<CustomerTributeCode>;
+  country_code?: string;
   municipality_code?: string;
 }
 

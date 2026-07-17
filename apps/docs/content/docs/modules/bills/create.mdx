@@ -416,6 +416,12 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/facturas/crea
                   </>
                 ),
               },
+              country_code: {
+                type: "string",
+                required: false,
+                description:
+                  "Código del país del cliente. Consulta el catálogo oficial de países en la guía de tablas de referencia.",
+              },
               municipality_code: {
                 type: "string",
                 required: false,
@@ -800,6 +806,7 @@ const response = await factus.bills.create({
     legal_organization_code: OrganizationTypeCode.NaturalPerson,
     tribute_code: CustomerTributeCode.NotApplicable,
     identification_document_code: IdentityDocumentCode.CitizenshipCard,
+    country_code: "CO",
     municipality_code: "11001",
   },
   items: [
@@ -1416,6 +1423,31 @@ console.log(response.data.number);
                                     required: false,
                                     description:
                                       "Nombre del tributo. Ejemplo: No aplica.",
+                                  },
+                                }}
+                              />
+                            </div>
+                          ),
+                        },
+                        country: {
+                          type: "object",
+                          required: false,
+                          description: (
+                            <div>
+                              Objeto con el país del cliente.
+                              <TypeTable
+                                type={{
+                                  code: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Código del país del cliente. Ejemplo: CO (Colombia).",
+                                  },
+                                  name: {
+                                    type: "string",
+                                    required: false,
+                                    description:
+                                      "Nombre del país del cliente. Ejemplo: Colombia.",
                                   },
                                 }}
                               />

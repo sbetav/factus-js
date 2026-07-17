@@ -76,6 +76,7 @@ const bill = await factus.bills.create({
     phone: "1234567890",
     legal_organization_code: OrganizationTypeCode.NaturalPerson,
     tribute_code: CustomerTributeCode.NotApplicable,
+    country_code: "CO",
     municipality_code: "68679",
   },
   items: [

@@ -63,6 +63,32 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/notas-credito
       required: false,
       description: "ID del rango de numeración.",
     },
+    currency: {
+      type: "BillCurrencyInput",
+      required: false,
+      description: (
+        <div>
+          Totales en moneda extranjera para la representación gráfica. Si envías
+          este objeto, sus campos internos son obligatorios.
+          <TypeTable
+            type={{
+              code: {
+                type: "string",
+                required: true,
+                description:
+                  "Código ISO de la moneda extranjera. Consulta la tabla oficial de monedas en la guía de tablas de referencia.",
+              },
+              exchange_rate: {
+                type: "string | number",
+                required: true,
+                description:
+                  "Tasa de cambio para convertir los montos de la moneda local a la moneda extranjera.",
+              },
+            }}
+          />
+        </div>
+      ),
+    },
     observation: {
       type: "string",
       required: false,
@@ -284,6 +310,12 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/notas-credito
                     {"."}
                   </>
                 ),
+              },
+              country_code: {
+                type: "string",
+                required: false,
+                description:
+                  "Código del país del cliente. Consulta el catálogo oficial de países en la guía de tablas de referencia.",
               },
               municipality_code: {
                 type: "string",

@@ -44,6 +44,24 @@ describe("public type contracts", () => {
     >();
   });
 
+  test("credit note input supports optional foreign currency", () => {
+    expectTypeOf<
+      AssertTrue<HasKey<CreateCreditNoteInput, "currency">>
+    >().toEqualTypeOf<true>();
+    expectTypeOf<CreateCreditNoteInput["currency"]>().toEqualTypeOf<
+      CreateBillInput["currency"]
+    >();
+  });
+
+  test("customer input supports optional country_code", () => {
+    expectTypeOf<
+      AssertTrue<HasKey<NonNullable<CreateBillInput["customer"]>, "country_code">>
+    >().toEqualTypeOf<true>();
+    expectTypeOf<CreateBillInput["customer"]["country_code"]>().toEqualTypeOf<
+      string | undefined
+    >();
+  });
+
   test("document item input supports optional discount fields", () => {
     expectTypeOf<DocumentItemInput["discount_rate"]>().toEqualTypeOf<
       string | number | undefined
