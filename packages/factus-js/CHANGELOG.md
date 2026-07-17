@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1
+
+### Patch Changes
+
+- 8bd2c37: Align credit-note create input with Factus v1 docs: optional `bill_id`, plus `billing_period`, `establishment`, item `note` / `withholding_taxes`, and `allowance_charges.concept_type`.
+
 ## 1.1.0
 
 ### Minor Changes
