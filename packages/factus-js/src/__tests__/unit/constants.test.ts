@@ -1,8 +1,11 @@
 import { describe, expect, test } from "vitest";
 import {
   CustomerTributeCode,
+  DebitNoteCorrectionCode,
+  DebitNoteOperationCode,
   EventCode,
   IdentityDocumentCode,
+  NumberingRangeDocumentTypeCode,
   OperationTypeCode,
   PaymentFormCode,
   PaymentMethodCode,
@@ -11,8 +14,11 @@ import {
 } from "../../constants";
 import {
   CustomerTributeCodeInfo,
+  DebitNoteCorrectionCodeInfo,
+  DebitNoteOperationCodeInfo,
   EventCodeInfo,
   IdentityDocumentCodeInfo,
+  NumberingRangeDocumentTypeCodeInfo,
   OperationTypeCodeInfo,
   PaymentFormCodeInfo,
   PaymentMethodCodeInfo,
@@ -84,6 +90,52 @@ describe("constants — value map structure", () => {
       expect(info).toBeDefined();
       expect(typeof info.description).toBe("string");
     }
+  });
+
+  test("all DebitNoteOperationCode values are defined in DebitNoteOperationCodeInfo", () => {
+    for (const value of Object.values(DebitNoteOperationCode)) {
+      const info =
+        DebitNoteOperationCodeInfo[
+          value as keyof typeof DebitNoteOperationCodeInfo
+        ];
+      expect(info).toBeDefined();
+      expect(typeof info.description).toBe("string");
+    }
+  });
+
+  test("all DebitNoteCorrectionCode values are defined in DebitNoteCorrectionCodeInfo", () => {
+    for (const value of Object.values(DebitNoteCorrectionCode)) {
+      const info =
+        DebitNoteCorrectionCodeInfo[
+          value as keyof typeof DebitNoteCorrectionCodeInfo
+        ];
+      expect(info).toBeDefined();
+      expect(typeof info.description).toBe("string");
+    }
+  });
+
+  test("all NumberingRangeDocumentTypeCode values are defined in NumberingRangeDocumentTypeCodeInfo", () => {
+    for (const value of Object.values(NumberingRangeDocumentTypeCode)) {
+      const info =
+        NumberingRangeDocumentTypeCodeInfo[
+          value as keyof typeof NumberingRangeDocumentTypeCodeInfo
+        ];
+      expect(info).toBeDefined();
+      expect(typeof info.description).toBe("string");
+    }
+  });
+
+  test("NumberingRangeDocumentTypeCode no longer includes payroll document types", () => {
+    expect(Object.values(NumberingRangeDocumentTypeCode)).not.toContain("26");
+    expect(Object.values(NumberingRangeDocumentTypeCode)).not.toContain("27");
+    expect(Object.values(NumberingRangeDocumentTypeCode)).not.toContain("28");
+    expect(NumberingRangeDocumentTypeCode).not.toHaveProperty("Payroll");
+    expect(NumberingRangeDocumentTypeCode).not.toHaveProperty(
+      "PayrollAdjustmentNote",
+    );
+    expect(NumberingRangeDocumentTypeCode).not.toHaveProperty(
+      "PayrollDeletionNote",
+    );
   });
 });
 

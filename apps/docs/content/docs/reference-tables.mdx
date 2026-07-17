@@ -124,6 +124,43 @@ console.log(CreditNoteCorrectionCodeInfo[code].description); // "Ajuste de preci
 | `EarlyPaymentDiscount`          | `"5"` | Descuento comercial por pronto pago.                                     |
 | `VolumeDiscount`                | `"6"` | Descuento comercial por volumen de ventas.                               |
 
+## Tipo de operación en nota débito (`DebitNoteOperationCode`)
+
+```ts
+import { DebitNoteOperationCode, DebitNoteOperationCodeInfo } from "factus-js";
+
+const code = DebitNoteOperationCode.WithReference;
+
+console.log(code); // "30"
+console.log(DebitNoteOperationCodeInfo[code].description); // "Nota Débito que referencia una factura electrónica."
+```
+
+| Clave              | Valor  | Descripción                                           |
+| ------------------ | ------ | ----------------------------------------------------- |
+| `WithReference`    | `"30"` | Nota débito que referencia una factura electrónica.   |
+| `WithoutReference` | `"32"` | Nota débito sin referencia a una factura electrónica. |
+
+## Concepto de corrección de nota débito (`DebitNoteCorrectionCode`)
+
+```ts
+import {
+  DebitNoteCorrectionCode,
+  DebitNoteCorrectionCodeInfo,
+} from "factus-js";
+
+const code = DebitNoteCorrectionCode.ValueChange;
+
+console.log(code); // "3"
+console.log(DebitNoteCorrectionCodeInfo[code].description); // "Cambio del valor."
+```
+
+| Clave                 | Valor | Descripción        |
+| --------------------- | ----- | ------------------ |
+| `Interests`           | `"1"` | Intereses.         |
+| `CollectibleExpenses` | `"2"` | Gastos por cobrar. |
+| `ValueChange`         | `"3"` | Cambio del valor.  |
+| `Other`               | `"4"` | Otros.             |
+
 ## Estándar de producto (`ProductStandardCode`)
 
 ```ts
@@ -324,9 +361,6 @@ console.log(NumberingRangeDocumentTypeCodeInfo[code].description); // "Factura d
 | `DebitNote`                     | `"23"` | Nota Débito                      |
 | `SupportDocument`               | `"24"` | Documento Soporte                |
 | `SupportDocumentAdjustmentNote` | `"25"` | Nota de Ajuste Documento Soporte |
-| `Payroll`                       | `"26"` | Nomina                           |
-| `PayrollAdjustmentNote`         | `"27"` | Nota de Ajuste Nomina            |
-| `PayrollDeletionNote`           | `"28"` | Nota de eliminación de nomina    |
 | `PaperOrStubInvoice`            | `"30"` | Factura de talonario y de papel  |
 
 ## Concepto de corrección de nota de ajuste (`AdjustmentNoteReasonCode`)

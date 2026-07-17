@@ -12,6 +12,8 @@ import type {
   CreditNoteCorrectionCode,
   CreditNoteOperationCode,
   CustomerTributeCode,
+  DebitNoteCorrectionCode,
+  DebitNoteOperationCode,
   EventCode,
   FiscalResponsibilityCode,
   IdentityDocumentCode,
@@ -74,6 +76,28 @@ export const CreditNoteCorrectionCodeInfo: Record<
   "4": { description: "Ajuste de precio." },
   "5": { description: "Descuento comercial por pronto pago." },
   "6": { description: "Descuento comercial por volumen de ventas." },
+};
+
+export const DebitNoteOperationCodeInfo: Record<
+  DebitNoteOperationCode,
+  ConstantInfo
+> = {
+  "30": {
+    description: "Nota Débito que referencia una factura electrónica.",
+  },
+  "32": {
+    description: "Nota Débito sin referencia a una factura electrónica.",
+  },
+};
+
+export const DebitNoteCorrectionCodeInfo: Record<
+  DebitNoteCorrectionCode,
+  ConstantInfo
+> = {
+  "1": { description: "Intereses." },
+  "2": { description: "Gastos por cobrar." },
+  "3": { description: "Cambio del valor." },
+  "4": { description: "Otros." },
 };
 
 export const ProductStandardCodeInfo: Record<
@@ -186,9 +210,6 @@ export const NumberingRangeDocumentTypeCodeInfo: Record<
   "23": { description: "Nota Débito" },
   "24": { description: "Documento Soporte" },
   "25": { description: "Nota de Ajuste Documento Soporte" },
-  "26": { description: "Nomina" },
-  "27": { description: "Nota de Ajuste Nomina" },
-  "28": { description: "Nota de eliminación de nomina" },
   "30": { description: "Factura de talonario y de papel" },
 };
 

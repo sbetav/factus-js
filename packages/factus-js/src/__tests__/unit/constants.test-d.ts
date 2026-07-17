@@ -2,8 +2,11 @@ import { describe, expectTypeOf, test } from "vitest";
 import type {
   AdjustmentNoteReasonCode as AdjustmentNoteReasonCodeType,
   ChargeDiscountCode as ChargeDiscountCodeType,
+  DebitNoteCorrectionCode as DebitNoteCorrectionCodeType,
+  DebitNoteOperationCode as DebitNoteOperationCodeType,
   EventCode as EventCodeType,
   IdentityDocumentCode as IdentityDocumentCodeType,
+  NumberingRangeDocumentTypeCode as NumberingRangeDocumentTypeCodeType,
   OperationTypeCode as OperationTypeCodeType,
   PaymentFormCode as PaymentFormCodeType,
   PaymentMethodCode as PaymentMethodCodeType,
@@ -13,8 +16,11 @@ import type {
 import {
   AdjustmentNoteReasonCode,
   ChargeDiscountCode,
+  DebitNoteCorrectionCode,
+  DebitNoteOperationCode,
   EventCode,
   IdentityDocumentCode,
+  NumberingRangeDocumentTypeCode,
   OperationTypeCode,
   PaymentFormCode,
   PaymentMethodCode,
@@ -83,6 +89,36 @@ describe("constant values satisfy their type alias", () => {
     ).toExtend<ChargeDiscountCodeType>();
   });
 
+  test("DebitNoteOperationCode values satisfy their type alias", () => {
+    expectTypeOf(
+      DebitNoteOperationCode.WithReference,
+    ).toExtend<DebitNoteOperationCodeType>();
+    expectTypeOf(
+      DebitNoteOperationCode.WithoutReference,
+    ).toExtend<DebitNoteOperationCodeType>();
+  });
+
+  test("DebitNoteCorrectionCode values satisfy their type alias", () => {
+    expectTypeOf(
+      DebitNoteCorrectionCode.Interests,
+    ).toExtend<DebitNoteCorrectionCodeType>();
+    expectTypeOf(
+      DebitNoteCorrectionCode.Other,
+    ).toExtend<DebitNoteCorrectionCodeType>();
+  });
+
+  test("NumberingRangeDocumentTypeCode values satisfy their type alias", () => {
+    expectTypeOf(
+      NumberingRangeDocumentTypeCode.SalesInvoice,
+    ).toExtend<NumberingRangeDocumentTypeCodeType>();
+    expectTypeOf(
+      NumberingRangeDocumentTypeCode.DebitNote,
+    ).toExtend<NumberingRangeDocumentTypeCodeType>();
+    expectTypeOf(
+      NumberingRangeDocumentTypeCode.PaperOrStubInvoice,
+    ).toExtend<NumberingRangeDocumentTypeCodeType>();
+  });
+
   test("constant map values are strings, not objects", () => {
     expectTypeOf(PaymentFormCode.CashPayment).toEqualTypeOf<"1">();
     expectTypeOf(PaymentFormCode.CreditPayment).toEqualTypeOf<"2">();
@@ -92,5 +128,7 @@ describe("constant values satisfy their type alias", () => {
     expectTypeOf(
       OperationTypeCode.HealthCollection,
     ).toEqualTypeOf<"SS-Recaudo">();
+    expectTypeOf(DebitNoteOperationCode.WithReference).toEqualTypeOf<"30">();
+    expectTypeOf(DebitNoteCorrectionCode.ValueChange).toEqualTypeOf<"3">();
   });
 });

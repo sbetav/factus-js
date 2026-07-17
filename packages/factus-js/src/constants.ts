@@ -35,6 +35,22 @@ export const CreditNoteCorrectionCode = {
 export type CreditNoteCorrectionCode =
   (typeof CreditNoteCorrectionCode)[keyof typeof CreditNoteCorrectionCode];
 
+export const DebitNoteOperationCode = {
+  WithReference: "30",
+  WithoutReference: "32",
+} as const;
+export type DebitNoteOperationCode =
+  (typeof DebitNoteOperationCode)[keyof typeof DebitNoteOperationCode];
+
+export const DebitNoteCorrectionCode = {
+  Interests: "1",
+  CollectibleExpenses: "2",
+  ValueChange: "3",
+  Other: "4",
+} as const;
+export type DebitNoteCorrectionCode =
+  (typeof DebitNoteCorrectionCode)[keyof typeof DebitNoteCorrectionCode];
+
 export const ProductStandardCode = {
   TaxpayerAdoption: "999",
   UNSPSC: "001",
@@ -133,9 +149,6 @@ export const NumberingRangeDocumentTypeCode = {
   DebitNote: "23",
   SupportDocument: "24",
   SupportDocumentAdjustmentNote: "25",
-  Payroll: "26",
-  PayrollAdjustmentNote: "27",
-  PayrollDeletionNote: "28",
   PaperOrStubInvoice: "30",
 } as const;
 export type NumberingRangeDocumentTypeCode =
