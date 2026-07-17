@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.2.0
+
+### Minor Changes
+
+- 442266c: - Add optional `CustomerInput.country_code` for bill and credit-note customers
+  - Add optional `CreateCreditNoteInput.currency` (`BillCurrencyInput`) for graphic-representation totals in another currency
+
 ## 2.1.0
 
 ### Minor Changes
