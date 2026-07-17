@@ -8,8 +8,8 @@ Este endpoint permite ver la Información de la empresa del usuario correspondie
 
 #### **Endpoint**
 
-* [Pruebas](https://developers.factus.com.co/v1/empresas/ver#tab-panel-175)
-* [Producción](https://developers.factus.com.co/v1/empresas/ver#tab-panel-176)
+* Pruebas
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v1/company
@@ -27,7 +27,7 @@ Para realizar la solicitud es necesario incluir los siguientes encabezados:
 
 ``**Nota:** Reemplaza `token_de_acceso` con el token proporcionado tras autenticarte.``
 
-* [status 200](https://developers.factus.com.co/v1/empresas/ver#tab-panel-177)
+* status 200
 
 ```
 { "status": "OK", "message": "Solicitud exitosa", "data": { "url_logo": "http://api.test/storage/images/logos/IURT3at1baB4a7YHgmDPDCoaLJAPxsmJ3eQQeVBq.png", "nit": "900825759", "dv": "7", "company": "", "trade_name": "", "names": "ALAN", "surnames": "TURING", "graphic_representation_name": "ALAN TURING", "registration_code": "", "economic_activity": 6920, "phone": "0987654321", "email": "alanturing@enigmasas.com", "address": "calle 100 #50-80", "tribute": { "code": "ZZ", "name": "No aplica" }, "legal_organization": { "code": "2", "name": "Persona Natural" }, "municipality": { "code": "68872", "name": "Villanueva", "department": { "code": "68", "name": "Santander" } }, "responsibilities": [ { "code": "R-99-PN", "name": "No responsable" } ], "created_at": "2025-07-23T12:33:22Z", "updated_at": "2025-09-22T10:58:07Z" }}

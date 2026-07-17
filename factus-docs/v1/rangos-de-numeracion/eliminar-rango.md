@@ -8,8 +8,8 @@ Este endpoint permite eliminar un rango de numeración en específico. Es útil 
 
 #### **Endpoint**
 
-* [Pruebas](https://developers.factus.com.co/v1/rangos-de-numeracion/eliminar-rango#tab-panel-281)
-* [Producción](https://developers.factus.com.co/v1/rangos-de-numeracion/eliminar-rango#tab-panel-282)
+* Pruebas
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v1/numbering-ranges/:numbering_range_id
@@ -41,7 +41,7 @@ Para realizar la solicitud es necesario incluir los siguientes encabezados:
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/v1/rangos-de-numeracion/eliminar-rango#ejemplo-de-respuesta)
 
-* [status 200](https://developers.factus.com.co/v1/rangos-de-numeracion/eliminar-rango#tab-panel-283)
+* status 200
 
 ```
 { "status": "OK", "message": "Rango de numeración eliminado con éxito"}

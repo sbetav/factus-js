@@ -10,8 +10,8 @@ Elimina un documento soporte usando el código de referencia con el cual se cre�
 
 #### **Endpoint**
 
-* [Pruebas](https://developers.factus.com.co/v1/documentos-soporte/eliminar#tab-panel-166)
-* [Producción](https://developers.factus.com.co/v1/documentos-soporte/eliminar#tab-panel-167)
+* Pruebas
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v1/support-documents/reference/:reference_code
@@ -43,7 +43,7 @@ Para realizar la solicitud es necesario incluir los siguientes encabezados:
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/v1/documentos-soporte/eliminar#ejemplo-de-respuesta)
 
-* [status 200](https://developers.factus.com.co/v1/documentos-soporte/eliminar#tab-panel-168)
+* status 200
 
 ```
 { "status": "OK", "message": "Documento con código de referencia <reference_code> eliminado con éxito"}

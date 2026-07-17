@@ -12,8 +12,8 @@ Un comprador solo tendrá que indicar su tipo y número de documento y, con esta
 
 #### **Endpoint**
 
-* [Pruebas](https://developers.factus.com.co/v1/informacion-adquirientes/obtener-datos-adquiriente#tab-panel-208)
-* [Producción](https://developers.factus.com.co/v1/informacion-adquirientes/obtener-datos-adquiriente#tab-panel-209)
+* Pruebas
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v1/dian/acquirer?identification_document_id=&identification_number=
@@ -63,7 +63,7 @@ La consulta devuelve un objecto con el nombre y correo del adquiriente.
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/v1/informacion-adquirientes/obtener-datos-adquiriente#ejemplo-de-respuesta)
 
-* [status 200](https://developers.factus.com.co/v1/informacion-adquirientes/obtener-datos-adquiriente#tab-panel-210)
+* status 200
 
 ```
 { "status": "OK", "message": "Solicitud exitosa", "data": { "name": "Nombre Cédula de ciudadanía 5", "email": "Mail_Cédula de ciudadanía_5@mail.com" }}

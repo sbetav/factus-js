@@ -9,8 +9,8 @@ Para utilizar el archivo, deberás decodificar el contenido de la propiedad `pdf
 
 #### **Endpoint**
 
-* [Pruebas](https://developers.factus.com.co/v1/notas-ajuste-documentos-soporte/descargar-nota-ajuste-soporte-pdf#tab-panel-220)
-* [Producción](https://developers.factus.com.co/v1/notas-ajuste-documentos-soporte/descargar-nota-ajuste-soporte-pdf#tab-panel-221)
+* Pruebas
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v1/adjustment-notes/download-pdf/:number
@@ -44,7 +44,7 @@ Puede encontrar el número de la nota de ajuste a documento soporte, debe ver la
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/v1/notas-ajuste-documentos-soporte/descargar-nota-ajuste-soporte-pdf#ejemplo-de-respuesta)
 
-* [status 200](https://developers.factus.com.co/v1/notas-ajuste-documentos-soporte/descargar-nota-ajuste-soporte-pdf#tab-panel-222)
+* status 200
 
 ```
 { "status": "OK", "message": "Solicitud exitosa", "data": { "file_name": "nas09008257590002500000017", "pdf_base_64_encoded": "[TRIMMED_BASE64_60360_CHARS]" }}

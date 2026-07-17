@@ -8,8 +8,8 @@ Este endpoint permite obtener información detallada sobre la suscripción actua
 
 #### **Endpoint**
 
-* [Pruebas](https://developers.factus.com.co/v1/suscripciones/suscripcion-actual#tab-panel-293)
-* [Producción](https://developers.factus.com.co/v1/suscripciones/suscripcion-actual#tab-panel-294)
+* Pruebas
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v1/subscriptions/current
@@ -46,7 +46,7 @@ Para realizar la solicitud es necesario incluir los siguientes encabezados:
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/v1/suscripciones/suscripcion-actual#ejemplo-de-respuesta)
 
-* [status 200](https://developers.factus.com.co/v1/suscripciones/suscripcion-actual#tab-panel-295)
+* status 200
 
 ```
 { "status": "OK", "message": "Solicitud exitosa", "data": { "total_documents": 3000, "documents_used": 0, "documents_remaining": 3000, "subscription_days_to_expires": 349, "subscription_start_date": "2025-03-01T00:00:00Z", "subscription_expiration_date": "2026-03-01T00:00:00Z", "subscription_is_expired": false }}

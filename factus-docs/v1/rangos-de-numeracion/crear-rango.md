@@ -8,8 +8,8 @@ Este endpoint permite crear un rango de numeración en específico. Es útil par
 
 #### **Endpoint**
 
-* [Pruebas](https://developers.factus.com.co/v1/rangos-de-numeracion/crear-rango#tab-panel-278)
-* [Producción](https://developers.factus.com.co/v1/rangos-de-numeracion/crear-rango#tab-panel-279)
+* Pruebas
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v1/numbering-ranges
@@ -67,7 +67,7 @@ Solo es requerido si el campo `document` contiene el código `21`, `24` o `30`. 
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/v1/rangos-de-numeracion/crear-rango#ejemplo-de-respuesta)
 
-* [status 200](https://developers.factus.com.co/v1/rangos-de-numeracion/crear-rango#tab-panel-280)
+* status 200
 
 ```
 { "status": "Created", "message": "Rango de numeración creado con éxito", "data": { "id": 51, "document": "21", "document_name": "Factura de Venta", "prefix": "FV", "from": 1, "to": 1000, "current": 1, "resolution_number": "d3kd93kd39jd92", "start_date": "01-10-2024", "end_date": "01-04-2025", "technical_key": "dfs3dfs334d8d8s96s8d", "is_expired": true, "is_active": 0, "created_at": "2024-09-10T15:30:26Z", "updated_at": "2024-09-10T15:30:26Z" }}

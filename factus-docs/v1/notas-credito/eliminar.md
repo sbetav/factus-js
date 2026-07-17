@@ -8,8 +8,8 @@ Elimina una nota crédito usando el código de referencia con el cual se creó. 
 
 #### **Endpoint**
 
-* [Pruebas](https://developers.factus.com.co/v1/notas-credito/eliminar#tab-panel-257)
-* [Producción](https://developers.factus.com.co/v1/notas-credito/eliminar#tab-panel-258)
+* Pruebas
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v1/credit-notes/reference/:reference_code
@@ -41,9 +41,9 @@ Para realizar la solicitud es necesario incluir los siguientes encabezados:
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/v1/notas-credito/eliminar#ejemplo-de-respuesta)
 
-* [status 200](https://developers.factus.com.co/v1/notas-credito/eliminar#tab-panel-259)
-* [status 404](https://developers.factus.com.co/v1/notas-credito/eliminar#tab-panel-260)
-* [status 409](https://developers.factus.com.co/v1/notas-credito/eliminar#tab-panel-261)
+* status 200
+* status 404
+* status 409
 
 ```
 { "status": "OK", "message": "Documento con código de referencia 6 eliminado con éxito"}

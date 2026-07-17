@@ -9,8 +9,8 @@ Para utilizar el archivo, deberás decodificar el contenido de la propiedad `pdf
 
 #### **Endpoint**
 
-* [Pruebas](https://developers.factus.com.co/v1/facturas/descargar-xml#tab-panel-189)
-* [Producción](https://developers.factus.com.co/v1/facturas/descargar-xml#tab-panel-190)
+* Pruebas
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v1/bills/download-xml/:number
@@ -38,7 +38,7 @@ Para realizar la solicitud es necesario incluir los siguientes encabezados:
 
 * * *
 
-* [status 200](https://developers.factus.com.co/v1/facturas/descargar-xml#tab-panel-191)
+* status 200
 
 ```
 { "status": "OK", "message": "Solicitud exitosa", "data": { "file_name": "fv09008257590002400000241", "xml_base_64_encoded": "[TRIMMED_BASE64_20808_CHARS]" }}

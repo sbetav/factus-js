@@ -8,8 +8,8 @@ Este endpoint permite actualizar el consecutivo de un rango de numeración en es
 
 #### **Endpoint**
 
-* [Pruebas](https://developers.factus.com.co/v1/rangos-de-numeracion/actualizar-consecutivo#tab-panel-275)
-* [Producción](https://developers.factus.com.co/v1/rangos-de-numeracion/actualizar-consecutivo#tab-panel-276)
+* Pruebas
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v1/numbering-ranges/:numbering_range_id/current
@@ -69,7 +69,7 @@ Para realizar la solicitud es necesario incluir los siguientes encabezados:
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/v1/rangos-de-numeracion/actualizar-consecutivo#ejemplo-de-respuesta)
 
-* [status 200](https://developers.factus.com.co/v1/rangos-de-numeracion/actualizar-consecutivo#tab-panel-277)
+* status 200
 
 ```
 { "status": "OK", "message": "Rango de numeración actualizado con éxito", "data": { "id": 59, "document": "21", "document_name": "Factura de Venta", "prefix": "FV", "from": 1, "to": 1000, "current": 1, "resolution_number": "d3kd93kd39jd92", "start_date": "01-10-2024", "end_date": "01-04-2025", "technical_key": "dfs3dfs334d8d8s96s8d", "is_expired": true, "is_active": 1, "created_at": "2024-09-10T15:56:22Z", "updated_at": "2024-09-10T17:35:56Z" }}

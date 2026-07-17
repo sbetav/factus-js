@@ -9,8 +9,8 @@ Para utilizar el archivo, deberás decodificar el contenido de la propiedad `pdf
 
 #### **Endpoint**
 
-* [Pruebas](https://developers.factus.com.co/v1/notas-ajuste-documentos-soporte/descargar-xml#tab-panel-223)
-* [Producción](https://developers.factus.com.co/v1/notas-ajuste-documentos-soporte/descargar-xml#tab-panel-224)
+* Pruebas
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v1/adjustment-notes/download-xml/:number
@@ -40,7 +40,7 @@ Puede encontrar el número de la nota de ajuste a documento soporte, debe ver la
 
 * * *
 
-* [status 200](https://developers.factus.com.co/v1/notas-ajuste-documentos-soporte/descargar-xml#tab-panel-225)
+* status 200
 
 ```
 { "status": "OK", "message": "Solicitud exitosa", "data": { "file_name": "nas09008257590002500000017", "xml_base_64_encoded": "[TRIMMED_BASE64_18400_CHARS]" }}

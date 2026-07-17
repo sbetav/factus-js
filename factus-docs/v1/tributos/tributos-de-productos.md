@@ -8,8 +8,8 @@ El endpoint **Tributos de Productos** permite obtener los tributos de productos 
 
 #### **Endpoint**
 
-* [Pruebas](https://developers.factus.com.co/v1/tributos/tributos-de-productos#tab-panel-299)
-* [Producción](https://developers.factus.com.co/v1/tributos/tributos-de-productos#tab-panel-300)
+* Pruebas
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v1/tributes/products?name=
@@ -50,7 +50,7 @@ Para realizar la solicitud es necesario incluir los siguientes encabezados:
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/v1/tributos/tributos-de-productos#ejemplo-de-respuesta)
 
-* [status 200](https://developers.factus.com.co/v1/tributos/tributos-de-productos#tab-panel-301)
+* status 200
 
 ```
 { "status": "OK", "message": "Solicitud exitosa", "data": [ { "id": 1, "code": "01", "name": "IVA", "description": "Impuesto sobre la Ventas" }, { "id": 2, "code": "02", "name": "IC", "description": "Impuesto al Consumo Departamental Nominal" }, { "id": 3, "code": "03", "name": "ICA", "description": "Impuesto de Industria, Comercio y Aviso" }, { "id": 4, "code": "04", "name": "INC", "description": "Impuesto Nacional al Consumo" }, { "id": 5, "code": "05", "name": "ReteIVA", "description": "Retención sobre el IVA" }, { "id": 6, "code": "06", "name": "ReteRenta", "description": "Retención sobre renta" }, { "id": 7, "code": "07", "name": "ReteICA", "description": "Retención sobre el ICA" }, { "id": 8, "code": "08", "name": "IC Porcentual", "description": "Impuesto al Consumo Departamental Porcentual" }, { "id": 9, "code": "20", "name": "FtoHorticultura", "description": "Cuota de Fomento Hortifrutícula" }, { "id": 10, "code": "21", "name": "Timbre", "description": "Impuesto de Timbre" }, { "id": 11, "code": "22", "name": "INC Bolsas", "description": "Impuesto Nacional al Consumo de Bolsa Plástica" }, { "id": 12, "code": "23", "name": "INCarbono", "description": "Impuesto Nacional del Carbono" }, { "id": 13, "code": "24", "name": "INCarbono", "description": "Impuesto Nacional del Carbono" }, { "id": 14, "code": "24", "name": "INCombustibles", "description": "Impuesto Nacional a los Combustibles" }, { "id": 15, "code": "25", "name": "Sobretasa Combustibles", "description": "Sobretasa a los combustibles" }, { "id": 16, "code": "26", "name": "Sordicom", "description": "Contribución minoristas (Combustibles)" }, { "id": 17, "code": "30", "name": "IC Datos", "description": "Impuesto al Consumo de Datos" } ]}

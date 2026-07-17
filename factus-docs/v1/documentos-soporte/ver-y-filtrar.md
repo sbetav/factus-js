@@ -8,8 +8,8 @@ Esta sección explica cómo utilizar este endpoint para buscar y filtrar los doc
 
 #### **Endpoint**
 
-* [Pruebas](https://developers.factus.com.co/v1/documentos-soporte/ver-y-filtrar#tab-panel-169)
-* [Producción](https://developers.factus.com.co/v1/documentos-soporte/ver-y-filtrar#tab-panel-170)
+* Pruebas
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v1/support-documents?filter[identification]&filter[names]&filter[number]&filter[prefix]&filter[reference_code]&filter[status]
@@ -50,7 +50,7 @@ Para realizar la solicitud es necesario incluir los siguientes encabezados:
 
 [Sección titulada «Respuesta del Endpoint»](https://developers.factus.com.co/v1/documentos-soporte/ver-y-filtrar#respuesta-del-endpoint)
 
-* [Status 200](https://developers.factus.com.co/v1/documentos-soporte/ver-y-filtrar#tab-panel-171)
+* Status 200
 
 ```
 { "status": "OK", "message": "Solicitud exitosa", "data": { "data": [ { "id": 6, "number": "SEDS984000021", "api_client_name": "hallinxsl7@gmail.com", "reference_code": "REF0017", "identification": "123456789", "graphic_representation_name": "Alan Turing", "trade_name": null, "names": "Alan Turing", "email": "alanturing@enigmasas.com", "total": "90000.00", "status": 1, "errors": [ "Regla: DSAB19b, Notificación: NIT del Prestador de Servicios no está autorizado por la DIAN" ], "created_at": "11-02-2025 10:16:18 PM", "adjustment_notes": [] } ], "pagination": { "total": 1, "per_page": 10, "current_page": 1, "last_page": 1, "from": 1, "to": 1, "links": [ { "url": null, "label": "&laquo; Anterior", "page": null, "active": false }, { "url": "https://api-sandbox.factus.com.co/v1/support-documents?filter%5Bnumber%5D=SEDS984000021&page=1", "label": 1, "page": 1, "active": true }, { "url": null, "label": "Siguiente &raquo;", "page": null, "active": false } ] } }}

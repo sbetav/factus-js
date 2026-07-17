@@ -8,8 +8,8 @@ El endpoint **Países** permite realizar búsquedas en todos los países disponi
 
 #### **Endpoint**
 
-* [Pruebas](https://developers.factus.com.co/v1/paises/obtener-paises#tab-panel-272)
-* [Producción](https://developers.factus.com.co/v1/paises/obtener-paises#tab-panel-273)
+* Pruebas
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v1/countries
@@ -51,7 +51,7 @@ Para realizar la solicitud es necesario incluir los siguientes encabezados:
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/v1/paises/obtener-paises#ejemplo-de-respuesta)
 
-* [status 200](https://developers.factus.com.co/v1/paises/obtener-paises#tab-panel-274)
+* status 200
 
 ```
 { "status": "OK", "message": "Solicitud exitosa", "data": [ { "id": 1, "code": "AF", "name": "Afganistán" }, { "id": 2, "code": "AX", "name": "Åland" }, { "id": 3, "code": "AL", "name": "Albania" }, { "id": 4, "code": "DE", "name": "Alemania" }, { "id": 5, "code": "AD", "name": "Andorra" }, { "id": 6, "code": "AO", "name": "Angola" }, { "id": 7, "code": "AI", "name": "Anguila" }, { "id": 8, "code": "AQ", "name": "Antártida" }, { "id": 9, "code": "AG", "name": "Antigua Y Barbuda" }, { "id": 10, "code": "SA", "name": "Arabia Saudita" }, { "id": 11, "code": "DZ", "name": "Argelia" }, { "id": 12, "code": "AR", "name": "Argentina" }, { "id": 13, "code": "AM", "name": "Armenia" }, { "id": 14, "code": "AW", "name": "Aruba" }, { "id": 15, "code": "AU", "name": "Australia" }, { "id": 16, "code": "AT", "name": "Austria" }, { "id": 17, "code": "AZ", "name": "Azerbaiyán" }, { "id": 18, "code": "BS", "name": "Bahamas" }, { "id": 19, "code": "BD", "name": "Bangladés" }, { "id": 20, "code": "BB", "name": "Barbados" }, { "id": 21, "code": "BH", "name": "Baréin" }, { "id": 22, "code": "BE", "name": "Bélgica" }, { "id": 23, "code": "BZ", "name": "Belice" } ]}

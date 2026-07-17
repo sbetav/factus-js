@@ -8,8 +8,8 @@ Este contenido es para V1. Cambia a la [versión más reciente](https://develope
 
 [Sección titulada «Endpoint»](https://developers.factus.com.co/v1/autenticacion/auth#endpoint)
 
-* [Pruebas](https://developers.factus.com.co/v1/autenticacion/auth#tab-panel-144)
-* [Producción](https://developers.factus.com.co/v1/autenticacion/auth#tab-panel-145)
+* Pruebas
+* Producción
 
 `https://api-sandbox.factus.com.co/oauth/token`
 
@@ -63,9 +63,9 @@ El cuerpo de la solicitud debe enviarse como **form-data** e incluir los siguien
 
 A continuación, se muestra un ejemplo de cómo enviar una solicitud al endpoint:
 
-* [Laravel php](https://developers.factus.com.co/v1/autenticacion/auth#tab-panel-146)
-* [Node js](https://developers.factus.com.co/v1/autenticacion/auth#tab-panel-147)
-* [Curl](https://developers.factus.com.co/v1/autenticacion/auth#tab-panel-148)
+* Laravel php
+* Node js
+* Curl
 
 Ventana de terminal
 

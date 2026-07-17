@@ -8,8 +8,8 @@ Este endpoint permite obtener el asunto y el zip adjunto (en formato Base64) que
 
 #### **Endpoint**
 
-* [Pruebas](https://developers.factus.com.co/v1/facturas/obtener-contenido-de-correo#tab-panel-199)
-* [Producción](https://developers.factus.com.co/v1/facturas/obtener-contenido-de-correo#tab-panel-200)
+* Pruebas
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v1/bills/:number/email-content
@@ -41,7 +41,7 @@ Para realizar la solicitud es necesario incluir los siguientes encabezados:
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/v1/facturas/obtener-contenido-de-correo#ejemplo-de-respuesta)
 
-* [status 200](https://developers.factus.com.co/v1/facturas/obtener-contenido-de-correo#tab-panel-201)
+* status 200
 
 ```
 { "status": "OK", "message": "Solicitud exitosa", "data": { "subject": "901724254;FACTUS SAS;SETP990000748;01;FACTUS SAS", "attached_document": "[TRIMMED_BASE64_69784_CHARS]" }}

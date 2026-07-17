@@ -8,8 +8,8 @@ Este endpoint envía por correo electrónico la nota crédito en un archivo ZIP 
 
 #### **Endpoint**
 
-* [Pruebas](https://developers.factus.com.co/v1/notas-credito/enviar-correo#tab-panel-235)
-* [Producción](https://developers.factus.com.co/v1/notas-credito/enviar-correo#tab-panel-236)
+* Pruebas
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v1/credit-notes/send-email/:number
@@ -58,7 +58,7 @@ El cuerpo (Body) de la solicitud debe enviarse en formato JSON y debe incluir lo
 
 Aquí tienes un ejemplo de cómo debería quedar el cuerpo de la solicitud en formato JSON:
 
-* [200 - Envío de correo](https://developers.factus.com.co/v1/notas-credito/enviar-correo#tab-panel-237)
+* 200 - Envío de correo
 
 ```
 { "email": "alanturing@enigmasas.com.com", "pdf_base_64_encoded": "[TRIMMED_BASE64_60784_CHARS]"}
@@ -68,7 +68,7 @@ Aquí tienes un ejemplo de cómo debería quedar el cuerpo de la solicitud en fo
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/v1/notas-credito/enviar-correo#ejemplo-de-respuesta)
 
-* [status 200](https://developers.factus.com.co/v1/notas-credito/enviar-correo#tab-panel-238)
+* status 200
 
 ```
 { "status": "OK", "message": "Nota crédito enviada al cliente con éxito"}

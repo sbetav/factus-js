@@ -8,8 +8,8 @@ Este contenido es para V1. Cambia a la [versión más reciente](https://develope
 
 [Sección titulada «Endpoint»](https://developers.factus.com.co/v1/autenticacion/refresh-token#endpoint)
 
-* [Pruebas](https://developers.factus.com.co/v1/autenticacion/refresh-token#tab-panel-149)
-* [Producción](https://developers.factus.com.co/v1/autenticacion/refresh-token#tab-panel-150)
+* Pruebas
+* Producción
 
 `https://api-sandbox.factus.com.co/oauth/token`
 
@@ -55,9 +55,9 @@ La solicitud debe enviarse en formato `form-data`. A continuación se detallan l
 
 A continuación, se muestra un ejemplo de cómo enviar una solicitud al endpoint:
 
-* [Laravel php](https://developers.factus.com.co/v1/autenticacion/refresh-token#tab-panel-151)
-* [Node js](https://developers.factus.com.co/v1/autenticacion/refresh-token#tab-panel-152)
-* [Curl](https://developers.factus.com.co/v1/autenticacion/refresh-token#tab-panel-153)
+* Laravel php
+* Node js
+* Curl
 
 Ventana de terminal
 

@@ -9,8 +9,8 @@ Para utilizar el archivo, deberás decodificar el contenido de la propiedad `pdf
 
 #### **Endpoint**
 
-* [Pruebas](https://developers.factus.com.co/v1/documentos-soporte/descargar-documento-soporte#tab-panel-160)
-* [Producción](https://developers.factus.com.co/v1/documentos-soporte/descargar-documento-soporte#tab-panel-161)
+* Pruebas
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v1/support-documents/download-pdf/:number
@@ -44,7 +44,7 @@ Puede encontrar el número del documento soporte, debe ver la respuesta de la [c
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/v1/documentos-soporte/descargar-documento-soporte#ejemplo-de-respuesta)
 
-* [status 200](https://developers.factus.com.co/v1/documentos-soporte/descargar-documento-soporte#tab-panel-162)
+* status 200
 
 ```
 { "status": "OK", "message": "Solicitud exitosa", "data": { "file_name": "ds09017242540002500000006", "pdf_base_64_encoded": "[TRIMMED_BASE64_60832_CHARS]" }}

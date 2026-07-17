@@ -13,8 +13,8 @@ Este endpoint permite consultar todas las suscripciones activas. Devuelve inform
 
 #### **Endpoint**
 
-* [Pruebas](https://developers.factus.com.co/v1/suscripciones/suscripciones#tab-panel-296)
-* [Producción](https://developers.factus.com.co/v1/suscripciones/suscripciones#tab-panel-297)
+* Pruebas
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v1/subscriptions
@@ -56,7 +56,7 @@ Para realizar la solicitud es necesario incluir los siguientes encabezados:
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/v1/suscripciones/suscripciones#ejemplo-de-respuesta)
 
-* [status 200](https://developers.factus.com.co/v1/suscripciones/suscripciones#tab-panel-298)
+* status 200
 
 ```
 { "status": "OK", "message": "Solicitud exitosa", "data": [ { "name": "Facturación", "supported_document_types": [ "Factura de Venta", "Nota Crédito", "Nota Débito", "Documento Soporte", "Nota de Ajuste Documento Soporte" ], "documents_quota": 0, "documents_consumed": 0, "documents_available": "Ilimitado", "days_until_expiration": 365, "activated_at": "2025-12-10T00:00:00Z", "expires_at": "2026-12-10T00:00:00Z", "has_expired": false, "is_active": true, "has_unlimited_quota": true }, { "name": "Nómina", "supported_document_types": [ "Nómina", "Nota de Ajuste Nómina", "Nota de eliminación de nómina" ], "documents_quota": 100, "documents_consumed": 0, "documents_available": 100, "days_until_expiration": 365, "activated_at": "2025-12-10T00:00:00Z", "expires_at": "2026-12-10T00:00:00Z", "has_expired": false, "is_active": true, "has_unlimited_quota": false } ]}

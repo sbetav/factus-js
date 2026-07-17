@@ -6,8 +6,8 @@ Este contenido es para V1. Cambia a la [versión más reciente](https://develope
 
 #### **Endpoint**
 
-* [Pruebas](https://developers.factus.com.co/v1/rangos-de-numeracion/ver-rango#tab-panel-290)
-* [Producción](https://developers.factus.com.co/v1/rangos-de-numeracion/ver-rango#tab-panel-291)
+* Pruebas
+* Producción
 
 ```
 https://api-sandbox.factus.com.co/v1/numbering-ranges/:numbering_range_id
@@ -62,7 +62,7 @@ Para realizar la solicitud es necesario incluir los siguientes encabezados:
 
 [Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/v1/rangos-de-numeracion/ver-rango#ejemplo-de-respuesta)
 
-* [status 200](https://developers.factus.com.co/v1/rangos-de-numeracion/ver-rango#tab-panel-292)
+* status 200
 
 ```
 { "status": "OK", "message": "Solicitud exitosa", "data": { "id": 4, "document": "21", "document_name": "Factura de Venta", "prefix": "SEPT", "from": 990000000, "to": 995000000, "current": 990000295, "resolution_number": "18760000001", "start_date": "19-01-2019", "end_date": "19-01-2030", "technical_key": "fc8eac422eba16e22ffd8c6f94b3f40a6e38162c", "is_expired": false, "is_active": 1, "created_at": "2023-06-01T08:00:38Z", "updated_at": "2024-09-10T10:31:50Z" }}
