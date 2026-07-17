@@ -45,7 +45,7 @@ The script opens an interactive version selector:
 - `v1`: `https://developers.factus.com.co/v1`
 - `v2`: `https://developers.factus.com.co/`
 
-The script tries to use `wget` mirror mode and falls back to a Node.js crawler if not available. The crawler follows every reachable documentation page under the selected docs URL. It extracts the page content and convert it to Markdown, also it trims long base64 payloads to keep context size manageable.
+The script uses a Node.js crawler that follows every reachable documentation page under the selected docs URL. It extracts the page content and convert it to Markdown, also it trims long base64 payloads to keep context size manageable.
 
 Output folders:
 

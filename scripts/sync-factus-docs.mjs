@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import { spawn } from "node:child_process";
 import { createHash } from "node:crypto";
 import {
   mkdir,
@@ -82,10 +81,7 @@ const run = async () => {
   await mkdir(config.mirrorDir, { recursive: true });
   await mkdir(config.outputDir, { recursive: true });
 
-  const usedWget = await mirrorWithWget(config);
-  if (!usedWget) {
-    await mirrorWithNodeCrawler(config);
-  }
+  await mirrorWithNodeCrawler(config);
 
   const htmlFiles = await collectHtmlFiles(config.mirrorDir);
   if (htmlFiles.length === 0) {
@@ -168,51 +164,6 @@ const isCancelError = (error) => {
   );
 };
 
-const mirrorWithWget = async (config) => {
-  const hasWget = await isCommandAvailable("wget", ["--version"]);
-  if (!hasWget) {
-    log(
-      "wget is not available in PATH. Falling back to built-in Node crawler.",
-    );
-    return false;
-  }
-
-  log("wget detected. Running mirror mode.");
-
-  const args = [
-    "--mirror",
-    "--convert-links",
-    "--adjust-extension",
-    "--page-requisites",
-    "--no-parent",
-    `--domains=${config.base.hostname}`,
-    "--no-host-directories",
-    `--directory-prefix=${config.mirrorDir}`,
-    config.base.href,
-  ];
-
-  for (const prefix of config.target.excludePathPrefixes ?? []) {
-    args.splice(
-      args.length - 1,
-      0,
-      `--reject-regex=${escapeWgetRegex(prefix)}(/|$)`,
-    );
-  }
-
-  const result = await spawnAndWait("wget", args, { allowFailure: true });
-  if (result.exitCode === 0) {
-    log("wget mirror completed successfully.");
-    return true;
-  }
-
-  log(
-    `wget mirror failed with code ${result.exitCode}. Falling back to built-in Node crawler.`,
-  );
-  await rm(config.mirrorDir, { recursive: true, force: true });
-  await mkdir(config.mirrorDir, { recursive: true });
-  return false;
-};
-
 const mirrorWithNodeCrawler = async (config) => {
   log("Node crawler started.");
 
@@ -267,43 +218,6 @@ const mirrorWithNodeCrawler = async (config) => {
   }
 
   log(`Node crawler fetched ${fetched} pages.`);
-};
-
-const isCommandAvailable = async (command, args) => {
-  const result = await spawnAndWait(command, args, {
-    allowFailure: true,
-    quiet: true,
-  });
-  return result.exitCode === 0;
-};
-
-const spawnAndWait = (command, args, options = {}) => {
-  const { allowFailure = false, quiet = false } = options;
-
-  return new Promise((resolve, reject) => {
-    const child = spawn(command, args, {
-      stdio: quiet ? "ignore" : "inherit",
-      windowsHide: true,
-      shell: false,
-    });
-
-    child.on("error", (error) => {
-      if (allowFailure) {
-        resolve({ exitCode: -1, error });
-      } else {
-        reject(error);
-      }
-    });
-
-    child.on("close", (exitCode) => {
-      if (!allowFailure && exitCode !== 0) {
-        reject(new Error(`${command} failed with exit code ${exitCode}`));
-        return;
-      }
-
-      resolve({ exitCode: exitCode ?? -1 });
-    });
-  });
 };
 
 const collectHtmlFiles = async (dir) => {
@@ -411,6 +325,12 @@ const htmlToMarkdown = (html, sourceUrl) => {
     const href = $(element).attr("href");
     if (!href || href.startsWith("javascript:")) return;
 
+    const stableHref = removeStarlightTabPanelHash(href, sourceUrl);
+    if (stableHref) {
+      $(element).attr("href", stableHref);
+      return;
+    }
+
     try {
       $(element).attr("href", new URL(href, sourceUrl).href);
     } catch {
@@ -421,11 +341,34 @@ const htmlToMarkdown = (html, sourceUrl) => {
   normalizeObfuscatedEmailsInHtml($, content);
 
   return cleanupMarkdown(
-    normalizeObfuscatedEmailsInMarkdown(
-      trimLargeBase64Payloads(turndown.turndown(content.html() ?? "")),
+    stripStarlightTabPanelLinkHashes(
+      normalizeObfuscatedEmailsInMarkdown(
+        trimLargeBase64Payloads(turndown.turndown(content.html() ?? "")),
+      ),
     ),
   );
 };
+
+const removeStarlightTabPanelHash = (href, sourceUrl) => {
+  try {
+    const url = new URL(href, sourceUrl);
+    if (!/^tab-panel-\d+$/i.test(url.hash.slice(1))) {
+      return null;
+    }
+    url.hash = "";
+    return url.href;
+  } catch {
+    return /#tab-panel-\d+$/i.test(href)
+      ? href.replace(/#tab-panel-\d+$/i, "")
+      : null;
+  }
+};
+
+const stripStarlightTabPanelLinkHashes = (markdown) =>
+  markdown.replace(
+    /\[([^\]]+)\]\(([^)\s]*#tab-panel-\d+)\)/gi,
+    (_, label, href) => `[${label}](${href.replace(/#tab-panel-\d+$/i, "")})`,
+  );
 
 const decodeCloudflareEmail = (encoded) => {
   if (
@@ -612,10 +555,6 @@ const isExcludedPath = (pathname, config) => {
     const cleanPrefix = prefix.replace(/\/$/, "");
     return pathname === cleanPrefix || pathname.startsWith(`${cleanPrefix}/`);
   });
-};
-
-const escapeWgetRegex = (value) => {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 };
 
 const normalizeCrawlUrl = (url) => {
