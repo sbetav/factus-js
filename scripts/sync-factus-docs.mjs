@@ -297,6 +297,8 @@ const htmlToMarkdown = (html, sourceUrl) => {
   const contentRoot = $("main, article, .sl-markdown-content").first();
   const content = contentRoot.length > 0 ? contentRoot : $("body");
 
+  expandStarlightTabs($, content);
+
   content
     .find(
       [
@@ -325,11 +327,6 @@ const htmlToMarkdown = (html, sourceUrl) => {
     const href = $(element).attr("href");
     if (!href || href.startsWith("javascript:")) return;
 
-    if (isStarlightTabPanelHref(href, sourceUrl)) {
-      $(element).replaceWith($(element).text());
-      return;
-    }
-
     try {
       $(element).attr("href", new URL(href, sourceUrl).href);
     } catch {
@@ -340,24 +337,61 @@ const htmlToMarkdown = (html, sourceUrl) => {
   normalizeObfuscatedEmailsInHtml($, content);
 
   return cleanupMarkdown(
-    unwrapStarlightTabPanelLinks(
-      normalizeObfuscatedEmailsInMarkdown(
-        trimLargeBase64Payloads(turndown.turndown(content.html() ?? "")),
-      ),
+    normalizeObfuscatedEmailsInMarkdown(
+      trimLargeBase64Payloads(turndown.turndown(content.html() ?? "")),
     ),
   );
 };
 
-const isStarlightTabPanelHref = (href, sourceUrl) => {
-  try {
-    return /^tab-panel-\d+$/i.test(new URL(href, sourceUrl).hash.slice(1));
-  } catch {
-    return /^#tab-panel-\d+$/i.test(href);
-  }
+const expandStarlightTabs = ($, root) => {
+  root.find("starlight-tabs").each((_, element) => {
+    const tabsRoot = $(element);
+    const wrapper = $('<div class="synced-tabset"></div>');
+
+    tabsRoot.find('[role="tablist"] [role="tab"]').each((_, tabEl) => {
+      const tab = $(tabEl);
+      const label = cleanupMarkdown(tab.text());
+      if (!label) return;
+
+      const panelId = resolveStarlightTabPanelId(tab);
+      const panel = panelId
+        ? tabsRoot.find(`[role="tabpanel"]#${cssEscapeIdent(panelId)}`).first()
+        : $();
+
+      const section = $('<div class="synced-tab"></div>');
+      section.append($("<p></p>").append($("<strong></strong>").text(label)));
+
+      if (panel.length > 0) {
+        const panelClone = panel.clone();
+        panelClone.removeAttr("hidden");
+        panelClone.removeAttr("aria-hidden");
+        section.append(panelClone.contents());
+      }
+
+      wrapper.append(section);
+    });
+
+    if (wrapper.children().length > 0) {
+      tabsRoot.replaceWith(wrapper);
+    }
+  });
 };
 
-const unwrapStarlightTabPanelLinks = (markdown) =>
-  markdown.replace(/\[([^\]]+)\]\(([^)\s]*#tab-panel-\d+)\)/gi, "$1");
+const resolveStarlightTabPanelId = (tab) => {
+  const ariaControls = tab.attr("aria-controls");
+  if (ariaControls) return ariaControls;
+
+  const href = tab.attr("href") ?? "";
+  if (href.startsWith("#") && href.length > 1) {
+    return href.slice(1);
+  }
+
+  return null;
+};
+
+/** Minimal CSS.escape for IDs used in cheerio attribute selectors. */
+const cssEscapeIdent = (value) =>
+  String(value).replaceAll(/([ !"#$%&'()*+,./:;<=>?@[\\\]^`{|}~])/g, "\\$1");
 
 const decodeCloudflareEmail = (encoded) => {
   if (
