@@ -71,7 +71,7 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          version: pnpm changeset version && pnpm --filter @factus-js/docs generate:changelog
+          version: pnpm run ci:version
           publish: pnpm release
           createGithubReleases: true
         env:
