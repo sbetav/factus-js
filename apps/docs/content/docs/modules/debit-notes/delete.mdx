@@ -1,0 +1,59 @@
+﻿---
+title: Eliminar nota débito
+description: Eliminar una nota débito no validada usando reference_code.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Firma del método
+
+```ts
+delete(
+  referenceCode: string,
+  options?: RequestOptions,
+): Promise<DeleteDebitNoteResponse>
+```
+
+## Endpoint Factus
+
+`DELETE /v2/debit-notes/reference/{reference_code}`
+
+Fuente oficial: [Eliminar nota débito](https://developers.factus.com.co/notas-debito/eliminar)
+
+<Callout type="warn">
+  Solo se pueden eliminar notas débito que no hayan sido validadas por la DIAN.
+</Callout>
+
+## Parámetros
+
+<TypeTable
+  type={{
+    referenceCode: {
+      type: "string",
+      required: true,
+      description: (
+        <>
+          {"Código de referencia ("}
+          <code>{"reference_code"}</code>
+          {") de la nota débito no validada a eliminar."}
+        </>
+      ),
+    },
+  }}
+/>
+## Ejemplo
+
+```ts
+await factus.debitNotes.delete("ND856");
+```
+
+{/* using response example from v1. TODO: update to table once available */}
+
+## Ejemplo de respuesta
+
+```json
+{
+  "status": "OK",
+  "message": "Documento con código de referencia 6 eliminado con éxito"
+}
+```

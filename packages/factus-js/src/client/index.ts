@@ -18,6 +18,7 @@ export { AcquirerModule } from "./modules/acquirer";
 export { BillsModule } from "./modules/bills";
 export { CompanyModule } from "./modules/company";
 export { CreditNotesModule } from "./modules/credit-notes";
+export { DebitNotesModule } from "./modules/debit-notes";
 export { DocumentsModule } from "./modules/documents";
 export { NumberingRangesModule } from "./modules/numbering-ranges";
 export { ReceptionModule } from "./modules/reception";

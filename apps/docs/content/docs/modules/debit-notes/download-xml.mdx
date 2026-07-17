@@ -1,0 +1,55 @@
+﻿---
+title: Descargar XML
+description: Descargar XML de una nota débito en base64 por numero.
+---
+
+## Firma del método
+
+```ts
+downloadXml(
+  number: string,
+  options?: RequestOptions,
+): Promise<DownloadDebitNoteXmlResponse>
+```
+
+## Endpoint Factus
+
+`GET /v2/debit-notes/{number}/download-xml`
+
+Fuente oficial: [Descargar XML](https://developers.factus.com.co/notas-debito/descargar-xml)
+
+## Parámetros
+
+<TypeTable
+  type={{
+    number: {
+      type: "string",
+      required: true,
+      description:
+        "Número del documento de la nota débito cuyo XML se descargará.",
+    },
+  }}
+/>
+## Ejemplo
+
+```ts
+const response = await factus.debitNotes.downloadXml("ND856");
+const xml = Buffer.from(response.data.xml_base_64_encoded, "base64").toString(
+  "utf-8",
+);
+```
+
+{/* using response example from v1. TODO: update to table once available */}
+
+## Ejemplo de respuesta
+
+```json
+{
+  "status": "OK",
+  "message": "Solicitud exitosa",
+  "data": {
+    "file_name": "ND09008257590002400000072",
+    "xml_base_64_encoded": "[TRIMMED_BASE64_25240_CHARS]"
+  }
+}
+```

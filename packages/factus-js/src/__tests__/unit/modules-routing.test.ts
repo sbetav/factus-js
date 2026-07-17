@@ -4,6 +4,7 @@ import {
   BillsModule,
   CompanyModule,
   CreditNotesModule,
+  DebitNotesModule,
   DocumentsModule,
   NumberingRangesModule,
   ReceptionModule,
@@ -138,6 +139,62 @@ describe("module routing contract", () => {
         payload: sendInput,
       },
       { method: "delete", path: "/v2/credit-notes/reference/NC856" },
+    ]);
+  });
+
+  test("debit notes methods map to expected routes and verbs", async () => {
+    const spy = createHttpSpy();
+    const debitNotes = new DebitNotesModule(spy.client as never);
+
+    const createInput = { reference_code: "X" } as never;
+    const listFilters = { filter: { status: "1" }, page: 1, per_page: 10 };
+    const listQuery = { "filter[status]": "1", page: 1, per_page: 10 };
+    const sendInput = { email: "x@y.com" } as never;
+
+    await debitNotes.create(createInput);
+    await debitNotes.list(listFilters);
+    await debitNotes.get("ND856");
+    await debitNotes.downloadXml("ND856");
+    await debitNotes.downloadAttachedDocumentXml("ND856");
+    await debitNotes.downloadPdf("ND856");
+    await debitNotes.getEmailContent("ND856");
+    await debitNotes.sendEmail("ND856", sendInput);
+    await debitNotes.delete("ND856");
+
+    expect(spy.calls).toEqual([
+      {
+        method: "post",
+        path: "/v2/debit-notes/validate",
+        payload: createInput,
+      },
+      { method: "get", path: "/v2/debit-notes", payload: listQuery },
+      { method: "get", path: "/v2/debit-notes/ND856", payload: undefined },
+      {
+        method: "get",
+        path: "/v2/debit-notes/ND856/download-xml",
+        payload: undefined,
+      },
+      {
+        method: "get",
+        path: "/v2/debit-notes/ND856/download-attached-document-xml",
+        payload: undefined,
+      },
+      {
+        method: "get",
+        path: "/v2/debit-notes/ND856/download-pdf",
+        payload: undefined,
+      },
+      {
+        method: "get",
+        path: "/v2/debit-notes/ND856/email-content",
+        payload: undefined,
+      },
+      {
+        method: "post",
+        path: "/v2/debit-notes/ND856/send-email",
+        payload: sendInput,
+      },
+      { method: "delete", path: "/v2/debit-notes/reference/ND856" },
     ]);
   });
 

@@ -6,6 +6,7 @@ export * from "./bill";
 export * from "./common";
 export * from "./company";
 export * from "./credit-note";
+export * from "./debit-note";
 export * from "./customer";
 export * from "./adjustment-note";
 export * from "./numbering-range";

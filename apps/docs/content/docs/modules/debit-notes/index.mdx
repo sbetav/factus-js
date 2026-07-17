@@ -1,0 +1,30 @@
+﻿---
+title: Introducción
+description: Emitir, consultar y gestionar notas débito con Factus API v2.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+Accede al modulo a traves de `factus.debitNotes`.
+
+<Callout type="info">
+  Documentación oficial: [Notas
+  débito](https://developers.factus.com.co/notas-debito/crear-y-validar).
+</Callout>
+
+## Métodos disponibles
+
+| Método                                          | Método HTTP + Endpoint                                        | Descripción                                  |
+| ----------------------------------------------- | ------------------------------------------------------------- | -------------------------------------------- |
+| `create(input, options?)`                       | `POST /v2/debit-notes/validate`                               | Crear y validar una nota débito              |
+| `list(params?, options?)`                       | `GET /v2/debit-notes`                                         | Listar notas débito con filtros y paginación |
+| `listAll(filter?, options?)`                    | `GET /v2/debit-notes`                                         | Recorrer todas las páginas automáticamente   |
+| `get(number, options?)`                         | `GET /v2/debit-notes/{number}`                                | Obtener el detalle de una nota débito        |
+| `downloadXml(number, options?)`                 | `GET /v2/debit-notes/{number}/download-xml`                   | Descargar el XML firmado                     |
+| `downloadAttachedDocumentXml(number, options?)` | `GET /v2/debit-notes/{number}/download-attached-document-xml` | Descargar el AttachedDocument XML            |
+| `downloadPdf(number, options?)`                 | `GET /v2/debit-notes/{number}/download-pdf`                   | Descargar la representación PDF              |
+| `getEmailContent(number, options?)`             | `GET /v2/debit-notes/{number}/email-content`                  | Obtener asunto y adjunto para envío manual   |
+| `sendEmail(number, input, options?)`            | `POST /v2/debit-notes/{number}/send-email`                    | Enviar la nota débito por correo             |
+| `delete(referenceCode, options?)`               | `DELETE /v2/debit-notes/reference/{reference_code}`           | Eliminar una nota débito no validada         |
+
+Consulta [Paginación automática](/docs/pagination) para el uso de `listAll()`.

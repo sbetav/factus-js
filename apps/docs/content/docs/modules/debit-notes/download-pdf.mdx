@@ -1,0 +1,53 @@
+﻿---
+title: Descargar PDF
+description: Descargar PDF de una nota débito en base64 por numero.
+---
+
+## Firma del método
+
+```ts
+downloadPdf(
+  number: string,
+  options?: RequestOptions,
+): Promise<DownloadDebitNotePdfResponse>
+```
+
+## Endpoint Factus
+
+`GET /v2/debit-notes/{number}/download-pdf`
+
+Fuente oficial: [Descargar PDF](https://developers.factus.com.co/notas-debito/descargar-pdf)
+
+## Parámetros
+
+<TypeTable
+  type={{
+    number: {
+      type: "string",
+      required: true,
+      description:
+        "Número del documento de la nota débito cuyo PDF se descargará.",
+    },
+  }}
+/>
+## Ejemplo
+
+```ts
+const response = await factus.debitNotes.downloadPdf("ND856");
+const pdfBuffer = Buffer.from(response.data.pdf_base_64_encoded, "base64");
+```
+
+{/* using response example from v1. TODO: update to table once available */}
+
+## Ejemplo de respuesta
+
+```json
+{
+  "status": "OK",
+  "message": "Solicitud exitosa",
+  "data": {
+    "file_name": "ND09008257590002400000072",
+    "pdf_base_64_encoded": "[TRIMMED_BASE64_87000_CHARS]"
+  }
+}
+```

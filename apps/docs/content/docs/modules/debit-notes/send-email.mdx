@@ -1,0 +1,83 @@
+﻿---
+title: Enviar correo
+description: Enviar una nota débito por correo usando el numero del documento.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Firma del método
+
+```ts
+sendEmail(
+  number: string,
+  input: SendDebitNoteEmailInput,
+  options?: RequestOptions,
+): Promise<SendDebitNoteEmailResponse>
+```
+
+## Endpoint Factus
+
+`POST /v2/debit-notes/{number}/send-email`
+
+Fuente oficial: [Enviar correo](https://developers.factus.com.co/notas-debito/enviar-correo)
+
+## Parámetros
+
+<TypeTable
+  type={{
+    number: {
+      type: "string",
+      required: true,
+      description: "Número del documento de la nota débito a enviar.",
+    },
+
+    input: {
+      type: "SendDebitNoteEmailInput (object)",
+      required: true,
+      description: (
+        <div>
+          Datos para enviar el correo electrónico.
+          <TypeTable
+            type={{
+              email: {
+                type: "string",
+                required: true,
+                description: "Correo destinatario.",
+              },
+            pdf_base_64_encoded: {
+              type: "string",
+               required: false,
+               description: "PDF en base64 para adjuntar manualmente en lugar del generado por Factus.",
+             },
+            }}
+          />
+        </div>
+      ),
+    },
+
+}}
+/>
+
+## Ejemplo
+
+```ts
+await factus.debitNotes.sendEmail("ND856", {
+  email: "alanturing@enigmasas.com",
+});
+```
+
+<Callout type="warn">
+  Es probable que este método no funcione en entorno sandbox. Úsalo en
+  producción o con credenciales autorizadas.
+</Callout>
+
+{/* using response example from v1. TODO: update to table once available */}
+
+## Ejemplo de respuesta
+
+```json
+{
+  "status": "OK",
+  "message": "Nota débito enviada al cliente con éxito"
+}
+```

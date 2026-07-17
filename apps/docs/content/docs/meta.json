@@ -12,6 +12,7 @@
     "---Módulos---",
     "modules/bills",
     "modules/credit-notes",
+    "modules/debit-notes",
     "modules/support-documents",
     "modules/adjustment-notes",
     "modules/documents",

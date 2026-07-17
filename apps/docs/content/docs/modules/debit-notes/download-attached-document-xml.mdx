@@ -1,0 +1,34 @@
+﻿---
+title: Descargar AttachedDocument XML
+description: Descargar el AttachedDocument XML de una nota débito.
+---
+
+## Firma del método
+
+```ts
+downloadAttachedDocumentXml(
+  number: string,
+  options?: RequestOptions,
+): Promise<DownloadDebitNoteAttachedDocumentXmlResponse>
+```
+
+## Endpoint Factus
+
+`GET /v2/debit-notes/{number}/download-attached-document-xml`
+
+Fuente oficial: [Descargar XML AttachedDocument](https://developers.factus.com.co/notas-debito/descargar-xml-attacheddocument)
+
+## Ejemplo
+
+```ts
+const response = await factus.debitNotes.downloadAttachedDocumentXml("ND856");
+
+const xml = Buffer.from(response.data.xml_base_64_encoded, "base64").toString(
+  "utf-8",
+);
+
+console.log(response.data.file_name);
+console.log(xml.slice(0, 80));
+```
+
+{/* using no official response content yet. TODO: add official v2 response example or response fields once available */}

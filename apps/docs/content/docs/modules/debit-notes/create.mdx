@@ -1,0 +1,776 @@
+﻿---
+title: Crear y validar nota débito
+description: Crear y validar una nota débito con Factus API v2.
+---
+
+## Firma del método
+
+```ts
+create(
+  input: CreateDebitNoteInput,
+  options?: RequestOptions,
+): Promise<CreateDebitNoteResponse>
+```
+
+## Endpoint Factus
+
+`POST /v2/debit-notes/validate`
+
+Fuente oficial: [Crear y validar](https://developers.factus.com.co/notas-debito/crear-y-validar)
+
+## Campos principales
+
+<TypeTable
+  type={{
+    reference_code: {
+      type: "string",
+      required: true,
+      description: "Código interno único de referencia.",
+    },
+    correction_concept_code: {
+      type: "DebitNoteCorrectionCode",
+      required: true,
+      description: (
+        <>
+          {"Concepto de corrección — Ver "}
+          <a href="/docs/reference-tables#concepto-de-corrección-de-nota-débito-debitnotecorrectioncode">
+            {"DebitNoteCorrectionCode"}
+          </a>
+          {"."}
+        </>
+      ),
+    },
+    customization_id: {
+      type: "DebitNoteOperationCode",
+      required: false,
+      description: (
+        <>
+          {"Tipo de operación de la nota débito — Ver "}
+          <a href="/docs/reference-tables#tipo-de-operación-en-nota-débito-debitnoteoperationcode">
+            {"DebitNoteOperationCode"}
+          </a>
+          {"."}
+        </>
+      ),
+    },
+    bill_number: {
+      type: "string",
+      required: false,
+      description:
+        "Prefijo y número de la factura electrónica relacionada. Opcional solo cuando customization_id es 32 (sin referencia).",
+    },
+    numbering_range_id: {
+      type: "number",
+      required: false,
+      description: "ID del rango de numeración.",
+    },
+    created_time: {
+      type: "string",
+      required: false,
+      description: "Hora de creación del documento en formato HH:mm:ss.",
+    },
+    currency: {
+      type: "BillCurrencyInput",
+      required: false,
+      description: (
+        <div>
+          Totales en moneda extranjera para la representación gráfica. Si envías
+          este objeto, sus campos internos son obligatorios.
+          <TypeTable
+            type={{
+              code: {
+                type: "string",
+                required: true,
+                description:
+                  "Código ISO de la moneda extranjera. Consulta la tabla oficial de monedas en la guía de tablas de referencia.",
+              },
+              exchange_rate: {
+                type: "string | number",
+                required: true,
+                description:
+                  "Tasa de cambio para convertir los montos de la moneda local a la moneda extranjera.",
+              },
+            }}
+          />
+        </div>
+      ),
+    },
+    send_email: {
+      type: "boolean",
+      required: false,
+      description:
+        "Si es false, Factus no envía el correo automático y puedes usar getEmailContent() para el envío manual.",
+    },
+    cash_rounding_amount: {
+      type: "string | number",
+      required: false,
+      description:
+        "Ajuste de redondeo (±500.00) para reconciliar payment_details con el total.",
+    },
+    observation: {
+      type: "string",
+      required: false,
+      description: "Observaciones del documento.",
+    },
+    payment_details: {
+      type: "DocumentPaymentDetailInput[]",
+      required: true,
+      description: (
+        <div>
+          Detalle de medios de pago.
+          <TypeTable
+            type={{
+              payment_form: {
+                type: "PaymentFormCode",
+                required: true,
+                description: (
+                  <>
+                    {"Forma de pago — Ver "}
+                    <a href="/docs/reference-tables#forma-de-pago-paymentformcode">
+                      {"PaymentFormCode"}
+                    </a>
+                    {"."}
+                  </>
+                ),
+              },
+              payment_method_code: {
+                type: "PaymentMethodCode",
+                required: true,
+                description: (
+                  <>
+                    {"Método de pago — Ver "}
+                    <a href="/docs/reference-tables#método-de-pago-paymentmethodcode">
+                      {"PaymentMethodCode"}
+                    </a>
+                    {"."}
+                  </>
+                ),
+              },
+              reference_code: {
+                type: "string",
+                required: false,
+                description: "Referencia interna del pago.",
+              },
+              amount: {
+                type: "string | number",
+                required: true,
+                description: "Monto aplicado a este medio de pago.",
+              },
+              due_date: {
+                type: "string",
+                required: false,
+                description:
+                  "Fecha de vencimiento cuando la forma de pago es a crédito.",
+              },
+            }}
+          />
+        </div>
+      ),
+    },
+    establishment: {
+      type: "EstablishmentInput",
+      required: false,
+      description: (
+        <div>
+          Datos del establecimiento emisor.
+          <TypeTable
+            type={{
+              name: {
+                type: "string",
+                required: true,
+                description: "Nombre del establecimiento.",
+              },
+              address: {
+                type: "string",
+                required: true,
+                description: "Dirección del establecimiento.",
+              },
+              phone_number: {
+                type: "string",
+                required: true,
+                description: "Teléfono del establecimiento.",
+              },
+              email: {
+                type: "string",
+                required: true,
+                description: "Correo del establecimiento.",
+              },
+              municipality_code: {
+                type: "string",
+                required: true,
+                description:
+                  "Código del municipio del establecimiento. Consulta el catálogo oficial de municipios en la guía de tablas de referencia.",
+              },
+            }}
+          />
+        </div>
+      ),
+    },
+    billing_period: {
+      type: "BillingPeriod",
+      required: false,
+      description: (
+        <div>
+          Período de facturación cuando aplica.
+          <TypeTable
+            type={{
+              start_date: {
+                type: "string",
+                required: true,
+                description: "Fecha inicial del período.",
+              },
+              start_time: {
+                type: "string",
+                required: false,
+                description: "Hora inicial del período.",
+              },
+              end_date: {
+                type: "string",
+                required: true,
+                description: "Fecha final del período.",
+              },
+              end_time: {
+                type: "string",
+                required: false,
+                description: "Hora final del período.",
+              },
+            }}
+          />
+        </div>
+      ),
+    },
+    customer: {
+      type: "CustomerInput",
+      required: false,
+      description: (
+        <div>
+          Cliente receptor.
+          <TypeTable
+            type={{
+              identification_document_code: {
+                type: "IdentityDocumentCode",
+                required: true,
+                description: (
+                  <>
+                    {
+                      "Tipo de documento de identificación del adquiriente — Ver "
+                    }
+                    <a href="/docs/reference-tables#tipo-de-documento-de-identidad-identitydocumentcode">
+                      {"IdentityDocumentCode"}
+                    </a>
+                    {"."}
+                  </>
+                ),
+              },
+              identification: {
+                type: "string",
+                required: true,
+                description: "Número de identificación del cliente.",
+              },
+              dv: {
+                type: "string",
+                required: false,
+                description:
+                  "Dígito de verificación, normalmente usado con NIT.",
+              },
+              company: {
+                type: "string",
+                required: false,
+                description: "Razón social del cliente cuando aplica.",
+              },
+              trade_name: {
+                type: "string",
+                required: false,
+                description: "Nombre comercial del cliente.",
+              },
+              names: {
+                type: "string",
+                required: false,
+                description: "Nombres del cliente.",
+              },
+              address: {
+                type: "string",
+                required: false,
+                description: "Dirección del cliente.",
+              },
+              email: {
+                type: "string",
+                required: false,
+                description: "Correo del cliente.",
+              },
+              phone: {
+                type: "string",
+                required: false,
+                description: "Teléfono del cliente.",
+              },
+              legal_organization_code: {
+                type: "OrganizationTypeCode",
+                required: true,
+                description: (
+                  <>
+                    {"Tipo de organización — Ver "}
+                    <a href="/docs/reference-tables#tipo-de-organización-organizationtypecode">
+                      {"OrganizationTypeCode"}
+                    </a>
+                    {"."}
+                  </>
+                ),
+              },
+              tribute_code: {
+                type: "CustomerTributeCode",
+                required: false,
+                description: (
+                  <>
+                    {"Tributo del cliente — Ver "}
+                    <a href="/docs/reference-tables#tributo-del-cliente-customertributecode">
+                      {"CustomerTributeCode"}
+                    </a>
+                    {"."}
+                  </>
+                ),
+              },
+              country_code: {
+                type: "string",
+                required: false,
+                description:
+                  "Código del país del cliente. Consulta el catálogo oficial de países en la guía de tablas de referencia.",
+              },
+              municipality_code: {
+                type: "string",
+                required: false,
+                description:
+                  "Código del municipio del cliente. Consulta el catálogo oficial de municipios en la guía de tablas de referencia.",
+              },
+            }}
+          />
+        </div>
+      ),
+    },
+    items: {
+      type: "DocumentItemInput[]",
+      required: true,
+      description: (
+        <div>
+          Ítems de la nota débito.
+          <TypeTable
+            type={{
+              scheme_id: {
+                type: "string",
+                required: false,
+                description: "Esquema del ítem cuando aplica.",
+              },
+              note: {
+                type: "string",
+                required: false,
+                description: "Nota libre del ítem.",
+              },
+              collection_concept_code: {
+                type: "string",
+                required: false,
+                description: "Código de concepto de recaudo cuando aplica.",
+              },
+              code_reference: {
+                type: "string",
+                required: true,
+                description: "Código de referencia del ítem.",
+              },
+              name: {
+                type: "string",
+                required: true,
+                description: "Nombre del ítem.",
+              },
+              quantity: {
+                type: "string | number",
+                required: true,
+                description: "Cantidad del ítem.",
+              },
+              discount_rate: {
+                type: "string | number",
+                required: false,
+                description:
+                  "Porcentaje de descuento del ítem. Usa este campo o discount_amount, no ambos.",
+              },
+              discount_amount: {
+                type: "string | number",
+                required: false,
+                description:
+                  "Monto fijo de descuento del ítem. Usa este campo o discount_rate, no ambos.",
+              },
+              price: {
+                type: "string | number",
+                required: true,
+                description: "Precio unitario del ítem.",
+              },
+              unit_measure_code: {
+                type: "string",
+                required: true,
+                description:
+                  "Código de unidad de medida. Consulta el catálogo oficial de unidades de medida en la guía de tablas de referencia.",
+              },
+              standard_code: {
+                type: "ProductStandardCode",
+                required: true,
+                description: (
+                  <>
+                    {"Código del estándar del producto — Ver "}
+                    <a href="/docs/reference-tables#estándar-de-producto-productstandardcode">
+                      {"ProductStandardCode"}
+                    </a>
+                    {"."}
+                  </>
+                ),
+              },
+              taxes: {
+                type: "DocumentTaxInput[]",
+                required: true,
+                description: (
+                  <div>
+                    Impuestos del ítem.
+                    <TypeTable
+                      type={{
+                        code: {
+                          type: "string",
+                          required: true,
+                          description: "Código del impuesto.",
+                        },
+                        rate: {
+                          type: "string | number",
+                          required: true,
+                          description: "Tarifa del impuesto.",
+                        },
+                        is_excluded: {
+                          type: "boolean",
+                          required: false,
+                          description:
+                            "Marca el impuesto como excluido cuando aplica.",
+                        },
+                      }}
+                    />
+                  </div>
+                ),
+              },
+              withholding_taxes: {
+                type: "DocumentWithholdingTaxInput[]",
+                required: false,
+                description: (
+                  <div>
+                    Retenciones del ítem.
+                    <TypeTable
+                      type={{
+                        code: {
+                          type: "string",
+                          required: true,
+                          description: "Código de la retención.",
+                        },
+                        rate: {
+                          type: "string | number",
+                          required: true,
+                          description: "Tarifa de la retención.",
+                        },
+                      }}
+                    />
+                  </div>
+                ),
+              },
+              additional_properties: {
+                type: "DocumentItemAdditionalPropertyInput[]",
+                required: false,
+                description: (
+                  <div>
+                    Propiedades adicionales del ítem.
+                    <TypeTable
+                      type={{
+                        code: {
+                          type: "string",
+                          required: true,
+                          description: "Código de la propiedad adicional.",
+                        },
+                        value: {
+                          type: "string",
+                          required: true,
+                          description: "Valor de la propiedad adicional.",
+                        },
+                        quantity: {
+                          type: "string | number",
+                          required: false,
+                          description: "Cantidad asociada a la propiedad.",
+                        },
+                        unit_measure_code: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "Código de unidad de medida de la propiedad adicional.",
+                        },
+                      }}
+                    />
+                  </div>
+                ),
+              },
+              mandate: {
+                type: "DocumentItemMandateInput",
+                required: false,
+                description: (
+                  <div>
+                    Datos de mandato del ítem cuando aplica.
+                    <TypeTable
+                      type={{
+                        identification_document_code: {
+                          type: "IdentityDocumentCode",
+                          required: true,
+                          description: (
+                            <>
+                              {"Tipo de documento del mandante — Ver "}
+                              <a href="/docs/reference-tables#tipo-de-documento-de-identidad-identitydocumentcode">
+                                {"IdentityDocumentCode"}
+                              </a>
+                              {"."}
+                            </>
+                          ),
+                        },
+                        identification: {
+                          type: "string",
+                          required: true,
+                          description: "Número de identificación del mandante.",
+                        },
+                      }}
+                    />
+                  </div>
+                ),
+              },
+            }}
+          />
+        </div>
+      ),
+    },
+    allowance_charges: {
+      type: "AllowanceChargeInput[]",
+      required: false,
+      description: (
+        <div>
+          Descuentos o recargos globales.
+          <TypeTable
+            type={{
+              concept_type: {
+                type: "ChargeDiscountCode",
+                required: true,
+                description: (
+                  <>
+                    {"Tipo de cargo o descuento — Ver "}
+                    <a href="/docs/reference-tables#tipo-de-cargo-o-descuento-chargediscountcode">
+                      {"ChargeDiscountCode"}
+                    </a>
+                    {"."}
+                  </>
+                ),
+              },
+              is_surcharge: {
+                type: "boolean",
+                required: true,
+                description: "Indica si el valor corresponde a un recargo.",
+              },
+              reason: {
+                type: "string",
+                required: true,
+                description: "Motivo del descuento o recargo.",
+              },
+              base_amount: {
+                type: "string | number",
+                required: true,
+                description:
+                  "Base sobre la cual se calcula el descuento o recargo.",
+              },
+              amount: {
+                type: "string | number",
+                required: true,
+                description: "Valor del descuento o recargo.",
+              },
+            }}
+          />
+        </div>
+      ),
+    },
+  }}
+/>
+
+## Ejemplo
+
+```ts
+import {
+  DebitNoteCorrectionCode,
+  DebitNoteOperationCode,
+  PaymentFormCode,
+  PaymentMethodCode,
+  ProductStandardCode,
+} from "factus-js";
+
+const response = await factus.debitNotes.create({
+  numbering_range_id: 9,
+  reference_code: "ND-2026-0005",
+  customization_id: DebitNoteOperationCode.WithReference,
+  correction_concept_code: DebitNoteCorrectionCode.ValueChange,
+  bill_number: "SETP990001298",
+  send_email: false,
+  payment_details: [
+    {
+      payment_form: PaymentFormCode.CashPayment,
+      payment_method_code: PaymentMethodCode.Cash,
+      amount: "50000.00",
+    },
+  ],
+  observation: "Cambio de valor por error en factura original",
+  items: [
+    {
+      code_reference: "PROD-001",
+      name: "Producto de prueba",
+      quantity: "1.00",
+      discount_rate: "0.00",
+      price: "50000.00",
+      unit_measure_code: "94",
+      standard_code: ProductStandardCode.TaxpayerAdoption,
+      taxes: [{ code: "01", rate: "19.00" }],
+    },
+  ],
+});
+
+console.log(response.data.number);
+```
+
+{/* using response example from v1. TODO: update to table once available */}
+
+## Ejemplo de respuesta
+
+```json
+{
+  "status": "Created",
+  "message": "Documento con el código de referencia 5 registrado y validado con éxito",
+  "data": {
+    "company": {
+      "url_logo": "http://api.test/storage/images/logos/uKWIKmmwxeELNzmrxyKoGgbCtimDV1zInzQqgNin.png",
+      "nit": "900825759",
+      "dv": "7",
+      "company": "HALLTEC S.A.S.",
+      "name": "HALLTEC",
+      "registration_code": "3FJ3253427",
+      "economic_activity": "6311",
+      "phone": "3165584659",
+      "email": "[email protected]",
+      "direction": "cra 10 # 9 - 04",
+      "municipality": "San Gil"
+    },
+    "establishment": {
+      "name": "SuperMarket",
+      "address": "calle 10 # 3-13",
+      "phone_number": "0987654321",
+      "email": "[email protected]",
+      "municipality_id": {
+        "id": 996,
+        "code": "68872",
+        "name": "Villanueva",
+        "department": {
+          "id": 28,
+          "code": "68",
+          "name": "Santander"
+        }
+      }
+    },
+    "customer": {
+      "identification": "123456789",
+      "dv": null,
+      "graphic_representation_name": "Alan Turing",
+      "trade_name": "",
+      "company": "",
+      "names": "Alan Turing",
+      "address": "calle 1 # 2-68",
+      "email": "[email protected]",
+      "phone": "1234567890",
+      "legal_organization": {
+        "id": 2,
+        "code": "2",
+        "name": "Persona Natural"
+      },
+      "tribute": {
+        "id": 21,
+        "code": "ZZ",
+        "name": "No aplica"
+      },
+      "municipality": {
+        "id": 980,
+        "code": "68679",
+        "name": "San Gil"
+      }
+    },
+    "debit_note": {
+      "id": 132,
+      "number": "ND76",
+      "reference_code": "5",
+      "status": 1,
+      "send_email": 0,
+      "qr": "https://catalogo-vpfe-hab.dian.gov.co/document/searchqr?documentkey=eee1fc09684c19aaa7cee1b97d3923e286b1ccf12bdd0d185b4ddcbbab87bcbe9d589a9daf9eee9f55132c782c1b8bc0",
+      "cude": "eee1fc09684c19aaa7cee1b97d3923e286b1ccf12bdd0d185b4ddcbbab87bcbe9d589a9daf9eee9f55132c782c1b8bc0",
+      "validated": "20-09-2024 09:13:43 AM",
+      "gross_value": "67226.89",
+      "taxable_amount": "67226.89",
+      "tax_amount": "12773.11",
+      "discount_amount": "0.00",
+      "surcharge_amount": "0.00",
+      "total": "80000.00",
+      "observation": null,
+      "errors": [
+        "Regla: CBF02, Notificación: No se informo el numero de la factura referenciada",
+        "Regla: CAK55, Notificación: Correo electrónico no informado"
+      ],
+      "created_at": "20-09-2024 09:13:42 AM",
+      "qr_image": "data:image/png;base64, [TRIMMED_BASE64_13356_CHARS]",
+      "bill_id": 514,
+      "cufe": "025972ce686eb5fc89a78ab8e9de34c3dea87d23982694ff25843b7f3046b0ac42815f9bb7a1f7469062ef0c11f2eac0",
+      "number_bill": "SETP990000302",
+      "payment_method": {
+        "name": "Efectivo",
+        "code": "10"
+      },
+      "customization_id": {
+        "code": "30",
+        "name": "Nota Débito que referencia una factura electrónica."
+      },
+      "correction_concept": {
+        "code": "3",
+        "name": "Cambio del valor."
+      }
+    },
+    "items": [
+      {
+        "note": null,
+        "code_reference": "123456",
+        "name": "Aspirina",
+        "quantity": 1,
+        "discount_rate": "0.00",
+        "discount": "0.00",
+        "gross_value": "67226.89",
+        "tax_rate": "19.00",
+        "taxable_amount": "67226.89",
+        "tax_amount": "12773.11",
+        "price": "80000.00",
+        "is_excluded": 0,
+        "unit_measure": {
+          "id": 70,
+          "code": "94",
+          "name": "unidad"
+        },
+        "standard_code": {
+          "id": 1,
+          "code": "999",
+          "name": "Estándar de adopción del contribuyente"
+        },
+        "tribute": {
+          "id": 1,
+          "code": "01",
+          "name": "IVA"
+        },
+        "total": 80000,
+        "withholding_taxes": []
+      }
+    ],
+    "withholding_taxes": []
+  }
+}
+```

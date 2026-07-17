@@ -1,0 +1,15 @@
+{
+  "title": "Notas débito",
+  "pages": [
+    "index",
+    "create",
+    "get",
+    "list",
+    "download-pdf",
+    "download-xml",
+    "download-attached-document-xml",
+    "get-email-content",
+    "send-email",
+    "delete"
+  ]
+}

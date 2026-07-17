@@ -5,6 +5,7 @@ import type {
   ClaimConceptCode,
   CreateBillInput,
   CreateCreditNoteInput,
+  CreateDebitNoteInput,
   DocumentItemInput,
   EmailContentData,
   FactusClient,
@@ -28,6 +29,18 @@ describe("public type contracts", () => {
     >().toEqualTypeOf<true>();
     expectTypeOf<
       AssertFalse<HasKey<CreateCreditNoteInput, "bill_number">>
+    >().toEqualTypeOf<false>();
+  });
+
+  test("debit note input keeps bill_number and drops bill_id", () => {
+    expectTypeOf<CreateDebitNoteInput["bill_number"]>().toEqualTypeOf<
+      string | undefined
+    >();
+    expectTypeOf<
+      AssertTrue<HasKey<CreateDebitNoteInput, "bill_number">>
+    >().toEqualTypeOf<true>();
+    expectTypeOf<
+      AssertFalse<HasKey<CreateDebitNoteInput, "bill_id">>
     >().toEqualTypeOf<false>();
   });
 
@@ -55,7 +68,9 @@ describe("public type contracts", () => {
 
   test("customer input supports optional country_code", () => {
     expectTypeOf<
-      AssertTrue<HasKey<NonNullable<CreateBillInput["customer"]>, "country_code">>
+      AssertTrue<
+        HasKey<NonNullable<CreateBillInput["customer"]>, "country_code">
+      >
     >().toEqualTypeOf<true>();
     expectTypeOf<CreateBillInput["customer"]["country_code"]>().toEqualTypeOf<
       string | undefined
@@ -101,6 +116,18 @@ describe("public type contracts", () => {
     expectTypeOf<
       AssertFalse<HasKey<FactusClient, "catalog">>
     >().toEqualTypeOf<false>();
+  });
+
+  test("client exposes debitNotes module", () => {
+    expectTypeOf<
+      AssertTrue<HasKey<FactusClient, "debitNotes">>
+    >().toEqualTypeOf<true>();
+    expectTypeOf<
+      AssertTrue<HasKey<FactusClient["debitNotes"], "create">>
+    >().toEqualTypeOf<true>();
+    expectTypeOf<
+      AssertTrue<HasKey<FactusClient["debitNotes"], "listAll">>
+    >().toEqualTypeOf<true>();
   });
 
   test("radian event inputs include claim concept code", () => {

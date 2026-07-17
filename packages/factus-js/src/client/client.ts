@@ -5,6 +5,7 @@ import { AdjustmentNotesModule } from "./modules/adjustment-notes";
 import { BillsModule } from "./modules/bills";
 import { CompanyModule } from "./modules/company";
 import { CreditNotesModule } from "./modules/credit-notes";
+import { DebitNotesModule } from "./modules/debit-notes";
 import { DocumentsModule } from "./modules/documents";
 import { NumberingRangesModule } from "./modules/numbering-ranges";
 import { ReceptionModule } from "./modules/reception";
@@ -51,6 +52,9 @@ export class FactusClient {
   /** Credit notes. */
   readonly creditNotes: CreditNotesModule;
 
+  /** Debit notes. */
+  readonly debitNotes: DebitNotesModule;
+
   /** Support documents. */
   readonly supportDocuments: SupportDocumentsModule;
 
@@ -93,6 +97,7 @@ export class FactusClient {
 
     this.bills = new BillsModule(this.http);
     this.creditNotes = new CreditNotesModule(this.http);
+    this.debitNotes = new DebitNotesModule(this.http);
     this.supportDocuments = new SupportDocumentsModule(this.http);
     this.adjustmentNotes = new AdjustmentNotesModule(this.http);
     this.reception = new ReceptionModule(this.http);

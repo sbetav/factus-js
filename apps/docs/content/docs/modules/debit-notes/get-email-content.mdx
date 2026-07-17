@@ -1,0 +1,63 @@
+﻿---
+title: Obtener contenido de correo
+description: Obtener asunto y archivo ZIP en base64 para envío manual de correo.
+---
+
+## Firma del método
+
+```ts
+getEmailContent(
+  number: string,
+  options?: RequestOptions,
+): Promise<GetDebitNoteEmailContentResponse>
+```
+
+## Endpoint Factus
+
+`GET /v2/debit-notes/{number}/email-content`
+
+Fuente oficial: [Obtener contenido de correo](https://developers.factus.com.co/notas-debito/obtener-contenido-de-correo)
+
+## Cuándo usar este endpoint
+
+Este endpoint está pensado principalmente para escenarios donde la nota débito se creó con `send_email = false` y el integrador necesita encargarse del envío manual al cliente.
+
+El campo `attached_document` contiene un archivo ZIP codificado en base64 con:
+
+- El PDF de la nota débito
+- El XML `AttachedDocument` que Factus enviaría en el correo oficial
+
+## Parámetros
+
+<TypeTable
+  type={{
+    number: {
+      type: "string",
+      required: true,
+      description:
+        "Número del documento de la nota débito para construir el contenido de correo.",
+    },
+  }}
+/>
+## Ejemplo
+
+```ts
+const response = await factus.debitNotes.getEmailContent("ND856");
+console.log(response.data.subject);
+console.log(response.data.attached_document);
+```
+
+{/* using response example from v1. TODO: update to table once available */}
+
+## Ejemplo de respuesta
+
+```json
+{
+  "status": "OK",
+  "message": "Solicitud exitosa",
+  "data": {
+    "subject": "900825759;HALLTEC S.A.S.;NC150;91;HALLTEC S.A.S.",
+    "attached_document": "[TRIMMED_BASE64_65232_CHARS]"
+  }
+}
+```
