@@ -2,6 +2,7 @@ import { describe, expectTypeOf, test } from "vitest";
 import type {
   AdjustmentNoteReasonCode as AdjustmentNoteReasonCodeType,
   ChargeDiscountCode as ChargeDiscountCodeType,
+  ContractTypeCode as ContractTypeCodeType,
   DebitNoteCorrectionCode as DebitNoteCorrectionCodeType,
   DebitNoteOperationCode as DebitNoteOperationCodeType,
   EventCode as EventCodeType,
@@ -10,12 +11,15 @@ import type {
   OperationTypeCode as OperationTypeCodeType,
   PaymentFormCode as PaymentFormCodeType,
   PaymentMethodCode as PaymentMethodCodeType,
+  PayrollPeriodCode as PayrollPeriodCodeType,
   ProductStandardCode as ProductStandardCodeType,
   SupportDocumentIdentityDocumentCode as SupportDocumentIdentityDocumentCodeType,
+  WorkerTypeCode as WorkerTypeCodeType,
 } from "../../constants";
 import {
   AdjustmentNoteReasonCode,
   ChargeDiscountCode,
+  ContractTypeCode,
   DebitNoteCorrectionCode,
   DebitNoteOperationCode,
   EventCode,
@@ -24,8 +28,10 @@ import {
   OperationTypeCode,
   PaymentFormCode,
   PaymentMethodCode,
+  PayrollPeriodCode,
   ProductStandardCode,
   SupportDocumentIdentityDocumentCode,
+  WorkerTypeCode,
 } from "../../constants";
 
 describe("constant values satisfy their type alias", () => {
@@ -117,6 +123,14 @@ describe("constant values satisfy their type alias", () => {
     expectTypeOf(
       NumberingRangeDocumentTypeCode.PaperOrStubInvoice,
     ).toExtend<NumberingRangeDocumentTypeCodeType>();
+  });
+
+  test("payroll reference codes satisfy their type aliases", () => {
+    expectTypeOf(PayrollPeriodCode.Monthly).toExtend<PayrollPeriodCodeType>();
+    expectTypeOf(WorkerTypeCode.Dependent).toExtend<WorkerTypeCodeType>();
+    expectTypeOf(ContractTypeCode.FixedTerm).toExtend<ContractTypeCodeType>();
+    expectTypeOf(PayrollPeriodCode.Biweekly).toEqualTypeOf<"4">();
+    expectTypeOf(WorkerTypeCode.Dependent).toEqualTypeOf<"01">();
   });
 
   test("constant map values are strings, not objects", () => {

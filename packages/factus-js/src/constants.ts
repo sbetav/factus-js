@@ -182,3 +182,179 @@ export const FiscalResponsibilityCode = {
 } as const;
 export type FiscalResponsibilityCode =
   (typeof FiscalResponsibilityCode)[keyof typeof FiscalResponsibilityCode];
+
+export const PayrollPeriodCode = {
+  Biweekly: "4",
+  Monthly: "5",
+} as const;
+export type PayrollPeriodCode =
+  (typeof PayrollPeriodCode)[keyof typeof PayrollPeriodCode];
+
+export const PayrollAccountTypeCode = {
+  Payroll: "1",
+  Savings: "2",
+  Checking: "3",
+} as const;
+export type PayrollAccountTypeCode =
+  (typeof PayrollAccountTypeCode)[keyof typeof PayrollAccountTypeCode];
+
+export const WorkerTypeCode = {
+  Dependent: "01",
+  DomesticService: "02",
+  CommunityMother: "04",
+  SenaLearningStage: "12",
+  PublicOfficialUnlimitedIbc: "18",
+  SenaProductiveStage: "19",
+  HealthPostgraduateStudent: "21",
+  PrivateSchoolTeacher: "22",
+  StudentLaborRisksOnly: "23",
+  PublicEntitySpecialHealthRegime: "30",
+  CooperativeWorker: "31",
+  ParticipationSystemDependent: "47",
+  PartTimeWorker: "51",
+  PrePensionerLiquidatingEntity: "54",
+  PrePensionerVoluntaryHealth: "56",
+  PublicSectorIntern: "58",
+} as const;
+export type WorkerTypeCode =
+  (typeof WorkerTypeCode)[keyof typeof WorkerTypeCode];
+
+export const WorkerSubtypeCode = {
+  NotApplicable: "00",
+  ActiveRetiredDependent: "01",
+} as const;
+export type WorkerSubtypeCode =
+  (typeof WorkerSubtypeCode)[keyof typeof WorkerSubtypeCode];
+
+export const ContractTypeCode = {
+  FixedTerm: "1",
+  IndefiniteTerm: "2",
+  TermOrLabor: "3",
+  Apprenticeship: "4",
+  Internship: "5",
+} as const;
+export type ContractTypeCode =
+  (typeof ContractTypeCode)[keyof typeof ContractTypeCode];
+
+export const PayrollIdentityDocumentCode = {
+  CivilRegistration: "11",
+  IdentityCard: "12",
+  CitizenshipCard: "13",
+  ForeignerIdentityCard: "21",
+  ForeignerId: "22",
+  NIT: "31",
+  Passport: "41",
+  ForeignIdentificationDocument: "42",
+  PEP: "47",
+  ForeignNIT: "50",
+  NUIP: "91",
+} as const;
+export type PayrollIdentityDocumentCode =
+  (typeof PayrollIdentityDocumentCode)[keyof typeof PayrollIdentityDocumentCode];
+
+export const PayrollSeveranceTypeCode = {
+  Severance: "1",
+  SeveranceInterest: "2",
+} as const;
+export type PayrollSeveranceTypeCode =
+  (typeof PayrollSeveranceTypeCode)[keyof typeof PayrollSeveranceTypeCode];
+
+export const PayrollPremiumTypeCode = {
+  Premium: "1",
+  NonSalaryPremium: "2",
+} as const;
+export type PayrollPremiumTypeCode =
+  (typeof PayrollPremiumTypeCode)[keyof typeof PayrollPremiumTypeCode];
+
+export const PayrollIncentiveTypeCode = {
+  Incentive: "1",
+  NonSalaryIncentive: "2",
+} as const;
+export type PayrollIncentiveTypeCode =
+  (typeof PayrollIncentiveTypeCode)[keyof typeof PayrollIncentiveTypeCode];
+
+export const PayrollEpctvBonusTypeCode = {
+  SalaryPayment: "1",
+  NonSalaryPayment: "2",
+  SalaryFoodPayment: "3",
+  NonSalaryFoodPayment: "4",
+} as const;
+export type PayrollEpctvBonusTypeCode =
+  (typeof PayrollEpctvBonusTypeCode)[keyof typeof PayrollEpctvBonusTypeCode];
+
+export const PayrollTransportAllowanceTypeCode = {
+  TransportAllowance: "1",
+  SalaryLodgingMealAllowance: "2",
+  NonSalaryLodgingMealAllowance: "3",
+} as const;
+export type PayrollTransportAllowanceTypeCode =
+  (typeof PayrollTransportAllowanceTypeCode)[keyof typeof PayrollTransportAllowanceTypeCode];
+
+export const PayrollCompensationTypeCode = {
+  Ordinary: "1",
+  Extraordinary: "2",
+} as const;
+export type PayrollCompensationTypeCode =
+  (typeof PayrollCompensationTypeCode)[keyof typeof PayrollCompensationTypeCode];
+
+export const PayrollOtherConceptTypeCode = {
+  SalaryOtherConcept: "1",
+  NonSalaryOtherConcept: "2",
+} as const;
+export type PayrollOtherConceptTypeCode =
+  (typeof PayrollOtherConceptTypeCode)[keyof typeof PayrollOtherConceptTypeCode];
+
+export const PayrollLeaveTypeCode = {
+  MaternityOrPaternity: "1",
+  CompensatedVacation: "2",
+} as const;
+export type PayrollLeaveTypeCode =
+  (typeof PayrollLeaveTypeCode)[keyof typeof PayrollLeaveTypeCode];
+
+export const PayrollVacationTypeCode = {
+  Common: "1",
+  Compensated: "2",
+} as const;
+export type PayrollVacationTypeCode =
+  (typeof PayrollVacationTypeCode)[keyof typeof PayrollVacationTypeCode];
+
+export const PayrollIncapacityTypeCode = {
+  Common: "1",
+  Professional: "2",
+  Occupational: "3",
+} as const;
+export type PayrollIncapacityTypeCode =
+  (typeof PayrollIncapacityTypeCode)[keyof typeof PayrollIncapacityTypeCode];
+
+export const PayrollAllowanceTypeCode = {
+  SalaryAllowance: "1",
+  NonSalaryAllowance: "2",
+} as const;
+export type PayrollAllowanceTypeCode =
+  (typeof PayrollAllowanceTypeCode)[keyof typeof PayrollAllowanceTypeCode];
+
+export const PayrollOvertimeTypeCode = {
+  DaytimeOvertime: "1",
+  NighttimeOvertime: "2",
+  NightSurcharge: "3",
+  SundayHolidayDaytimeOvertime: "4",
+  SundayHolidayDaySurcharge: "5",
+  SundayHolidayNighttimeOvertime: "6",
+  SundayHolidayNightSurcharge: "7",
+} as const;
+export type PayrollOvertimeTypeCode =
+  (typeof PayrollOvertimeTypeCode)[keyof typeof PayrollOvertimeTypeCode];
+
+export const PayrollPensionSolidarityFundTypeCode = {
+  PensionSolidarity: "1",
+  Subsistence: "2",
+} as const;
+export type PayrollPensionSolidarityFundTypeCode =
+  (typeof PayrollPensionSolidarityFundTypeCode)[keyof typeof PayrollPensionSolidarityFundTypeCode];
+
+export const PayrollSanctionTypeCode = {
+  Public: "1",
+  Private: "2",
+} as const;
+export type PayrollSanctionTypeCode =
+  (typeof PayrollSanctionTypeCode)[keyof typeof PayrollSanctionTypeCode];

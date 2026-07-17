@@ -22,8 +22,28 @@ import type {
   OrganizationTypeCode,
   PaymentFormCode,
   PaymentMethodCode,
+  PayrollAccountTypeCode,
+  PayrollAllowanceTypeCode,
+  PayrollCompensationTypeCode,
+  PayrollEpctvBonusTypeCode,
+  PayrollIdentityDocumentCode,
+  PayrollIncapacityTypeCode,
+  PayrollIncentiveTypeCode,
+  PayrollLeaveTypeCode,
+  PayrollOtherConceptTypeCode,
+  PayrollOvertimeTypeCode,
+  PayrollPensionSolidarityFundTypeCode,
+  PayrollPeriodCode,
+  PayrollPremiumTypeCode,
+  PayrollSanctionTypeCode,
+  PayrollSeveranceTypeCode,
+  PayrollTransportAllowanceTypeCode,
+  PayrollVacationTypeCode,
   ProductStandardCode,
   SupportDocumentIdentityDocumentCode,
+  WorkerSubtypeCode,
+  WorkerTypeCode,
+  ContractTypeCode,
 } from "./constants";
 
 export interface ConstantInfo {
@@ -251,4 +271,198 @@ export const FiscalResponsibilityCodeInfo: Record<
   "0-23": { description: "Agente de retención de IVA" },
   "0-47": { description: "Regimen simple de tributación" },
   "R-99-PN": { description: "No responsable" },
+};
+
+export const PayrollPeriodCodeInfo: Record<PayrollPeriodCode, ConstantInfo> = {
+  "4": { description: "Quincenal" },
+  "5": { description: "Mensual" },
+};
+
+export const PayrollAccountTypeCodeInfo: Record<
+  PayrollAccountTypeCode,
+  ConstantInfo
+> = {
+  "1": { description: "Nómina" },
+  "2": { description: "Ahorros" },
+  "3": { description: "Corriente" },
+};
+
+export const WorkerTypeCodeInfo: Record<WorkerTypeCode, ConstantInfo> = {
+  "01": { description: "Dependiente" },
+  "02": { description: "Servicio doméstico" },
+  "04": { description: "Madre comunitaria" },
+  "12": { description: "Aprendices del SENA en etapa lectiva" },
+  "18": {
+    description: "Funcionarios públicos sin tope máximo de IBC",
+  },
+  "19": { description: "Aprendices del SENA en etapa productiva" },
+  "21": { description: "Estudiantes de posgrado en salud" },
+  "22": { description: "Profesor de establecimiento particular" },
+  "23": { description: "Estudiantes aportes solo riesgos laborales" },
+  "30": {
+    description:
+      "Dependiente entidades o universidades públicas con régimen especial en salud",
+  },
+  "31": { description: "Cooperados o pre cooperativas de trabajo asociado" },
+  "47": {
+    description:
+      "Trabajador dependiente de entidad beneficiaria del sistema general de participaciones - aportes patronales",
+  },
+  "51": { description: "Trabajador de tiempo parcial" },
+  "54": { description: "Pre pensionado de entidad en liquidación" },
+  "56": { description: "Pre pensionado con aporte voluntario a salud" },
+  "58": {
+    description: "Estudiantes de prácticas laborales en el sector público",
+  },
+};
+
+export const WorkerSubtypeCodeInfo: Record<WorkerSubtypeCode, ConstantInfo> = {
+  "00": { description: "No aplica" },
+  "01": { description: "Dependiente pensionado por vejez activo" },
+};
+
+export const ContractTypeCodeInfo: Record<ContractTypeCode, ConstantInfo> = {
+  "1": { description: "Término fijo" },
+  "2": { description: "Término indefinido" },
+  "3": { description: "Término o labor" },
+  "4": { description: "Aprendizaje" },
+  "5": { description: "Prácticas o Pasantías" },
+};
+
+export const PayrollIdentityDocumentCodeInfo: Record<
+  PayrollIdentityDocumentCode,
+  ConstantInfo
+> = {
+  "11": { description: "Registro civil" },
+  "12": { description: "Tarjeta de identidad" },
+  "13": { description: "Cédula de ciudadanía" },
+  "21": { description: "Tarjeta de extranjería" },
+  "22": { description: "Cédula de extranjería" },
+  "31": { description: "NIT" },
+  "41": { description: "Pasaporte" },
+  "42": { description: "Documento de identificación extranjero" },
+  "47": { description: "PEP" },
+  "50": { description: "NIT otro país" },
+  "91": { description: "NUIP" },
+};
+
+export const PayrollSeveranceTypeCodeInfo: Record<
+  PayrollSeveranceTypeCode,
+  ConstantInfo
+> = {
+  "1": { description: "Cesantías" },
+  "2": { description: "Intereses a cesantías" },
+};
+
+export const PayrollPremiumTypeCodeInfo: Record<
+  PayrollPremiumTypeCode,
+  ConstantInfo
+> = {
+  "1": { description: "Primas" },
+  "2": { description: "Primas no salariales" },
+};
+
+export const PayrollIncentiveTypeCodeInfo: Record<
+  PayrollIncentiveTypeCode,
+  ConstantInfo
+> = {
+  "1": { description: "Bonificación" },
+  "2": { description: "Bonificación no salarial" },
+};
+
+export const PayrollEpctvBonusTypeCodeInfo: Record<
+  PayrollEpctvBonusTypeCode,
+  ConstantInfo
+> = {
+  "1": { description: "Pago salarial" },
+  "2": { description: "Pago no salarial" },
+  "3": { description: "Pago alimentación salarial" },
+  "4": { description: "Pago alimentación no salarial" },
+};
+
+export const PayrollTransportAllowanceTypeCodeInfo: Record<
+  PayrollTransportAllowanceTypeCode,
+  ConstantInfo
+> = {
+  "1": { description: "Auxilio transporte" },
+  "2": { description: "Viático manutención de alojamiento salarial" },
+  "3": { description: "Viático manutención de alojamiento no salarial" },
+};
+
+export const PayrollCompensationTypeCodeInfo: Record<
+  PayrollCompensationTypeCode,
+  ConstantInfo
+> = {
+  "1": { description: "Compensaciones ordinarias" },
+  "2": { description: "Compensaciones extraordinarias" },
+};
+
+export const PayrollOtherConceptTypeCodeInfo: Record<
+  PayrollOtherConceptTypeCode,
+  ConstantInfo
+> = {
+  "1": { description: "Otro concepto salarial" },
+  "2": { description: "Otro concepto no salarial" },
+};
+
+export const PayrollLeaveTypeCodeInfo: Record<
+  PayrollLeaveTypeCode,
+  ConstantInfo
+> = {
+  "1": { description: "Licencia de maternidad o paternidad" },
+  "2": { description: "Vacaciones compensadas" },
+};
+
+export const PayrollVacationTypeCodeInfo: Record<
+  PayrollVacationTypeCode,
+  ConstantInfo
+> = {
+  "1": { description: "Vacaciones comunes" },
+  "2": { description: "Vacaciones compensadas" },
+};
+
+export const PayrollIncapacityTypeCodeInfo: Record<
+  PayrollIncapacityTypeCode,
+  ConstantInfo
+> = {
+  "1": { description: "Incapacidad común" },
+  "2": { description: "Incapacidad profesional" },
+  "3": { description: "Incapacidad laboral" },
+};
+
+export const PayrollAllowanceTypeCodeInfo: Record<
+  PayrollAllowanceTypeCode,
+  ConstantInfo
+> = {
+  "1": { description: "Auxilio salarial" },
+  "2": { description: "Auxilio no salarial" },
+};
+
+export const PayrollOvertimeTypeCodeInfo: Record<
+  PayrollOvertimeTypeCode,
+  ConstantInfo
+> = {
+  "1": { description: "Hora extra diurna" },
+  "2": { description: "Hora extra nocturna" },
+  "3": { description: "Hora recargo nocturno" },
+  "4": { description: "Hora extra diurna dominical y festivos" },
+  "5": { description: "Hora recargo diurno dominical y festivos" },
+  "6": { description: "Hora extra nocturna dominical y festivos" },
+  "7": { description: "Hora recargo nocturno dominical y festivos" },
+};
+
+export const PayrollPensionSolidarityFundTypeCodeInfo: Record<
+  PayrollPensionSolidarityFundTypeCode,
+  ConstantInfo
+> = {
+  "1": { description: "Deducción de solidaridad pensional" },
+  "2": { description: "Deducción de subsistencia" },
+};
+
+export const PayrollSanctionTypeCodeInfo: Record<
+  PayrollSanctionTypeCode,
+  ConstantInfo
+> = {
+  "1": { description: "Sanción pública" },
+  "2": { description: "Sanción privada" },
 };

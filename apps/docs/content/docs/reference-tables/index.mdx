@@ -1,0 +1,64 @@
+---
+title: Introducción
+description: Tablas de referencia de Factus, constantes tipadas del SDK y catálogos externos.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+import { Cards, Card } from "fumadocs-ui/components/card";
+
+Las tablas de referencia de Factus definen los códigos que debes enviar en los
+campos de la API. En `factus-js`, los catálogos más usados están disponibles
+como constantes tipadas (`*Code` y `*Info`) para evitar valores errados y
+tener autocompletado en el editor.
+
+Fuente oficial:
+[Tablas de referencia](https://developers.factus.com.co/tablas-de-referencia/tablas)
+
+## Modo de uso
+
+Cada tabla de referencia se expone desde la raíz del paquete y sigue el siguiente patrón:
+
+- **`*Code`** — mapa clave-valor para usar directamente en los campos de la API.
+- **`*Info`** — Siempre incluye `description` y en algunos casos, como para documentos de identidad, también incluye `abbreviation`.
+
+### Ejemplo
+
+```ts
+import { IdentityDocumentCode, IdentityDocumentCodeInfo } from "factus-js";
+
+// Usar un código en un payload de la API
+const docType = IdentityDocumentCode.CitizenshipCard; // "13"
+
+// Descripción y abreviatura del código
+const docInfo = IdentityDocumentCodeInfo[docType];
+console.log(docInfo.description); // "Cédula de ciudadanía"
+console.log(docInfo.abbreviation); // "CC"
+```
+
+<Callout type="info">
+  Estas constantes están declaradas explícitamente y no realizan llamadas HTTP.
+</Callout>
+
+## Países, municipios, unidades de medida y monedas
+
+Debido a su tamaño, estos datos no se incluyen como constantes dentro del SDK. Sin embargo, puedes consultarlos y descargarlos directamente desde la documentación oficial.
+
+- [Países](https://developers.factus.com.co/tablas-de-referencia/countries/)
+- [Municipios](https://developers.factus.com.co/tablas-de-referencia/municipios/)
+- [Unidades de medida](https://developers.factus.com.co/tablas-de-referencia/unit-measures/)
+- [Tipos de moneda](https://developers.factus.com.co/tablas-de-referencia/currency/)
+
+## Catálogos en el SDK
+
+<Cards>
+  <Card
+    title="General"
+    href="/docs/reference-tables/general"
+    description="Facturación, notas crédito y débito, RADIAN, pagos, identidad y rangos de numeración."
+  />
+  <Card
+    title="Nómina electrónica"
+    href="/docs/reference-tables/payroll"
+    description="Trabajador, contrato, devengados, deducciones y demás catálogos de nómina."
+  />
+</Cards>

@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
 import {
+  ContractTypeCode,
   CustomerTributeCode,
   DebitNoteCorrectionCode,
   DebitNoteOperationCode,
@@ -9,10 +10,30 @@ import {
   OperationTypeCode,
   PaymentFormCode,
   PaymentMethodCode,
+  PayrollAccountTypeCode,
+  PayrollAllowanceTypeCode,
+  PayrollCompensationTypeCode,
+  PayrollEpctvBonusTypeCode,
+  PayrollIdentityDocumentCode,
+  PayrollIncapacityTypeCode,
+  PayrollIncentiveTypeCode,
+  PayrollLeaveTypeCode,
+  PayrollOtherConceptTypeCode,
+  PayrollOvertimeTypeCode,
+  PayrollPensionSolidarityFundTypeCode,
+  PayrollPeriodCode,
+  PayrollPremiumTypeCode,
+  PayrollSanctionTypeCode,
+  PayrollSeveranceTypeCode,
+  PayrollTransportAllowanceTypeCode,
+  PayrollVacationTypeCode,
   ProductStandardCode,
   SupportDocumentIdentityDocumentCode,
+  WorkerSubtypeCode,
+  WorkerTypeCode,
 } from "../../constants";
 import {
+  ContractTypeCodeInfo,
   CustomerTributeCodeInfo,
   DebitNoteCorrectionCodeInfo,
   DebitNoteOperationCodeInfo,
@@ -22,9 +43,39 @@ import {
   OperationTypeCodeInfo,
   PaymentFormCodeInfo,
   PaymentMethodCodeInfo,
+  PayrollAccountTypeCodeInfo,
+  PayrollAllowanceTypeCodeInfo,
+  PayrollCompensationTypeCodeInfo,
+  PayrollEpctvBonusTypeCodeInfo,
+  PayrollIdentityDocumentCodeInfo,
+  PayrollIncapacityTypeCodeInfo,
+  PayrollIncentiveTypeCodeInfo,
+  PayrollLeaveTypeCodeInfo,
+  PayrollOtherConceptTypeCodeInfo,
+  PayrollOvertimeTypeCodeInfo,
+  PayrollPensionSolidarityFundTypeCodeInfo,
+  PayrollPeriodCodeInfo,
+  PayrollPremiumTypeCodeInfo,
+  PayrollSanctionTypeCodeInfo,
+  PayrollSeveranceTypeCodeInfo,
+  PayrollTransportAllowanceTypeCodeInfo,
+  PayrollVacationTypeCodeInfo,
   ProductStandardCodeInfo,
   SupportDocumentIdentityDocumentCodeInfo,
+  WorkerSubtypeCodeInfo,
+  WorkerTypeCodeInfo,
 } from "../../constants-info";
+
+function expectCodeInfoPairs(
+  codeMap: Record<string, string>,
+  infoMap: Record<string, { description: string }>,
+) {
+  for (const value of Object.values(codeMap)) {
+    const info = infoMap[value];
+    expect(info).toBeDefined();
+    expect(typeof info.description).toBe("string");
+  }
+}
 
 describe("constants — value map structure", () => {
   test("constant values are plain strings (not objects)", () => {
@@ -136,6 +187,64 @@ describe("constants — value map structure", () => {
     expect(NumberingRangeDocumentTypeCode).not.toHaveProperty(
       "PayrollDeletionNote",
     );
+  });
+});
+
+describe("payroll constants — value and info maps", () => {
+  test("payroll period and account type codes are plain strings", () => {
+    expect(PayrollPeriodCode.Biweekly).toBe("4");
+    expect(PayrollAccountTypeCode.Payroll).toBe("1");
+    expect(WorkerTypeCode.Dependent).toBe("01");
+    expect(ContractTypeCode.FixedTerm).toBe("1");
+  });
+
+  test("all payroll reference code maps have matching *Info entries", () => {
+    expectCodeInfoPairs(PayrollPeriodCode, PayrollPeriodCodeInfo);
+    expectCodeInfoPairs(PayrollAccountTypeCode, PayrollAccountTypeCodeInfo);
+    expectCodeInfoPairs(WorkerTypeCode, WorkerTypeCodeInfo);
+    expectCodeInfoPairs(WorkerSubtypeCode, WorkerSubtypeCodeInfo);
+    expectCodeInfoPairs(ContractTypeCode, ContractTypeCodeInfo);
+    expectCodeInfoPairs(
+      PayrollIdentityDocumentCode,
+      PayrollIdentityDocumentCodeInfo,
+    );
+    expectCodeInfoPairs(PayrollSeveranceTypeCode, PayrollSeveranceTypeCodeInfo);
+    expectCodeInfoPairs(PayrollPremiumTypeCode, PayrollPremiumTypeCodeInfo);
+    expectCodeInfoPairs(PayrollIncentiveTypeCode, PayrollIncentiveTypeCodeInfo);
+    expectCodeInfoPairs(
+      PayrollEpctvBonusTypeCode,
+      PayrollEpctvBonusTypeCodeInfo,
+    );
+    expectCodeInfoPairs(
+      PayrollTransportAllowanceTypeCode,
+      PayrollTransportAllowanceTypeCodeInfo,
+    );
+    expectCodeInfoPairs(
+      PayrollCompensationTypeCode,
+      PayrollCompensationTypeCodeInfo,
+    );
+    expectCodeInfoPairs(
+      PayrollOtherConceptTypeCode,
+      PayrollOtherConceptTypeCodeInfo,
+    );
+    expectCodeInfoPairs(PayrollLeaveTypeCode, PayrollLeaveTypeCodeInfo);
+    expectCodeInfoPairs(PayrollVacationTypeCode, PayrollVacationTypeCodeInfo);
+    expectCodeInfoPairs(
+      PayrollIncapacityTypeCode,
+      PayrollIncapacityTypeCodeInfo,
+    );
+    expectCodeInfoPairs(PayrollAllowanceTypeCode, PayrollAllowanceTypeCodeInfo);
+    expectCodeInfoPairs(PayrollOvertimeTypeCode, PayrollOvertimeTypeCodeInfo);
+    expectCodeInfoPairs(
+      PayrollPensionSolidarityFundTypeCode,
+      PayrollPensionSolidarityFundTypeCodeInfo,
+    );
+    expectCodeInfoPairs(PayrollSanctionTypeCode, PayrollSanctionTypeCodeInfo);
+  });
+
+  test("PayrollIdentityDocumentCode omits PPT (48)", () => {
+    expect(Object.values(PayrollIdentityDocumentCode)).not.toContain("48");
+    expect(PayrollIdentityDocumentCode).not.toHaveProperty("PPT");
   });
 });
 
