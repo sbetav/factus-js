@@ -190,18 +190,28 @@ export default async function HomePage() {
 
         {/* Version badge */}
 
-        <span
-          className="animate-fade-up mb-5 sm:mb-8 inline-flex items-center gap-2 rounded-full border border-fd-border bg-fd-card px-3.5 py-1.5 text-xs font-medium text-fd-muted-foreground"
+        <div
+          className="flex items-center flex-col justify-center mb-5 sm:mb-8 animate-fade-up"
           style={{ animationDelay: "80ms" }}
         >
-          <span className="size-1.5 rounded-full bg-emerald-500" aria-hidden />v
-          {VERSION}
-          <span className="h-3 w-px bg-fd-border" aria-hidden />
-          <span className="inline-flex items-center gap-1  text-[11px] font-medium text-fd-foreground">
-            <span className="text-fd-primary font-semibold">NUEVA</span> API v2
-            🔥
+          <span className="inline-flex items-center gap-2 rounded-full border border-fd-border bg-fd-card px-3.5 py-1.5 text-xs font-medium text-fd-muted-foreground">
+            <span
+              className="size-1.5 rounded-full bg-emerald-500"
+              aria-hidden
+            />
+            v{VERSION}
+            <span className="h-3 w-px bg-fd-border" aria-hidden />
+            <span className="inline-flex items-center gap-1  text-xs font-medium text-fd-foreground">
+              <span className="text-fd-primary font-semibold">NUEVA</span> API
+              v2 🔥
+            </span>
           </span>
-        </span>
+          <span className=" inline-flex items-center gap-2 rounded-b-2xl border-x border-b border-fd-border bg-fd-card/80 px-2.5 py-1.5 pb-2 text-xs font-medium ">
+            <span className="inline-flex items-center gap-1 tracking-wide text-[10px] font-medium">
+              💼 Nomina • 💰 Notas Débito
+            </span>
+          </span>
+        </div>
 
         {/* Headline */}
         <h1
