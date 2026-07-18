@@ -1,5 +1,6 @@
 import {
   AdjustmentNotesModule,
+  AdjustmentPayrollsModule,
   AcquirerModule,
   BillsModule,
   CompanyModule,
@@ -310,6 +311,43 @@ describe("module routing contract", () => {
         payload: undefined,
       },
       { method: "delete", path: "/v2/payrolls/reference/PAY-001" },
+    ]);
+  });
+
+  test("adjustment payrolls methods map to expected routes and verbs", async () => {
+    const spy = createHttpSpy();
+    const adjustmentPayrolls = new AdjustmentPayrollsModule(
+      spy.client as never,
+    );
+
+    const createInput = {
+      payroll_number: "NEF110",
+      reference_code: "ADJ-001",
+    } as never;
+    const listFilters = { filter: { number: "NEF110" }, page: 1, per_page: 10 };
+    const listQuery = { "filter[number]": "NEF110", page: 1, per_page: 10 };
+
+    await adjustmentPayrolls.create(createInput);
+    await adjustmentPayrolls.list(listFilters);
+    await adjustmentPayrolls.get("ADJ-001");
+    await adjustmentPayrolls.delete("ADJ-001");
+
+    expect(spy.calls).toEqual([
+      {
+        method: "post",
+        path: "/v2/adjustment-payrolls",
+        payload: createInput,
+      },
+      { method: "get", path: "/v2/adjustment-payrolls", payload: listQuery },
+      {
+        method: "get",
+        path: "/v2/adjustment-payrolls/reference/ADJ-001",
+        payload: undefined,
+      },
+      {
+        method: "delete",
+        path: "/v2/adjustment-payrolls/reference/ADJ-001",
+      },
     ]);
   });
 

@@ -1,0 +1,56 @@
+---
+title: Crear y validar
+description: Crear y validar una nómina de eliminación para anular una nómina electrónica validada.
+---
+
+## Firma del método
+
+```ts
+create(
+  input: CreateAdjustmentPayrollInput,
+  options?: RequestOptions,
+): Promise<CreateAdjustmentPayrollResponse>
+```
+
+## Endpoint Factus
+
+`POST /v2/adjustment-payrolls`
+
+Fuente oficial: [Crear y validar](https://developers.factus.com.co/nota-ajuste-nomina/crear-y-validar)
+
+## Campos principales
+
+<TypeTable
+  type={{
+    payroll_number: {
+      type: "string",
+      required: true,
+      description:
+        "Número de la nómina electrónica que se desea eliminar (por ejemplo, NEF110).",
+    },
+    reference_code: {
+      type: "string",
+      required: true,
+      description:
+        "Código de referencia único de la nómina de eliminación. Guárdalo para consultar o eliminar el documento.",
+    },
+    numbering_range_id: {
+      type: "string | number",
+      required: false,
+      description:
+        "ID del rango de numeración. Requerido solo si tienes más de un rango activo para nómina de eliminación.",
+    },
+  }}
+/>
+
+## Ejemplo
+
+```ts
+const response = await factus.adjustmentPayrolls.create({
+  payroll_number: "NEF110",
+  reference_code: "990000001",
+  numbering_range_id: "01kpdv25zj3f7sd5sedemgbnx9",
+});
+
+console.log(response.data.number, response.data.reference_code);
+```

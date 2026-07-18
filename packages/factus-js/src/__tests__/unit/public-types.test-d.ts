@@ -5,6 +5,7 @@ import type {
   ClaimConceptCode,
   CreateBillInput,
   CreateCreditNoteInput,
+  CreateAdjustmentPayrollInput,
   CreateDebitNoteInput,
   CreatePayrollInput,
   DocumentItemInput,
@@ -146,6 +147,30 @@ describe("public type contracts", () => {
     expectTypeOf<
       AssertTrue<HasKey<FactusClient["payrolls"], "listAll">>
     >().toEqualTypeOf<true>();
+  });
+
+  test("client exposes adjustmentPayrolls module", () => {
+    expectTypeOf<
+      AssertTrue<HasKey<FactusClient, "adjustmentPayrolls">>
+    >().toEqualTypeOf<true>();
+    expectTypeOf<
+      AssertTrue<HasKey<FactusClient["adjustmentPayrolls"], "create">>
+    >().toEqualTypeOf<true>();
+    expectTypeOf<
+      AssertTrue<HasKey<FactusClient["adjustmentPayrolls"], "listAll">>
+    >().toEqualTypeOf<true>();
+  });
+
+  test("adjustment payroll input requires payroll_number and reference_code", () => {
+    expectTypeOf<
+      AssertTrue<HasKey<CreateAdjustmentPayrollInput, "payroll_number">>
+    >().toEqualTypeOf<true>();
+    expectTypeOf<
+      AssertTrue<HasKey<CreateAdjustmentPayrollInput, "reference_code">>
+    >().toEqualTypeOf<true>();
+    expectTypeOf<
+      CreateAdjustmentPayrollInput["numbering_range_id"]
+    >().toEqualTypeOf<string | number | undefined>();
   });
 
   test("payroll input supports typed settlement and worker codes", () => {

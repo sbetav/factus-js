@@ -14,6 +14,7 @@ export { FactusError } from "./error";
 // Module classes (for advanced use / dependency injection)
 // ---------------------------------------------------------------------------
 export { AdjustmentNotesModule } from "./modules/adjustment-notes";
+export { AdjustmentPayrollsModule } from "./modules/adjustment-payrolls";
 export { AcquirerModule } from "./modules/acquirer";
 export { BillsModule } from "./modules/bills";
 export { CompanyModule } from "./modules/company";

@@ -9,6 +9,7 @@ export * from "./credit-note";
 export * from "./debit-note";
 export * from "./customer";
 export * from "./adjustment-note";
+export * from "./adjustment-payroll";
 export * from "./numbering-range";
 export * from "./payroll";
 export * from "./reception";

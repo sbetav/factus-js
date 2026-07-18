@@ -1,7 +1,8 @@
 import type { FactusClientConfig } from "./http-client";
 import { HttpClient } from "./http-client";
-import { AcquirerModule } from "./modules/acquirer";
 import { AdjustmentNotesModule } from "./modules/adjustment-notes";
+import { AdjustmentPayrollsModule } from "./modules/adjustment-payrolls";
+import { AcquirerModule } from "./modules/acquirer";
 import { BillsModule } from "./modules/bills";
 import { CompanyModule } from "./modules/company";
 import { CreditNotesModule } from "./modules/credit-notes";
@@ -65,6 +66,9 @@ export class FactusClient {
   /** Electronic payrolls. */
   readonly payrolls: PayrollsModule;
 
+  /** Payroll elimination (adjustment) notes. */
+  readonly adjustmentPayrolls: AdjustmentPayrollsModule;
+
   /** Incoming / received bills via RADIAN. */
   readonly reception: ReceptionModule;
 
@@ -105,6 +109,7 @@ export class FactusClient {
     this.supportDocuments = new SupportDocumentsModule(this.http);
     this.adjustmentNotes = new AdjustmentNotesModule(this.http);
     this.payrolls = new PayrollsModule(this.http);
+    this.adjustmentPayrolls = new AdjustmentPayrollsModule(this.http);
     this.reception = new ReceptionModule(this.http);
     this.acquirer = new AcquirerModule(this.http);
     this.company = new CompanyModule(this.http);

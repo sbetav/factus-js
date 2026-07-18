@@ -1,0 +1,27 @@
+---
+title: Introducción
+description: Crear, consultar y gestionar nóminas de eliminación (notas de ajuste a nómina) con Factus API v2.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+Accede al módulo a través de `factus.adjustmentPayrolls`.
+
+<Callout type="info">
+  Documentación oficial: [Nota de ajuste a
+  nómina](https://developers.factus.com.co/nota-ajuste-nomina/crear-y-validar).
+</Callout>
+
+Una nota de ajuste a nómina (nómina de eliminación) anula ante la DIAN una nómina electrónica previamente validada.
+
+## Métodos disponibles
+
+| Método                            | Método HTTP + Endpoint                                      | Descripción                                    |
+| --------------------------------- | ----------------------------------------------------------- | ---------------------------------------------- |
+| `create(input, options?)`         | `POST /v2/adjustment-payrolls`                              | Crear y validar una nómina de eliminación      |
+| `list(params?, options?)`         | `GET /v2/adjustment-payrolls`                               | Listar nóminas de eliminación                  |
+| `listAll(filter?, options?)`      | `GET /v2/adjustment-payrolls`                               | Recorrer todas las páginas automáticamente     |
+| `get(referenceCode, options?)`    | `GET /v2/adjustment-payrolls/reference/{reference_code}`    | Obtener el detalle por código de referencia    |
+| `delete(referenceCode, options?)` | `DELETE /v2/adjustment-payrolls/reference/{reference_code}` | Eliminar una nómina de eliminación no validada |
+
+Consulta [Paginación automática](/docs/pagination) para el uso de `listAll()`.

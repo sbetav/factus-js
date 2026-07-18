@@ -1,0 +1,59 @@
+---
+title: Eliminar nómina de eliminación
+description: Eliminar una nómina de eliminación no validada por reference_code.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Firma del método
+
+```ts
+delete(
+  referenceCode: string,
+  options?: RequestOptions,
+): Promise<DeleteAdjustmentPayrollResponse>
+```
+
+## Endpoint Factus
+
+`DELETE /v2/adjustment-payrolls/reference/{reference_code}`
+
+Fuente oficial: [Eliminar no validada](https://developers.factus.com.co/nota-ajuste-nomina/eliminar)
+
+<Callout type="warn">
+  Solo se pueden eliminar nóminas de eliminación que no hayan sido validadas por
+  la DIAN.
+</Callout>
+
+## Parámetros
+
+<TypeTable
+  type={{
+    referenceCode: {
+      type: "string",
+      required: true,
+      description: (
+        <>
+          {"Código de referencia ("}
+          <code>{"reference_code"}</code>
+          {") de la nómina de eliminación no validada a eliminar."}
+        </>
+      ),
+    },
+  }}
+/>
+
+## Ejemplo
+
+```ts
+await factus.adjustmentPayrolls.delete("990000001");
+```
+
+## Ejemplo de respuesta
+
+```json
+{
+  "status": "OK",
+  "message": "Documento con código de referencia 990000001 eliminado con éxito"
+}
+```

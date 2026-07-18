@@ -1,0 +1,89 @@
+---
+title: Listar nóminas de eliminación
+description: Listar nóminas de eliminación con filtros y paginación.
+---
+
+## Firma del método
+
+```ts
+list(
+  params?: ListParams<AdjustmentPayrollFilters>,
+  options?: RequestOptions,
+): Promise<GetAdjustmentPayrollsResponse>
+```
+
+## Endpoint Factus
+
+`GET /v2/adjustment-payrolls`
+
+Fuente oficial: [Listar nóminas de eliminación](https://developers.factus.com.co/nota-ajuste-nomina/listar)
+
+## Parámetros
+
+<TypeTable
+  type={{
+    params: {
+      type: "ListParams<AdjustmentPayrollFilters> (object)",
+      required: false,
+      description: (
+        <div>
+          Filtros y paginación para la consulta.
+          <TypeTable
+            type={{
+              filter: {
+                type: "AdjustmentPayrollFilters",
+                required: false,
+                description: (
+                  <TypeTable
+                    type={{
+                      identification_number: {
+                        type: "string",
+                        required: false,
+                        description:
+                          "Filtra por número de identificación del trabajador.",
+                      },
+                      number: {
+                        type: "string",
+                        required: false,
+                        description:
+                          "Filtra por número de la nómina de eliminación.",
+                      },
+                      names: {
+                        type: "string",
+                        required: false,
+                        description: "Filtra por nombre del trabajador.",
+                      },
+                    }}
+                  />
+                ),
+              },
+              page: {
+                type: "number",
+                required: false,
+                description: "Número de página (base 1).",
+              },
+              per_page: {
+                type: "number",
+                required: false,
+                description: "Cantidad de resultados por página.",
+              },
+            }}
+          />
+        </div>
+      ),
+    },
+  }}
+/>
+
+## Ejemplo
+
+```ts
+const response = await factus.adjustmentPayrolls.list({
+  filter: { number: "NEF110" },
+  page: 1,
+  per_page: 10,
+});
+
+const notes = response.data.data;
+const pagination = response.data.pagination;
+```
