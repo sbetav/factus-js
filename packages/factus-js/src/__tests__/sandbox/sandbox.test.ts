@@ -310,6 +310,85 @@ describe("sandbox integration", () => {
     );
 
     // -----------------------------------------------------------------
+    // Debit Notes
+    // -----------------------------------------------------------------
+    await runAllowConflict(
+      "debitNotes.create",
+      factus.debitNotes.create({
+        numbering_range_id: 6,
+        correction_concept_code: "3",
+        customization_id: "30",
+        bill_number: "SETP990000203",
+        reference_code: uniqueRef("DN"),
+        payment_details: cashPaymentDetails,
+        customer: naturalCustomer,
+        items: [billItem],
+      }),
+      [409, 422],
+    );
+
+    await run(
+      "debitNotes.list",
+      factus.debitNotes.list({ page: 1, per_page: 5 }),
+    );
+
+    // -----------------------------------------------------------------
+    // Payrolls & Adjustment Payrolls
+    // -----------------------------------------------------------------
+    await run("payrolls.list", factus.payrolls.list({ page: 1, per_page: 5 }));
+    await runAllowConflict(
+      "payrolls.create",
+      factus.payrolls.create({
+        reference_code: uniqueRef("PAY"),
+        observation: "Sandbox payroll smoke test",
+        settlement_period: {
+          month: "5",
+          year: "2026",
+          payroll_period_code: "5",
+        },
+        payment: {
+          payment_method_code: "42",
+          bank_name: "Bancolombia",
+          account_type: "1",
+          account_number: "123456789",
+          payment_date: "2026-06-05",
+        },
+        worker: {
+          identification_document_code: "13",
+          identification_number: "1234567890",
+          first_name: "Mateo",
+          first_surname: "Gonzales",
+          second_surname: "Forero",
+          address: "Cra100 39-100",
+          country_code: "CO",
+          municipality_code: "68679",
+          has_integral_salary: false,
+          has_high_risk: false,
+          worker_subtype: "00",
+          contract_type: "1",
+          employee_code: "001",
+          worker_type_code: "01",
+          salary: "2800000.00",
+          entry_date: "2023-03-15",
+          days_worked: "30.00",
+        },
+        accruals: {
+          suel: { amount: "2800000.00" },
+        },
+        deductions: {
+          salu: { amount: "112000.00", percentage: "4" },
+          pens: { amount: "112000.00", percentage: "4" },
+        },
+      }),
+      [409, 422],
+    );
+
+    await run(
+      "adjustmentPayrolls.list",
+      factus.adjustmentPayrolls.list({ page: 1, per_page: 5 }),
+    );
+
+    // -----------------------------------------------------------------
     // Support Documents & Adjustment Notes — cleanup, then delete
     // flows FIRST (before regular creates, to avoid 409 "pending
     // document" conflicts). The sandbox only allows one pending
