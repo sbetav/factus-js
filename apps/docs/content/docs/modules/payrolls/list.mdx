@@ -1,0 +1,88 @@
+---
+title: Listar nóminas
+description: Listar nóminas electrónicas con filtros y paginación.
+---
+
+## Firma del método
+
+```ts
+list(
+  params?: ListParams<PayrollFilters>,
+  options?: RequestOptions,
+): Promise<GetPayrollsResponse>
+```
+
+## Endpoint Factus
+
+`GET /v2/payrolls`
+
+Fuente oficial: [Listar nóminas](https://developers.factus.com.co/nomina/listar)
+
+## Parámetros
+
+<TypeTable
+  type={{
+    params: {
+      type: "ListParams<PayrollFilters> (object)",
+      required: false,
+      description: (
+        <div>
+          Filtros y paginación para la consulta.
+          <TypeTable
+            type={{
+              filter: {
+                type: "PayrollFilters",
+                required: false,
+                description: (
+                  <TypeTable
+                    type={{
+                      identification_number: {
+                        type: "string",
+                        required: false,
+                        description:
+                          "Filtra por número de identificación del trabajador.",
+                      },
+                      number: {
+                        type: "string",
+                        required: false,
+                        description: "Filtra por número de la nómina.",
+                      },
+                      names: {
+                        type: "string",
+                        required: false,
+                        description: "Filtra por nombre del trabajador.",
+                      },
+                    }}
+                  />
+                ),
+              },
+              page: {
+                type: "number",
+                required: false,
+                description: "Número de página (base 1).",
+              },
+              per_page: {
+                type: "number",
+                required: false,
+                description: "Cantidad de resultados por página.",
+              },
+            }}
+          />
+        </div>
+      ),
+    },
+  }}
+/>
+
+## Ejemplo
+
+```ts
+const response = await factus.payrolls.list({
+  filter: { identification_number: "1234567890" },
+  page: 1,
+  per_page: 10,
+});
+
+const payrolls = response.data.data;
+const pagination = response.data.pagination;
+```

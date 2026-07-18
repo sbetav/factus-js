@@ -21,6 +21,7 @@ export { CreditNotesModule } from "./modules/credit-notes";
 export { DebitNotesModule } from "./modules/debit-notes";
 export { DocumentsModule } from "./modules/documents";
 export { NumberingRangesModule } from "./modules/numbering-ranges";
+export { PayrollsModule } from "./modules/payrolls";
 export { ReceptionModule } from "./modules/reception";
 export { SubscriptionModule } from "./modules/subscription";
 export { SupportDocumentsModule } from "./modules/support-documents";

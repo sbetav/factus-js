@@ -8,6 +8,7 @@ import { CreditNotesModule } from "./modules/credit-notes";
 import { DebitNotesModule } from "./modules/debit-notes";
 import { DocumentsModule } from "./modules/documents";
 import { NumberingRangesModule } from "./modules/numbering-ranges";
+import { PayrollsModule } from "./modules/payrolls";
 import { ReceptionModule } from "./modules/reception";
 import { SubscriptionModule } from "./modules/subscription";
 import { SupportDocumentsModule } from "./modules/support-documents";
@@ -61,6 +62,9 @@ export class FactusClient {
   /** Adjustment notes for support documents. */
   readonly adjustmentNotes: AdjustmentNotesModule;
 
+  /** Electronic payrolls. */
+  readonly payrolls: PayrollsModule;
+
   /** Incoming / received bills via RADIAN. */
   readonly reception: ReceptionModule;
 
@@ -100,6 +104,7 @@ export class FactusClient {
     this.debitNotes = new DebitNotesModule(this.http);
     this.supportDocuments = new SupportDocumentsModule(this.http);
     this.adjustmentNotes = new AdjustmentNotesModule(this.http);
+    this.payrolls = new PayrollsModule(this.http);
     this.reception = new ReceptionModule(this.http);
     this.acquirer = new AcquirerModule(this.http);
     this.company = new CompanyModule(this.http);

@@ -1,0 +1,27 @@
+---
+title: Introducción
+description: Crear, consultar y gestionar nóminas electrónicas con Factus API v2.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+Accede al módulo a través de `factus.payrolls`.
+
+<Callout type="info">
+  Documentación oficial: [Nómina
+  electrónica](https://developers.factus.com.co/nomina/crear-y-validar).
+</Callout>
+
+## Métodos disponibles
+
+| Método                            | Método HTTP + Endpoint                           | Descripción                                 |
+| --------------------------------- | ------------------------------------------------ | ------------------------------------------- |
+| `create(input, options?)`         | `POST /v2/payrolls`                              | Crear y validar una nómina electrónica      |
+| `list(params?, options?)`         | `GET /v2/payrolls`                               | Listar nóminas                              |
+| `listAll(filter?, options?)`      | `GET /v2/payrolls`                               | Recorrer todas las páginas automáticamente  |
+| `get(referenceCode, options?)`    | `GET /v2/payrolls/reference/{reference_code}`    | Obtener el detalle por código de referencia |
+| `delete(referenceCode, options?)` | `DELETE /v2/payrolls/reference/{reference_code}` | Eliminar una nómina no validada             |
+
+Consulta [Paginación automática](/docs/pagination) para el uso de `listAll()`.
+
+Los catálogos de códigos para trabajador, devengados y deducciones están en [Tablas de referencia nómina](/docs/reference-tables/payroll).

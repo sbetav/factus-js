@@ -1,0 +1,44 @@
+---
+title: Ver nómina
+description: Obtener el detalle de una nómina por código de referencia.
+---
+
+## Firma del método
+
+```ts
+get(
+  referenceCode: string,
+  options?: RequestOptions,
+): Promise<ViewPayrollResponse>
+```
+
+## Endpoint Factus
+
+`GET /v2/payrolls/reference/{reference_code}`
+
+Fuente oficial: [Ver nómina](https://developers.factus.com.co/nomina/ver)
+
+## Parámetros
+
+<TypeTable
+  type={{
+    referenceCode: {
+      type: "string",
+      required: true,
+      description: (
+        <>
+          {"Código de referencia ("}
+          <code>{"reference_code"}</code>
+          {") de la nómina."}
+        </>
+      ),
+    },
+  }}
+/>
+
+## Ejemplo
+
+```ts
+const response = await factus.payrolls.get("990000070");
+console.log(response.data);
+```

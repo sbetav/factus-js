@@ -1,0 +1,317 @@
+---
+title: Crear y validar
+description: Crear y validar una nómina electrónica con periodo, trabajador, devengados y deducciones.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Firma del método
+
+```ts
+create(
+  input: CreatePayrollInput,
+  options?: RequestOptions,
+): Promise<CreatePayrollResponse>
+```
+
+## Endpoint Factus
+
+`POST /v2/payrolls`
+
+Fuente oficial: [Crear y validar](https://developers.factus.com.co/nomina/crear-y-validar)
+
+<Callout type="info">
+  La descripción completa de cada campo de devengados y deducciones está en la
+  [documentación oficial de
+  campos](https://developers.factus.com.co/nomina/descripcion-de-campos). Los
+  códigos tipados del SDK están en [Tablas de referencia
+  nómina](/docs/reference-tables/payroll).
+</Callout>
+
+## Campos principales
+
+<TypeTable
+  type={{
+    reference_code: {
+      type: "string",
+      required: true,
+      description: "Código único interno de referencia de la nómina.",
+    },
+    observation: {
+      type: "string",
+      required: false,
+      description: "Observación libre sobre la nómina.",
+    },
+    numbering_range_id: {
+      type: "string | number",
+      required: false,
+      description:
+        "ID del rango de numeración. Requerido si tienes más de un rango activo.",
+    },
+    settlement_period: {
+      type: "PayrollSettlementPeriodInput",
+      required: true,
+      description: (
+        <TypeTable
+          type={{
+            month: {
+              type: "string | number",
+              required: true,
+              description: "Mes de liquidación (1–12).",
+            },
+            year: {
+              type: "string | number",
+              required: true,
+              description: "Año de liquidación.",
+            },
+            payroll_period_code: {
+              type: "PayrollPeriodCode",
+              required: true,
+              description: (
+                <>
+                  {"Periodo de nómina — Ver "}
+                  <a href="/docs/reference-tables/payroll#periodo-de-nómina-payrollperiodcode">
+                    {"PayrollPeriodCode"}
+                  </a>
+                  {"."}
+                </>
+              ),
+            },
+            pay_period_half: {
+              type: "string",
+              required: false,
+              description:
+                "Primera o segunda quincena. Requerido si payroll_period_code es quincenal (`4`).",
+            },
+          }}
+        />
+      ),
+    },
+    payment: {
+      type: "PayrollPaymentInput",
+      required: true,
+      description: (
+        <TypeTable
+          type={{
+            payment_method_code: {
+              type: "PaymentMethodCode",
+              required: true,
+              description: (
+                <>
+                  {"Método de pago — Ver "}
+                  <a href="/docs/reference-tables/general#método-de-pago-paymentmethodcode">
+                    {"PaymentMethodCode"}
+                  </a>
+                  {"."}
+                </>
+              ),
+            },
+            bank_name: {
+              type: "string",
+              required: false,
+              description:
+                "Entidad bancaria. Requerido para consignación, transferencia o CATS (`42`, `47`, `98`).",
+            },
+            account_type: {
+              type: "PayrollAccountTypeCode",
+              required: false,
+              description: (
+                <>
+                  {"Tipo de cuenta — Ver "}
+                  <a href="/docs/reference-tables/payroll#tipo-de-cuenta-bancaria-payrollaccounttypecode">
+                    {"PayrollAccountTypeCode"}
+                  </a>
+                  {"."}
+                </>
+              ),
+            },
+            account_number: {
+              type: "string",
+              required: false,
+              description: "Número de cuenta del trabajador.",
+            },
+            payment_date: {
+              type: "string",
+              required: true,
+              description: "Fecha de pago (`AAAA-MM-DD`).",
+            },
+          }}
+        />
+      ),
+    },
+    worker: {
+      type: "PayrollWorkerInput",
+      required: true,
+      description: (
+        <TypeTable
+          type={{
+            identification_document_code: {
+              type: "PayrollIdentityDocumentCode",
+              required: true,
+              description: (
+                <>
+                  {"Tipo de documento — Ver "}
+                  <a href="/docs/reference-tables/payroll#tipo-de-documento-de-identidad-payrollidentitydocumentcode">
+                    {"PayrollIdentityDocumentCode"}
+                  </a>
+                  {"."}
+                </>
+              ),
+            },
+            identification_number: {
+              type: "string",
+              required: true,
+              description: "Número de identificación del trabajador.",
+            },
+            first_name: { type: "string", required: true },
+            other_names: { type: "string", required: false },
+            first_surname: { type: "string", required: true },
+            second_surname: { type: "string", required: true },
+            address: { type: "string", required: true },
+            country_code: {
+              type: "string",
+              required: true,
+              description: "Código ISO del país (catálogo externo).",
+            },
+            municipality_code: {
+              type: "string",
+              required: false,
+              description:
+                "Código de municipio. Requerido si country_code es CO.",
+            },
+            has_integral_salary: { type: "boolean", required: true },
+            has_high_risk: { type: "boolean", required: true },
+            worker_type_code: {
+              type: "WorkerTypeCode",
+              required: true,
+              description: (
+                <>
+                  {"Tipo de trabajador — Ver "}
+                  <a href="/docs/reference-tables/payroll#tipo-de-trabajador-workertypecode">
+                    {"WorkerTypeCode"}
+                  </a>
+                  {"."}
+                </>
+              ),
+            },
+            worker_subtype: {
+              type: "WorkerSubtypeCode",
+              required: true,
+              description: (
+                <>
+                  {"Subtipo de trabajador — Ver "}
+                  <a href="/docs/reference-tables/payroll#subtipo-de-trabajador-workersubtypecode">
+                    {"WorkerSubtypeCode"}
+                  </a>
+                  {"."}
+                </>
+              ),
+            },
+            contract_type: {
+              type: "ContractTypeCode",
+              required: true,
+              description: (
+                <>
+                  {"Tipo de contrato — Ver "}
+                  <a href="/docs/reference-tables/payroll#tipo-de-contrato-contracttypecode">
+                    {"ContractTypeCode"}
+                  </a>
+                  {"."}
+                </>
+              ),
+            },
+            employee_code: { type: "string", required: false },
+            salary: { type: "string", required: true },
+            entry_date: { type: "string", required: true },
+            days_worked: { type: "string", required: true },
+            retirement_date: { type: "string", required: false },
+          }}
+        />
+      ),
+    },
+    accruals: {
+      type: "PayrollAccrualsInput",
+      required: true,
+      description:
+        "Devengados. Incluye suel (obligatorio), y bloques opcionales como cesa, prim, tra, hora, vaca, inca, etc. Cada subtipo con accrual_type_code usa las constantes Payroll*TypeCode documentadas en la página de referencia nómina.",
+    },
+    deductions: {
+      type: "PayrollDeductionsInput",
+      required: true,
+      description:
+        "Deducciones. salu y pens son obligatorios; el resto (dedu, sanc, sind, libr, etc.) es opcional según el caso.",
+    },
+  }}
+/>
+
+## Ejemplo
+
+```ts
+import {
+  ContractTypeCode,
+  PaymentMethodCode,
+  PayrollAccountTypeCode,
+  PayrollIdentityDocumentCode,
+  PayrollPeriodCode,
+  WorkerSubtypeCode,
+  WorkerTypeCode,
+} from "factus-js";
+
+const response = await factus.payrolls.create({
+  reference_code: "990000070",
+  observation: "Nómina ordinaria mensual",
+  numbering_range_id: "01kpdv25zepw0vzn39th90h1a7",
+  settlement_period: {
+    month: "5",
+    year: "2026",
+    payroll_period_code: PayrollPeriodCode.Monthly,
+  },
+  payment: {
+    payment_method_code: PaymentMethodCode.BankDeposit,
+    bank_name: "Bancolombia",
+    account_type: PayrollAccountTypeCode.Payroll,
+    account_number: "123456789",
+    payment_date: "2026-06-05",
+  },
+  worker: {
+    identification_document_code: PayrollIdentityDocumentCode.CitizenshipCard,
+    identification_number: "1234567890",
+    first_name: "Mateo",
+    first_surname: "Gonzales",
+    second_surname: "Forero",
+    address: "Cra100 39-100",
+    country_code: "CO",
+    municipality_code: "68679",
+    has_integral_salary: false,
+    has_high_risk: false,
+    worker_subtype: WorkerSubtypeCode.NotApplicable,
+    contract_type: ContractTypeCode.FixedTerm,
+    employee_code: "001",
+    worker_type_code: WorkerTypeCode.Dependent,
+    salary: "2800000.00",
+    entry_date: "2023-03-15",
+    days_worked: "30.00",
+  },
+  accruals: {
+    suel: { amount: "2800000.00" },
+    tra: [{ amount: "249095.00", accrual_type_code: "1" }],
+    comi: [{ amount: "300000.00" }],
+    hora: [
+      {
+        quantity: "5",
+        percentage: "25.00",
+        amount: "79545.45",
+        start_date: "2026-05-06 18:00:00",
+        end_date: "2026-05-06 23:00:00",
+        accrual_type_code: "1",
+      },
+    ],
+  },
+  deductions: {
+    salu: { amount: "131025.45", percentage: "4" },
+    pens: { amount: "131025.45", percentage: "4" },
+  },
+});
+
+console.log(response.data.number, response.data.reference_code);
+```

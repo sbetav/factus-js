@@ -131,6 +131,7 @@ export const PaymentMethodCode = {
   Undefined: "1",
   DebitCard: "49",
   CreditCard: "48",
+  Cats: "98",
   Other: "ZZZ",
 } as const;
 export type PaymentMethodCode =

@@ -6,6 +6,7 @@ import type {
   CreateBillInput,
   CreateCreditNoteInput,
   CreateDebitNoteInput,
+  CreatePayrollInput,
   DocumentItemInput,
   EmailContentData,
   FactusClient,
@@ -13,7 +14,12 @@ import type {
   ManualReceptionEventCode,
   RadianEventUpdateInput,
 } from "../../index";
-import { EventCode } from "../../index";
+import {
+  ContractTypeCode,
+  EventCode,
+  PayrollPeriodCode,
+  WorkerTypeCode,
+} from "../../index";
 
 type HasKey<T, K extends PropertyKey> = K extends keyof T ? true : false;
 type AssertTrue<T extends true> = T;
@@ -128,6 +134,33 @@ describe("public type contracts", () => {
     expectTypeOf<
       AssertTrue<HasKey<FactusClient["debitNotes"], "listAll">>
     >().toEqualTypeOf<true>();
+  });
+
+  test("client exposes payrolls module", () => {
+    expectTypeOf<
+      AssertTrue<HasKey<FactusClient, "payrolls">>
+    >().toEqualTypeOf<true>();
+    expectTypeOf<
+      AssertTrue<HasKey<FactusClient["payrolls"], "create">>
+    >().toEqualTypeOf<true>();
+    expectTypeOf<
+      AssertTrue<HasKey<FactusClient["payrolls"], "listAll">>
+    >().toEqualTypeOf<true>();
+  });
+
+  test("payroll input supports typed settlement and worker codes", () => {
+    expectTypeOf(PayrollPeriodCode.Monthly).toExtend<
+      CreatePayrollInput["settlement_period"]["payroll_period_code"]
+    >();
+    expectTypeOf(WorkerTypeCode.Dependent).toExtend<
+      CreatePayrollInput["worker"]["worker_type_code"]
+    >();
+    expectTypeOf(ContractTypeCode.FixedTerm).toExtend<
+      CreatePayrollInput["worker"]["contract_type"]
+    >();
+    expectTypeOf<CreatePayrollInput["numbering_range_id"]>().toEqualTypeOf<
+      string | number | undefined
+    >();
   });
 
   test("radian event inputs include claim concept code", () => {

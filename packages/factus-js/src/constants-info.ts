@@ -213,6 +213,7 @@ export const PaymentMethodCodeInfo: Record<PaymentMethodCode, ConstantInfo> = {
   "1": { description: "Medio de pago no definido" },
   "49": { description: "Tarjeta Débito" },
   "48": { description: "Tarjeta Crédito" },
+  "98": { description: "CATS (Nequi, Daviplata, etc.)" },
   ZZZ: { description: "Otro" },
 };
 

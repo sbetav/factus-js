@@ -7,6 +7,7 @@ import {
   DebitNotesModule,
   DocumentsModule,
   NumberingRangesModule,
+  PayrollsModule,
   ReceptionModule,
   SubscriptionModule,
   SupportDocumentsModule,
@@ -276,6 +277,39 @@ describe("module routing contract", () => {
         payload: undefined,
       },
       { method: "delete", path: "/v2/adjustment-notes/reference/NDS3" },
+    ]);
+  });
+
+  test("payrolls methods map to expected routes and verbs", async () => {
+    const spy = createHttpSpy();
+    const payrolls = new PayrollsModule(spy.client as never);
+
+    const createInput = { reference_code: "PAY-001" } as never;
+    const listFilters = {
+      filter: { identification_number: "1234567890" },
+      page: 1,
+      per_page: 10,
+    };
+    const listQuery = {
+      "filter[identification_number]": "1234567890",
+      page: 1,
+      per_page: 10,
+    };
+
+    await payrolls.create(createInput);
+    await payrolls.list(listFilters);
+    await payrolls.get("PAY-001");
+    await payrolls.delete("PAY-001");
+
+    expect(spy.calls).toEqual([
+      { method: "post", path: "/v2/payrolls", payload: createInput },
+      { method: "get", path: "/v2/payrolls", payload: listQuery },
+      {
+        method: "get",
+        path: "/v2/payrolls/reference/PAY-001",
+        payload: undefined,
+      },
+      { method: "delete", path: "/v2/payrolls/reference/PAY-001" },
     ]);
   });
 

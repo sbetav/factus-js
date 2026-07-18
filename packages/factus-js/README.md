@@ -10,7 +10,7 @@ TypeScript/JavaScript SDK for the [Factus](https://www.factus.com.co/) API for C
 
 ## Features
 
-- Full coverage of the Factus API v2: bills, credit notes, debit notes, support documents, adjustment notes, RADIAN reception, numbering ranges, subscriptions and more.
+- Full coverage of the Factus API v2: bills, credit notes, debit notes, payrolls, support documents, adjustment notes, RADIAN reception, numbering ranges, subscriptions and more.
 - Automatic OAuth2 authentication with refresh and one-time retry on expired token.
 - Strong TypeScript typing for payloads and responses.
 - Typed DIAN constants such as `PaymentFormCode`, `IdentityDocumentCode`, `EventCode`, etc.

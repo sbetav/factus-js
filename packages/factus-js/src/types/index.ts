@@ -10,6 +10,7 @@ export * from "./debit-note";
 export * from "./customer";
 export * from "./adjustment-note";
 export * from "./numbering-range";
+export * from "./payroll";
 export * from "./reception";
 export * from "./subscription";
 export * from "./support-document";

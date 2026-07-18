@@ -13,6 +13,8 @@
     "modules/bills",
     "modules/credit-notes",
     "modules/debit-notes",
+    "modules/payrolls",
+    "modules/adjustment-payrolls",
     "modules/support-documents",
     "modules/adjustment-notes",
     "modules/documents",
