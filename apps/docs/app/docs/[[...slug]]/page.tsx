@@ -1,7 +1,9 @@
+import { DocsTocFooter } from "@/components/docs-toc-footer";
 import { getMDXComponents } from "@/components/mdx";
 import { ViewOptionsPopover } from "@/components/view-options-popover";
 import {
   getGithubDocsBlobUrl,
+  getGithubDocsIssueUrl,
   getOgImageAbsoluteUrl,
   getSiteUrl,
 } from "@/lib/site";
@@ -95,13 +97,26 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
   const description =
     page.data.description ??
     "Documentación de factus-js para integrar Factus API en JavaScript y TypeScript.";
+  const pageUrl = new URL(page.url, `${getSiteUrl()}/`).href;
+  const githubUrl = getGithubDocsBlobUrl(page.path);
+  const tocFooter = (
+    <DocsTocFooter
+      editUrl={githubUrl}
+      issueUrl={getGithubDocsIssueUrl(pageUrl)}
+    />
+  );
 
   return (
-    <DocsPage toc={page.data.toc} full={page.data.full}>
+    <DocsPage
+      toc={page.data.toc}
+      full={page.data.full}
+      tableOfContent={{ footer: tocFooter }}
+      tableOfContentPopover={{ footer: tocFooter }}
+    >
       <DocsStructuredData
         title={page.data.title}
         description={description}
-        pageUrl={new URL(page.url, `${getSiteUrl()}/`).href}
+        pageUrl={pageUrl}
         slug={params.slug}
       />
       <DocsTitle>{page.data.title}</DocsTitle>
@@ -112,7 +127,7 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
         </MarkdownCopyButton>
         <ViewOptionsPopover
           markdownUrl={`${page.url}.mdx`}
-          githubUrl={getGithubDocsBlobUrl(page.path)}
+          githubUrl={githubUrl}
         />
       </div>
       <DocsBody>

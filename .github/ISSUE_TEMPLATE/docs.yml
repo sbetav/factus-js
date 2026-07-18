@@ -1,0 +1,57 @@
+name: Problema en la documentación
+description: Reporta un error, omisión o mejora en la documentación.
+title: "[Docs]: "
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Usa esta plantilla para reportar problemas en la documentación del sitio o del README.
+
+  - type: input
+    id: page-url
+    attributes:
+      label: URL de la página
+      description: Enlace a la página con el problema (si aplica).
+      placeholder: https://factusjs.vercel.app/docs/...
+    validations:
+      required: false
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Tipo de problema
+      options:
+        - Información incorrecta
+        - Información faltante
+        - Ejemplo de código roto
+        - Tipografía / redacción
+        - Navegación / estructura
+        - Otro
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Descripción
+      description: ¿Qué está mal o qué falta? Incluye el texto o el fragmento afectado si puedes.
+      placeholder: En la sección X se indica Y, pero el SDK realmente...
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Sugerencia (opcional)
+      description: ¿Cómo debería quedar o qué te habría ayudado a encontrar?
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: Revisé la documentación actualizada y los issues existentes
+          required: true

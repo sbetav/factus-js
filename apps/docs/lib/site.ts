@@ -46,9 +46,23 @@ export const gitConfig = {
 export const docsContentPathInRepo =
   process.env.NEXT_PUBLIC_DOCS_CONTENT_PATH_IN_REPO ?? "apps/docs/content/docs";
 
+export function getGithubRepoUrl(): string {
+  return `https://github.com/${gitConfig.user}/${gitConfig.repo}`;
+}
+
 export function getGithubDocsBlobUrl(pagePath: string): string {
-  const base = `https://github.com/${gitConfig.user}/${gitConfig.repo}/blob/${gitConfig.branch}`;
+  const base = `${getGithubRepoUrl()}/blob/${gitConfig.branch}`;
   const dir = docsContentPathInRepo.replace(/\/$/, "");
   const rel = pagePath.replace(/^\//, "");
   return `${base}/${dir}/${rel}`;
+}
+
+/** Opens the docs issue template with the current page referenced in the title. */
+export function getGithubDocsIssueUrl(pageUrl: string): string {
+  const params = new URLSearchParams({
+    template: "docs.yml",
+    labels: "documentation",
+    title: `[Docs]: ${pageUrl}`,
+  });
+  return `${getGithubRepoUrl()}/issues/new?${params.toString()}`;
 }
