@@ -1,0 +1,51 @@
+name: Solicitud de funcionalidad
+description: Propón una mejora o una nueva capacidad para el SDK.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Cuéntanos qué te gustaría agregar o mejorar en factus-js.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema o necesidad
+      description: ¿Qué problema resuelve esta funcionalidad?
+      placeholder: Hoy tengo que hacer X manualmente porque el SDK no expone...
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Propuesta
+      description: Describe la solución o API que imaginas.
+      placeholder: Me gustaría poder llamar a client.... con...
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas consideradas
+      description: ¿Hay otra forma de lograrlo hoy? ¿Qué evaluaste?
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexto adicional
+      description: Enlaces, capturas, ejemplos de la API de Factus, etc.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: Revisé la documentación y los issues existentes
+          required: true

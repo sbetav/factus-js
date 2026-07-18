@@ -1,0 +1,99 @@
+name: Reporte de error
+description: Algo no funciona como se espera en el SDK.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por reportar el problema. Completa los campos para ayudarnos a reproducirlo.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Descripción
+      description: ¿Qué ocurrió y qué esperabas que ocurriera?
+      placeholder: Al llamar a client.bills.create(...) recibí un error inesperado...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Pasos para reproducir
+      description: Incluye un fragmento de código mínimo si es posible.
+      placeholder: |
+        1. Instalar factus-js@x.y.z
+        2. Ejecutar...
+        3. Observar el error...
+      render: typescript
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamiento esperado
+      placeholder: Debería devolver...
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Versión de factus-js
+      placeholder: 1.2.3
+    validations:
+      required: true
+
+  - type: dropdown
+    id: runtime
+    attributes:
+      label: Entorno
+      options:
+        - Node.js
+        - Bun
+        - Deno
+        - Edge / Cloudflare Workers
+        - Otro
+    validations:
+      required: true
+
+  - type: input
+    id: runtime-version
+    attributes:
+      label: Versión del entorno
+      description: Por ejemplo, Node.js 22.11.0
+      placeholder: 22.11.0
+    validations:
+      required: false
+
+  - type: dropdown
+    id: api-env
+    attributes:
+      label: Entorno de la API Factus
+      options:
+        - Sandbox
+        - Producción
+        - No aplica
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / mensaje de error
+      description: Pega el stack trace o la respuesta de la API (sin secretos ni tokens).
+      render: shell
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: Revisé la documentación y los issues existentes
+          required: true
+        - label: El reporte no incluye credenciales, tokens ni datos sensibles
+          required: true

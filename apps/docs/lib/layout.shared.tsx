@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
-import { gitConfig } from "@/lib/site";
+import { getGithubRepoUrl, gitConfig } from "@/lib/site";
 
 export { gitConfig };
 
@@ -26,6 +26,6 @@ export function baseOptions(): BaseLayoutProps {
     nav: {
       title: <NavLogo />,
     },
-    githubUrl: `https://github.com/${gitConfig.user}/${gitConfig.repo}`,
+    githubUrl: getGithubRepoUrl(),
   };
 }
