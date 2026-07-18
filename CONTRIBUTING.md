@@ -1,59 +1,59 @@
-# Contributing
+# Contribuir
 
-This repo is organized as a monorepo (pnpm + Turborepo):
+Este repositorio está organizado como monorepo (pnpm + Turborepo):
 
-- `packages/factus-js`: the publishable npm SDK
-- `apps/docs`: Next.js documentation site
+- `packages/factus-js`: el SDK publicado en npm
+- `apps/docs`: sitio de documentación en Next.js (fumadocs)
 
-## Quickstart (local)
+## Inicio rápido (local)
 
-1. Install dependencies:
+1. Instala las dependencias:
    - `pnpm install`
-2. Run the dev servers:
+2. Ejecuta los servidores de desarrollo:
    - `pnpm dev`
 
-## Verification before opening a PR
+## Verificación antes de abrir un PR
 
-Run these from the repo root:
+Ejecuta esto desde la raíz del repositorio:
 
 - `pnpm lint`
 - `pnpm check-types`
-- `pnpm test` (or `pnpm --filter factus-js test`)
+- `pnpm test` (o `pnpm --filter factus-js test`)
 
-## Docs
+## Documentación
 
-The docs site lives in `apps/docs`. If your PR changes SDK behavior or public APIs, please also update the relevant docs/MDX pages where appropriate.
+El sitio con la documentación está en `apps/docs`. Si tu PR cambia el comportamiento del SDK o APIs públicas, actualiza también la documentación correspondiente cuando aplique.
 
-If you update `packages/factus-js/CHANGELOG.md`, regenerate the docs changelog page and commit the result:
+Si actualizas `packages/factus-js/CHANGELOG.md`, regenera la página de changelog de docs y confirma el resultado:
 
 ```bash
 pnpm --filter @factus-js/docs generate:changelog
 ```
 
-This updates `apps/docs/content/docs/changelog.mdx`, which is committed so deploys stay read-only.
+Esto actualiza `apps/docs/content/docs/changelog.mdx`, que se versiona para que los deploys permanezcan en solo lectura.
 
-## Agent context (from official docs)
+## Contexto para agentes (desde la documentación oficial)
 
-To generate local markdown context from the official Factus docs, run this command from the repo root:
+Para generar contexto en markdown local a partir de la documentación oficial de Factus, ejecuta este comando desde la raíz del repo:
 
 ```bash
 pnpm sync-factus-docs
 ```
 
-The script opens an interactive version selector:
+El script abre un selector interactivo de versión:
 
 - `v1`: `https://developers.factus.com.co/v1`
 - `v2`: `https://developers.factus.com.co/`
 
-The script uses a Node.js crawler that follows every reachable documentation page under the selected docs URL. It extracts the page content and convert it to Markdown, also it trims long base64 payloads to keep context size manageable.
+El script extrae el contenido de la página y lo convierte a Markdown; también recorta payloads base64 largos para mantener el tamaño del contexto manejable.
 
-Output folders:
+Carpetas de salida:
 
-- Markdown snapshots: `factus-docs/v1/` and `factus-docs/v2/`
-- Temporary site mirrors: `.temp/factus-docs-mirror-v1/` and `.temp/factus-docs-mirror-v2/`
+- Snapshots en Markdown: `factus-docs/v1/` y `factus-docs/v2/`
+- Copias temporales del sitio: `.temp/factus-docs-mirror-v1/` y `.temp/factus-docs-mirror-v2/`
 
 ## Releases
 
-Releases are automated using Changesets. Contributors typically only need to submit code changes and versioning/publishing is handled in CI/CD.
+Los releases se automatizan con Changesets. En general, si vas a contribuir solo necesitas enviar cambios de código; el versionado y la publicación se manejan con CI/CD.
 
-The release workflow also verifies that the committed docs changelog matches `packages/factus-js/CHANGELOG.md`.
+El workflow también verifica que el changelog de la documentación coincida con `packages/factus-js/CHANGELOG.md`.

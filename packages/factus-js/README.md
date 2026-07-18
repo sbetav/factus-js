@@ -4,22 +4,22 @@
 [![license](https://img.shields.io/npm/l/factus-js.svg)](https://github.com/sbetav/factus-js/blob/main/LICENSE)
 [![npm downloads](https://img.shields.io/npm/dm/factus-js.svg)](https://www.npmjs.com/package/factus-js)
 
-TypeScript/JavaScript SDK for the [Factus](https://www.factus.com.co/) API for Colombian e-invoicing.
+SDK TypeScript/JavaScript para la API de [Factus](https://www.factus.com.co/).
 
-> Full documentation: [https://factusjs.vercel.app](https://factusjs.vercel.app)
+> Documentación completa: [https://factusjs.vercel.app](https://factusjs.vercel.app)
 
-## Features
+## Características
 
-- Full coverage of Factus API domains: bills, credit notes, support documents, adjustment notes, RADIAN reception, numbering ranges, catalogs, and more.
-- Automatic OAuth2 authentication with refresh and one-time retry on expired token.
-- Strong TypeScript typing for payloads and responses.
-- Typed DIAN constants (`PaymentFormCode`, `IdentityDocumentTypeId`, and more) as direct value maps.
-- Automatic pagination iterator with `listAll()` for paginated modules.
-- `AbortSignal` support and client-level timeout.
-- Runtime compatibility with Node.js >= 18, Deno, and Bun.
-- Zero runtime dependencies.
+- Cobertura completa de los dominios de la API de Factus: facturas, notas crédito, documentos soporte, notas de ajuste, recepción RADIAN, rangos de numeración, catálogos y más.
+- Autenticación OAuth2 automática con refresh y un reintento ante token expirado.
+- Tipado fuerte en TypeScript para payloads y respuestas.
+- Constantes DIAN tipadas (`PaymentFormCode`, `IdentityDocumentTypeId`, y más) como mapas de valores directos.
+- Iterador de paginación automática con `listAll()` en módulos paginados.
+- Soporte de `AbortSignal` y timeout a nivel de cliente.
+- Compatibilidad en runtime con Node.js >= 18, Deno y Bun.
+- Cero dependencias en runtime.
 
-## Installation
+## Instalación
 
 ```bash
 # npm
@@ -35,7 +35,7 @@ pnpm add factus-js
 bun add factus-js
 ```
 
-## Basic usage
+## Uso básico
 
 ```ts
 import {
@@ -53,7 +53,7 @@ const factus = new FactusClient({
   clientSecret: process.env.FACTUS_CLIENT_SECRET!,
   username: process.env.FACTUS_USERNAME!,
   password: process.env.FACTUS_PASSWORD!,
-  environment: "sandbox", // use "production" for live usage
+  environment: "sandbox", // usa "production" en producción
 });
 
 const bill = await factus.bills.create({
@@ -92,23 +92,23 @@ const bill = await factus.bills.create({
 console.log(bill.data);
 ```
 
-## Available modules
+## Módulos disponibles
 
-| Module                    | Description                                     |
-| ------------------------- | ----------------------------------------------- |
-| `factus.bills`            | Electronic sales bills                          |
-| `factus.creditNotes`      | Credit notes                                    |
-| `factus.supportDocuments` | Support documents                               |
-| `factus.adjustmentNotes`  | Adjustment notes for support documents          |
-| `factus.reception`        | RADIAN reception and bill events                |
-| `factus.company`          | Company data                                    |
-| `factus.numberingRanges`  | DIAN numbering ranges                           |
-| `factus.subscription`     | Subscription and quota status                   |
-| `factus.catalog`          | Municipalities, countries, tributes, and others |
+| Módulo                    | Descripción                            |
+| ------------------------- | -------------------------------------- |
+| `factus.bills`            | Facturas electrónicas de venta         |
+| `factus.creditNotes`      | Notas crédito                          |
+| `factus.supportDocuments` | Documentos soporte                     |
+| `factus.adjustmentNotes`  | Notas de ajuste de documentos soporte  |
+| `factus.reception`        | Recepción RADIAN y eventos de facturas |
+| `factus.company`          | Datos de la empresa                    |
+| `factus.numberingRanges`  | Rangos de numeración DIAN              |
+| `factus.subscription`     | Suscripción y estado de cupo           |
+| `factus.catalog`          | Municipios, países, tributos y otros   |
 
-## DIAN constants
+## Constantes DIAN
 
-Constants are direct typed values. Use them directly in payloads, without `.value`.
+Las constantes son valores tipados directos. Úsalas tal cual en los payloads, sin `.value`.
 
 ```ts
 import {
@@ -127,7 +127,7 @@ const paymentForm = PaymentFormCode.CreditPayment;
 const paymentLabel = PaymentFormCodeInfo[paymentForm].description;
 ```
 
-## Error handling
+## Manejo de errores
 
 ```ts
 import { FactusClient, FactusError } from "factus-js";
@@ -145,7 +145,7 @@ try {
 }
 ```
 
-## Exports
+## Exportaciones
 
 ```ts
 import {
@@ -161,6 +161,6 @@ import {
 } from "factus-js";
 ```
 
-## License
+## Licencia
 
 [MIT](https://github.com/sbetav/factus-js/blob/main/LICENSE)

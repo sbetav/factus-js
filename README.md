@@ -1,25 +1,25 @@
 <p align="center">
-  <img src="./assets/banner.png" alt="JavaScript SDK for the Factus API" />
+  <img src="./assets/banner.png" alt="SDK de JavaScript para la API de Factus" />
 </p>
 
 # factus-js
 
-TypeScript/JavaScript SDK for the Factus API (Colombian e-invoicing).
+SDK TypeScript/JavaScript para la API de Factus (facturación electrónica para Colombia).
 
-## Install
+## Instalación
 
 ```bash
 npm install factus-js@1.1.1
 ```
 
-## Requirements
+## Requisitos
 
-- Node.js 18+ (uses native `fetch`).
-- Factus API credentials.
+- Node.js 18+ (usa `fetch` nativo).
+- Credenciales de la API de Factus.
 
-## Quickstart
+## Inicio rápido
 
-### 1) Set environment variables
+### 1) Configura las variables de entorno
 
 ```env
 FACTUS_CLIENT_ID=your-client-id
@@ -28,7 +28,7 @@ FACTUS_USERNAME=your-username
 FACTUS_PASSWORD=your-password
 ```
 
-### 2) Create the client
+### 2) Inicializa el cliente
 
 ```ts
 import { FactusClient } from "factus-js";
@@ -38,22 +38,22 @@ const factus = new FactusClient({
   clientSecret: process.env.FACTUS_CLIENT_SECRET!,
   username: process.env.FACTUS_USERNAME!,
   password: process.env.FACTUS_PASSWORD!,
-  environment: "sandbox", // use "production" for live usage
+  environment: "sandbox", // usa "production" en producción
 });
 ```
 
-### 3) Make your first request
+### 3) Haz tu primera petición
 
 ```ts
 const bills = await factus.bills.list({ page: 1, per_page: 10 });
 console.log(bills.data.data);
 ```
 
-## Examples
+## Ejemplos
 
-### Create a bill
+### Crear una factura
 
-DIAN constants are direct string values and should be used directly in payloads:
+Las constantes DIAN son valores string directos y deben usarse tal cual en los payloads:
 
 ```ts
 import {
@@ -103,7 +103,7 @@ const response = await factus.bills.create({
 console.log(response.data);
 ```
 
-### Automatic pagination
+### Paginación automática
 
 ```ts
 for await (const bill of factus.bills.listAll({ status: 1 })) {
@@ -111,7 +111,7 @@ for await (const bill of factus.bills.listAll({ status: 1 })) {
 }
 ```
 
-### Error handling
+### Manejo de errores
 
 ```ts
 import { FactusError } from "factus-js";
@@ -120,14 +120,14 @@ try {
   await factus.bills.get("SETP990000001");
 } catch (error) {
   if (error instanceof FactusError) {
-    console.error(error.statusCode); // e.g. 404
+    console.error(error.statusCode); // p. ej. 404
     console.error(error.message);
-    console.error(error.validationErrors); // DIAN validation errors on 422
+    console.error(error.validationErrors); // errores de validación DIAN en 422
   }
 }
 ```
 
-## Available modules
+## Módulos disponibles
 
 - `bills`
 - `creditNotes`
@@ -139,15 +139,14 @@ try {
 - `subscription`
 - `catalog`
 
-## Documentation
+## Documentación
 
-- Official Factus API docs: `https://developers.factus.com.co/v1/`
-- SDK docs site: `https://factusjs.vercel.app/`
-- Package README: `packages/factus-js/README.md`
+- API oficial de Factus: `https://developers.factus.com.co/v1/`
+- Documentación del SDK: `https://factusjs.vercel.app/`
 
 ## Monorepo
 
-This repository also contains the docs application and development tooling.
+Este repositorio también incluye la app de documentación y las herramientas de desarrollo.
 
 ```bash
 pnpm install
