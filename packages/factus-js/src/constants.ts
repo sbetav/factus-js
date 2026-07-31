@@ -155,6 +155,13 @@ export const NumberingRangeDocumentTypeCode = {
 export type NumberingRangeDocumentTypeCode =
   (typeof NumberingRangeDocumentTypeCode)[keyof typeof NumberingRangeDocumentTypeCode];
 
+export const PayrollNumberingRangeDocumentTypeCode = {
+  Payroll: "26",
+  PayrollAdjustmentNote: "27",
+} as const;
+export type PayrollNumberingRangeDocumentTypeCode =
+  (typeof PayrollNumberingRangeDocumentTypeCode)[keyof typeof PayrollNumberingRangeDocumentTypeCode];
+
 export const AdjustmentNoteReasonCode = {
   PartialReturn: "1",
   SupportDocumentCancellation: "2",
@@ -307,10 +314,52 @@ export type PayrollOtherConceptTypeCode =
 
 export const PayrollLeaveTypeCode = {
   MaternityOrPaternity: "1",
-  CompensatedVacation: "2",
+  PaidLeave: "2",
+  UnpaidLeave: "3",
 } as const;
 export type PayrollLeaveTypeCode =
   (typeof PayrollLeaveTypeCode)[keyof typeof PayrollLeaveTypeCode];
+
+export const HealthCoverageCode = {
+  UpcBenefitsPlan: "01",
+  MaximumBudget: "02",
+  EpsEocPremiumUninsuredSoat: "03",
+  SoatPolicyCoverage: "04",
+  ArlCoverage: "05",
+  AdresCoverage: "06",
+  PublicHealthCoverage: "07",
+  TerritorialEntityOfferResources: "08",
+  MigrantPopulationEmergencies: "09",
+  ComplementaryHealthPlan: "10",
+  PrepaidMedicinePlan: "11",
+  OtherHealthPolicies: "12",
+  SpecialOrExceptionRegime: "13",
+  PrivateLibertyNationalHealthFund: "14",
+  Private: "15",
+  UpcContributoryRegime: "16",
+  UpcSubsidizedRegime: "17",
+} as const;
+export type HealthCoverageCode =
+  (typeof HealthCoverageCode)[keyof typeof HealthCoverageCode];
+
+export const HealthIdentityDocumentCode = {
+  CitizenshipCard: "CC",
+  ForeignerId: "CE",
+  DiplomaticCard: "CD",
+  Passport: "PA",
+  SafeConduct: "SC",
+  SpecialPermanencePermit: "PE",
+  CivilRegistration: "RC",
+  IdentityCard: "TI",
+  LiveBirthCertificate: "CN",
+  UnidentifiedAdult: "AS",
+  UnidentifiedMinor: "MS",
+  ForeignDocument: "DE",
+  WithoutIdentification: "SI",
+  TemporaryProtectionPermit: "PT",
+} as const;
+export type HealthIdentityDocumentCode =
+  (typeof HealthIdentityDocumentCode)[keyof typeof HealthIdentityDocumentCode];
 
 export const PayrollVacationTypeCode = {
   Common: "1",

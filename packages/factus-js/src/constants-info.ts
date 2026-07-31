@@ -17,12 +17,15 @@ import type {
   EventCode,
   FiscalResponsibilityCode,
   IdentityDocumentCode,
+  HealthCoverageCode,
+  HealthIdentityDocumentCode,
   NumberingRangeDocumentTypeCode,
   OperationTypeCode,
   OrganizationTypeCode,
   PaymentFormCode,
   PaymentMethodCode,
   PayrollAccountTypeCode,
+  PayrollNumberingRangeDocumentTypeCode,
   PayrollAllowanceTypeCode,
   PayrollCompensationTypeCode,
   PayrollEpctvBonusTypeCode,
@@ -234,6 +237,14 @@ export const NumberingRangeDocumentTypeCodeInfo: Record<
   "30": { description: "Factura de talonario y de papel" },
 };
 
+export const PayrollNumberingRangeDocumentTypeCodeInfo: Record<
+  PayrollNumberingRangeDocumentTypeCode,
+  ConstantInfo
+> = {
+  "26": { description: "Nómina Electrónica" },
+  "27": { description: "Nota de ajuste Nómina Electrónica" },
+};
+
 export const AdjustmentNoteReasonCodeInfo: Record<
   AdjustmentNoteReasonCode,
   ConstantInfo
@@ -411,7 +422,60 @@ export const PayrollLeaveTypeCodeInfo: Record<
   ConstantInfo
 > = {
   "1": { description: "Licencia de maternidad o paternidad" },
-  "2": { description: "Vacaciones compensadas" },
+  "2": { description: "Licencia remunerada" },
+  "3": { description: "Licencia no remunerada" },
+};
+
+export const HealthCoverageCodeInfo: Record<HealthCoverageCode, ConstantInfo> =
+  {
+    "01": { description: "Plan de beneficios en salud financiado con UPC" },
+    "02": { description: "Presupuesto máximo" },
+    "03": { description: "Prima EPS / EOC, no asegurados SOAT" },
+    "04": { description: "Cobertura Póliza SOAT" },
+    "05": { description: "Cobertura ARL" },
+    "06": { description: "Cobertura ADRES" },
+    "07": { description: "Cobertura Salud Pública" },
+    "08": {
+      description: "Cobertura entidad territorial, recursos de oferta",
+    },
+    "09": { description: "Urgencias población migrante" },
+    "10": { description: "Plan complementario en salud" },
+    "11": { description: "Plan medicina prepagada" },
+    "12": { description: "Otras pólizas en salud" },
+    "13": { description: "Cobertura Régimen Especial o Excepción" },
+    "14": {
+      description:
+        "Cobertura Fondo Nacional de Salud de las Personas Privadas de la Libertad",
+    },
+    "15": { description: "Particular" },
+    "16": {
+      description:
+        "Plan de beneficios en salud financiado con UPC régimen contributivo",
+    },
+    "17": {
+      description:
+        "Plan de beneficios en salud financiado con UPC régimen subsidiado",
+    },
+  };
+
+export const HealthIdentityDocumentCodeInfo: Record<
+  HealthIdentityDocumentCode,
+  ConstantInfo
+> = {
+  CC: { description: "Cédula de ciudadanía" },
+  CE: { description: "Cédula de extranjería" },
+  CD: { description: "Carné diplomático" },
+  PA: { description: "Pasaporte" },
+  SC: { description: "Salvoconducto" },
+  PE: { description: "Permiso especial de permanencia" },
+  RC: { description: "Registro civil de nacimiento" },
+  TI: { description: "Tarjeta de identidad" },
+  CN: { description: "Certificado de nacido vivo" },
+  AS: { description: "Adulto sin identificar" },
+  MS: { description: "Menor sin identificar" },
+  DE: { description: "Documento extranjero" },
+  SI: { description: "Sin identificación" },
+  PT: { description: "Permiso por protección temporal" },
 };
 
 export const PayrollVacationTypeCodeInfo: Record<

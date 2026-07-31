@@ -5,6 +5,8 @@ import {
   DebitNoteCorrectionCode,
   DebitNoteOperationCode,
   EventCode,
+  HealthCoverageCode,
+  HealthIdentityDocumentCode,
   IdentityDocumentCode,
   NumberingRangeDocumentTypeCode,
   OperationTypeCode,
@@ -18,6 +20,7 @@ import {
   PayrollIncapacityTypeCode,
   PayrollIncentiveTypeCode,
   PayrollLeaveTypeCode,
+  PayrollNumberingRangeDocumentTypeCode,
   PayrollOtherConceptTypeCode,
   PayrollOvertimeTypeCode,
   PayrollPensionSolidarityFundTypeCode,
@@ -38,6 +41,8 @@ import {
   DebitNoteCorrectionCodeInfo,
   DebitNoteOperationCodeInfo,
   EventCodeInfo,
+  HealthCoverageCodeInfo,
+  HealthIdentityDocumentCodeInfo,
   IdentityDocumentCodeInfo,
   NumberingRangeDocumentTypeCodeInfo,
   OperationTypeCodeInfo,
@@ -51,6 +56,7 @@ import {
   PayrollIncapacityTypeCodeInfo,
   PayrollIncentiveTypeCodeInfo,
   PayrollLeaveTypeCodeInfo,
+  PayrollNumberingRangeDocumentTypeCodeInfo,
   PayrollOtherConceptTypeCodeInfo,
   PayrollOvertimeTypeCodeInfo,
   PayrollPensionSolidarityFundTypeCodeInfo,
@@ -186,6 +192,31 @@ describe("constants — value map structure", () => {
     );
     expect(NumberingRangeDocumentTypeCode).not.toHaveProperty(
       "PayrollDeletionNote",
+    );
+  });
+
+  test("PayrollNumberingRangeDocumentTypeCode covers 26 and 27 only", () => {
+    expect(PayrollNumberingRangeDocumentTypeCode.Payroll).toBe("26");
+    expect(PayrollNumberingRangeDocumentTypeCode.PayrollAdjustmentNote).toBe(
+      "27",
+    );
+    expect(Object.values(PayrollNumberingRangeDocumentTypeCode)).not.toContain(
+      "28",
+    );
+    expectCodeInfoPairs(
+      PayrollNumberingRangeDocumentTypeCode,
+      PayrollNumberingRangeDocumentTypeCodeInfo,
+    );
+  });
+
+  test("health coverage and identity catalogs include latest codes", () => {
+    expect(HealthCoverageCode.UpcContributoryRegime).toBe("16");
+    expect(HealthCoverageCode.UpcSubsidizedRegime).toBe("17");
+    expect(HealthIdentityDocumentCode.TemporaryProtectionPermit).toBe("PT");
+    expectCodeInfoPairs(HealthCoverageCode, HealthCoverageCodeInfo);
+    expectCodeInfoPairs(
+      HealthIdentityDocumentCode,
+      HealthIdentityDocumentCodeInfo,
     );
   });
 });

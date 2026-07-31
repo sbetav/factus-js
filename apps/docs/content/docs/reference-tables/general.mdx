@@ -325,6 +325,27 @@ console.log(NumberingRangeDocumentTypeCodeInfo[code].description); // "Factura d
 | `SupportDocumentAdjustmentNote` | `"25"` | Nota de Ajuste Documento Soporte |
 | `PaperOrStubInvoice`            | `"30"` | Factura de talonario y de papel  |
 
+## Tipo de documento en rangos de numeración nómina (`PayrollNumberingRangeDocumentTypeCode`)
+
+```ts
+import {
+  PayrollNumberingRangeDocumentTypeCode,
+  PayrollNumberingRangeDocumentTypeCodeInfo,
+} from "factus-js";
+
+const code = PayrollNumberingRangeDocumentTypeCode.Payroll;
+
+console.log(code); // "26"
+console.log(PayrollNumberingRangeDocumentTypeCodeInfo[code].description); // "Nómina Electrónica"
+```
+
+Usado con `factus.numberingRanges.payrolls.create()`. No incluye el código `28`.
+
+| Clave                   | Valor  | Descripción                       |
+| ----------------------- | ------ | --------------------------------- |
+| `Payroll`               | `"26"` | Nómina Electrónica                |
+| `PayrollAdjustmentNote` | `"27"` | Nota de ajuste Nómina Electrónica |
+
 ## Concepto de corrección de nota de ajuste (`AdjustmentNoteReasonCode`)
 
 ```ts
@@ -386,3 +407,48 @@ console.log(FiscalResponsibilityCodeInfo[code].description); // "No responsable"
 | `VATWithholdingAgent`  | `"0-23"`    | Agente de retención de IVA    |
 | `SimpleTaxRegime`      | `"0-47"`    | Regimen simple de tributación |
 | `NotResponsible`       | `"R-99-PN"` | No responsable                |
+
+## Plan de cobertura en salud (`HealthCoverageCode`)
+
+Usado en `health.coverage_code` en facturas de sector salud.
+
+| Clave                              | Valor  | Descripción                                                           |
+| ---------------------------------- | ------ | --------------------------------------------------------------------- |
+| `UpcBenefitsPlan`                  | `"01"` | Plan de beneficios en salud financiado con UPC                        |
+| `MaximumBudget`                    | `"02"` | Presupuesto máximo                                                    |
+| `EpsEocPremiumUninsuredSoat`       | `"03"` | Prima EPS / EOC, no asegurados SOAT                                   |
+| `SoatPolicyCoverage`               | `"04"` | Cobertura Póliza SOAT                                                 |
+| `ArlCoverage`                      | `"05"` | Cobertura ARL                                                         |
+| `AdresCoverage`                    | `"06"` | Cobertura ADRES                                                       |
+| `PublicHealthCoverage`             | `"07"` | Cobertura Salud Pública                                               |
+| `TerritorialEntityOfferResources`  | `"08"` | Cobertura entidad territorial, recursos de oferta                     |
+| `MigrantPopulationEmergencies`     | `"09"` | Urgencias población migrante                                          |
+| `ComplementaryHealthPlan`          | `"10"` | Plan complementario en salud                                          |
+| `PrepaidMedicinePlan`              | `"11"` | Plan medicina prepagada                                               |
+| `OtherHealthPolicies`              | `"12"` | Otras pólizas en salud                                                |
+| `SpecialOrExceptionRegime`         | `"13"` | Cobertura Régimen Especial o Excepción                                |
+| `PrivateLibertyNationalHealthFund` | `"14"` | Cobertura Fondo Nacional de Salud de Personas Privadas de la Libertad |
+| `Private`                          | `"15"` | Particular                                                            |
+| `UpcContributoryRegime`            | `"16"` | Plan UPC régimen contributivo                                         |
+| `UpcSubsidizedRegime`              | `"17"` | Plan UPC régimen subsidiado                                           |
+
+## Documento de identidad sector salud (`HealthIdentityDocumentCode`)
+
+Catálogo de beneficiario (`beneficiary.identification_document_code`). No reutiliza los códigos DIAN numéricos.
+
+| Clave                       | Valor  | Descripción                     |
+| --------------------------- | ------ | ------------------------------- |
+| `CitizenshipCard`           | `"CC"` | Cédula de ciudadanía            |
+| `ForeignerId`               | `"CE"` | Cédula de extranjería           |
+| `DiplomaticCard`            | `"CD"` | Carné diplomático               |
+| `Passport`                  | `"PA"` | Pasaporte                       |
+| `SafeConduct`               | `"SC"` | Salvoconducto                   |
+| `SpecialPermanencePermit`   | `"PE"` | Permiso especial de permanencia |
+| `CivilRegistration`         | `"RC"` | Registro civil de nacimiento    |
+| `IdentityCard`              | `"TI"` | Tarjeta de identidad            |
+| `LiveBirthCertificate`      | `"CN"` | Certificado de nacido vivo      |
+| `UnidentifiedAdult`         | `"AS"` | Adulto sin identificar          |
+| `UnidentifiedMinor`         | `"MS"` | Menor sin identificar           |
+| `ForeignDocument`           | `"DE"` | Documento extranjero            |
+| `WithoutIdentification`     | `"SI"` | Sin identificación              |
+| `TemporaryProtectionPermit` | `"PT"` | Permiso por protección temporal |

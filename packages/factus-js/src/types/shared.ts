@@ -1,4 +1,6 @@
 import type {
+  HealthCoverageCode,
+  HealthIdentityDocumentCode,
   IdentityDocumentCode,
   PaymentFormCode,
   PaymentMethodCode,
@@ -261,13 +263,13 @@ export interface AllowanceChargeResponse {
 export interface DocumentHealthData {
   provider_code: string;
   payment_method_code: LiteralUnion<PaymentMethodCode>;
-  coverage_code: string;
+  coverage_code: LiteralUnion<HealthCoverageCode>;
   contract_number: string;
   policy_number?: string | null;
 }
 
 export interface DocumentBeneficiary {
-  identification_document_code: LiteralUnion<IdentityDocumentCode>;
+  identification_document_code: LiteralUnion<HealthIdentityDocumentCode>;
   identification_number?: string;
   names?: string;
   surnames?: string;
