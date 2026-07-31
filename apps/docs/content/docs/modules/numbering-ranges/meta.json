@@ -2,12 +2,15 @@
   "title": "Rangos de numeración",
   "pages": [
     "index",
+    "---Facturación---",
     "list",
     "create",
     "get",
     "delete",
     "update-current",
     "toggle-status",
-    "get-software-range"
+    "get-software-range",
+    "---Nómina---",
+    "payrolls"
   ]
 }

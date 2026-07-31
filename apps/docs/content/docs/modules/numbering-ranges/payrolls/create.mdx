@@ -1,0 +1,62 @@
+---
+title: Crear
+description: Crear un rango de numeración de nómina.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Firma del método
+
+```ts
+create(
+  input: CreatePayrollNumberingRangeInput,
+  options?: RequestOptions,
+): Promise<ApiResponse<PayrollNumberingRange>>
+```
+
+## Endpoint Factus
+
+`POST /v2/numbering-ranges/payrolls`
+
+Fuente oficial: [Crear](https://developers.factus.com.co/rangos-de-numeracion/nomina/crear-rango)
+
+## Parámetros
+
+<TypeTable
+  type={{
+    document: {
+      type: "PayrollNumberingRangeDocumentTypeCode",
+      required: true,
+      description: "Código de documento: 26 (nómina) o 27 (nota de ajuste).",
+    },
+    prefix: {
+      type: "string",
+      required: true,
+      description: "Prefijo alfanumérico (máx. 4 caracteres).",
+    },
+    current: {
+      type: "number",
+      required: true,
+      description: "Número actual del consecutivo.",
+    },
+  }}
+/>
+
+## Ejemplo
+
+```ts
+import { PayrollNumberingRangeDocumentTypeCode } from "factus-js";
+
+const response = await factus.numberingRanges.payrolls.create({
+  document: PayrollNumberingRangeDocumentTypeCode.Payroll,
+  prefix: "NE",
+  current: 1,
+});
+
+console.log(response.data.id);
+```
+
+<Callout type="warn">
+  Es probable que este método no funcione en entorno sandbox. Úsalo en
+  producción o con credenciales autorizadas.
+</Callout>

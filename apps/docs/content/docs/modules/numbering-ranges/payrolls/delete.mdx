@@ -1,0 +1,32 @@
+---
+title: Eliminar
+description: Eliminar un rango de numeración de nómina.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Firma del método
+
+```ts
+delete(
+  id: string,
+  options?: RequestOptions,
+): Promise<DeletePayrollNumberingRangeResponse>
+```
+
+## Endpoint Factus
+
+`DELETE /v2/numbering-ranges/payrolls/{id}`
+
+Fuente oficial: [Eliminar](https://developers.factus.com.co/rangos-de-numeracion/nomina/eliminar-rango)
+
+## Ejemplo
+
+```ts
+await factus.numberingRanges.payrolls.delete("01kpdv25zepw0vzn39th90h1a7");
+```
+
+<Callout type="warn">
+  Es probable que este método no funcione en entorno sandbox. Úsalo en
+  producción o con credenciales autorizadas.
+</Callout>

@@ -1,0 +1,34 @@
+---
+title: Cambiar estado
+description: Activar o desactivar un rango de numeración de nómina.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Firma del método
+
+```ts
+toggleStatus(
+  id: string,
+  options?: RequestOptions,
+): Promise<ApiResponse<PayrollNumberingRange>>
+```
+
+## Endpoint Factus
+
+`PATCH /v2/numbering-ranges/payrolls/{id}/toggle-status`
+
+Fuente oficial: [Cambiar estado](https://developers.factus.com.co/rangos-de-numeracion/nomina/cambiar-estado)
+
+## Ejemplo
+
+```ts
+const response = await factus.numberingRanges.payrolls.toggleStatus(
+  "01kpdv25zepw0vzn39th90h1a7",
+);
+```
+
+<Callout type="warn">
+  Es probable que este método no funcione en entorno sandbox. Úsalo en
+  producción o con credenciales autorizadas.
+</Callout>

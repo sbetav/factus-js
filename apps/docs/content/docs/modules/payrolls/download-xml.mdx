@@ -1,0 +1,40 @@
+---
+title: Descargar XML
+description: Descargar el XML de una nómina electrónica en Base64.
+---
+
+## Firma del método
+
+```ts
+downloadXml(
+  number: string,
+  options?: RequestOptions,
+): Promise<DownloadPayrollXmlResponse>
+```
+
+## Endpoint Factus
+
+`GET /v2/payrolls/{number}/download-xml`
+
+Fuente oficial: [Descargar XML](https://developers.factus.com.co/nomina/descargar-xml)
+
+## Parámetros
+
+<TypeTable
+  type={{
+    number: {
+      type: "string",
+      required: true,
+      description: "Número de la nómina cuyo XML se descargará.",
+    },
+  }}
+/>
+
+## Ejemplo
+
+```ts
+const response = await factus.payrolls.downloadXml("990000070");
+const xml = Buffer.from(response.data.xml_base_64_encoded, "base64").toString(
+  "utf-8",
+);
+```

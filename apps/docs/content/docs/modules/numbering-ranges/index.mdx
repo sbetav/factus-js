@@ -7,12 +7,14 @@ import { Callout } from "fumadocs-ui/components/callout";
 
 Accede al modulo a traves de `factus.numberingRanges`.
 
+Los rangos de **facturación** viven en `/v2/numbering-ranges`. Los de **nómina** están en el submódulo `factus.numberingRanges.payrolls` (`/v2/numbering-ranges/payrolls`).
+
 <Callout type="info">
-  Documentación oficial: [Rangos de
-  numeración](https://developers.factus.com.co/rangos-de-numeracion/introduccion).
+  Documentación oficial: [Rangos de numeración
+  facturación](https://developers.factus.com.co/rangos-de-numeracion/facturacion/introduccion).
 </Callout>
 
-## Métodos disponibles
+## Métodos de facturación
 
 | Método                               | Método HTTP + Endpoint                          | Descripción                                |
 | ------------------------------------ | ----------------------------------------------- | ------------------------------------------ |
@@ -24,5 +26,7 @@ Accede al modulo a traves de `factus.numberingRanges`.
 | `toggleStatus(id, options?)`         | `PATCH /v2/numbering-ranges/{id}/toggle-status` | Activar o desactivar un rango              |
 | `getSoftwareRange(options?)`         | `GET /v2/numbering-ranges/dian`                 | Consultar rangos asociados al software     |
 | `delete(id, options?)`               | `DELETE /v2/numbering-ranges/{id}`              | Eliminar un rango                          |
+
+Consulta [Rangos nómina](/docs/modules/numbering-ranges/payrolls) para `factus.numberingRanges.payrolls`.
 
 Consulta [Paginación automática](/docs/pagination) para el uso de `listAll()`.

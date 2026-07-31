@@ -259,7 +259,7 @@ describe("sandbox integration", () => {
         numbering_range_id: 9,
         correction_concept_code: "2",
         customization_id: "20",
-        bill_id: 514,
+        bill_number: "SETP990000203",
         reference_code: uniqueRef("CN"),
         payment_details: cashPaymentDetails,
         customer: naturalCustomer,
@@ -297,7 +297,7 @@ describe("sandbox integration", () => {
         numbering_range_id: 9,
         correction_concept_code: "2",
         customization_id: "20",
-        bill_id: 514,
+        bill_number: "SETP990000203",
         reference_code: deleteCreditNoteRef,
         payment_details: cashPaymentDetails,
         customer: invalidNitCustomer,
@@ -336,6 +336,7 @@ describe("sandbox integration", () => {
     // Payrolls & Adjustment Payrolls
     // -----------------------------------------------------------------
     await run("payrolls.list", factus.payrolls.list({ page: 1, per_page: 5 }));
+    await run("payrolls.downloadXml", factus.payrolls.downloadXml("990000070"));
     await runAllowConflict(
       "payrolls.create",
       factus.payrolls.create({
@@ -386,6 +387,10 @@ describe("sandbox integration", () => {
     await run(
       "adjustmentPayrolls.list",
       factus.adjustmentPayrolls.list({ page: 1, per_page: 5 }),
+    );
+    await run(
+      "adjustmentPayrolls.downloadXml",
+      factus.adjustmentPayrolls.downloadXml("NADJ1"),
     );
 
     // -----------------------------------------------------------------
@@ -562,6 +567,10 @@ describe("sandbox integration", () => {
     await run(
       "numberingRanges.list",
       factus.numberingRanges.list({ page: 1, per_page: 5 }),
+    );
+    await run(
+      "numberingRanges.payrolls.list",
+      factus.numberingRanges.payrolls.list({ page: 1, per_page: 5 }),
     );
     await run(
       "numberingRanges.getSoftwareRange",

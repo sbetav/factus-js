@@ -1,0 +1,35 @@
+---
+title: Ver
+description: Obtener el detalle de un rango de numeración de nómina por ID.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Firma del método
+
+```ts
+get(
+  id: string,
+  options?: RequestOptions,
+): Promise<ApiResponse<PayrollNumberingRange>>
+```
+
+## Endpoint Factus
+
+`GET /v2/numbering-ranges/payrolls/{id}`
+
+Fuente oficial: [Ver](https://developers.factus.com.co/rangos-de-numeracion/nomina/ver-rango)
+
+## Ejemplo
+
+```ts
+const response = await factus.numberingRanges.payrolls.get(
+  "01kpdv25zepw0vzn39th90h1a7",
+);
+console.log(response.data.prefix);
+```
+
+<Callout type="warn">
+  Es probable que este método no funcione en entorno sandbox. Úsalo en
+  producción o con credenciales autorizadas.
+</Callout>

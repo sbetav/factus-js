@@ -1,9 +1,12 @@
-import type { NumberingRangeDocumentTypeCode } from "../constants";
+import type {
+  NumberingRangeDocumentTypeCode,
+  PayrollNumberingRangeDocumentTypeCode,
+} from "../constants";
 import type { LiteralUnion } from "./common";
 import type { DeleteResponse } from "./shared";
 
 // ---------------------------------------------------------------------------
-// Response types
+// Billing (facturación) response / input types
 // ---------------------------------------------------------------------------
 
 export interface NumberingRange {
@@ -26,10 +29,6 @@ export interface NumberingRange {
   updated_at: string;
 }
 
-// ---------------------------------------------------------------------------
-// Input types
-// ---------------------------------------------------------------------------
-
 export interface UpdateNumberingRangeCurrentInput {
   current: number;
 }
@@ -42,10 +41,6 @@ export interface CreateNumberingRangeInput {
   resolution_number?: string;
 }
 
-// ---------------------------------------------------------------------------
-// Filters
-// ---------------------------------------------------------------------------
-
 export interface NumberingRangeFilters {
   id?: string | number;
   document?: LiteralUnion<NumberingRangeDocumentTypeCode>;
@@ -53,10 +48,6 @@ export interface NumberingRangeFilters {
   technical_key?: string;
   is_active?: string | number | boolean;
 }
-
-// ---------------------------------------------------------------------------
-// Related response types
-// ---------------------------------------------------------------------------
 
 export interface SoftwareNumberingRange {
   resolution_number: string;
@@ -69,7 +60,46 @@ export interface SoftwareNumberingRange {
 }
 
 // ---------------------------------------------------------------------------
+// Payroll numbering ranges (`/v2/numbering-ranges/payrolls`)
+// ---------------------------------------------------------------------------
+
+export interface PayrollNumberingRange {
+  id: string;
+  document: PayrollNumberingRangeDocumentTypeCode | string;
+  document_name?: string;
+  prefix: string;
+  from?: number;
+  to?: number;
+  current?: number;
+  resolution_number?: string | null;
+  start_date?: string;
+  end_date?: string;
+  technical_key?: string | null;
+  is_expired?: boolean;
+  is_active: boolean | 0 | 1;
+  deleted_at?: string | null;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface CreatePayrollNumberingRangeInput {
+  document: PayrollNumberingRangeDocumentTypeCode;
+  prefix: string;
+  current: number;
+}
+
+export interface UpdatePayrollNumberingRangeCurrentInput {
+  current: number;
+}
+
+export interface PayrollNumberingRangeFilters {
+  code?: string;
+  is_enabled?: string | number | boolean;
+}
+
+// ---------------------------------------------------------------------------
 // Named response aliases
 // ---------------------------------------------------------------------------
 
 export type DeleteNumberingRangeResponse = DeleteResponse;
+export type DeletePayrollNumberingRangeResponse = DeleteResponse;

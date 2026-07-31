@@ -1,4 +1,4 @@
 {
   "title": "Notas de ajuste a nómina",
-  "pages": ["index", "create", "get", "list", "delete"]
+  "pages": ["index", "create", "get", "list", "download-xml", "delete"]
 }

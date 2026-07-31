@@ -300,6 +300,7 @@ describe("module routing contract", () => {
     await payrolls.create(createInput);
     await payrolls.list(listFilters);
     await payrolls.get("PAY-001");
+    await payrolls.downloadXml("NE990000070");
     await payrolls.delete("PAY-001");
 
     expect(spy.calls).toEqual([
@@ -308,6 +309,11 @@ describe("module routing contract", () => {
       {
         method: "get",
         path: "/v2/payrolls/reference/PAY-001",
+        payload: undefined,
+      },
+      {
+        method: "get",
+        path: "/v2/payrolls/NE990000070/download-xml",
         payload: undefined,
       },
       { method: "delete", path: "/v2/payrolls/reference/PAY-001" },
@@ -330,6 +336,7 @@ describe("module routing contract", () => {
     await adjustmentPayrolls.create(createInput);
     await adjustmentPayrolls.list(listFilters);
     await adjustmentPayrolls.get("ADJ-001");
+    await adjustmentPayrolls.downloadXml("NADJ1");
     await adjustmentPayrolls.delete("ADJ-001");
 
     expect(spy.calls).toEqual([
@@ -342,6 +349,11 @@ describe("module routing contract", () => {
       {
         method: "get",
         path: "/v2/adjustment-payrolls/reference/ADJ-001",
+        payload: undefined,
+      },
+      {
+        method: "get",
+        path: "/v2/adjustment-payrolls/NADJ1/download-xml",
         payload: undefined,
       },
       {
@@ -419,6 +431,62 @@ describe("module routing contract", () => {
       },
       { method: "get", path: "/v2/numbering-ranges/dian", payload: undefined },
       { method: "delete", path: "/v2/numbering-ranges/8" },
+    ]);
+  });
+
+  test("payroll numbering ranges methods map to expected routes and verbs", async () => {
+    const spy = createHttpSpy();
+    const payrollRanges = new NumberingRangesModule(spy.client as never)
+      .payrolls;
+
+    const listFilters = {
+      filter: { is_enabled: true },
+      page: 1,
+      per_page: 10,
+    };
+    const listQuery = { "filter[is_enabled]": true, page: 1, per_page: 10 };
+    const createInput = {
+      document: "26",
+      prefix: "NE",
+      current: 1,
+    } as never;
+    const updateInput = { current: 2 } as never;
+    const id = "01kpdv25zepw0vzn39th90h1a7";
+
+    await payrollRanges.list(listFilters);
+    await payrollRanges.get(id);
+    await payrollRanges.create(createInput);
+    await payrollRanges.updateCurrent(id, updateInput);
+    await payrollRanges.toggleStatus(id);
+    await payrollRanges.delete(id);
+
+    expect(spy.calls).toEqual([
+      {
+        method: "get",
+        path: "/v2/numbering-ranges/payrolls",
+        payload: listQuery,
+      },
+      {
+        method: "get",
+        path: `/v2/numbering-ranges/payrolls/${id}`,
+        payload: undefined,
+      },
+      {
+        method: "post",
+        path: "/v2/numbering-ranges/payrolls",
+        payload: createInput,
+      },
+      {
+        method: "patch",
+        path: `/v2/numbering-ranges/payrolls/${id}/current`,
+        payload: updateInput,
+      },
+      {
+        method: "patch",
+        path: `/v2/numbering-ranges/payrolls/${id}/toggle-status`,
+        payload: undefined,
+      },
+      { method: "delete", path: `/v2/numbering-ranges/payrolls/${id}` },
     ]);
   });
 

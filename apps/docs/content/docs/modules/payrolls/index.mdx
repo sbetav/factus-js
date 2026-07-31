@@ -20,6 +20,7 @@ Accede al módulo a través de `factus.payrolls`.
 | `list(params?, options?)`         | `GET /v2/payrolls`                               | Listar nóminas                              |
 | `listAll(filter?, options?)`      | `GET /v2/payrolls`                               | Recorrer todas las páginas automáticamente  |
 | `get(referenceCode, options?)`    | `GET /v2/payrolls/reference/{reference_code}`    | Obtener el detalle por código de referencia |
+| `downloadXml(number, options?)`   | `GET /v2/payrolls/{number}/download-xml`         | Descargar el XML firmado                    |
 | `delete(referenceCode, options?)` | `DELETE /v2/payrolls/reference/{reference_code}` | Eliminar una nómina no validada             |
 
 Consulta [Paginación automática](/docs/pagination) para el uso de `listAll()`.

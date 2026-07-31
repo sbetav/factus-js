@@ -4,6 +4,7 @@ import type {
   CreateAdjustmentPayrollInput,
   CreateAdjustmentPayrollResponse,
   DeleteAdjustmentPayrollResponse,
+  DownloadAdjustmentPayrollXmlResponse,
   GetAdjustmentPayrollsResponse,
   ListParams,
   ViewAdjustmentPayrollResponse,
@@ -71,6 +72,21 @@ export class AdjustmentPayrollsModule {
   ): Promise<ViewAdjustmentPayrollResponse> {
     return this.http.get(
       `/v2/adjustment-payrolls/reference/${referenceCode}`,
+      undefined,
+      options?.signal,
+    );
+  }
+
+  /**
+   * Download the payroll adjustment note XML as a base64-encoded string.
+   * GET /v2/adjustment-payrolls/{number}/download-xml
+   */
+  downloadXml(
+    number: string,
+    options?: RequestOptions,
+  ): Promise<DownloadAdjustmentPayrollXmlResponse> {
+    return this.http.get(
+      `/v2/adjustment-payrolls/${number}/download-xml`,
       undefined,
       options?.signal,
     );

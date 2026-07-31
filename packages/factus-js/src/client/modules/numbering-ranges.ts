@@ -11,9 +11,15 @@ import type {
 } from "../../types";
 import type { HttpClient, RequestOptions } from "../http-client";
 import { buildListQueryParams } from "../list-params";
+import { PayrollNumberingRangesModule } from "./payroll-numbering-ranges";
 
 export class NumberingRangesModule {
-  constructor(private readonly http: HttpClient) {}
+  /** Payroll numbering ranges (`/v2/numbering-ranges/payrolls`). */
+  readonly payrolls: PayrollNumberingRangesModule;
+
+  constructor(private readonly http: HttpClient) {
+    this.payrolls = new PayrollNumberingRangesModule(http);
+  }
 
   /**
    * List numbering ranges with optional filters and pagination.

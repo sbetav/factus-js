@@ -1,0 +1,41 @@
+---
+title: Descargar XML
+description: Descargar el XML de una nota de ajuste a nómina en Base64.
+---
+
+## Firma del método
+
+```ts
+downloadXml(
+  number: string,
+  options?: RequestOptions,
+): Promise<DownloadAdjustmentPayrollXmlResponse>
+```
+
+## Endpoint Factus
+
+`GET /v2/adjustment-payrolls/{number}/download-xml`
+
+Fuente oficial: [Descargar XML](https://developers.factus.com.co/nota-ajuste-nomina/descargar-xml)
+
+## Parámetros
+
+<TypeTable
+  type={{
+    number: {
+      type: "string",
+      required: true,
+      description:
+        "Número de la nota de ajuste a nómina cuyo XML se descargará.",
+    },
+  }}
+/>
+
+## Ejemplo
+
+```ts
+const response = await factus.adjustmentPayrolls.downloadXml("NADJ1");
+const xml = Buffer.from(response.data.xml_base_64_encoded, "base64").toString(
+  "utf-8",
+);
+```

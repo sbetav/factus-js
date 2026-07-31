@@ -22,6 +22,7 @@ Una nota de ajuste a nómina (nómina de eliminación) anula ante la DIAN una n�
 | `list(params?, options?)`         | `GET /v2/adjustment-payrolls`                               | Listar nóminas de eliminación                  |
 | `listAll(filter?, options?)`      | `GET /v2/adjustment-payrolls`                               | Recorrer todas las páginas automáticamente     |
 | `get(referenceCode, options?)`    | `GET /v2/adjustment-payrolls/reference/{reference_code}`    | Obtener el detalle por código de referencia    |
+| `downloadXml(number, options?)`   | `GET /v2/adjustment-payrolls/{number}/download-xml`         | Descargar el XML firmado                       |
 | `delete(referenceCode, options?)` | `DELETE /v2/adjustment-payrolls/reference/{reference_code}` | Eliminar una nómina de eliminación no validada |
 
 Consulta [Paginación automática](/docs/pagination) para el uso de `listAll()`.

@@ -3,6 +3,7 @@ import type {
   CompanyInfo,
   DeleteResponse,
   DocumentErrors,
+  DownloadXmlData,
   NumberingRangeInfo,
 } from "./shared";
 
@@ -69,3 +70,4 @@ export type GetAdjustmentPayrollsResponse = ApiResponse<
   PaginatedData<AdjustmentPayrollListItem>
 >;
 export type DeleteAdjustmentPayrollResponse = DeleteResponse;
+export type DownloadAdjustmentPayrollXmlResponse = ApiResponse<DownloadXmlData>;

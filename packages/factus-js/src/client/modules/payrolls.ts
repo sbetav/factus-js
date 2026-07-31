@@ -2,6 +2,7 @@ import type {
   CreatePayrollInput,
   CreatePayrollResponse,
   DeletePayrollResponse,
+  DownloadPayrollXmlResponse,
   GetPayrollsResponse,
   ListParams,
   PayrollFilters,
@@ -70,6 +71,21 @@ export class PayrollsModule {
   ): Promise<ViewPayrollResponse> {
     return this.http.get(
       `/v2/payrolls/reference/${referenceCode}`,
+      undefined,
+      options?.signal,
+    );
+  }
+
+  /**
+   * Download the payroll XML as a base64-encoded string.
+   * GET /v2/payrolls/{number}/download-xml
+   */
+  downloadXml(
+    number: string,
+    options?: RequestOptions,
+  ): Promise<DownloadPayrollXmlResponse> {
+    return this.http.get(
+      `/v2/payrolls/${number}/download-xml`,
       undefined,
       options?.signal,
     );

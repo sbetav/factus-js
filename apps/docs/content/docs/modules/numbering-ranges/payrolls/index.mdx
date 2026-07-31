@@ -1,0 +1,31 @@
+---
+title: Introducción
+description: Gestionar rangos de numeración de nómina electrónica con factus.numberingRanges.payrolls.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+Accede al submódulo a través de `factus.numberingRanges.payrolls`.
+
+<Callout type="info">
+  Documentación oficial: [Rangos de numeración
+  nómina](https://developers.factus.com.co/rangos-de-numeracion/nomina/obtener-rangos).
+</Callout>
+
+Los IDs de rangos de nómina son strings (ULID), no números enteros como en facturación.
+
+## Métodos disponibles
+
+| Método                               | Método HTTP + Endpoint                                   | Descripción                |
+| ------------------------------------ | -------------------------------------------------------- | -------------------------- |
+| `list(params?, options?)`            | `GET /v2/numbering-ranges/payrolls`                      | Listar rangos de nómina    |
+| `listAll(filter?, options?)`         | `GET /v2/numbering-ranges/payrolls`                      | Recorrer todas las páginas |
+| `get(id, options?)`                  | `GET /v2/numbering-ranges/payrolls/{id}`                 | Obtener un rango por ID    |
+| `create(input, options?)`            | `POST /v2/numbering-ranges/payrolls`                     | Crear un rango             |
+| `updateCurrent(id, input, options?)` | `PATCH /v2/numbering-ranges/payrolls/{id}/current`       | Actualizar el consecutivo  |
+| `toggleStatus(id, options?)`         | `PATCH /v2/numbering-ranges/payrolls/{id}/toggle-status` | Activar o desactivar       |
+| `delete(id, options?)`               | `DELETE /v2/numbering-ranges/payrolls/{id}`              | Eliminar un rango          |
+
+Consulta [Paginación automática](/docs/pagination) para el uso de `listAll()`.
+
+Los códigos de documento (`26`, `27`) están en [tablas de referencia](/docs/reference-tables/general#tipo-de-documento-en-rangos-de-numeración-nómina-payrollnumberingrangedocumenttypecode).

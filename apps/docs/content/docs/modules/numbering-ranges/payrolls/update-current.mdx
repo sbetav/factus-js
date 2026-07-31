@@ -1,0 +1,36 @@
+---
+title: Actualizar consecutivo
+description: Actualizar el consecutivo de un rango de numeración de nómina.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Firma del método
+
+```ts
+updateCurrent(
+  id: string,
+  input: UpdatePayrollNumberingRangeCurrentInput,
+  options?: RequestOptions,
+): Promise<ApiResponse<PayrollNumberingRange>>
+```
+
+## Endpoint Factus
+
+`PATCH /v2/numbering-ranges/payrolls/{id}/current`
+
+Fuente oficial: [Actualizar consecutivo](https://developers.factus.com.co/rangos-de-numeracion/nomina/actualizar-consecutivo)
+
+## Ejemplo
+
+```ts
+const response = await factus.numberingRanges.payrolls.updateCurrent(
+  "01kpdv25zepw0vzn39th90h1a7",
+  { current: 2 },
+);
+```
+
+<Callout type="warn">
+  Es probable que este método no funcione en entorno sandbox. Úsalo en
+  producción o con credenciales autorizadas.
+</Callout>
