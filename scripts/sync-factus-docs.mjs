@@ -662,9 +662,32 @@ const pathFromRelativePathname = (pathname, extension) => {
   const normalizedPathname = normalizePathname(pathname);
   const basePathname =
     normalizedPathname === "/" ? "/index" : normalizedPathname;
-  return `${basePathname}${extension}`
+  const safePathname = basePathname
+    .split("/")
+    .map((segment) => (segment ? sanitizePathSegment(segment) : segment))
+    .join("/");
+
+  return `${safePathname}${extension}`
     .replace(/^\//, "")
     .replaceAll("/", path.sep);
+};
+
+const sanitizePathSegment = (segment) => {
+  let decoded = segment;
+  try {
+    decoded = decodeURIComponent(segment);
+  } catch {
+    // Keep the raw segment when percent-decoding fails.
+  }
+
+  const ascii = decoded
+    .normalize("NFD")
+    .replace(/\p{M}/gu, "")
+    .replace(/[^a-zA-Z0-9._-]+/gu, "-")
+    .replace(/-+/gu, "-")
+    .replace(/^-+|-+$/gu, "");
+
+  return ascii || "-";
 };
 
 const normalizePathname = (pathname) => {
