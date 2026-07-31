@@ -42,7 +42,7 @@ export interface CreateCreditNoteInput {
   reference_code: string;
   correction_concept_code: CreditNoteCorrectionCode;
   customization_id?: CreditNoteOperationCode;
-  bill_id?: number;
+  bill_number?: string;
   numbering_range_id?: number;
   currency?: BillCurrencyInput;
   observation?: string;

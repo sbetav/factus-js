@@ -27,15 +27,15 @@ type AssertTrue<T extends true> = T;
 type AssertFalse<T extends false> = T;
 
 describe("public type contracts", () => {
-  test("credit note input keeps bill_id and drops bill_number", () => {
-    expectTypeOf<CreateCreditNoteInput["bill_id"]>().toEqualTypeOf<
-      number | undefined
+  test("credit note input keeps bill_number and drops bill_id", () => {
+    expectTypeOf<CreateCreditNoteInput["bill_number"]>().toEqualTypeOf<
+      string | undefined
     >();
     expectTypeOf<
-      AssertTrue<HasKey<CreateCreditNoteInput, "bill_id">>
+      AssertTrue<HasKey<CreateCreditNoteInput, "bill_number">>
     >().toEqualTypeOf<true>();
     expectTypeOf<
-      AssertFalse<HasKey<CreateCreditNoteInput, "bill_number">>
+      AssertFalse<HasKey<CreateCreditNoteInput, "bill_id">>
     >().toEqualTypeOf<false>();
   });
 

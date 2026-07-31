@@ -53,10 +53,11 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/notas-credito
         </>
       ),
     },
-    bill_id: {
-      type: "number",
+    bill_number: {
+      type: "string",
       required: false,
-      description: "ID interno de la factura relacionada, si aplica.",
+      description:
+        "Número de la factura relacionada. Opcional solo cuando customization_id es 22 (sin referencia a factura).",
     },
     numbering_range_id: {
       type: "number",
@@ -636,7 +637,7 @@ const response = await factus.creditNotes.create({
   reference_code: "NC-2026-0005",
   customization_id: CreditNoteOperationCode.WithReference,
   correction_concept_code: CreditNoteCorrectionCode.PriceAdjustment,
-  bill_id: 514,
+  bill_number: "SETP990000203",
   payment_details: [
     {
       payment_form: PaymentFormCode.CashPayment,
