@@ -1,12 +1,13 @@
 {
-  "title": "Rangos nómina",
+  "title": "Facturación",
   "pages": [
     "index",
     "list",
     "create",
     "get",
+    "delete",
     "update-current",
     "toggle-status",
-    "delete"
+    "get-software-range"
   ]
 }

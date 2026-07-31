@@ -5,7 +5,7 @@ description: Crear y gestionar rangos de numeración autorizados por la DIAN usa
 
 import { Callout } from "fumadocs-ui/components/callout";
 
-Accede al modulo a traves de `factus.numberingRanges`.
+Accede al módulo a través de `factus.numberingRanges`.
 
 Los rangos de **facturación** viven en `/v2/numbering-ranges`. Los de **nómina** están en el submódulo `factus.numberingRanges.payrolls` (`/v2/numbering-ranges/payrolls`).
 
@@ -14,19 +14,5 @@ Los rangos de **facturación** viven en `/v2/numbering-ranges`. Los de **nómina
   facturación](https://developers.factus.com.co/rangos-de-numeracion/facturacion/introduccion).
 </Callout>
 
-## Métodos de facturación
-
-| Método                               | Método HTTP + Endpoint                          | Descripción                                |
-| ------------------------------------ | ----------------------------------------------- | ------------------------------------------ |
-| `list(params?, options?)`            | `GET /v2/numbering-ranges`                      | Listar rangos con filtros y paginación     |
-| `listAll(filter?, options?)`         | `GET /v2/numbering-ranges`                      | Recorrer todas las páginas automáticamente |
-| `get(id, options?)`                  | `GET /v2/numbering-ranges/{id}`                 | Obtener un rango por ID                    |
-| `create(input, options?)`            | `POST /v2/numbering-ranges`                     | Crear un rango                             |
-| `updateCurrent(id, input, options?)` | `PATCH /v2/numbering-ranges/{id}/current`       | Actualizar el consecutivo actual           |
-| `toggleStatus(id, options?)`         | `PATCH /v2/numbering-ranges/{id}/toggle-status` | Activar o desactivar un rango              |
-| `getSoftwareRange(options?)`         | `GET /v2/numbering-ranges/dian`                 | Consultar rangos asociados al software     |
-| `delete(id, options?)`               | `DELETE /v2/numbering-ranges/{id}`              | Eliminar un rango                          |
-
-Consulta [Rangos nómina](/docs/modules/numbering-ranges/payrolls) para `factus.numberingRanges.payrolls`.
-
-Consulta [Paginación automática](/docs/pagination) para el uso de `listAll()`.
+- [Facturación](/docs/modules/numbering-ranges/facturacion) — `factus.numberingRanges`
+- [Nómina](/docs/modules/numbering-ranges/nomina) — `factus.numberingRanges.payrolls`

@@ -1,0 +1,12 @@
+{
+  "title": "Nómina",
+  "pages": [
+    "index",
+    "list",
+    "create",
+    "get",
+    "update-current",
+    "toggle-status",
+    "delete"
+  ]
+}
