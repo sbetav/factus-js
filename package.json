@@ -23,7 +23,7 @@
     "turndown-plugin-gfm": "^1.0.2",
     "typescript": "5.9.2"
   },
-  "packageManager": "pnpm@11.4.0",
+  "packageManager": "pnpm@11.18.0",
   "engines": {
     "node": ">=18"
   }
