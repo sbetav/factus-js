@@ -41,7 +41,7 @@ Código del concepto por el cual se genera la nota débito. [Códigos de correcc
 | **`customization_id`** `string` `default:30` `opcional`
 Código del tipo de operación de la nota débito. Si no se envía, por defecto toma el valor de 30. [Códigos de tipos de operación disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#c%C3%B3digos-de-tipos-de-operaci%C3%B3n-notas-d%C3%A9bito) |
 | **`bill_number`** `string`
-Prefijo y número de la factura electrónica a la que se le generará la nota débito. Este campo es opcional únicamente cuando el campo `customization_id` es 32 (Nota débito sin referencia a una factura electrónica). |
+Número de la factura electrónica a la que se le generará la nota débito. Este campo es opcional únicamente cuando el campo `customization_id` es 32 (Nota débito sin referencia a una factura electrónica). |
 | **`numbering_range_id`** `integer` `opcional`
 ID del rango de numeración. Es obligatorio solo si tienes múltiples rangos activos. Si se omite, el sistema utilizará el único rango disponible por defecto. [Rangos de numeración.](https://developers.factus.com.co/rangos-de-numeracion/obtener-rangos) |
 | **`payment_details`** `array`
@@ -57,7 +57,7 @@ Monto pagado por ese medio y método de pago. |
 | **`payment_details.*.due_date`** `string` `opcional`
 Fecha de vencimiento en formato `YYYY-MM-DD`. Requerido solo cuando la forma de pago (`payment_form`) contiene el valor de 2 (pago a crédito). |
 | **`created_time`** `string` `opcional`
-Fecha y hora de creación de la nota débito en formato `HH:mm:ss`. |
+Hora de creación de la nota débito en formato `HH:mm:ss`. |
 | **`establishment`** `object` `opcional`
 Este es un objeto que contendrá la información sobre el establecimiento. Úsalo cuando manejes más de un establecimiento y necesites que los datos correspondientes se reflejen en la nota débito. Si envías el campo `establishment` los campos internos son obligatorios. |
 | **`establishment.name`** `string`

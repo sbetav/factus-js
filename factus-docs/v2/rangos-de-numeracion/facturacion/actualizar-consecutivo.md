@@ -28,9 +28,18 @@ Incluye los siguientes encabezados.
 
 * * *
 
+### Variables de Ruta, Path Variables
+
+[Sección titulada «Variables de Ruta, Path Variables»](https://developers.factus.com.co/rangos-de-numeracion/facturacion/actualizar-consecutivo#variables-de-ruta-path-variables)
+
+| |
+| --- |
+| **`numbering_range_id`** `string`
+ID del rango de numeración. Se recomienda guardar el ID del rango de numeración para no hacer múltiples llamadas al endpoint al momento de realizar los documentos electrónicos. |
+
 ### Request
 
-[Sección titulada «Request»](https://developers.factus.com.co/rangos-de-numeracion/actualizar-consecutivo#request)
+[Sección titulada «Request»](https://developers.factus.com.co/rangos-de-numeracion/facturacion/actualizar-consecutivo#request)
 
 | |
 | --- |
@@ -39,7 +48,7 @@ Número actual del consecutivo. Se recomienda guardar el ID del rango de numerac
 
 ### Response
 
-[Sección titulada «Response»](https://developers.factus.com.co/rangos-de-numeracion/actualizar-consecutivo#response)
+[Sección titulada «Response»](https://developers.factus.com.co/rangos-de-numeracion/facturacion/actualizar-consecutivo#response)
 
 | |
 | --- |
@@ -73,12 +82,3 @@ El valor es `1` cuando el rango de numeración está activo y `0` cuando no est�
 Fecha de creación. |
 | **`updated_at`**
 Fecha de actualización. |
-
-### Variables de Ruta, Path Variables
-
-[Sección titulada «Variables de Ruta, Path Variables»](https://developers.factus.com.co/rangos-de-numeracion/actualizar-consecutivo#variables-de-ruta-path-variables)
-
-| |
-| --- |
-| **`numbering_range_id`** `string`
-ID del rango de numeración. Se recomienda guardar el ID del rango de numeración para no hacer múltiples llamadas al endpoint al momento de realizar los documentos electrónicos. |

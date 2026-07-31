@@ -51,7 +51,7 @@ Código único que sirve para identificar cada documento soporte de manera unív
 | **`numbering_range_id`** `integer` `opcional`
 ID del rango de numeración. Es obligatorio solo si tienes múltiples rangos activos. Si se omite, el sistema utilizará el único rango disponible por defecto. [Rangos de numeración para documento soporte](https://developers.factus.com.co/rangos-de-numeracion/obtener-rangos) , filtar por filter\[document\] = 24 para obtener solo los rangos de numeración para documentos soporte. |
 | **`created_time`** `string` `opcional`
-Fecha y hora de creación del documento soporte en formato `HH:mm:ss`. |
+Hora de creación del documento soporte en formato `HH:mm:ss`. |
 | **`observation`** `string` `opcional`
 Agrega una observación del documento soporte. No debe tener más de 250 caracteres. |
 | **`payment_details`** `array`
@@ -96,7 +96,7 @@ Nombre del proveedor. |
 Dirección del proveedor. |
 | **`provider.country_code`** `string`
 Código del país del proveedor. [Países disponibles](https://developers.factus.com.co/tablas-de-referencia/countries) |
-| **`provider.municipality_code`** `string`
+| **`provider.municipality_code`** `string` `opcional`
 Código del municipio del proveedor. [Municipios disponibles](https://developers.factus.com.co/tablas-de-referencia/municipios) |
 | **`provider.email`** `string` `opcional`
 Dirección del correo electrónico del proveedor. |

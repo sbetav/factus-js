@@ -52,8 +52,8 @@ Código único que sirve para identificar cada nota crédito de manera unívoca 
 Código del concepto por el cual se genera la nota crédito. [Códigos de corrección disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#c%C3%B3digos-de-correcci%C3%B3n) |
 | **`customization_id`** `string` `default:20` `opcional`
 Código del tipo de operación de la nota crédito. Si no se envía, por defecto toma el valor de 20. [Códigos de tipos de operación disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#c%C3%B3digos-de-tipos-de-operaci%C3%B3n-notas-cr%C3%A9dito) |
-| **`bill_id`** `integer`
-ID de la factura a la que se le generará la nota crédito. Este campo es opcional únicamente cuando el campo \`customization\_id\` es 22 (Nota crédito sin referencia a una factura electrónica). |
+| **`bill_number`** `string`
+Número de la factura a la que se le generará la nota crédito. Este campo es opcional únicamente cuando el campo \`customization\_id\` es 22 (Nota crédito sin referencia a una factura electrónica). |
 | **`numbering_range_id`** `integer` `opcional`
 ID del rango de numeración. Es obligatorio solo si tienes múltiples rangos activos. Si se omite, el sistema utilizará el único rango disponible por defecto. [Rangos de numeración.](https://developers.factus.com.co/rangos-de-numeracion/obtener-rangos) |
 | **`currency`** `object` `opcional`
@@ -73,7 +73,7 @@ Código del método de pago. [Métodos de pago disponibles.](https://developers.
 | **`payment_details.*.reference_code`** `string` `opcional`
 Código de referencia del pago. |
 | **`payment_details.*.amount`** `string`
-Monto pagado por ese medio y metido de pago [Métodos de pago disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#c%C3%B3digos-de-m%C3%A9todos-de-pago) |
+Monto pagado por ese medio y método de pago. [Métodos de pago disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#c%C3%B3digos-de-m%C3%A9todos-de-pago) |
 | **`payment_details.*due_date`** `string` `opcional`
 Fecha de vencimiento de la factura en formato \`YYYY-MM-DD\`. Requerido solo cuando la forma de pago (\`payment\_form\`) contiene el valor de 2 (pago a crédito). |
 | **`health`** `object` `opcional`

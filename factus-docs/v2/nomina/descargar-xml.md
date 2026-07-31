@@ -1,6 +1,6 @@
 # Descargar XML
 
-Este endpoint `devuelve` el xml de la factura en formato **Base64** y el nombre del archivo asociado.
+Este endpoint `devuelve` el xml de la nómina en formato **Base64** y el nombre del archivo asociado.
 Para utilizar el archivo, deberás decodificar el contenido de la propiedad `xml_base_64_encoded`.
 
 **Método:** GET
@@ -10,13 +10,13 @@ Para utilizar el archivo, deberás decodificar el contenido de la propiedad `xml
 **Sandbox**
 
 ```
-https://api-sandbox.factus.com.co/v2/bills/:number/download-xml/
+https://api-sandbox.factus.com.co/v2/payrolls/:number/download-xml
 ```
 
 **Producción**
 
 ```
-https://api.factus.com.co/v2/bills/:number/download-xml/
+https://api.factus.com.co/v2/payrolls/:number/download-xml
 ```
 
 ### **Encabezados de la Solicitud**
@@ -31,9 +31,9 @@ Incluye los siguientes encabezados.
 
 ### Variables de Ruta, Path Variables
 
-[Sección titulada «Variables de Ruta, Path Variables»](https://developers.factus.com.co/facturas/descargar-xml#variables-de-ruta-path-variables)
+[Sección titulada «Variables de Ruta, Path Variables»](https://developers.factus.com.co/nomina/descargar-xml#variables-de-ruta-path-variables)
 
 | |
 | --- |
 | **`number`** `string`
-Número de factura. Se recomienda guardar el número de la factura una vez se haga la creación de la misma para poder hacer uso de este endpoint fácilmente. |
+Número de nómina. Se recomienda guardar el numero de la nómina una vez se haga la creación de la misma para poder hacer uso de este endpoint fácilmente. |

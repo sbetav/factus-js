@@ -32,7 +32,7 @@ Incluye los siguientes encabezados.
 
 ### Variables de Ruta, Path Variables
 
-[Sección titulada «Variables de Ruta, Path Variables»](https://developers.factus.com.co/rangos-de-numeracion/obtener-rangos#variables-de-ruta-path-variables)
+[Sección titulada «Variables de Ruta, Path Variables»](https://developers.factus.com.co/rangos-de-numeracion/facturacion/obtener-rangos#variables-de-ruta-path-variables)
 
 | |
 | --- |
@@ -49,7 +49,7 @@ Estado del registro: `1` para activo, `0` para inactivo |
 
 #### Respuesta del Endpoint
 
-[Sección titulada «Respuesta del Endpoint»](https://developers.factus.com.co/rangos-de-numeracion/obtener-rangos#respuesta-del-endpoint)
+[Sección titulada «Respuesta del Endpoint»](https://developers.factus.com.co/rangos-de-numeracion/facturacion/obtener-rangos#respuesta-del-endpoint)
 
 | |
 | --- |

@@ -30,7 +30,7 @@ Incluye los siguientes encabezados.
 
 ### Variables de Ruta, Path Variables
 
-[Sección titulada «Variables de Ruta, Path Variables»](https://developers.factus.com.co/rangos-de-numeracion/eliminar-rango#variables-de-ruta-path-variables)
+[Sección titulada «Variables de Ruta, Path Variables»](https://developers.factus.com.co/rangos-de-numeracion/facturacion/eliminar-rango#variables-de-ruta-path-variables)
 
 | |
 | --- |
@@ -39,7 +39,7 @@ ID del rango de numeración. Se recomienda guardar el ID del rango de numeració
 
 ### Ejemplo de respuesta
 
-[Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/rangos-de-numeracion/eliminar-rango#ejemplo-de-respuesta)
+[Sección titulada «Ejemplo de respuesta»](https://developers.factus.com.co/rangos-de-numeracion/facturacion/eliminar-rango#ejemplo-de-respuesta)
 
 **status 200**
 

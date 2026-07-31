@@ -1,21 +1,21 @@
-# Crear Rango
+# Actualizar consecutivo
 
-Este endpoint permite crear un rango de numeración en específico. Es útil para crear un rango de numeración en particular.
+Este endpoint permite actualizar el consecutivo de un rango de numeración en específico.
 
-**Método:** POST
+**Método:** PATCH
 
 #### **Endpoint**
 
 **Sandbox**
 
 ```
-https://api-sandbox.factus.com.co/v2/numbering-ranges
+https://api-sandbox.factus.com.co/v2/numbering-ranges/payrolls/:numbering_range_id/current
 ```
 
 **Producción**
 
 ```
-https://api.factus.com.co/v2/numbering-ranges
+https://api.factus.com.co/v2/numbering-ranges/payrolls/:numbering_range_id/current
 ```
 
 ### **Encabezados de la Solicitud**
@@ -26,31 +26,29 @@ Incluye los siguientes encabezados.
 
 ``**Nota:** Reemplaza `token_de_acceso` con el token proporcionado tras autenticarte.``
 
-### Parámetros del Cuerpo (Body)
+* * *
 
-[Sección titulada «Parámetros del Cuerpo (Body)»](https://developers.factus.com.co/rangos-de-numeracion/crear-rango#par%C3%A1metros-del-cuerpo-body)
+### Variables de Ruta, Path Variables
 
-| Parámetros |
+[Sección titulada «Variables de Ruta, Path Variables»](https://developers.factus.com.co/rangos-de-numeracion/nomina/actualizar-consecutivo#variables-de-ruta-path-variables)
+
+| |
 | --- |
-| **`document`** `string`
-Código de documento, para ver los códigos de documento que se pueden usar vea la siguiente tabla.
+| **`numbering_range_id`** `string`
+ID del rango de numeración. Se recomienda guardar el ID del rango de numeración para no hacer múltiples llamadas al endpoint al momento de realizar los documentos electrónicos. |
 
-[Códigos de documentos](https://developers.factus.com.co/tablas-de-referencia/tablas/#c%C3%B3digos-de-tipos-de-documento-para-los-rangos-de-numeraci%C3%B3n) |
-| **`prefix`** `Máx.4 caracteres`
+### Request
 
-Prefijo alfanumérico del rango de numeración.
+[Sección titulada «Request»](https://developers.factus.com.co/rangos-de-numeracion/nomina/actualizar-consecutivo#request)
 
-|
-| **`current`** `Máx.4 caracteres`
-
-Número actual del consecutivo. El número del siguiente documento que se generará.
-**NOTA**: Si el consecutivo se ha usado, debe agregar el número del último consecutivo usado.
-
-|
+| |
+| --- |
+| **`current`**
+Número actual del consecutivo. Se recomienda guardar el ID del rango de numeración para no hacer múltiples llamadas al endpoint al momento de realizar los documentos electrónicos. |
 
 ### Response
 
-[Sección titulada «Response»](https://developers.factus.com.co/rangos-de-numeracion/crear-rango#response)
+[Sección titulada «Response»](https://developers.factus.com.co/rangos-de-numeracion/nomina/actualizar-consecutivo#response)
 
 | |
 | --- |

@@ -28,9 +28,18 @@ Incluye los siguientes encabezados.
 
 * * *
 
+### Variables de Ruta, Path Variables
+
+[Sección titulada «Variables de Ruta, Path Variables»](https://developers.factus.com.co/rangos-de-numeracion/facturacion/ver-rango#variables-de-ruta-path-variables)
+
+| |
+| --- |
+| **`numbering_range_id`** `string`
+ID del rango de numeración. Se recomienda guardar el ID del rango de numeración para no hacer múltiples llamadas al endpoint al momento de realizar los documentos electrónicos. |
+
 #### Respuesta del Endpoint
 
-[Sección titulada «Respuesta del Endpoint»](https://developers.factus.com.co/rangos-de-numeracion/ver-rango#respuesta-del-endpoint)
+[Sección titulada «Respuesta del Endpoint»](https://developers.factus.com.co/rangos-de-numeracion/facturacion/ver-rango#respuesta-del-endpoint)
 
 | |
 | --- |
@@ -60,12 +69,3 @@ Clave técnica |
 El valor es `1` cuando el rango está vencido y `0` cuando está vigente |
 | **`is_active`**
 El valor es `1` cuando el rango está activo y `0` cuando está inactivo |
-
-### Variables de Ruta, Path Variables
-
-[Sección titulada «Variables de Ruta, Path Variables»](https://developers.factus.com.co/rangos-de-numeracion/ver-rango#variables-de-ruta-path-variables)
-
-| |
-| --- |
-| **`numbering_range_id`** `string`
-ID del rango de numeración. Se recomienda guardar el ID del rango de numeración para no hacer múltiples llamadas al endpoint al momento de realizar los documentos electrónicos. |

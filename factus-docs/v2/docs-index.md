@@ -1,8 +1,8 @@
 # External Factus Docs Index
 
-- Generated at: 2026-07-17T22:37:25.293Z
+- Generated at: 2026-07-31T20:39:26.440Z
 - Base URL: https://developers.factus.com.co/
-- Files: 113
+- Files: 121
 
 ## Autenticación
 
@@ -284,6 +284,11 @@
 - Source: https://developers.factus.com.co/nomina/crear-y-validar
 - File: nomina\crear-y-validar.md
 
+## Descargar XML
+
+- Source: https://developers.factus.com.co/nomina/descargar-xml
+- File: nomina\descargar-xml.md
+
 ## Campos de la nómina
 
 - Source: https://developers.factus.com.co/nomina/descripcion-de-campos
@@ -308,6 +313,11 @@
 
 - Source: https://developers.factus.com.co/nota-ajuste-nomina/crear-y-validar
 - File: nota-ajuste-nomina\crear-y-validar.md
+
+## Descargar XML
+
+- Source: https://developers.factus.com.co/nota-ajuste-nomina/descargar-xml
+- File: nota-ajuste-nomina\descargar-xml.md
 
 ## Eliminar no validada
 
@@ -461,58 +471,88 @@
 
 ## Actualizar consecutivo
 
-- Source: https://developers.factus.com.co/rangos-de-numeracion/actualizar-consecutivo
-- File: rangos-de-numeracion\actualizar-consecutivo.md
+- Source: https://developers.factus.com.co/rangos-de-numeracion/facturacion/actualizar-consecutivo
+- File: rangos-de-numeracion\facturacion\actualizar-consecutivo.md
 
 ## Cambiar Estado
 
-- Source: https://developers.factus.com.co/rangos-de-numeracion/cambiar-estado
-- File: rangos-de-numeracion\cambiar-estado.md
+- Source: https://developers.factus.com.co/rangos-de-numeracion/facturacion/cambiar-estado
+- File: rangos-de-numeracion\facturacion\cambiar-estado.md
 
-## Crear Rango
+## Crear
 
-- Source: https://developers.factus.com.co/rangos-de-numeracion/crear-rango
-- File: rangos-de-numeracion\crear-rango.md
+- Source: https://developers.factus.com.co/rangos-de-numeracion/facturacion/crear-rango
+- File: rangos-de-numeracion\facturacion\crear-rango.md
 
 ## Crear Rango documento soporte
 
-- Source: https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-documento-soporte
-- File: rangos-de-numeracion\ejemplos\crear-rango-para-documento-soporte.md
+- Source: https://developers.factus.com.co/rangos-de-numeracion/facturacion/ejemplos/crear-rango-para-documento-soporte
+- File: rangos-de-numeracion\facturacion\ejemplos\crear-rango-para-documento-soporte.md
 
 ## Crear Rango para facturación
 
-- Source: https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-facturacion
-- File: rangos-de-numeracion\ejemplos\crear-rango-para-facturacion.md
+- Source: https://developers.factus.com.co/rangos-de-numeracion/facturacion/ejemplos/crear-rango-para-facturacion
+- File: rangos-de-numeracion\facturacion\ejemplos\crear-rango-para-facturacion.md
 
 ## Crear Rango para notas crédito
 
-- Source: https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-notas-credito
-- File: rangos-de-numeracion\ejemplos\crear-rango-para-notas-credito.md
+- Source: https://developers.factus.com.co/rangos-de-numeracion/facturacion/ejemplos/crear-rango-para-notas-credito
+- File: rangos-de-numeracion\facturacion\ejemplos\crear-rango-para-notas-credito.md
 
 ## Eliminar
 
-- Source: https://developers.factus.com.co/rangos-de-numeracion/eliminar-rango
-- File: rangos-de-numeracion\eliminar-rango.md
+- Source: https://developers.factus.com.co/rangos-de-numeracion/facturacion/eliminar-rango
+- File: rangos-de-numeracion\facturacion\eliminar-rango.md
 
 ## Introducción
 
-- Source: https://developers.factus.com.co/rangos-de-numeracion/introduccion
-- File: rangos-de-numeracion\introduccion.md
+- Source: https://developers.factus.com.co/rangos-de-numeracion/facturacion/introduccion
+- File: rangos-de-numeracion\facturacion\introduccion.md
 
 ## Listar
 
-- Source: https://developers.factus.com.co/rangos-de-numeracion/obtener-rangos
-- File: rangos-de-numeracion\obtener-rangos.md
+- Source: https://developers.factus.com.co/rangos-de-numeracion/facturacion/obtener-rangos
+- File: rangos-de-numeracion\facturacion\obtener-rangos.md
 
 ## Rangos asociados al software
 
-- Source: https://developers.factus.com.co/rangos-de-numeracion/rangos-asociados-al-software
-- File: rangos-de-numeracion\rangos-asociados-al-software.md
+- Source: https://developers.factus.com.co/rangos-de-numeracion/facturacion/rangos-asociados-al-software
+- File: rangos-de-numeracion\facturacion\rangos-asociados-al-software.md
 
 ## Ver
 
-- Source: https://developers.factus.com.co/rangos-de-numeracion/ver-rango
-- File: rangos-de-numeracion\ver-rango.md
+- Source: https://developers.factus.com.co/rangos-de-numeracion/facturacion/ver-rango
+- File: rangos-de-numeracion\facturacion\ver-rango.md
+
+## Actualizar consecutivo
+
+- Source: https://developers.factus.com.co/rangos-de-numeracion/nomina/actualizar-consecutivo
+- File: rangos-de-numeracion\nomina\actualizar-consecutivo.md
+
+## Cambiar Estado
+
+- Source: https://developers.factus.com.co/rangos-de-numeracion/nomina/cambiar-estado
+- File: rangos-de-numeracion\nomina\cambiar-estado.md
+
+## Crear
+
+- Source: https://developers.factus.com.co/rangos-de-numeracion/nomina/crear-rango
+- File: rangos-de-numeracion\nomina\crear-rango.md
+
+## Eliminar
+
+- Source: https://developers.factus.com.co/rangos-de-numeracion/nomina/eliminar-rango
+- File: rangos-de-numeracion\nomina\eliminar-rango.md
+
+## Listar
+
+- Source: https://developers.factus.com.co/rangos-de-numeracion/nomina/obtener-rangos
+- File: rangos-de-numeracion\nomina\obtener-rangos.md
+
+## Ver
+
+- Source: https://developers.factus.com.co/rangos-de-numeracion/nomina/ver-rango
+- File: rangos-de-numeracion\nomina\ver-rango.md
 
 ## Cargar Factura
 

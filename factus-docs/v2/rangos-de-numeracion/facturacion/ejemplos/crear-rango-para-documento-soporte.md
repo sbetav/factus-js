@@ -1,6 +1,6 @@
-# Crear Rango para notas crédito
+# Crear Rango documento soporte
 
-Esta sección describe cómo crear un rango de numeración para notas crédito.
+Esta sección describe cómo crear un rango de numeración para documento soporte.
 
 **Método:** POST
 
@@ -30,14 +30,14 @@ Incluye los siguientes encabezados.
 
 ### Parámetros del Cuerpo (Body)
 
-[Sección titulada «Parámetros del Cuerpo (Body)»](https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-notas-credito#par%C3%A1metros-del-cuerpo-body)
+[Sección titulada «Parámetros del Cuerpo (Body)»](https://developers.factus.com.co/rangos-de-numeracion/facturacion/ejemplos/crear-rango-para-documento-soporte#par%C3%A1metros-del-cuerpo-body)
 
 El cuerpo (Body) de la solicitud debe enviarse en formato JSON y debe incluir los siguientes parámetros:
 
 | Parámetros |
 | --- |
 | **`document`** `string`
-Código de documento, para ver los códigos de documento que se pueden usar vea la siguiente tabla. 22 para crear un rango de notas crédito electrónica.
+Código de documento, para ver los códigos de documento que se pueden usar vea la siguiente tabla. 24 para crear un rango de documento soporte.
 
 [Códigos de documentos](https://developers.factus.com.co/tablas-de-referencia/tablas/#c%C3%B3digos-de-tipos-de-documento-para-los-rangos-de-numeraci%C3%B3n) |
 | **`prefix`** `Máx.4 caracteres`
@@ -45,19 +45,24 @@ Código de documento, para ver los códigos de documento que se pueden usar vea 
 Prefijo alfanumérico del rango de numeración.
 
 |
+| **`resolution_number`** `string`
+
+Número de resolución.
+
+|
 | **`current`** `string`
 
-Número actual del consecutivo. El número del siguiente nota crédito que se generará.
+Número actual del consecutivo. El número del siguiente documento que se generará.
 **NOTA**: Si el consecutivo se ha usado, debe agregar el número del último consecutivo usado.
 
 |
 
 ### Ejemplo de Solicitud
 
-[Sección titulada «Ejemplo de Solicitud»](https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-notas-credito#ejemplo-de-solicitud)
+[Sección titulada «Ejemplo de Solicitud»](https://developers.factus.com.co/rangos-de-numeracion/facturacion/ejemplos/crear-rango-para-documento-soporte#ejemplo-de-solicitud)
 
 **Factura de venta**
 
 ```
-{ "document": "22", "prefix": "NC", "current": 1}
+{ "document": "24", "prefix": "DS", "resolution_number": "18760000009", "current": 1}
 ```

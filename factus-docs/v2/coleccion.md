@@ -20,4 +20,8 @@ Si trabajas con Postman, descarga el archivo JSON de la colección e impórtalo 
 
 Descargar para Postman
 
-](https://developers.factus.com.co/collections/api-factus-v2.json?v=2.0.0)
+](https://developers.factus.com.co/collections/api-factus-v2.json?v=2.0.0)[
+
+Descargar variables de entorno
+
+](https://developers.factus.com.co/collections/factus-v2.postman_environment.json)

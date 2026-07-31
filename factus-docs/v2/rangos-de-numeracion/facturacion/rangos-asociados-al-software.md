@@ -30,15 +30,7 @@ Incluye los siguientes encabezados.
 
 ### Response
 
-[Sección titulada «Response»](https://developers.factus.com.co/rangos-de-numeracion/rangos-asociados-al-software#response)
-
-La consulta devuelve un array con los rangos de numeración asociados al software.
-
-* * *
-
-## Tabla de Valores del Consecutivo
-
-[Sección titulada «Tabla de Valores del Consecutivo»](https://developers.factus.com.co/rangos-de-numeracion/rangos-asociados-al-software#tabla-de-valores-del-consecutivo)
+[Sección titulada «Response»](https://developers.factus.com.co/rangos-de-numeracion/facturacion/rangos-asociados-al-software#response)
 
 | |
 | --- |

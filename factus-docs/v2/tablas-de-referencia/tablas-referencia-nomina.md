@@ -136,7 +136,8 @@
 | Código | Nombre |
 | --- | --- |
 | 1 | Licencia de maternidad o paternidad |
-| 2 | Vacaciones compensadas |
+| 2 | Licencia remunerada |
+| 3 | Licencia no remunerada |
 
 ### Códigos de tipos de vacaciones
 

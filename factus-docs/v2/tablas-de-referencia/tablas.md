@@ -204,6 +204,15 @@
 | `25` | Nota de Ajuste Documento Soporte |
 | `30` | Factura de talonario y de papel |
 
+#### Códigos de tipos de documento para los rangos de numeración nómina
+
+[Sección titulada «Códigos de tipos de documento para los rangos de numeración nómina»](https://developers.factus.com.co/tablas-de-referencia/tablas#c%C3%B3digos-de-tipos-de-documento-para-los-rangos-de-numeraci%C3%B3n-n%C3%B3mina)
+
+| **Código** | **Descripción** |
+| --- | --- |
+| `26` | Nómina Electrónica |
+| `27` | Nota de ajuste Nómina Electrónica |
+
 #### Códigos de tipos de documentos de identidad para Documentos Soporte y Notas de ajuste
 
 [Sección titulada «Códigos de tipos de documentos de identidad para Documentos Soporte y Notas de ajuste»](https://developers.factus.com.co/tablas-de-referencia/tablas#c%C3%B3digos-de-tipos-de-documentos-de-identidad-para-documentos-soporte-y-notas-de-ajuste)
@@ -278,6 +287,8 @@
 | `13` | Cobertura Régimen Especial o Excepción |
 | `14` | Cobertura Fondo Nacional de Salud de las Personas Privadas de la Libertad |
 | `15` | Particular |
+| `16` | Plan de beneficios en salud financiado con UPC régimen contributivo |
+| `17` | Plan de beneficios en salud financiado con UPC régimen subsidiado |
 
 #### Documentos de identificacion para sector salud
 
@@ -298,6 +309,7 @@
 | `MS` | Menor sin identificar |
 | `DE` | Documento extranjero |
 | `SI` | Sin identificación |
+| `PT` | Permiso por protección temporal |
 
 #### Metodos de pago en salud
 

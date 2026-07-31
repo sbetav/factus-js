@@ -37,7 +37,7 @@ Ver aquí la descripción de los campos.
 | **`reference_code`** `string`
 Código único que sirve para identificar cada factura de manera unívoca en el sistema y garantizar que no haya duplicados. Esto nos ayuda a prevenir que se genere más de una factura con la misma información. |
 | **`created_time`** `string` `opcional`
-Fecha y hora de creación del documento soporte en formato `HH:mm:ss`. |
+Hora de creación del documento soporte en formato `HH:mm:ss`. |
 | **`document`** `string` `default:01` `opcional`
 Código del tipo de documento. [Tipos de documentos disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#c%C3%B3digos-de-tipos-de-documentos-para-la-factura) |
 | **`numbering_range_id`** `integer` `opcional`

@@ -35,7 +35,7 @@ Ver aquí la descripción de los campos.
 | **`reference_code`** `string`
 Código único que sirve para identificar cada nota de ajuste a documento soporte de manera unívoca en el sistema y garantizar que no haya duplicados. Esto nos ayuda a prevenir que se genere más de una nota de ajuste con la misma información. |
 | **`created_time`** `string` `opcional`
-Fecha y hora de creación de la nota de ajuste en formato `HH:mm:ss`. |
+Hora de creación de la nota de ajuste en formato `HH:mm:ss`. |
 | **`numbering_range_id`** `integer` `opcional`
 ID del rango de numeración. Es obligatorio solo si tienes múltiples rangos activos. Si se omite, el sistema utilizará el único rango disponible por defecto. [Rangos de numeración para nota de ajuste](https://developers.factus.com.co/rangos-de-numeracion/obtener-rangos) , filtar por filter\[document\] = 25 para obtener solo los rangos de numeración para notas de ajuste. |
 | **`support_document_number`** `string`
@@ -74,7 +74,7 @@ Nombre del proveedor. |
 Dirección del proveedor. |
 | **`provider.country_code`** `string`
 Código del país del proveedor. [Países disponibles](https://developers.factus.com.co/tablas-de-referencia/countries) |
-| **`provider.municipality_code`** `string`
+| **`provider.municipality_code`** `string` `opcional`
 Código del municipio del proveedor. [Municipios disponibles](https://developers.factus.com.co/tablas-de-referencia/municipios) |
 | **`provider.email`** `string` `opcional`
 Dirección del correo electrónico del proveedor. |

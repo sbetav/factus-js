@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-17T22:37:25.293Z",
+  "generatedAt": "2026-07-31T20:39:26.440Z",
   "baseUrl": "https://developers.factus.com.co/",
-  "totalFiles": 113,
+  "totalFiles": 121,
   "entries": [
     {
       "title": "Autenticación",
@@ -284,6 +284,11 @@
       "path": "nomina\\crear-y-validar.md"
     },
     {
+      "title": "Descargar XML",
+      "sourceUrl": "https://developers.factus.com.co/nomina/descargar-xml",
+      "path": "nomina\\descargar-xml.md"
+    },
+    {
       "title": "Campos de la nómina",
       "sourceUrl": "https://developers.factus.com.co/nomina/descripcion-de-campos",
       "path": "nomina\\descripcion-de-campos.md"
@@ -307,6 +312,11 @@
       "title": "Crear y validar",
       "sourceUrl": "https://developers.factus.com.co/nota-ajuste-nomina/crear-y-validar",
       "path": "nota-ajuste-nomina\\crear-y-validar.md"
+    },
+    {
+      "title": "Descargar XML",
+      "sourceUrl": "https://developers.factus.com.co/nota-ajuste-nomina/descargar-xml",
+      "path": "nota-ajuste-nomina\\descargar-xml.md"
     },
     {
       "title": "Eliminar no validada",
@@ -460,58 +470,88 @@
     },
     {
       "title": "Actualizar consecutivo",
-      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/actualizar-consecutivo",
-      "path": "rangos-de-numeracion\\actualizar-consecutivo.md"
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/facturacion/actualizar-consecutivo",
+      "path": "rangos-de-numeracion\\facturacion\\actualizar-consecutivo.md"
     },
     {
       "title": "Cambiar Estado",
-      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/cambiar-estado",
-      "path": "rangos-de-numeracion\\cambiar-estado.md"
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/facturacion/cambiar-estado",
+      "path": "rangos-de-numeracion\\facturacion\\cambiar-estado.md"
     },
     {
-      "title": "Crear Rango",
-      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/crear-rango",
-      "path": "rangos-de-numeracion\\crear-rango.md"
+      "title": "Crear",
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/facturacion/crear-rango",
+      "path": "rangos-de-numeracion\\facturacion\\crear-rango.md"
     },
     {
       "title": "Crear Rango documento soporte",
-      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-documento-soporte",
-      "path": "rangos-de-numeracion\\ejemplos\\crear-rango-para-documento-soporte.md"
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/facturacion/ejemplos/crear-rango-para-documento-soporte",
+      "path": "rangos-de-numeracion\\facturacion\\ejemplos\\crear-rango-para-documento-soporte.md"
     },
     {
       "title": "Crear Rango para facturación",
-      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-facturacion",
-      "path": "rangos-de-numeracion\\ejemplos\\crear-rango-para-facturacion.md"
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/facturacion/ejemplos/crear-rango-para-facturacion",
+      "path": "rangos-de-numeracion\\facturacion\\ejemplos\\crear-rango-para-facturacion.md"
     },
     {
       "title": "Crear Rango para notas crédito",
-      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/ejemplos/crear-rango-para-notas-credito",
-      "path": "rangos-de-numeracion\\ejemplos\\crear-rango-para-notas-credito.md"
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/facturacion/ejemplos/crear-rango-para-notas-credito",
+      "path": "rangos-de-numeracion\\facturacion\\ejemplos\\crear-rango-para-notas-credito.md"
     },
     {
       "title": "Eliminar",
-      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/eliminar-rango",
-      "path": "rangos-de-numeracion\\eliminar-rango.md"
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/facturacion/eliminar-rango",
+      "path": "rangos-de-numeracion\\facturacion\\eliminar-rango.md"
     },
     {
       "title": "Introducción",
-      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/introduccion",
-      "path": "rangos-de-numeracion\\introduccion.md"
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/facturacion/introduccion",
+      "path": "rangos-de-numeracion\\facturacion\\introduccion.md"
     },
     {
       "title": "Listar",
-      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/obtener-rangos",
-      "path": "rangos-de-numeracion\\obtener-rangos.md"
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/facturacion/obtener-rangos",
+      "path": "rangos-de-numeracion\\facturacion\\obtener-rangos.md"
     },
     {
       "title": "Rangos asociados al software",
-      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/rangos-asociados-al-software",
-      "path": "rangos-de-numeracion\\rangos-asociados-al-software.md"
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/facturacion/rangos-asociados-al-software",
+      "path": "rangos-de-numeracion\\facturacion\\rangos-asociados-al-software.md"
     },
     {
       "title": "Ver",
-      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/ver-rango",
-      "path": "rangos-de-numeracion\\ver-rango.md"
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/facturacion/ver-rango",
+      "path": "rangos-de-numeracion\\facturacion\\ver-rango.md"
+    },
+    {
+      "title": "Actualizar consecutivo",
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/nomina/actualizar-consecutivo",
+      "path": "rangos-de-numeracion\\nomina\\actualizar-consecutivo.md"
+    },
+    {
+      "title": "Cambiar Estado",
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/nomina/cambiar-estado",
+      "path": "rangos-de-numeracion\\nomina\\cambiar-estado.md"
+    },
+    {
+      "title": "Crear",
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/nomina/crear-rango",
+      "path": "rangos-de-numeracion\\nomina\\crear-rango.md"
+    },
+    {
+      "title": "Eliminar",
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/nomina/eliminar-rango",
+      "path": "rangos-de-numeracion\\nomina\\eliminar-rango.md"
+    },
+    {
+      "title": "Listar",
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/nomina/obtener-rangos",
+      "path": "rangos-de-numeracion\\nomina\\obtener-rangos.md"
+    },
+    {
+      "title": "Ver",
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/nomina/ver-rango",
+      "path": "rangos-de-numeracion\\nomina\\ver-rango.md"
     },
     {
       "title": "Cargar Factura",
