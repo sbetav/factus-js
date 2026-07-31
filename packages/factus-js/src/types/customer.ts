@@ -38,7 +38,7 @@ export interface ProviderInput {
   names: string;
   address: string;
   country_code: string;
-  municipality_code: string;
+  municipality_code?: string;
   email?: string;
   phone?: string;
   legal_organization_code?: LiteralUnion<OrganizationTypeCode>;
