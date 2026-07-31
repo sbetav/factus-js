@@ -21,22 +21,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 1. Credit notes create docs conflict on `bill_id` vs `bill_number`
-
-**Description:** Field table documents `bill_id`; create example sends `"bill_number"`.
-
-**Files:**
-
-- `factus-docs/v2/notas-credito/crear-y-validar.md`
-- `factus-docs/v2/notas-credito/descripcion-de-campos.md`
-
-**Factus docs status:** Open
-
-**SDK decision:** `CreateCreditNoteInput.bill_id?: number` only; `bill_number` is not exposed.
-
----
-
-### 2. Adjustment note delete page still shows a v1 route in v2 docs
+### 1. Adjustment note delete page still shows a v1 route in v2 docs
 
 **Description:** Delete docs document `v1/adjustment-notes/reference/:reference_code` instead of a v2 path.
 
@@ -50,7 +35,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 3. Generic error guide conflicts with richer v2 document response docs
+### 2. Generic error guide conflicts with richer v2 document response docs
 
 **Description:** Generic error guide says v2 returns `status: "created"` and `validated_at: "true"`; endpoint docs use `is_validated: boolean` and `validated_at: string | null`.
 
@@ -64,9 +49,9 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 4. Credit-note docs contain field-path and prose typos
+### 3. Credit-note docs contain a field-path typo
 
-**Description:** Field paths/prose include typos such as `payment_details.*due_date` (missing dot) and `metido de pago`.
+**Description:** Field path `payment_details.*due_date` is missing a dot (`payment_details.*.due_date`).
 
 **Files:**
 
@@ -79,9 +64,9 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 5. `identification_document_code` type is inconsistent across docs
+### 4. `identification_document_code` type is inconsistent across docs
 
-**Description:** Some pages label the field as `integer`/`int`; examples use string codes (`"13"`, `"31"`). Beneficiary health codes (`CC`, `SI`, …) are a separate catalog — see #22.
+**Description:** Some pages label the field as `integer`/`int`; examples use string codes (`"13"`, `"31"`). Beneficiary health codes (`CC`, `SI`, …) are a separate catalog — see #19.
 
 **Files:**
 
@@ -95,7 +80,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 6. XML download docs sometimes mention the PDF field name
+### 5. XML download docs sometimes mention the PDF field name
 
 **Description:** XML download prose tells integrators to decode `pdf_base_64_encoded`.
 
@@ -110,7 +95,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 7. Email-content docs describe the payload but do not name the response field clearly
+### 6. Email-content docs describe the payload but do not name the response field clearly
 
 **Description:** Prose describes a Base64 attachment; the exact v2 response field name is unclear (v1 used `attached_document`).
 
@@ -125,7 +110,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 8. Some examples use numeric literals where field tables describe strings
+### 7. Some examples use numeric literals where field tables describe strings
 
 **Description:** Examples mix numeric literals with string field tables (`payment_form: 1`, numeric `allowance_charges.amount`, numeric `items.*.scheme_id` on Mandatos / SS-Recaudo, etc.).
 
@@ -139,7 +124,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 9. Acceptance / tacit-event docs are internally contradictory
+### 8. Acceptance / tacit-event docs are internally contradictory
 
 **Description:** Bills and reception pages disagree on route (`/v2/bills/...` vs `/v2/receptions/bills/...`), identifier (`:number` vs `:bill_id`), method (`POST` vs `PATCH`), and whether tacit acceptance (`034`) is user-emitted or automatic-only.
 
@@ -154,7 +139,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 10. Auth token lifetime is inconsistent
+### 9. Auth token lifetime is inconsistent
 
 **Description:** Auth prose says the token lasts 1 hour; the example shows `"expires_in": 600`.
 
@@ -169,7 +154,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 11. Support-document field tables omit `provider.legal_organization_code`
+### 10. Support-document field tables omit `provider.legal_organization_code`
 
 **Description:** Field description omits `provider.legal_organization_code`; create examples include it.
 
@@ -184,7 +169,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 12. Generic documents XML download page lacks a clear response schema
+### 11. Generic documents XML download page lacks a clear response schema
 
 **Description:** Path is documented; response field name/schema is missing compared with family-specific XML pages.
 
@@ -198,7 +183,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 13. Some pages reference the wrong resource in prose
+### 12. Some pages reference the wrong resource in prose
 
 **Description:** Prose sometimes names the wrong document family (e.g. support-doc fields closing with “nota crédito”, adjustment-note pages referring to documentos soporte).
 
@@ -214,7 +199,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 14. Company logo upload page mixes multipart and JSON wording
+### 13. Company logo upload page mixes multipart and JSON wording
 
 **Description:** Page indicates `multipart/form-data` but surrounding text still says JSON.
 
@@ -228,7 +213,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 15. Recurrent spelling and wording defects
+### 14. Recurrent spelling and wording defects
 
 **Description:** Recurring typos across the docs (e.g. `compos`, `filtar`, `metido`, `pagina`, `objecto`).
 
@@ -242,7 +227,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 16. Bill currency field table says `code` but example sends `type`
+### 15. Bill currency field table says `code` but example sends `type`
 
 **Description:** Currency example table documents `currency.code`; the request example sends `"type": "USD"`.
 
@@ -257,7 +242,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 17. Item discount docs not propagated to support documents or adjustment notes
+### 16. Item discount docs not propagated to support documents or adjustment notes
 
 **Description:** Support-document / adjustment-note field tables still document only `items.*.discount_rate`; bills and credit notes also document `discount_amount`.
 
@@ -273,7 +258,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 19. Item discount request field name differs from response field name
+### 17. Item discount request field name differs from response field name
 
 **Description:** Create request documents `items.*.discount_amount` (with optional `discount_rate`); create/view responses document `data.items.*.discount` and `data.items.*.discount_rate`, with no mapping note that input `discount_amount` becomes response `discount`.
 
@@ -289,7 +274,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 20. Bill `currency` is documented on create but absent from response schemas
+### 18. Bill `currency` is documented on create but absent from response schemas
 
 **Description:** Optional `currency` appears on bill/credit-note create tables and examples for graphic-representation totals; create/view response tables omit `data.currency`. Unclear whether the API echoes it, uses it only for PDF generation, or drops it after create.
 
@@ -308,9 +293,9 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 21. Beneficiary `identification_document_code` uses the health catalog, not DIAN identity codes
+### 19. Beneficiary `identification_document_code` uses the health catalog, not DIAN identity codes
 
-**Description:** Sector-salud docs link beneficiary IDs to the health identity catalog (`CC`, `CE`, `SI`, …) and examples send `"CC"`. Customer / mandate fields on the same payloads still use DIAN numeric codes (`"13"`, `"31"`), with the same field name and no discriminator.
+**Description:** Sector-salud docs link beneficiary IDs to the health identity catalog (`CC`, `CE`, `SI`, `PT`, …) and examples send `"CC"`. Customer / mandate fields on the same payloads still use DIAN numeric codes (`"13"`, `"31"`), with the same field name and no discriminator.
 
 **Files:**
 
@@ -320,11 +305,11 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 **Factus docs status:** Open
 
-**SDK decision (assumed):** Beneficiary should follow the health identity catalog; customer / mandate keep DIAN `IdentityDocumentCode`. Prefer a dedicated health identity type rather than reusing `IdentityDocumentCode`.
+**SDK decision:** `DocumentBeneficiary.identification_document_code` uses `HealthIdentityDocumentCode` (includes `PT`). Customer / mandate keep DIAN `IdentityDocumentCode`. `health.coverage_code` uses `HealthCoverageCode` (`01`–`17`).
 
 ---
 
-### 22. Excluded-tax examples omit `code` and `rate`
+### 20. Excluded-tax examples omit `code` and `rate`
 
 **Description:** Field tables list `items.*.taxes.*.code` and `rate` as required-looking fields with optional `is_excluded`. Excluded-IVA examples send only `{ "is_excluded": true }`, with no note that `code`/`rate` become optional.
 
@@ -340,23 +325,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 23. Debit notes use `bill_number` while credit notes use `bill_id`
-
-**Description:** The related-bill concept uses `bill_number` (string) on debit notes and `bill_id` (integer) on credit notes. Credit-note examples still also show `bill_number` (see #1), so integrators copying between families send the wrong key.
-
-**Files:**
-
-- `factus-docs/v2/notas-debito/crear-y-validar.md`
-- `factus-docs/v2/notas-debito/descripcion-de-campos.md`
-- `factus-docs/v2/notas-credito/crear-y-validar.md`
-
-**Factus docs status:** Open
-
-**SDK decision:** `CreateDebitNoteInput.bill_number?`; `CreateCreditNoteInput.bill_id?` (no `bill_number` on credit notes).
-
----
-
-### 24. Payroll create path conflicts between pages
+### 21. Payroll create path conflicts between pages
 
 **Description:** Create page documents `POST /v2/payrolls`; field-description page documents `POST /v2/payroll/validate`.
 
@@ -371,7 +340,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 25. Payroll `numbering_range_id` typed as integer but examples use ULID strings
+### 22. Payroll `numbering_range_id` typed as integer but examples use ULID strings
 
 **Description:** Nómina field table types `numbering_range_id` as integer while examples send ULID-like strings. Adjustment-payroll docs type it as string and also use ULID examples.
 
@@ -386,7 +355,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 26. Payment method `98` (CATS) mentioned only in nómina prose
+### 23. Payment method `98` (CATS) mentioned only in nómina prose
 
 **Description:** Nómina payment docs require bank fields when `payment_method_code` is `42`, `47`, or `98` (CATS – Nequi, Daviplata, etc.), but the main payment-methods table does not list `98`.
 
@@ -402,23 +371,23 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 27. Numbering-range document types `26`–`28` removed while payroll APIs exist
+### 24. Payroll numbering-range document type `28` still absent
 
-**Description:** Official numbering-range document-type table no longer lists payroll / payroll-adjustment / payroll-deletion codes (`26`–`28`), yet `/v2/payrolls` and `/v2/adjustment-payrolls` exist and examples use string range IDs.
+**Description:** Payroll numbering-range table publishes `26` (Nómina Electrónica) and `27` (Nota de ajuste Nómina Electrónica). Former code `28` (payroll deletion) is still missing while `/v2/adjustment-payrolls` exists and uses document type `27` in practice.
 
 **Files:**
 
 - `factus-docs/v2/tablas-de-referencia/tablas.md`
-- `factus-docs/v2/nomina/**`
+- `factus-docs/v2/rangos-de-numeracion/nomina/**`
 - `factus-docs/v2/nota-ajuste-nomina/**`
 
 **Factus docs status:** Open
 
-**SDK decision:** Removed `NumberingRangeDocumentTypeCode` `26` / `27` / `28` to match the published table. Confirm with sandbox how payroll ranges are created/listed.
+**SDK decision:** `PayrollNumberingRangeDocumentTypeCode` exposes `26` / `27` only. Payroll ranges use `factus.numberingRanges.payrolls` (`/v2/numbering-ranges/payrolls`).
 
 ---
 
-### 28. Debit notes create examples include `send_email` but field tables omit it
+### 25. Debit notes create examples include `send_email` but field tables omit it
 
 **Description:** Create example sends `"send_email": false`; parameter tables and `descripcion-de-campos` do not document `send_email`. Email-content prose mentions `send_email = false` as a scenario.
 
@@ -431,3 +400,18 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 **Factus docs status:** Open
 
 **SDK decision:** Optional `send_email?: boolean` on `CreateDebitNoteInput` (same pattern as bills / support docs). Prefer Factus adding the field to the create parameter table.
+
+---
+
+### 26. Payroll and adjustment-payroll XML download pages lack a response schema table
+
+**Description:** New pages document `GET .../download-xml` and tell integrators to decode `xml_base_64_encoded`, but omit a full response schema (same thin pattern as some other XML pages).
+
+**Files:**
+
+- `factus-docs/v2/nomina/descargar-xml.md`
+- `factus-docs/v2/nota-ajuste-nomina/descargar-xml.md`
+
+**Factus docs status:** Open
+
+**SDK decision:** `payrolls.downloadXml()` / `adjustmentPayrolls.downloadXml()` typed as `ApiResponse<DownloadXmlData>` with `xml_base_64_encoded`.
