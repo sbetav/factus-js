@@ -57,12 +57,7 @@ export function getGithubDocsBlobUrl(pagePath: string): string {
   return `${base}/${dir}/${rel}`;
 }
 
-/** Opens the docs issue template with the current page referenced in the title. */
-export function getGithubDocsIssueUrl(pageUrl: string): string {
-  const params = new URLSearchParams({
-    template: "docs.yml",
-    labels: "documentation",
-    title: `[Docs]: ${pageUrl}`,
-  });
-  return `${getGithubRepoUrl()}/issues/new?${params.toString()}`;
+/** Opens GitHub’s issue template chooser. */
+export function getGithubDocsIssueUrl(): string {
+  return `${getGithubRepoUrl()}/issues/new/choose`;
 }

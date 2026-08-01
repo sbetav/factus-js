@@ -100,10 +100,7 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
   const pageUrl = new URL(page.url, `${getSiteUrl()}/`).href;
   const githubUrl = getGithubDocsBlobUrl(page.path);
   const tocFooter = (
-    <DocsTocFooter
-      editUrl={githubUrl}
-      issueUrl={getGithubDocsIssueUrl(pageUrl)}
-    />
+    <DocsTocFooter editUrl={githubUrl} issueUrl={getGithubDocsIssueUrl()} />
   );
 
   return (
