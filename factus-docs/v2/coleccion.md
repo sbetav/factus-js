@@ -25,3 +25,17 @@ Descargar para Postman
 Descargar variables de entorno
 
 ](https://developers.factus.com.co/collections/factus-v2.postman_environment.json)
+
+### Skill para asistentes de IA
+
+[Sección titulada «Skill para asistentes de IA»](https://developers.factus.com.co/coleccion#skill-para-asistentes-de-ia)
+
+Si usas un asistente de IA (Claude Code, Copilot, Cursor, etc.) para integrar la API de Factus, descarga este skill y colócalo en tu proyecto para darle contexto listo sobre cómo crear y validar una factura electrónica estándar: campos de `customer`, `items`, `payment_details`, `cash_rounding_amount`, de dónde debe salir cada dato y un ejemplo completo de solicitud y respuesta.
+
+Skill para asistentes de IA
+
+Usa la siguiente skill para integrar con IA y agrégala a tu proyecto para darle contexto de lo que necesitas para integrar.
+
+[Descargar](https://developers.factus.com.co/skills/facturas-crear-y-validar.md)
+
+Guarda el archivo descargado como `SKILL.md` dentro de una carpeta `facturas-crear-y-validar/` en el directorio de skills de tu asistente (por ejemplo, `.claude/skills/facturas-crear-y-validar/SKILL.md` para Claude Code). Otras herramientas pueden usar una convención de carpeta distinta; revisa su documentación.

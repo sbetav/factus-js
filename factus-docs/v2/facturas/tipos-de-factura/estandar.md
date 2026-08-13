@@ -46,7 +46,7 @@ ID del rango de numeración. Es obligatorio solo si tienes múltiples rangos act
 Código del tipo de operación. Si el tipo de operación no se agrega, por defecto el API agrega el código 10 (estándar). [Tipos de operación disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#c%C3%B3digos-de-tipos-de-operaci%C3%B3n) |
 | **`currency`** `object` `opcional`
 Objeto utilizado para mostrar los totales de la factura en una moneda extranjera dentro de su representación gráfica. Si se envía el campo `currency`, los campos internos son obligatorios. |
-| **`currency.code`** `string`
+| **`currency.type`** `string`
 Código internacional de la moneda extranjera que se desea mostrar en la factura. Debe ser una moneda distinta a la moneda local de emisión. [Códigos de monedas disponibles.](https://developers.factus.com.co/tablas-de-referencia/currency) |
 | **`currency.exchange_rate`** `string`
 Tasa de cambio utilizada para convertir los montos de la moneda local a la moneda extranjera especificada. |
@@ -128,6 +128,8 @@ Si el cliente se identifica con NIT y no se envía el dígito de verificación, 
 Código que corresponda al tipo de organización. [Tipos de organizaciones disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#c%C3%B3digo-de-tipos-de-organizaciones) |
 | **`customer.tribute_code`** `string` `default:ZZ` `opcional`
 Código del tributo. [Tipos de tributos disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#c%C3%B3digos-de-tributos-clientes) |
+| **`customer.responsibilities`** `array` `default:R-99-PN ⁠` `opcional`
+Códigos relacionados a los tipos de responsabilidad fiscal. Para saber los tipos de responsabilidades consulte la tabla [Tipos de responsabilidades fiscales disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#responsabilidades-fiscales) |
 | **`customer.company`** `string` `opcional`
 Razón social. Es obligatorio cuando el campo `customer.legal_organization_code` es 1 (persona jurídica). |
 | **`customer.trade_name`** `string` `opcional`
@@ -202,7 +204,7 @@ Valor del descuento o recargo aplicado (máximo dos decimales). |
 **Factura de venta**
 
 ```
-{ "reference_code": "FACT-2026-0124", "document": "01", "numbering_range_id": 389, "operation_type": "10", "observation": "Observación de prueba", "payment_details": [ { "payment_form": "1", "payment_method_code": "42", "reference_code": "pago-001", "amount": "83300" } ], "cash_rounding_amount": "0.00", "customer": { "identification_document_code": "31", "identification": "123456789", "company": "Alan company name", "trade_name": "Alan trade name", "address": "calle 1 # 1-1", "email": "alan.company@email.com", "phone": "1234567890", "legal_organization_code": "1", "tribute_code": "ZZ", "country_code": "CO", "municipality_code": "68679" }, "items": [ { "code_reference": "PROD-000A", "name": "Producto A", "quantity": "1.00", "discount_rate": "0.00", "price": "10000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] }, { "code_reference": "PROD-000B", "name": "Producto B", "quantity": "3.00", "discount_rate": "0.00", "price": "20000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] } ]}
+{ "reference_code": "FACT-2026-0124", "document": "01", "numbering_range_id": 389, "operation_type": "10", "observation": "Observación de prueba", "payment_details": [ { "payment_form": "1", "payment_method_code": "42", "reference_code": "pago-001", "amount": "83300" } ], "cash_rounding_amount": "0.00", "customer": { "identification_document_code": "31", "identification": "123456789", "company": "Alan company name", "trade_name": "Alan trade name", "address": "calle 1 # 1-1", "email": "alan.company@email.com", "phone": "1234567890", "legal_organization_code": "1", "tribute_code": "ZZ", "country_code": "CO", "responsibilities": [ "R-99-PN" ], "municipality_code": "68679" }, "items": [ { "code_reference": "PROD-000A", "name": "Producto A", "quantity": "1.00", "discount_rate": "0.00", "price": "10000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] }, { "code_reference": "PROD-000B", "name": "Producto B", "quantity": "3.00", "discount_rate": "0.00", "price": "20000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] } ]}
 ```
 
 * * *

@@ -106,7 +106,7 @@ Base sobre la cual se calcula el descuento o recargo (máximo dos decimales). |
 Valor del descuento o recargo aplicado (máximo dos decimales). |
 | **`currency`** `object` `opcional`
 Objeto utilizado para mostrar los totales de la nota débito en una moneda extranjera dentro de su representación gráfica. Si se envía el campo `currency`, los campos internos son obligatorios. |
-| **`currency.code`** `string`
+| **`currency.type`** `string`
 Código internacional de la moneda extranjera que se desea mostrar. Debe ser una moneda distinta a la moneda local de emisión. [Códigos de monedas disponibles.](https://developers.factus.com.co/tablas-de-referencia/currency) |
 | **`currency.exchange_rate`** `string`
 Tasa de cambio utilizada para convertir los montos de la moneda local a la moneda extranjera especificada. |
@@ -136,6 +136,8 @@ Código que corresponda al tipo de organización. [Tipos de organizaciones dispo
 Código del tributo. [Tipos de tributos disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#c%C3%B3digos-de-tributos-clientes) |
 | **`customer.country_code`** `string` `opcional`
 Código del país del cliente. [Países disponibles](https://developers.factus.com.co/tablas-de-referencia/countries) |
+| **`customer.responsibilities`** `array` `default:R-99-PN ⁠` `opcional`
+Códigos relacionados a los tipos de responsabilidad fiscal. Para saber los tipos de responsabilidades consulte la tabla [Tipos de responsabilidades fiscales disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#responsabilidades-fiscales) |
 | **`customer.municipality_code`** `string` `opcional`
 Código que corresponda al municipio donde vive el cliente. Se debe enviar el código del municipio únicamente si el municipio es de Colombia; si es extranjero, el valor del campo no aplica. [Municipios disponibles.](https://developers.factus.com.co/tablas-de-referencia/municipios) |
 | **`items`** `array`

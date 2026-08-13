@@ -257,9 +257,9 @@
 | **Código** | **Descripción** |
 | --- | --- |
 | `O-13` | Gran contribuyente |
-| `0-15` | Autorretenedor |
-| `0-23` | Agente de retención de IVA |
-| `0-47` | Régimen simple de tributación |
+| `O-15` | Autorretenedor |
+| `O-23` | Agente de retención de IVA |
+| `O-47` | Régimen simple de tributación |
 | `R-99-PN` | No responsable |
 
 ### Sector Salud

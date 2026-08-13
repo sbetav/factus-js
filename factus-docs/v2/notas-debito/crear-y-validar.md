@@ -94,7 +94,7 @@ Base sobre la cual se calcula el descuento o recargo (máximo dos decimales). |
 Valor del descuento o recargo aplicado (máximo dos decimales). |
 | **`currency`** `object` `opcional`
 Objeto utilizado para mostrar los totales de la nota débito en una moneda extranjera dentro de su representación gráfica. Si se envía el campo `currency`, los campos internos son obligatorios. |
-| **`currency.code`** `string`
+| **`currency.type`** `string`
 Código internacional de la moneda extranjera que se desea mostrar. Debe ser una moneda distinta a la moneda local de emisión. [Códigos de monedas disponibles.](https://developers.factus.com.co/tablas-de-referencia/currency) |
 | **`currency.exchange_rate`** `string`
 Tasa de cambio utilizada para convertir los montos de la moneda local a la moneda extranjera especificada. |
@@ -124,6 +124,8 @@ Código que corresponda al tipo de organización. [Tipos de organizaciones dispo
 Código del tributo. [Tipos de tributos disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#c%C3%B3digos-de-tributos-clientes) |
 | **`customer.country_code`** `string` `opcional`
 Código del país del cliente. [Países disponibles](https://developers.factus.com.co/tablas-de-referencia/countries) |
+| **`customer.responsibilities`** `array` `default:R-99-PN ⁠` `opcional`
+Códigos relacionados a los tipos de responsabilidad fiscal. Para saber los tipos de responsabilidades consulte la tabla [Tipos de responsabilidades fiscales disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#responsabilidades-fiscales) |
 | **`customer.municipality_code`** `string` `opcional`
 Código que corresponda al municipio donde vive el cliente. Se debe enviar el código del municipio únicamente si el municipio es de Colombia; si es extranjero, el valor del campo no aplica. [Municipios disponibles.](https://developers.factus.com.co/tablas-de-referencia/municipios) |
 | **`items`** `array`
@@ -170,5 +172,5 @@ Aquí tienes un ejemplo de cómo debería quedar el cuerpo de la solicitud en fo
 **Nota débito**
 
 ```
-{ "reference_code": "DEBITO-2026-0617", "correction_concept_code": "4", "customization_id": "30", "bill_number": "SETP990001298", "numbering_range_id": 6, "send_email": false, "payment_details": [ { "payment_form": "1", "payment_method_code": "10", "reference_code": "pago-001", "amount": "100000" }, { "payment_form": "2", "payment_method_code": "10", "reference_code": "pago-002", "due_date": "2026-07-30", "amount": "19000" } ], "cash_rounding_amount": "0", "observation": "descripcion de prueba", "customer": { "identification_document_code": "31", "identification": "123456789", "company": "Alan company name", "trade_name": "Alan trade name", "address": "calle 1 # 1-1", "email": "alan.company@email.com", "phone": "1234567890", "legal_organization_code": "1", "tribute_code": "ZZ", "municipality_code": "68679" }, "items": [ { "code_reference": "PROD-000A", "name": "Producto A", "quantity": "1.00", "discount_rate": "0.00", "price": "10000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] }, { "code_reference": "PROD-000B", "name": "Producto B", "quantity": "3.00", "discount_rate": "0.00", "price": "20000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] } ]}
+{ "reference_code": "DEBITO-2026-0617", "correction_concept_code": "4", "customization_id": "30", "bill_number": "SETP990001298", "numbering_range_id": 6, "send_email": false, "payment_details": [ { "payment_form": "1", "payment_method_code": "10", "reference_code": "pago-001", "amount": "100000" }, { "payment_form": "2", "payment_method_code": "10", "reference_code": "pago-002", "due_date": "2026-07-30", "amount": "19000" } ], "cash_rounding_amount": "0", "observation": "descripcion de prueba", "customer": { "identification_document_code": "31", "identification": "123456789", "company": "Alan company name", "trade_name": "Alan trade name", "address": "calle 1 # 1-1", "email": "alan.company@email.com", "phone": "1234567890", "legal_organization_code": "1", "tribute_code": "ZZ", "country_code": "CO", "responsibilities": [ "R-99-PN" ], "municipality_code": "68679" }, "items": [ { "code_reference": "PROD-000A", "name": "Producto A", "quantity": "1.00", "discount_rate": "0.00", "price": "10000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] }, { "code_reference": "PROD-000B", "name": "Producto B", "quantity": "3.00", "discount_rate": "0.00", "price": "20000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "code": "01", "rate": "19.00" } ] } ]}
 ```
