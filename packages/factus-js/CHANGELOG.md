@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.5.0
+
+### Minor Changes
+
+- 2481bb1: Align the SDK with the current Factus v2 contracts by renaming
+  `BillCurrencyInput.code` to `type`, adding
+  `CustomerInput.responsibilities`, and using the official `O-*`
+  fiscal-responsibility values.
+
 ## 2.4.0
 
 ### Minor Changes
