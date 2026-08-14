@@ -73,7 +73,7 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/notas-credito
           este objeto, sus campos internos son obligatorios.
           <TypeTable
             type={{
-              code: {
+              type: {
                 type: "string",
                 required: true,
                 description:
@@ -317,6 +317,12 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/notas-credito
                 required: false,
                 description:
                   "Código del país del cliente. Consulta el catálogo oficial de países en la guía de tablas de referencia.",
+              },
+              responsibilities: {
+                type: "FiscalResponsibilityCode[]",
+                required: false,
+                description:
+                  "Códigos de responsabilidad fiscal del cliente. Usa el catálogo FiscalResponsibilityCode.",
               },
               municipality_code: {
                 type: "string",
@@ -599,9 +605,17 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/notas-credito
                 ),
               },
               coverage_code: {
-                type: "string",
+                type: "HealthCoverageCode",
                 required: true,
-                description: "Código de cobertura.",
+                description: (
+                  <>
+                    {"Código de cobertura en salud — Ver "}
+                    <a href="/docs/reference-tables/general#plan-de-cobertura-en-salud-healthcoveragecode">
+                      {"HealthCoverageCode"}
+                    </a>
+                    {"."}
+                  </>
+                ),
               },
               contract_number: {
                 type: "string",
@@ -627,6 +641,10 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/notas-credito
 import {
   CreditNoteCorrectionCode,
   CreditNoteOperationCode,
+  CustomerTributeCode,
+  FiscalResponsibilityCode,
+  IdentityDocumentCode,
+  OrganizationTypeCode,
   PaymentFormCode,
   PaymentMethodCode,
   ProductStandardCode,
@@ -646,6 +664,13 @@ const response = await factus.creditNotes.create({
     },
   ],
   observation: "Ajuste de precio por error en factura original",
+  customer: {
+    identification_document_code: IdentityDocumentCode.CitizenshipCard,
+    identification: "123456789",
+    legal_organization_code: OrganizationTypeCode.NaturalPerson,
+    tribute_code: CustomerTributeCode.NotApplicable,
+    responsibilities: [FiscalResponsibilityCode.NotResponsible],
+  },
   items: [
     {
       code_reference: "PROD-001",
@@ -662,8 +687,6 @@ const response = await factus.creditNotes.create({
 
 console.log(response.data.number);
 ```
-
-{/* using response example from v1. TODO: update to table once available */}
 
 ## Ejemplo de respuesta
 
@@ -731,11 +754,11 @@ console.log(response.data.number);
       "id": 132,
       "number": "NC76",
       "reference_code": "5",
-      "status": 1,
-      "send_email": 0,
+      "is_validated": true,
+      "send_email": false,
       "qr": "https://catalogo-vpfe-hab.dian.gov.co/document/searchqr?documentkey=eee1fc09684c19aaa7cee1b97d3923e286b1ccf12bdd0d185b4ddcbbab87bcbe9d589a9daf9eee9f55132c782c1b8bc0",
       "cude": "eee1fc09684c19aaa7cee1b97d3923e286b1ccf12bdd0d185b4ddcbbab87bcbe9d589a9daf9eee9f55132c782c1b8bc0",
-      "validated": "20-09-2024 09:13:43 AM",
+      "validated_at": "20-09-2024 09:13:43 AM",
       "gross_value": "67226.89",
       "taxable_amount": "67226.89",
       "tax_amount": "12773.11",

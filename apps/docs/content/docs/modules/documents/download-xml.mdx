@@ -45,4 +45,15 @@ console.log(response.data.file_name);
 console.log(xml.slice(0, 80));
 ```
 
-{/* using no official response content yet. TODO: add official v2 response example or response fields once available */}
+## Ejemplo de respuesta
+
+```json
+{
+  "status": "OK",
+  "message": "Solicitud exitosa",
+  "data": {
+    "file_name": "[ADJUSTMENT_PAYROLL_FILE_NAME]",
+    "xml_base_64_encoded": "[BASE64_XML]"
+  }
+}
+```:

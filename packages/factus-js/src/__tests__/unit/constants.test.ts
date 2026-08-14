@@ -5,6 +5,7 @@ import {
   DebitNoteCorrectionCode,
   DebitNoteOperationCode,
   EventCode,
+  FiscalResponsibilityCode,
   HealthCoverageCode,
   HealthIdentityDocumentCode,
   IdentityDocumentCode,
@@ -41,6 +42,7 @@ import {
   DebitNoteCorrectionCodeInfo,
   DebitNoteOperationCodeInfo,
   EventCodeInfo,
+  FiscalResponsibilityCodeInfo,
   HealthCoverageCodeInfo,
   HealthIdentityDocumentCodeInfo,
   IdentityDocumentCodeInfo,
@@ -147,6 +149,13 @@ describe("constants — value map structure", () => {
       expect(info).toBeDefined();
       expect(typeof info.description).toBe("string");
     }
+  });
+
+  test("fiscal responsibility codes use the official O-prefixed values", () => {
+    expect(FiscalResponsibilityCode.SelfWithholdingAgent).toBe("O-15");
+    expect(FiscalResponsibilityCode.VATWithholdingAgent).toBe("O-23");
+    expect(FiscalResponsibilityCode.SimpleTaxRegime).toBe("O-47");
+    expectCodeInfoPairs(FiscalResponsibilityCode, FiscalResponsibilityCodeInfo);
   });
 
   test("all DebitNoteOperationCode values are defined in DebitNoteOperationCodeInfo", () => {

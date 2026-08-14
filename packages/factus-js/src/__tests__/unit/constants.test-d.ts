@@ -6,6 +6,7 @@ import type {
   DebitNoteCorrectionCode as DebitNoteCorrectionCodeType,
   DebitNoteOperationCode as DebitNoteOperationCodeType,
   EventCode as EventCodeType,
+  FiscalResponsibilityCode as FiscalResponsibilityCodeType,
   IdentityDocumentCode as IdentityDocumentCodeType,
   NumberingRangeDocumentTypeCode as NumberingRangeDocumentTypeCodeType,
   OperationTypeCode as OperationTypeCodeType,
@@ -23,6 +24,7 @@ import {
   DebitNoteCorrectionCode,
   DebitNoteOperationCode,
   EventCode,
+  FiscalResponsibilityCode,
   IdentityDocumentCode,
   NumberingRangeDocumentTypeCode,
   OperationTypeCode,
@@ -51,6 +53,18 @@ describe("constant values satisfy their type alias", () => {
   test("EventCode values satisfy EventCode type", () => {
     expectTypeOf(EventCode.ReceiptAcknowledgement).toExtend<EventCodeType>();
     expectTypeOf(EventCode.ExpressAcceptance).toExtend<EventCodeType>();
+  });
+
+  test("FiscalResponsibilityCode values satisfy its type alias", () => {
+    expectTypeOf(
+      FiscalResponsibilityCode.SelfWithholdingAgent,
+    ).toEqualTypeOf<"O-15">();
+    expectTypeOf(
+      FiscalResponsibilityCode.VATWithholdingAgent,
+    ).toExtend<FiscalResponsibilityCodeType>();
+    expectTypeOf(
+      FiscalResponsibilityCode.SimpleTaxRegime,
+    ).toExtend<FiscalResponsibilityCodeType>();
   });
 
   test("IdentityDocumentCode values satisfy IdentityDocumentCode type", () => {

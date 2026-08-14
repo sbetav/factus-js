@@ -106,8 +106,6 @@ const pagination = response.data.pagination;
 
 ## Ejemplo de respuesta
 
-{/* using response example from v1. TODO: update to table once available */}
-
 ```json
 {
   "status": "OK",
@@ -126,12 +124,12 @@ const pagination = response.data.pagination;
         "names": "Pepito Perez",
         "email": null,
         "total": "50000.00",
-        "status": 1,
+        "is_validated": true,
         "errors": [
           "Regla: CBF02, Notificación: No se informo el numero de la factura referenciada",
           "Regla: CAK55, Notificación: Correo electrónico no informado"
         ],
-        "send_email": 0,
+        "send_email": false,
         "created_at": "30-09-2024 10:13:00 AM"
       }
     ]

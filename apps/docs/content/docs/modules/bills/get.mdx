@@ -46,7 +46,6 @@ const response = await factus.bills.get("SETP990000203");
 console.log(response.data);
 ```
 
-{/* using response example from v1. TODO: update to table once available */}
 
 ## Ejemplo de respuesta
 
@@ -138,11 +137,11 @@ console.log(response.data);
       "number": "SETP990000493",
       "reference_code": "fact0022025",
       "order_reference": null,
-      "status": 1,
-      "send_email": 0,
+      "is_validated": true,
+      "send_email": false,
       "qr": "https://catalogo-vpfe-hab.dian.gov.co/document/searchqr?documentkey=44e260a76e092e46fd5d8344a03146d5c8863ab68b18bde38a53318a33bf6805bac75f0bd71b0b75b3bd9c747a629470",
       "cufe": "44e260a76e092e46fd5d8344a03146d5c8863ab68b18bde38a53318a33bf6805bac75f0bd71b0b75b3bd9c747a629470",
-      "validated": "09-01-2025 01:56:16 PM",
+      "validated_at": "09-01-2025 01:56:16 PM",
       "gross_value": "81232.50",
       "taxable_amount": "81232.50",
       "tax_amount": "8767.50",
@@ -154,8 +153,8 @@ console.log(response.data);
       "created_at": "09-01-2025 01:56:13 PM",
       "payment_due_date": null,
       "qr_image": "data:image/png;base64, [TRIMMED_BASE64_12712_CHARS]",
-      "has_claim": 0,
-      "is_negotiable_instrument": 0,
+      "has_claim": false,
+      "is_negotiable_instrument": false,
       "payment_form": {
         "code": "1",
         "name": "Pago de contado"

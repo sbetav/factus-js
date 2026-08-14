@@ -1,5 +1,6 @@
 import type {
   CustomerTributeCode,
+  FiscalResponsibilityCode,
   IdentityDocumentCode,
   OrganizationTypeCode,
   SupportDocumentIdentityDocumentCode,
@@ -23,6 +24,7 @@ export interface CustomerInput {
   legal_organization_code: LiteralUnion<OrganizationTypeCode>;
   tribute_code?: LiteralUnion<CustomerTributeCode>;
   country_code?: string;
+  responsibilities?: LiteralUnion<FiscalResponsibilityCode>[];
   municipality_code?: string;
 }
 

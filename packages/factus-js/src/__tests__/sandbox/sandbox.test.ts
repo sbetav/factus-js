@@ -230,7 +230,7 @@ describe("sandbox integration", () => {
         numbering_range_id: 8,
         reference_code: uniqueRef("B3-CUR"),
         currency: {
-          code: "USD",
+          type: "USD",
           exchange_rate: "4000.00",
         },
         payment_details: cashPaymentDetails,

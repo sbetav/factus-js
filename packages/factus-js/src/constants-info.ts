@@ -279,9 +279,9 @@ export const FiscalResponsibilityCodeInfo: Record<
   ConstantInfo
 > = {
   "O-13": { description: "Gran contribuyente" },
-  "0-15": { description: "Autorretenedor" },
-  "0-23": { description: "Agente de retención de IVA" },
-  "0-47": { description: "Regimen simple de tributación" },
+  "O-15": { description: "Autorretenedor" },
+  "O-23": { description: "Agente de retención de IVA" },
+  "O-47": { description: "Regimen simple de tributación" },
   "R-99-PN": { description: "No responsable" },
 };
 

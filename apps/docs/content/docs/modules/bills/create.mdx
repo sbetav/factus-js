@@ -77,7 +77,7 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/facturas/crea
           .
           <TypeTable
             type={{
-              code: {
+              type: {
                 type: "string",
                 required: true,
                 description:
@@ -422,6 +422,12 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/facturas/crea
                 description:
                   "Código del país del cliente. Consulta el catálogo oficial de países en la guía de tablas de referencia.",
               },
+              responsibilities: {
+                type: "FiscalResponsibilityCode[]",
+                required: false,
+                description:
+                  "Códigos de responsabilidad fiscal del cliente. Usa el catálogo FiscalResponsibilityCode.",
+              },
               municipality_code: {
                 type: "string",
                 required: false,
@@ -704,9 +710,17 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/facturas/crea
                 ),
               },
               coverage_code: {
-                type: "string",
+                type: "HealthCoverageCode",
                 required: true,
-                description: "Código de cobertura.",
+                description: (
+                  <>
+                    {"Código de cobertura en salud — Ver "}
+                    <a href="/docs/reference-tables/general#plan-de-cobertura-en-salud-healthcoveragecode">
+                      {"HealthCoverageCode"}
+                    </a>
+                    {"."}
+                  </>
+                ),
               },
               contract_number: {
                 type: "string",
@@ -732,13 +746,13 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/facturas/crea
           <TypeTable
             type={{
               identification_document_code: {
-                type: "IdentityDocumentCode",
+                type: "HealthIdentityDocumentCode",
                 required: true,
                 description: (
                   <>
-                    {"Tipo de documento del beneficiario — Ver "}
-                    <a href="/docs/reference-tables/general#tipo-de-documento-de-identidad-identitydocumentcode">
-                      {"IdentityDocumentCode"}
+                    {"Tipo de documento del beneficiario en salud — Ver "}
+                    <a href="/docs/reference-tables/general#documento-de-identidad-sector-salud-healthidentitydocumentcode">
+                      {"HealthIdentityDocumentCode"}
                     </a>
                     {"."}
                   </>
@@ -772,6 +786,7 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/facturas/crea
 ```ts
 import {
   CustomerTributeCode,
+  FiscalResponsibilityCode,
   IdentityDocumentCode,
   OperationTypeCode,
   OrganizationTypeCode,
@@ -807,6 +822,7 @@ const response = await factus.bills.create({
     tribute_code: CustomerTributeCode.NotApplicable,
     identification_document_code: IdentityDocumentCode.CitizenshipCard,
     country_code: "CO",
+    responsibilities: [FiscalResponsibilityCode.NotResponsible],
     municipality_code: "11001",
   },
   items: [

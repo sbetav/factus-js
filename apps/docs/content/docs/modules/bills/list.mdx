@@ -109,7 +109,6 @@ const paginacion = response.data.pagination;
 
 ## Ejemplo de respuesta
 
-{/* using response example from v1. TODO: update to table once available */}
 
 ```json
 {
@@ -133,14 +132,14 @@ const paginacion = response.data.pagination;
         "names": "Alan Turing",
         "email": "[email protected]",
         "total": "90000.00",
-        "status": 1,
+        "is_validated": true,
         "errors": [
           "Regla: FAJ43b, Notificación: Nombre informado No corresponde al registrado en el RUT con respecto al Nit suministrado.",
           "Regla: FAJ43b, Notificación: Nombre informado No corresponde al registrado en el RUT con respecto al Nit suministrado."
         ],
-        "send_email": 1,
-        "has_claim": 0,
-        "is_negotiable_instrument": 0,
+        "send_email": true,
+        "has_claim": false,
+        "is_negotiable_instrument": false,
         "payment_form": {
           "code": "1",
           "name": "Pago de contado"

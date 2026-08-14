@@ -183,9 +183,9 @@ export type ChargeDiscountCode =
 
 export const FiscalResponsibilityCode = {
   LargeTaxpayer: "O-13",
-  SelfWithholdingAgent: "0-15",
-  VATWithholdingAgent: "0-23",
-  SimpleTaxRegime: "0-47",
+  SelfWithholdingAgent: "O-15",
+  VATWithholdingAgent: "O-23",
+  SimpleTaxRegime: "O-47",
   NotResponsible: "R-99-PN",
 } as const;
 export type FiscalResponsibilityCode =

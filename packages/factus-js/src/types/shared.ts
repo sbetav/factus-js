@@ -121,7 +121,7 @@ export interface DocumentPaymentDetail {
 }
 
 export interface BillCurrencyInput {
-  code: string;
+  type: string;
   exchange_rate: string | number;
 }
 

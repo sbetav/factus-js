@@ -489,7 +489,6 @@ const response = await factus.supportDocuments.create({
 console.log(response.data.number);
 ```
 
-{/* using response example from v1. TODO: update to table once available */}
 
 ## Ejemplo de respuesta
 
@@ -551,10 +550,10 @@ console.log(response.data.number);
       "id": 6,
       "number": "SEDS984000021",
       "reference_code": "REF0017",
-      "status": 1,
+      "is_validated": true,
       "qr": "https://catalogo-vpfe-hab.dian.gov.co/document/searchqr?documentkey=69f218c3601e279d9d47d091fe1c2d85e2b727a9576811d7a561d16313860799f26e8b0c8ae9f68db7a61a7234329f06",
       "cuds": "69f218c3601e279d9d47d091fe1c2d85e2b727a9576811d7a561d16313860799f26e8b0c8ae9f68db7a61a7234329f06",
-      "validated": "11-02-2025 10:16:23 PM",
+      "validated_at": "11-02-2025 10:16:23 PM",
       "gross_value": "90000.00",
       "taxable_amount": "0.00",
       "tax_amount": "0.00",

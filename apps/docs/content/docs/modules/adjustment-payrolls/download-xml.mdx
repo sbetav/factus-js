@@ -39,3 +39,16 @@ const xml = Buffer.from(response.data.xml_base_64_encoded, "base64").toString(
   "utf-8",
 );
 ```
+
+## Ejemplo de respuesta
+
+```json
+{
+  "status": "OK",
+  "message": "Solicitud exitosa",
+  "data": {
+    "file_name": "[ADJUSTMENT_PAYROLL_FILE_NAME]",
+    "xml_base_64_encoded": "[BASE64_XML]"
+  }
+}
+```

@@ -227,22 +227,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 15. Bill currency field table says `code` but example sends `type`
-
-**Description:** Currency example table documents `currency.code`; the request example sends `"type": "USD"`.
-
-**Files:**
-
-- `factus-docs/v2/facturas/ejemplos/estandar-currency.md`
-- Bill create field tables under `factus-docs/v2/facturas/**`
-
-**Factus docs status:** Open
-
-**SDK decision:** `BillCurrencyInput = { code: string; exchange_rate: string | number }`. No `type` alias; SDK examples use `code: "USD"`.
-
----
-
-### 16. Item discount docs not propagated to support documents or adjustment notes
+### 15. Item discount docs not propagated to support documents or adjustment notes
 
 **Description:** Support-document / adjustment-note field tables still document only `items.*.discount_rate`; bills and credit notes also document `discount_amount`.
 
@@ -258,7 +243,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 17. Item discount request field name differs from response field name
+### 16. Item discount request field name differs from response field name
 
 **Description:** Create request documents `items.*.discount_amount` (with optional `discount_rate`); create/view responses document `data.items.*.discount` and `data.items.*.discount_rate`, with no mapping note that input `discount_amount` becomes response `discount`.
 
@@ -274,7 +259,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 18. Bill `currency` is documented on create but absent from response schemas
+### 17. Bill `currency` is documented on create but absent from response schemas
 
 **Description:** Optional `currency` appears on bill/credit-note create tables and examples for graphic-representation totals; create/view response tables omit `data.currency`. Unclear whether the API echoes it, uses it only for PDF generation, or drops it after create.
 
@@ -293,7 +278,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 19. Beneficiary `identification_document_code` uses the health catalog, not DIAN identity codes
+### 18. Beneficiary `identification_document_code` uses the health catalog, not DIAN identity codes
 
 **Description:** Sector-salud docs link beneficiary IDs to the health identity catalog (`CC`, `CE`, `SI`, `PT`, …) and examples send `"CC"`. Customer / mandate fields on the same payloads still use DIAN numeric codes (`"13"`, `"31"`), with the same field name and no discriminator.
 
@@ -309,7 +294,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 20. Excluded-tax examples omit `code` and `rate`
+### 19. Excluded-tax examples omit `code` and `rate`
 
 **Description:** Field tables list `items.*.taxes.*.code` and `rate` as required-looking fields with optional `is_excluded`. Excluded-IVA examples send only `{ "is_excluded": true }`, with no note that `code`/`rate` become optional.
 
@@ -325,7 +310,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 21. Payroll create path conflicts between pages
+### 20. Payroll create path conflicts between pages
 
 **Description:** Create page documents `POST /v2/payrolls`; field-description page documents `POST /v2/payroll/validate`.
 
@@ -340,7 +325,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 22. Payroll `numbering_range_id` typed as integer but examples use ULID strings
+### 21. Payroll `numbering_range_id` typed as integer but examples use ULID strings
 
 **Description:** Nómina field table types `numbering_range_id` as integer while examples send ULID-like strings. Adjustment-payroll docs type it as string and also use ULID examples.
 
@@ -355,7 +340,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 23. Payment method `98` (CATS) mentioned only in nómina prose
+### 22. Payment method `98` (CATS) mentioned only in nómina prose
 
 **Description:** Nómina payment docs require bank fields when `payment_method_code` is `42`, `47`, or `98` (CATS – Nequi, Daviplata, etc.), but the main payment-methods table does not list `98`.
 
@@ -371,7 +356,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 24. Payroll numbering-range document type `28` still absent
+### 23. Payroll numbering-range document type `28` still absent
 
 **Description:** Payroll numbering-range table publishes `26` (Nómina Electrónica) and `27` (Nota de ajuste Nómina Electrónica). Former code `28` (payroll deletion) is still missing while `/v2/adjustment-payrolls` exists and uses document type `27` in practice.
 
@@ -387,7 +372,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 25. Debit notes create examples include `send_email` but field tables omit it
+### 24. Debit notes create examples include `send_email` but field tables omit it
 
 **Description:** Create example sends `"send_email": false`; parameter tables and `descripcion-de-campos` do not document `send_email`. Email-content prose mentions `send_email = false` as a scenario.
 
@@ -403,7 +388,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 26. Payroll and adjustment-payroll XML download pages lack a response schema table
+### 25. Payroll and adjustment-payroll XML download pages lack a response schema table
 
 **Description:** New pages document `GET .../download-xml` and tell integrators to decode `xml_base_64_encoded`, but omit a full response schema (same thin pattern as some other XML pages).
 
@@ -415,3 +400,18 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 **Factus docs status:** Open
 
 **SDK decision:** `payrolls.downloadXml()` / `adjustmentPayrolls.downloadXml()` typed as `ApiResponse<DownloadXmlData>` with `xml_base_64_encoded`.
+
+---
+
+### 26. Fiscal-responsibility codes alternate between the letter `O` and zero
+
+**Description:** The refreshed reference table uses `O-15`, `O-23`, and `O-47`, while the glossary still describes the same responsibilities as `0-15`, `0-23`, and `0-47`. The characters are visually similar but represent different API values.
+
+**Files:**
+
+- `factus-docs/v2/tablas-de-referencia/tablas.md`
+- `factus-docs/v2/glosario.md`
+
+**Factus docs status:** Open
+
+**SDK decision:** Follow the endpoint-specific reference table and use `O-13`, `O-15`, `O-23`, and `O-47` in public constants and curated SDK documentation. Prefer Factus correcting the glossary to match the reference table.

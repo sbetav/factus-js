@@ -57,7 +57,7 @@ describe("public type contracts", () => {
     >().toEqualTypeOf<true>();
     expectTypeOf<CreateBillInput["currency"]>().toEqualTypeOf<
       | {
-          code: string;
+          type: string;
           exchange_rate: string | number;
         }
       | undefined
@@ -82,6 +82,14 @@ describe("public type contracts", () => {
     expectTypeOf<CreateBillInput["customer"]["country_code"]>().toEqualTypeOf<
       string | undefined
     >();
+  });
+
+  test("customer input supports fiscal responsibilities", () => {
+    expectTypeOf<
+      AssertTrue<
+        HasKey<NonNullable<CreateBillInput["customer"]>, "responsibilities">
+      >
+    >().toEqualTypeOf<true>();
   });
 
   test("document item input supports optional discount fields", () => {
