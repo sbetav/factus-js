@@ -53,7 +53,7 @@ Tasa de cambio utilizada para convertir los montos de la moneda local a la moned
 | **`send_email`** `boolean` `default:true` `opcional`
 Indica si el sistema debe enviar el correo electrónico al cliente. Útil cuando el envío del correo se gestiona de forma externa o personalizada por el integrador. Por defecto, este campo tiene un valor de true, lo que implica que el correo electrónico será enviado al cliente. Si se establece en false, el correo no será enviado. |
 | **`observation`** `string` `opcional`
-Agrega una observación a la factura. No debe tener más de 250 caracteres. |
+Agrega una observación a la factura. No debe tener más de 500 caracteres. |
 | **`prepayment_details`** `array` `opcional`
 Este es un array de objetos para los detalles de anticipos. Se debe enviar un objeto por cada anticipo realizado. |
 | **`prepayment_details.*.reference_code`** `string`

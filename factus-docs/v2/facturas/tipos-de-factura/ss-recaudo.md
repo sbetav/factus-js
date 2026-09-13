@@ -53,7 +53,7 @@ Tasa de cambio utilizada para convertir los montos de la moneda local a la moned
 | **`send_email`** `boolean` `default:true` `opcional`
 Indica si el sistema debe enviar el correo electrónico al cliente. Útil cuando el envío del correo se gestiona de forma externa o personalizada por el integrador. Por defecto, este campo tiene un valor de true, lo que implica que el correo electrónico será enviado al cliente. Si se establece en false, el correo no será enviado. |
 | **`observation`** `string` `opcional`
-Agrega una observación a la factura. No debe tener más de 250 caracteres. |
+Agrega una observación a la factura. No debe tener más de 500 caracteres. |
 | **`prepayment_details`** `array` `opcional`
 Este es un array de objetos para los detalles de anticipos. Se debe enviar un objeto por cada anticipo realizado. |
 | **`prepayment_details.*.reference_code`** `string`
@@ -98,10 +98,12 @@ Código del prestador de servicios de salud (IPS/EPS). |
 Código del método de pago en salud. [Métodos de pago en salud disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#metodos-de-pago-en-salud) |
 | **`health.coverage_code`** `string`
 Código del plan de cobertura en salud. [Planes de cobertura disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#planes-de-cobertura-en-salud) |
-| **`health.contract_number`** `string`
+| **`health.contract_number`** `string` `opcional`
 Número del contrato con la entidad pagadora. |
 | **`health.policy_number`** `string` `opcional`
 Número de póliza. Requerido cuando el plan de cobertura corresponde a una póliza (SOAT, ARL, etc.). |
+| **`health.without_contract_code`** `string` `opcional`
+Código de la causal por la que se factura sin contrato. Obligatorio cuando no se envía contract\_number. [Ver tabla de causales de factura sin contrato.](https://developers.factus.com.co/tablas-de-referencia/tablas/#causales-de-factura-sin-contrato) |
 | **`establishment`** `object` `opcional`
 Este es un objeto que contendrá la información sobre el establecimiento. Úsalo cuando manejes más de un establecimiento y necesites que los datos correspondientes se reflejen en la factura. Si envías el campo `establishment` los campos internos son obligatorios. |
 | **`establishment.name`** `string`

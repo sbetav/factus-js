@@ -23,7 +23,7 @@
 | --- | --- |
 | `10` | Estándar. |
 | `11` | Mandatos. |
-| `12` | Transporte. |
+| `12` | Transporte de carga. |
 | `SS-CUFE` | Sector Salud - CUFE. |
 | `SS-Reporte` | Sector Salud - Reporte. |
 | `SS-SinAporte` | Sector Salud - Sin Aporte. |
@@ -317,18 +317,10 @@
 
 | **Código** | **Nombre** |
 | --- | --- |
-| `01` | Paquete / Canasta / Conjunto Integral en Salud |
-| `02` | Grupos Relacionados por Diagnóstico |
-| `03` | Integral por grupo de riesgo |
-| `04` | Pago por contacto por especialidad |
-| `05` | Pago por escenario de atención |
-| `06` | Pago por tipo de servicio |
-| `07` | Pago global prospectivo por episodio |
-| `08` | Pago global prospectivo por grupo de riesgo |
-| `09` | Pago global prospectivo por especialidad |
-| `10` | Pago global prospectivo por nivel de complejidad |
-| `11` | Capitación |
-| `12` | Por servicio |
+| `01` | Pago individual por caso / Conjunto integral de atenciones / Paquete / Canasta |
+| `02` | Pago global prospectivo |
+| `03` | Pago por capitación |
+| `04` | Pago por evento |
 
 #### Conceptos de anticipo o recaudo previo en salud
 
@@ -341,3 +333,17 @@
 | `03` | Pagos compartidos en planes voluntarios de salud |
 | `04` | Anticipo |
 | `05` | No aplica |
+
+#### Causales de factura sin contrato
+
+[Sección titulada «Causales de factura sin contrato»](https://developers.factus.com.co/tablas-de-referencia/tablas#causales-de-factura-sin-contrato)
+
+| **Código** | **Nombre** |
+| --- | --- |
+| `01` | Atención de urgencias |
+| `02` | Atención a cargo de ADRES o de Aseguradora SOAT, Planes voluntarios de Salud |
+| `03` | Atención en salud por fallos de tutela/órdenes judiciales |
+| `04` | Atención en salud por Portabilidad o en los casos de asignación masiva de afiliados - artículo 2.5.3.4.7.9 del Decreto 780/2016 |
+| `05` | Atención en salud en casos excepcionales por cotizaciones o autorizaciones sin contrato adicionales excepcionales |
+| `06` | Gestión recuperación de órganos para trasplante en cumplimiento ley estatutaria 1751 de 2015 |
+| `07` | Atención a pacientes particulares |

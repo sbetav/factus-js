@@ -1,8 +1,8 @@
 # External Factus Docs Index
 
-- Generated at: 2026-08-13T21:54:50.731Z
+- Generated at: 2026-09-13T19:29:18.192Z
 - Base URL: https://developers.factus.com.co/
-- Files: 121
+- Files: 122
 
 ## Autenticación
 
@@ -283,6 +283,11 @@
 
 - Source: https://developers.factus.com.co/nomina/crear-y-validar
 - File: nomina\crear-y-validar.md
+
+## Descargar PDF
+
+- Source: https://developers.factus.com.co/nomina/descargar-pdf
+- File: nomina\descargar-pdf.md
 
 ## Descargar XML
 

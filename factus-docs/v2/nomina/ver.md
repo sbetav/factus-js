@@ -9,13 +9,13 @@ Este endpoint `devuelve` una nómina específica pasando el **código de referen
 **Sandbox**
 
 ```
-https://api-sandbox.factus.com.co/v2/payrolls/reference/:reference_code
+https://api-sandbox.factus.com.co/v2/payrolls/:number
 ```
 
 **Producción**
 
 ```
-https://api.factus.com.co/v2/payrolls/reference/:reference_code
+https://api.factus.com.co/v2/payrolls/:number
 ```
 
 ### **Encabezados de la Solicitud**

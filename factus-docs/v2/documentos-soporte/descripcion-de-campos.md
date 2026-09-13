@@ -53,7 +53,7 @@ ID del rango de numeración. Es obligatorio solo si tienes múltiples rangos act
 | **`created_time`** `string` `opcional`
 Hora de creación del documento soporte en formato `HH:mm:ss`. |
 | **`observation`** `string` `opcional`
-Agrega una observación del documento soporte. No debe tener más de 250 caracteres. |
+Agrega una observación del documento soporte. No debe tener más de 500 caracteres. |
 | **`payment_details`** `array`
 Este es un array de objetos para los medios de pago. Se debe enviar un objeto por cada medio de pago utilizado para pagar el documento soporte. |
 | **`payment_details.*.payment_form`** `string`
@@ -132,5 +132,11 @@ Código del impuesto aplicado al producto o servicio, para documento soporte deb
 Porcentaje del impuesto aplicado al producto o servicio (máximo dos decimales). |
 | **`items.*.taxes.*.is_excluded`** `boolean` `opcional`
 Indica si el ítem está excluido de impuestos. Valor: `true` o `false`. |
+| **`items.*.period`** `object` `opcional`
+Indica cuándo se adquirió el producto o servicio. Si no lo envías, el documento soporte se genera por operación (generation\_mode = 1) con la fecha actual. |
+| **`items.*.period.generation_mode`** `string`
+Forma de generación del documento soporte: 1 por operación (la compra se hizo el mismo día) o 2 acumulado semanal (compras de días anteriores). |
+| **`items.*.period.start_date`** `string` `opcional`
+Fecha en que se adquirió el producto o servicio, en formato YYYY-MM-DD. Requerido solo cuando generation\_mode es 2; puede ser como máximo 6 días antes de la fecha actual. Si generation\_mode es 1 se ignora y se toma la fecha actual. |
 
 El (\*) al lado del nombre de un campo indica que se pueden enviar múltiples objetos con esa estructura dentro del array, por ejemplo, en el caso del campo `items`, se debe enviar un objeto por cada producto o servicio que se quiera incluir en la nota crédito.

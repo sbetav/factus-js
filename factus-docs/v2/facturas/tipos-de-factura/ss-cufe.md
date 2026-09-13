@@ -53,7 +53,7 @@ Tasa de cambio utilizada para convertir los montos de la moneda local a la moned
 | **`send_email`** `boolean` `default:true` `opcional`
 Indica si el sistema debe enviar el correo electrónico al cliente. Útil cuando el envío del correo se gestiona de forma externa o personalizada por el integrador. Por defecto, este campo tiene un valor de true, lo que implica que el correo electrónico será enviado al cliente. Si se establece en false, el correo no será enviado. |
 | **`observation`** `string` `opcional`
-Agrega una observación a la factura. No debe tener más de 250 caracteres. |
+Agrega una observación a la factura. No debe tener más de 500 caracteres. |
 | **`prepayment_details`** `array` `opcional`
 Este es un array de objetos para los detalles de anticipos. Se debe enviar un objeto por cada anticipo realizado. |
 | **`prepayment_details.*.reference_code`** `string`
@@ -98,10 +98,12 @@ Código del prestador de servicios de salud (IPS/EPS). |
 Código del método de pago en salud. [Métodos de pago en salud disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#metodos-de-pago-en-salud) |
 | **`health.coverage_code`** `string`
 Código del plan de cobertura en salud. [Planes de cobertura disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#planes-de-cobertura-en-salud) |
-| **`health.contract_number`** `string`
+| **`health.contract_number`** `string` `opcional`
 Número del contrato con la entidad pagadora. |
 | **`health.policy_number`** `string` `opcional`
 Número de póliza. Requerido cuando el plan de cobertura corresponde a una póliza (SOAT, ARL, etc.). |
+| **`health.without_contract_code`** `string` `opcional`
+Código de la causal por la que se factura sin contrato. Obligatorio cuando no se envía contract\_number. [Ver tabla de causales de factura sin contrato.](https://developers.factus.com.co/tablas-de-referencia/tablas/#causales-de-factura-sin-contrato) |
 | **`establishment`** `object` `opcional`
 Este es un objeto que contendrá la información sobre el establecimiento. Úsalo cuando manejes más de un establecimiento y necesites que los datos correspondientes se reflejen en la factura. Si envías el campo `establishment` los campos internos son obligatorios. |
 | **`establishment.name`** `string`
@@ -238,7 +240,7 @@ Valor del descuento o recargo aplicado (máximo dos decimales). |
 **SS CUFE**
 
 ```
-{ "reference_code": "FACT-2026-0124", "document": "01", "numbering_range_id": 4, "operation_type": "SS-CUFE", "send_email": false, "billing_period": { "start_date": "2025-01-01", "start_time": "05:11:00", "end_date": "2025-01-02", "end_time": "11:59:59" }, "payment_details": [ { "payment_form": 1, "payment_method_code": "10", "amount": "10000" } ], "cash_rounding_amount": "0.00", "health": { "provider_code": "1920304050", "payment_method_code": "04", "coverage_code": "10", "contract_number": "CONT1230", "policy_number": "" }, "prepayment_details": [ { "reference_code": "1", "received_date": "2025-08-01", "concept_code": "01", "amount": "5000.00", "note": "texto libre para notas" } ], "customer": { "identification_document_code": "13", "identification": "123456789", "names": "Alan Turing", "address": "calle 1 # 1-1", "email": "alan.company@email.com", "phone": "1234567890", "legal_organization_code": "2", "tribute_code": "ZZ", "municipality_code": "68679" }, "items": [ { "code_reference": "SRV-000A", "name": "XXXXXXXXXX", "quantity": "1.00", "discount_rate": "0.00", "price": "10000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "is_excluded": true } ] } ]}
+{ "reference_code": "FACT-2026-0124", "document": "01", "numbering_range_id": 4, "operation_type": "SS-CUFE", "send_email": false, "billing_period": { "start_date": "2025-01-01", "start_time": "05:11:00", "end_date": "2025-01-02", "end_time": "11:59:59" }, "payment_details": [ { "payment_form": 1, "payment_method_code": "10", "amount": "10000" } ], "cash_rounding_amount": "0.00", "health": { "provider_code": "1920304050", "payment_method_code": "04", "coverage_code": "10", "contract_number": "CONT1230", "policy_number": "", "without_contract_code": "07" }, "prepayment_details": [ { "reference_code": "1", "received_date": "2025-08-01", "concept_code": "01", "amount": "5000.00", "note": "texto libre para notas" } ], "customer": { "identification_document_code": "13", "identification": "123456789", "names": "Alan Turing", "address": "calle 1 # 1-1", "email": "alan.company@email.com", "phone": "1234567890", "legal_organization_code": "2", "tribute_code": "ZZ", "municipality_code": "68679" }, "items": [ { "code_reference": "SRV-000A", "name": "XXXXXXXXXX", "quantity": "1.00", "discount_rate": "0.00", "price": "10000.00", "unit_measure_code": "94", "standard_code": "999", "taxes": [ { "is_excluded": true } ] } ]}
 ```
 
 * * *

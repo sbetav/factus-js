@@ -51,7 +51,7 @@ Código internacional de la moneda extranjera que se desea mostrar en la factura
 | **`currency.exchange_rate`** `string`
 Tasa de cambio utilizada para convertir los montos de la moneda local a la moneda extranjera especificada. |
 | **`observation`** `string` `opcional`
-Agrega una observación a la nota crédito. No debe tener más de 250 caracteres. |
+Agrega una observación a la nota crédito. No debe tener más de 500 caracteres. |
 | **`payment_details`** `array`
 Este es un array de objetos para los medios de pago. Se debe enviar un objeto por cada medio de pago utilizado para pagar la factura. |
 | **`payment_details.*.payment_form`** `string`

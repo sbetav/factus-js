@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-13T21:54:50.731Z",
+  "generatedAt": "2026-09-13T19:29:18.192Z",
   "baseUrl": "https://developers.factus.com.co/",
-  "totalFiles": 121,
+  "totalFiles": 122,
   "entries": [
     {
       "title": "Autenticación",
@@ -282,6 +282,11 @@
       "title": "Crear y validar",
       "sourceUrl": "https://developers.factus.com.co/nomina/crear-y-validar",
       "path": "nomina\\crear-y-validar.md"
+    },
+    {
+      "title": "Descargar PDF",
+      "sourceUrl": "https://developers.factus.com.co/nomina/descargar-pdf",
+      "path": "nomina\\descargar-pdf.md"
     },
     {
       "title": "Descargar XML",

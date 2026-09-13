@@ -57,3 +57,7 @@ Siguiente número dentro del rango de numeración |
 El valor es `1` cuando el rango está activo y `0` cuando está inactivo |
 | **`deleted_at`**
 Fecha en la que el rango de numeración fue eliminado, `null` si no ha sido eliminado |
+| **`created_at`**
+Fecha de creación. |
+| **`updated_at`**
+Fecha de actualización. |

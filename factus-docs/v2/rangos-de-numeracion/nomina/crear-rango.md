@@ -55,31 +55,19 @@ Número actual del consecutivo. El número del siguiente documento que se genera
 | |
 | --- |
 | **`id`**
-ID del rango de numeración. |
+ID del rango de numeración |
 | **`document`**
-Código del documento. |
+Número del documento |
 | **`document_name`**
-Nombre del documento. |
+Nombre del documento |
 | **`prefix`**
-Prefijo del rango de numeración. |
-| **`from`**
-Número de inicio del rango de numeración. |
-| **`to`**
-Número final del rango de numeración. |
+Prefijo del rango de numeración |
 | **`current`**
-Siguiente número del rango de numeración. |
-| **`resolution_number`**
-Número de resolución. |
-| **`start_date`**
-Fecha en la que se expidió el rango de numeración. |
-| **`end_date`**
-Fecha de vencimiento del rango de numeración. |
-| **`technical_key`**
-Clave técnica. |
-| **`is_expired`**
-El valor es `1` cuando el rango de numeración está vencido y `0` cuando está vigente. |
+Siguiente número dentro del rango de numeración |
 | **`is_active`**
-El valor es `1` cuando el rango de numeración está activo y `0` cuando no está activo. |
+El valor es `1` cuando el rango está activo y `0` cuando está inactivo |
+| **`deleted_at`**
+Fecha en la que el rango de numeración fue eliminado, `null` si no ha sido eliminado |
 | **`created_at`**
 Fecha de creación. |
 | **`updated_at`**

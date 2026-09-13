@@ -9,13 +9,13 @@ Este endpoint `devuelve` una nómina de eliminación específica pasando el **c�
 **Sandbox**
 
 ```
-https://api-sandbox.factus.com.co/v2/adjustment-payrolls/reference/:reference_code
+https://api-sandbox.factus.com.co/v2/adjustment-payrolls/:number
 ```
 
 **Producción**
 
 ```
-https://api.factus.com.co/v2/adjustment-payrolls/reference/:reference_code
+https://api.factus.com.co/v2/adjustment-payrolls/:number
 ```
 
 ### **Encabezados de la Solicitud**

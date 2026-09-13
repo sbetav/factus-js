@@ -39,7 +39,7 @@ ID del rango de numeración. Es obligatorio solo si tienes múltiples rangos act
 | **`created_time`** `string` `opcional`
 Hora de creación del documento soporte en formato `HH:mm:ss`. |
 | **`observation`** `string` `opcional`
-Agrega una observación del documento soporte. No debe tener más de 250 caracteres. |
+Agrega una observación del documento soporte. No debe tener más de 500 caracteres. |
 | **`payment_details`** `array`
 Este es un array de objetos para los medios de pago. Se debe enviar un objeto por cada medio de pago utilizado para pagar el documento soporte. |
 | **`payment_details.*.payment_form`** `string`
@@ -118,6 +118,12 @@ Código del impuesto aplicado al producto o servicio, para documento soporte deb
 Porcentaje del impuesto aplicado al producto o servicio (máximo dos decimales). |
 | **`items.*.taxes.*.is_excluded`** `boolean` `opcional`
 Indica si el ítem está excluido de impuestos. Valor: `true` o `false`. |
+| **`items.*.period`** `object` `opcional`
+Indica cuándo se adquirió el producto o servicio. Si no lo envías, el documento soporte se genera por operación (generation\_mode = 1) con la fecha actual. |
+| **`items.*.period.generation_mode`** `string`
+Forma de generación del documento soporte: 1 por operación (la compra se hizo el mismo día) o 2 acumulado semanal (compras de días anteriores). |
+| **`items.*.period.start_date`** `string` `opcional`
+Fecha en que se adquirió el producto o servicio, en formato YYYY-MM-DD. Requerido solo cuando generation\_mode es 2; puede ser como máximo 6 días antes de la fecha actual. Si generation\_mode es 1 se ignora y se toma la fecha actual. |
 
 ### Ejemplo de Solicitud
 
@@ -126,5 +132,5 @@ Indica si el ítem está excluido de impuestos. Valor: `true` o `false`. |
 **201 - Documento Soporte**
 
 ```
-{ "reference_code": "DS-2026-v2-0001", "created_time": "15:30:00", "observation": "", "payment_details": [ { "payment_form": "1", "payment_method_code": "42", "reference_code": "pago-002", "amount": "40000" }, { "payment_form": "2", "payment_method_code": "10", "reference_code": "pago-003", "amount": "40000", "due_date": "2026-05-25" } ], "cash_rounding_amount": "0.00", "establishment": { "name": "nombre establecimiento", "address": "direccion del establecimiento", "phone_number": "1234567890", "email": "establecieminto@tuempresa.com", "municipality_code": "91263" }, "provider": { "identification_document_code": "31", "identification": "2343543", "dv": "7", "names": "Pepito Perez", "address": "calle 4", "country_code": "CO", "municipality_code": "68679", "legal_organization_code": "1" }, "items": [ { "code_reference": "12345", "name": "producto de prueba", "quantity": "2.00", "discount_rate": "20.00", "price": "50000.00", "unit_measure_code": "94", "standard_code": "999", "withholding_taxes": [ { "code": "06", "rate": "3.50" } ], "taxes": [ { "code": "01", "rate": "19.00" } ] } ]}
+{ "reference_code": "DS-2026-v2-0001", "created_time": "15:30:00", "observation": "", "payment_details": [ { "payment_form": "1", "payment_method_code": "42", "reference_code": "pago-002", "amount": "50000" }, { "payment_form": "2", "payment_method_code": "10", "reference_code": "pago-003", "amount": "45200", "due_date": "2028-05-25" } ], "cash_rounding_amount": "0.00", "establishment": { "name": "nombre establecimiento", "address": "direccion del establecimiento", "phone_number": "1234567890", "email": "establecieminto@tuempresa.com", "municipality_code": "91263" }, "provider": { "identification_document_code": "31", "identification": "2343543", "dv": "7", "names": "Pepito Perez", "address": "calle 4", "country_code": "CO", "municipality_code": "68679", "legal_organization_code": "1" }, "items": [ { "code_reference": "12345", "name": "producto de prueba", "quantity": "2.00", "discount_rate": "20.00", "price": "50000.00", "unit_measure_code": "94", "standard_code": "999", "withholding_taxes": [ { "code": "06", "rate": "3.50" } ], "taxes": [ { "code": "01", "rate": "19.00" } ], "period": { "start_date": "2026-09-11", "generation_mode": "2" } } ]}
 ```

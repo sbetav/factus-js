@@ -101,7 +101,7 @@ Tasa de cambio utilizada para convertir los montos de la moneda local a la moned
 | **`cash_rounding_amount`** `string` `opcional`
 Ajuste opcional que reconcilia la diferencia entre la suma de los montos en `payment_details` y el `total` de la nota débito, causada por las limitaciones de denominación de la moneda local. Acepta valores negativos (redondeo hacia abajo) o positivos (redondeo hacia arriba). El valor máximo permitido es ±500.00. |
 | **`observation`** `string` `opcional`
-Agrega una observación a la nota débito. No debe tener más de 250 caracteres. |
+Agrega una observación a la nota débito. No debe tener más de 500 caracteres. |
 | **`customer`** `object`
 Este es un objeto que contendrá la información del cliente de la nota débito. Si no se envían los datos del cliente, el API tomará los datos del cliente de la factura relacionada al campo `bill_number` para generar la nota débito. Si envías el campo `customer` los campos internos son obligatorios, excepto aquellos que se indican como opcionales. |
 | **`customer.identification_document_code`** `string`

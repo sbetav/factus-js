@@ -55,7 +55,7 @@ Número del documento soporte al que se le hará la nota de ajuste. |
 | **`correction_concept_code`** `string`
 Código del motivo por el cual se genera la nota de ajuste. Para conocer el código de cada motivo, consulte el siguiente endpoint: [Motivos para la generación de las notas de ajuste](https://developers.factus.com.co/tablas-de-referencia/tablas/#motivos-para-la-generaci%C3%B3n-de-notas-de-ajuste) |
 | **`observation`** `string` `opcional`
-Agrega una observación de la nota de ajuste. No debe tener más de 250 caracteres. |
+Agrega una observación de la nota de ajuste. No debe tener más de 500 caracteres. |
 | **`payment_details`** `array`
 Este es un array de objetos para los medios de pago. Se debe enviar un objeto por cada medio de pago utilizado para pagar la nota de ajuste. |
 | **`payment_details.*.payment_form`** `string`
