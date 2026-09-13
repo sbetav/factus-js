@@ -37,7 +37,7 @@ console.log(OperationTypeCodeInfo[code].description); // "Estándar."
 | ---------------------- | ---------------- | ------------------------------------------------------- |
 | `Standard`             | `"10"`           | Estándar.                                               |
 | `Mandates`             | `"11"`           | Mandatos.                                               |
-| `Transport`            | `"12"`           | Transporte.                                             |
+| `Transport`            | `"12"`           | Transporte de carga.                                    |
 | `HealthCufe`           | `"SS-CUFE"`      | Sector salud - CUFE.                                    |
 | `HealthReport`         | `"SS-Reporte"`   | Sector salud - Reporte.                                 |
 | `HealthNoContribution` | `"SS-SinAporte"` | Sector salud - Sin aporte.                              |
@@ -228,6 +228,15 @@ console.log(SupportDocumentIdentityDocumentCodeInfo[code].description); // "NIT"
 | `ForeignIdentificationDocument` | `"42"` | DE          | Documento de identificación extranjero |
 | `PEP`                           | `"47"` | PEP         | PEP                                    |
 | `ForeignNIT`                    | `"50"` | NE          | NIT otro país                          |
+
+## Forma de generación documento soporte (`SupportDocumentGenerationModeCode`)
+
+Usado en `items[].period.generation_mode` al crear un documento soporte.
+
+| Clave                 | Valor | Descripción                                      |
+| --------------------- | ----- | ------------------------------------------------ |
+| `ByOperation`         | `"1"` | Por operación (la compra se hizo el mismo día)   |
+| `WeeklyAccumulated`   | `"2"` | Acumulado semanal (compras de días anteriores)   |
 
 ## Tributo del cliente (`CustomerTributeCode`)
 
@@ -431,6 +440,31 @@ Usado en `health.coverage_code` en facturas de sector salud.
 | `Private`                          | `"15"` | Particular                                                            |
 | `UpcContributoryRegime`            | `"16"` | Plan UPC régimen contributivo                                         |
 | `UpcSubsidizedRegime`              | `"17"` | Plan UPC régimen subsidiado                                           |
+
+## Método de pago en salud (`HealthPaymentMethodCode`)
+
+Usado en `health.payment_method_code`. No reutiliza `PaymentMethodCode` de DIAN.
+
+| Clave                      | Valor  | Descripción                                                                      |
+| -------------------------- | ------ | -------------------------------------------------------------------------------- |
+| `IndividualCaseOrPackage`  | `"01"` | Pago individual por caso / conjunto integral de atenciones / paquete / canasta   |
+| `ProspectiveGlobal`        | `"02"` | Pago global prospectivo                                                          |
+| `Capitation`               | `"03"` | Pago por capitación                                                              |
+| `Event`                    | `"04"` | Pago por evento                                                                  |
+
+## Causal de factura sin contrato (`HealthWithoutContractCode`)
+
+Usado en `health.without_contract_code` cuando no se envía `contract_number`.
+
+| Clave                           | Valor  | Descripción                                                                                  |
+| ------------------------------- | ------ | -------------------------------------------------------------------------------------------- |
+| `EmergencyCare`                 | `"01"` | Atención de urgencias                                                                        |
+| `AdresSoatOrVoluntaryPlans`     | `"02"` | Atención a cargo de ADRES o de Aseguradora SOAT, planes voluntarios de salud                 |
+| `TutelaOrCourtOrders`           | `"03"` | Atención en salud por fallos de tutela / órdenes judiciales                                  |
+| `PortabilityOrMassAssignment`   | `"04"` | Atención en salud por portabilidad o asignación masiva de afiliados                          |
+| `ExceptionalContributions`      | `"05"` | Atención en salud en casos excepcionales por cotizaciones o autorizaciones sin contrato      |
+| `OrganRecoveryForTransplant`    | `"06"` | Gestión recuperación de órganos para trasplante                                              |
+| `PrivatePatients`               | `"07"` | Atención a pacientes particulares                                                            |
 
 ## Documento de identidad sector salud (`HealthIdentityDocumentCode`)
 

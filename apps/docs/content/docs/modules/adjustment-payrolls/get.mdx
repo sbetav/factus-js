@@ -1,37 +1,34 @@
 ---
 title: Ver nómina de eliminación
-description: Obtener el detalle de una nómina de eliminación por código de referencia.
+description: Obtener el detalle de una nómina de eliminación por su número consecutivo.
 ---
 
 ## Firma del método
 
 ```ts
 get(
-  referenceCode: string,
+  number: string,
   options?: RequestOptions,
 ): Promise<ViewAdjustmentPayrollResponse>
 ```
 
 ## Endpoint Factus
 
-`GET /v2/adjustment-payrolls/reference/{reference_code}`
+`GET /v2/adjustment-payrolls/{number}`
 
 Fuente oficial: [Ver nómina de eliminación](https://developers.factus.com.co/nota-ajuste-nomina/ver)
+
+`data.payroll` trae la nómina referenciada (número, trabajador y CUNE). El borrado sigue usando `reference_code`.
 
 ## Parámetros
 
 <TypeTable
   type={{
-    referenceCode: {
+    number: {
       type: "string",
       required: true,
-      description: (
-        <>
-          {"Código de referencia ("}
-          <code>{"reference_code"}</code>
-          {") de la nómina de eliminación."}
-        </>
-      ),
+      description:
+        "Número consecutivo de la nómina de eliminación (por ejemplo, NADJ1).",
     },
   }}
 />
@@ -39,6 +36,6 @@ Fuente oficial: [Ver nómina de eliminación](https://developers.factus.com.co/n
 ## Ejemplo
 
 ```ts
-const response = await factus.adjustmentPayrolls.get("990000001");
-console.log(response.data);
+const response = await factus.adjustmentPayrolls.get("NADJ1");
+console.log(response.data.number, response.data.payroll?.number);
 ```

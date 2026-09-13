@@ -93,7 +93,7 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/notas-credito
     observation: {
       type: "string",
       required: false,
-      description: "Observaciones del documento.",
+      description: "Observaciones del documento. Máximo 500 caracteres.",
     },
     payment_details: {
       type: "DocumentPaymentDetailInput[]",
@@ -344,7 +344,7 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/notas-credito
           <TypeTable
             type={{
               scheme_id: {
-                type: "string",
+                type: "string | number",
                 required: false,
                 description: "Esquema del ítem cuando aplica.",
               },
@@ -592,13 +592,13 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/notas-credito
                 description: "Código del prestador de salud.",
               },
               payment_method_code: {
-                type: "PaymentMethodCode",
+                type: "HealthPaymentMethodCode",
                 required: true,
                 description: (
                   <>
-                    {"Método de pago del bloque salud — Ver "}
-                    <a href="/docs/reference-tables/general#método-de-pago-paymentmethodcode">
-                      {"PaymentMethodCode"}
+                    {"Método de pago en salud — Ver "}
+                    <a href="/docs/reference-tables/general#método-de-pago-en-salud-healthpaymentmethodcode">
+                      {"HealthPaymentMethodCode"}
                     </a>
                     {"."}
                   </>
@@ -619,13 +619,29 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/notas-credito
               },
               contract_number: {
                 type: "string",
-                required: true,
-                description: "Número de contrato.",
+                required: false,
+                description:
+                  "Número del contrato con la entidad pagadora. Si no lo envías, without_contract_code es obligatorio.",
               },
               policy_number: {
                 type: "string | null",
                 required: false,
                 description: "Número de póliza cuando aplica.",
+              },
+              without_contract_code: {
+                type: "HealthWithoutContractCode",
+                required: false,
+                description: (
+                  <>
+                    {
+                      "Causal de factura sin contrato. Obligatorio cuando no se envía contract_number — Ver "
+                    }
+                    <a href="/docs/reference-tables/general#causal-de-factura-sin-contrato-healthwithoutcontractcode">
+                      {"HealthWithoutContractCode"}
+                    </a>
+                    {"."}
+                  </>
+                ),
               },
             }}
           />

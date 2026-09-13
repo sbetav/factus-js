@@ -1,37 +1,33 @@
 ---
 title: Ver nómina
-description: Obtener el detalle de una nómina por código de referencia.
+description: Obtener el detalle de una nómina por su número consecutivo.
 ---
 
 ## Firma del método
 
 ```ts
 get(
-  referenceCode: string,
+  number: string,
   options?: RequestOptions,
 ): Promise<ViewPayrollResponse>
 ```
 
 ## Endpoint Factus
 
-`GET /v2/payrolls/reference/{reference_code}`
+`GET /v2/payrolls/{number}`
 
 Fuente oficial: [Ver nómina](https://developers.factus.com.co/nomina/ver)
+
+La respuesta de create/get usa catálogos anidados (`code` / `name`) para periodo, pago, trabajador, devengos y deducciones. No reutiliza la forma del payload de creación.
 
 ## Parámetros
 
 <TypeTable
   type={{
-    referenceCode: {
+    number: {
       type: "string",
       required: true,
-      description: (
-        <>
-          {"Código de referencia ("}
-          <code>{"reference_code"}</code>
-          {") de la nómina."}
-        </>
-      ),
+      description: "Número consecutivo de la nómina (por ejemplo, NEF1).",
     },
   }}
 />
@@ -39,6 +35,7 @@ Fuente oficial: [Ver nómina](https://developers.factus.com.co/nomina/ver)
 ## Ejemplo
 
 ```ts
-const response = await factus.payrolls.get("990000070");
-console.log(response.data);
+const response = await factus.payrolls.get("NEF1");
+console.log(response.data.number, response.data.worker.name);
+console.log(response.data.related_documents);
 ```

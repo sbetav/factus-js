@@ -1,4 +1,4 @@
 {
   "title": "Nómina",
-  "pages": ["index", "create", "get", "list", "download-xml", "delete"]
+  "pages": ["index", "create", "get", "list", "download-xml", "download-pdf", "delete"]
 }

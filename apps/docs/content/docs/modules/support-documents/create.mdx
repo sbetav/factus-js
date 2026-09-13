@@ -41,7 +41,7 @@ Fuente oficial: [Crear documento soporte](https://developers.factus.com.co/docum
     observation: {
       type: "string",
       required: false,
-      description: "Observaciones del documento.",
+      description: "Observaciones del documento. Máximo 500 caracteres.",
     },
     payment_details: {
       type: "DocumentPaymentDetailInput[]",
@@ -251,7 +251,7 @@ Fuente oficial: [Crear documento soporte](https://developers.factus.com.co/docum
           <TypeTable
             type={{
               scheme_id: {
-                type: "string",
+                type: "string | number",
                 required: false,
                 description: "Esquema del ítem cuando aplica.",
               },
@@ -433,6 +433,39 @@ Fuente oficial: [Crear documento soporte](https://developers.factus.com.co/docum
                   </div>
                 ),
               },
+              period: {
+                type: "SupportDocumentItemPeriodInput",
+                required: false,
+                description: (
+                  <div>
+                    Periodo de generación del ítem. Si lo omites, Factus usa
+                    generation_mode 1 con la fecha actual.
+                    <TypeTable
+                      type={{
+                        generation_mode: {
+                          type: "SupportDocumentGenerationModeCode",
+                          required: true,
+                          description: (
+                            <>
+                              {"1 por operación o 2 acumulado semanal — Ver "}
+                              <a href="/docs/reference-tables/general#forma-de-generación-documento-soporte-supportdocumentgenerationmodecode">
+                                {"SupportDocumentGenerationModeCode"}
+                              </a>
+                              {"."}
+                            </>
+                          ),
+                        },
+                        start_date: {
+                          type: "string",
+                          required: false,
+                          description:
+                            "YYYY-MM-DD. Obligatorio si generation_mode es 2; máximo 6 días atrás. Se ignora si generation_mode es 1.",
+                        },
+                      }}
+                    />
+                  </div>
+                ),
+              },
             }}
           />
         </div>
@@ -448,6 +481,7 @@ import {
   PaymentFormCode,
   PaymentMethodCode,
   ProductStandardCode,
+  SupportDocumentGenerationModeCode,
   SupportDocumentIdentityDocumentCode,
 } from "factus-js";
 
@@ -482,6 +516,10 @@ const response = await factus.supportDocuments.create({
       unit_measure_code: "94",
       standard_code: ProductStandardCode.TaxpayerAdoption,
       taxes: [{ code: "01", rate: "19.00" }],
+      period: {
+        generation_mode: SupportDocumentGenerationModeCode.WeeklyAccumulated,
+        start_date: "2026-09-11",
+      },
     },
   ],
 });

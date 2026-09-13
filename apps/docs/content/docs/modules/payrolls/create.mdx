@@ -40,7 +40,7 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/nomina/crear-
     observation: {
       type: "string",
       required: false,
-      description: "Observación libre sobre la nómina.",
+      description: "Observación libre sobre la nómina. Máximo 500 caracteres.",
     },
     numbering_range_id: {
       type: "string | number",
@@ -314,4 +314,5 @@ const response = await factus.payrolls.create({
 });
 
 console.log(response.data.number, response.data.reference_code);
+console.log(response.data.worker.name, response.data.net_balance);
 ```

@@ -59,7 +59,7 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/notas-ajuste-
     observation: {
       type: "string",
       required: false,
-      description: "Observaciones del documento.",
+      description: "Observaciones del documento. Máximo 500 caracteres.",
     },
     payment_details: {
       type: "DocumentPaymentDetailInput[]",
@@ -230,7 +230,7 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/notas-ajuste-
           <TypeTable
             type={{
               scheme_id: {
-                type: "string",
+                type: "string | number",
                 required: false,
                 description: "Esquema del ítem cuando aplica.",
               },
