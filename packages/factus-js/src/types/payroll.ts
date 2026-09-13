@@ -23,11 +23,12 @@ import type {
 } from "../constants";
 import type { ApiResponse, LiteralUnion, PaginatedData } from "./common";
 import type {
-  CompanyInfo,
+  CodeNameObject,
   DeleteResponse,
   DocumentErrors,
+  DownloadPdfData,
   DownloadXmlData,
-  NumberingRangeInfo,
+  MunicipalityObject,
 } from "./shared";
 
 type Scalar = string | number;
@@ -314,20 +315,141 @@ export interface ViewPayrollData {
   reference_code: string;
   number: string;
   observation?: string | null;
-  numbering_range_id?: string | number;
-  settlement_period: PayrollSettlementPeriodInput;
-  payment: PayrollPaymentInput;
-  worker: PayrollWorkerInput;
-  accruals: PayrollAccrualsInput;
-  deductions: PayrollDeductionsInput;
+  settlement_period: PayrollSettlementPeriod;
+  payment: PayrollPayment;
+  worker: PayrollWorker;
+  company: PayrollCompany;
+  numbering_range?: PayrollNumberingRangeRef;
+  accruals: PayrollAccruals;
+  deductions: PayrollDeductions;
+  total_accruals?: string;
+  total_deductions?: string;
+  net_balance?: string;
+  related_documents?: PayrollRelatedDocument[] | null;
   is_validated: boolean;
   validated_at: string | null;
   errors: DocumentErrors;
   created_at: string;
-  company?: CompanyInfo;
-  numbering_range?: NumberingRangeInfo;
-  cune?: string;
+  cune?: string | null;
   qr?: string;
+}
+
+export interface PayrollSettlementPeriod {
+  pay_period_half?: string | null;
+  settlement_start_date: string;
+  settlement_end_date: string;
+  payroll_period: CodeNameObject;
+}
+
+export interface PayrollPayment {
+  payment_method: CodeNameObject;
+  bank_name?: string | null;
+  account_type?: CodeNameObject | null;
+  account_number?: string | null;
+  payment_date: string;
+}
+
+export interface PayrollWorker {
+  identification_document: CodeNameObject;
+  identification_number: string;
+  name: string;
+  address: string;
+  country: CodeNameObject;
+  municipality?: MunicipalityObject | null;
+  has_integral_salary: boolean;
+  has_high_risk: boolean;
+  worker_subtype: CodeNameObject;
+  contract_type: CodeNameObject;
+  worker_type: CodeNameObject;
+  employee_code?: string | null;
+  entry_date: string;
+  retirement_date?: string | null;
+  days_worked: string;
+  worked_time: string;
+  salary: string;
+}
+
+export interface PayrollCompany {
+  url_logo: string;
+  nit: string;
+  dv: string;
+  economic_activity: string;
+  name: string;
+  address: string;
+  phone_number: string;
+  email: string;
+  municipality: MunicipalityObject;
+}
+
+export interface PayrollNumberingRangeRef {
+  prefix: string;
+  current: string;
+}
+
+export interface PayrollConcept {
+  code: string;
+  name: string;
+  amount?: string;
+  quantity?: string;
+  percentage?: string | null;
+  description?: string;
+  start_date?: string | null;
+  end_date?: string | null;
+}
+
+export interface PayrollAccruals {
+  suel?: PayrollConcept;
+  prim?: PayrollConcept;
+  dota?: PayrollConcept;
+  tele?: PayrollConcept;
+  reti?: PayrollConcept;
+  inde?: PayrollConcept;
+  rein?: PayrollConcept;
+  apoy?: PayrollConcept;
+  cesa?: PayrollConcept[];
+  boni?: PayrollConcept[];
+  bono?: PayrollConcept[];
+  tra?: PayrollConcept[];
+  comp?: PayrollConcept[];
+  otro?: PayrollConcept[];
+  lice?: PayrollConcept[];
+  vaca?: PayrollConcept[];
+  inca?: PayrollConcept[];
+  auxi?: PayrollConcept[];
+  huel?: PayrollConcept[];
+  comi?: PayrollConcept[];
+  terc?: PayrollConcept[];
+  anti?: PayrollConcept[];
+  hora?: PayrollConcept[];
+}
+
+export interface PayrollDeductions {
+  salu?: PayrollConcept;
+  pens?: PayrollConcept;
+  dedu?: PayrollConcept;
+  pevo?: PayrollConcept;
+  rete?: PayrollConcept;
+  afco?: PayrollConcept;
+  coop?: PayrollConcept;
+  emba?: PayrollConcept;
+  plan?: PayrollConcept;
+  educ?: PayrollConcept;
+  rein?: PayrollConcept;
+  deud?: PayrollConcept;
+  sind?: PayrollConcept[];
+  sanc?: PayrollConcept[];
+  libr?: PayrollConcept[];
+  terc?: PayrollConcept[];
+  anti?: PayrollConcept[];
+  otra?: PayrollConcept[];
+}
+
+export interface PayrollRelatedDocument {
+  adjustment_payroll?: {
+    reference_code: string;
+    number: string;
+    validated_at: string;
+  } | null;
 }
 
 // ---------------------------------------------------------------------------
@@ -339,3 +461,4 @@ export type ViewPayrollResponse = ApiResponse<ViewPayrollData>;
 export type GetPayrollsResponse = ApiResponse<PaginatedData<PayrollListItem>>;
 export type DeletePayrollResponse = DeleteResponse;
 export type DownloadPayrollXmlResponse = ApiResponse<DownloadXmlData>;
+export type DownloadPayrollPdfResponse = ApiResponse<DownloadPdfData>;

@@ -299,8 +299,9 @@ describe("module routing contract", () => {
 
     await payrolls.create(createInput);
     await payrolls.list(listFilters);
-    await payrolls.get("PAY-001");
+    await payrolls.get("NE990000070");
     await payrolls.downloadXml("NE990000070");
+    await payrolls.downloadPdf("NE990000070");
     await payrolls.delete("PAY-001");
 
     expect(spy.calls).toEqual([
@@ -308,12 +309,17 @@ describe("module routing contract", () => {
       { method: "get", path: "/v2/payrolls", payload: listQuery },
       {
         method: "get",
-        path: "/v2/payrolls/reference/PAY-001",
+        path: "/v2/payrolls/NE990000070",
         payload: undefined,
       },
       {
         method: "get",
         path: "/v2/payrolls/NE990000070/download-xml",
+        payload: undefined,
+      },
+      {
+        method: "get",
+        path: "/v2/payrolls/NE990000070/download-pdf",
         payload: undefined,
       },
       { method: "delete", path: "/v2/payrolls/reference/PAY-001" },
@@ -335,7 +341,7 @@ describe("module routing contract", () => {
 
     await adjustmentPayrolls.create(createInput);
     await adjustmentPayrolls.list(listFilters);
-    await adjustmentPayrolls.get("ADJ-001");
+    await adjustmentPayrolls.get("NADJ1");
     await adjustmentPayrolls.downloadXml("NADJ1");
     await adjustmentPayrolls.delete("ADJ-001");
 
@@ -348,7 +354,7 @@ describe("module routing contract", () => {
       { method: "get", path: "/v2/adjustment-payrolls", payload: listQuery },
       {
         method: "get",
-        path: "/v2/adjustment-payrolls/reference/ADJ-001",
+        path: "/v2/adjustment-payrolls/NADJ1",
         payload: undefined,
       },
       {

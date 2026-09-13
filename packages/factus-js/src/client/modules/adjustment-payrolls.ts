@@ -63,15 +63,15 @@ export class AdjustmentPayrollsModule {
   }
 
   /**
-   * Get full detail of a payroll elimination note by its reference code.
-   * GET /v2/adjustment-payrolls/reference/{reference_code}
+   * Get full detail of a payroll elimination note by its consecutive number.
+   * GET /v2/adjustment-payrolls/{number}
    */
   get(
-    referenceCode: string,
+    number: string,
     options?: RequestOptions,
   ): Promise<ViewAdjustmentPayrollResponse> {
     return this.http.get(
-      `/v2/adjustment-payrolls/reference/${referenceCode}`,
+      `/v2/adjustment-payrolls/${number}`,
       undefined,
       options?.signal,
     );

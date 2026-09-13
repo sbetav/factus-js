@@ -8,17 +8,22 @@ import type {
   CreateAdjustmentPayrollInput,
   CreateDebitNoteInput,
   CreatePayrollInput,
+  DocumentHealthData,
   DocumentItemInput,
   EmailContentData,
   FactusClient,
   EmitEventInput,
   ManualReceptionEventCode,
   RadianEventUpdateInput,
+  SupportDocumentItemInput,
+  ViewPayrollData,
 } from "../../index";
 import {
   ContractTypeCode,
   EventCode,
+  HealthPaymentMethodCode,
   PayrollPeriodCode,
+  SupportDocumentGenerationModeCode,
   WorkerTypeCode,
 } from "../../index";
 
@@ -99,8 +104,31 @@ describe("public type contracts", () => {
     expectTypeOf<DocumentItemInput["discount_amount"]>().toEqualTypeOf<
       string | number | undefined
     >();
+    expectTypeOf<DocumentItemInput["scheme_id"]>().toEqualTypeOf<
+      string | number | undefined
+    >();
     expectTypeOf<
       AssertTrue<HasKey<DocumentItemInput, "discount_amount">>
+    >().toEqualTypeOf<true>();
+  });
+
+  test("support document items accept an optional generation period", () => {
+    expectTypeOf(
+      SupportDocumentGenerationModeCode.WeeklyAccumulated,
+    ).toExtend<
+      NonNullable<SupportDocumentItemInput["period"]>["generation_mode"]
+    >();
+  });
+
+  test("health block uses the salud payment catalog and optional contract fields", () => {
+    expectTypeOf(HealthPaymentMethodCode.Event).toExtend<
+      DocumentHealthData["payment_method_code"]
+    >();
+    expectTypeOf<DocumentHealthData["contract_number"]>().toEqualTypeOf<
+      string | undefined
+    >();
+    expectTypeOf<
+      AssertTrue<HasKey<DocumentHealthData, "without_contract_code">>
     >().toEqualTypeOf<true>();
   });
 
@@ -155,6 +183,14 @@ describe("public type contracts", () => {
     expectTypeOf<
       AssertTrue<HasKey<FactusClient["payrolls"], "listAll">>
     >().toEqualTypeOf<true>();
+    expectTypeOf<
+      AssertTrue<HasKey<FactusClient["payrolls"], "downloadPdf">>
+    >().toEqualTypeOf<true>();
+    expectTypeOf<ViewPayrollData["worker"]["name"]>().toEqualTypeOf<string>();
+    expectTypeOf<ViewPayrollData["settlement_period"]["payroll_period"]>().toEqualTypeOf<{
+      code: string;
+      name: string;
+    }>();
   });
 
   test("client exposes adjustmentPayrolls module", () => {

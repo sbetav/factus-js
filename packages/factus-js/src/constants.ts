@@ -320,6 +320,34 @@ export const PayrollLeaveTypeCode = {
 export type PayrollLeaveTypeCode =
   (typeof PayrollLeaveTypeCode)[keyof typeof PayrollLeaveTypeCode];
 
+export const HealthPaymentMethodCode = {
+  IndividualCaseOrPackage: "01",
+  ProspectiveGlobal: "02",
+  Capitation: "03",
+  Event: "04",
+} as const;
+export type HealthPaymentMethodCode =
+  (typeof HealthPaymentMethodCode)[keyof typeof HealthPaymentMethodCode];
+
+export const HealthWithoutContractCode = {
+  EmergencyCare: "01",
+  AdresSoatOrVoluntaryPlans: "02",
+  TutelaOrCourtOrders: "03",
+  PortabilityOrMassAssignment: "04",
+  ExceptionalContributions: "05",
+  OrganRecoveryForTransplant: "06",
+  PrivatePatients: "07",
+} as const;
+export type HealthWithoutContractCode =
+  (typeof HealthWithoutContractCode)[keyof typeof HealthWithoutContractCode];
+
+export const SupportDocumentGenerationModeCode = {
+  ByOperation: "1",
+  WeeklyAccumulated: "2",
+} as const;
+export type SupportDocumentGenerationModeCode =
+  (typeof SupportDocumentGenerationModeCode)[keyof typeof SupportDocumentGenerationModeCode];
+
 export const HealthCoverageCode = {
   UpcBenefitsPlan: "01",
   MaximumBudget: "02",

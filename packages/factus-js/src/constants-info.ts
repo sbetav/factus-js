@@ -19,6 +19,8 @@ import type {
   IdentityDocumentCode,
   HealthCoverageCode,
   HealthIdentityDocumentCode,
+  HealthPaymentMethodCode,
+  HealthWithoutContractCode,
   NumberingRangeDocumentTypeCode,
   OperationTypeCode,
   OrganizationTypeCode,
@@ -43,6 +45,7 @@ import type {
   PayrollTransportAllowanceTypeCode,
   PayrollVacationTypeCode,
   ProductStandardCode,
+  SupportDocumentGenerationModeCode,
   SupportDocumentIdentityDocumentCode,
   WorkerSubtypeCode,
   WorkerTypeCode,
@@ -65,7 +68,7 @@ export const BillDocumentCodeInfo: Record<BillDocumentCode, ConstantInfo> = {
 export const OperationTypeCodeInfo: Record<OperationTypeCode, ConstantInfo> = {
   "10": { description: "Estándar." },
   "11": { description: "Mandatos." },
-  "12": { description: "Transporte." },
+  "12": { description: "Transporte de carga." },
   "SS-CUFE": { description: "Sector Salud - CUFE." },
   "SS-Reporte": { description: "Sector Salud - Reporte." },
   "SS-SinAporte": { description: "Sector Salud - Sin Aporte." },
@@ -424,6 +427,54 @@ export const PayrollLeaveTypeCodeInfo: Record<
   "1": { description: "Licencia de maternidad o paternidad" },
   "2": { description: "Licencia remunerada" },
   "3": { description: "Licencia no remunerada" },
+};
+
+export const HealthPaymentMethodCodeInfo: Record<
+  HealthPaymentMethodCode,
+  ConstantInfo
+> = {
+  "01": {
+    description:
+      "Pago individual por caso / Conjunto integral de atenciones / Paquete / Canasta",
+  },
+  "02": { description: "Pago global prospectivo" },
+  "03": { description: "Pago por capitación" },
+  "04": { description: "Pago por evento" },
+};
+
+export const HealthWithoutContractCodeInfo: Record<
+  HealthWithoutContractCode,
+  ConstantInfo
+> = {
+  "01": { description: "Atención de urgencias" },
+  "02": {
+    description:
+      "Atención a cargo de ADRES o de Aseguradora SOAT, Planes voluntarios de Salud",
+  },
+  "03": {
+    description: "Atención en salud por fallos de tutela/órdenes judiciales",
+  },
+  "04": {
+    description:
+      "Atención en salud por Portabilidad o en los casos de asignación masiva de afiliados",
+  },
+  "05": {
+    description:
+      "Atención en salud en casos excepcionales por cotizaciones o autorizaciones sin contrato",
+  },
+  "06": {
+    description:
+      "Gestión recuperación de órganos para trasplante en cumplimiento ley estatutaria 1751 de 2015",
+  },
+  "07": { description: "Atención a pacientes particulares" },
+};
+
+export const SupportDocumentGenerationModeCodeInfo: Record<
+  SupportDocumentGenerationModeCode,
+  ConstantInfo
+> = {
+  "1": { description: "Por operación (la compra se hizo el mismo día)" },
+  "2": { description: "Acumulado semanal (compras de días anteriores)" },
 };
 
 export const HealthCoverageCodeInfo: Record<HealthCoverageCode, ConstantInfo> =

@@ -4,8 +4,8 @@ import type {
   CompanyInfo,
   DeleteResponse,
   DocumentErrors,
-  DocumentItemInput,
   DocumentItemResponse,
+  SupportDocumentItemInput,
   DocumentLinks,
   DocumentParty,
   DocumentPaymentDetail,
@@ -33,7 +33,7 @@ export interface CreateSupportDocumentInput {
   cash_rounding_amount?: string | number;
   establishment?: EstablishmentInput;
   provider: ProviderInput;
-  items: DocumentItemInput[];
+  items: SupportDocumentItemInput[];
 }
 
 // ---------------------------------------------------------------------------

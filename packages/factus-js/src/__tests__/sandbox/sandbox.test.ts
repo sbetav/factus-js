@@ -337,6 +337,7 @@ describe("sandbox integration", () => {
     // -----------------------------------------------------------------
     await run("payrolls.list", factus.payrolls.list({ page: 1, per_page: 5 }));
     await run("payrolls.downloadXml", factus.payrolls.downloadXml("990000070"));
+    await run("payrolls.downloadPdf", factus.payrolls.downloadPdf("990000070"));
     await runAllowConflict(
       "payrolls.create",
       factus.payrolls.create({

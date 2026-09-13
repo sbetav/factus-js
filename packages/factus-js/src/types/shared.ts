@@ -1,10 +1,13 @@
 import type {
   HealthCoverageCode,
   HealthIdentityDocumentCode,
+  HealthPaymentMethodCode,
+  HealthWithoutContractCode,
   IdentityDocumentCode,
   PaymentFormCode,
   PaymentMethodCode,
   ProductStandardCode,
+  SupportDocumentGenerationModeCode,
 } from "../constants";
 import type { ApiResponse, LiteralUnion } from "./common";
 
@@ -200,7 +203,7 @@ export interface DocumentItemMandate {
 }
 
 export interface DocumentItemInput {
-  scheme_id?: string;
+  scheme_id?: string | number;
   note?: string;
   collection_concept_code?: string;
   code_reference: string;
@@ -262,10 +265,20 @@ export interface AllowanceChargeResponse {
 
 export interface DocumentHealthData {
   provider_code: string;
-  payment_method_code: LiteralUnion<PaymentMethodCode>;
+  payment_method_code: LiteralUnion<HealthPaymentMethodCode>;
   coverage_code: LiteralUnion<HealthCoverageCode>;
-  contract_number: string;
+  contract_number?: string;
   policy_number?: string | null;
+  without_contract_code?: LiteralUnion<HealthWithoutContractCode>;
+}
+
+export interface SupportDocumentItemPeriodInput {
+  generation_mode: LiteralUnion<SupportDocumentGenerationModeCode>;
+  start_date?: string;
+}
+
+export interface SupportDocumentItemInput extends DocumentItemInput {
+  period?: SupportDocumentItemPeriodInput;
 }
 
 export interface DocumentBeneficiary {

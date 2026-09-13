@@ -1,11 +1,10 @@
 import type { ApiResponse, PaginatedData } from "./common";
 import type {
-  CompanyInfo,
   DeleteResponse,
   DocumentErrors,
   DownloadXmlData,
-  NumberingRangeInfo,
 } from "./shared";
+import type { PayrollCompany, PayrollWorker } from "./payroll";
 
 // ---------------------------------------------------------------------------
 // Input types
@@ -46,14 +45,20 @@ export interface AdjustmentPayrollFilters {
 export interface ViewAdjustmentPayrollData {
   reference_code: string;
   number: string;
-  payroll_number?: string;
-  numbering_range_id?: string | number;
+  company?: PayrollCompany;
+  payroll?: {
+    reference_code: string;
+    number: string;
+    worker: Pick<
+      PayrollWorker,
+      "name" | "identification_number" | "municipality"
+    >;
+    cune: string;
+  } | null;
   is_validated: boolean;
   validated_at: string | null;
   errors: DocumentErrors;
   created_at: string;
-  company?: CompanyInfo;
-  numbering_range?: NumberingRangeInfo;
   cune?: string;
   qr?: string;
 }

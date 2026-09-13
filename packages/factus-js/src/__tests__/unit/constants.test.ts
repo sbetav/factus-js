@@ -8,6 +8,8 @@ import {
   FiscalResponsibilityCode,
   HealthCoverageCode,
   HealthIdentityDocumentCode,
+  HealthPaymentMethodCode,
+  HealthWithoutContractCode,
   IdentityDocumentCode,
   NumberingRangeDocumentTypeCode,
   OperationTypeCode,
@@ -32,6 +34,7 @@ import {
   PayrollTransportAllowanceTypeCode,
   PayrollVacationTypeCode,
   ProductStandardCode,
+  SupportDocumentGenerationModeCode,
   SupportDocumentIdentityDocumentCode,
   WorkerSubtypeCode,
   WorkerTypeCode,
@@ -45,6 +48,8 @@ import {
   FiscalResponsibilityCodeInfo,
   HealthCoverageCodeInfo,
   HealthIdentityDocumentCodeInfo,
+  HealthPaymentMethodCodeInfo,
+  HealthWithoutContractCodeInfo,
   IdentityDocumentCodeInfo,
   NumberingRangeDocumentTypeCodeInfo,
   OperationTypeCodeInfo,
@@ -69,6 +74,7 @@ import {
   PayrollTransportAllowanceTypeCodeInfo,
   PayrollVacationTypeCodeInfo,
   ProductStandardCodeInfo,
+  SupportDocumentGenerationModeCodeInfo,
   SupportDocumentIdentityDocumentCodeInfo,
   WorkerSubtypeCodeInfo,
   WorkerTypeCodeInfo,
@@ -222,10 +228,23 @@ describe("constants — value map structure", () => {
     expect(HealthCoverageCode.UpcContributoryRegime).toBe("16");
     expect(HealthCoverageCode.UpcSubsidizedRegime).toBe("17");
     expect(HealthIdentityDocumentCode.TemporaryProtectionPermit).toBe("PT");
+    expect(OperationTypeCodeInfo["12"].description).toBe("Transporte de carga.");
+    expect(HealthPaymentMethodCode.Event).toBe("04");
+    expect(HealthWithoutContractCode.PrivatePatients).toBe("07");
+    expect(SupportDocumentGenerationModeCode.WeeklyAccumulated).toBe("2");
     expectCodeInfoPairs(HealthCoverageCode, HealthCoverageCodeInfo);
     expectCodeInfoPairs(
       HealthIdentityDocumentCode,
       HealthIdentityDocumentCodeInfo,
+    );
+    expectCodeInfoPairs(HealthPaymentMethodCode, HealthPaymentMethodCodeInfo);
+    expectCodeInfoPairs(
+      HealthWithoutContractCode,
+      HealthWithoutContractCodeInfo,
+    );
+    expectCodeInfoPairs(
+      SupportDocumentGenerationModeCode,
+      SupportDocumentGenerationModeCodeInfo,
     );
   });
 });

@@ -2,6 +2,7 @@ import type {
   CreatePayrollInput,
   CreatePayrollResponse,
   DeletePayrollResponse,
+  DownloadPayrollPdfResponse,
   DownloadPayrollXmlResponse,
   GetPayrollsResponse,
   ListParams,
@@ -62,18 +63,11 @@ export class PayrollsModule {
   }
 
   /**
-   * Get full detail of a payroll by its reference code.
-   * GET /v2/payrolls/reference/{reference_code}
+   * Get full detail of a payroll by its consecutive number.
+   * GET /v2/payrolls/{number}
    */
-  get(
-    referenceCode: string,
-    options?: RequestOptions,
-  ): Promise<ViewPayrollResponse> {
-    return this.http.get(
-      `/v2/payrolls/reference/${referenceCode}`,
-      undefined,
-      options?.signal,
-    );
+  get(number: string, options?: RequestOptions): Promise<ViewPayrollResponse> {
+    return this.http.get(`/v2/payrolls/${number}`, undefined, options?.signal);
   }
 
   /**
@@ -86,6 +80,21 @@ export class PayrollsModule {
   ): Promise<DownloadPayrollXmlResponse> {
     return this.http.get(
       `/v2/payrolls/${number}/download-xml`,
+      undefined,
+      options?.signal,
+    );
+  }
+
+  /**
+   * Download the payroll PDF as a base64-encoded string.
+   * GET /v2/payrolls/{number}/download-pdf
+   */
+  downloadPdf(
+    number: string,
+    options?: RequestOptions,
+  ): Promise<DownloadPayrollPdfResponse> {
+    return this.http.get(
+      `/v2/payrolls/${number}/download-pdf`,
       undefined,
       options?.signal,
     );
