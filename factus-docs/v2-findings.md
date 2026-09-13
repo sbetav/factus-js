@@ -120,7 +120,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 **Factus docs status:** Open
 
-**SDK decision:** Affected request fields stay `string | number` where docs/examples mix types. `DocumentItemInput.scheme_id` should follow the same rule (still `string`-only in the package today).
+**SDK decision:** Affected request fields stay `string | number` where docs/examples mix types. `DocumentItemInput.scheme_id` is `string | number`.
 
 ---
 
@@ -415,3 +415,97 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 **Factus docs status:** Open
 
 **SDK decision:** Follow the endpoint-specific reference table and use `O-13`, `O-15`, `O-23`, and `O-47` in public constants and curated SDK documentation. Prefer Factus correcting the glossary to match the reference table.
+
+---
+
+### 27. Payroll GET URL uses `:number` while the path-variable table still says `reference_code`
+
+**Description:** Get pages changed the route to `/v2/payrolls/:number` and `/v2/adjustment-payrolls/:number`, but intro prose and the path-variable table still name `reference_code`. Delete remains `/reference/:reference_code`.
+
+**Files:**
+
+- `factus-docs/v2/nomina/ver.md`
+- `factus-docs/v2/nota-ajuste-nomina/ver.md`
+
+**Factus docs status:** Open
+
+**SDK decision:** `payrolls.get(number)` and `adjustmentPayrolls.get(number)` follow the documented URL. Delete still uses `reference_code`.
+
+---
+
+### 28. Payroll PDF download page lacks a response schema table
+
+**Description:** New page documents `GET /v2/payrolls/:number/download-pdf` and tells integrators to decode `pdf_base_64_encoded`, but omits a full response schema (same thin pattern as #25). There is no matching PDF page for adjustment payrolls.
+
+**Files:**
+
+- `factus-docs/v2/nomina/descargar-pdf.md`
+
+**Factus docs status:** Open
+
+**SDK decision:** `payrolls.downloadPdf()` typed as `ApiResponse<DownloadPdfData>` with `pdf_base_64_encoded`.
+
+---
+
+### 29. Health payment-methods catalog collapsed from 12 codes to 4
+
+**Description:** The “Métodos de pago en salud” table now publishes only `01`–`04` with rewritten labels. Former codes `05`–`12` disappeared. This catalog is distinct from DIAN `PaymentMethodCode`.
+
+**Files:**
+
+- `factus-docs/v2/tablas-de-referencia/tablas.md`
+
+**Factus docs status:** Open
+
+**SDK decision:** `HealthPaymentMethodCode` (`01`–`04`) on `DocumentHealthData.payment_method_code`. Do not reuse DIAN payment-method constants.
+
+---
+
+### 30. `health.without_contract_code` and optional `contract_number` are incomplete across families
+
+**Description:** Bill sector-salud pages make `contract_number` optional and add `without_contract_code` (required when the contract number is omitted). Credit-note health tables still require `contract_number` and omit the new field. SS examples send both `contract_number` and `without_contract_code: "07"` together.
+
+**Files:**
+
+- `factus-docs/v2/facturas/descripcion-de-campos.md`
+- `factus-docs/v2/facturas/tipos-de-factura/ss-cufe.md`
+- `factus-docs/v2/facturas/tipos-de-factura/ss-reporte.md`
+- `factus-docs/v2/facturas/tipos-de-factura/ss-sin-aporte.md`
+- `factus-docs/v2/notas-credito/crear-y-validar.md`
+- `factus-docs/v2/notas-credito/descripcion-de-campos.md`
+- `factus-docs/v2/tablas-de-referencia/tablas.md`
+
+**Factus docs status:** Open
+
+**SDK decision:** Shared `DocumentHealthData` has optional `contract_number` and `without_contract_code` (`HealthWithoutContractCode`, `01`–`07`).
+
+---
+
+### 31. Support-document item `period` is not mirrored on adjustment notes
+
+**Description:** Support-document create/field pages add optional `items.*.period.generation_mode` (`1` / `2`) and `start_date`. Adjustment-note field tables do not.
+
+**Files:**
+
+- `factus-docs/v2/documentos-soporte/crear-validar.md`
+- `factus-docs/v2/documentos-soporte/descripcion-de-campos.md`
+- `factus-docs/v2/notas-ajuste-documentos-soporte/*`
+
+**Factus docs status:** Open
+
+**SDK decision:** `SupportDocumentItemInput.period` only. Adjustment-note items stay on shared `DocumentItemInput`.
+
+---
+
+### 32. Payroll numbering-range create response is a subset of GET
+
+**Description:** Create response dropped `from`, `to`, `resolution_number`, `start_date`, `end_date`, `technical_key`, and `is_expired`. GET added `created_at` / `updated_at`. Unclear whether those range bounds are GET-only or omitted from the create docs by mistake.
+
+**Files:**
+
+- `factus-docs/v2/rangos-de-numeracion/nomina/crear-rango.md`
+- `factus-docs/v2/rangos-de-numeracion/nomina/ver-rango.md`
+
+**Factus docs status:** Open
+
+**SDK decision:** Keep `PayrollNumberingRange` with those fields optional so create and GET share one type.
