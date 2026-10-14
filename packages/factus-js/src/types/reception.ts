@@ -16,7 +16,8 @@ export interface UploadReceptionBillInput {
 export type ManualReceptionEventCode = Exclude<EventCode, "034">;
 
 export interface EmitEventParams {
-  bill_id: string;
+  /** ReceptionBill.id (data.id), not the prefixed bill number. */
+  bill_id: string | number;
   /** RADIAN event type code. */
   event_type: ManualReceptionEventCode;
 }
@@ -38,6 +39,9 @@ export interface EmitEventInput {
 // ---------------------------------------------------------------------------
 // Response types
 // ---------------------------------------------------------------------------
+
+/** The single-bill endpoint has no documented response schema in the mirror. */
+export type ViewReceptionBillResponse = unknown;
 
 export interface ReceptionBill {
   id: number;

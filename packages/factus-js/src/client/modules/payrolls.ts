@@ -2,6 +2,7 @@ import type {
   CreatePayrollInput,
   CreatePayrollResponse,
   DeletePayrollResponse,
+  DownloadPayrollApplicationResponseResponse,
   DownloadPayrollPdfResponse,
   DownloadPayrollXmlResponse,
   GetPayrollsResponse,
@@ -80,6 +81,22 @@ export class PayrollsModule {
   ): Promise<DownloadPayrollXmlResponse> {
     return this.http.get(
       `/v2/payrolls/${number}/download-xml`,
+      undefined,
+      options?.signal,
+    );
+  }
+
+  /**
+   * Download the payroll Application Response XML (base64).
+   * The response envelope is undocumented; narrow the result before using it.
+   * GET /v2/payrolls/{number}/download-application-response
+   */
+  downloadApplicationResponse(
+    number: string,
+    options?: RequestOptions,
+  ): Promise<DownloadPayrollApplicationResponseResponse> {
+    return this.http.get(
+      `/v2/payrolls/${number}/download-application-response`,
       undefined,
       options?.signal,
     );

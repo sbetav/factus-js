@@ -302,6 +302,7 @@ describe("module routing contract", () => {
     await payrolls.get("NE990000070");
     await payrolls.downloadXml("NE990000070");
     await payrolls.downloadPdf("NE990000070");
+    await payrolls.downloadApplicationResponse("NE990000070");
     await payrolls.delete("PAY-001");
 
     expect(spy.calls).toEqual([
@@ -320,6 +321,11 @@ describe("module routing contract", () => {
       {
         method: "get",
         path: "/v2/payrolls/NE990000070/download-pdf",
+        payload: undefined,
+      },
+      {
+        method: "get",
+        path: "/v2/payrolls/NE990000070/download-application-response",
         payload: undefined,
       },
       { method: "delete", path: "/v2/payrolls/reference/PAY-001" },
@@ -343,6 +349,8 @@ describe("module routing contract", () => {
     await adjustmentPayrolls.list(listFilters);
     await adjustmentPayrolls.get("NADJ1");
     await adjustmentPayrolls.downloadXml("NADJ1");
+    await adjustmentPayrolls.downloadApplicationResponse("NADJ1");
+    await adjustmentPayrolls.downloadPdf("NADJ1");
     await adjustmentPayrolls.delete("ADJ-001");
 
     expect(spy.calls).toEqual([
@@ -360,6 +368,16 @@ describe("module routing contract", () => {
       {
         method: "get",
         path: "/v2/adjustment-payrolls/NADJ1/download-xml",
+        payload: undefined,
+      },
+      {
+        method: "get",
+        path: "/v2/adjustment-payrolls/NADJ1/download-application-response",
+        payload: undefined,
+      },
+      {
+        method: "get",
+        path: "/v2/adjustment-payrolls/NADJ1/download-pdf",
         payload: undefined,
       },
       {
@@ -387,18 +405,20 @@ describe("module routing contract", () => {
     const eventInput = { identification: "12345667" } as never;
 
     await reception.list(listFilters);
+    await reception.get(12);
     await reception.upload(uploadInput);
     await reception.emitEvent(
-      { bill_id: "SETP990000203", event_type: "030" as never },
+      { bill_id: 12, event_type: "030" as never },
       eventInput,
     );
 
     expect(spy.calls).toEqual([
       { method: "get", path: "/v2/receptions/bills", payload: listQuery },
+      { method: "get", path: "/v2/receptions/bills/12", payload: undefined },
       { method: "post", path: "/v2/receptions/upload", payload: uploadInput },
       {
         method: "patch",
-        path: "/v2/receptions/bills/SETP990000203/radian/events/030",
+        path: "/v2/receptions/bills/12/radian/events/030",
         payload: eventInput,
       },
     ]);
@@ -420,6 +440,7 @@ describe("module routing contract", () => {
     await numberingRanges.toggleStatus(10);
     await numberingRanges.getSoftwareRange();
     await numberingRanges.delete(8);
+    await numberingRanges.restore(8);
 
     expect(spy.calls).toEqual([
       { method: "get", path: "/v2/numbering-ranges", payload: listQuery },
@@ -437,7 +458,84 @@ describe("module routing contract", () => {
       },
       { method: "get", path: "/v2/numbering-ranges/dian", payload: undefined },
       { method: "delete", path: "/v2/numbering-ranges/8" },
+      {
+        method: "put",
+        path: "/v2/numbering-ranges/8/restore",
+        payload: undefined,
+      },
     ]);
+  });
+
+  test.each(["with", "only", undefined] as const)(
+    "numbering range list and listAll preserve trashed=%s",
+    async (trashed) => {
+      const item = {
+        id: 12,
+        is_external: false,
+        deleted_at: "2026-10-14T10:00:00Z",
+      };
+      const spy = createHttpSpy({
+        data: { data: [item], pagination: { last_page: 1 } },
+      });
+      const ranges = new NumberingRangesModule(spy.client as never);
+      const filter = { trashed };
+      const query = trashed === undefined ? {} : { "filter[trashed]": trashed };
+
+      await ranges.list({ filter });
+      const items = [];
+      for await (const range of ranges.listAll(filter)) items.push(range);
+
+      expect(items).toEqual([item]);
+      expect(spy.calls).toEqual([
+        { method: "get", path: "/v2/numbering-ranges", payload: query },
+        {
+          method: "get",
+          path: "/v2/numbering-ranges",
+          payload: { ...query, page: 1, per_page: 100 },
+        },
+      ]);
+    },
+  );
+
+  test("new endpoints forward signals and return responses unchanged", async () => {
+    const response = { message: "Rango de numeración restaurado con éxito" };
+    const spy = createHttpSpy(response);
+    const get = vi.spyOn(spy.client, "get");
+    const put = vi.spyOn(spy.client, "put");
+    const options = { signal: new AbortController().signal };
+    const payrolls = new PayrollsModule(spy.client as never);
+    const adjustments = new AdjustmentPayrollsModule(spy.client as never);
+    const reception = new ReceptionModule(spy.client as never);
+    const ranges = new NumberingRangesModule(spy.client as never);
+
+    expect(await payrolls.downloadApplicationResponse("NE1", options)).toBe(
+      response,
+    );
+    expect(await adjustments.downloadApplicationResponse("NA1", options)).toBe(
+      response,
+    );
+    expect(await adjustments.downloadPdf("NA1", options)).toBe(response);
+    expect(await reception.get(12, options)).toBe(response);
+    expect(await ranges.restore(12, options)).toBe(response);
+    expect(get.mock.calls).toEqual([
+      [
+        "/v2/payrolls/NE1/download-application-response",
+        undefined,
+        options.signal,
+      ],
+      [
+        "/v2/adjustment-payrolls/NA1/download-application-response",
+        undefined,
+        options.signal,
+      ],
+      ["/v2/adjustment-payrolls/NA1/download-pdf", undefined, options.signal],
+      ["/v2/receptions/bills/12", undefined, options.signal],
+    ]);
+    expect(put).toHaveBeenCalledWith(
+      "/v2/numbering-ranges/12/restore",
+      undefined,
+      options.signal,
+    );
   });
 
   test("payroll numbering ranges methods map to expected routes and verbs", async () => {

@@ -256,7 +256,8 @@ export interface PayrollSimpleDeductionInput {
 export interface PayrollDeductionsInput {
   salu: PayrollHealthDeductionInput;
   pens: PayrollPensionDeductionInput;
-  dedu?: PayrollPensionSolidarityFundDeductionInput;
+  /** Required by the API for salaries of at least four minimum wages. */
+  dedu?: PayrollPensionSolidarityFundDeductionInput[];
   sind?: PayrollUnionDeductionInput[];
   sanc?: PayrollSanctionDeductionInput[];
   libr?: PayrollPayrollLoanDeductionInput[];
@@ -462,3 +463,5 @@ export type GetPayrollsResponse = ApiResponse<PaginatedData<PayrollListItem>>;
 export type DeletePayrollResponse = DeleteResponse;
 export type DownloadPayrollXmlResponse = ApiResponse<DownloadXmlData>;
 export type DownloadPayrollPdfResponse = ApiResponse<DownloadPdfData>;
+/** The mirror documents base64 XML, but not the response envelope. */
+export type DownloadPayrollApplicationResponseResponse = unknown;

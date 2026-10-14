@@ -9,6 +9,7 @@ import type {
   ReceptionBillFilters,
   UploadReceptionBillInput,
   UploadedReceptionBill,
+  ViewReceptionBillResponse,
 } from "../../types";
 import type { HttpClient, RequestOptions } from "../http-client";
 import { buildListQueryParams } from "../list-params";
@@ -52,6 +53,22 @@ export class ReceptionModule {
   }
 
   /**
+   * Get a received bill by its numeric reception ID, not its bill number.
+   * The response schema is undocumented; narrow the result before using it.
+   * GET /v2/receptions/bills/{id}
+   */
+  get(
+    id: number,
+    options?: RequestOptions,
+  ): Promise<ViewReceptionBillResponse> {
+    return this.http.get(
+      `/v2/receptions/bills/${id}`,
+      undefined,
+      options?.signal,
+    );
+  }
+
+  /**
    * Upload (register) a new received bill via its DIAN track ID.
    * POST /v2/receptions/upload
    */
@@ -63,7 +80,7 @@ export class ReceptionModule {
   }
 
   /**
-   * Emit a RADIAN lifecycle event (030–034) on a received bill.
+   * Emit a manual RADIAN event (030–033) using the received bill's data.id.
    * PATCH /v2/receptions/bills/{bill_id}/radian/events/{event_type}
    */
   emitEvent(

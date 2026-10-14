@@ -13,10 +13,27 @@ import type {
   EmailContentData,
   FactusClient,
   EmitEventInput,
+  EmitEventParams,
   ManualReceptionEventCode,
   RadianEventUpdateInput,
   SupportDocumentItemInput,
   ViewPayrollData,
+  CreateAdjustmentNoteInput,
+  CreateSupportDocumentInput,
+  CreateNumberingRangeInput,
+  CreatePayrollNumberingRangeInput,
+  DocumentItemMandateInput,
+  DownloadPayrollApplicationResponseResponse,
+  DownloadAdjustmentPayrollApplicationResponseResponse,
+  DownloadAdjustmentPayrollPdfResponse,
+  NumberingRange,
+  NumberingRangeFilters,
+  PayrollDeductionsInput,
+  PayrollPensionSolidarityFundDeductionInput,
+  PayrollConcept,
+  ProviderInput,
+  RestoreNumberingRangeResponse,
+  ViewReceptionBillResponse,
 } from "../../index";
 import {
   ContractTypeCode,
@@ -113,9 +130,7 @@ describe("public type contracts", () => {
   });
 
   test("support document items accept an optional generation period", () => {
-    expectTypeOf(
-      SupportDocumentGenerationModeCode.WeeklyAccumulated,
-    ).toExtend<
+    expectTypeOf(SupportDocumentGenerationModeCode.WeeklyAccumulated).toExtend<
       NonNullable<SupportDocumentItemInput["period"]>["generation_mode"]
     >();
   });
@@ -187,7 +202,9 @@ describe("public type contracts", () => {
       AssertTrue<HasKey<FactusClient["payrolls"], "downloadPdf">>
     >().toEqualTypeOf<true>();
     expectTypeOf<ViewPayrollData["worker"]["name"]>().toEqualTypeOf<string>();
-    expectTypeOf<ViewPayrollData["settlement_period"]["payroll_period"]>().toEqualTypeOf<{
+    expectTypeOf<
+      ViewPayrollData["settlement_period"]["payroll_period"]
+    >().toEqualTypeOf<{
       code: string;
       name: string;
     }>();
@@ -232,6 +249,100 @@ describe("public type contracts", () => {
     >();
   });
 
+  test("payroll solidarity fund deductions are an optional input array", () => {
+    expectTypeOf<CreatePayrollInput["deductions"]["dedu"]>().toEqualTypeOf<
+      PayrollPensionSolidarityFundDeductionInput[] | undefined
+    >();
+    expectTypeOf<PayrollPensionSolidarityFundDeductionInput>().not.toExtend<
+      NonNullable<PayrollDeductionsInput["dedu"]>
+    >();
+    // The response table still documents an object, independently of the input.
+    expectTypeOf<ViewPayrollData["deductions"]["dedu"]>().toEqualTypeOf<
+      PayrollConcept | undefined
+    >();
+  });
+
+  test("providers require organization code and support a company name", () => {
+    expectTypeOf<{}>().not.toExtend<
+      Pick<ProviderInput, "legal_organization_code">
+    >();
+    expectTypeOf<
+      ProviderInput["legal_organization_code"]
+    >().not.toExtend<undefined>();
+    expectTypeOf<ProviderInput["company"]>().toEqualTypeOf<
+      string | undefined
+    >();
+    expectTypeOf<
+      CreateSupportDocumentInput["provider"]
+    >().toEqualTypeOf<ProviderInput>();
+    expectTypeOf<
+      CreateAdjustmentNoteInput["provider"]
+    >().toEqualTypeOf<ProviderInput>();
+  });
+
+  test("credit note items already support the shared mandate contract", () => {
+    expectTypeOf<
+      CreateCreditNoteInput["items"][number]["mandate"]
+    >().toEqualTypeOf<DocumentItemMandateInput | undefined>();
+    expectTypeOf<
+      DocumentItemMandateInput["identification"]
+    >().toEqualTypeOf<string>();
+    expectTypeOf<{}>().not.toExtend<DocumentItemMandateInput>();
+  });
+
+  test("numbering range filters and counters match the mirror", () => {
+    expectTypeOf<NumberingRangeFilters["trashed"]>().toEqualTypeOf<
+      "with" | "only" | undefined
+    >();
+    expectTypeOf<"invalid">().not.toExtend<NumberingRangeFilters["trashed"]>();
+    expectTypeOf<NumberingRange["deleted_at"]>().toEqualTypeOf<
+      string | null | undefined
+    >();
+    expectTypeOf<NumberingRange["is_external"]>().toEqualTypeOf<
+      boolean | undefined
+    >();
+    expectTypeOf<CreateNumberingRangeInput["current"]>().toEqualTypeOf<
+      string | number
+    >();
+    expectTypeOf<CreatePayrollNumberingRangeInput["current"]>().toEqualTypeOf<
+      string | number
+    >();
+    expectTypeOf<
+      Awaited<ReturnType<FactusClient["numberingRanges"]["restore"]>>
+    >().toEqualTypeOf<RestoreNumberingRangeResponse>();
+    expectTypeOf<RestoreNumberingRangeResponse>().toEqualTypeOf<{
+      message: string;
+    }>();
+  });
+
+  test("new endpoints do not invent undocumented response schemas", () => {
+    expectTypeOf<
+      Awaited<
+        ReturnType<FactusClient["payrolls"]["downloadApplicationResponse"]>
+      >
+    >().toEqualTypeOf<DownloadPayrollApplicationResponseResponse>();
+    expectTypeOf<DownloadPayrollApplicationResponseResponse>().toBeUnknown();
+    expectTypeOf<
+      Awaited<
+        ReturnType<
+          FactusClient["adjustmentPayrolls"]["downloadApplicationResponse"]
+        >
+      >
+    >().toEqualTypeOf<DownloadAdjustmentPayrollApplicationResponseResponse>();
+    expectTypeOf<DownloadAdjustmentPayrollApplicationResponseResponse>().toBeUnknown();
+    expectTypeOf<
+      Awaited<ReturnType<FactusClient["adjustmentPayrolls"]["downloadPdf"]>>
+    >().toEqualTypeOf<DownloadAdjustmentPayrollPdfResponse>();
+    expectTypeOf<DownloadAdjustmentPayrollPdfResponse>().toBeUnknown();
+    expectTypeOf<
+      Awaited<ReturnType<FactusClient["reception"]["get"]>>
+    >().toEqualTypeOf<ViewReceptionBillResponse>();
+    expectTypeOf<ViewReceptionBillResponse>().toBeUnknown();
+    expectTypeOf<
+      Parameters<FactusClient["reception"]["get"]>[0]
+    >().toEqualTypeOf<number>();
+  });
+
   test("radian event inputs include claim concept code", () => {
     expectTypeOf<RadianEventUpdateInput["claim_concept_code"]>().toEqualTypeOf<
       ClaimConceptCode | undefined
@@ -248,6 +359,7 @@ describe("public type contracts", () => {
   });
 
   test("reception emitEvent excludes tacit acceptance", () => {
+    expectTypeOf<EmitEventParams["bill_id"]>().toEqualTypeOf<string | number>();
     expectTypeOf<ManualReceptionEventCode>().toEqualTypeOf<
       "030" | "031" | "032" | "033"
     >();

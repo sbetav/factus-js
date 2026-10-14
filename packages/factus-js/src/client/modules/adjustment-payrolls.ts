@@ -4,6 +4,8 @@ import type {
   CreateAdjustmentPayrollInput,
   CreateAdjustmentPayrollResponse,
   DeleteAdjustmentPayrollResponse,
+  DownloadAdjustmentPayrollApplicationResponseResponse,
+  DownloadAdjustmentPayrollPdfResponse,
   DownloadAdjustmentPayrollXmlResponse,
   GetAdjustmentPayrollsResponse,
   ListParams,
@@ -87,6 +89,38 @@ export class AdjustmentPayrollsModule {
   ): Promise<DownloadAdjustmentPayrollXmlResponse> {
     return this.http.get(
       `/v2/adjustment-payrolls/${number}/download-xml`,
+      undefined,
+      options?.signal,
+    );
+  }
+
+  /**
+   * Download the payroll adjustment Application Response XML (base64).
+   * The response envelope is undocumented; narrow the result before using it.
+   * GET /v2/adjustment-payrolls/{number}/download-application-response
+   */
+  downloadApplicationResponse(
+    number: string,
+    options?: RequestOptions,
+  ): Promise<DownloadAdjustmentPayrollApplicationResponseResponse> {
+    return this.http.get(
+      `/v2/adjustment-payrolls/${number}/download-application-response`,
+      undefined,
+      options?.signal,
+    );
+  }
+
+  /**
+   * Download the payroll adjustment PDF (base64).
+   * The response envelope is undocumented; narrow the result before using it.
+   * GET /v2/adjustment-payrolls/{number}/download-pdf
+   */
+  downloadPdf(
+    number: string,
+    options?: RequestOptions,
+  ): Promise<DownloadAdjustmentPayrollPdfResponse> {
+    return this.http.get(
+      `/v2/adjustment-payrolls/${number}/download-pdf`,
       undefined,
       options?.signal,
     );

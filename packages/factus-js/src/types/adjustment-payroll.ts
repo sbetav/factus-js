@@ -1,9 +1,5 @@
 import type { ApiResponse, PaginatedData } from "./common";
-import type {
-  DeleteResponse,
-  DocumentErrors,
-  DownloadXmlData,
-} from "./shared";
+import type { DeleteResponse, DocumentErrors, DownloadXmlData } from "./shared";
 import type { PayrollCompany, PayrollWorker } from "./payroll";
 
 // ---------------------------------------------------------------------------
@@ -76,3 +72,7 @@ export type GetAdjustmentPayrollsResponse = ApiResponse<
 >;
 export type DeleteAdjustmentPayrollResponse = DeleteResponse;
 export type DownloadAdjustmentPayrollXmlResponse = ApiResponse<DownloadXmlData>;
+/** The mirror documents base64 XML, but not the full JSON response envelope. */
+export type DownloadAdjustmentPayrollApplicationResponseResponse = unknown;
+/** The mirror documents base64 PDF, but not the full JSON response envelope. */
+export type DownloadAdjustmentPayrollPdfResponse = unknown;

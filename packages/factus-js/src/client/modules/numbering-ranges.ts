@@ -6,6 +6,7 @@ import type {
   NumberingRange,
   NumberingRangeFilters,
   PaginatedData,
+  RestoreNumberingRangeResponse,
   SoftwareNumberingRange,
   UpdateNumberingRangeCurrentInput,
 } from "../../types";
@@ -122,6 +123,21 @@ export class NumberingRangesModule {
   ): Promise<ApiResponse<SoftwareNumberingRange[]>> {
     return this.http.get(
       "/v2/numbering-ranges/dian",
+      undefined,
+      options?.signal,
+    );
+  }
+
+  /**
+   * Restore a soft-deleted numbering range.
+   * PUT /v2/numbering-ranges/{id}/restore
+   */
+  restore(
+    id: number,
+    options?: RequestOptions,
+  ): Promise<RestoreNumberingRangeResponse> {
+    return this.http.put(
+      `/v2/numbering-ranges/${id}/restore`,
       undefined,
       options?.signal,
     );

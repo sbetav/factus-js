@@ -24,6 +24,9 @@ export interface NumberingRange {
   technical_key: string | null;
   is_expired: boolean;
   is_active: boolean | 0 | 1;
+  /** Included in the billing numbering-range list example. */
+  is_external?: boolean;
+  /** Null for non-deleted ranges; a timestamp for soft-deleted ranges. */
   deleted_at?: string | null;
   created_at: string;
   updated_at: string;
@@ -36,7 +39,8 @@ export interface UpdateNumberingRangeCurrentInput {
 export interface CreateNumberingRangeInput {
   document: NumberingRangeDocumentTypeCode;
   prefix: string;
-  current: number;
+  /** Next available consecutive number, not the last used number. */
+  current: string | number;
   /** Only required when document contains code 21, 24, or 30. */
   resolution_number?: string;
 }
@@ -47,6 +51,8 @@ export interface NumberingRangeFilters {
   resolution_number?: string;
   technical_key?: string;
   is_active?: string | number | boolean;
+  /** Omit to exclude deleted ranges; "with" includes them, "only" lists just them. */
+  trashed?: "with" | "only";
 }
 
 export interface SoftwareNumberingRange {
@@ -85,7 +91,8 @@ export interface PayrollNumberingRange {
 export interface CreatePayrollNumberingRangeInput {
   document: PayrollNumberingRangeDocumentTypeCode;
   prefix: string;
-  current: number;
+  /** Next available consecutive number, not the last used number. */
+  current: string | number;
 }
 
 export interface UpdatePayrollNumberingRangeCurrentInput {
@@ -100,6 +107,10 @@ export interface PayrollNumberingRangeFilters {
 // ---------------------------------------------------------------------------
 // Named response aliases
 // ---------------------------------------------------------------------------
+
+export interface RestoreNumberingRangeResponse {
+  message: string;
+}
 
 export type DeleteNumberingRangeResponse = DeleteResponse;
 export type DeletePayrollNumberingRangeResponse = DeleteResponse;

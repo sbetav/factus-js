@@ -43,6 +43,8 @@ export interface ProviderInput {
   municipality_code?: string;
   email?: string;
   phone?: string;
-  legal_organization_code?: LiteralUnion<OrganizationTypeCode>;
+  legal_organization_code: LiteralUnion<OrganizationTypeCode>;
+  /** Required by the API when legal_organization_code is "1" (legal entity). */
+  company?: string;
   tribute_code?: LiteralUnion<CustomerTributeCode>;
 }
