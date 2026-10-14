@@ -1,0 +1,47 @@
+---
+title: Preguntas frecuentes
+description: Respuestas prácticas para integrar Factus API v2 con el SDK.
+---
+
+Esta guía reúne las dudas de integración más útiles de las [preguntas frecuentes oficiales](https://developers.factus.com.co/buenas-practicas/preguntas-frecuentes). Para condiciones comerciales y activación de cuentas, consulta directamente con Factus.
+
+## ¿Por qué no llega el correo en sandbox?
+
+El envío automático de facturas (`send_email`, por defecto `true`) está **deshabilitado en sandbox** y solo está disponible en producción. El correo estándar incluye un enlace a la factura y un ZIP con el PDF y XML. Puedes ver el [ejemplo oficial de correo](https://developers.factus.com.co/facturas/ejemplos/correo/).
+
+Para enviar tu propia representación gráfica, crea la factura con `send_email: false`, genera el PDF a partir de la respuesta y utiliza [bills.sendEmail()](/docs/modules/bills/send-email) con `pdf_base_64_encoded`, o gestiona el envío externamente.
+
+## ¿Qué ocurre si reutilizo un reference_code?
+
+La FAQ oficial indica que, para una **factura ya validada**, la API devuelve la factura asociada a esa referencia. Usa una referencia única por factura y conserva su relación con el documento de tu sistema; no reutilices una referencia para otra venta. No extrapoles esta garantía a todos los tipos de documentos ni a facturas aún no validadas.
+
+Guarda también el número devuelto por Factus: las consultas y descargas de facturas y nóminas usan `number`, no `reference_code`. La [recepción de facturas](/docs/modules/reception/get) utiliza un ID numérico.
+
+## ¿Cómo continúo un rango que ya utilicé?
+
+`current` es el **siguiente número disponible**, no el último utilizado. Si el último documento fue 100, crea el rango con `current: 101`. Esto aplica tanto a [facturación](/docs/modules/numbering-ranges/facturacion/create) como a [nómina](/docs/modules/numbering-ranges/nomina/create).
+
+En los rangos de facturación, los eliminados no aparecen en el listado por defecto. Para incluirlos usa `filter: { trashed: "with" }`; para ver solo eliminados, `trashed: "only"`. Un rango con soft delete puede [restaurarse](/docs/modules/numbering-ranges/facturacion/restore); uno eliminado permanentemente no.
+
+## ¿Qué método de pago uso para transferencias o billeteras digitales?
+
+La FAQ recomienda `PaymentMethodCode.Transfer` (`"47"`) para transferencias y billeteras como Nequi o Daviplata, que no tienen un código específico. Para cheques usa `PaymentMethodCode.Check` (`"20"`). Consulta los nombres y códigos en [Tablas de referencia](/docs/reference-tables/general).
+
+En v2, `payment_details` es un array: envía una entrada por cada forma o medio de pago utilizado.
+
+## ¿Debo renovar manualmente el token? ¿Hay un límite de solicitudes?
+
+El SDK obtiene y renueva el token automáticamente; consulta [Autenticación](/docs/authentication). Factus documenta una vigencia de una hora y un límite de **80 solicitudes por minuto por usuario (NIT)**. Coordina las solicitudes que compartan credenciales y consulta con Factus si necesitas una ampliación.
+
+Si recibes un `429`, no reintentes en un bucle inmediato; consulta [Manejo de errores](/docs/error-handling).
+
+## ¿Puedo usar datos reales en el sandbox público?
+
+Evítalo. La FAQ oficial advierte que otros integradores con credenciales pueden ver la información enviada al sandbox público. Usa datos de prueba sin información sensible y consulta con Factus las condiciones de un sandbox privado.
+
+## Buenas prácticas de integración
+
+- Conserva los IDs de rangos, números de documentos y referencias internas para evitar consultas repetidas y confusiones entre identificadores.
+- Para proveedores jurídicos, envía `provider.legal_organization_code: "1"` y su razón social en `provider.company`; consulta [Documento soporte](/docs/modules/support-documents/create).
+- Envía `deductions.dedu` como un array de fondos de seguridad pensional cuando corresponda; consulta [Crear nómina](/docs/modules/payrolls/create).
+- Usa los campos y códigos de v2. Algunas respuestas de la FAQ oficial aún mencionan campos v1 como `identification_document_id`, `legal_organization_id` y `standard_code_id`; en v2 consulta las tablas y páginas del módulo correspondiente.

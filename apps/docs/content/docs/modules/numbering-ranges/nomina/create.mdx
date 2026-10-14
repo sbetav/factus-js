@@ -35,9 +35,9 @@ Fuente oficial: [Crear](https://developers.factus.com.co/rangos-de-numeracion/no
       description: "Prefijo alfanumérico (máx. 4 caracteres).",
     },
     current: {
-      type: "number",
+      type: "string | number",
       required: true,
-      description: "Número actual del consecutivo.",
+      description: "Siguiente número disponible para el próximo documento. Si el último usado fue 100, envía 101.",
     },
   }}
 />

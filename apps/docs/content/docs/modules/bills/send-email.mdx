@@ -21,6 +21,10 @@ sendEmail(
 
 Fuente oficial: [Enviar correo](https://developers.factus.com.co/facturas/enviar-correo)
 
+El correo estándar incluye un enlace para ver la factura y un archivo ZIP con su PDF y XML. Consulta el [ejemplo oficial de correo](https://developers.factus.com.co/facturas/ejemplos/correo/).
+
+El campo `send_email` de [crear factura](/docs/modules/bills/create) controla el envío automático (por defecto `true`), disponible solo en producción y deshabilitado en sandbox. Este método permite solicitar el envío por número de factura.
+
 ## Parámetros
 
 <TypeTable

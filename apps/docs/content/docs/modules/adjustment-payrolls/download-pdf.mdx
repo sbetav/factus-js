@@ -1,0 +1,44 @@
+---
+title: Descargar PDF
+description: Descargar el PDF de una nota de ajuste a nómina en Base64.
+---
+
+## Firma del método
+
+```ts
+downloadPdf(
+  number: string,
+  options?: RequestOptions,
+): Promise<DownloadAdjustmentPayrollPdfResponse>
+```
+
+## Endpoint Factus
+
+`GET /v2/adjustment-payrolls/{number}/download-pdf`
+
+Fuente oficial: [Descargar PDF](https://developers.factus.com.co/nota-ajuste-nomina/descargar-pdf)
+
+## Parámetros
+
+<TypeTable
+  type={{
+    number: {
+      type: "string",
+      required: true,
+      description: "Número de la nota de ajuste devuelto al crearla, no el número de la nómina original ni su reference_code.",
+    },
+  }}
+/>
+
+## Ejemplo
+
+```ts
+const response = await factus.adjustmentPayrolls.downloadPdf("NA1");
+console.log(response);
+```
+
+## Respuesta
+
+Factus documenta el PDF en Base64 (`pdf_base_64_encoded`) y el nombre del archivo, pero no publica un ejemplo del contenedor de respuesta. Por ello, `DownloadAdjustmentPayrollPdfResponse` es `unknown`: valida la estructura recibida antes de acceder a sus campos; no asumas que están en `response.data`.
+
+Una vez localizado y validado el campo `pdf_base_64_encoded` como string, puedes obtener el archivo en Node.js con `Buffer.from(pdf_base_64_encoded, "base64")`.

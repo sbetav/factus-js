@@ -22,7 +22,10 @@ Accede al módulo a través de `factus.payrolls`.
 | `get(number, options?)`           | `GET /v2/payrolls/{number}`                      | Obtener el detalle por número              |
 | `downloadXml(number, options?)`   | `GET /v2/payrolls/{number}/download-xml`         | Descargar el XML firmado                   |
 | `downloadPdf(number, options?)`   | `GET /v2/payrolls/{number}/download-pdf`         | Descargar el PDF                           |
+| `downloadApplicationResponse(number, options?)` | `GET /v2/payrolls/{number}/download-application-response` | Descargar el XML Application Response |
 | `delete(referenceCode, options?)` | `DELETE /v2/payrolls/reference/{reference_code}` | Eliminar una nómina no validada            |
+
+Consulta [Descargar Application Response](/docs/modules/payrolls/download-application-response) para el XML de respuesta de la nómina; es distinto del XML firmado.
 
 Consulta [Paginación automática](/docs/pagination) para el uso de `listAll()`.
 

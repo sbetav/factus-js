@@ -98,7 +98,7 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/facturas/crea
       type: "boolean",
       required: false,
       description:
-        "Si es `true`, Factus intenta enviar el documento por correo automáticamente.",
+        "Por defecto es true: Factus envía el correo al cliente solo en producción. En sandbox el envío está deshabilitado. Usa false si gestionas el correo externamente.",
     },
     observation: {
       type: "string",

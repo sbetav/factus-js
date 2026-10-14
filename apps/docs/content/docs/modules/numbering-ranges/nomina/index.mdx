@@ -22,7 +22,7 @@ Los IDs de rangos de nómina son strings (ULID), no números enteros como en fac
 | `listAll(filter?, options?)`         | `GET /v2/numbering-ranges/payrolls`                      | Recorrer todas las páginas |
 | `get(id, options?)`                  | `GET /v2/numbering-ranges/payrolls/{id}`                 | Obtener un rango por ID    |
 | `create(input, options?)`            | `POST /v2/numbering-ranges/payrolls`                     | Crear un rango             |
-| `updateCurrent(id, input, options?)` | `PATCH /v2/numbering-ranges/payrolls/{id}/current`       | Actualizar el consecutivo  |
+| `updateCurrent(id, input, options?)` | `PATCH /v2/numbering-ranges/payrolls/{id}/current`       | Asignar el siguiente número disponible  |
 | `toggleStatus(id, options?)`         | `PATCH /v2/numbering-ranges/payrolls/{id}/toggle-status` | Activar o desactivar       |
 | `delete(id, options?)`               | `DELETE /v2/numbering-ranges/payrolls/{id}`              | Eliminar un rango          |
 

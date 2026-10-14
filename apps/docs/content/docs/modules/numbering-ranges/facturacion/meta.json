@@ -6,6 +6,7 @@
     "create",
     "get",
     "delete",
+    "restore",
     "update-current",
     "toggle-status",
     "get-software-range"

@@ -500,7 +500,7 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/notas-credito
                 required: false,
                 description: (
                   <div>
-                    Datos de mandato del ítem cuando aplica.
+                    Datos del mandante. Requeridos si scheme_id es 1 (ingresos para terceros) y operation_type es 11 (mandatos) o SS-Recaudo (salud).
                     <TypeTable
                       type={{
                         identification_document_code: {
@@ -650,6 +650,23 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/notas-credito
     },
   }}
 />
+
+## Mandatos
+
+`items[].mandate` identifica al mandante mediante `identification_document_code` e `identification`.
+
+La tabla oficial lo exige para ítems con `scheme_id: 1` y operaciones `11` (mandatos) o `SS-Recaudo` (salud). Sin embargo, describe esta condición con `operation_type`, un campo que no aparece en la tabla principal de notas crédito ni en `CreateCreditNoteInput`. Confirma con Factus cómo indicar la operación en una nota crédito; no sustituyas este campo por `customization_id`, que tiene su propio catálogo.
+
+```ts
+import type { DocumentItemMandateInput } from "factus-js";
+
+const mandate: DocumentItemMandateInput = {
+  identification_document_code: "31",
+  identification: "900123456",
+};
+```
+
+Usa este objeto en `items[].mandate` cuando la operación lo requiera.
 
 ## Ejemplo
 

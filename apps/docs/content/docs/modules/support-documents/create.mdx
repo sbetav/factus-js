@@ -182,7 +182,7 @@ Fuente oficial: [Crear documento soporte](https://developers.factus.com.co/docum
               names: {
                 type: "string",
                 required: true,
-                description: "Nombres o razón social del proveedor.",
+                description: "Nombres del proveedor.",
               },
               address: {
                 type: "string",
@@ -211,9 +211,14 @@ Fuente oficial: [Crear documento soporte](https://developers.factus.com.co/docum
                 required: false,
                 description: "Teléfono del proveedor.",
               },
+              company: {
+                type: "string",
+                required: false,
+                description: "Razón social. Obligatoria si legal_organization_code es 1 (persona jurídica).",
+              },
               legal_organization_code: {
                 type: "OrganizationTypeCode",
-                required: false,
+                required: true,
                 description: (
                   <>
                     {"Tipo de organización — Ver "}
@@ -478,6 +483,7 @@ Fuente oficial: [Crear documento soporte](https://developers.factus.com.co/docum
 
 ```ts
 import {
+  OrganizationTypeCode,
   PaymentFormCode,
   PaymentMethodCode,
   ProductStandardCode,
@@ -497,6 +503,8 @@ const response = await factus.supportDocuments.create({
     },
   ],
   provider: {
+    legal_organization_code: OrganizationTypeCode.LegalEntity,
+    company: "Enigma S.A.S.",
     identification: "123456789",
     names: "Alan Turing",
     address: "calle 1 # 2-68",

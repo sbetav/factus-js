@@ -44,9 +44,9 @@ Fuente oficial: [Crear rango](https://developers.factus.com.co/rangos-de-numerac
       description: "Prefijo del rango (ej. SETP).",
     },
     current: {
-      type: "number",
+      type: "string | number",
       required: true,
-      description: "Consecutivo inicial/actual del rango.",
+      description: "Siguiente número disponible: el número del próximo documento. Si el último usado fue 100, envía 101, no 100.",
     },
     resolution_number: {
       type: "string",

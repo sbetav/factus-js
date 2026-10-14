@@ -1,0 +1,44 @@
+---
+title: Descargar Application Response
+description: Descargar el XML Application Response de una nota de ajuste a nómina en Base64.
+---
+
+## Firma del método
+
+```ts
+downloadApplicationResponse(
+  number: string,
+  options?: RequestOptions,
+): Promise<DownloadAdjustmentPayrollApplicationResponseResponse>
+```
+
+## Endpoint Factus
+
+`GET /v2/adjustment-payrolls/{number}/download-application-response`
+
+Fuente oficial: [Application Response](https://developers.factus.com.co/nota-ajuste-nomina/descargar-application-response)
+
+## Parámetros
+
+<TypeTable
+  type={{
+    number: {
+      type: "string",
+      required: true,
+      description: "Número de la nota de ajuste devuelto al crearla, no el número de la nómina original ni su reference_code.",
+    },
+  }}
+/>
+
+## Ejemplo
+
+```ts
+const response = await factus.adjustmentPayrolls.downloadApplicationResponse("NA1");
+console.log(response);
+```
+
+## Respuesta
+
+Factus documenta el XML Application Response en Base64 (`xml_base_64_encoded`) y el nombre del archivo, pero no publica un ejemplo del contenedor de respuesta. Por ello, `DownloadAdjustmentPayrollApplicationResponseResponse` es `unknown`: valida la estructura recibida antes de acceder a sus campos; no asumas que están en `response.data`.
+
+Una vez localizado y validado el campo `xml_base_64_encoded` como string, puedes decodificarlo en Node.js con `Buffer.from(xml_base_64_encoded, "base64").toString("utf-8")`. Este archivo es el Application Response, no el [XML de la nota](/docs/modules/adjustment-payrolls/download-xml).

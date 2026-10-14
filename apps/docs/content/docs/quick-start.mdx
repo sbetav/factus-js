@@ -100,6 +100,13 @@ export const factus = new FactusClient({
 
 ## Crea tu primera factura
 
+Consulta [los rangos disponibles](/docs/modules/numbering-ranges/facturacion/list) y sustituye el ID de ejemplo por el de tu cuenta. Conserva el `reference_code` único y el número devuelto por Factus para consultas posteriores.
+
+<Callout type="info">
+  El envío automático de correo (`send_email`, por defecto `true`) solo está
+  habilitado en producción. En sandbox no se envían correos al cliente.
+</Callout>
+
 ```ts
 import { factus } from "./factus";
 import {

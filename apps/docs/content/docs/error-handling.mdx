@@ -166,7 +166,9 @@ La respuesta raw de la API para estos casos tiene la siguiente forma:
 | `500`       | Error interno del servidor de Factus                  |
 
 <Callout type="warn">
-  Factus tiene un límite de **80 solicitudes por minuto**. Si se excede, la API
+  Factus documenta un límite de **80 solicitudes por minuto por usuario (NIT)**.
+  Consulta con Factus una ampliación si tu volumen de emisión lo requiere.
+  Si se excede, la API
   responde `429 Too Many Requests` y puede incluir headers como
   `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` y
   `Retry-After`.

@@ -1,0 +1,49 @@
+---
+title: Ver factura recibida
+description: Consultar el detalle de una factura electrónica recibida por su ID.
+---
+
+## Firma del método
+
+```ts
+get(
+  id: number,
+  options?: RequestOptions,
+): Promise<ViewReceptionBillResponse>
+```
+
+## Endpoint Factus
+
+`GET /v2/receptions/bills/{id}`
+
+Fuente oficial: [Ver factura](https://developers.factus.com.co/recepcion-de-documentos/ver-factura)
+
+## Parámetros
+
+<TypeTable
+  type={{
+    id: {
+      type: "number",
+      required: true,
+      description: "ID de la factura recibida, obtenido en data.data[i].id del listado. No es el número de factura ni el CUFE.",
+    },
+  }}
+/>
+
+## Ejemplo
+
+```ts
+const response = await factus.reception.list({ per_page: 1 });
+const bill = response.data.data[0];
+
+if (bill) {
+  const detail = await factus.reception.get(bill.id);
+  console.log(detail);
+}
+```
+
+## Respuesta
+
+La documentación oficial confirma la consulta por ID, pero no publica los campos del detalle ni un ejemplo completo de respuesta. `ViewReceptionBillResponse` es `unknown`: valida la respuesta y su contenedor antes de acceder a sus propiedades; no asumas que tiene la misma estructura que un elemento del listado.
+
+Para [emitir un evento RADIAN](/docs/modules/reception/emit-event), `bill_id` corresponde al ID de esta factura (`data.id`, cuando está presente en el detalle). El listado también proporciona su ID.

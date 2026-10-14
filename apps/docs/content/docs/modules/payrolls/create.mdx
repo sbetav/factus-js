@@ -239,10 +239,28 @@ Fuente oficial: [Crear y validar](https://developers.factus.com.co/nomina/crear-
       type: "PayrollDeductionsInput",
       required: true,
       description:
-        "Deducciones. salu y pens son obligatorios; el resto (dedu, sanc, sind, libr, etc.) es opcional según el caso.",
+        "Deducciones. salu y pens son obligatorios. dedu es un array de fondos de seguridad pensional, requerido si el sueldo es igual o superior a 4 salarios mínimos. sanc, sind, libr y otros bloques son opcionales según el caso.",
     },
   }}
 />
+
+## Fondo de seguridad pensional
+
+`deductions.dedu` es un **array**, no un objeto. Cada entrada incluye `percentage`, `amount` y `deduction_type_code`; consulta los [códigos de fondos](/docs/reference-tables/payroll). Para un trabajador al que le aplique este fondo, el bloque tiene esta forma:
+
+```ts
+import type { PayrollDeductionsInput } from "factus-js";
+
+const deductions: PayrollDeductionsInput = {
+  salu: { percentage: "4", amount: "320000.00" },
+  pens: { percentage: "4", amount: "320000.00" },
+  dedu: [
+    { percentage: "1", amount: "80000.00", deduction_type_code: "1" },
+  ],
+};
+```
+
+Calcula los montos y selecciona los códigos según el caso del trabajador; estos valores son ilustrativos.
 
 ## Ejemplo
 

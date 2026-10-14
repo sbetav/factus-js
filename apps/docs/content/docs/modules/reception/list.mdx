@@ -1,5 +1,5 @@
 ---
-title: Ver facturas
+title: Listar facturas
 description: Listar y filtrar facturas electrónicas recibidas.
 ---
 
@@ -16,7 +16,7 @@ list(
 
 `GET /v2/receptions/bills`
 
-Fuente oficial: [Ver facturas](https://developers.factus.com.co/recepcion-de-documentos/ver-facturas)
+Fuente oficial: [Listar facturas](https://developers.factus.com.co/recepcion-de-documentos/ver-facturas)
 
 ## Parámetros
 
@@ -108,6 +108,13 @@ const response = await factus.reception.list({
 
 const receptionBills = response.data.data;
 const pagination = response.data.pagination;
+
+if (receptionBills.length > 0) {
+  const detail = await factus.reception.get(receptionBills[0].id);
+  console.log(detail);
+}
 ```
+
+Usa el ID del listado para [consultar una factura recibida](/docs/modules/reception/get).
 
 {/* using no official response content yet. TODO: add official v2 response example or response fields once available */}

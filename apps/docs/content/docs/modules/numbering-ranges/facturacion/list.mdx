@@ -58,6 +58,11 @@ Fuente oficial: [Listar rangos](https://developers.factus.com.co/rangos-de-numer
                         required: false,
                         description: "Filtra por clave técnica.",
                       },
+                      trashed: {
+                        type: '"with" | "only"',
+                        required: false,
+                        description: "with incluye rangos no eliminados y eliminados; only muestra solo eliminados. Sin filtro se excluyen los eliminados; cualquier otro valor se ignora.",
+                      },
                       is_active: {
                         type: "string",
                         required: false,
@@ -98,6 +103,20 @@ const response = await factus.numberingRanges.list({
 const numberingRanges = response.data.data;
 const pagination = response.data.pagination;
 ```
+
+## Rangos eliminados
+
+```ts
+const deleted = await factus.numberingRanges.list({
+  filter: { trashed: "only" },
+});
+
+for await (const range of factus.numberingRanges.listAll({ trashed: "with" })) {
+  console.log(range.id, range.deleted_at);
+}
+```
+
+`deleted_at` es `null` para un rango no eliminado y contiene una fecha para uno eliminado. Esto es independiente de `is_active`: un rango inactivo no necesariamente está eliminado. Puedes [restaurar un rango eliminado](/docs/modules/numbering-ranges/facturacion/restore) usando su ID.
 
 ## Respuesta
 
@@ -160,6 +179,16 @@ const pagination = response.data.pagination;
       required: false,
       description:
         "El valor es 1 cuando el rango está vencido y 0 cuando está vigente",
+    },
+    is_external: {
+      type: "boolean",
+      required: false,
+      description: "Indica si el rango es externo; aparece en el ejemplo oficial del listado.",
+    },
+    deleted_at: {
+      type: "string | null",
+      required: false,
+      description: "Fecha del soft delete; null si el rango no está eliminado.",
     },
     is_active: {
       type: "boolean | 0 | 1",

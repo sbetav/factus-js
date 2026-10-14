@@ -1,0 +1,54 @@
+---
+title: Restaurar rango
+description: Restaurar un rango de numeración marcado como eliminado.
+---
+
+## Firma del método
+
+```ts
+restore(
+  id: number,
+  options?: RequestOptions,
+): Promise<RestoreNumberingRangeResponse>
+```
+
+## Endpoint Factus
+
+`PUT /v2/numbering-ranges/{id}/restore`
+
+Fuente oficial: [Restaurar](https://developers.factus.com.co/rangos-de-numeracion/facturacion/restaurar-rango)
+
+Revierte el soft delete de un rango y lo vuelve a incluir en los listados por defecto. No restaura rangos eliminados permanentemente ni equivale a [activar un rango](/docs/modules/numbering-ranges/facturacion/toggle-status).
+
+## Parámetros
+
+<TypeTable
+  type={{
+    id: {
+      type: "number",
+      required: true,
+      description: "ID numérico del rango eliminado. Puedes encontrarlo listando con filter.trashed = only.",
+    },
+  }}
+/>
+
+No se envía un cuerpo de solicitud.
+
+## Ejemplo
+
+```ts
+const response = await factus.numberingRanges.restore(8);
+console.log(response.message);
+```
+
+Para buscar rangos eliminados, consulta [Listar rangos](/docs/modules/numbering-ranges/facturacion/list).
+
+## Ejemplo de respuesta
+
+HTTP 200. La respuesta documentada solo contiene `message`; no tiene un contenedor `data` ni requiere `status`.
+
+```json
+{
+  "message": "Rango de numeración restaurado con éxito"
+}
+```

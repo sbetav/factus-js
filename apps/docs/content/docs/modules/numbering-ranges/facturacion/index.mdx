@@ -20,9 +20,10 @@ Accede al módulo a través de `factus.numberingRanges`.
 | `listAll(filter?, options?)`         | `GET /v2/numbering-ranges`                      | Recorrer todas las páginas automáticamente |
 | `get(id, options?)`                  | `GET /v2/numbering-ranges/{id}`                 | Obtener un rango por ID                    |
 | `create(input, options?)`            | `POST /v2/numbering-ranges`                     | Crear un rango                             |
-| `updateCurrent(id, input, options?)` | `PATCH /v2/numbering-ranges/{id}/current`       | Actualizar el consecutivo actual           |
+| `updateCurrent(id, input, options?)` | `PATCH /v2/numbering-ranges/{id}/current`       | Asignar el siguiente número disponible           |
 | `toggleStatus(id, options?)`         | `PATCH /v2/numbering-ranges/{id}/toggle-status` | Activar o desactivar un rango              |
 | `getSoftwareRange(options?)`         | `GET /v2/numbering-ranges/dian`                 | Consultar rangos asociados al software     |
+| `restore(id, options?)`              | `PUT /v2/numbering-ranges/{id}/restore`         | Restaurar un rango con soft delete         |
 | `delete(id, options?)`               | `DELETE /v2/numbering-ranges/{id}`              | Eliminar un rango                          |
 
 Consulta [Paginación automática](/docs/pagination) para el uso de `listAll()`.

@@ -34,10 +34,10 @@ Fuente oficial: [Emitir evento](https://developers.factus.com.co/recepcion-de-do
           <TypeTable
             type={{
               bill_id: {
-                type: "string",
+                type: "string | number",
                 required: true,
                 description:
-                  "ID del documento recibido sobre el cual se emitirá el evento.",
+                  "ID de la factura recibida: data.data[i].id en el listado. La documentación también indica data.id en el detalle, cuyo esquema aún no está publicado. No es el número ni el CUFE.",
               },
               event_type: {
                 type: '"030" | "031" | "032" | "033"',

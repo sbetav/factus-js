@@ -23,6 +23,10 @@ Una nota de ajuste a nómina (nómina de eliminación) anula ante la DIAN una n�
 | `listAll(filter?, options?)`      | `GET /v2/adjustment-payrolls`                               | Recorrer todas las páginas automáticamente     |
 | `get(number, options?)`           | `GET /v2/adjustment-payrolls/{number}`                      | Obtener el detalle por número                  |
 | `downloadXml(number, options?)`   | `GET /v2/adjustment-payrolls/{number}/download-xml`         | Descargar el XML firmado                       |
+| `downloadPdf(number, options?)` | `GET /v2/adjustment-payrolls/{number}/download-pdf` | Descargar el PDF |
+| `downloadApplicationResponse(number, options?)` | `GET /v2/adjustment-payrolls/{number}/download-application-response` | Descargar el XML Application Response |
 | `delete(referenceCode, options?)` | `DELETE /v2/adjustment-payrolls/reference/{reference_code}` | Eliminar una nómina de eliminación no validada |
+
+Las descargas usan el número de la **nota de ajuste**, no el de la nómina original. Consulta [Descargar PDF](/docs/modules/adjustment-payrolls/download-pdf) y [Descargar Application Response](/docs/modules/adjustment-payrolls/download-application-response).
 
 Consulta [Paginación automática](/docs/pagination) para el uso de `listAll()`.

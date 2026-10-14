@@ -1,9 +1,4 @@
 {
   "title": "Recepción de documentos",
-  "pages": [
-    "index",
-    "upload",
-    "list",
-    "emit-event"
-  ]
+  "pages": ["index", "upload", "list", "get", "emit-event"]
 }
