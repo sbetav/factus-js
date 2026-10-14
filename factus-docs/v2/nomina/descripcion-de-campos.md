@@ -309,14 +309,14 @@ Porcentaje de la deducción del fondo de pensión que paga el trabajador. |
 Valor de la deducción por pensión por parte del trabajador. |
 | **`deductions.pens.deduction_type_code`** `string` `opcional`
 Código del tipo de deducción de pensión. Por defecto es `1`. |
-| **`deductions.dedu`** `object` `opcional`
-Objeto con la información sobre el fondo de seguridad pensional. Requerido si el trabajador devenga un sueldo igual o superior a 4 salarios mínimos. |
+| **`deductions.dedu`** `array` `opcional`
+Este array contendrá la información sobre el fondo de seguridad pensional del documento. Requerido si el trabajador devenga un sueldo que sea igual o superior a 4 salarios mínimos. |
 | **`deductions.dedu.percentage`** `string`
-Porcentaje de deducción del fondo de seguridad pensional. |
+Porcentaje de deducción que paga el trabajador. |
 | **`deductions.dedu.amount`** `string`
 Valor de la deducción del fondo de seguridad pensional. |
 | **`deductions.dedu.deduction_type_code`** `string`
-Código del tipo de fondo de seguridad pensional. [Códigos de tipos de fondos de seguridad pensional.](https://developers.factus.com.co/tablas-de-referencia/tablas-referencia-nomina/#c%C3%B3digos-de-tipos-de-fondos-de-seguridad-pensional) |
+Código para identificar el tipo de fondo de seguridad pensional. [Códigos de tipos de fondos de seguridad pensional.](https://developers.factus.com.co/tablas-de-referencia/tablas-referencia-nomina/#c%C3%B3digos-de-tipos-de-fondos-de-seguridad-pensional) |
 | **`deductions.sind`** `array` `opcional`
 Array con la información sobre los sindicatos del trabajador. |
 | **`deductions.sind.*.percentage`** `string`

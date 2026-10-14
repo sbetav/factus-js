@@ -10,6 +10,18 @@ Términos y definiciones clave relacionados con la facturación electrónica y e
 
 ](https://developers.factus.com.co/glosario)[
 
+Preguntas frecuentes
+
+Respuestas a las dudas más comunes de clientes y aliados sobre la integración con Factus.
+
+](https://developers.factus.com.co/buenas-practicas/preguntas-frecuentes)[
+
+Referencia de Endpoints
+
+Listado completo de los endpoints disponibles en la API, agrupados por módulo.
+
+](https://developers.factus.com.co/endpoints)[
+
 Colecciones
 
 Colecciones listas para Bruno y Postman para explorar y probar los endpoints de la API.
@@ -27,6 +39,18 @@ Respuestas del API
 Estructura de las respuestas estándar de error y éxito que retorna la API.
 
 ](https://developers.factus.com.co/respuestas-del-api)[
+
+Manejo de errores
+
+Guía para manejar respuestas y errores del API de Factus.
+
+](https://developers.factus.com.co/manejo-errores)[
+
+Buenas prácticas
+
+Guía de buenas prácticas para la correcta emisión de documentos electrónicos.
+
+](https://developers.factus.com.co/buenas-practicas/primeros-pasos)[
 
 Autenticación
 
@@ -110,16 +134,4 @@ Tablas de referencia
 
 Códigos y tablas necesarios para la correcta emisión de documentos electrónicos.
 
-](https://developers.factus.com.co/tablas-de-referencia/tablas)[
-
-Manejo de errores
-
-Guía para manejar respuestas y errores del API de Factus.
-
-](https://developers.factus.com.co/manejo-errores)[
-
-Buenas prácticas
-
-Guía de buenas prácticas para la correcta emisión de documentos electrónicos.
-
-](https://developers.factus.com.co/buenas-practicas/primeros-pasos)
+](https://developers.factus.com.co/tablas-de-referencia/tablas)

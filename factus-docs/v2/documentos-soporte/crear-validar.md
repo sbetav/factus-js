@@ -74,6 +74,8 @@ Código que corresponde al tipo de identificación. [Tipos de documentos de iden
 Número de identificación del proveedor. |
 | **`provider.dv`** `string` `opcional`
 Dígito de verificación del proveedor. Requerido ya que el proveedor debe identificarse con NIT, sin embargo, si no se envía el API lo calcula automáticamente. |
+| **`provider.legal_organization_code`** `string`
+Código que corresponda al tipo de organización. [Tipos de organizaciones disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#c%C3%B3digo-de-tipos-de-organizaciones) |
 | **`provider.trade_name`** `string` `opcional`
 Nombre comercial del proveedor. |
 | **`provider.names`** `string`
@@ -88,6 +90,8 @@ Código del municipio del proveedor. [Municipios disponibles](https://developers
 Dirección del correo electrónico del proveedor. |
 | **`provider.phone`** `string` `opcional`
 Número de teléfono del proveedor. |
+| **`provider.company`** `string` `opcional`
+Razón social. Es obligatorio cuando el campo `provider.legal_organization_code` es 1 (persona jurídica). |
 | **`items`** `array`
 Este es un array de objetos (items) que corresponde a los productos o servicios del documento soporte, se debe enviar un objeto por cada producto o servicio. |
 | **`items.*.code_reference`** `string`
@@ -132,5 +136,5 @@ Fecha en que se adquirió el producto o servicio, en formato YYYY-MM-DD. Requeri
 **201 - Documento Soporte**
 
 ```
-{ "reference_code": "DS-2026-v2-0001", "created_time": "15:30:00", "observation": "", "payment_details": [ { "payment_form": "1", "payment_method_code": "42", "reference_code": "pago-002", "amount": "50000" }, { "payment_form": "2", "payment_method_code": "10", "reference_code": "pago-003", "amount": "45200", "due_date": "2028-05-25" } ], "cash_rounding_amount": "0.00", "establishment": { "name": "nombre establecimiento", "address": "direccion del establecimiento", "phone_number": "1234567890", "email": "establecieminto@tuempresa.com", "municipality_code": "91263" }, "provider": { "identification_document_code": "31", "identification": "2343543", "dv": "7", "names": "Pepito Perez", "address": "calle 4", "country_code": "CO", "municipality_code": "68679", "legal_organization_code": "1" }, "items": [ { "code_reference": "12345", "name": "producto de prueba", "quantity": "2.00", "discount_rate": "20.00", "price": "50000.00", "unit_measure_code": "94", "standard_code": "999", "withholding_taxes": [ { "code": "06", "rate": "3.50" } ], "taxes": [ { "code": "01", "rate": "19.00" } ], "period": { "start_date": "2026-09-11", "generation_mode": "2" } } ]}
+{ "reference_code": "DS-2026-v2-0001", "created_time": "15:30:00", "observation": "", "payment_details": [ { "payment_form": "1", "payment_method_code": "42", "reference_code": "pago-002", "amount": "50000" }, { "payment_form": "2", "payment_method_code": "10", "reference_code": "pago-003", "amount": "45200", "due_date": "2028-05-25" } ], "cash_rounding_amount": "0.00", "establishment": { "name": "nombre establecimiento", "address": "direccion del establecimiento", "phone_number": "1234567890", "email": "establecieminto@tuempresa.com", "municipality_code": "91263" }, "provider": { "identification_document_code": "31", "identification": "2343543", "dv": "7", "legal_organization_code": "1", "names": "Pepito Perez", "address": "calle 4", "country_code": "CO", "municipality_code": "68679", "company": "Company S.A.S" }, "items": [ { "code_reference": "12345", "name": "producto de prueba", "quantity": "2.00", "discount_rate": "20.00", "price": "50000.00", "unit_measure_code": "94", "standard_code": "999", "withholding_taxes": [ { "code": "06", "rate": "3.50" } ], "taxes": [ { "code": "01", "rate": "19.00" } ], "period": { "start_date": "2026-09-11", "generation_mode": "2" } } ]}
 ```

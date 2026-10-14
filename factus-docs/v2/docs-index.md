@@ -1,8 +1,8 @@
 # External Factus Docs Index
 
-- Generated at: 2026-09-13T19:29:18.192Z
+- Generated at: 2026-10-14T14:42:47.013Z
 - Base URL: https://developers.factus.com.co/
-- Files: 122
+- Files: 130
 
 ## Autenticación
 
@@ -23,6 +23,11 @@
 
 - Source: https://developers.factus.com.co/buenas-practicas/cambios-v2-v1
 - File: buenas-practicas\cambios-v2-v1.md
+
+## Preguntas frecuentes
+
+- Source: https://developers.factus.com.co/buenas-practicas/preguntas-frecuentes
+- File: buenas-practicas\preguntas-frecuentes.md
 
 ## Conceptos para la creación de facturas
 
@@ -89,6 +94,11 @@
 - Source: https://developers.factus.com.co/empresas/ver
 - File: empresas\ver.md
 
+## Referencia de Endpoints
+
+- Source: https://developers.factus.com.co/endpoints
+- File: endpoints.md
+
 ## Aceptación tacita
 
 - Source: https://developers.factus.com.co/facturas/aceptacion-tacita
@@ -118,6 +128,11 @@
 
 - Source: https://developers.factus.com.co/facturas/descripcion-de-campos
 - File: facturas\descripcion-de-campos.md
+
+## Ejemplo de Correo
+
+- Source: https://developers.factus.com.co/facturas/ejemplos/correo
+- File: facturas\ejemplos\correo.md
 
 ## Con anticipo
 
@@ -284,6 +299,11 @@
 - Source: https://developers.factus.com.co/nomina/crear-y-validar
 - File: nomina\crear-y-validar.md
 
+## Application Response
+
+- Source: https://developers.factus.com.co/nomina/descargar-application-response
+- File: nomina\descargar-application-response.md
+
 ## Descargar PDF
 
 - Source: https://developers.factus.com.co/nomina/descargar-pdf
@@ -318,6 +338,16 @@
 
 - Source: https://developers.factus.com.co/nota-ajuste-nomina/crear-y-validar
 - File: nota-ajuste-nomina\crear-y-validar.md
+
+## Application Response
+
+- Source: https://developers.factus.com.co/nota-ajuste-nomina/descargar-application-response
+- File: nota-ajuste-nomina\descargar-application-response.md
+
+## Descargar PDF
+
+- Source: https://developers.factus.com.co/nota-ajuste-nomina/descargar-pdf
+- File: nota-ajuste-nomina\descargar-pdf.md
 
 ## Descargar XML
 
@@ -524,6 +554,11 @@
 - Source: https://developers.factus.com.co/rangos-de-numeracion/facturacion/rangos-asociados-al-software
 - File: rangos-de-numeracion\facturacion\rangos-asociados-al-software.md
 
+## Restaurar
+
+- Source: https://developers.factus.com.co/rangos-de-numeracion/facturacion/restaurar-rango
+- File: rangos-de-numeracion\facturacion\restaurar-rango.md
+
 ## Ver
 
 - Source: https://developers.factus.com.co/rangos-de-numeracion/facturacion/ver-rango
@@ -569,7 +604,12 @@
 - Source: https://developers.factus.com.co/recepcion-de-documentos/emitir-evento
 - File: recepcion-de-documentos\emitir-evento.md
 
-## Ver Facturas
+## Ver
+
+- Source: https://developers.factus.com.co/recepcion-de-documentos/ver-factura
+- File: recepcion-de-documentos\ver-factura.md
+
+## Listar
 
 - Source: https://developers.factus.com.co/recepcion-de-documentos/ver-facturas
 - File: recepcion-de-documentos\ver-facturas.md

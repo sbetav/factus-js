@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-13T19:29:18.192Z",
+  "generatedAt": "2026-10-14T14:42:47.013Z",
   "baseUrl": "https://developers.factus.com.co/",
-  "totalFiles": 122,
+  "totalFiles": 130,
   "entries": [
     {
       "title": "Autenticación",
@@ -22,6 +22,11 @@
       "title": "Cambios de V1 a V2",
       "sourceUrl": "https://developers.factus.com.co/buenas-practicas/cambios-v2-v1",
       "path": "buenas-practicas\\cambios-v2-v1.md"
+    },
+    {
+      "title": "Preguntas frecuentes",
+      "sourceUrl": "https://developers.factus.com.co/buenas-practicas/preguntas-frecuentes",
+      "path": "buenas-practicas\\preguntas-frecuentes.md"
     },
     {
       "title": "Conceptos para la creación de facturas",
@@ -89,6 +94,11 @@
       "path": "empresas\\ver.md"
     },
     {
+      "title": "Referencia de Endpoints",
+      "sourceUrl": "https://developers.factus.com.co/endpoints",
+      "path": "endpoints.md"
+    },
+    {
       "title": "Aceptación tacita",
       "sourceUrl": "https://developers.factus.com.co/facturas/aceptacion-tacita",
       "path": "facturas\\aceptacion-tacita.md"
@@ -117,6 +127,11 @@
       "title": "Campos de la factura",
       "sourceUrl": "https://developers.factus.com.co/facturas/descripcion-de-campos",
       "path": "facturas\\descripcion-de-campos.md"
+    },
+    {
+      "title": "Ejemplo de Correo",
+      "sourceUrl": "https://developers.factus.com.co/facturas/ejemplos/correo",
+      "path": "facturas\\ejemplos\\correo.md"
     },
     {
       "title": "Con anticipo",
@@ -284,6 +299,11 @@
       "path": "nomina\\crear-y-validar.md"
     },
     {
+      "title": "Application Response",
+      "sourceUrl": "https://developers.factus.com.co/nomina/descargar-application-response",
+      "path": "nomina\\descargar-application-response.md"
+    },
+    {
       "title": "Descargar PDF",
       "sourceUrl": "https://developers.factus.com.co/nomina/descargar-pdf",
       "path": "nomina\\descargar-pdf.md"
@@ -317,6 +337,16 @@
       "title": "Crear y validar",
       "sourceUrl": "https://developers.factus.com.co/nota-ajuste-nomina/crear-y-validar",
       "path": "nota-ajuste-nomina\\crear-y-validar.md"
+    },
+    {
+      "title": "Application Response",
+      "sourceUrl": "https://developers.factus.com.co/nota-ajuste-nomina/descargar-application-response",
+      "path": "nota-ajuste-nomina\\descargar-application-response.md"
+    },
+    {
+      "title": "Descargar PDF",
+      "sourceUrl": "https://developers.factus.com.co/nota-ajuste-nomina/descargar-pdf",
+      "path": "nota-ajuste-nomina\\descargar-pdf.md"
     },
     {
       "title": "Descargar XML",
@@ -524,6 +554,11 @@
       "path": "rangos-de-numeracion\\facturacion\\rangos-asociados-al-software.md"
     },
     {
+      "title": "Restaurar",
+      "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/facturacion/restaurar-rango",
+      "path": "rangos-de-numeracion\\facturacion\\restaurar-rango.md"
+    },
+    {
       "title": "Ver",
       "sourceUrl": "https://developers.factus.com.co/rangos-de-numeracion/facturacion/ver-rango",
       "path": "rangos-de-numeracion\\facturacion\\ver-rango.md"
@@ -569,7 +604,12 @@
       "path": "recepcion-de-documentos\\emitir-evento.md"
     },
     {
-      "title": "Ver Facturas",
+      "title": "Ver",
+      "sourceUrl": "https://developers.factus.com.co/recepcion-de-documentos/ver-factura",
+      "path": "recepcion-de-documentos\\ver-factura.md"
+    },
+    {
+      "title": "Listar",
       "sourceUrl": "https://developers.factus.com.co/recepcion-de-documentos/ver-facturas",
       "path": "recepcion-de-documentos\\ver-facturas.md"
     },

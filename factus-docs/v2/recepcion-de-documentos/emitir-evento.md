@@ -144,6 +144,6 @@ Departamento al que pertenece el cargo que tiene la persona.
 | |
 | --- |
 | **`bill_id`** `string`
-ID de la factura electrónica. |
+ID de la factura electrónica, corresponde al data.id de la factura. |
 | **`event_type`** `string`
 Código del evento a emitir. |

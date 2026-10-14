@@ -65,7 +65,7 @@ Tasa de cambio utilizada para convertir los montos de la moneda local a la moned
 | **`observation`** `string` `opcional`
 Agrega una observación a la nota crédito. No debe tener más de 500 caracteres. |
 | **`payment_details`** `array`
-Este es un array de objetos para los medios de pago. Se debe enviar un objeto por cada medio de pago utilizado para pagar la factura. |
+Este es un array de objetos para los medios de pago. Se debe enviar un objeto por cada medio de pago utilizado para pagar la nota credito. |
 | **`payment_details.*.payment_form`** `string`
 Código de la forma de pago. [Formas de pago disponibles](https://developers.factus.com.co/tablas-de-referencia/tablas/#c%C3%B3digos-de-formas-de-pago) |
 | **`payment_details.*.payment_method_code`** `string`
@@ -176,6 +176,12 @@ Este es un array de objetos (autorretenciones) para informar las retenciones en 
 Código de la retención aplicada al producto o servicio. [Códigos retenciones disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#c%C3%B3digos-de-retenciones) |
 | **`items.*.withholding_taxes.*.rate`** `string`
 Porcentaje de la retención aplicada al producto o servicio (máximo dos decimales). |
+| **`items.*.mandate`** `object` `opcional`
+Este es un objeto que contendrá la información del mandante. Este campo es requerido si `items.*.scheme_id` = 1 (ingresos recibidos para terceros) y `operation_type` = 11 (mandatos) o `operation_type` = SS-Recaudo (Salud). |
+| **`items.*.mandate.identification_document_code`** `string`
+Código que corresponda al tipo de identificación del mandante. [Tipos de documentos disponibles](https://developers.factus.com.co/tablas-de-referencia/tablas/#c%C3%B3digos-de-tipos-de-documentos-de-identidad) |
+| **`items.*.mandate.identification`** `string`
+Número de identificación del mandante. |
 | **`items.*.additional_properties`** `array` `opcional`
 Este campo sirve para informar las operaciones efectuadas por el sector transporte de carga. Si envías el campo \`additional\_properties\` los campos internos son obligatorios. |
 | **`items.*.additional_properties.*.code`** `string`

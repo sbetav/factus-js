@@ -8,6 +8,8 @@ This file tracks **reportable** ambiguities, inconsistencies, and likely docs ty
 - record the matching **SDK decision** for each open item
 - flag items where the SDK choice is **assumed** because docs do not confirm the round-trip contract
 
+Finding numbers remain stable when resolved items are removed; gaps are intentional.
+
 ### SDK working rule
 
 When v2 docs disagree, prefer this order:
@@ -23,11 +25,12 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ### 1. Adjustment note delete page still shows a v1 route in v2 docs
 
-**Description:** Delete docs document `v1/adjustment-notes/reference/:reference_code` instead of a v2 path.
+**Description:** Delete docs still document `v1/adjustment-notes/reference/:reference_code`; the new v2 endpoint index lists `adjustment-notes/reference/:reference_code` under API v2.
 
 **Files:**
 
 - `factus-docs/v2/notas-ajuste-documentos-soporte/eliminar.md`
+- `factus-docs/v2/endpoints.md`
 
 **Factus docs status:** Open
 
@@ -66,7 +69,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ### 4. `identification_document_code` type is inconsistent across docs
 
-**Description:** Some pages label the field as `integer`/`int`; examples use string codes (`"13"`, `"31"`). Beneficiary health codes (`CC`, `SI`, …) are a separate catalog — see #19.
+**Description:** Reception / tacit-acceptance tables label the field as `integer`/`int`; the tacit-acceptance example uses `"13"` and document create tables use string codes. Reception `dv` prose still identifies NIT as `identification_document_code=6`, while the linked v2 catalog uses `31`. Beneficiary health codes (`CC`, `SI`, …) are a separate catalog — see #18.
 
 **Files:**
 
@@ -76,7 +79,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 **Factus docs status:** Open
 
-**SDK decision:** `LiteralUnion<IdentityDocumentCode>` / string-oriented party inputs.
+**SDK decision:** `LiteralUnion<IdentityDocumentCode>` / string-oriented party inputs; use `"31"` for NIT, not the stale v1 ID `6`.
 
 ---
 
@@ -106,13 +109,13 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 **Factus docs status:** Open
 
-**SDK decision:** `EmailContentData = { subject: string; attached_document?: string }`.
+**SDK decision (assumed):** `EmailContentData = { subject: string; attached_document?: string }`; the new visual email example does not confirm the API response field name.
 
 ---
 
 ### 7. Some examples use numeric literals where field tables describe strings
 
-**Description:** Examples mix numeric literals with string field tables (`payment_form: 1`, numeric `allowance_charges.amount`, numeric `items.*.scheme_id` on Mandatos / SS-Recaudo, etc.).
+**Description:** Examples mix numeric literals with string field tables (`payment_form: 1`, numeric `allowance_charges.*.amount`, numeric `items.*.scheme_id` on SS-Recaudo, etc.). The current Mandatos example uses string `scheme_id` values, so that page no longer demonstrates the mismatch.
 
 **Files:**
 
@@ -120,13 +123,13 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 **Factus docs status:** Open
 
-**SDK decision:** Affected request fields stay `string | number` where docs/examples mix types. `DocumentItemInput.scheme_id` is `string | number`.
+**SDK decision:** `DocumentItemInput.scheme_id`, allowance-charge amounts, and payment amounts accept `string | number`. `DocumentPaymentDetailInput.payment_form` remains `LiteralUnion<PaymentFormCode>` (string-oriented), despite numeric example literals; the SDK does not widen every mismatched field to accept numbers.
 
 ---
 
 ### 8. Acceptance / tacit-event docs are internally contradictory
 
-**Description:** Bills and reception pages disagree on route (`/v2/bills/...` vs `/v2/receptions/bills/...`), identifier (`:number` vs `:bill_id`), method (`POST` vs `PATCH`), and whether tacit acceptance (`034`) is user-emitted or automatic-only.
+**Description:** Reception prose says tacit acceptance cannot be emitted by the recipient and is generated automatically by the issuer, yet includes `034` in its event table without marking it unavailable on that endpoint. The issuer's bills page explicitly documents emitting tacit acceptance. The distinct issuer `POST /v2/bills/:number/...` and recipient `PATCH /v2/receptions/bills/:bill_id/...` routes are not themselves contradictory; the automatic/manual wording and allowed reception codes need clarification.
 
 **Files:**
 
@@ -135,18 +138,19 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 **Factus docs status:** Open
 
-**SDK decision:** `reception.emitEvent()` supports manual codes `030`–`033` only (excludes tacit `034`). Tacit acceptance is not exposed as a manual reception event.
+**SDK decision:** `reception.emitEvent()` uses `PATCH /v2/receptions/bills/:bill_id/radian/events/:event_type` and manual codes `030`–`033` only. Issuer tacit acceptance is available through `bills.emitRadianEvent(number, "034", input)`, which accepts `EventCode` and posts to `/v2/bills/:number/radian/events/:event_type`; it is not a separate tacit-only method. Do not expose `034` as a manual reception event.
 
 ---
 
 ### 9. Auth token lifetime is inconsistent
 
-**Description:** Auth prose says the token lasts 1 hour; the example shows `"expires_in": 600`.
+**Description:** Auth prose and the new FAQ say the token lasts 1 hour; the auth example shows `"expires_in": 600`, while the refresh-token example shows `3600`.
 
 **Files:**
 
 - `factus-docs/v2/autenticacion/auth.md`
 - `factus-docs/v2/autenticacion/refresh-token.md`
+- `factus-docs/v2/buenas-practicas/preguntas-frecuentes.md`
 
 **Factus docs status:** Open
 
@@ -154,20 +158,6 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 10. Support-document field tables omit `provider.legal_organization_code`
-
-**Description:** Field description omits `provider.legal_organization_code`; create examples include it.
-
-**Files:**
-
-- `factus-docs/v2/documentos-soporte/crear-validar.md`
-- `factus-docs/v2/documentos-soporte/descripcion-de-campos.md`
-
-**Factus docs status:** Open
-
-**SDK decision:** Provider input types include `legal_organization_code` from examples.
-
----
 
 ### 11. Generic documents XML download page lacks a clear response schema
 
@@ -179,7 +169,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 **Factus docs status:** Open
 
-**SDK decision:** `documents.downloadXml()` typed as `ApiResponse<DownloadXmlData>` with `xml_base_64_encoded`.
+**SDK decision (assumed):** `documents.downloadXml()` typed as `ApiResponse<DownloadXmlData>` with `xml_base_64_encoded`; the generic endpoint does not confirm that shared envelope.
 
 ---
 
@@ -245,7 +235,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ### 16. Item discount request field name differs from response field name
 
-**Description:** Create request documents `items.*.discount_amount` (with optional `discount_rate`); create/view responses document `data.items.*.discount` and `data.items.*.discount_rate`, with no mapping note that input `discount_amount` becomes response `discount`.
+**Description:** Bill / credit-note create requests document `items.*.discount_amount` (with optional `discount_rate`); the bill create response documents `data.items.*.discount` and `data.items.*.discount_rate`, with no mapping note that input `discount_amount` becomes response `discount`. The bill view page has no response schema to confirm the read contract independently.
 
 **Files:**
 
@@ -255,13 +245,13 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 **Factus docs status:** Open
 
-**SDK decision (assumed):** `DocumentItemInput.discount_amount?` on create; `DocumentItemResponse.discount?` on read; no `discount_amount` on response types.
+**SDK decision (assumed):** `DocumentItemInput.discount_amount?` on create; `DocumentItemResponse.discount?` on read, with no `discount_amount` on that item response type. Document-level `DocumentTotals.discount_amount?` is a separate response field.
 
 ---
 
 ### 17. Bill `currency` is documented on create but absent from response schemas
 
-**Description:** Optional `currency` appears on bill/credit-note create tables and examples for graphic-representation totals; create/view response tables omit `data.currency`. Unclear whether the API echoes it, uses it only for PDF generation, or drops it after create.
+**Description:** Optional `currency` appears on bill/credit-note create tables and examples for graphic-representation totals; the bill create response table omits `data.currency`, and the bill view page has no response schema. Unclear whether the API echoes it, uses it only for PDF generation, or drops it after create.
 
 **Files:**
 
@@ -318,10 +308,11 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 - `factus-docs/v2/nomina/crear-y-validar.md`
 - `factus-docs/v2/nomina/descripcion-de-campos.md`
+- `factus-docs/v2/endpoints.md`
 
 **Factus docs status:** Open
 
-**SDK decision:** Follow `crear-y-validar` — `factus.payrolls.create()` posts to `/v2/payrolls`. Confirm with sandbox if the field-description path is a stale typo.
+**SDK decision:** `factus.payrolls.create()` posts to `/v2/payrolls`, confirmed by both the create page and the new endpoint index; do not follow `/v2/payroll/validate` from the field-description page.
 
 ---
 
@@ -358,7 +349,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ### 23. Payroll numbering-range document type `28` still absent
 
-**Description:** Payroll numbering-range table publishes `26` (Nómina Electrónica) and `27` (Nota de ajuste Nómina Electrónica). Former code `28` (payroll deletion) is still missing while `/v2/adjustment-payrolls` exists and uses document type `27` in practice.
+**Description:** Payroll numbering-range table publishes only `26` (Nómina Electrónica) and `27` (Nota de ajuste Nómina Electrónica). The adjustment-payroll create page explicitly describes elimination, but does not explain the migration from former deletion code `28` or explicitly identify its numbering-range code. Absence of `28` alone does not establish that v2 still accepts it.
 
 **Files:**
 
@@ -368,7 +359,7 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 **Factus docs status:** Open
 
-**SDK decision:** `PayrollNumberingRangeDocumentTypeCode` exposes `26` / `27` only. Payroll ranges use `factus.numberingRanges.payrolls` (`/v2/numbering-ranges/payrolls`).
+**SDK decision (assumed):** `PayrollNumberingRangeDocumentTypeCode` exposes the published `26` / `27` only; use `27` for adjustment-payroll elimination, without inventing v2 support for `28`. Payroll ranges use `factus.numberingRanges.payrolls` (`/v2/numbering-ranges/payrolls`).
 
 ---
 
@@ -388,18 +379,20 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 25. Payroll and adjustment-payroll XML download pages lack a response schema table
+### 25. Payroll XML / Application Response download pages lack response schemas
 
-**Description:** New pages document `GET .../download-xml` and tell integrators to decode `xml_base_64_encoded`, but omit a full response schema (same thin pattern as some other XML pages).
+**Description:** Payroll and adjustment-payroll pages document `GET .../download-xml` and the new `GET .../download-application-response`; all name `xml_base_64_encoded` in prose but omit the response envelope, file-name field, and schema/example.
 
 **Files:**
 
 - `factus-docs/v2/nomina/descargar-xml.md`
 - `factus-docs/v2/nota-ajuste-nomina/descargar-xml.md`
+- `factus-docs/v2/nomina/descargar-application-response.md`
+- `factus-docs/v2/nota-ajuste-nomina/descargar-application-response.md`
 
 **Factus docs status:** Open
 
-**SDK decision:** `payrolls.downloadXml()` / `adjustmentPayrolls.downloadXml()` typed as `ApiResponse<DownloadXmlData>` with `xml_base_64_encoded`.
+**SDK decision:** Existing `DownloadPayrollXmlResponse` and `DownloadAdjustmentPayrollXmlResponse` remain `ApiResponse<DownloadXmlData>` (`file_name`, `xml_base_64_encoded`); that envelope is still assumed, not confirmed by these mirrors. New `DownloadPayrollApplicationResponseResponse` and `DownloadAdjustmentPayrollApplicationResponseResponse` are `unknown`, so both `downloadApplicationResponse()` methods require callers to narrow the result rather than assume an envelope. Routes are confirmed as `/v2/{payrolls|adjustment-payrolls}/:number/{download-xml|download-application-response}`.
 
 ---
 
@@ -433,17 +426,18 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 28. Payroll PDF download page lacks a response schema table
+### 28. Payroll and adjustment-payroll PDF downloads lack response schemas
 
-**Description:** New page documents `GET /v2/payrolls/:number/download-pdf` and tells integrators to decode `pdf_base_64_encoded`, but omits a full response schema (same thin pattern as #25). There is no matching PDF page for adjustment payrolls.
+**Description:** Both payroll families now document `GET .../:number/download-pdf` and name `pdf_base_64_encoded`, but omit the response envelope, file-name field, and schema/example (same thin pattern as #25). The missing adjustment-payroll PDF page is resolved.
 
 **Files:**
 
 - `factus-docs/v2/nomina/descargar-pdf.md`
+- `factus-docs/v2/nota-ajuste-nomina/descargar-pdf.md`
 
 **Factus docs status:** Open
 
-**SDK decision:** `payrolls.downloadPdf()` typed as `ApiResponse<DownloadPdfData>` with `pdf_base_64_encoded`.
+**SDK decision:** Existing `payrolls.downloadPdf()` returns `DownloadPayrollPdfResponse = ApiResponse<DownloadPdfData>` (`file_name`, `pdf_base_64_encoded`); its envelope remains assumed from the shared download contract. New `adjustmentPayrolls.downloadPdf()` returns `DownloadAdjustmentPayrollPdfResponse = unknown` and does not promise that envelope or those fields. Both routes are confirmed as `/v2/{payrolls|adjustment-payrolls}/:number/download-pdf`.
 
 ---
 
@@ -497,15 +491,134 @@ Do not preserve obvious docs typos in public types just for fidelity to the word
 
 ---
 
-### 32. Payroll numbering-range create response is a subset of GET
+### 32. Payroll numbering-range update response still lists billing-only fields
 
-**Description:** Create response dropped `from`, `to`, `resolution_number`, `start_date`, `end_date`, `technical_key`, and `is_expired`. GET added `created_at` / `updated_at`. Unclear whether those range bounds are GET-only or omitted from the create docs by mistake.
+**Description:** Create and GET now agree on `id`, `document`, `document_name`, `prefix`, `current`, `is_active`, `deleted_at`, `created_at`, and `updated_at`; the earlier create/GET mismatch is resolved. The consecutive-update response still lists `from`, `to`, `resolution_number`, `start_date`, `end_date`, `technical_key`, and `is_expired`, unlike both current payroll schemas, and omits `deleted_at`. Unclear whether update intentionally returns a different resource shape or retains a billing-range schema.
 
 **Files:**
 
 - `factus-docs/v2/rangos-de-numeracion/nomina/crear-rango.md`
 - `factus-docs/v2/rangos-de-numeracion/nomina/ver-rango.md`
+- `factus-docs/v2/rangos-de-numeracion/nomina/actualizar-consecutivo.md`
 
 **Factus docs status:** Open
 
-**SDK decision:** Keep `PayrollNumberingRange` with those fields optional so create and GET share one type.
+**SDK decision (assumed):** Payroll range create, GET, and `updateCurrent()` all return `ApiResponse<PayrollNumberingRange>`. The actual shared type retains optional `from`, `to`, `resolution_number`, `start_date`, `end_date`, `technical_key`, and `is_expired`; `current`, `document_name`, `deleted_at`, `created_at`, and `updated_at` are also optional. `document` is `PayrollNumberingRangeDocumentTypeCode | string`, and `is_active` is `boolean | 0 | 1`. This compatibility type does not establish that billing-only fields are returned on create/GET or explain the different update schema.
+
+---
+
+### 33. Payroll `deductions.dedu` array change is incomplete in child paths and responses
+
+**Description:** Both payroll request tables now type `deductions.dedu` as `array`, but child paths still use `deductions.dedu.percentage`, `.amount`, and `.deduction_type_code` without `.*`. The create response still types `data.deductions.dedu` as `object` with object child paths. No example demonstrates this deduction or explains whether multiple request entries are aggregated into one response object. Adjustment-payroll create is elimination-only and documents no deductions payload; it is not evidence of a stale request shape.
+
+**Files:**
+
+- `factus-docs/v2/nomina/crear-y-validar.md`
+- `factus-docs/v2/nomina/descripcion-de-campos.md`
+- `factus-docs/v2/nota-ajuste-nomina/crear-y-validar.md`
+
+**Factus docs status:** Open
+
+**SDK decision (assumed):** `PayrollDeductionsInput.dedu?: PayrollPensionSolidarityFundDeductionInput[]` follows the request tables; `PayrollDeductions.dedu?: PayrollConcept` stays an object per the response table until confirmed otherwise. Do not normalize the response or add deductions to adjustment-payroll elimination inputs.
+
+---
+
+### 34. Reception view and event docs disagree on the shared identifier type
+
+**Description:** The new reception view page documents `GET /v2/receptions/bills/:id`, types `id` as `integer`, and obtains it from list `data.data.*.id`. Event docs now explicitly source `bill_id` from the bill's `data.id` but still type it as `string`. It is unclear whether this is just stringification of the same reception ID; the view page has no response schema/example to confirm its shape or identifier fields.
+
+**Files:**
+
+- `factus-docs/v2/recepcion-de-documentos/ver-factura.md`
+- `factus-docs/v2/recepcion-de-documentos/ver-facturas.md`
+- `factus-docs/v2/recepcion-de-documentos/emitir-evento.md`
+
+**Factus docs status:** Open
+
+**SDK decision:** `reception.get(id: number)` calls `GET /v2/receptions/bills/:id` and returns `Promise<ViewReceptionBillResponse>`, where `ViewReceptionBillResponse = unknown`; it does not reuse the list-item response schema. `EmitEventParams.bill_id` accepts `string | number` and is documented in the SDK as `ReceptionBill.id` (`data.id`), not the separate `ReceptionBill.bill_id` property or invoice `number`. Narrow the view result before accessing response fields.
+
+---
+
+### 35. Numbering-range list example and field tables disagree on resource fields
+
+**Description:** The new billing-range list example returns a document name in `document`, boolean `is_expired` / `is_active`, and `is_external` / `deleted_at`. Its list table omits the latter fields and describes flags as `1` / `0`; create/update tables instead describe `document` as a code and provide `document_name`. Soft-delete prose calls non-deleted ranges “activos”, which can be confused with the separate `is_active` filter. The restore page does confirm a message-only response, not a returned range.
+
+**Files:**
+
+- `factus-docs/v2/rangos-de-numeracion/facturacion/obtener-rangos.md`
+- `factus-docs/v2/rangos-de-numeracion/facturacion/crear-rango.md`
+- `factus-docs/v2/rangos-de-numeracion/facturacion/actualizar-consecutivo.md`
+- `factus-docs/v2/rangos-de-numeracion/facturacion/restaurar-rango.md`
+
+**Factus docs status:** Open
+
+**SDK decision:** The actual shared `NumberingRange.document` remains `NumberingRangeDocumentTypeCode` (code-only), despite its comment acknowledging names in list responses; the list example's name-valued field is not represented by a wider SDK type. `document_name` is optional; `is_expired` remains `boolean`, while `is_active` is `boolean | 0 | 1`. `is_external?: boolean` and `deleted_at?: string | null` accommodate the list example without guaranteeing them on create/GET. `NumberingRangeFilters.trashed?: "with" | "only"` is independent of `is_active`; omission means non-deleted, not necessarily enabled. `numberingRanges.restore(id: number)` uses confirmed `PUT /v2/numbering-ranges/:numbering_range_id/restore` with no body and returns `RestoreNumberingRangeResponse = { message: string }`, not `ApiResponse<NumberingRange>`.
+
+---
+
+### 36. Numbering-range list example differs from the documented pagination envelope
+
+**Description:** The new numbering-range example places `data: []` and `pagination` at the top level and uses placeholder strings in `pagination.links`. The adjustment-note list example instead wraps both under `data` inside `{ status, message, data }`, with link objects containing `url`, `label`, `active`, and optional `page`. Numbering-range docs do not state whether this is a real endpoint-specific envelope or an abbreviated example; the difference affects pagination consumers.
+
+**Files:**
+
+- `factus-docs/v2/rangos-de-numeracion/facturacion/obtener-rangos.md`
+- `factus-docs/v2/notas-ajuste-documentos-soporte/ver-y-filtrar.md`
+
+**Factus docs status:** Open
+
+**SDK decision (assumed):** Keep `numberingRanges.list()` as `ApiResponse<PaginatedData<NumberingRange>>` and `listAll()` reading `response.data.data` / `response.data.pagination.last_page`, with structured `PaginationLink[]`. Do not change all list envelopes or treat `["..."]` as a confirmed string-link contract; verify the billing-range list response in sandbox before changing its pagination handling.
+
+---
+
+### 37. New FAQ mixes stale v1 contracts with confirmed v2 endpoints
+
+**Description:** The FAQ says no debit-note endpoint is published, then later says debit and credit notes are available by API; the v2 endpoint index and debit-note create page explicitly publish `POST /v2/debit-notes/validate`. Other FAQ answers still use `identification_document_id`, `legal_organization_id`, and `standard_code_id` (with standard ID `1`), although v2 uses code fields and standard code `999` for the taxpayer's own standard. Its tax answer names `is_exclude`, while endpoint tables/examples use `is_excluded`.
+
+**Files:**
+
+- `factus-docs/v2/buenas-practicas/preguntas-frecuentes.md`
+- `factus-docs/v2/endpoints.md`
+- `factus-docs/v2/notas-debito/crear-y-validar.md`
+- `factus-docs/v2/buenas-practicas/cambios-v2-v1.md`
+- `factus-docs/v2/facturas/descripcion-de-campos.md`
+- `factus-docs/v2/tablas-de-referencia/tablas.md`
+
+**Factus docs status:** Open
+
+**SDK decision:** Keep debit-note creation on `/v2/debit-notes/validate`; use `identification_document_code`, `legal_organization_code`, `standard_code` (`"999"` for the taxpayer's own standard), and `is_excluded`. Do not add legacy ID fields or an `is_exclude` alias from FAQ prose.
+
+---
+
+### 38. Endpoint index claims completeness but omits documented routes
+
+**Description:** The new endpoint index calls itself a complete list of API v2 endpoints, but omits both payroll families' `download-application-response`, adjustment-payroll `download-pdf`, reception single-bill GET, and billing numbering-range restore. Each has an endpoint-specific page with explicit method and sandbox/production URLs. These are concrete index omissions, not requests for undocumented functionality.
+
+**Files:**
+
+- `factus-docs/v2/endpoints.md`
+- `factus-docs/v2/nomina/descargar-application-response.md`
+- `factus-docs/v2/nota-ajuste-nomina/descargar-application-response.md`
+- `factus-docs/v2/nota-ajuste-nomina/descargar-pdf.md`
+- `factus-docs/v2/recepcion-de-documentos/ver-factura.md`
+- `factus-docs/v2/rangos-de-numeracion/facturacion/restaurar-rango.md`
+
+**Factus docs status:** Open
+
+**SDK decision:** Follow the endpoint-specific pages: expose `GET /v2/{payrolls|adjustment-payrolls}/:number/download-application-response`, `GET /v2/adjustment-payrolls/:number/download-pdf`, `GET /v2/receptions/bills/:id`, and `PUT /v2/numbering-ranges/:numbering_range_id/restore`. The final SDK implements all five routes; absence from the index is not evidence they are unavailable. Response choices remain as recorded in #25, #28, #34, and #35.
+
+---
+
+### 39. Credit-note mandate condition depends on undocumented operation fields
+
+**Description:** Both credit-note tables now document optional `items.*.mandate`, but say it is required for `items.*.scheme_id = 1` with `operation_type = 11` or `SS-Recaudo`. Neither table defines a request `operation_type` or `items.*.scheme_id`; instead, credit-note operation is documented as `customization_id` (`20` / `22` in the linked catalog). It is unclear whether mandate requirements inherit the referenced bill's operation or whether credit-note request fields are missing. The bill's operation codes cannot simply be substituted for credit-note customization codes.
+
+**Files:**
+
+- `factus-docs/v2/notas-credito/crear-y-validar.md`
+- `factus-docs/v2/notas-credito/descripcion-de-campos.md`
+- `factus-docs/v2/tablas-de-referencia/tablas.md`
+
+**Factus docs status:** Open
+
+**SDK decision (assumed):** `CreateCreditNoteInput` retains optional `customization_id?: CreditNoteOperationCode` and no top-level `operation_type`. Its `items: DocumentItemInput[]` already permit optional `scheme_id?: string | number` and `mandate?: DocumentItemMandateInput`; the SDK does not enforce the undocumented condition or derive it from a referenced bill. Do not widen credit-note operation codes to `11` / `SS-Recaudo` or invent a new top-level field without confirmation.

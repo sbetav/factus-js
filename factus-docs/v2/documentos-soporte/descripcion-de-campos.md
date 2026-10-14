@@ -88,6 +88,8 @@ Código que corresponde al tipo de identificación. [Tipos de documentos de iden
 Número de identificación del proveedor. |
 | **`provider.dv`** `string` `opcional`
 Dígito de verificación del proveedor. Requerido ya que el proveedor debe identificarse con NIT, sin embargo, si no se envía el API lo calcula automáticamente. |
+| **`provider.legal_organization_code`** `string`
+Código que corresponda al tipo de organización. [Tipos de organizaciones disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#c%C3%B3digo-de-tipos-de-organizaciones) |
 | **`provider.trade_name`** `string` `opcional`
 Nombre comercial del proveedor. |
 | **`provider.names`** `string`
@@ -102,6 +104,8 @@ Código del municipio del proveedor. [Municipios disponibles](https://developers
 Dirección del correo electrónico del proveedor. |
 | **`provider.phone`** `string` `opcional`
 Número de teléfono del proveedor. |
+| **`provider.company`** `string` `opcional`
+Razón social. Es obligatorio cuando el campo `provider.legal_organization_code` es 1 (persona jurídica). |
 | **`items`** `array`
 Este es un array de objetos (items) que corresponde a los productos o servicios del documento soporte, se debe enviar un objeto por cada producto o servicio. |
 | **`items.*.code_reference`** `string`

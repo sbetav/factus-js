@@ -65,7 +65,8 @@ Código internacional de la moneda extranjera que se desea mostrar en la factura
 | **`currency.exchange_rate`** `string`
 Tasa de cambio utilizada para convertir los montos de la moneda local a la moneda extranjera especificada. |
 | **`send_email`** `boolean` `default:true` `opcional`
-Indica si el sistema debe enviar el correo electrónico al cliente. Útil cuando el envío del correo se gestiona de forma externa o personalizada por el integrador. Por defecto, este campo tiene un valor de true, lo que implica que el correo electrónico será enviado al cliente. Si se establece en false, el correo no será enviado. |
+Indica si el sistema debe enviar el correo electrónico al cliente. Útil cuando el envío del correo se gestiona de forma externa o personalizada por el integrador. Por defecto, este campo tiene un valor de true, lo que implica que el correo electrónico será enviado al cliente. Si se establece en false, el correo no será enviado.
+`Nota:` Esta funcionalidad se enceutra activa solamente en producción, en ambiente de sandbox se encuentra deshabilitada. Puedes ver un ejemplo del correo y su contenido en el siguiente enlace: [Ver ejemplo](https://developers.factus.com.co/facturas/ejemplos/correo/) |
 | **`observation`** `string` `opcional`
 Agrega una observación a la factura. No debe tener más de 500 caracteres. |
 | **`prepayment_details`** `array` `opcional`
@@ -230,7 +231,8 @@ Código internacional de la moneda extranjera que se desea mostrar en la factura
 | **`currency.exchange_rate`** `string`
 Tasa de cambio utilizada para convertir los montos de la moneda local a la moneda extranjera especificada. |
 | **`send_email`** `boolean` `default:true` `opcional`
-Indica si el sistema debe enviar el correo electrónico al cliente. Útil cuando el envío del correo se gestiona de forma externa o personalizada por el integrador. Por defecto, este campo tiene un valor de true, lo que implica que el correo electrónico será enviado al cliente. Si se establece en false, el correo no será enviado. |
+Indica si el sistema debe enviar el correo electrónico al cliente. Útil cuando el envío del correo se gestiona de forma externa o personalizada por el integrador. Por defecto, este campo tiene un valor de true, lo que implica que el correo electrónico será enviado al cliente. Si se establece en false, el correo no será enviado.
+`Nota:` Esta funcionalidad se enceutra activa solamente en producción, en ambiente de sandbox se encuentra deshabilitada. Puedes ver un ejemplo del correo y su contenido en el siguiente enlace: [Ver ejemplo](https://developers.factus.com.co/facturas/ejemplos/correo/) |
 | **`observation`** `string` `opcional`
 Agrega una observación a la factura. No debe tener más de 500 caracteres. |
 | **`prepayment_details`** `array` `opcional`
@@ -403,7 +405,8 @@ Código internacional de la moneda extranjera que se desea mostrar en la factura
 | **`currency.exchange_rate`** `string`
 Tasa de cambio utilizada para convertir los montos de la moneda local a la moneda extranjera especificada. |
 | **`send_email`** `boolean` `default:true` `opcional`
-Indica si el sistema debe enviar el correo electrónico al cliente. Útil cuando el envío del correo se gestiona de forma externa o personalizada por el integrador. Por defecto, este campo tiene un valor de true, lo que implica que el correo electrónico será enviado al cliente. Si se establece en false, el correo no será enviado. |
+Indica si el sistema debe enviar el correo electrónico al cliente. Útil cuando el envío del correo se gestiona de forma externa o personalizada por el integrador. Por defecto, este campo tiene un valor de true, lo que implica que el correo electrónico será enviado al cliente. Si se establece en false, el correo no será enviado.
+`Nota:` Esta funcionalidad se enceutra activa solamente en producción, en ambiente de sandbox se encuentra deshabilitada. Puedes ver un ejemplo del correo y su contenido en el siguiente enlace: [Ver ejemplo](https://developers.factus.com.co/facturas/ejemplos/correo/) |
 | **`observation`** `string` `opcional`
 Agrega una observación a la factura. No debe tener más de 500 caracteres. |
 | **`prepayment_details`** `array` `opcional`
@@ -580,7 +583,8 @@ Código internacional de la moneda extranjera que se desea mostrar en la factura
 | **`currency.exchange_rate`** `string`
 Tasa de cambio utilizada para convertir los montos de la moneda local a la moneda extranjera especificada. |
 | **`send_email`** `boolean` `default:true` `opcional`
-Indica si el sistema debe enviar el correo electrónico al cliente. Útil cuando el envío del correo se gestiona de forma externa o personalizada por el integrador. Por defecto, este campo tiene un valor de true, lo que implica que el correo electrónico será enviado al cliente. Si se establece en false, el correo no será enviado. |
+Indica si el sistema debe enviar el correo electrónico al cliente. Útil cuando el envío del correo se gestiona de forma externa o personalizada por el integrador. Por defecto, este campo tiene un valor de true, lo que implica que el correo electrónico será enviado al cliente. Si se establece en false, el correo no será enviado.
+`Nota:` Esta funcionalidad se enceutra activa solamente en producción, en ambiente de sandbox se encuentra deshabilitada. Puedes ver un ejemplo del correo y su contenido en el siguiente enlace: [Ver ejemplo](https://developers.factus.com.co/facturas/ejemplos/correo/) |
 | **`observation`** `string` `opcional`
 Agrega una observación a la factura. No debe tener más de 500 caracteres. |
 | **`prepayment_details`** `array` `opcional`

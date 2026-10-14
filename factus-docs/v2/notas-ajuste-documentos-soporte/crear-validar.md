@@ -66,6 +66,8 @@ Código que corresponde al tipo de identificación. [Tipos de documentos de iden
 Número de identificación del proveedor. |
 | **`provider.dv`** `string` `opcional`
 Dígito de verificación del proveedor. Requerido ya que el proveedor debe identificarse con NIT, sin embargo, si no se envía el API lo calcula automáticamente. |
+| **`provider.legal_organization_code`** `string`
+Código que corresponda al tipo de organización. [Tipos de organizaciones disponibles.](https://developers.factus.com.co/tablas-de-referencia/tablas/#c%C3%B3digo-de-tipos-de-organizaciones) |
 | **`provider.trade_name`** `string` `opcional`
 Nombre comercial del proveedor. |
 | **`provider.names`** `string`
@@ -80,6 +82,8 @@ Código del municipio del proveedor. [Municipios disponibles](https://developers
 Dirección del correo electrónico del proveedor. |
 | **`provider.phone`** `string` `opcional`
 Número de teléfono del proveedor. |
+| **`provider.company`** `string` `opcional`
+Razón social. Es obligatorio cuando el campo `provider.legal_organization_code` es 1 (persona jurídica). |
 | **`items`** `array`
 Este es un array de objetos (items) que corresponde a los productos o servicios de la nota de ajuste, se debe enviar un objeto por cada producto o servicio. |
 | **`items.*.code_reference`** `string`
@@ -120,5 +124,5 @@ Aquí tienes un ejemplo de cómo debería quedar el cuerpo de la solicitud en fo
 **201 - Nota de ajuste a documento Soporte**
 
 ```
-{ "reference_code": "AN-2026-v2-0005", "support_document_number": "SEDS984000129", "correction_concept_code": "2", "created_time": "15:26:00", "payment_details": [ { "payment_form": "1", "payment_method_code": "42", "reference_code": "pago-001", "amount": "60000.00" }, { "payment_form": "1", "payment_method_code": "10", "reference_code": "pago-002", "amount": "59000.00" } ], "provider": { "identification_document_code": "31", "identification": "2343543", "dv": "7", "names": "Pepito Perez", "address": "calle 4", "country_code": "CO", "municipality_code": "68679" }, "items": [ { "code_reference": "12345", "name": "producto de prueba", "quantity": "2.00", "discount_rate": "0.00", "price": "50000.00", "unit_measure_code": "94", "standard_code": "999", "withholding_taxes": [ { "code": "06", "rate": "3.50" } ], "taxes": [ { "code": "01", "rate": "19.00" } ] } ]}
+{ "reference_code": "AN-2026-v2-0005", "support_document_number": "SEDS984000129", "correction_concept_code": "2", "created_time": "15:26:00", "payment_details": [ { "payment_form": "1", "payment_method_code": "42", "reference_code": "pago-001", "amount": "60000.00" }, { "payment_form": "1", "payment_method_code": "10", "reference_code": "pago-002", "amount": "59000.00" } ], "provider": { "identification_document_code": "31", "identification": "2343543", "dv": "7", "legal_organization_code": "1", "names": "Pepito Perez", "address": "calle 4", "country_code": "CO", "municipality_code": "68679", "company": "Company S.A.S" }, "items": [ { "code_reference": "12345", "name": "producto de prueba", "quantity": "2.00", "discount_rate": "0.00", "price": "50000.00", "unit_measure_code": "94", "standard_code": "999", "withholding_taxes": [ { "code": "06", "rate": "3.50" } ], "taxes": [ { "code": "01", "rate": "19.00" } ] } ]}
 ```

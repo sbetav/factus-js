@@ -41,10 +41,10 @@ Código de documento, para ver los códigos de documento que se pueden usar vea 
 Prefijo alfanumérico del rango de numeración.
 
 |
-| **`current`** `Máx.4 caracteres`
+| **`current`** `string`
 
 Número actual del consecutivo. El número del siguiente documento que se generará.
-**NOTA**: Si el consecutivo se ha usado, debe agregar el número del último consecutivo usado.
+**NOTA**: Si el consecutivo ya está en uso, asigne el número siguiente disponible.
 
 |
 

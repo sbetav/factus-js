@@ -1,4 +1,4 @@
-# Ver Facturas
+# Listar
 
 Este endpoint se utiliza para obtener y filtrar las facturas electrónicas.
 
